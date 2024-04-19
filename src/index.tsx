@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import LeaguePage from './pages/League/League';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 
@@ -13,6 +14,7 @@ root.render(
         <HashRouter basename="/">
             <Routes>
                 <Route path="/" element={<App />}></Route>
+                <Route path="/league" element={<LeaguePage />}></Route>
             </Routes>
         </HashRouter>
     </React.StrictMode>
