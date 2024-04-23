@@ -13,8 +13,8 @@ root.render(
     <React.StrictMode>
         <HashRouter basename="/">
             <Routes>
-                <Route path="/" element={<App />}></Route>
-                <Route path="/league" element={<LeaguePage />}></Route>
+                <Route path="/" element={<App />} />
+                <Route path="/league" element={<LeaguePage />} />
             </Routes>
         </HashRouter>
     </React.StrictMode>

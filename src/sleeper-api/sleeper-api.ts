@@ -71,6 +71,13 @@ export type Pick = {
     draft_id: string;
 };
 
+export type User = {
+    username: string;
+    user_id: string;
+    display_name: string;
+    avatar: string;
+};
+
 const BASE_API_URL = 'https://api.sleeper.app/v1';
 
 export async function getLeague(leagueId: string): Promise<League> {
@@ -82,6 +89,11 @@ export async function getRosters(leagueId: string): Promise<Roster[]> {
     const response = await axios.get(
         `${BASE_API_URL}/league/${leagueId}/rosters`
     );
+    return response.data;
+}
+
+export async function getUser(userId: string): Promise<User> {
+    const response = await axios.get(`${BASE_API_URL}/user/${userId}`);
     return response.data;
 }
 
