@@ -8,6 +8,7 @@ import {
     getRosters,
     getUser,
 } from '../../sleeper-api/sleeper-api';
+import './League.css';
 
 const DEFAULT_LEAGUE_ID = '1048770475687571456';
 
@@ -48,21 +49,37 @@ export default function LeaguePage() {
         });
     }, [rosters]);
 
-    function teamPreviewComponent(ownerId: string) {
+    function teamPreviewComponent(ownerId: string, index: number) {
         const user = users.get(ownerId);
-        return <div key={ownerId}>{user?.display_name}</div>;
+        const isEven = index % 2 === 0;
+        return (
+            <div
+                key={ownerId}
+                className={`teamPreview ${isEven ? 'even' : 'odd'}`}
+            >
+                <img
+                    className="avatarThumbnail"
+                    src={`https://sleepercdn.com/avatars/thumbs/${user?.avatar}`}
+                />
+                {user?.display_name}
+            </div>
+        );
     }
 
     function rostersComponent() {
         return (
-            <>{rosters?.map(roster => teamPreviewComponent(roster.owner_id))}</>
+            <div className="allRosters">
+                {rosters?.map((roster, index) =>
+                    teamPreviewComponent(roster.owner_id, index)
+                )}
+            </div>
         );
     }
 
     return (
-        <>
+        <div className="leaguePage">
             <h2>{league?.name}</h2>
             {!loading && rostersComponent()}
-        </>
+        </div>
     );
 }
