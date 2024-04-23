@@ -34,23 +34,16 @@ export default function LeaguePage() {
 
     useEffect(() => {
         if (!rosters) return;
-        rosters.forEach(roster => {
-            getUser(roster.owner_id).then(user => {
-                setUsers(users => {
-                    users.set(roster.owner_id, user);
-                    return users;
-                });
-            });
-        });
-        const loadedUsers = new Map<string, User>();
-        const huh = async () => {
+        const loadUsers = async () => {
+            const loadedUsers = new Map<string, User>();
             for (const roster of rosters) {
                 const user = await getUser(roster.owner_id);
                 loadedUsers.set(roster.owner_id, user);
             }
             setUsers(loadedUsers);
         };
-        huh().finally(() => {
+
+        loadUsers().finally(() => {
             setLoading(false);
         });
     }, [rosters]);
@@ -65,16 +58,11 @@ export default function LeaguePage() {
             <>{rosters?.map(roster => teamPreviewComponent(roster.owner_id))}</>
         );
     }
-    if (loading) {
-        return <>loading</>;
-    }
 
     return (
-        !loading && (
-            <>
-                <h2>{league?.name}</h2>
-                {rostersComponent()}
-            </>
-        )
+        <>
+            <h2>{league?.name}</h2>
+            {!loading && rostersComponent()}
+        </>
     );
 }
