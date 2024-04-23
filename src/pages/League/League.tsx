@@ -24,7 +24,7 @@ export default function LeaguePage() {
 
     useEffect(() => {
         setLeagueId(searchParams.get('leagueId') ?? DEFAULT_LEAGUE_ID);
-    });
+    }, [searchParams]);
 
     useEffect(() => {
         if (!leagueId) return;
