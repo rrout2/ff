@@ -27,12 +27,3 @@
     margin: 4px;
     max-width: 780px;
 }
-
-.avatarThumbnail {
-    height: 40px;
-    border-radius: 50%;
-}
-
-.dropdownArrow {
-    margin-left: auto;
-}

@@ -3,14 +3,11 @@ import {useSearchParams} from 'react-router-dom';
 import {
     League,
     Roster,
-    User,
     getLeague,
     getRosters,
-    getUser,
 } from '../../sleeper-api/sleeper-api';
 import './League.css';
-import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
-import {IconButton} from '@material-ui/core';
+import TeamPreview from '../Team/TeamPreview/TeamPreview';
 
 const DEFAULT_LEAGUE_ID = '1048770475687571456';
 
@@ -20,18 +17,7 @@ export default function LeaguePage() {
     const [leagueId, setLeagueId] = useState('');
     const [league, setLeague] = useState<League>();
     const [rosters, setRosters] = useState<Roster[]>([]);
-    const [isExpanded, setIsExpanded] = useState<Map<string, boolean>>(
-        new Map<string, boolean>()
-    );
-    const [users, setUsers] = useState<Map<string, User>>(
-        new Map<string, User>()
-    );
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        console.log(isExpanded);
-    });
-
     useEffect(() => {
         setLeagueId(searchParams.get('leagueId') ?? DEFAULT_LEAGUE_ID);
     }, [searchParams]);
@@ -44,17 +30,7 @@ export default function LeaguePage() {
 
     useEffect(() => {
         if (!rosters) return;
-        const loadUsers = async () => {
-            const loadedUsers = new Map<string, User>();
-            const newExpanded = new Map<string, boolean>();
-            for (const roster of rosters) {
-                const user = await getUser(roster.owner_id);
-                loadedUsers.set(roster.owner_id, user);
-                newExpanded.set(roster.owner_id, false);
-            }
-            setUsers(loadedUsers);
-            setIsExpanded(newExpanded);
-        };
+        const loadUsers = async () => {};
 
         loadUsers().finally(() => {
             setLoading(false);
@@ -62,31 +38,14 @@ export default function LeaguePage() {
     }, [rosters]);
 
     function teamPreviewComponent(ownerId: string, index: number) {
-        const user = users.get(ownerId);
+        // const user = users.get(ownerId);
         const isEven = index % 2 === 0;
         return (
             <div
                 key={ownerId}
                 className={`teamPreview ${isEven ? 'even' : 'odd'}`}
             >
-                <img
-                    className="avatarThumbnail"
-                    src={`https://sleepercdn.com/avatars/thumbs/${user?.avatar}`}
-                />
-                {user?.display_name}
-                <span className="dropdownArrow">
-                    <IconButton
-                        onClick={() => {
-                            // console.log(isExpanded);
-                            isExpanded.set(ownerId, !isExpanded.get(ownerId));
-                            // console.log(isExpanded);
-                            setIsExpanded(isExpanded);
-                        }}
-                    >
-                        {isExpanded.get(ownerId) && <ArrowDropUp />}
-                        {!isExpanded.get(ownerId) && <ArrowDropDown />}
-                    </IconButton>
-                </span>
+                <TeamPreview ownerId={ownerId} />
             </div>
         );
     }
