@@ -9,6 +9,8 @@ import {
     getUser,
 } from '../../sleeper-api/sleeper-api';
 import './League.css';
+import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
+import {IconButton} from '@material-ui/core';
 
 const DEFAULT_LEAGUE_ID = '1048770475687571456';
 
@@ -18,10 +20,17 @@ export default function LeaguePage() {
     const [leagueId, setLeagueId] = useState('');
     const [league, setLeague] = useState<League>();
     const [rosters, setRosters] = useState<Roster[]>([]);
+    const [isExpanded, setIsExpanded] = useState<Map<string, boolean>>(
+        new Map<string, boolean>()
+    );
     const [users, setUsers] = useState<Map<string, User>>(
         new Map<string, User>()
     );
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        console.log(isExpanded);
+    });
 
     useEffect(() => {
         setLeagueId(searchParams.get('leagueId') ?? DEFAULT_LEAGUE_ID);
@@ -37,11 +46,14 @@ export default function LeaguePage() {
         if (!rosters) return;
         const loadUsers = async () => {
             const loadedUsers = new Map<string, User>();
+            const newExpanded = new Map<string, boolean>();
             for (const roster of rosters) {
                 const user = await getUser(roster.owner_id);
                 loadedUsers.set(roster.owner_id, user);
+                newExpanded.set(roster.owner_id, false);
             }
             setUsers(loadedUsers);
+            setIsExpanded(newExpanded);
         };
 
         loadUsers().finally(() => {
@@ -62,6 +74,19 @@ export default function LeaguePage() {
                     src={`https://sleepercdn.com/avatars/thumbs/${user?.avatar}`}
                 />
                 {user?.display_name}
+                <span className="dropdownArrow">
+                    <IconButton
+                        onClick={() => {
+                            // console.log(isExpanded);
+                            isExpanded.set(ownerId, !isExpanded.get(ownerId));
+                            // console.log(isExpanded);
+                            setIsExpanded(isExpanded);
+                        }}
+                    >
+                        {isExpanded.get(ownerId) && <ArrowDropUp />}
+                        {!isExpanded.get(ownerId) && <ArrowDropDown />}
+                    </IconButton>
+                </span>
             </div>
         );
     }
