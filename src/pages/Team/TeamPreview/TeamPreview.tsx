@@ -14,7 +14,7 @@ export default function TeamPreview({ownerId}: TeamPreviewProps) {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
     useEffect(() => {
         getUser(ownerId).then(user => setUser(user));
-    });
+    }, [ownerId]);
     return (
         <>
             <img

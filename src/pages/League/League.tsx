@@ -8,34 +8,28 @@ import {
 } from '../../sleeper-api/sleeper-api';
 import './League.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
-
-const DEFAULT_LEAGUE_ID = '1048770475687571456';
+import {TextField, FormControl} from '@mui/material';
 
 // accessed via /dynasty-ff/#league
 export default function LeaguePage() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [leagueId, setLeagueId] = useState('');
+    const [input, setInput] = useState('');
     const [league, setLeague] = useState<League>();
     const [rosters, setRosters] = useState<Roster[]>([]);
-    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        setLeagueId(searchParams.get('leagueId') ?? DEFAULT_LEAGUE_ID);
+        const leagueIdFromUrl = searchParams.get('leagueId');
+        if (!leagueIdFromUrl) return;
+
+        setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
     useEffect(() => {
         if (!leagueId) return;
-        getLeague(leagueId).then(l => setLeague(l));
-        getRosters(leagueId).then(rs => setRosters(rs));
+        getLeague(leagueId).then(league => setLeague(league));
+        getRosters(leagueId).then(rosters => setRosters(rosters));
     }, [leagueId]);
-
-    useEffect(() => {
-        if (!rosters) return;
-        const loadUsers = async () => {};
-
-        loadUsers().finally(() => {
-            setLoading(false);
-        });
-    }, [rosters]);
 
     function teamPreviewComponent(ownerId: string, index: number) {
         // const user = users.get(ownerId);
@@ -47,6 +41,26 @@ export default function LeaguePage() {
             >
                 <TeamPreview ownerId={ownerId} />
             </div>
+        );
+    }
+
+    function inputComponent() {
+        return (
+            <FormControl>
+                <TextField
+                    label={'League ID'}
+                    margin="normal"
+                    onChange={event => setInput(event.target.value)}
+                    onKeyUp={e => {
+                        if (e.key !== 'Enter') return;
+
+                        setSearchParams(searchParams => {
+                            searchParams.set('leagueId', input);
+                            return searchParams;
+                        });
+                    }}
+                />
+            </FormControl>
         );
     }
 
@@ -62,8 +76,9 @@ export default function LeaguePage() {
 
     return (
         <div className="leaguePage">
+            {!leagueId && inputComponent()}
             <h2>{league?.name}</h2>
-            {!loading && rostersComponent()}
+            {rostersComponent()}
         </div>
     );
 }
