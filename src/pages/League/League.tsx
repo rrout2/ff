@@ -31,15 +31,10 @@ export default function LeaguePage() {
         getRosters(leagueId).then(rosters => setRosters(rosters));
     }, [leagueId]);
 
-    function teamPreviewComponent(ownerId: string, index: number) {
-        // const user = users.get(ownerId);
-        const isEven = index % 2 === 0;
+    function teamPreviewComponent(roster: Roster, index: number) {
         return (
-            <div
-                key={ownerId}
-                className={`teamPreview ${isEven ? 'even' : 'odd'}`}
-            >
-                <TeamPreview ownerId={ownerId} />
+            <div key={roster.owner_id}>
+                <TeamPreview roster={roster} index={index} />
             </div>
         );
     }
@@ -68,7 +63,7 @@ export default function LeaguePage() {
         return (
             <div className="allRosters">
                 {rosters?.map((roster, index) =>
-                    teamPreviewComponent(roster.owner_id, index)
+                    teamPreviewComponent(roster, index)
                 )}
             </div>
         );
