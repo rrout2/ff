@@ -43,10 +43,12 @@ export default function TeamPreview({roster, index}: TeamPreviewProps) {
     return (
         <>
             <div className={`teamPreviewHeader ${isEven ? 'even' : 'odd'}`}>
-                <img
-                    className="avatarThumbnail"
-                    src={`https://sleepercdn.com/avatars/thumbs/${user?.avatar}`}
-                />
+                {user && (
+                    <img
+                        className="avatarThumbnail"
+                        src={`https://sleepercdn.com/avatars/thumbs/${user.avatar}`}
+                    />
+                )}
                 {user?.display_name}
                 <span className="dropdownArrow">
                     <IconButton
