@@ -1,14 +1,9 @@
 import {useEffect, useState} from 'react';
-import {Player, Roster, User, getUser} from '../../../sleeper-api/sleeper-api';
+import {Roster, User, getUser} from '../../../sleeper-api/sleeper-api';
 import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
 import {IconButton} from '@material-ui/core';
-
-import playersJson from '../../../data/players.json';
 import './TeamPreview.css';
-
-interface PlayerData {
-    [key: string]: Player;
-}
+import {usePlayerData} from '../../../hooks/hooks';
 
 export type TeamPreviewProps = {
     roster: Roster;
@@ -21,11 +16,7 @@ export default function TeamPreview({roster, index}: TeamPreviewProps) {
 
     const [user, setUser] = useState<User>();
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
-    const [playerData, setPlayerData] = useState<PlayerData>();
-
-    useEffect(() => {
-        setPlayerData(playersJson as unknown as PlayerData);
-    }, [playerData]);
+    const playerData = usePlayerData();
 
     useEffect(() => {
         getUser(ownerId).then(user => setUser(user));
@@ -33,12 +24,20 @@ export default function TeamPreview({roster, index}: TeamPreviewProps) {
 
     function expandableContent() {
         if (!playerData) return <>Loading...</>;
+
         const players = roster.players;
-        return players.map(player => (
-            <div key={player}>
-                {playerData[player].first_name} {playerData[player].last_name}
-            </div>
-        ));
+        return players
+            .map(p => playerData[p])
+            .sort(
+                (a, b) =>
+                    a.position.localeCompare(b.position) ||
+                    a.last_name.localeCompare(b.last_name)
+            )
+            .map(player => (
+                <div key={player.player_id}>
+                    {player.position} {player.first_name} {player.last_name}
+                </div>
+            ));
     }
 
     return (
