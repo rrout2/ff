@@ -25,3 +25,7 @@
 .teamPreviewHeader.odd {
     background-color: lightcyan;
 }
+
+.expandableContent {
+    padding: 5px;
+}

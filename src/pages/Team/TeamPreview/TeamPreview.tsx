@@ -59,7 +59,9 @@ export default function TeamPreview({roster, index}: TeamPreviewProps) {
                     </IconButton>
                 </span>
             </div>
-            <div>{isExpanded && expandableContent()}</div>
+            {isExpanded && (
+                <div className="expandableContent">{expandableContent()}</div>
+            )}
         </>
     );
 }
