@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Roster, User, getUser} from '../../../sleeper-api/sleeper-api';
-import {ArrowDropUp, ArrowDropDown, OpenInNew} from '@material-ui/icons';
+import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
+import {useQuery, UseQueryOptions} from 'react-query';
 import {useNavigate} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
 import './TeamPreview.css';
@@ -28,6 +29,13 @@ export default function TeamPreview({
     useEffect(() => {
         getUser(ownerId).then(user => setUser(user));
     }, [ownerId]);
+    // useQuery({
+    //     queryKey: [ownerId],
+    //     queryFn: async () => {
+    //         return await getUser(ownerId).then(user => setUser(user));
+    //     },
+    //     staleTime: 10000,
+    // });
 
     function expandableContent() {
         if (!playerData) return <>Loading...</>;

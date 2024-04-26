@@ -6,19 +6,25 @@ import LeaguePage from './pages/League/League';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import TeamPage from './pages/Team/TeamPage/TeamPage';
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+
+const queryClient = new QueryClient();
+
 root.render(
     <React.StrictMode>
-        <HashRouter basename="/">
-            <Routes>
-                <Route path="/" element={<App />} />
-                <Route path="/league" element={<LeaguePage />} />
-                <Route path="/team" element={<TeamPage />} />
-            </Routes>
-        </HashRouter>
+        <QueryClientProvider client={queryClient}>
+            <HashRouter basename="/">
+                <Routes>
+                    <Route path="/" element={<App />} />
+                    <Route path="/league" element={<LeaguePage />} />
+                    <Route path="/team" element={<TeamPage />} />
+                </Routes>
+            </HashRouter>
+        </QueryClientProvider>
     </React.StrictMode>
 );
 

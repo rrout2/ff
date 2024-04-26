@@ -4,15 +4,12 @@ import {Button, IconButton} from '@material-ui/core';
 import {ArrowBack, ArrowForward} from '@material-ui/icons';
 import './TeamPage.css';
 import {useEffect, useState} from 'react';
+import {Roster, getRosters} from '../../../sleeper-api/sleeper-api';
 import {
-    League,
-    Roster,
-    User,
-    getLeague,
-    getRosters,
-    getUser,
-} from '../../../sleeper-api/sleeper-api';
-import {usePlayerData} from '../../../hooks/hooks';
+    useFetchLeague,
+    useFetchUser,
+    usePlayerData,
+} from '../../../hooks/hooks';
 
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -20,11 +17,12 @@ export default function TeamPage() {
     const [leagueId, setLeagueId] = useState('');
     const [teamId, setTeamId] = useState('');
     const [input, setInput] = useState('');
-    const [league, setLeague] = useState<League>();
+    // const [league, setLeague] = useState<League>();
+    const [rosters, setRosters] = useState<Roster[]>();
     const [roster, setRoster] = useState<Roster>();
-    const [user, setUser] = useState<User>();
     const [numRosters, setNumRosters] = useState(0);
     const playerData = usePlayerData();
+
     useEffect(() => {
         const teamIdFromUrl = searchParams.get('teamId');
         const leagueIdFromUrl = searchParams.get('leagueId');
@@ -35,18 +33,23 @@ export default function TeamPage() {
         setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
-    useEffect(() => {
-        if (!teamId) return;
+    const fetchLeagueResponse = useFetchLeague(leagueId);
+    const league = fetchLeagueResponse.data;
 
-        getLeague(leagueId).then(league => setLeague(league));
-        getRosters(leagueId).then(rosters => {
-            getUser(rosters[+teamId].owner_id).then(user => {
-                setUser(user);
-                setRoster(rosters[+teamId]);
-                setNumRosters(rosters.length);
-            });
-        });
-    }, [teamId, leagueId]);
+    useEffect(() => {
+        if (!leagueId) return;
+
+        getRosters(leagueId).then(rosters => setRosters(rosters));
+    }, [leagueId]);
+
+    const fetchUserResponse = useFetchUser(teamId, rosters);
+    const user = fetchUserResponse.data;
+
+    useEffect(() => {
+        if (!rosters || rosters.length === 0) return;
+        setRoster(rosters[+teamId]);
+        setNumRosters(rosters.length);
+    }, [rosters, user, teamId]);
 
     function inputComponent() {
         return (
