@@ -5,6 +5,7 @@ import App from './App';
 import LeaguePage from './pages/League/League';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
+import TeamPage from './pages/Team/TeamPage/TeamPage';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/league" element={<LeaguePage />} />
+                <Route path="/team" element={<TeamPage />} />
             </Routes>
         </HashRouter>
     </React.StrictMode>
