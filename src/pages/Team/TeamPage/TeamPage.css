@@ -19,3 +19,8 @@
 .arrowButton {
     height: 48px;
 }
+
+.displayName {
+    font-size: larger;
+    font-weight: bold;
+}

@@ -7,8 +7,10 @@ import {useEffect, useState} from 'react';
 import {
     League,
     Roster,
+    User,
     getLeague,
     getRosters,
+    getUser,
 } from '../../../sleeper-api/sleeper-api';
 import {usePlayerData} from '../../../hooks/hooks';
 
@@ -19,6 +21,7 @@ export default function TeamPage() {
     const [input, setInput] = useState('');
     const [league, setLeague] = useState<League>();
     const [roster, setRoster] = useState<Roster>();
+    const [user, setUser] = useState<User>();
     const [numRosters, setNumRosters] = useState(0);
     const playerData = usePlayerData();
     useEffect(() => {
@@ -36,8 +39,11 @@ export default function TeamPage() {
 
         getLeague(leagueId).then(league => setLeague(league));
         getRosters(leagueId).then(rosters => {
-            setRoster(rosters[+teamId]);
-            setNumRosters(rosters.length);
+            getUser(rosters[+teamId].owner_id).then(user => {
+                setUser(user);
+                setRoster(rosters[+teamId]);
+                setNumRosters(rosters.length);
+            });
         });
     }, [teamId, leagueId]);
 
@@ -98,6 +104,9 @@ export default function TeamPage() {
                     <ArrowBack />
                 </IconButton>
                 <div className="teamPageRoster">
+                    {user && (
+                        <div className="displayName">{user.display_name}</div>
+                    )}
                     {teamId && rosterComponent()}
                 </div>
                 <IconButton
