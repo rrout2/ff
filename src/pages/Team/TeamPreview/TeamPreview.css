@@ -16,15 +16,26 @@
     height: 80px;
     width: 350px;
     padding-left: 5px;
+    cursor: pointer;
 }
 
 .teamPreviewHeader.even {
     background-color: lightblue;
 }
 
+
+.teamPreviewHeader.even:hover {
+    background-color: mediumaquamarine;
+}
+
 .teamPreviewHeader.odd {
     background-color: lightcyan;
 }
+
+.teamPreviewHeader.odd:hover {
+    background-color: mediumaquamarine;
+}
+
 
 .expandableContent {
     padding: 5px;

@@ -49,28 +49,23 @@ export default function TeamPreview({
 
     return (
         <>
-            <div className={`teamPreviewHeader ${isEven ? 'even' : 'odd'}`}>
+            <div
+                className={`teamPreviewHeader ${isEven ? 'even' : 'odd'}`}
+                onClick={() => {
+                    navigate(`../team?leagueId=${leagueId}&teamId=${index}`);
+                }}
+            >
                 {user && (
                     <img
                         className="avatarThumbnail"
                         src={`https://sleepercdn.com/avatars/thumbs/${user.avatar}`}
                     />
                 )}
-                {user?.display_name}{' '}
-                {
-                    <IconButton
-                        onClick={() => {
-                            navigate(
-                                `../team?leagueId=${leagueId}&teamId=${index}`
-                            );
-                        }}
-                    >
-                        <OpenInNew />
-                    </IconButton>
-                }
+                {user?.display_name}
                 <span className="dropdownArrow">
                     <IconButton
-                        onClick={() => {
+                        onClick={event => {
+                            event.stopPropagation();
                             setIsExpanded(!isExpanded);
                         }}
                     >

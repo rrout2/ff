@@ -88,6 +88,7 @@ export default function TeamPage() {
     function returnToLeaguePageButton() {
         return (
             <Button
+                variant="outlined"
                 onClick={() => {
                     navigate(`../league?leagueId=${leagueId}`);
                 }}
