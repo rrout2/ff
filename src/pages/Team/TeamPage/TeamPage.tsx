@@ -1,6 +1,6 @@
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import {TextField, FormControl} from '@mui/material';
-import {IconButton} from '@material-ui/core';
+import {Button, IconButton} from '@material-ui/core';
 import {ArrowBack, ArrowForward} from '@material-ui/icons';
 import './TeamPage.css';
 import {useEffect, useState} from 'react';
@@ -16,6 +16,7 @@ import {usePlayerData} from '../../../hooks/hooks';
 
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [leagueId, setLeagueId] = useState('');
     const [teamId, setTeamId] = useState('');
     const [input, setInput] = useState('');
@@ -54,8 +55,8 @@ export default function TeamPage() {
                     label={'League ID'}
                     margin="normal"
                     onChange={event => setInput(event.target.value)}
-                    onKeyUp={e => {
-                        if (e.key !== 'Enter') return;
+                    onKeyUp={event => {
+                        if (event.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
                             searchParams.set('leagueId', input);
@@ -84,11 +85,24 @@ export default function TeamPage() {
             ));
     }
 
+    function returnToLeaguePageButton() {
+        return (
+            <Button
+                onClick={() => {
+                    navigate(`../league?leagueId=${leagueId}`);
+                }}
+            >
+                Return to League Page
+            </Button>
+        );
+    }
+
     return (
         <div className="teamPage">
             {!teamId && inputComponent()}
             <div className="teamPageContent">
                 <IconButton
+                    className="arrowButton"
                     onClick={() => {
                         setSearchParams(searchParams => {
                             searchParams.set(
@@ -99,7 +113,6 @@ export default function TeamPage() {
                         });
                     }}
                     disabled={teamId === '0'}
-                    className="arrowButton"
                 >
                     <ArrowBack />
                 </IconButton>
@@ -110,6 +123,7 @@ export default function TeamPage() {
                     {teamId && rosterComponent()}
                 </div>
                 <IconButton
+                    className="arrowButton"
                     onClick={() => {
                         setSearchParams(searchParams => {
                             searchParams.set(
@@ -120,11 +134,11 @@ export default function TeamPage() {
                         });
                     }}
                     disabled={parseInt(teamId) + 1 === numRosters}
-                    className="arrowButton"
                 >
                     <ArrowForward />
                 </IconButton>
             </div>
+            {returnToLeaguePageButton()}
         </div>
     );
 }
