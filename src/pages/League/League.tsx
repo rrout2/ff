@@ -34,7 +34,11 @@ export default function LeaguePage() {
     function teamPreviewComponent(roster: Roster, index: number) {
         return (
             <div key={roster.owner_id}>
-                <TeamPreview roster={roster} index={index} />
+                <TeamPreview
+                    roster={roster}
+                    index={index}
+                    leagueId={leagueId}
+                />
             </div>
         );
     }
