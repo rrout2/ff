@@ -3,3 +3,19 @@
     flex-direction: column;
     align-items: center;
 }
+
+.teamPageContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.teamPageRoster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.arrowButton {
+    height: 48px;
+}

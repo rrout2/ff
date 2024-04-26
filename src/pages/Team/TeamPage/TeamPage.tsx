@@ -81,7 +81,7 @@ export default function TeamPage() {
     return (
         <div className="teamPage">
             {!teamId && inputComponent()}
-            <div>
+            <div className="teamPageContent">
                 <IconButton
                     onClick={() => {
                         setSearchParams(searchParams => {
@@ -93,9 +93,13 @@ export default function TeamPage() {
                         });
                     }}
                     disabled={teamId === '0'}
+                    className="arrowButton"
                 >
                     <ArrowBack />
                 </IconButton>
+                <div className="teamPageRoster">
+                    {teamId && rosterComponent()}
+                </div>
                 <IconButton
                     onClick={() => {
                         setSearchParams(searchParams => {
@@ -107,10 +111,10 @@ export default function TeamPage() {
                         });
                     }}
                     disabled={parseInt(teamId) + 1 === numRosters}
+                    className="arrowButton"
                 >
                     <ArrowForward />
                 </IconButton>
-                {teamId && rosterComponent()}
             </div>
         </div>
     );
