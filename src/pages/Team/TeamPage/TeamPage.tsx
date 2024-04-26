@@ -4,9 +4,9 @@ import {Button, IconButton} from '@material-ui/core';
 import {ArrowBack, ArrowForward} from '@material-ui/icons';
 import './TeamPage.css';
 import {useEffect, useState} from 'react';
-import {Roster, getRosters} from '../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
-    useFetchLeague,
+    useFetchRosters,
     useFetchUser,
     usePlayerData,
 } from '../../../hooks/hooks';
@@ -17,8 +17,6 @@ export default function TeamPage() {
     const [leagueId, setLeagueId] = useState('');
     const [teamId, setTeamId] = useState('');
     const [input, setInput] = useState('');
-    // const [league, setLeague] = useState<League>();
-    const [rosters, setRosters] = useState<Roster[]>();
     const [roster, setRoster] = useState<Roster>();
     const [numRosters, setNumRosters] = useState(0);
     const playerData = usePlayerData();
@@ -33,14 +31,8 @@ export default function TeamPage() {
         setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
-    const fetchLeagueResponse = useFetchLeague(leagueId);
-    const league = fetchLeagueResponse.data;
-
-    useEffect(() => {
-        if (!leagueId) return;
-
-        getRosters(leagueId).then(rosters => setRosters(rosters));
-    }, [leagueId]);
+    const fetchRostersResponse = useFetchRosters(leagueId);
+    const rosters = fetchRostersResponse.data;
 
     const fetchUserResponse = useFetchUser(teamId, rosters);
     const user = fetchUserResponse.data;
