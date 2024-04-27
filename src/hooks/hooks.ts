@@ -24,11 +24,13 @@ export function usePlayerData() {
 }
 
 export function usePlayer(playerId: string) {
+    const playerData = usePlayerData();
     const [player, setPlayer] = useState<Player>();
 
     useEffect(() => {
-        setPlayer((playersJson as unknown as PlayerData)[playerId]);
-    }, [playerId]);
+        if (!playerData) return;
+        setPlayer(playerData[playerId]);
+    }, [playerId, playerData]);
 
     return player;
 }

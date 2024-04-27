@@ -78,7 +78,9 @@ export default function TeamPage() {
                     key={player.player_id}
                     className={'playerRow ' + player.position}
                     onClick={() => {
-                        navigate(`../player?playerId=${player.player_id}`);
+                        navigate(
+                            `../player?playerId=${player.player_id}&leagueId=${leagueId}`
+                        );
                     }}
                 >
                     <img
