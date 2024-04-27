@@ -57,6 +57,14 @@ export default function PlayerPage() {
             <div>
                 {player?.first_name} {player?.last_name}
             </div>
+            <div>
+                {player?.position}
+                {player?.depth_chart_order} on {player?.team}
+            </div>
+            <div>{player?.status}</div>
+            <div>Age: {player?.age}</div>
+            <div>Year: {player?.years_exp}</div>
+            <div>{player?.college}</div>
             <Button
                 onClick={() => {
                     navigate(`../team?leagueId=${leagueId}&teamId=${teamId}`);
