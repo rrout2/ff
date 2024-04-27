@@ -4,6 +4,7 @@ import {useFetchRosters, useFetchUser, usePlayer} from '../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Roster} from '../../sleeper-api/sleeper-api';
 import {Button} from '@material-ui/core';
+import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../consts/urlParams';
 
 export default function PlayerPage() {
     const navigate = useNavigate();
@@ -27,8 +28,8 @@ export default function PlayerPage() {
     }
 
     useEffect(() => {
-        setPlayerId(searchParams.get('playerId') ?? '');
-        setLeagueId(searchParams.get('leagueId') ?? '');
+        setPlayerId(searchParams.get(PLAYER_ID) ?? '');
+        setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
     }, [searchParams]);
 
     useEffect(() => {
@@ -69,7 +70,7 @@ export default function PlayerPage() {
                 <Button
                     onClick={() => {
                         navigate(
-                            `../team?leagueId=${leagueId}&teamId=${teamId}`
+                            `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamId}`
                         );
                     }}
                     variant="outlined"

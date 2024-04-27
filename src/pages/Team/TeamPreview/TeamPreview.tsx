@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
 import './TeamPreview.css';
 import {usePlayerData} from '../../../hooks/hooks';
+import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
 
 export type TeamPreviewProps = {
     roster: Roster;
@@ -52,7 +53,9 @@ export default function TeamPreview({
             <div
                 className={`teamPreviewHeader ${isEven ? 'even' : 'odd'}`}
                 onClick={() => {
-                    navigate(`../team?leagueId=${leagueId}&teamId=${index}`);
+                    navigate(
+                        `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${index}`
+                    );
                 }}
             >
                 {user && (

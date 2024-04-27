@@ -9,6 +9,7 @@ import {
 import './League.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl} from '@mui/material';
+import {LEAGUE_ID} from '../../consts/urlParams';
 
 // accessed via /dynasty-ff/#league
 export default function LeaguePage() {
@@ -19,7 +20,7 @@ export default function LeaguePage() {
     const [rosters, setRosters] = useState<Roster[]>([]);
 
     useEffect(() => {
-        const leagueIdFromUrl = searchParams.get('leagueId');
+        const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
         if (!leagueIdFromUrl) return;
 
         setLeagueId(leagueIdFromUrl);
@@ -54,7 +55,7 @@ export default function LeaguePage() {
                         if (e.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
-                            searchParams.set('leagueId', input);
+                            searchParams.set(LEAGUE_ID, input);
                             return searchParams;
                         });
                     }}

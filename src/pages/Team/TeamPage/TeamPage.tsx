@@ -10,6 +10,7 @@ import {
     useFetchUser,
     usePlayerData,
 } from '../../../hooks/hooks';
+import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
 
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -22,8 +23,8 @@ export default function TeamPage() {
     const playerData = usePlayerData();
 
     useEffect(() => {
-        const teamIdFromUrl = searchParams.get('teamId');
-        const leagueIdFromUrl = searchParams.get('leagueId');
+        const teamIdFromUrl = searchParams.get(TEAM_ID);
+        const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
 
         if (!teamIdFromUrl || !leagueIdFromUrl) return;
 
@@ -54,8 +55,8 @@ export default function TeamPage() {
                         if (event.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
-                            searchParams.set('leagueId', input);
-                            searchParams.set('teamId', '0');
+                            searchParams.set(LEAGUE_ID, input);
+                            searchParams.set(TEAM_ID, '0');
                             return searchParams;
                         });
                     }}
@@ -79,7 +80,7 @@ export default function TeamPage() {
                     className={'playerRow ' + player.position}
                     onClick={() => {
                         navigate(
-                            `../player?playerId=${player.player_id}&leagueId=${leagueId}`
+                            `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
                         );
                     }}
                 >
@@ -102,7 +103,7 @@ export default function TeamPage() {
             <Button
                 variant="outlined"
                 onClick={() => {
-                    navigate(`../league?leagueId=${leagueId}`);
+                    navigate(`../league?${LEAGUE_ID}=${leagueId}`);
                 }}
             >
                 Return to League Page
@@ -119,7 +120,7 @@ export default function TeamPage() {
                     onClick={() => {
                         setSearchParams(searchParams => {
                             searchParams.set(
-                                'teamId',
+                                TEAM_ID,
                                 (parseInt(teamId) - 1).toString()
                             );
                             return searchParams;
@@ -141,7 +142,7 @@ export default function TeamPage() {
                     onClick={() => {
                         setSearchParams(searchParams => {
                             searchParams.set(
-                                'teamId',
+                                TEAM_ID,
                                 (parseInt(teamId) + 1).toString()
                             );
                             return searchParams;
