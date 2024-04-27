@@ -74,7 +74,10 @@ export default function TeamPage() {
                     a.last_name.localeCompare(b.last_name)
             )
             .map(player => (
-                <div key={player.player_id} className="playerRow">
+                <div
+                    key={player.player_id}
+                    className={'playerRow ' + player.position}
+                >
                     <img
                         className="headshot"
                         src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}

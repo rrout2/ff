@@ -35,4 +35,23 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-content: center;
+    margin: 1px;
+    border-radius: 4px;
+}
+
+.playerRow.QB {
+    background-color: lightcoral;
+}
+
+.playerRow.RB {
+    background-color: lightgreen;
+}
+
+.playerRow.WR {
+    background-color: lightseagreen;
+}
+
+.playerRow.TE {
+    background-color: lightyellow;
 }
