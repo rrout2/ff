@@ -25,3 +25,14 @@
     font-size: larger;
     font-weight: bold;
 }
+
+.headshot {
+    height: 40px;
+    border-radius: 50%;
+}
+
+.playerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

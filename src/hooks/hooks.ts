@@ -53,7 +53,6 @@ export function useFetchRosters(leagueIdNewName: string) {
         queryFn: async () => {
             if (!leagueIdNewName) return;
             const huh = await getRosters(leagueIdNewName);
-            console.log(huh);
             return huh;
         },
         staleTime: 10000,
