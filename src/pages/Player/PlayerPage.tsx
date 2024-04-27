@@ -65,14 +65,18 @@ export default function PlayerPage() {
             <div>Age: {player?.age}</div>
             <div>Year: {player?.years_exp}</div>
             <div>{player?.college}</div>
-            <Button
-                onClick={() => {
-                    navigate(`../team?leagueId=${leagueId}&teamId=${teamId}`);
-                }}
-                variant="outlined"
-            >
-                Return to {user?.display_name}
-            </Button>
+            {!!user && (
+                <Button
+                    onClick={() => {
+                        navigate(
+                            `../team?leagueId=${leagueId}&teamId=${teamId}`
+                        );
+                    }}
+                    variant="outlined"
+                >
+                    Return to {user?.display_name}
+                </Button>
+            )}
         </div>
     );
 }
