@@ -1,0 +1,10 @@
+.playerPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headshot {
+    border-radius: 50%;
+    max-height: 150px;
+}
