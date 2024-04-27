@@ -113,10 +113,11 @@ export default function TeamPage() {
                     <ArrowBack />
                 </IconButton>
                 <div className="teamPageRoster">
+                    {(!teamId || !user) && <>Loading...</>}
                     {user && (
                         <div className="displayName">{user.display_name}</div>
                     )}
-                    {teamId && rosterComponent()}
+                    {teamId && user && rosterComponent()}
                 </div>
                 <IconButton
                     className="arrowButton"
