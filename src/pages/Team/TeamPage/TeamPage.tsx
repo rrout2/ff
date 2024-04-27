@@ -77,6 +77,9 @@ export default function TeamPage() {
                 <div
                     key={player.player_id}
                     className={'playerRow ' + player.position}
+                    onClick={() => {
+                        navigate(`../player?playerId=${player.player_id}`);
+                    }}
                 >
                     <img
                         className="headshot"

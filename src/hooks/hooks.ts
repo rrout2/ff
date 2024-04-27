@@ -23,6 +23,16 @@ export function usePlayerData() {
     return playerData;
 }
 
+export function usePlayer(playerId: string) {
+    const [player, setPlayer] = useState<Player>();
+
+    useEffect(() => {
+        setPlayer((playersJson as unknown as PlayerData)[playerId]);
+    }, [playerId]);
+
+    return player;
+}
+
 export function useFetchUser(teamId: string, rosters?: Roster[]) {
     return useQuery({
         queryKey: [rosters, teamId],

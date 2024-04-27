@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import TeamPage from './pages/Team/TeamPage/TeamPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import PlayerPage from './pages/Player/PlayerPage';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -22,6 +23,7 @@ root.render(
                     <Route path="/" element={<App />} />
                     <Route path="/league" element={<LeaguePage />} />
                     <Route path="/team" element={<TeamPage />} />
+                    <Route path="/player" element={<PlayerPage />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>
