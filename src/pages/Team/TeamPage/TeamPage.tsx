@@ -78,6 +78,11 @@ export default function TeamPage() {
                     <img
                         className="headshot"
                         src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
+                        onError={({currentTarget}) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src =
+                                'https://sleepercdn.com/images/v2/icons/player_default.webp';
+                        }}
                     />
                     {player.position} {player.first_name} {player.last_name}
                 </div>
