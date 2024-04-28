@@ -46,7 +46,11 @@ export default function PlayerPage() {
     return (
         <div className={styles.playerPage}>
             <div className={styles.flexSpace}>
-                <IconButton>
+                <IconButton
+                    onClick={() => {
+                        navigate('search');
+                    }}
+                >
                     <Search />
                 </IconButton>
             </div>

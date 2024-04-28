@@ -1,3 +1,3 @@
 export default function PlayerSearch() {
-    return <></>;
+    return <>yeet</>;
 }

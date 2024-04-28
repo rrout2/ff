@@ -8,6 +8,7 @@ import {HashRouter, Routes, Route} from 'react-router-dom';
 import TeamPage from './pages/Team/TeamPage/TeamPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import PlayerPage from './pages/Player/PlayerPage/PlayerPage';
+import PlayerSearch from './pages/Player/Search/PlayerSearch';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -24,6 +25,7 @@ root.render(
                     <Route path="/league" element={<LeaguePage />} />
                     <Route path="/team" element={<TeamPage />} />
                     <Route path="/player" element={<PlayerPage />} />
+                    <Route path="/player/search" element={<PlayerSearch />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>
