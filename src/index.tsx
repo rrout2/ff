@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import TeamPage from './pages/Team/TeamPage/TeamPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import PlayerPage from './pages/Player/PlayerPage';
+import PlayerPage from './pages/Player/PlayerPage/PlayerPage';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

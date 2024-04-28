@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
 import {useSearchParams, useNavigate} from 'react-router-dom';
-import {useFetchRosters, useFetchUser, usePlayer} from '../../hooks/hooks';
+import {useFetchRosters, useFetchUser, usePlayer} from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
-import {Roster} from '../../sleeper-api/sleeper-api';
+import {Roster} from '../../../sleeper-api/sleeper-api';
 import {Button, IconButton} from '@material-ui/core';
 import {Search} from '@material-ui/icons';
-import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../consts/urlParams';
+import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
 
 export default function PlayerPage() {
     const navigate = useNavigate();
