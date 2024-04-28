@@ -3,7 +3,8 @@ import {useSearchParams, useNavigate} from 'react-router-dom';
 import {useFetchRosters, useFetchUser, usePlayer} from '../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Roster} from '../../sleeper-api/sleeper-api';
-import {Button} from '@material-ui/core';
+import {Button, IconButton} from '@material-ui/core';
+import {Search} from '@material-ui/icons';
 import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../consts/urlParams';
 
 export default function PlayerPage() {
@@ -44,40 +45,49 @@ export default function PlayerPage() {
 
     return (
         <div className={styles.playerPage}>
-            {player && (
-                <img
-                    className={styles.headshot}
-                    src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
-                    onError={({currentTarget}) => {
-                        currentTarget.onerror = null;
-                        currentTarget.src =
-                            'https://sleepercdn.com/images/v2/icons/player_default.webp';
-                    }}
-                />
-            )}
-            <div>
-                {player?.first_name} {player?.last_name}
+            <div className={styles.flexSpace}>
+                <IconButton>
+                    <Search />
+                </IconButton>
             </div>
-            <div>
-                {player?.position}
-                {player?.depth_chart_order} on {player?.team}
+
+            <div className={styles.playerProfile}>
+                {player && (
+                    <img
+                        className={styles.headshot}
+                        src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
+                        onError={({currentTarget}) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src =
+                                'https://sleepercdn.com/images/v2/icons/player_default.webp';
+                        }}
+                    />
+                )}
+                <div>
+                    {player?.first_name} {player?.last_name}
+                </div>
+                <div>
+                    {player?.position}
+                    {player?.depth_chart_order} on {player?.team}
+                </div>
+                <div>{player?.status}</div>
+                <div>Age: {player?.age}</div>
+                <div>Year: {player?.years_exp}</div>
+                <div>{player?.college}</div>
+                {!!user && (
+                    <Button
+                        onClick={() => {
+                            navigate(
+                                `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamId}`
+                            );
+                        }}
+                        variant="outlined"
+                    >
+                        Return to {user?.display_name}
+                    </Button>
+                )}
             </div>
-            <div>{player?.status}</div>
-            <div>Age: {player?.age}</div>
-            <div>Year: {player?.years_exp}</div>
-            <div>{player?.college}</div>
-            {!!user && (
-                <Button
-                    onClick={() => {
-                        navigate(
-                            `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamId}`
-                        );
-                    }}
-                    variant="outlined"
-                >
-                    Return to {user?.display_name}
-                </Button>
-            )}
+            <div className={styles.flexSpace}></div>
         </div>
     );
 }
