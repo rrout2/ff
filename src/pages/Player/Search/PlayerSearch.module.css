@@ -7,3 +7,7 @@
 .input {
     max-width: 200px;
 }
+
+.searchResultRow {
+    cursor: pointer;
+}

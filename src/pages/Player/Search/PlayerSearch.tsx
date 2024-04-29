@@ -9,7 +9,7 @@ export default function PlayerSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [leagueId, setLeagueId] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
-    const [searchOutput, setSearchOutput] = useState<Player[]>([]);
+    const [searchOutput, setSearchOutput] = useState<Set<Player>>(new Set());
     const playerData = usePlayerData();
     const navigate = useNavigate();
 
@@ -18,34 +18,36 @@ export default function PlayerSearch() {
     }, [searchParams]);
 
     useEffect(() => {
-        if (!searchInput) setSearchOutput([]);
-        const newPlayers: Player[] = [];
+        if (!searchInput) setSearchOutput(new Set());
+        const searchResults = new Set<Player>();
         for (const playerId in playerData) {
             const player = playerData[playerId];
             if (
                 player.search_full_name &&
                 player.search_full_name.includes(searchInput)
             ) {
-                newPlayers.push(player);
+                searchResults.add(player);
             }
         }
-        setSearchOutput(newPlayers);
+        setSearchOutput(searchResults);
     }, [searchInput]);
 
     function searchResults() {
         if (!playerData || !searchInput) return <>{searchInput}</>;
         return (
             <>
-                {searchOutput.map(p => {
+                {Array.from(searchOutput).map(player => {
                     return (
                         <div
                             onClick={() => {
                                 navigate(
-                                    `../player?${PLAYER_ID}=${p.player_id}&${LEAGUE_ID}=${leagueId}`
+                                    `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
                                 );
                             }}
+                            key={player.player_id}
+                            className={styles.searchResultRow}
                         >
-                            {p.first_name} {p.last_name}
+                            {player.first_name} {player.last_name}
                         </div>
                     );
                 })}
