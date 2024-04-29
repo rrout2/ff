@@ -1,18 +1,48 @@
 import {TextField} from '@mui/material';
 import styles from './PlayerSearch.module.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {usePlayerData} from '../../../hooks/hooks';
+import {Player} from '../../../sleeper-api/sleeper-api';
 export default function PlayerSearch() {
-    const [searchInput, setSeachInput] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+    const [searchOutput, setSearchOutput] = useState<Player[]>([]);
+    const playerData = usePlayerData();
+
+    useEffect(() => {
+        if (!searchInput) setSearchOutput([]);
+        const newPlayers: Player[] = [];
+        for (const playerId in playerData) {
+            const player = playerData[playerId];
+            if (
+                player.first_name.toLowerCase().includes(searchInput) ||
+                player.last_name.toLowerCase().includes(searchInput)
+            ) {
+                newPlayers.push(player);
+            }
+        }
+        setSearchOutput(newPlayers);
+    }, [searchInput]);
 
     function searchResults() {
-        return <>{searchInput}</>;
+        if (!playerData || !searchInput) return <>{searchInput}</>;
+        return (
+            <>
+                {searchOutput.map(p => {
+                    return (
+                        <div>
+                            {p.first_name} {p.last_name}
+                        </div>
+                    );
+                })}
+            </>
+        );
     }
 
     return (
         <div className={styles.playerSearch}>
             <TextField
                 onChange={e => {
-                    setSeachInput(e.target.value);
+                    setSearchInput(e.target.value.toLowerCase());
                 }}
                 className={styles.input}
             ></TextField>
