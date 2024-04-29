@@ -48,7 +48,7 @@ export default function PlayerPage() {
             <div className={styles.flexSpace}>
                 <IconButton
                     onClick={() => {
-                        navigate('search');
+                        navigate(`search?${LEAGUE_ID}=${leagueId}`);
                     }}
                 >
                     <Search />

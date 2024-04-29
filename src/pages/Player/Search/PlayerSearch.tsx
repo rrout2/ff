@@ -1,12 +1,21 @@
 import {TextField} from '@mui/material';
 import styles from './PlayerSearch.module.css';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {usePlayerData} from '../../../hooks/hooks';
 import {Player} from '../../../sleeper-api/sleeper-api';
+import {LEAGUE_ID, PLAYER_ID} from '../../../consts/urlParams';
 export default function PlayerSearch() {
     const [searchInput, setSearchInput] = useState('');
+    const [leagueId, setLeagueId] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchOutput, setSearchOutput] = useState<Player[]>([]);
     const playerData = usePlayerData();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
+    }, [searchParams]);
 
     useEffect(() => {
         if (!searchInput) setSearchOutput([]);
@@ -14,8 +23,8 @@ export default function PlayerSearch() {
         for (const playerId in playerData) {
             const player = playerData[playerId];
             if (
-                player.first_name.toLowerCase().includes(searchInput) ||
-                player.last_name.toLowerCase().includes(searchInput)
+                player.search_full_name &&
+                player.search_full_name.includes(searchInput)
             ) {
                 newPlayers.push(player);
             }
@@ -29,7 +38,13 @@ export default function PlayerSearch() {
             <>
                 {searchOutput.map(p => {
                     return (
-                        <div>
+                        <div
+                            onClick={() => {
+                                navigate(
+                                    `../player?${PLAYER_ID}=${p.player_id}&${LEAGUE_ID}=${leagueId}`
+                                );
+                            }}
+                        >
                             {p.first_name} {p.last_name}
                         </div>
                     );
@@ -42,7 +57,9 @@ export default function PlayerSearch() {
         <div className={styles.playerSearch}>
             <TextField
                 onChange={e => {
-                    setSearchInput(e.target.value.toLowerCase());
+                    setSearchInput(
+                        e.target.value.toLowerCase().replace(/\s/g, '')
+                    );
                 }}
                 className={styles.input}
             ></TextField>
