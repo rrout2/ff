@@ -1,17 +1,17 @@
 import {TextField} from '@mui/material';
 import styles from './PlayerSearch.module.css';
-import {useSearchParams, useNavigate} from 'react-router-dom';
+import {useSearchParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {usePlayerData} from '../../../hooks/hooks';
 import {Player} from '../../../sleeper-api/sleeper-api';
-import {LEAGUE_ID, PLAYER_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID} from '../../../consts/urlParams';
+import PlayerPreview from '../PlayerPreview/PlayerPreview';
 export default function PlayerSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [leagueId, setLeagueId] = useState('');
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const [searchOutput, setSearchOutput] = useState<Set<Player>>(new Set());
     const playerData = usePlayerData();
-    const navigate = useNavigate();
 
     useEffect(() => {
         setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
@@ -38,17 +38,11 @@ export default function PlayerSearch() {
             <>
                 {Array.from(searchOutput).map(player => {
                     return (
-                        <div
-                            onClick={() => {
-                                navigate(
-                                    `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
-                                );
-                            }}
-                            key={player.player_id}
-                            className={styles.searchResultRow}
-                        >
-                            {player.first_name} {player.last_name}
-                        </div>
+                        <PlayerPreview
+                            player={player}
+                            leagueId={leagueId}
+                            hideHeadshot={true}
+                        />
                     );
                 })}
             </>

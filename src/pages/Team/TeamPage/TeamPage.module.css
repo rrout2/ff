@@ -25,34 +25,3 @@
     font-size: larger;
     font-weight: bold;
 }
-
-.headshot {
-    height: 40px;
-    border-radius: 50%;
-}
-
-.playerRow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    margin: 1px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.playerRow.QB {
-    background-color: lightcoral;
-}
-
-.playerRow.RB {
-    background-color: lightgreen;
-}
-
-.playerRow.WR {
-    background-color: lightseagreen;
-}
-
-.playerRow.TE {
-    background-color: rgb(250, 188, 73);
-}

@@ -5,9 +5,14 @@ import styles from './PlayerPreview.module.css';
 export type PlayerPreviewProps = {
     player: Player;
     leagueId: string;
+    hideHeadshot?: boolean;
 };
 
-export default function PlayerPreview({player, leagueId}: PlayerPreviewProps) {
+export default function PlayerPreview({
+    player,
+    leagueId,
+    hideHeadshot,
+}: PlayerPreviewProps) {
     const navigate = useNavigate();
     return (
         <div
@@ -19,15 +24,17 @@ export default function PlayerPreview({player, leagueId}: PlayerPreviewProps) {
                 );
             }}
         >
-            <img
-                className={styles.headshot}
-                src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
-                onError={({currentTarget}) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src =
-                        'https://sleepercdn.com/images/v2/icons/player_default.webp';
-                }}
-            />
+            {!hideHeadshot && (
+                <img
+                    className={styles.headshot}
+                    src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
+                    onError={({currentTarget}) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src =
+                            'https://sleepercdn.com/images/v2/icons/player_default.webp';
+                    }}
+                />
+            )}
             {player.position} {player.first_name} {player.last_name}
         </div>
     );
