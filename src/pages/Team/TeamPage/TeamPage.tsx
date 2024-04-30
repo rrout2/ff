@@ -2,7 +2,7 @@ import {useSearchParams, useNavigate} from 'react-router-dom';
 import {TextField, FormControl} from '@mui/material';
 import {Button, IconButton} from '@material-ui/core';
 import {ArrowBack, ArrowForward} from '@material-ui/icons';
-import './TeamPage.css';
+import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
 import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
@@ -92,7 +92,7 @@ export default function TeamPage() {
             .map(player => (
                 <div
                     key={player.player_id}
-                    className={'playerRow ' + player.position}
+                    className={styles.playerRow + ' ' + styles[player.position]}
                     onClick={() => {
                         navigate(
                             `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
@@ -100,7 +100,7 @@ export default function TeamPage() {
                     }}
                 >
                     <img
-                        className="headshot"
+                        className={styles.headshot}
                         src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
                         onError={({currentTarget}) => {
                             currentTarget.onerror = null;
@@ -127,12 +127,12 @@ export default function TeamPage() {
     }
 
     return (
-        <div className="teamPage">
+        <div className={styles.teamPage}>
             {!teamId && inputComponent()}
             {teamId && (
-                <div className="teamPageContent">
+                <div className={styles.teamPageContent}>
                     <IconButton
-                        className="arrowButton"
+                        className={styles.arrowButton}
                         onClick={() => {
                             setSearchParams(searchParams => {
                                 searchParams.set(
@@ -146,17 +146,17 @@ export default function TeamPage() {
                     >
                         <ArrowBack />
                     </IconButton>
-                    <div className="teamPageRoster">
+                    <div className={styles.teamPageRoster}>
                         {(!teamId || !user) && <>Loading...</>}
                         {user && (
-                            <div className="displayName">
+                            <div className={styles.displayName}>
                                 {user.display_name}
                             </div>
                         )}
                         {teamId && user && rosterComponent()}
                     </div>
                     <IconButton
-                        className="arrowButton"
+                        className={styles.arrowButton}
                         onClick={() => {
                             setSearchParams(searchParams => {
                                 searchParams.set(
