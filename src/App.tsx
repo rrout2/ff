@@ -1,22 +1,8 @@
 import './App.css';
-import {Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 
 function App() {
-    const navigate = useNavigate();
-
-    function leagueButton() {
-        return (
-            <Button
-                onClick={() => {
-                    navigate('league');
-                }}
-            >
-                League
-            </Button>
-        );
-    }
-    return <div className="App">{leagueButton()}</div>;
+    return <Navigate to="league" replace={true} />;
 }
 
 export default App;

@@ -17,7 +17,8 @@ export default function TeamPage() {
     const navigate = useNavigate();
     const [leagueId, setLeagueId] = useState('');
     const [teamId, setTeamId] = useState('');
-    const [input, setInput] = useState('');
+    const [leagueIdInput, setLeagueIdInput] = useState('');
+    const [teamIdInput, setTeamIdInput] = useState('');
     const [roster, setRoster] = useState<Roster>();
     const [numRosters, setNumRosters] = useState(0);
     const playerData = usePlayerData();
@@ -50,13 +51,27 @@ export default function TeamPage() {
                 <TextField
                     label={'League ID'}
                     margin="normal"
-                    onChange={event => setInput(event.target.value)}
+                    onChange={event => setLeagueIdInput(event.target.value)}
                     onKeyUp={event => {
                         if (event.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
-                            searchParams.set(LEAGUE_ID, input);
+                            searchParams.set(LEAGUE_ID, leagueIdInput);
                             searchParams.set(TEAM_ID, '0');
+                            return searchParams;
+                        });
+                    }}
+                />
+                <TextField
+                    label={'Team ID (optional)'}
+                    margin="normal"
+                    onChange={event => setTeamIdInput(event.target.value)}
+                    onKeyUp={event => {
+                        if (event.key !== 'Enter') return;
+
+                        setSearchParams(searchParams => {
+                            searchParams.set(LEAGUE_ID, leagueIdInput);
+                            searchParams.set(TEAM_ID, teamIdInput);
                             return searchParams;
                         });
                     }}
@@ -114,45 +129,50 @@ export default function TeamPage() {
     return (
         <div className="teamPage">
             {!teamId && inputComponent()}
-            <div className="teamPageContent">
-                <IconButton
-                    className="arrowButton"
-                    onClick={() => {
-                        setSearchParams(searchParams => {
-                            searchParams.set(
-                                TEAM_ID,
-                                (parseInt(teamId) - 1).toString()
-                            );
-                            return searchParams;
-                        });
-                    }}
-                    disabled={teamId === '0'}
-                >
-                    <ArrowBack />
-                </IconButton>
-                <div className="teamPageRoster">
-                    {(!teamId || !user) && <>Loading...</>}
-                    {user && (
-                        <div className="displayName">{user.display_name}</div>
-                    )}
-                    {teamId && user && rosterComponent()}
+            {teamId && (
+                <div className="teamPageContent">
+                    <IconButton
+                        className="arrowButton"
+                        onClick={() => {
+                            setSearchParams(searchParams => {
+                                searchParams.set(
+                                    TEAM_ID,
+                                    (parseInt(teamId) - 1).toString()
+                                );
+                                return searchParams;
+                            });
+                        }}
+                        disabled={teamId === '0'}
+                    >
+                        <ArrowBack />
+                    </IconButton>
+                    <div className="teamPageRoster">
+                        {(!teamId || !user) && <>Loading...</>}
+                        {user && (
+                            <div className="displayName">
+                                {user.display_name}
+                            </div>
+                        )}
+                        {teamId && user && rosterComponent()}
+                    </div>
+                    <IconButton
+                        className="arrowButton"
+                        onClick={() => {
+                            setSearchParams(searchParams => {
+                                searchParams.set(
+                                    TEAM_ID,
+                                    (parseInt(teamId) + 1).toString()
+                                );
+                                return searchParams;
+                            });
+                        }}
+                        disabled={parseInt(teamId) + 1 === numRosters}
+                    >
+                        <ArrowForward />
+                    </IconButton>
                 </div>
-                <IconButton
-                    className="arrowButton"
-                    onClick={() => {
-                        setSearchParams(searchParams => {
-                            searchParams.set(
-                                TEAM_ID,
-                                (parseInt(teamId) + 1).toString()
-                            );
-                            return searchParams;
-                        });
-                    }}
-                    disabled={parseInt(teamId) + 1 === numRosters}
-                >
-                    <ArrowForward />
-                </IconButton>
-            </div>
+            )}
+
             {returnToLeaguePageButton()}
         </div>
     );
