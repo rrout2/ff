@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {useSearchParams, useNavigate} from 'react-router-dom';
 import {useFetchRosters, useFetchUser, usePlayer} from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
-import {Roster} from '../../../sleeper-api/sleeper-api';
 import {Button, IconButton} from '@mui/material';
 import {Search} from '@mui/icons-material';
 import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
@@ -16,7 +15,6 @@ export default function PlayerPage() {
     const player = usePlayer(playerId);
     const fetchRostersResponse = useFetchRosters(leagueId);
     const rosters = fetchRostersResponse.data;
-    const [roster, setRoster] = useState<Roster>();
     const fetchUserResponse = useFetchUser(teamId, rosters);
     const user = fetchUserResponse.data;
 
@@ -37,11 +35,6 @@ export default function PlayerPage() {
         if (teamId !== '' || !leagueId || !player) return;
         setTeamId(findRoster().toString());
     }, [leagueId, teamId, player?.player_id]);
-
-    useEffect(() => {
-        if (!rosters || rosters.length === 0) return;
-        setRoster(rosters[+teamId]);
-    }, [rosters, teamId]);
 
     return (
         <div className={styles.playerPage}>

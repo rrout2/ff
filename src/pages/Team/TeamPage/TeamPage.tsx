@@ -9,7 +9,7 @@ import {
     useFetchUser,
     usePlayerData,
 } from '../../../hooks/hooks';
-import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
 
 export default function TeamPage() {
