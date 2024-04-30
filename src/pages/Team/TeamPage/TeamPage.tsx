@@ -11,6 +11,7 @@ import {
     usePlayerData,
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
+import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
 
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -90,26 +91,7 @@ export default function TeamPage() {
                     a.last_name.localeCompare(b.last_name)
             )
             .map(player => (
-                <div
-                    key={player.player_id}
-                    className={styles.playerRow + ' ' + styles[player.position]}
-                    onClick={() => {
-                        navigate(
-                            `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
-                        );
-                    }}
-                >
-                    <img
-                        className={styles.headshot}
-                        src={`https://sleepercdn.com/content/nfl/players/thumb/${player.player_id}.jpg`}
-                        onError={({currentTarget}) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src =
-                                'https://sleepercdn.com/images/v2/icons/player_default.webp';
-                        }}
-                    />
-                    {player.position} {player.first_name} {player.last_name}
-                </div>
+                <PlayerPreview player={player} leagueId={leagueId} />
             ));
     }
 
