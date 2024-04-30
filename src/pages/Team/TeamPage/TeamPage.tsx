@@ -1,7 +1,6 @@
 import {useSearchParams, useNavigate} from 'react-router-dom';
-import {TextField, FormControl} from '@mui/material';
-import {Button, IconButton} from '@material-ui/core';
-import {ArrowBack, ArrowForward} from '@material-ui/icons';
+import {TextField, FormControl, Button, IconButton} from '@mui/material';
+import {ArrowBack, ArrowForward} from '@mui/icons-material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
 import {Roster} from '../../../sleeper-api/sleeper-api';

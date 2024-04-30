@@ -3,8 +3,8 @@ import {useSearchParams, useNavigate} from 'react-router-dom';
 import {useFetchRosters, useFetchUser, usePlayer} from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Roster} from '../../../sleeper-api/sleeper-api';
-import {Button, IconButton} from '@material-ui/core';
-import {Search} from '@material-ui/icons';
+import {Button, IconButton} from '@mui/material';
+import {Search} from '@mui/icons-material';
 import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
 
 export default function PlayerPage() {

@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import {Roster, User, getUser} from '../../../sleeper-api/sleeper-api';
-import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
+import {ArrowDropUp, ArrowDropDown} from '@mui/icons-material';
 import {useNavigate} from 'react-router-dom';
-import {IconButton} from '@material-ui/core';
+import {IconButton} from '@mui/material';
 import styles from './TeamPreview.module.css';
 import {usePlayerData} from '../../../hooks/hooks';
 import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
