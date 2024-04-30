@@ -6,7 +6,7 @@ import {
     getLeague,
     getRosters,
 } from '../../sleeper-api/sleeper-api';
-import './League.css';
+import styles from './League.module.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
@@ -66,7 +66,7 @@ export default function LeaguePage() {
 
     function rostersComponent() {
         return (
-            <div className="allRosters">
+            <div className={styles.allRosters}>
                 {rosters?.map((roster, index) =>
                     teamPreviewComponent(roster, index)
                 )}
@@ -75,7 +75,7 @@ export default function LeaguePage() {
     }
 
     return (
-        <div className="leaguePage">
+        <div className={styles.leaguePage}>
             {!leagueId && inputComponent()}
             <h2>{league?.name}</h2>
             {rostersComponent()}
