@@ -16,8 +16,19 @@ interface PlayerData {
 export function usePlayerData() {
     const [playerData, setPlayerData] = useState<PlayerData>();
 
+    const preprocess = (pd: PlayerData) => {
+        const fantasyPositions = new Set(['QB', 'WR', 'RB', 'TE']);
+        for (const playerId in pd) {
+            const player = pd[playerId];
+            if (!fantasyPositions.has(player.position)) {
+                delete pd[playerId];
+            }
+        }
+        return pd;
+    };
+
     useEffect(() => {
-        setPlayerData(playersJson as unknown as PlayerData);
+        setPlayerData(preprocess(playersJson as unknown as PlayerData));
     }, []);
 
     return playerData;
