@@ -3,7 +3,7 @@ import {Roster, User, getUser} from '../../../sleeper-api/sleeper-api';
 import {ArrowDropUp, ArrowDropDown} from '@material-ui/icons';
 import {useNavigate} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
-import './TeamPreview.css';
+import styles from './TeamPreview.module.css';
 import {usePlayerData} from '../../../hooks/hooks';
 import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
 
@@ -51,7 +51,11 @@ export default function TeamPreview({
     return (
         <>
             <div
-                className={`teamPreviewHeader ${isEven ? 'even' : 'odd'}`}
+                className={
+                    styles.teamPreviewHeader +
+                    ' ' +
+                    (isEven ? styles.even : styles.odd)
+                }
                 onClick={() => {
                     navigate(
                         `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${index}`
@@ -60,12 +64,12 @@ export default function TeamPreview({
             >
                 {user && (
                     <img
-                        className="avatarThumbnail"
+                        className={styles.avatarThumbnail}
                         src={`https://sleepercdn.com/avatars/thumbs/${user.avatar}`}
                     />
                 )}
                 {user?.display_name}
-                <span className="dropdownArrow">
+                <span className={styles.dropdownArrow}>
                     <IconButton
                         onClick={event => {
                             event.stopPropagation();
@@ -78,7 +82,9 @@ export default function TeamPreview({
                 </span>
             </div>
             {isExpanded && (
-                <div className="expandableContent">{expandableContent()}</div>
+                <div className={styles.expandableContent}>
+                    {expandableContent()}
+                </div>
             )}
         </>
     );
