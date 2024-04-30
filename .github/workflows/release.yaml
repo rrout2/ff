@@ -1,5 +1,7 @@
 name: release
 on: [push]
+permissions:
+  contents: write
 jobs:
   new-release:
     runs-on: ubuntu-latest
