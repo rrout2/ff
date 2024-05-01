@@ -59,6 +59,7 @@ export default function LeaguePage() {
                             return searchParams;
                         });
                     }}
+                    autoFocus
                 />
             </FormControl>
         );

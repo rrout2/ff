@@ -1,24 +1,26 @@
 import {TextField} from '@mui/material';
 import styles from './PlayerSearch.module.css';
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import {usePlayerData} from '../../../hooks/hooks';
 import {Player} from '../../../sleeper-api/sleeper-api';
-import {LEAGUE_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID, PLAYER_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../PlayerPreview/PlayerPreview';
+
 export default function PlayerSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [leagueId, setLeagueId] = useState('');
     const [searchParams] = useSearchParams();
-    const [searchOutput, setSearchOutput] = useState<Set<Player>>(new Set());
+    const [searchOutputList, setSearchOutputList] = useState<Player[]>([]);
     const playerData = usePlayerData();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
     }, [searchParams]);
 
     useEffect(() => {
-        if (!searchInput) setSearchOutput(new Set());
+        if (!searchInput) setSearchOutputList([]);
         const searchResults = new Set<Player>();
         for (const playerId in playerData) {
             const player = playerData[playerId];
@@ -29,14 +31,14 @@ export default function PlayerSearch() {
                 searchResults.add(player);
             }
         }
-        setSearchOutput(searchResults);
+        setSearchOutputList(Array.from(searchResults));
     }, [searchInput]);
 
     function searchResults() {
         if (!playerData || !searchInput) return <>{searchInput}</>;
         return (
             <>
-                {Array.from(searchOutput).map(player => {
+                {searchOutputList.map(player => {
                     return (
                         <PlayerPreview
                             player={player}
@@ -52,13 +54,23 @@ export default function PlayerSearch() {
     return (
         <div className={styles.playerSearch}>
             <TextField
+                className={styles.input}
                 onChange={e => {
                     setSearchInput(
                         e.target.value.toLowerCase().replace(/\s/g, '')
                     );
                 }}
-                className={styles.input}
-            ></TextField>
+                onKeyUp={event => {
+                    if (event.key !== 'Enter') return;
+
+                    if (searchOutputList.length === 0) return;
+                    navigate(
+                        `../player?${PLAYER_ID}=${searchOutputList[0].player_id}&${LEAGUE_ID}=${leagueId}`
+                    );
+                }}
+                label={'Search for a player'}
+                autoFocus
+            />
             {searchResults()}
         </div>
     );
