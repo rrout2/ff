@@ -25,7 +25,6 @@ export default function NflTeam() {
     useEffect(() => {
         if (!teamCode || teamCode === 'Choose a team:') {
             setTeamPlayers([]);
-            // setTeamCode('Choose a team:');
             return;
         }
         const players: Player[] = [];
