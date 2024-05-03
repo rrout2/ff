@@ -4,9 +4,12 @@ import {usePlayerData} from '../../hooks/hooks';
 import {Player} from '../../sleeper-api/sleeper-api';
 import PlayerPreview from '../Player/PlayerPreview/PlayerPreview';
 import {LEAGUE_ID} from '../../consts/urlParams';
+import {InputLabel, MenuItem, FormControl, Select} from '@mui/material';
+import {SelectChangeEvent} from '@mui/material/Select';
+import styles from './NflTeam.module.css';
 
 export default function NflTeam() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [teamCode, setTeamCode] = useState('');
     const [leagueId, setLeagueId] = useState('');
     const [teamPlayers, setTeamPlayers] = useState<Player[]>([]);
@@ -53,5 +56,65 @@ export default function NflTeam() {
         ));
     }
 
-    return <>{rosterComponent()}</>;
+    function inputComponent() {
+        return (
+            <FormControl>
+                <InputLabel>Team</InputLabel>
+                <Select
+                    value={teamCode}
+                    label="Team"
+                    onChange={(event: SelectChangeEvent) => {
+                        setTeamCode(event.target.value);
+                        setSearchParams(searchParams => {
+                            searchParams.set(
+                                'team',
+                                event.target.value as string
+                            );
+                            return searchParams;
+                        });
+                    }}
+                >
+                    <MenuItem value={'ARI'}>ARI</MenuItem>
+                    <MenuItem value={'ATL'}>ATL</MenuItem>
+                    <MenuItem value={'BAL'}>BAL</MenuItem>
+                    <MenuItem value={'BUF'}>BUF</MenuItem>
+                    <MenuItem value={'CAR'}>CAR</MenuItem>
+                    <MenuItem value={'CHI'}>CHI</MenuItem>
+                    <MenuItem value={'CIN'}>CIN</MenuItem>
+                    <MenuItem value={'CLE'}>CLE</MenuItem>
+                    <MenuItem value={'DAL'}>DAL</MenuItem>
+                    <MenuItem value={'DEN'}>DEN</MenuItem>
+                    <MenuItem value={'DET'}>DET</MenuItem>
+                    <MenuItem value={'GB'}>GB</MenuItem>
+                    <MenuItem value={'HOU'}>HOU</MenuItem>
+                    <MenuItem value={'IND'}>IND</MenuItem>
+                    <MenuItem value={'JAX'}>JAX</MenuItem>
+                    <MenuItem value={'KC'}>KC</MenuItem>
+                    <MenuItem value={'LV'}>LV</MenuItem>
+                    <MenuItem value={'LAC'}>LAC</MenuItem>
+                    <MenuItem value={'LAR'}>LAR</MenuItem>
+                    <MenuItem value={'MIA'}>MIA</MenuItem>
+                    <MenuItem value={'MIN'}>MIN</MenuItem>
+                    <MenuItem value={'NE'}>NE</MenuItem>
+                    <MenuItem value={'NO'}>NO</MenuItem>
+                    <MenuItem value={'NYG'}>NYG</MenuItem>
+                    <MenuItem value={'NYJ'}>NYJ</MenuItem>
+                    <MenuItem value={'PHI'}>PHI</MenuItem>
+                    <MenuItem value={'PIT'}>PIT</MenuItem>
+                    <MenuItem value={'SF'}>SF</MenuItem>
+                    <MenuItem value={'SEA'}>SEA</MenuItem>
+                    <MenuItem value={'TB'}>TB</MenuItem>
+                    <MenuItem value={'TEN'}>TEN</MenuItem>
+                    <MenuItem value={'WAS'}>WAS</MenuItem>
+                </Select>
+            </FormControl>
+        );
+    }
+
+    return (
+        <div className={styles.nflTeam}>
+            {inputComponent()}
+            {rosterComponent()}
+        </div>
+    );
 }
