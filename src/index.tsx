@@ -9,6 +9,7 @@ import TeamPage from './pages/Team/TeamPage/TeamPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import PlayerPage from './pages/Player/PlayerPage/PlayerPage';
 import PlayerSearch from './pages/Player/Search/PlayerSearch';
+import NflTeam from './pages/NflTeam/NflTeam';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -26,6 +27,7 @@ root.render(
                     <Route path="/team" element={<TeamPage />} />
                     <Route path="/player" element={<PlayerPage />} />
                     <Route path="/player/search" element={<PlayerSearch />} />
+                    <Route path="/nfl" element={<NflTeam />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>
