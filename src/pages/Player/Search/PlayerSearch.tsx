@@ -7,6 +7,7 @@ import {Player} from '../../../sleeper-api/sleeper-api';
 import {LEAGUE_ID, PLAYER_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../PlayerPreview/PlayerPreview';
 
+// dynasty-ff#/player/search?leagueId=...
 export default function PlayerSearch() {
     const [searchInput, setSearchInput] = useState('');
     const [leagueId, setLeagueId] = useState('');

@@ -4,8 +4,14 @@ import {useFetchRosters, useFetchUser, usePlayer} from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Button, IconButton} from '@mui/material';
 import {Search} from '@mui/icons-material';
-import {LEAGUE_ID, PLAYER_ID, TEAM_ID} from '../../../consts/urlParams';
+import {
+    LEAGUE_ID,
+    PLAYER_ID,
+    TEAM_CODE,
+    TEAM_ID,
+} from '../../../consts/urlParams';
 
+// /dynasty-ff#/player?playerId=...&leagueId=...
 export default function PlayerPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -75,7 +81,7 @@ export default function PlayerPage() {
                     <Button
                         onClick={() => {
                             navigate(
-                                `../nfl?team=${player?.team}&leagueId=${leagueId}`
+                                `../nfl?${TEAM_CODE}=${player?.team}&${LEAGUE_ID}=${leagueId}`
                             );
                         }}
                         variant="outlined"

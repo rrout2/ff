@@ -12,6 +12,7 @@ import {
 import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
 
+// dynasty-ff#/team?leagueId=...&teamId=...
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();

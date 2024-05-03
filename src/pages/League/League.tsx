@@ -11,7 +11,7 @@ import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
 
-// accessed via /dynasty-ff/#league
+// dynasty-ff/#league?leagueId=...
 export default function LeaguePage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [leagueId, setLeagueId] = useState('');
