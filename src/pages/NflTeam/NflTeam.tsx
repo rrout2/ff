@@ -29,6 +29,21 @@ export default function NflTeam() {
                 players.push(player);
             }
         }
+        players.sort((playerA, playerB) => {
+            const posSort = playerA.position.localeCompare(playerB.position);
+            if (posSort) return posSort;
+
+            if (playerB.depth_chart_order && playerA.depth_chart_order) {
+                return playerA.depth_chart_order - playerB.depth_chart_order;
+            }
+
+            if (!playerB.depth_chart_order || !playerA.depth_chart_order) {
+                if (playerA.depth_chart_order) return -1;
+
+                if (playerB.depth_chart_order) return 1;
+            }
+            return 0;
+        });
         setTeamPlayers(players);
     }, [playerData, teamCode]);
 

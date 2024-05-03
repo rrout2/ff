@@ -71,6 +71,18 @@ export default function PlayerPage() {
                 <div>Age: {player?.age}</div>
                 <div>Year: {player?.years_exp}</div>
                 <div>{player?.college}</div>
+                {!!player && (
+                    <Button
+                        onClick={() => {
+                            navigate(
+                                `../nfl?team=${player?.team}&leagueId=${leagueId}`
+                            );
+                        }}
+                        variant="outlined"
+                    >
+                        View {player?.team} Depth Chart
+                    </Button>
+                )}
                 {!!user && (
                     <Button
                         onClick={() => {
