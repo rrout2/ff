@@ -11,6 +11,7 @@ import {
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
+import Menu from '../../Menu/Menu';
 
 // dynasty-ff#/team?leagueId=...&teamId=...
 export default function TeamPage() {
@@ -137,46 +138,52 @@ export default function TeamPage() {
         <div className={styles.teamPage}>
             {!teamId && inputComponent()}
             {teamId && (
-                <div className={styles.teamPageContent}>
-                    <IconButton
-                        className={styles.arrowButton}
-                        onClick={() => {
-                            setSearchParams(searchParams => {
-                                searchParams.set(
-                                    TEAM_ID,
-                                    (parseInt(teamId) - 1).toString()
-                                );
-                                return searchParams;
-                            });
-                        }}
-                        disabled={teamId === '0'}
-                    >
-                        <ArrowBack />
-                    </IconButton>
-                    <div className={styles.teamPageRoster}>
-                        {(!teamId || !user) && <>Loading...</>}
-                        {user && (
-                            <div className={styles.displayName}>
-                                {user.display_name}
-                            </div>
-                        )}
-                        {teamId && user && rosterComponent()}
+                <div className={styles.menuWrapper}>
+                    <div className={styles.flexSpace} />
+                    <div className={styles.teamPageContent}>
+                        <IconButton
+                            className={styles.arrowButton}
+                            onClick={() => {
+                                setSearchParams(searchParams => {
+                                    searchParams.set(
+                                        TEAM_ID,
+                                        (parseInt(teamId) - 1).toString()
+                                    );
+                                    return searchParams;
+                                });
+                            }}
+                            disabled={teamId === '0'}
+                        >
+                            <ArrowBack />
+                        </IconButton>
+                        <div className={styles.teamPageRoster}>
+                            {(!teamId || !user) && <>Loading...</>}
+                            {user && (
+                                <div className={styles.displayName}>
+                                    {user.display_name}
+                                </div>
+                            )}
+                            {teamId && user && rosterComponent()}
+                        </div>
+                        <IconButton
+                            className={styles.arrowButton}
+                            onClick={() => {
+                                setSearchParams(searchParams => {
+                                    searchParams.set(
+                                        TEAM_ID,
+                                        (parseInt(teamId) + 1).toString()
+                                    );
+                                    return searchParams;
+                                });
+                            }}
+                            disabled={parseInt(teamId) + 1 === numRosters}
+                        >
+                            <ArrowForward />
+                        </IconButton>
                     </div>
-                    <IconButton
-                        className={styles.arrowButton}
-                        onClick={() => {
-                            setSearchParams(searchParams => {
-                                searchParams.set(
-                                    TEAM_ID,
-                                    (parseInt(teamId) + 1).toString()
-                                );
-                                return searchParams;
-                            });
-                        }}
-                        disabled={parseInt(teamId) + 1 === numRosters}
-                    >
-                        <ArrowForward />
-                    </IconButton>
+                    <div className={styles.flexSpace}>
+                        <Menu />
+                    </div>
                 </div>
             )}
             {!roster && viewTeamButton()}
