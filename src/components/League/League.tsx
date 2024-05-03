@@ -10,6 +10,7 @@ import styles from './League.module.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
+import Menu from '../Menu/Menu';
 
 // dynasty-ff/#league?leagueId=...
 export default function LeaguePage() {
@@ -78,7 +79,14 @@ export default function LeaguePage() {
     return (
         <div className={styles.leaguePage}>
             {!leagueId && inputComponent()}
-            <h2>{league?.name}</h2>
+            <div className={styles.menuWrapper}>
+                <div className={styles.flexSpace} />
+                <div className={styles.leagueName}>{league?.name}</div>
+                <div className={styles.flexSpace}>
+                    <Menu />
+                </div>
+            </div>
+
             {rostersComponent()}
         </div>
     );
