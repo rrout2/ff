@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import LeaguePage from './pages/League/League';
+import LeaguePage from './components/League/League';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
-import TeamPage from './pages/Team/TeamPage/TeamPage';
+import TeamPage from './components/Team/TeamPage/TeamPage';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import PlayerPage from './pages/Player/PlayerPage/PlayerPage';
-import PlayerSearch from './pages/Player/Search/PlayerSearch';
-import NflTeam from './pages/NflTeam/NflTeam';
+import PlayerPage from './components/Player/PlayerPage/PlayerPage';
+import PlayerSearch from './components/Player/Search/PlayerSearch';
+import NflTeam from './components/NflTeam/NflTeam';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
