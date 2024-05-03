@@ -7,6 +7,7 @@ import {LEAGUE_ID, TEAM_CODE} from '../../consts/urlParams';
 import {InputLabel, MenuItem, FormControl, Select} from '@mui/material';
 import {SelectChangeEvent} from '@mui/material/Select';
 import styles from './NflTeam.module.css';
+import Menu from '../Menu/Menu';
 
 // dynasty-ff#/nfl?teamCode=...&leagueId=...
 export default function NflTeam() {
@@ -121,7 +122,14 @@ export default function NflTeam() {
 
     return (
         <div className={styles.nflTeam}>
-            {inputComponent()}
+            <div className={styles.menuWrapper}>
+                <div className={styles.flexSpace} />
+                <div>{inputComponent()}</div>
+                <div className={styles.flexSpace}>
+                    <Menu />
+                </div>
+            </div>
+
             {rosterComponent()}
         </div>
     );
