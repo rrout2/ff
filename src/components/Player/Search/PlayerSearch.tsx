@@ -6,6 +6,7 @@ import {usePlayerData} from '../../../hooks/hooks';
 import {Player} from '../../../sleeper-api/sleeper-api';
 import {LEAGUE_ID, PLAYER_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../PlayerPreview/PlayerPreview';
+import Menu from '../../Menu/Menu';
 
 // dynasty-ff#/player/search?leagueId=...
 export default function PlayerSearch() {
@@ -54,24 +55,31 @@ export default function PlayerSearch() {
 
     return (
         <div className={styles.playerSearch}>
-            <TextField
-                className={styles.input}
-                onChange={e => {
-                    setSearchInput(
-                        e.target.value.toLowerCase().replace(/\s/g, '')
-                    );
-                }}
-                onKeyUp={event => {
-                    if (event.key !== 'Enter') return;
+            <div className={styles.menuWrapper}>
+                <div className={styles.flexSpace} />
+                <TextField
+                    className={styles.input}
+                    onChange={e => {
+                        setSearchInput(
+                            e.target.value.toLowerCase().replace(/\s/g, '')
+                        );
+                    }}
+                    onKeyUp={event => {
+                        if (event.key !== 'Enter') return;
 
-                    if (searchOutputList.length === 0) return;
-                    navigate(
-                        `../player?${PLAYER_ID}=${searchOutputList[0].player_id}&${LEAGUE_ID}=${leagueId}`
-                    );
-                }}
-                label={'Search for a player'}
-                autoFocus
-            />
+                        if (searchOutputList.length === 0) return;
+                        navigate(
+                            `../player?${PLAYER_ID}=${searchOutputList[0].player_id}&${LEAGUE_ID}=${leagueId}`
+                        );
+                    }}
+                    label={'Search for a player'}
+                    autoFocus
+                />
+                <div className={styles.flexSpace}>
+                    <Menu />
+                </div>
+            </div>
+
             {searchResults()}
         </div>
     );
