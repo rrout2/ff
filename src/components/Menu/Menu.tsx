@@ -3,8 +3,8 @@ import {IconButton} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {useState} from 'react';
 import {Menu as MuiMenu, MenuItem} from '@mui/material';
-import {useSearchParams, useNavigate} from 'react-router-dom';
-import {LEAGUE_ID, TEAM_ID} from '../../consts/urlParams';
+import {useNavigate} from 'react-router-dom';
+import {LEAGUE_ID} from '../../consts/urlParams';
 
 export default function Menu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,6 +44,20 @@ export default function Menu() {
                     }}
                 >
                     Team
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        navigate(`../player/search?${LEAGUE_ID}=${leagueId}`);
+                    }}
+                >
+                    Player Search
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        navigate(`../nfl?${LEAGUE_ID}=${leagueId}`);
+                    }}
+                >
+                    NFL Depth Charts
                 </MenuItem>
             </MuiMenu>
         </>

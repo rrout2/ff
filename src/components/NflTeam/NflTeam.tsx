@@ -17,13 +17,14 @@ export default function NflTeam() {
     const playerData = usePlayerData();
 
     useEffect(() => {
-        setTeamCode(searchParams.get(TEAM_CODE) ?? '');
+        setTeamCode(searchParams.get(TEAM_CODE) ?? 'Choose a team:');
         setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
     }, [searchParams]);
 
     useEffect(() => {
-        if (!teamCode) {
+        if (!teamCode || teamCode === 'Choose a team:') {
             setTeamPlayers([]);
+            // setTeamCode('Choose a team:');
             return;
         }
         const players: Player[] = [];
@@ -80,6 +81,7 @@ export default function NflTeam() {
                         });
                     }}
                 >
+                    <MenuItem value={'Choose a team:'}>Choose a team:</MenuItem>
                     <MenuItem value={'ARI'}>ARI</MenuItem>
                     <MenuItem value={'ATL'}>ATL</MenuItem>
                     <MenuItem value={'BAL'}>BAL</MenuItem>
