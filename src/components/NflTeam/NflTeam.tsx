@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 import {useSearchParams} from 'react-router-dom';
-import {usePlayerData} from '../../hooks/hooks';
+import {useLeagueIdFromUrl, usePlayerData} from '../../hooks/hooks';
 import {Player} from '../../sleeper-api/sleeper-api';
 import PlayerPreview from '../Player/PlayerPreview/PlayerPreview';
-import {LEAGUE_ID, TEAM_CODE} from '../../consts/urlParams';
+import {TEAM_CODE} from '../../consts/urlParams';
 import {InputLabel, MenuItem, FormControl, Select} from '@mui/material';
 import {SelectChangeEvent} from '@mui/material/Select';
 import styles from './NflTeam.module.css';
@@ -13,13 +13,12 @@ import Menu from '../Menu/Menu';
 export default function NflTeam() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [teamCode, setTeamCode] = useState('');
-    const [leagueId, setLeagueId] = useState('');
+    const [leagueId] = useLeagueIdFromUrl();
     const [teamPlayers, setTeamPlayers] = useState<Player[]>([]);
     const playerData = usePlayerData();
 
     useEffect(() => {
         setTeamCode(searchParams.get(TEAM_CODE) ?? 'Choose a team:');
-        setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
     }, [searchParams]);
 
     useEffect(() => {

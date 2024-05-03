@@ -1,6 +1,11 @@
 import {useEffect, useState} from 'react';
 import {useSearchParams, useNavigate} from 'react-router-dom';
-import {useFetchRosters, useFetchUser, usePlayer} from '../../../hooks/hooks';
+import {
+    useFetchRosters,
+    useFetchUser,
+    useLeagueIdFromUrl,
+    usePlayer,
+} from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Button, IconButton} from '@mui/material';
 import {Search} from '@mui/icons-material';
@@ -17,7 +22,7 @@ export default function PlayerPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [playerId, setPlayerId] = useState('');
-    const [leagueId, setLeagueId] = useState('');
+    const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState('');
     const player = usePlayer(playerId);
     const fetchRostersResponse = useFetchRosters(leagueId);
@@ -35,7 +40,6 @@ export default function PlayerPage() {
 
     useEffect(() => {
         setPlayerId(searchParams.get(PLAYER_ID) ?? '');
-        setLeagueId(searchParams.get(LEAGUE_ID) ?? '');
     }, [searchParams]);
 
     useEffect(() => {

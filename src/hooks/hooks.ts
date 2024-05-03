@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import {
     Player,
@@ -84,8 +84,11 @@ export function useFetchRosters(leagueIdNewName: string) {
     });
 }
 
-export function useLeagueIdFromUrl() {
-    const [searchParams] = useSearchParams();
+export function useLeagueIdFromUrl(): [
+    string,
+    Dispatch<SetStateAction<string>>
+] {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [leagueId, setLeagueId] = useState('');
 
     useEffect(() => {
@@ -94,5 +97,15 @@ export function useLeagueIdFromUrl() {
 
         setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
-    return leagueId;
+
+    useEffect(() => {
+        if (leagueId === searchParams.get(LEAGUE_ID) || !leagueId) return;
+
+        setSearchParams(searchParams => {
+            searchParams.set(LEAGUE_ID, leagueId);
+            return searchParams;
+        });
+    }, [leagueId]);
+
+    return [leagueId, setLeagueId];
 }

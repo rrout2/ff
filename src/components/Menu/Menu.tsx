@@ -8,7 +8,7 @@ import {LEAGUE_ID} from '../../consts/urlParams';
 
 export default function Menu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const leagueId = useLeagueIdFromUrl();
+    const [leagueId] = useLeagueIdFromUrl();
     const navigate = useNavigate();
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

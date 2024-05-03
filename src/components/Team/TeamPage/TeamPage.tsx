@@ -7,6 +7,7 @@ import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
     useFetchUser,
+    useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
@@ -17,7 +18,7 @@ import Menu from '../../Menu/Menu';
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
-    const [leagueId, setLeagueId] = useState('');
+    const [leagueId, setLeagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState('');
     const [teamIdInput, setTeamIdInput] = useState('');
     const [roster, setRoster] = useState<Roster>();
@@ -26,11 +27,11 @@ export default function TeamPage() {
 
     useEffect(() => {
         const teamIdFromUrl = searchParams.get(TEAM_ID);
-        const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
+        // const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
 
         if (teamIdFromUrl) setTeamId(teamIdFromUrl);
 
-        if (leagueIdFromUrl) setLeagueId(leagueIdFromUrl);
+        // if (leagueIdFromUrl) setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
     const fetchRostersResponse = useFetchRosters(leagueId);

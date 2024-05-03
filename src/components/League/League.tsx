@@ -11,21 +11,15 @@ import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
 import Menu from '../Menu/Menu';
+import {useLeagueIdFromUrl} from '../../hooks/hooks';
 
 // dynasty-ff/#league?leagueId=...
 export default function LeaguePage() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [leagueId, setLeagueId] = useState('');
+    const setSearchParams = useSearchParams()[1];
+    const [leagueId] = useLeagueIdFromUrl();
     const [input, setInput] = useState('');
     const [league, setLeague] = useState<League>();
     const [rosters, setRosters] = useState<Roster[]>([]);
-
-    useEffect(() => {
-        const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
-        if (!leagueIdFromUrl) return;
-
-        setLeagueId(leagueIdFromUrl);
-    }, [searchParams]);
 
     useEffect(() => {
         if (!leagueId) return;
