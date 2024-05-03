@@ -47,47 +47,53 @@ export default function TeamPage() {
 
     function inputComponent() {
         return (
-            <FormControl>
-                <TextField
-                    label={'League ID'}
-                    margin="normal"
-                    value={leagueId}
-                    onChange={event => {
-                        setLeagueId(event.target.value);
-                    }}
-                    onKeyUp={event => {
-                        if (event.key !== 'Enter') return;
+            <div className={styles.menuWrapper}>
+                <div className={styles.flexSpace} />
+                <FormControl>
+                    <TextField
+                        label={'League ID'}
+                        margin="normal"
+                        value={leagueId}
+                        onChange={event => {
+                            setLeagueId(event.target.value);
+                        }}
+                        onKeyUp={event => {
+                            if (event.key !== 'Enter') return;
 
-                        setSearchParams(searchParams => {
-                            if (leagueId) {
-                                searchParams.set(LEAGUE_ID, leagueId);
-                            }
-                            if (teamIdInput) {
-                                searchParams.set(TEAM_ID, teamIdInput);
-                            }
-                            return searchParams;
-                        });
-                    }}
-                />
-                <TextField
-                    label={'Team ID (optional)'}
-                    margin="normal"
-                    onChange={event => setTeamIdInput(event.target.value)}
-                    onKeyUp={event => {
-                        if (event.key !== 'Enter') return;
+                            setSearchParams(searchParams => {
+                                if (leagueId) {
+                                    searchParams.set(LEAGUE_ID, leagueId);
+                                }
+                                if (teamIdInput) {
+                                    searchParams.set(TEAM_ID, teamIdInput);
+                                }
+                                return searchParams;
+                            });
+                        }}
+                    />
+                    <TextField
+                        label={'Team ID (optional)'}
+                        margin="normal"
+                        onChange={event => setTeamIdInput(event.target.value)}
+                        onKeyUp={event => {
+                            if (event.key !== 'Enter') return;
 
-                        setSearchParams(searchParams => {
-                            if (leagueId) {
-                                searchParams.set(LEAGUE_ID, leagueId);
-                            }
-                            if (teamIdInput) {
-                                searchParams.set(TEAM_ID, teamIdInput);
-                            }
-                            return searchParams;
-                        });
-                    }}
-                />
-            </FormControl>
+                            setSearchParams(searchParams => {
+                                if (leagueId) {
+                                    searchParams.set(LEAGUE_ID, leagueId);
+                                }
+                                if (teamIdInput) {
+                                    searchParams.set(TEAM_ID, teamIdInput);
+                                }
+                                return searchParams;
+                            });
+                        }}
+                    />
+                </FormControl>
+                <div className={styles.flexSpace}>
+                    <Menu />
+                </div>
+            </div>
         );
     }
 
