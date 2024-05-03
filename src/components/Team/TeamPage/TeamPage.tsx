@@ -18,7 +18,6 @@ export default function TeamPage() {
     const navigate = useNavigate();
     const [leagueId, setLeagueId] = useState('');
     const [teamId, setTeamId] = useState('');
-    const [leagueIdInput, setLeagueIdInput] = useState('');
     const [teamIdInput, setTeamIdInput] = useState('');
     const [roster, setRoster] = useState<Roster>();
     const [numRosters, setNumRosters] = useState(0);
@@ -28,10 +27,9 @@ export default function TeamPage() {
         const teamIdFromUrl = searchParams.get(TEAM_ID);
         const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
 
-        if (!teamIdFromUrl || !leagueIdFromUrl) return;
+        if (teamIdFromUrl) setTeamId(teamIdFromUrl);
 
-        setTeamId(teamIdFromUrl);
-        setLeagueId(leagueIdFromUrl);
+        if (leagueIdFromUrl) setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
     const fetchRostersResponse = useFetchRosters(leagueId);
@@ -41,7 +39,7 @@ export default function TeamPage() {
     const user = fetchUserResponse.data;
 
     useEffect(() => {
-        if (!rosters || rosters.length === 0) return;
+        if (!rosters || rosters.length === 0 || !teamId) return;
         setRoster(rosters[+teamId]);
         setNumRosters(rosters.length);
     }, [rosters, user, teamId]);
@@ -52,13 +50,20 @@ export default function TeamPage() {
                 <TextField
                     label={'League ID'}
                     margin="normal"
-                    onChange={event => setLeagueIdInput(event.target.value)}
+                    value={leagueId}
+                    onChange={event => {
+                        setLeagueId(event.target.value);
+                    }}
                     onKeyUp={event => {
                         if (event.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
-                            searchParams.set(LEAGUE_ID, leagueIdInput);
-                            searchParams.set(TEAM_ID, '0');
+                            if (leagueId) {
+                                searchParams.set(LEAGUE_ID, leagueId);
+                            }
+                            if (teamIdInput) {
+                                searchParams.set(TEAM_ID, teamIdInput);
+                            }
                             return searchParams;
                         });
                     }}
@@ -71,8 +76,12 @@ export default function TeamPage() {
                         if (event.key !== 'Enter') return;
 
                         setSearchParams(searchParams => {
-                            searchParams.set(LEAGUE_ID, leagueIdInput);
-                            searchParams.set(TEAM_ID, teamIdInput);
+                            if (leagueId) {
+                                searchParams.set(LEAGUE_ID, leagueId);
+                            }
+                            if (teamIdInput) {
+                                searchParams.set(TEAM_ID, teamIdInput);
+                            }
                             return searchParams;
                         });
                     }}
@@ -93,6 +102,22 @@ export default function TeamPage() {
             .map(player => (
                 <PlayerPreview player={player} leagueId={leagueId} />
             ));
+    }
+
+    function viewTeamButton() {
+        return (
+            <Button
+                variant="outlined"
+                onClick={() => {
+                    const teamIdOrDefault = teamId ? teamId : '0';
+                    navigate(
+                        `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamIdOrDefault}`
+                    );
+                }}
+            >
+                View Team
+            </Button>
+        );
     }
 
     function returnToLeaguePageButton() {
@@ -154,7 +179,7 @@ export default function TeamPage() {
                     </IconButton>
                 </div>
             )}
-
+            {!roster && viewTeamButton()}
             {returnToLeaguePageButton()}
         </div>
     );

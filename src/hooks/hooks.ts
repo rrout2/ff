@@ -8,6 +8,8 @@ import {
     getUser,
 } from '../sleeper-api/sleeper-api';
 import {useQuery} from 'react-query';
+import {LEAGUE_ID} from '../consts/urlParams';
+import {useSearchParams} from 'react-router-dom';
 
 interface PlayerData {
     [key: string]: Player;
@@ -80,4 +82,17 @@ export function useFetchRosters(leagueIdNewName: string) {
         },
         staleTime: 10000,
     });
+}
+
+export function useLeagueIdFromUrl() {
+    const [searchParams] = useSearchParams();
+    const [leagueId, setLeagueId] = useState('');
+
+    useEffect(() => {
+        const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
+        if (!leagueIdFromUrl) return;
+
+        setLeagueId(leagueIdFromUrl);
+    }, [searchParams]);
+    return leagueId;
 }

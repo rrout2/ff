@@ -10,6 +10,7 @@ import {
     TEAM_CODE,
     TEAM_ID,
 } from '../../../consts/urlParams';
+import Menu from '../../Menu/Menu';
 
 // /dynasty-ff#/player?playerId=...&leagueId=...
 export default function PlayerPage() {
@@ -102,7 +103,9 @@ export default function PlayerPage() {
                     </Button>
                 )}
             </div>
-            <div className={styles.flexSpace}></div>
+            <div className={`${styles.flexSpace} ${styles.menuIcon}`}>
+                <Menu />
+            </div>
         </div>
     );
 }

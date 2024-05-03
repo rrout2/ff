@@ -20,3 +20,9 @@
 .flexSpace {
     flex: 1;
 }
+
+.menuIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
