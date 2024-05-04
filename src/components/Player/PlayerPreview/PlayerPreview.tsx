@@ -14,15 +14,21 @@ export default function PlayerPreview({
     hideHeadshot,
 }: PlayerPreviewProps) {
     const navigate = useNavigate();
+
+    const playerPath = `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`;
+
     return (
         <div
             key={player.player_id}
             className={styles.playerRow + ' ' + styles[player.position]}
             onClick={() => {
-                navigate(
-                    `../player?${PLAYER_ID}=${player.player_id}&${LEAGUE_ID}=${leagueId}`
-                );
+                navigate(playerPath);
             }}
+            onKeyUp={event => {
+                if (event.key !== 'Enter') return;
+                navigate(playerPath);
+            }}
+            tabIndex={0}
         >
             {!hideHeadshot && (
                 <img
