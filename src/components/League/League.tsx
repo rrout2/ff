@@ -76,9 +76,7 @@ export default function LeaguePage() {
             <div className={styles.menuWrapper}>
                 <div className={styles.flexSpace} />
                 <div className={styles.leagueName}>{league?.name}</div>
-                <div className={styles.flexSpace}>
-                    <Menu />
-                </div>
+                <div className={styles.flexSpace}>{!!leagueId && <Menu />}</div>
             </div>
 
             {rostersComponent()}
