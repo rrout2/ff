@@ -3,6 +3,7 @@ import playersJson from '../data/players.json';
 import {
     Player,
     Roster,
+    User,
     getLeague,
     getRosters,
     getUser,
@@ -46,6 +47,22 @@ export function usePlayer(playerId: string) {
     }, [playerId, playerData]);
 
     return player;
+}
+
+export function useFetchUsers(rosters?: Roster[]) {
+    return useQuery({
+        queryKey: [rosters],
+        queryFn: async () => {
+            if (!rosters || rosters.length === 0) return;
+            const users: User[] = [];
+            for (const rosterId in rosters) {
+                const roster = rosters[rosterId];
+                users.push(await getUser(roster.owner_id));
+            }
+            return users;
+        },
+        staleTime: 10000,
+    });
 }
 
 export function useFetchUser(teamId: string, rosters?: Roster[]) {

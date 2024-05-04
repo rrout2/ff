@@ -1,5 +1,14 @@
 import {useSearchParams, useNavigate} from 'react-router-dom';
-import {TextField, FormControl, Button, IconButton} from '@mui/material';
+import {
+    TextField,
+    FormControl,
+    Button,
+    IconButton,
+    InputLabel,
+    Select,
+    SelectChangeEvent,
+    MenuItem,
+} from '@mui/material';
 import {ArrowBack, ArrowForward} from '@mui/icons-material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
@@ -7,6 +16,7 @@ import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
     useFetchUser,
+    useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
@@ -22,29 +32,24 @@ export default function TeamPage() {
     const [teamId, setTeamId] = useState('');
     const [teamIdInput, setTeamIdInput] = useState('');
     const [roster, setRoster] = useState<Roster>();
-    const [numRosters, setNumRosters] = useState(0);
     const playerData = usePlayerData();
 
     useEffect(() => {
         const teamIdFromUrl = searchParams.get(TEAM_ID);
-        // const leagueIdFromUrl = searchParams.get(LEAGUE_ID);
-
         if (teamIdFromUrl) setTeamId(teamIdFromUrl);
-
-        // if (leagueIdFromUrl) setLeagueId(leagueIdFromUrl);
     }, [searchParams]);
 
     const fetchRostersResponse = useFetchRosters(leagueId);
     const rosters = fetchRostersResponse.data;
 
-    const fetchUserResponse = useFetchUser(teamId, rosters);
-    const user = fetchUserResponse.data;
+    const fetchUsersResponse = useFetchUsers(rosters);
+    const users = fetchUsersResponse.data;
+    const user = users ? users[+teamId] : undefined;
 
     useEffect(() => {
-        if (!rosters || rosters.length === 0 || !teamId) return;
+        if (!rosters || rosters.length === 0 || !hasTeamId()) return;
         setRoster(rosters[+teamId]);
-        setNumRosters(rosters.length);
-    }, [rosters, user, teamId]);
+    }, [rosters, teamId]);
 
     function inputComponent() {
         return (
@@ -98,6 +103,27 @@ export default function TeamPage() {
         );
     }
 
+    function teamSelectComponent() {
+        return (
+            <FormControl>
+                <InputLabel>Team</InputLabel>
+                <Select
+                    value={teamId}
+                    label="Team"
+                    onChange={(event: SelectChangeEvent) => {
+                        setTeamId(event.target.value);
+                    }}
+                >
+                    {users?.map((u, idx) => (
+                        <MenuItem value={idx} key={idx}>
+                            {u.display_name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        );
+    }
+
     function rosterComponent() {
         if (!playerData || !roster) return <>Loading...</>;
         return roster.players
@@ -141,52 +167,21 @@ export default function TeamPage() {
         );
     }
 
+    function hasTeamId() {
+        return teamId !== '';
+    }
+
     return (
         <div className={styles.teamPage}>
-            {!teamId && inputComponent()}
-            {teamId && (
+            {!hasTeamId() && inputComponent()}
+            {hasTeamId() && user && (
                 <div className={styles.menuWrapper}>
                     <div className={styles.flexSpace} />
                     <div className={styles.teamPageContent}>
-                        <IconButton
-                            className={styles.arrowButton}
-                            onClick={() => {
-                                setSearchParams(searchParams => {
-                                    searchParams.set(
-                                        TEAM_ID,
-                                        (parseInt(teamId) - 1).toString()
-                                    );
-                                    return searchParams;
-                                });
-                            }}
-                            disabled={teamId === '0'}
-                        >
-                            <ArrowBack />
-                        </IconButton>
                         <div className={styles.teamPageRoster}>
-                            {(!teamId || !user) && <>Loading...</>}
-                            {user && (
-                                <div className={styles.displayName}>
-                                    {user.display_name}
-                                </div>
-                            )}
-                            {teamId && user && rosterComponent()}
+                            {teamSelectComponent()}
+                            {rosterComponent()}
                         </div>
-                        <IconButton
-                            className={styles.arrowButton}
-                            onClick={() => {
-                                setSearchParams(searchParams => {
-                                    searchParams.set(
-                                        TEAM_ID,
-                                        (parseInt(teamId) + 1).toString()
-                                    );
-                                    return searchParams;
-                                });
-                            }}
-                            disabled={parseInt(teamId) + 1 === numRosters}
-                        >
-                            <ArrowForward />
-                        </IconButton>
                     </div>
                     <div className={styles.flexSpace}>
                         <Menu />
