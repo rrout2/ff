@@ -51,6 +51,13 @@ export default function TeamPage() {
         setRoster(rosters[+teamId]);
     }, [rosters, teamId]);
 
+    useEffect(() => {
+        setSearchParams(searchParams => {
+            searchParams.set(TEAM_ID, teamId);
+            return searchParams;
+        });
+    }, [teamId]);
+
     function inputComponent() {
         return (
             <div className={styles.menuWrapper}>
