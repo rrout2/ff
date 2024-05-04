@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import {useState} from 'react';
 import {Menu as MuiMenu, MenuItem} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import {LEAGUE_ID} from '../../consts/urlParams';
+import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../consts/urlParams';
 
 export default function Menu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -40,7 +40,9 @@ export default function Menu() {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
-                        navigate(`../team?${LEAGUE_ID}=${leagueId}`);
+                        navigate(
+                            `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${NONE_TEAM_ID}`
+                        );
                     }}
                 >
                     Team

@@ -1,26 +1,22 @@
 import {useSearchParams, useNavigate} from 'react-router-dom';
 import {
-    TextField,
     FormControl,
     Button,
-    IconButton,
     InputLabel,
     Select,
     SelectChangeEvent,
     MenuItem,
 } from '@mui/material';
-import {ArrowBack, ArrowForward} from '@mui/icons-material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
 import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
-    useFetchUser,
     useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
-import {LEAGUE_ID, TEAM_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
 import Menu from '../../Menu/Menu';
 
@@ -28,9 +24,8 @@ import Menu from '../../Menu/Menu';
 export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
-    const [leagueId, setLeagueId] = useLeagueIdFromUrl();
+    const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState('');
-    const [teamIdInput, setTeamIdInput] = useState('');
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
 
@@ -58,58 +53,6 @@ export default function TeamPage() {
         });
     }, [teamId]);
 
-    function inputComponent() {
-        return (
-            <div className={styles.menuWrapper}>
-                <div className={styles.flexSpace} />
-                <FormControl>
-                    <TextField
-                        label={'League ID'}
-                        margin="normal"
-                        value={leagueId}
-                        onChange={event => {
-                            setLeagueId(event.target.value);
-                        }}
-                        onKeyUp={event => {
-                            if (event.key !== 'Enter') return;
-
-                            setSearchParams(searchParams => {
-                                if (leagueId) {
-                                    searchParams.set(LEAGUE_ID, leagueId);
-                                }
-                                if (teamIdInput) {
-                                    searchParams.set(TEAM_ID, teamIdInput);
-                                }
-                                return searchParams;
-                            });
-                        }}
-                    />
-                    <TextField
-                        label={'Team ID (optional)'}
-                        margin="normal"
-                        onChange={event => setTeamIdInput(event.target.value)}
-                        onKeyUp={event => {
-                            if (event.key !== 'Enter') return;
-
-                            setSearchParams(searchParams => {
-                                if (leagueId) {
-                                    searchParams.set(LEAGUE_ID, leagueId);
-                                }
-                                if (teamIdInput) {
-                                    searchParams.set(TEAM_ID, teamIdInput);
-                                }
-                                return searchParams;
-                            });
-                        }}
-                    />
-                </FormControl>
-                <div className={styles.flexSpace}>
-                    <Menu />
-                </div>
-            </div>
-        );
-    }
-
     function teamSelectComponent() {
         return (
             <FormControl>
@@ -121,6 +64,9 @@ export default function TeamPage() {
                         setTeamId(event.target.value);
                     }}
                 >
+                    <MenuItem value={NONE_TEAM_ID} key={'chooseateam'}>
+                        Choose a team:
+                    </MenuItem>
                     {users?.map((u, idx) => (
                         <MenuItem value={idx} key={idx}>
                             {u.display_name}
@@ -145,22 +91,6 @@ export default function TeamPage() {
             ));
     }
 
-    function viewTeamButton() {
-        return (
-            <Button
-                variant="outlined"
-                onClick={() => {
-                    const teamIdOrDefault = teamId ? teamId : '0';
-                    navigate(
-                        `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamIdOrDefault}`
-                    );
-                }}
-            >
-                View Team
-            </Button>
-        );
-    }
-
     function returnToLeaguePageButton() {
         return (
             <Button
@@ -175,27 +105,25 @@ export default function TeamPage() {
     }
 
     function hasTeamId() {
-        return teamId !== '';
+        return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
 
     return (
         <div className={styles.teamPage}>
-            {!hasTeamId() && inputComponent()}
-            {hasTeamId() && user && (
+            {
                 <div className={styles.menuWrapper}>
                     <div className={styles.flexSpace} />
                     <div className={styles.teamPageContent}>
                         <div className={styles.teamPageRoster}>
-                            {teamSelectComponent()}
-                            {rosterComponent()}
+                            {users && teamSelectComponent()}
+                            {hasTeamId() && user && rosterComponent()}
                         </div>
                     </div>
                     <div className={styles.flexSpace}>
                         <Menu />
                     </div>
                 </div>
-            )}
-            {!roster && viewTeamButton()}
+            }
             {returnToLeaguePageButton()}
         </div>
     );
