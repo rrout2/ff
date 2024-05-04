@@ -59,6 +59,13 @@ export default function Menu() {
                 >
                     NFL Depth Charts
                 </MenuItem>
+                <MenuItem
+                    onClick={() => {
+                        navigate(`../league?${LEAGUE_ID}=`);
+                    }}
+                >
+                    View New League
+                </MenuItem>
             </MuiMenu>
         </>
     );
