@@ -103,7 +103,7 @@ export default function PlayerPage() {
                         }}
                         variant="outlined"
                     >
-                        Return to {user?.display_name}
+                        View {user?.display_name}'s Full Team
                     </Button>
                 )}
             </div>
