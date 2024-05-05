@@ -12,6 +12,7 @@ import {useEffect, useState} from 'react';
 import {Roster} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
+    useFetchUser,
     useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
@@ -34,12 +35,18 @@ export default function TeamPage() {
         if (teamIdFromUrl) setTeamId(teamIdFromUrl);
     }, [searchParams]);
 
-    const fetchRostersResponse = useFetchRosters(leagueId);
-    const rosters = fetchRostersResponse.data;
+    const {data: rosters} = useFetchRosters(leagueId);
 
-    const fetchUsersResponse = useFetchUsers(rosters);
-    const users = fetchUsersResponse.data;
-    const user = users ? users[+teamId] : undefined;
+    // start fetching all users from league
+    const {data: allUsers} = useFetchUsers(rosters);
+
+    // fetch specified user, unless already have allUsers
+    const {data: fetchedUser} = useFetchUser(
+        teamId,
+        rosters,
+        /* disabled = */ !!allUsers
+    );
+    const specifiedUser = allUsers ? allUsers[+teamId] : fetchedUser;
 
     useEffect(() => {
         if (!rosters || rosters.length === 0 || !hasTeamId()) return;
@@ -67,7 +74,12 @@ export default function TeamPage() {
                     <MenuItem value={NONE_TEAM_ID} key={'chooseateam'}>
                         Choose a team:
                     </MenuItem>
-                    {users?.map((u, idx) => (
+                    {!allUsers && specifiedUser && (
+                        <MenuItem value={teamId} key={teamId}>
+                            {specifiedUser?.display_name}
+                        </MenuItem>
+                    )}
+                    {allUsers?.map((u, idx) => (
                         <MenuItem value={idx} key={idx}>
                             {u.display_name}
                         </MenuItem>
@@ -115,8 +127,9 @@ export default function TeamPage() {
                     <div className={styles.flexSpace} />
                     <div className={styles.teamPageContent}>
                         <div className={styles.teamPageRoster}>
-                            {users && teamSelectComponent()}
-                            {hasTeamId() && user && rosterComponent()}
+                            {(specifiedUser || allUsers) &&
+                                teamSelectComponent()}
+                            {hasTeamId() && specifiedUser && rosterComponent()}
                         </div>
                     </div>
                     <div className={styles.flexSpace}>

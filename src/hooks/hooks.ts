@@ -52,6 +52,7 @@ export function usePlayer(playerId: string) {
 export function useFetchUsers(rosters?: Roster[]) {
     return useQuery({
         queryKey: [rosters],
+        enabled: !!rosters && rosters.length > 0,
         queryFn: async () => {
             if (!rosters || rosters.length === 0) return;
             const users: User[] = [];
@@ -65,9 +66,14 @@ export function useFetchUsers(rosters?: Roster[]) {
     });
 }
 
-export function useFetchUser(teamId: string, rosters?: Roster[]) {
+export function useFetchUser(
+    teamId: string,
+    rosters?: Roster[],
+    disabled?: boolean
+) {
     return useQuery({
         queryKey: [rosters, teamId],
+        enabled: !!rosters && rosters.length > 0 && !disabled,
         queryFn: async () => {
             if (!rosters || rosters.length === 0) return;
             const userId = rosters[+teamId].owner_id;
