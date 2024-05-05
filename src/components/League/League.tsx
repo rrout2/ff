@@ -8,10 +8,11 @@ import {
 } from '../../sleeper-api/sleeper-api';
 import styles from './League.module.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
-import {TextField, FormControl} from '@mui/material';
+import {TextField, FormControl, Button} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
 import Menu from '../Menu/Menu';
 import {useLeagueIdFromUrl} from '../../hooks/hooks';
+import {OpenInNew} from '@mui/icons-material';
 
 // dynasty-ff/#league?leagueId=...
 export default function LeaguePage() {
@@ -41,22 +42,36 @@ export default function LeaguePage() {
 
     function inputComponent() {
         return (
-            <FormControl>
-                <TextField
-                    label={'League ID'}
-                    margin="normal"
-                    onChange={event => setInput(event.target.value)}
-                    onKeyUp={e => {
-                        if (e.key !== 'Enter') return;
+            <>
+                <FormControl>
+                    <TextField
+                        label={'League ID'}
+                        margin="normal"
+                        onChange={event => setInput(event.target.value)}
+                        onKeyUp={e => {
+                            if (e.key !== 'Enter') return;
 
-                        setSearchParams(searchParams => {
-                            searchParams.set(LEAGUE_ID, input);
-                            return searchParams;
-                        });
+                            setSearchParams(searchParams => {
+                                searchParams.set(LEAGUE_ID, input);
+                                return searchParams;
+                            });
+                        }}
+                        autoFocus
+                    />
+                </FormControl>
+                <Button
+                    variant="outlined"
+                    endIcon={<OpenInNew />}
+                    onClick={() => {
+                        window.open(
+                            'https://support.sleeper.com/en/articles/4121798-how-do-i-find-my-league-id',
+                            '_blank'
+                        );
                     }}
-                    autoFocus
-                />
-            </FormControl>
+                >
+                    How to Find Sleeper League ID
+                </Button>
+            </>
         );
     }
 
