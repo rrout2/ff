@@ -25,10 +25,11 @@ export default function PlayerPage() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState('');
     const player = usePlayer(playerId);
-    const fetchRostersResponse = useFetchRosters(leagueId);
-    const rosters = fetchRostersResponse.data;
-    const fetchUserResponse = useFetchUser(teamId, rosters);
-    const user = fetchUserResponse.data;
+    const {data: rosters} = useFetchRosters(leagueId);
+    const {data: user, isLoading: isFetchUserLoading} = useFetchUser(
+        teamId,
+        rosters
+    );
 
     // O(N * M)
     function findRoster() {
@@ -108,7 +109,7 @@ export default function PlayerPage() {
                         View {player?.team} Depth Chart
                     </Button>
                 )}
-                {
+                {!isFetchUserLoading && (
                     <Button
                         onClick={() => {
                             navigate(
@@ -122,7 +123,7 @@ export default function PlayerPage() {
                             ? `View ${user?.display_name}'s Full Team`
                             : 'View Full Team'}
                     </Button>
-                }
+                )}
             </div>
             <div className={`${styles.flexSpace} ${styles.menuIcon}`}>
                 <Menu />

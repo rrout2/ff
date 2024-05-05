@@ -73,7 +73,7 @@ export function useFetchUser(
 ) {
     return useQuery({
         queryKey: [rosters, teamId],
-        enabled: !!rosters && rosters.length > 0 && !disabled,
+        enabled: !!rosters && rosters.length > 0 && !!teamId && !disabled,
         queryFn: async () => {
             if (!rosters || rosters.length === 0) return;
             const userId = rosters[+teamId].owner_id;
