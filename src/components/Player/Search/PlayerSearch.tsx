@@ -28,7 +28,11 @@ export default function PlayerSearch() {
                 searchResults.add(player);
             }
         }
-        setSearchOutputList(Array.from(searchResults));
+        setSearchOutputList(
+            Array.from(searchResults).sort((a, b) => {
+                return a.search_rank - b.search_rank;
+            })
+        );
     }, [searchInput]);
 
     function searchResults() {
