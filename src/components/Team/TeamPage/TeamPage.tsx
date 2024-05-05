@@ -6,6 +6,7 @@ import {
     Select,
     SelectChangeEvent,
     MenuItem,
+    CircularProgress,
 } from '@mui/material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
@@ -130,6 +131,9 @@ export default function TeamPage() {
                             {(specifiedUser || allUsers) &&
                                 teamSelectComponent()}
                             {hasTeamId() && specifiedUser && rosterComponent()}
+                            {!specifiedUser && !allUsers && (
+                                <CircularProgress />
+                            )}
                         </div>
                     </div>
                     <div className={styles.flexSpace}>
