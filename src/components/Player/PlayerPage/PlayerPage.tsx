@@ -8,7 +8,7 @@ import {
 } from '../../../hooks/hooks';
 import styles from './PlayerPage.module.css';
 import {Button, IconButton} from '@mui/material';
-import {Search} from '@mui/icons-material';
+import {OpenInNew, Search} from '@mui/icons-material';
 import {
     LEAGUE_ID,
     PLAYER_ID,
@@ -84,6 +84,20 @@ export default function PlayerPage() {
                 <div>{player?.college}</div>
                 {!!player && (
                     <Button
+                        endIcon={<OpenInNew />}
+                        onClick={() => {
+                            window.open(
+                                `https://www.google.com/search?q=${player?.first_name}+${player?.last_name}&tbm=nws`,
+                                '_blank'
+                            );
+                        }}
+                        variant="outlined"
+                    >
+                        News
+                    </Button>
+                )}
+                {!!player && (
+                    <Button
                         onClick={() => {
                             navigate(
                                 `../nfl?${TEAM_CODE}=${player?.team}&${LEAGUE_ID}=${leagueId}`
@@ -94,7 +108,7 @@ export default function PlayerPage() {
                         View {player?.team} Depth Chart
                     </Button>
                 )}
-                {!!user && (
+                {
                     <Button
                         onClick={() => {
                             navigate(
@@ -102,10 +116,13 @@ export default function PlayerPage() {
                             );
                         }}
                         variant="outlined"
+                        disabled={!user}
                     >
-                        View {user?.display_name}'s Full Team
+                        {user
+                            ? `View ${user?.display_name}'s Full Team`
+                            : 'View Full Team'}
                     </Button>
-                )}
+                }
             </div>
             <div className={`${styles.flexSpace} ${styles.menuIcon}`}>
                 <Menu />
