@@ -10,6 +10,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import PlayerPage from './components/Player/PlayerPage/PlayerPage';
 import PlayerSearch from './components/Player/Search/PlayerSearch';
 import NflTeam from './components/NflTeam/NflTeam';
+import AllTransactions from './components/Transactions/AllTransactions';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -28,6 +29,7 @@ root.render(
                     <Route path="/player" element={<PlayerPage />} />
                     <Route path="/player/search" element={<PlayerSearch />} />
                     <Route path="/nfl" element={<NflTeam />} />
+                    <Route path="/transactions" element={<AllTransactions />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>

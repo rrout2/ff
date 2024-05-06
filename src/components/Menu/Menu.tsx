@@ -63,6 +63,13 @@ export default function Menu() {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
+                        navigate(`../transactions?${LEAGUE_ID}=${leagueId}`);
+                    }}
+                >
+                    Transaction Log
+                </MenuItem>
+                <MenuItem
+                    onClick={() => {
                         navigate(`../league?${LEAGUE_ID}=`);
                     }}
                 >

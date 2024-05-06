@@ -113,6 +113,36 @@ export type Player = {
     yahoo_id: null | string;
 };
 
+export type TradedPick = {
+    previous_owner_id: number;
+    owner_id: number;
+    roster_id: number;
+    league_id: null | string;
+    season: string;
+    round: number;
+};
+
+export type Transaction = {
+    waiver_budget: {sender: number; receiver: number; amount: number}[];
+    status_updated: number;
+    roster_ids: number[];
+    consenter_ids: number[];
+    drops: {[playerId: string]: number};
+    adds: {[playerId: string]: number};
+    transaction_id: string;
+    creator: string;
+    draft_picks: TradedPick[];
+    leg: number;
+    settings: {waiver_bid: number};
+    created: number;
+    metadata: {
+        veto_msg_id: string;
+        poll_id: string;
+    };
+    type: string;
+    status: string;
+};
+
 const BASE_API_URL = 'https://api.sleeper.app/v1';
 
 export async function getLeague(leagueId: string): Promise<League> {
@@ -154,6 +184,16 @@ export async function getTradedPicksFromDraft(
 ): Promise<Pick[]> {
     const response = await axios.get(
         `${BASE_API_URL}/league/${draftId}/traded_picks`
+    );
+    return response.data;
+}
+
+export async function getTransacations(
+    leagueId: string,
+    round = 1
+): Promise<Transaction[]> {
+    const response = await axios.get(
+        `${BASE_API_URL}/league/${leagueId}/transactions/${round}`
     );
     return response.data;
 }
