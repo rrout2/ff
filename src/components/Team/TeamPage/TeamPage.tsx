@@ -55,6 +55,8 @@ export default function TeamPage() {
     }, [rosters, teamId]);
 
     useEffect(() => {
+        if (!teamId || searchParams.get(TEAM_ID) === teamId) return;
+
         setSearchParams(searchParams => {
             searchParams.set(TEAM_ID, teamId);
             return searchParams;

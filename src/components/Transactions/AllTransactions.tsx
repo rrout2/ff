@@ -16,12 +16,15 @@ import PlayerPreview from '../Player/PlayerPreview/PlayerPreview';
 import styles from './AllTransactions.module.css';
 import Menu from '../Menu/Menu';
 import {CircularProgress} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import {LEAGUE_ID, TEAM_ID} from '../../consts/urlParams';
 
 export default function AllTransactions() {
     const [leagueId] = useLeagueIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const {data: allUsers} = useFetchUsers(rosters);
     const playerData = usePlayerData();
+    const navigate = useNavigate();
 
     const {data: fetchedTransactions} = useQuery({
         enabled: leagueId !== '',
@@ -63,17 +66,34 @@ export default function AllTransactions() {
         return addsByUser;
     }
 
-    function singleTransaction(t: Transaction) {
+    function singleTransactionComponent(t: Transaction) {
         const {transaction_id} = t;
         if (!playerData || !allUsers) return <></>;
 
         const addsByUser = getAddsByUser(t);
 
+        if (addsByUser.size === 0) return <></>;
+
         return (
             <div key={transaction_id} className={styles.singleton}>
-                {Array.from(addsByUser).map(([user, adds]) => (
+                {Array.from(addsByUser).map(([user, adds], idx) => (
                     <>
-                        {user.display_name} received:
+                        <div
+                            className={
+                                styles.teamLabel +
+                                (idx > 0 ? ` ${styles.notFirst}` : '')
+                            }
+                            onClick={() => {
+                                const teamId = allUsers.findIndex(
+                                    u => u.user_id === user.user_id
+                                );
+                                navigate(
+                                    `../team?${LEAGUE_ID}=${leagueId}&${TEAM_ID}=${teamId}`
+                                );
+                            }}
+                        >
+                            {user.display_name} received:
+                        </div>
                         {adds.map(add => {
                             if (typeof add === 'string') {
                                 return (
@@ -98,7 +118,7 @@ export default function AllTransactions() {
         <div className={styles.menuWrapper}>
             <div className={styles.flexSpace} />
             <div>
-                {transactions.map(singleTransaction)}
+                {transactions.map(singleTransactionComponent)}
                 {!(playerData && allUsers) && <CircularProgress />}
             </div>
             <div className={styles.flexSpace}>
