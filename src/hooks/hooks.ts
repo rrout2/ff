@@ -58,6 +58,7 @@ export function useFetchUsers(rosters?: Roster[]) {
             const users: User[] = [];
             for (const rosterId in rosters) {
                 const roster = rosters[rosterId];
+                if (!roster.owner_id) continue;
                 users.push(await getUser(roster.owner_id));
             }
             return users;

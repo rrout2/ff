@@ -6,12 +6,14 @@ export type PlayerPreviewProps = {
     player: Player;
     leagueId: string;
     hideHeadshot?: boolean;
+    clickable?: boolean;
 };
 
 export default function PlayerPreview({
     player,
     leagueId,
     hideHeadshot,
+    clickable = true,
 }: PlayerPreviewProps) {
     const navigate = useNavigate();
 
@@ -20,10 +22,19 @@ export default function PlayerPreview({
     return (
         <div
             key={player.player_id}
-            className={styles.playerRow + ' ' + styles[player.position]}
-            onClick={() => {
-                navigate(playerPath);
-            }}
+            className={
+                styles.playerRow +
+                ' ' +
+                styles[player.position] +
+                (clickable ? ` ${styles.clickable}` : '')
+            }
+            onClick={
+                clickable
+                    ? () => {
+                          navigate(playerPath);
+                      }
+                    : undefined
+            }
             onKeyUp={event => {
                 if (event.key !== 'Enter') return;
                 navigate(playerPath);

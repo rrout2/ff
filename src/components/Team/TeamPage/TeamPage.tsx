@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
-import {Roster} from '../../../sleeper-api/sleeper-api';
+import {Roster, User} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
     useFetchUser,
@@ -63,35 +63,6 @@ export default function TeamPage() {
         });
     }, [teamId]);
 
-    function teamSelectComponent() {
-        return (
-            <FormControl>
-                <InputLabel>Team</InputLabel>
-                <Select
-                    value={teamId}
-                    label="Team"
-                    onChange={(event: SelectChangeEvent) => {
-                        setTeamId(event.target.value);
-                    }}
-                >
-                    <MenuItem value={NONE_TEAM_ID} key={'chooseateam'}>
-                        Choose a team:
-                    </MenuItem>
-                    {!allUsers && specifiedUser && (
-                        <MenuItem value={teamId} key={teamId}>
-                            {specifiedUser?.display_name}
-                        </MenuItem>
-                    )}
-                    {allUsers?.map((u, idx) => (
-                        <MenuItem value={idx} key={idx}>
-                            {u.display_name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        );
-    }
-
     function rosterComponent() {
         if (!playerData || !roster) return <>Loading...</>;
         return roster.players
@@ -131,7 +102,12 @@ export default function TeamPage() {
                     <div className={styles.teamPageContent}>
                         <div className={styles.teamPageRoster}>
                             {(specifiedUser || allUsers) &&
-                                teamSelectComponent()}
+                                teamSelectComponent(
+                                    teamId,
+                                    setTeamId,
+                                    allUsers,
+                                    specifiedUser
+                                )}
                             {hasTeamId() && specifiedUser && rosterComponent()}
                             {!specifiedUser && !allUsers && (
                                 <CircularProgress />
@@ -145,5 +121,39 @@ export default function TeamPage() {
             }
             {returnToLeaguePageButton()}
         </div>
+    );
+}
+
+export function teamSelectComponent(
+    teamId: string,
+    setTeamId: (value: React.SetStateAction<string>) => void,
+    allUsers?: User[],
+    specifiedUser?: User
+) {
+    return (
+        <FormControl>
+            <InputLabel>Team</InputLabel>
+            <Select
+                value={teamId}
+                label="Team"
+                onChange={(event: SelectChangeEvent) => {
+                    setTeamId(event.target.value);
+                }}
+            >
+                <MenuItem value={NONE_TEAM_ID} key={'chooseateam'}>
+                    Choose a team:
+                </MenuItem>
+                {!allUsers && specifiedUser && (
+                    <MenuItem value={teamId} key={teamId}>
+                        {specifiedUser?.display_name}
+                    </MenuItem>
+                )}
+                {allUsers?.map((u, idx) => (
+                    <MenuItem value={idx} key={idx}>
+                        {u.display_name}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
 }
