@@ -28,11 +28,7 @@ export default function PlayerSearch() {
                 searchResults.add(player);
             }
         }
-        setSearchOutputList(
-            Array.from(searchResults).sort((a, b) => {
-                return a.search_rank - b.search_rank;
-            })
-        );
+        setSearchOutputList(Array.from(searchResults).sort(sortBySearchRank));
     }, [searchInput]);
 
     function searchResults() {
@@ -82,4 +78,8 @@ export default function PlayerSearch() {
             {searchResults()}
         </div>
     );
+}
+
+export function sortBySearchRank(a: Player, b: Player) {
+    return a.search_rank - b.search_rank;
 }
