@@ -1,7 +1,32 @@
+.blueprintPage {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
 .otherSettings {
     margin-top: 20px;
 }
 
 .subflex {
     padding-left: 10px;
+}
+
+.bench {
+    width: 450px;
+}
+
+.copyWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.playerRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.column {
+    min-width: 200px;
 }

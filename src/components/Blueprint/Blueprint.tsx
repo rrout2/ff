@@ -9,8 +9,9 @@ import {League, Player, Roster, getLeague} from '../../sleeper-api/sleeper-api';
 import styles from './Blueprint.module.css';
 import {teamSelectComponent} from '../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../consts/urlParams';
-import PlayerPreview from '../Player/PlayerPreview/PlayerPreview';
 import {sortBySearchRank} from '../Player/Search/PlayerSearch';
+import {IconButton} from '@mui/material';
+import {ContentCopy} from '@mui/icons-material';
 export default function Blueprint() {
     const [leagueId] = useLeagueIdFromUrl();
     const [league, setLeague] = useState<League>();
@@ -23,7 +24,9 @@ export default function Blueprint() {
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
-    const [startingLineup, setStartingLineup] = useState<Player[]>([]);
+    const [startingLineup, setStartingLineup] = useState<
+        {player: Player; position: string}[]
+    >([]);
     const [benchString, setBenchString] = useState('');
 
     useEffect(() => {
@@ -50,7 +53,7 @@ export default function Blueprint() {
     useEffect(() => {
         if (!playerData || !roster) return;
         const remainingPlayers = new Set(roster.players);
-        const starters: Player[] = [];
+        const starters: {player: Player; position: string}[] = [];
         Array.from(rosterSettings)
             .filter(([position]) => position !== 'BN')
             .forEach(([position, count]) => {
@@ -61,25 +64,30 @@ export default function Blueprint() {
                 );
                 bestAtPosition.forEach(p => {
                     remainingPlayers.delete(p.player_id);
-                    starters.push(p);
+                    starters.push({
+                        player: p,
+                        position: position,
+                    });
                 });
             });
+
         setStartingLineup(starters);
 
-        const benchString = Array.from(remainingPlayers)
-            .map(p => playerData[p])
-            .sort(
-                (a, b) =>
-                    a.position.localeCompare(b.position) ||
-                    a.last_name.localeCompare(b.last_name)
-            )
-            .reduce((acc, player, idx) => {
-                const isLast = idx === remainingPlayers.size - 1;
-                const trailingText = isLast ? '' : ', ';
-                return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
-            }, '');
-
-        setBenchString(benchString);
+        setBenchString(
+            Array.from(remainingPlayers)
+                .map(p => playerData[p])
+                .sort(
+                    (a, b) =>
+                        a.position.localeCompare(b.position) ||
+                        a.last_name.localeCompare(b.last_name)
+                )
+                .reduce((acc, player, idx) => {
+                    const isLast = idx === remainingPlayers.size - 1;
+                    const trailingText = isLast ? '' : ', ';
+                    return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
+                }, '')
+                .toLocaleUpperCase()
+        );
     }, [playerData, roster, rosterSettings]);
 
     function getBestNAtPosition(
@@ -156,22 +164,44 @@ export default function Blueprint() {
         }
     }
 
+    function humanReadablePosition(position: string) {
+        switch (position) {
+            case 'FLEX':
+                return 'WR/RB/TE';
+            case 'WRRB_FLEX':
+                return 'WR/RB';
+            case 'REC_FLEX':
+                return 'WR/TE';
+            case 'SUPER_FLEX':
+                return 'QB/WR/RB/TE';
+        }
+        return position;
+    }
+
     function rosterComponent() {
         if (!hasTeamId() || !playerData || !roster) return <></>;
         return (
             <>
                 <div>
-                    {startingLineup.map(player => (
-                        <PlayerPreview
-                            player={player}
-                            leagueId={leagueId}
-                            clickable={false}
-                        />
-                    ))}
+                    <h3>Projected Starters: </h3>
+                    {startingLineup.map(({player, position}) => {
+                        const starterString =
+                            `${player.first_name} ${player.last_name}`.toLocaleUpperCase();
+                        const posTeamString = `${player.position} - ${player.team}`;
+                        return (
+                            <div className={styles.playerRow}>
+                                <div className={styles.column}>
+                                    {humanReadablePosition(position)}
+                                </div>
+                                {copyWrapper(starterString, styles.column)}
+                                {copyWrapper(posTeamString, styles.column)}
+                            </div>
+                        );
+                    })}
                 </div>
-                <div>
-                    <div>Bench: </div>
-                    {benchString}
+                <div className={styles.bench}>
+                    <h3>Bench: </h3>
+                    {copyWrapper(benchString)}
                 </div>
             </>
         );
@@ -196,7 +226,8 @@ export default function Blueprint() {
             'BN',
         ]);
         return (
-            <>
+            <div className={styles.rosterSettings}>
+                <h3>League Settings: </h3>
                 {Array.from(rosterSettings)
                     .filter(([position]) => allowSet.has(position))
                     .map(([position, count]) => {
@@ -220,7 +251,7 @@ export default function Blueprint() {
                             </div>
                         );
                     })}
-            </>
+            </div>
         );
     }
 
@@ -244,11 +275,25 @@ export default function Blueprint() {
     }
 
     return (
-        <>
+        <div className={styles.blueprintPage}>
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser)}
             {rosterSettingsComponent()}
             {otherSettingsComponent()}
             {rosterComponent()}
-        </>
+        </div>
+    );
+}
+
+function copyWrapper(text: string, className?: string) {
+    return (
+        <div className={styles.copyWrapper + (` ${className}` ?? '')}>
+            <IconButton
+                onClick={() => navigator.clipboard.writeText(text)}
+                size="small"
+            >
+                <ContentCopy />
+            </IconButton>
+            {text}
+        </div>
     );
 }
