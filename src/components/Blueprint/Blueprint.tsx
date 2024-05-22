@@ -44,26 +44,129 @@ export default function Blueprint() {
         setRosterSettings(settings);
     }, [league?.roster_positions]);
 
+    function getBestOfPosition(
+        position: string,
+        count: number,
+        remainingPlayers: Set<string>
+    ) {
+        if (!playerData || !roster) return [];
+        if (position === 'FLEX') {
+            return roster.players
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB') ||
+                        p.fantasy_positions.includes('TE')
+                )
+                .sort((a, b) => a.search_rank - b.search_rank)
+                .slice(0, count);
+        }
+        if (position === 'WRRB_FLEX') {
+            return roster.players
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB')
+                )
+                .sort((a, b) => a.search_rank - b.search_rank)
+                .slice(0, count);
+        }
+        if (position === 'REC_FLEX') {
+            return roster.players
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('TE')
+                )
+                .sort((a, b) => a.search_rank - b.search_rank)
+                .slice(0, count);
+        }
+        if (position === 'SUPER_FLEX') {
+            return roster.players
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB') ||
+                        p.fantasy_positions.includes('TE') ||
+                        p.fantasy_positions.includes('QB')
+                )
+                .sort((a, b) => {
+                    // manually prioritizing QBs for super flex
+                    if (a.position === 'QB' && b.position !== 'QB') {
+                        return -1;
+                    }
+                    if (a.position !== 'QB' && b.position === 'QB') {
+                        return 1;
+                    }
+                    return a.search_rank - b.search_rank;
+                })
+                .slice(0, count);
+        }
+
+        return roster.players
+            .filter(p => remainingPlayers.has(p))
+            .map(p => playerData[p])
+            .filter(p => p.fantasy_positions.includes(position))
+            .sort((a, b) => a.search_rank - b.search_rank)
+            .slice(0, count);
+    }
+
     function rosterComponent() {
         if (!hasTeamId()) return <></>;
         if (!playerData || !roster) return <>Loading...</>;
-        return roster.players
-            .map(p => playerData[p])
-            .sort((a, b) => {
-                const posComp = a.position.localeCompare(b.position);
-                if (posComp) return posComp;
-                return (
-                    a.search_rank - b.search_rank ||
-                    a.search_last_name.localeCompare(b.search_last_name)
+
+        const lineup: JSX.Element[] = [];
+        const remainingPlayers = new Set(roster.players);
+        Array.from(rosterSettings)
+            .filter(([position]) => position !== 'BN')
+            .forEach(([position, count]) => {
+                const bestAtPosition = getBestOfPosition(
+                    position,
+                    count,
+                    remainingPlayers
                 );
-            })
-            .map(player => (
-                <PlayerPreview
-                    player={player}
-                    leagueId={leagueId}
-                    clickable={false}
-                />
-            ));
+                bestAtPosition.forEach(p => {
+                    remainingPlayers.delete(p.player_id);
+                });
+                lineup.push(
+                    ...bestAtPosition.map(player => (
+                        <PlayerPreview
+                            player={player}
+                            leagueId={leagueId}
+                            clickable={false}
+                        />
+                    ))
+                );
+            });
+        lineup.push(<>Bench:</>);
+        lineup.push(
+            ...Array.from(remainingPlayers)
+                .map(p => playerData[p])
+                .sort((a, b) => {
+                    const posComp = a.position.localeCompare(b.position);
+                    if (posComp) return posComp;
+                    return (
+                        a.search_rank - b.search_rank ||
+                        a.search_last_name.localeCompare(b.search_last_name)
+                    );
+                })
+                .map(player => (
+                    <PlayerPreview
+                        player={player}
+                        leagueId={leagueId}
+                        clickable={false}
+                    />
+                ))
+        );
+        return lineup;
     }
 
     function hasTeamId() {
