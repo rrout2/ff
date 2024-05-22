@@ -215,42 +215,39 @@ export default function Blueprint() {
         const wrtFlex = rosterSettings.get('FLEX') ?? 0;
         const wrFlex = rosterSettings.get('WRRB_FLEX') ?? 0;
         const wtFlex = rosterSettings.get('REC_FLEX') ?? 0;
-        const totalFlexes = wrtFlex + wrFlex + wtFlex;
-        const allowSet = new Set([
-            'QB',
-            'RB',
-            'WR',
-            'TE',
-            'SUPER_FLEX',
-            'FLEX',
-            'BN',
-        ]);
+
+        const nonFlexSet = new Set(['QB', 'RB', 'WR', 'TE', 'SUPER_FLEX']);
+        const flexSet = new Set(['FLEX', 'REC_FLEX', 'WRRB_FLEX']);
+
+        const rosterSettingsArray = Array.from(rosterSettings);
+        const hasFlexes =
+            rosterSettingsArray.filter(([position]) => flexSet.has(position))
+                .length > 0;
+        const hasBench = !!rosterSettings.get('BN');
         return (
             <div className={styles.rosterSettings}>
                 <h3>League Settings: </h3>
-                {Array.from(rosterSettings)
-                    .filter(([position]) => allowSet.has(position))
-                    .map(([position, count]) => {
-                        if (position !== 'FLEX') {
-                            return (
-                                <div
-                                    key={position}
-                                >{`${count} ${position}`}</div>
-                            );
-                        }
-                        return (
-                            <div key={'FLEX'}>
-                                <div key={'FLEX'}>
-                                    {totalFlexes} {position}
-                                </div>
-                                <div className={styles.subflex}>
-                                    <div>{wrtFlex} W/R/T</div>
-                                    <div>{wrFlex} W/R</div>
-                                    <div>{wtFlex} W/T</div>
-                                </div>
-                            </div>
-                        );
-                    })}
+
+                {rosterSettingsArray
+                    .filter(([position]) => nonFlexSet.has(position))
+                    .map(([position, count]) => (
+                        <div key={position}>{`${count} ${position}`}</div>
+                    ))}
+
+                {hasFlexes && (
+                    <div key={'FLEX'}>
+                        <div key={'FLEX'}>{wrtFlex + wrFlex + wtFlex} FLEX</div>
+                        <div className={styles.indented}>
+                            <div>{wrtFlex} W/R/T</div>
+                            <div>{wrFlex} W/R</div>
+                            <div>{wtFlex} W/T</div>
+                        </div>
+                    </div>
+                )}
+
+                {hasBench && (
+                    <div key={'BN'}>{rosterSettings.get('BN')} BN</div>
+                )}
             </div>
         );
     }
@@ -263,7 +260,7 @@ export default function Blueprint() {
                 <div>{rosters.length} team league</div>
                 <div>SF: {rosterSettings.has('SUPER_FLEX') ? 'YES' : 'NO'}</div>
                 <div>PPR: {scoringSettings.rec ?? 0}</div>
-                <div className={styles.subflex}>
+                <div className={styles.indented}>
                     <div>RB Bonus: {scoringSettings.bonus_rec_rb ?? 0}</div>
                     <div>WR Bonus: {scoringSettings.bonus_rec_wr ?? 0}</div>
                     <div>TE Bonus: {scoringSettings.bonus_rec_te ?? 0}</div>
