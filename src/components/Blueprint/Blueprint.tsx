@@ -23,6 +23,8 @@ export default function Blueprint() {
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
+    const [startingLineup, setStartingLineup] = useState<Player[]>([]);
+    const [benchString, setBenchString] = useState('');
 
     useEffect(() => {
         if (!leagueId) return;
@@ -45,7 +47,42 @@ export default function Blueprint() {
         setRosterSettings(settings);
     }, [league?.roster_positions]);
 
-    function getBestOfPosition(
+    useEffect(() => {
+        if (!playerData || !roster) return;
+        const remainingPlayers = new Set(roster.players);
+        const starters: Player[] = [];
+        Array.from(rosterSettings)
+            .filter(([position]) => position !== 'BN')
+            .forEach(([position, count]) => {
+                const bestAtPosition = getBestNAtPosition(
+                    position,
+                    count,
+                    remainingPlayers
+                );
+                bestAtPosition.forEach(p => {
+                    remainingPlayers.delete(p.player_id);
+                    starters.push(p);
+                });
+            });
+        setStartingLineup(starters);
+
+        const benchString = Array.from(remainingPlayers)
+            .map(p => playerData[p])
+            .sort(
+                (a, b) =>
+                    a.position.localeCompare(b.position) ||
+                    a.last_name.localeCompare(b.last_name)
+            )
+            .reduce((acc, player, idx) => {
+                const isLast = idx === remainingPlayers.size - 1;
+                const trailingText = isLast ? '' : ', ';
+                return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
+            }, '');
+
+        setBenchString(benchString);
+    }, [playerData, roster, rosterSettings]);
+
+    function getBestNAtPosition(
         position: string,
         count: number,
         remainingPlayers: Set<string>
@@ -120,47 +157,18 @@ export default function Blueprint() {
     }
 
     function rosterComponent() {
-        if (!hasTeamId()) return <></>;
-        if (!playerData || !roster) return <>Loading...</>;
-
-        const lineup: JSX.Element[] = [];
-        const remainingPlayers = new Set(roster.players);
-        Array.from(rosterSettings)
-            .filter(([position]) => position !== 'BN')
-            .forEach(([position, count]) => {
-                const bestAtPosition = getBestOfPosition(
-                    position,
-                    count,
-                    remainingPlayers
-                );
-                bestAtPosition.forEach(p => {
-                    remainingPlayers.delete(p.player_id);
-                });
-                lineup.push(
-                    ...bestAtPosition.map(player => (
+        if (!hasTeamId() || !playerData || !roster) return <></>;
+        return (
+            <>
+                <div>
+                    {startingLineup.map(player => (
                         <PlayerPreview
                             player={player}
                             leagueId={leagueId}
                             clickable={false}
                         />
-                    ))
-                );
-            });
-        const benchString = Array.from(remainingPlayers)
-            .map(p => playerData[p])
-            .sort(
-                (a, b) =>
-                    a.position.localeCompare(b.position) ||
-                    a.last_name.localeCompare(b.last_name)
-            )
-            .reduce((acc, player, idx) => {
-                const isLast = idx === remainingPlayers.size - 1;
-                const trailingText = isLast ? '' : ', ';
-                return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
-            }, '');
-        return (
-            <>
-                <div>{lineup}</div>
+                    ))}
+                </div>
                 <div>
                     <div>Bench: </div>
                     {benchString}
