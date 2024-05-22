@@ -266,7 +266,7 @@ export default function Blueprint() {
                 <div className={styles.subflex}>
                     <div>RB Bonus: {scoringSettings.bonus_rec_rb ?? 0}</div>
                     <div>WR Bonus: {scoringSettings.bonus_rec_wr ?? 0}</div>
-                    <div>TE Bonus: {scoringSettings.bonus_rec_te}</div>
+                    <div>TE Bonus: {scoringSettings.bonus_rec_te ?? 0}</div>
                 </div>
 
                 <div>Taxi #: {league.settings.taxi_slots}</div>
