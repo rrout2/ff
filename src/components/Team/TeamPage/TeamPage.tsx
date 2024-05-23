@@ -94,21 +94,41 @@ export default function TeamPage() {
         });
     }, [teamId]);
 
+    function humanReadablePosition(position: string) {
+        switch (position) {
+            case 'FLEX':
+                return 'WR/RB/TE';
+            case 'WRRB_FLEX':
+                return 'WR/RB';
+            case 'REC_FLEX':
+                return 'WR/TE';
+            case 'SUPER_FLEX':
+                return 'QB/WR/RB/TE';
+        }
+        return position;
+    }
+
     function rosterComponent() {
         const projectedStarters = Array.from(startingLineup).map(
             ({player, position}) => (
-                <>
+                <div className={styles.starterRow}>
+                    <div className={styles.starterPosition}>
+                        {humanReadablePosition(position)}
+                    </div>
                     <PlayerPreview player={player} leagueId={leagueId} />
-                </>
+                </div>
             )
         );
         const projectedBench = bench.map(p => (
-            <PlayerPreview player={p} leagueId={leagueId} />
+            <div className={styles.starterRow}>
+                <div className={styles.starterPosition}>BN</div>
+                <PlayerPreview player={p} leagueId={leagueId} />
+            </div>
         ));
         return (
             <>
-                <div>Projected starters: {projectedStarters}</div>
-                <div>Bench: {projectedBench}</div>
+                <div>{projectedStarters}</div>
+                <div>{projectedBench}</div>
             </>
         );
     }
