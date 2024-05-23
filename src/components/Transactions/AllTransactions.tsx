@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {
     useFetchUsers,
     useFetchRosters,
@@ -27,6 +27,7 @@ export default function AllTransactions() {
     const navigate = useNavigate();
 
     const {data: fetchedTransactions} = useQuery({
+        queryKey: [leagueId],
         enabled: leagueId !== '',
         queryFn: async () => {
             const res = await getTransacations(leagueId);

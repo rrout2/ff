@@ -6,7 +6,7 @@ import LeaguePage from './components/League/League';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Routes, Route} from 'react-router-dom';
 import TeamPage from './components/Team/TeamPage/TeamPage';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import PlayerPage from './components/Player/PlayerPage/PlayerPage';
 import PlayerSearch from './components/Player/Search/PlayerSearch';
 import NflTeam from './components/NflTeam/NflTeam';

@@ -8,7 +8,7 @@ import {
     getRosters,
     getUser,
 } from '../sleeper-api/sleeper-api';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {LEAGUE_ID} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {sortBySearchRank} from '../components/Player/Search/PlayerSearch';
