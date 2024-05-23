@@ -4,12 +4,12 @@ import {
     useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
+    useProjectedLineup,
 } from '../../hooks/hooks';
-import {League, Player, Roster, getLeague} from '../../sleeper-api/sleeper-api';
+import {League, Roster, getLeague} from '../../sleeper-api/sleeper-api';
 import styles from './Blueprint.module.css';
 import {teamSelectComponent} from '../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../consts/urlParams';
-import {sortBySearchRank} from '../Player/Search/PlayerSearch';
 import {IconButton} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
 export default function Blueprint() {
@@ -24,10 +24,11 @@ export default function Blueprint() {
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
-    const [startingLineup, setStartingLineup] = useState<
-        {player: Player; position: string}[]
-    >([]);
-    const [benchString, setBenchString] = useState('');
+
+    const [startingLineup, _, benchString] = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
 
     useEffect(() => {
         if (!leagueId) return;
@@ -49,120 +50,6 @@ export default function Blueprint() {
         });
         setRosterSettings(settings);
     }, [league?.roster_positions]);
-
-    useEffect(() => {
-        if (!playerData || !roster) return;
-        const remainingPlayers = new Set(roster.players);
-        const starters: {player: Player; position: string}[] = [];
-        Array.from(rosterSettings)
-            .filter(([position]) => position !== 'BN')
-            .forEach(([position, count]) => {
-                const bestAtPosition = getBestNAtPosition(
-                    position,
-                    count,
-                    remainingPlayers
-                );
-                bestAtPosition.forEach(p => {
-                    remainingPlayers.delete(p.player_id);
-                    starters.push({
-                        player: p,
-                        position: position,
-                    });
-                });
-            });
-
-        setStartingLineup(starters);
-
-        setBenchString(
-            Array.from(remainingPlayers)
-                .map(p => playerData[p])
-                .sort(
-                    (a, b) =>
-                        a.position.localeCompare(b.position) ||
-                        a.last_name.localeCompare(b.last_name)
-                )
-                .reduce((acc, player, idx) => {
-                    const isLast = idx === remainingPlayers.size - 1;
-                    const trailingText = isLast ? '' : ', ';
-                    return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
-                }, '')
-                .toLocaleUpperCase()
-        );
-    }, [playerData, roster, rosterSettings]);
-
-    function getBestNAtPosition(
-        position: string,
-        count: number,
-        remainingPlayers: Set<string>
-    ): Player[] {
-        if (!playerData || !roster) return [];
-        switch (position) {
-            case 'FLEX':
-                return roster.players
-                    .filter(p => remainingPlayers.has(p))
-                    .map(p => playerData[p])
-                    .filter(
-                        p =>
-                            p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB') ||
-                            p.fantasy_positions.includes('TE')
-                    )
-                    .sort(sortBySearchRank)
-                    .slice(0, count);
-            case 'WRRB_FLEX':
-                return roster.players
-                    .filter(p => remainingPlayers.has(p))
-                    .map(p => playerData[p])
-                    .filter(
-                        p =>
-                            p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB')
-                    )
-                    .sort(sortBySearchRank)
-                    .slice(0, count);
-            case 'REC_FLEX':
-                return roster.players
-                    .filter(p => remainingPlayers.has(p))
-                    .map(p => playerData[p])
-                    .filter(
-                        p =>
-                            p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('TE')
-                    )
-                    .sort(sortBySearchRank)
-                    .slice(0, count);
-
-            case 'SUPER_FLEX':
-                return roster.players
-                    .filter(p => remainingPlayers.has(p))
-                    .map(p => playerData[p])
-                    .filter(
-                        p =>
-                            p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB') ||
-                            p.fantasy_positions.includes('TE') ||
-                            p.fantasy_positions.includes('QB')
-                    )
-                    .sort((a, b) => {
-                        // manually prioritizing QBs for super flex
-                        if (a.position === 'QB' && b.position !== 'QB') {
-                            return -1;
-                        }
-                        if (a.position !== 'QB' && b.position === 'QB') {
-                            return 1;
-                        }
-                        return sortBySearchRank(a, b);
-                    })
-                    .slice(0, count);
-            default: // non-flex positions
-                return roster.players
-                    .filter(p => remainingPlayers.has(p))
-                    .map(p => playerData[p])
-                    .filter(p => p.fantasy_positions.includes(position))
-                    .sort(sortBySearchRank)
-                    .slice(0, count);
-        }
-    }
 
     function humanReadablePosition(position: string) {
         switch (position) {

@@ -11,6 +11,7 @@ import {
 import {useQuery} from 'react-query';
 import {LEAGUE_ID} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
+import {sortBySearchRank} from '../components/Player/Search/PlayerSearch';
 
 interface PlayerData {
     [key: string]: Player;
@@ -132,4 +133,141 @@ export function useLeagueIdFromUrl(): [
     }, [leagueId]);
 
     return [leagueId, setLeagueId];
+}
+
+export function useProjectedLineup(
+    rosterSettings: Map<string, number>,
+    playerIds?: string[]
+): [{player: Player; position: string}[], Player[], string] {
+    const playerData = usePlayerData();
+    const [startingLineup, setStartingLineup] = useState<
+        {player: Player; position: string}[]
+    >([]);
+    const [bench, setBench] = useState<Player[]>([]);
+    const [benchString, setBenchString] = useState('');
+
+    useEffect(() => {
+        if (!playerData || !playerIds) return;
+        const remainingPlayers = new Set(playerIds);
+        const starters: {player: Player; position: string}[] = [];
+        Array.from(rosterSettings)
+            .filter(([position]) => position !== 'BN')
+            .forEach(([position, count]) => {
+                const bestAtPosition = getBestNAtPosition(
+                    position,
+                    count,
+                    remainingPlayers,
+                    playerData,
+                    playerIds
+                );
+                bestAtPosition.forEach(p => {
+                    remainingPlayers.delete(p.player_id);
+                    starters.push({
+                        player: p,
+                        position: position,
+                    });
+                });
+            });
+
+        setStartingLineup(starters);
+
+        const benchPlayerList = Array.from(remainingPlayers).map(
+            p => playerData[p]
+        );
+
+        setBench(benchPlayerList);
+
+        setBenchString(
+            benchPlayerList
+                .sort(
+                    (a, b) =>
+                        a.position.localeCompare(b.position) ||
+                        a.last_name.localeCompare(b.last_name)
+                )
+                .reduce((acc, player, idx) => {
+                    const isLast = idx === remainingPlayers.size - 1;
+                    const trailingText = isLast ? '' : ', ';
+                    return `${acc}${player.first_name[0]}. ${player.last_name} (${player.position})${trailingText}`;
+                }, '')
+                .toLocaleUpperCase()
+        );
+    }, [playerData, playerIds, rosterSettings]);
+
+    return [startingLineup, bench, benchString];
+}
+
+function getBestNAtPosition(
+    position: string,
+    count: number,
+    remainingPlayers: Set<string>,
+    playerData?: PlayerData,
+    playerIds?: string[]
+): Player[] {
+    if (!playerData || !playerIds) return [];
+    switch (position) {
+        case 'FLEX':
+            return playerIds
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB') ||
+                        p.fantasy_positions.includes('TE')
+                )
+                .sort(sortBySearchRank)
+                .slice(0, count);
+        case 'WRRB_FLEX':
+            return playerIds
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB')
+                )
+                .sort(sortBySearchRank)
+                .slice(0, count);
+        case 'REC_FLEX':
+            return playerIds
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('TE')
+                )
+                .sort(sortBySearchRank)
+                .slice(0, count);
+
+        case 'SUPER_FLEX':
+            return playerIds
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(
+                    p =>
+                        p.fantasy_positions.includes('WR') ||
+                        p.fantasy_positions.includes('RB') ||
+                        p.fantasy_positions.includes('TE') ||
+                        p.fantasy_positions.includes('QB')
+                )
+                .sort((a, b) => {
+                    // manually prioritizing QBs for super flex
+                    if (a.position === 'QB' && b.position !== 'QB') {
+                        return -1;
+                    }
+                    if (a.position !== 'QB' && b.position === 'QB') {
+                        return 1;
+                    }
+                    return sortBySearchRank(a, b);
+                })
+                .slice(0, count);
+        default: // non-flex positions
+            return playerIds
+                .filter(p => remainingPlayers.has(p))
+                .map(p => playerData[p])
+                .filter(p => p.fantasy_positions.includes(position))
+                .sort(sortBySearchRank)
+                .slice(0, count);
+    }
 }
