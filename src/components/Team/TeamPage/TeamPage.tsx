@@ -126,7 +126,7 @@ export default function TeamPage() {
         return (
             <>
                 <div>{projectedStarters}</div>
-                <div>{projectedBench}</div>
+                <div className={styles.bench}>{projectedBench}</div>
             </>
         );
     }

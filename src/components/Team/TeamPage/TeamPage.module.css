@@ -49,3 +49,6 @@
     flex-direction: column;
     align-items: center;
 }
+.bench {
+    margin-top: 20px;
+}
