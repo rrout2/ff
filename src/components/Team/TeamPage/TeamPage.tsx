@@ -21,7 +21,6 @@ import {
     useFetchUser,
     useFetchUsers,
     useLeagueIdFromUrl,
-    usePlayerData,
     useProjectedLineup,
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../../consts/urlParams';
@@ -36,7 +35,6 @@ export default function TeamPage() {
     const [league, setLeague] = useState<League>();
     const [teamId, setTeamId] = useState('');
     const [roster, setRoster] = useState<Roster>();
-    const playerData = usePlayerData();
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
