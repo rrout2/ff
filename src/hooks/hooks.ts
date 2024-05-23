@@ -55,7 +55,9 @@ export function useFetchUsers(rosters?: Roster[]) {
         queryKey: [rosters],
         enabled: !!rosters && rosters.length > 0,
         queryFn: async () => {
-            if (!rosters || rosters.length === 0) return;
+            if (!rosters || rosters.length === 0) {
+                throw new Error('rosters is undefined or empty');
+            }
             const users: User[] = [];
             for (const rosterId in rosters) {
                 const roster = rosters[rosterId];
@@ -77,7 +79,9 @@ export function useFetchUser(
         queryKey: [rosters, teamId],
         enabled: !!rosters && rosters.length > 0 && !!teamId && !disabled,
         queryFn: async () => {
-            if (!rosters || rosters.length === 0) return;
+            if (!rosters || rosters.length === 0) {
+                throw new Error('rosters is undefined or empty');
+            }
             const userId = rosters[+teamId].owner_id;
             if (!userId) return;
             return await getUser(userId);
@@ -90,7 +94,9 @@ export function useFetchLeague(leagueId: string) {
     return useQuery({
         queryKey: [leagueId],
         queryFn: async () => {
-            if (!leagueId) return;
+            if (!leagueId) {
+                throw new Error('leagueId is empty');
+            }
             return await getLeague(leagueId);
         },
         staleTime: 10000,
@@ -101,7 +107,7 @@ export function useFetchRosters(leagueIdNewName: string) {
     return useQuery({
         queryKey: [leagueIdNewName],
         queryFn: async () => {
-            if (!leagueIdNewName) return;
+            if (!leagueIdNewName) throw new Error('leagueId is empty');
             const huh = await getRosters(leagueIdNewName);
             return huh;
         },
