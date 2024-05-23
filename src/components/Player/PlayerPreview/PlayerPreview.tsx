@@ -12,7 +12,7 @@ export type PlayerPreviewProps = {
 export default function PlayerPreview({
     player,
     leagueId,
-    hideHeadshot,
+    hideHeadshot = false,
     clickable = true,
 }: PlayerPreviewProps) {
     const navigate = useNavigate();

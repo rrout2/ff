@@ -10,13 +10,19 @@ import {
 } from '@mui/material';
 import styles from './TeamPage.module.css';
 import {useEffect, useState} from 'react';
-import {Roster, User} from '../../../sleeper-api/sleeper-api';
+import {
+    League,
+    Roster,
+    User,
+    getLeague,
+} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
     useFetchUser,
     useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
+    useProjectedLineup,
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
@@ -27,9 +33,34 @@ export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [leagueId] = useLeagueIdFromUrl();
+    const [league, setLeague] = useState<League>();
     const [teamId, setTeamId] = useState('');
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
+    const [rosterSettings, setRosterSettings] = useState(
+        new Map<string, number>()
+    );
+
+    useEffect(() => {
+        if (!leagueId) return;
+        getLeague(leagueId).then(league => setLeague(league));
+    }, [leagueId]);
+
+    useEffect(() => {
+        const settings = new Map<string, number>();
+        league?.roster_positions.forEach(pos => {
+            if (!settings.has(pos)) {
+                settings.set(pos, 0);
+            }
+            settings.set(pos, settings.get(pos)! + 1);
+        });
+        setRosterSettings(settings);
+    }, [league?.roster_positions]);
+
+    const [startingLineup, bench] = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
 
     useEffect(() => {
         const teamIdFromUrl = searchParams.get(TEAM_ID);
@@ -55,7 +86,7 @@ export default function TeamPage() {
     }, [rosters, teamId]);
 
     useEffect(() => {
-        if (!teamId || searchParams.get(TEAM_ID) === teamId) return;
+        if (searchParams.get(TEAM_ID) === teamId) return;
 
         setSearchParams(searchParams => {
             searchParams.set(TEAM_ID, teamId);
@@ -64,17 +95,22 @@ export default function TeamPage() {
     }, [teamId]);
 
     function rosterComponent() {
-        if (!playerData || !roster) return <>Loading...</>;
-        return roster.players
-            .map(p => playerData[p])
-            .sort(
-                (a, b) =>
-                    a.position.localeCompare(b.position) ||
-                    a.last_name.localeCompare(b.last_name)
+        const projectedStarters = Array.from(startingLineup).map(
+            ({player, position}) => (
+                <>
+                    <PlayerPreview player={player} leagueId={leagueId} />
+                </>
             )
-            .map(player => (
-                <PlayerPreview player={player} leagueId={leagueId} />
-            ));
+        );
+        const projectedBench = bench.map(p => (
+            <PlayerPreview player={p} leagueId={leagueId} />
+        ));
+        return (
+            <>
+                <div>Projected starters: {projectedStarters}</div>
+                <div>Bench: {projectedBench}</div>
+            </>
+        );
     }
 
     function returnToLeaguePageButton() {
