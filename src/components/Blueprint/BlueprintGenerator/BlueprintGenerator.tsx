@@ -143,6 +143,7 @@ export default function BlueprintGenerator() {
     function exportButton() {
         return (
             <Button
+                variant="outlined"
                 onClick={() =>
                     toPng(
                         document.getElementsByClassName(
@@ -158,6 +159,7 @@ export default function BlueprintGenerator() {
                         document.body.removeChild(link);
                     })
                 }
+                className={styles.button}
             >
                 Export As PNG
             </Button>
@@ -170,7 +172,6 @@ export default function BlueprintGenerator() {
             {hasTeamId() && allPositionalSelectors()}
             {hasTeamId() && cornerstoneAssetsComponent()}
             {hasTeamId() && exportButton()}
-            {}
         </div>
     );
 }

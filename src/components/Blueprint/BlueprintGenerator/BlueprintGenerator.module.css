@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
-    height: 500px;
+    width: 800px;
 }
 
 .cornerstoneAssetsComponent {
@@ -12,7 +12,7 @@
 
 .positions {
     display: flex;
-    width: 900px;
+    width: 760px;
     justify-content: space-around;
 }
 
@@ -21,7 +21,7 @@
     font-size: 40px;
     color: white;
     padding: /* top/bottom = */ 4px /* left/right  = */ 24px;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: -4px 4px #213965;
     width: 45px;
     text-align: center;
@@ -60,6 +60,10 @@
     margin-bottom: 20px;
 }
 
+.button {
+    width: 120px;
+}
+
 @font-face {
     font-family: 'Antarctican Headline';
     src: local('Antarctican Headline Bold'), local('Antarctican-Headline-Bold'),
@@ -70,10 +74,10 @@
     font-style: normal;
   }
 
-  @font-face {
+@font-face {
     font-family: 'Prohibition Test';
     src: local('Prohibition Test'), local('Prohibition-Test'),
         url("ProhibitionTest-Regular.otf") format("opentype"),;
     font-weight: 700;
     font-style: normal;
-  }
+}
