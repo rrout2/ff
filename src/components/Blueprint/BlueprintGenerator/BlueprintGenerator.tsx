@@ -98,21 +98,32 @@ export default function BlueprintGenerator() {
     }
 
     function cornerstoneAssetsComponent() {
+        if (!playerData) return <></>;
         return (
             <div>
                 <div className={styles.positions}>
-                    <div className={`${styles.positionChip} ${styles.qb}`}>
-                        QB
-                    </div>
-                    <div className={`${styles.positionChip} ${styles.rb}`}>
-                        RB
-                    </div>
-                    <div className={`${styles.positionChip} ${styles.wr}`}>
-                        WB
-                    </div>
-                    <div className={`${styles.positionChip} ${styles.te}`}>
-                        TE
-                    </div>
+                    {['QB', 'RB', 'WR', 'TE'].map(pos => (
+                        <div>
+                            <div
+                                className={`${styles.positionChip} ${styles[pos]}`}
+                            >
+                                {pos}
+                            </div>
+                            <div>
+                                {cornerstones
+                                    .get(pos)!
+                                    .map(playerId => playerData[playerId])
+                                    .map(player => {
+                                        return (
+                                            <div>
+                                                {player.first_name}{' '}
+                                                {player.last_name}
+                                            </div>
+                                        );
+                                    })}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         );
