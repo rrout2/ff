@@ -1,21 +1,16 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
     useFetchRosters,
     useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
-    useProjectedLineup,
 } from '../../../hooks/hooks';
-import {
-    League,
-    Player,
-    Roster,
-    getLeague,
-} from '../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
 import {
+    Button,
     FormControl,
     InputLabel,
     MenuItem,
@@ -23,18 +18,16 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import {sortBySearchRank} from '../../Player/Search/PlayerSearch';
+import {toPng} from 'html-to-image';
 export default function BlueprintGenerator() {
     const [leagueId] = useLeagueIdFromUrl();
-    const [league, setLeague] = useState<League>();
     const [teamId, setTeamId] = useState(NONE_TEAM_ID);
     const {data: rosters} = useFetchRosters(leagueId);
     const {data: allUsers} = useFetchUsers(rosters);
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const specifiedUser = allUsers?.[+teamId];
-    const [rosterSettings, setRosterSettings] = useState(
-        new Map<string, number>()
-    );
+    const componentRef = useRef(null);
     const [cornerstones, setCornerstones] = useState(
         new Map<string, string[]>([
             ['QB', []],
@@ -45,25 +38,17 @@ export default function BlueprintGenerator() {
     );
 
     useEffect(() => {
-        if (!leagueId) return;
-        getLeague(leagueId).then(league => setLeague(league));
-    }, [leagueId]);
-
-    useEffect(() => {
         if (!rosters || rosters.length === 0 || !hasTeamId()) return;
+        setCornerstones(
+            new Map<string, string[]>([
+                ['QB', []],
+                ['RB', []],
+                ['WR', []],
+                ['TE', []],
+            ])
+        );
         setRoster(rosters[+teamId]);
     }, [rosters, teamId]);
-
-    useEffect(() => {
-        const settings = new Map<string, number>();
-        league?.roster_positions.forEach(pos => {
-            if (!settings.has(pos)) {
-                settings.set(pos, 0);
-            }
-            settings.set(pos, settings.get(pos)! + 1);
-        });
-        setRosterSettings(settings);
-    }, [league?.roster_positions]);
 
     function playerSelectComponent(
         players: string[],
@@ -100,24 +85,26 @@ export default function BlueprintGenerator() {
     function cornerstoneAssetsComponent() {
         if (!playerData) return <></>;
         return (
-            <div>
+            <div
+                className={styles.cornerstoneAssetsComponent}
+                ref={componentRef}
+            >
                 <div className={styles.positions}>
                     {['QB', 'RB', 'WR', 'TE'].map(pos => (
-                        <div>
+                        <div className={styles.column}>
                             <div
                                 className={`${styles.positionChip} ${styles[pos]}`}
                             >
                                 {pos}
                             </div>
-                            <div>
+                            <div className={styles.cornerstoneList}>
                                 {cornerstones
                                     .get(pos)!
                                     .map(playerId => playerData[playerId])
                                     .map(player => {
                                         return (
                                             <div>
-                                                {player.first_name}{' '}
-                                                {player.last_name}
+                                                {`${player.first_name} ${player.last_name}`.toLocaleUpperCase()}
                                             </div>
                                         );
                                     })}
@@ -153,11 +140,37 @@ export default function BlueprintGenerator() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
 
+    function exportButton() {
+        return (
+            <Button
+                onClick={() =>
+                    toPng(
+                        document.getElementsByClassName(
+                            styles.cornerstoneAssetsComponent
+                        )[0] as HTMLElement,
+                        {backgroundColor: 'rgba(0, 0, 0, 0)'}
+                    ).then(dataUrl => {
+                        const link = document.createElement('a');
+                        link.href = dataUrl;
+                        link.download = `${specifiedUser?.username}_cornerstones.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    })
+                }
+            >
+                Export As PNG
+            </Button>
+        );
+    }
+
     return (
         <div className={styles.blueprintPage}>
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser)}
             {hasTeamId() && allPositionalSelectors()}
             {hasTeamId() && cornerstoneAssetsComponent()}
+            {hasTeamId() && exportButton()}
+            {}
         </div>
     );
 }

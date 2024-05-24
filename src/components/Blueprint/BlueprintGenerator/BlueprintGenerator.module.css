@@ -2,8 +2,12 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
-    /* background-color: #005D91; */
     height: 500px;
+}
+
+.cornerstoneAssetsComponent {
+    background-color: #005D91;
+    width: fit-content;
 }
 
 .positions {
@@ -12,22 +16,15 @@
     justify-content: space-around;
 }
 
-.cornerstoneTitle {
-    font-family: 'Antarctican Headline';
-    color: #0A1531;
-    background-color: white;
-    border-radius: 8px 0px 0px 0px;
-
-}
-
 .positionChip {
     font-family: 'Antarctican Headline';
     font-size: 40px;
-    background-color: #EC336D;
     color: white;
-    padding: /* top/bottom = */ 4px /* left/right  = */ 28px;
+    padding: /* top/bottom = */ 4px /* left/right  = */ 24px;
     border-radius: 8px;
     box-shadow: -4px 4px #213965;
+    width: 45px;
+    text-align: center;
 }
 
 .QB {
@@ -46,12 +43,37 @@
     background-color: #FBAD5B;
 }
 
+.cornerstoneList {
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: 'Prohibition Test', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 @font-face {
     font-family: 'Antarctican Headline';
     src: local('Antarctican Headline Bold'), local('Antarctican-Headline-Bold'),
         url('AntarcticanHeadline-Bold.woff2') format('woff2'),
         url('AntarcticanHeadline-Bold.woff') format('woff'),
         url('AntarcticanHeadline-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Prohibition Test';
+    src: local('Prohibition Test'), local('Prohibition-Test'),
+        url("ProhibitionTest-Regular.otf") format("opentype"),;
     font-weight: 700;
     font-style: normal;
   }
