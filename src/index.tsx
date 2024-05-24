@@ -12,6 +12,7 @@ import PlayerSearch from './components/Player/Search/PlayerSearch';
 import NflTeam from './components/NflTeam/NflTeam';
 import AllTransactions from './components/Transactions/AllTransactions';
 import Blueprint from './components/Blueprint/Blueprint';
+import BlueprintGenerator from './components/Blueprint/BlueprintGenerator/BlueprintGenerator';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -32,6 +33,10 @@ root.render(
                     <Route path="/nfl" element={<NflTeam />} />
                     <Route path="/transactions" element={<AllTransactions />} />
                     <Route path="/blueprint" element={<Blueprint />} />
+                    <Route
+                        path="/blueprint-gen"
+                        element={<BlueprintGenerator />}
+                    />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>

@@ -1,0 +1,57 @@
+.blueprintPage {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    /* background-color: #005D91; */
+    height: 500px;
+}
+
+.positions {
+    display: flex;
+    width: 900px;
+    justify-content: space-around;
+}
+
+.cornerstoneTitle {
+    font-family: 'Antarctican Headline';
+    color: #0A1531;
+    background-color: white;
+    border-radius: 8px 0px 0px 0px;
+
+}
+
+.positionChip {
+    font-family: 'Antarctican Headline';
+    font-size: 40px;
+    background-color: #EC336D;
+    color: white;
+    padding: /* top/bottom = */ 4px /* left/right  = */ 28px;
+    border-radius: 8px;
+    box-shadow: -4px 4px #213965;
+}
+
+.qb {
+    background-color: #EC336D;
+}
+
+.rb {
+    background-color: #3DBCB1;
+}
+
+.wr {
+    background-color: #3CB6E9;
+}
+
+.te {
+    background-color: #FBAD5B;
+}
+
+@font-face {
+    font-family: 'Antarctican Headline';
+    src: local('Antarctican Headline Bold'), local('Antarctican-Headline-Bold'),
+        url('AntarcticanHeadline-Bold.woff2') format('woff2'),
+        url('AntarcticanHeadline-Bold.woff') format('woff'),
+        url('AntarcticanHeadline-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
