@@ -1,12 +1,17 @@
 import {useEffect, useState} from 'react';
 import {
     useFetchRosters,
-    useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
     useProjectedLineup,
 } from '../../hooks/hooks';
-import {League, Roster, getLeague} from '../../sleeper-api/sleeper-api';
+import {
+    League,
+    Roster,
+    User,
+    getAllUsers,
+    getLeague,
+} from '../../sleeper-api/sleeper-api';
 import styles from './Blueprint.module.css';
 import {teamSelectComponent} from '../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../consts/urlParams';
@@ -17,7 +22,7 @@ export default function Blueprint() {
     const [league, setLeague] = useState<League>();
     const [teamId, setTeamId] = useState(NONE_TEAM_ID);
     const {data: rosters} = useFetchRosters(leagueId);
-    const {data: allUsers} = useFetchUsers(rosters);
+    const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const specifiedUser = allUsers?.[+teamId];
@@ -33,6 +38,7 @@ export default function Blueprint() {
     useEffect(() => {
         if (!leagueId) return;
         getLeague(leagueId).then(league => setLeague(league));
+        getAllUsers(leagueId).then(users => setAllUsers(users));
     }, [leagueId]);
 
     useEffect(() => {

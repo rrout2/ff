@@ -176,6 +176,9 @@ export type User = {
     user_id: string;
     display_name: string;
     avatar: string;
+    metadata: {
+        team_name?: string;
+    };
 };
 
 export type Player = {
@@ -253,6 +256,13 @@ export async function getLeague(leagueId: string): Promise<League> {
 export async function getRosters(leagueId: string): Promise<Roster[]> {
     const response = await axios.get(
         `${BASE_API_URL}/league/${leagueId}/rosters`
+    );
+    return response.data;
+}
+
+export async function getAllUsers(leagueId: string): Promise<User[]> {
+    const response = await axios.get(
+        `${BASE_API_URL}/league/${leagueId}/users`
     );
     return response.data;
 }

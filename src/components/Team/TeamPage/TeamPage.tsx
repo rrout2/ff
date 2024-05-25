@@ -199,12 +199,13 @@ export function teamSelectComponent(
                 </MenuItem>
                 {!allUsers && specifiedUser && (
                     <MenuItem value={teamId} key={teamId}>
-                        {specifiedUser?.display_name}
+                        {specifiedUser?.metadata?.team_name ??
+                            specifiedUser?.display_name}
                     </MenuItem>
                 )}
                 {allUsers?.map((u, idx) => (
                     <MenuItem value={idx} key={idx}>
-                        {u.display_name}
+                        {u.metadata?.team_name ?? u.display_name}
                     </MenuItem>
                 ))}
             </Select>
