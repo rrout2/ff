@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {
     useFetchRosters,
-    useFetchUsers,
     useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
