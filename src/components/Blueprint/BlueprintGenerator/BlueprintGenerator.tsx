@@ -5,7 +5,7 @@ import {
     useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
-import {Roster} from '../../../sleeper-api/sleeper-api';
+import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
@@ -23,7 +23,7 @@ export default function BlueprintGenerator() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState(NONE_TEAM_ID);
     const {data: rosters} = useFetchRosters(leagueId);
-    const {data: allUsers} = useFetchUsers(rosters);
+    const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const specifiedUser = allUsers?.[+teamId];
@@ -50,6 +50,10 @@ export default function BlueprintGenerator() {
         setRoster(rosters[+teamId]);
     }, [rosters, teamId]);
 
+    useEffect(() => {
+        getAllUsers(leagueId).then(users => setAllUsers(users));
+    }, [leagueId]);
+
     function playerSelectComponent(
         players: string[],
         selectedPlayerIds: string[],
@@ -58,7 +62,11 @@ export default function BlueprintGenerator() {
     ) {
         if (!playerData) return <></>;
         return (
-            <FormControl>
+            <FormControl
+                style={{
+                    margin: '4px',
+                }}
+            >
                 <InputLabel>{position}</InputLabel>
                 <Select
                     value={selectedPlayerIds}
@@ -68,8 +76,10 @@ export default function BlueprintGenerator() {
                 >
                     {players
                         .map(playerId => playerData[playerId])
-                        .filter(player =>
-                            player.fantasy_positions.includes(position)
+                        .filter(
+                            player =>
+                                player &&
+                                player.fantasy_positions.includes(position)
                         )
                         .sort(sortBySearchRank)
                         .map((player, idx) => (
@@ -159,6 +169,9 @@ export default function BlueprintGenerator() {
                         document.body.removeChild(link);
                     })
                 }
+                style={{
+                    margin: '8px',
+                }}
                 className={styles.button}
             >
                 Export As PNG
@@ -169,9 +182,9 @@ export default function BlueprintGenerator() {
     return (
         <div className={styles.blueprintPage}>
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser)}
-            {hasTeamId() && allPositionalSelectors()}
             {hasTeamId() && cornerstoneAssetsComponent()}
             {hasTeamId() && exportButton()}
+            {hasTeamId() && allPositionalSelectors()}
         </div>
     );
 }

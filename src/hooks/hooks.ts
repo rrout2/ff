@@ -177,9 +177,9 @@ export function useProjectedLineup(
 
         setStartingLineup(starters);
 
-        const benchPlayerList = Array.from(remainingPlayers).map(
-            p => playerData[p]
-        );
+        const benchPlayerList = Array.from(remainingPlayers)
+            .map(p => playerData[p])
+            .filter(p => !!p);
 
         setBench(benchPlayerList);
 
@@ -217,9 +217,10 @@ function getBestNAtPosition(
                 .map(p => playerData[p])
                 .filter(
                     p =>
-                        p.fantasy_positions.includes('WR') ||
-                        p.fantasy_positions.includes('RB') ||
-                        p.fantasy_positions.includes('TE')
+                        !!p &&
+                        (p.fantasy_positions.includes('WR') ||
+                            p.fantasy_positions.includes('RB') ||
+                            p.fantasy_positions.includes('TE'))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
@@ -229,8 +230,9 @@ function getBestNAtPosition(
                 .map(p => playerData[p])
                 .filter(
                     p =>
-                        p.fantasy_positions.includes('WR') ||
-                        p.fantasy_positions.includes('RB')
+                        !!p &&
+                        (p.fantasy_positions.includes('WR') ||
+                            p.fantasy_positions.includes('RB'))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
@@ -240,8 +242,9 @@ function getBestNAtPosition(
                 .map(p => playerData[p])
                 .filter(
                     p =>
-                        p.fantasy_positions.includes('WR') ||
-                        p.fantasy_positions.includes('TE')
+                        !!p &&
+                        (p.fantasy_positions.includes('WR') ||
+                            p.fantasy_positions.includes('TE'))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
@@ -252,10 +255,11 @@ function getBestNAtPosition(
                 .map(p => playerData[p])
                 .filter(
                     p =>
-                        p.fantasy_positions.includes('WR') ||
-                        p.fantasy_positions.includes('RB') ||
-                        p.fantasy_positions.includes('TE') ||
-                        p.fantasy_positions.includes('QB')
+                        !!p &&
+                        (p.fantasy_positions.includes('WR') ||
+                            p.fantasy_positions.includes('RB') ||
+                            p.fantasy_positions.includes('TE') ||
+                            p.fantasy_positions.includes('QB'))
                 )
                 .sort((a, b) => {
                     // manually prioritizing QBs for super flex
@@ -272,7 +276,7 @@ function getBestNAtPosition(
             return playerIds
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
-                .filter(p => p.fantasy_positions.includes(position))
+                .filter(p => !!p && p.fantasy_positions.includes(position))
                 .sort(sortBySearchRank)
                 .slice(0, count);
     }
