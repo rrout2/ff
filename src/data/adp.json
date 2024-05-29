@@ -1,0 +1,2677 @@
+[
+  {
+    "player_name": "Josh Allen",
+    "position": "QB",
+    "average_pick": 104.3537624
+  },
+  {
+    "player_name": "Patrick Mahomes",
+    "position": "QB",
+    "average_pick": 102.8986576
+  },
+  {
+    "player_name": "C.J. Stroud",
+    "position": "QB",
+    "average_pick": 99.34904637
+  },
+  {
+    "player_name": "Jalen Hurts",
+    "position": "QB",
+    "average_pick": 95.25076999
+  },
+  {
+    "player_name": "Lamar Jackson",
+    "position": "QB",
+    "average_pick": 92.61294403
+  },
+  {
+    "player_name": "Justin Jefferson",
+    "position": "WR",
+    "average_pick": 91.9649817
+  },
+  {
+    "player_name": "Joe Burrow",
+    "position": "QB",
+    "average_pick": 87.5544209
+  },
+  {
+    "player_name": "CeeDee Lamb",
+    "position": "WR",
+    "average_pick": 86.94185029
+  },
+  {
+    "player_name": "Anthony Richardson",
+    "position": "QB",
+    "average_pick": 83.94268804
+  },
+  {
+    "player_name": "Ja'Marr Chase",
+    "position": "WR",
+    "average_pick": 79.91686949
+  },
+  {
+    "player_name": "Justin Herbert",
+    "position": "QB",
+    "average_pick": 79.91686949
+  },
+  {
+    "player_name": "Rookie Pick 1.01",
+    "position": "K",
+    "average_pick": 77.70369271
+  },
+  {
+    "player_name": "Amon-Ra St. Brown",
+    "position": "WR",
+    "average_pick": 77.16004228
+  },
+  {
+    "player_name": "Rookie Pick 1.02",
+    "position": "K",
+    "average_pick": 72.43519699
+  },
+  {
+    "player_name": "Kyler Murray",
+    "position": "QB",
+    "average_pick": 69.93645895
+  },
+  {
+    "player_name": "Jordan Love",
+    "position": "QB",
+    "average_pick": 67.52391784
+  },
+  {
+    "player_name": "Bijan Robinson",
+    "position": "RB",
+    "average_pick": 67.05148976
+  },
+  {
+    "player_name": "Puka Nacua",
+    "position": "WR",
+    "average_pick": 63.83575843
+  },
+  {
+    "player_name": "Breece Hall",
+    "position": "RB",
+    "average_pick": 60.7742508
+  },
+  {
+    "player_name": "Garrett Wilson",
+    "position": "WR",
+    "average_pick": 58.67777093
+  },
+  {
+    "player_name": "Rookie Pick 1.03",
+    "position": "K",
+    "average_pick": 58.26723452
+  },
+  {
+    "player_name": "Jahmyr Gibbs",
+    "position": "RB",
+    "average_pick": 57.85957041
+  },
+  {
+    "player_name": "Trevor Lawrence",
+    "position": "QB",
+    "average_pick": 57.4547585
+  },
+  {
+    "player_name": "Christian McCaffrey",
+    "position": "RB",
+    "average_pick": 56.25723715
+  },
+  {
+    "player_name": "A.J. Brown",
+    "position": "WR",
+    "average_pick": 53.55918882
+  },
+  {
+    "player_name": "Rookie Pick 1.04",
+    "position": "K",
+    "average_pick": 52.07594813
+  },
+  {
+    "player_name": "Brock Purdy",
+    "position": "QB",
+    "average_pick": 51.71160108
+  },
+  {
+    "player_name": "Sam LaPorta",
+    "position": "TE",
+    "average_pick": 50.63378354
+  },
+  {
+    "player_name": "Dak Prescott",
+    "position": "QB",
+    "average_pick": 49.5784308
+  },
+  {
+    "player_name": "Rookie Pick 1.05",
+    "position": "K",
+    "average_pick": 47.53325654
+  },
+  {
+    "player_name": "Tyreek Hill",
+    "position": "WR",
+    "average_pick": 45.57244837
+  },
+  {
+    "player_name": "Drake London",
+    "position": "WR",
+    "average_pick": 44.31038836
+  },
+  {
+    "player_name": "Jonathan Taylor",
+    "position": "RB",
+    "average_pick": 42.48252766
+  },
+  {
+    "player_name": "Chris Olave",
+    "position": "WR",
+    "average_pick": 42.48252766
+  },
+  {
+    "player_name": "Tua Tagovailoa",
+    "position": "QB",
+    "average_pick": 39.32503654
+  },
+  {
+    "player_name": "Rookie Pick 1.06",
+    "position": "K",
+    "average_pick": 38.77668979
+  },
+  {
+    "player_name": "Jaylen Waddle",
+    "position": "WR",
+    "average_pick": 38.5053904
+  },
+  {
+    "player_name": "Rookie Pick 1.07",
+    "position": "K",
+    "average_pick": 34.65640514
+  },
+  {
+    "player_name": "Trey McBride",
+    "position": "TE",
+    "average_pick": 34.65640514
+  },
+  {
+    "player_name": "Brandon Aiyuk",
+    "position": "WR",
+    "average_pick": 33.46089134
+  },
+  {
+    "player_name": "DJ Moore",
+    "position": "WR",
+    "average_pick": 33.2267837
+  },
+  {
+    "player_name": "DeVonta Smith",
+    "position": "WR",
+    "average_pick": 32.3066182
+  },
+  {
+    "player_name": "Michael Pittman",
+    "position": "WR",
+    "average_pick": 31.85613599
+  },
+  {
+    "player_name": "Jared Goff",
+    "position": "QB",
+    "average_pick": 30.97392851
+  },
+  {
+    "player_name": "Kyren Williams",
+    "position": "RB",
+    "average_pick": 30.7572208
+  },
+  {
+    "player_name": "Saquon Barkley",
+    "position": "RB",
+    "average_pick": 27.87778552
+  },
+  {
+    "player_name": "Nico Collins",
+    "position": "WR",
+    "average_pick": 27.68273984
+  },
+  {
+    "player_name": "Dalton Kincaid",
+    "position": "TE",
+    "average_pick": 27.10575243
+  },
+  {
+    "player_name": "Kyle Pitts",
+    "position": "TE",
+    "average_pick": 25.98760516
+  },
+  {
+    "player_name": "De'Von Achane",
+    "position": "RB",
+    "average_pick": 25.98760516
+  },
+  {
+    "player_name": "Tee Higgins",
+    "position": "WR",
+    "average_pick": 25.62523502
+  },
+  {
+    "player_name": "Rookie Pick 1.08",
+    "position": "K",
+    "average_pick": 24.56816101
+  },
+  {
+    "player_name": "Mark Andrews",
+    "position": "TE",
+    "average_pick": 24.22558354
+  },
+  {
+    "player_name": "Zay Flowers",
+    "position": "WR",
+    "average_pick": 23.22624696
+  },
+  {
+    "player_name": "Travis Etienne",
+    "position": "RB",
+    "average_pick": 23.06374556
+  },
+  {
+    "player_name": "Tank Dell",
+    "position": "WR",
+    "average_pick": 22.58303119
+  },
+  {
+    "player_name": "Rookie Pick 1.09",
+    "position": "K",
+    "average_pick": 22.42503002
+  },
+  {
+    "player_name": "T.J. Hockenson",
+    "position": "TE",
+    "average_pick": 21.95762831
+  },
+  {
+    "player_name": "Rashee Rice",
+    "position": "WR",
+    "average_pick": 19.21545202
+  },
+  {
+    "player_name": "Kenneth Walker",
+    "position": "RB",
+    "average_pick": 19.08101196
+  },
+  {
+    "player_name": "Jordan Addison",
+    "position": "WR",
+    "average_pick": 18.94751251
+  },
+  {
+    "player_name": "DK Metcalf",
+    "position": "WR",
+    "average_pick": 18.94751251
+  },
+  {
+    "player_name": "Jayden Reed",
+    "position": "WR",
+    "average_pick": 18.03880624
+  },
+  {
+    "player_name": "George Pickens",
+    "position": "WR",
+    "average_pick": 17.17368073
+  },
+  {
+    "player_name": "Jaxon Smith-Njigba",
+    "position": "WR",
+    "average_pick": 17.05352584
+  },
+  {
+    "player_name": "Kirk Cousins",
+    "position": "QB",
+    "average_pick": 16.81573215
+  },
+  {
+    "player_name": "Rachaad White",
+    "position": "RB",
+    "average_pick": 16.81573215
+  },
+  {
+    "player_name": "Bryce Young",
+    "position": "QB",
+    "average_pick": 16.46524423
+  },
+  {
+    "player_name": "Deebo Samuel",
+    "position": "WR",
+    "average_pick": 15.8972561
+  },
+  {
+    "player_name": "Deshaun Watson",
+    "position": "QB",
+    "average_pick": 15.8972561
+  },
+  {
+    "player_name": "Baker Mayfield",
+    "position": "QB",
+    "average_pick": 14.71570106
+  },
+  {
+    "player_name": "Rookie Pick 1.10",
+    "position": "K",
+    "average_pick": 13.81459462
+  },
+  {
+    "player_name": "Josh Jacobs",
+    "position": "RB",
+    "average_pick": 13.81459462
+  },
+  {
+    "player_name": "Stefon Diggs",
+    "position": "WR",
+    "average_pick": 13.33804379
+  },
+  {
+    "player_name": "Travis Kelce",
+    "position": "TE",
+    "average_pick": 13.15205864
+  },
+  {
+    "player_name": "James Cook",
+    "position": "RB",
+    "average_pick": 12.87793215
+  },
+  {
+    "player_name": "Rookie Pick 1.11",
+    "position": "K",
+    "average_pick": 12.69836277
+  },
+  {
+    "player_name": "Isiah Pacheco",
+    "position": "RB",
+    "average_pick": 12.17453892
+  },
+  {
+    "player_name": "Mike Evans",
+    "position": "WR",
+    "average_pick": 11.75456376
+  },
+  {
+    "player_name": "Will Levis",
+    "position": "QB",
+    "average_pick": 11.59065859
+  },
+  {
+    "player_name": "Davante Adams",
+    "position": "WR",
+    "average_pick": 10.9575763
+  },
+  {
+    "player_name": "Rookie Pick 1.12",
+    "position": "K",
+    "average_pick": 10.6541228
+  },
+  {
+    "player_name": "George Kittle",
+    "position": "TE",
+    "average_pick": 10.00172448
+  },
+  {
+    "player_name": "Rookie Pick 2.01",
+    "position": "K",
+    "average_pick": 9.931747862
+  },
+  {
+    "player_name": "Rookie Pick 2.02",
+    "position": "K",
+    "average_pick": 9.06538116
+  },
+  {
+    "player_name": "Evan Engram",
+    "position": "TE",
+    "average_pick": 8.450726693
+  },
+  {
+    "player_name": "Christian Kirk",
+    "position": "WR",
+    "average_pick": 8.102123311
+  },
+  {
+    "player_name": "D'Andre Swift",
+    "position": "RB",
+    "average_pick": 8.045437166
+  },
+  {
+    "player_name": "Rookie Pick 2.03",
+    "position": "K",
+    "average_pick": 7.767900268
+  },
+  {
+    "player_name": "Cooper Kupp",
+    "position": "WR",
+    "average_pick": 7.659584973
+  },
+  {
+    "player_name": "Jake Ferguson",
+    "position": "TE",
+    "average_pick": 7.499937334
+  },
+  {
+    "player_name": "Diontae Johnson",
+    "position": "WR",
+    "average_pick": 7.499937334
+  },
+  {
+    "player_name": "Javonte Williams",
+    "position": "RB",
+    "average_pick": 7.19055524
+  },
+  {
+    "player_name": "Christian Watson",
+    "position": "WR",
+    "average_pick": 7.19055524
+  },
+  {
+    "player_name": "Amari Cooper",
+    "position": "WR",
+    "average_pick": 7.040683521
+  },
+  {
+    "player_name": "Justin Fields",
+    "position": "QB",
+    "average_pick": 6.991423693
+  },
+  {
+    "player_name": "Joe Mixon",
+    "position": "RB",
+    "average_pick": 6.893935557
+  },
+  {
+    "player_name": "David Njoku",
+    "position": "TE",
+    "average_pick": 6.797806792
+  },
+  {
+    "player_name": "Rookie Pick 2.04",
+    "position": "K",
+    "average_pick": 6.656121073
+  },
+  {
+    "player_name": "Chris Godwin",
+    "position": "WR",
+    "average_pick": 6.656121073
+  },
+  {
+    "player_name": "Matthew Stafford",
+    "position": "QB",
+    "average_pick": 6.563308384
+  },
+  {
+    "player_name": "Terry McLaurin",
+    "position": "WR",
+    "average_pick": 6.426510281
+  },
+  {
+    "player_name": "Calvin Ridley",
+    "position": "WR",
+    "average_pick": 6.336899276
+  },
+  {
+    "player_name": "Marquise Brown",
+    "position": "WR",
+    "average_pick": 6.248537803
+  },
+  {
+    "player_name": "Tyjae Spears",
+    "position": "RB",
+    "average_pick": 6.075494003
+  },
+  {
+    "player_name": "Alvin Kamara",
+    "position": "RB",
+    "average_pick": 6.075494003
+  },
+  {
+    "player_name": "Rookie Pick 2.05",
+    "position": "K",
+    "average_pick": 5.623936165
+  },
+  {
+    "player_name": "Aaron Rodgers",
+    "position": "QB",
+    "average_pick": 5.468189762
+  },
+  {
+    "player_name": "Derrick Henry",
+    "position": "RB",
+    "average_pick": 5.429931816
+  },
+  {
+    "player_name": "Najee Harris",
+    "position": "RB",
+    "average_pick": 4.921591439
+  },
+  {
+    "player_name": "David Montgomery",
+    "position": "RB",
+    "average_pick": 4.887157744
+  },
+  {
+    "player_name": "Rookie Pick 2.06",
+    "position": "K",
+    "average_pick": 4.852964963
+  },
+  {
+    "player_name": "Josh Downs",
+    "position": "WR",
+    "average_pick": 4.751815305
+  },
+  {
+    "player_name": "Keenan Allen",
+    "position": "WR",
+    "average_pick": 4.718569441
+  },
+  {
+    "player_name": "Geno Smith",
+    "position": "QB",
+    "average_pick": 4.492270941
+  },
+  {
+    "player_name": "Brian Robinson",
+    "position": "RB",
+    "average_pick": 4.398639177
+  },
+  {
+    "player_name": "Tony Pollard",
+    "position": "RB",
+    "average_pick": 4.187684255
+  },
+  {
+    "player_name": "Rhamondre Stevenson",
+    "position": "RB",
+    "average_pick": 4.014936875
+  },
+  {
+    "player_name": "Rookie Pick 2.07",
+    "position": "K",
+    "average_pick": 3.903749273
+  },
+  {
+    "player_name": "Dallas Goedert",
+    "position": "TE",
+    "average_pick": 3.876436865
+  },
+  {
+    "player_name": "Cole Kmet",
+    "position": "TE",
+    "average_pick": 3.742714578
+  },
+  {
+    "player_name": "James Conner",
+    "position": "RB",
+    "average_pick": 3.184601384
+  },
+  {
+    "player_name": "Derek Carr",
+    "position": "QB",
+    "average_pick": 3.140195428
+  },
+  {
+    "player_name": "Russell Wilson",
+    "position": "QB",
+    "average_pick": 3.031870662
+  },
+  {
+    "player_name": "Quentin Johnston",
+    "position": "WR",
+    "average_pick": 3.010658314
+  },
+  {
+    "player_name": "Michael Mayer",
+    "position": "TE",
+    "average_pick": 2.826302599
+  },
+  {
+    "player_name": "Jaylen Warren",
+    "position": "RB",
+    "average_pick": 2.767394376
+  },
+  {
+    "player_name": "Aaron Jones",
+    "position": "RB",
+    "average_pick": 2.728805938
+  },
+  {
+    "player_name": "Jakobi Meyers",
+    "position": "WR",
+    "average_pick": 2.709713969
+  },
+  {
+    "player_name": "Jerry Jeudy",
+    "position": "WR",
+    "average_pick": 2.709713969
+  },
+  {
+    "player_name": "Rookie Pick 2.08",
+    "position": "K",
+    "average_pick": 2.561709271
+  },
+  {
+    "player_name": "Jameson Williams",
+    "position": "WR",
+    "average_pick": 2.50831593
+  },
+  {
+    "player_name": "Daniel Jones",
+    "position": "QB",
+    "average_pick": 2.421788596
+  },
+  {
+    "player_name": "Romeo Doubs",
+    "position": "WR",
+    "average_pick": 2.388019272
+  },
+  {
+    "player_name": "Chuba Hubbard",
+    "position": "RB",
+    "average_pick": 2.338246126
+  },
+  {
+    "player_name": "Zamir White",
+    "position": "RB",
+    "average_pick": 2.338246126
+  },
+  {
+    "player_name": "Nick Chubb",
+    "position": "RB",
+    "average_pick": 2.305641715
+  },
+  {
+    "player_name": "Rookie Pick 2.09",
+    "position": "K",
+    "average_pick": 2.210531018
+  },
+  {
+    "player_name": "Zach Charbonnet",
+    "position": "RB",
+    "average_pick": 2.164457235
+  },
+  {
+    "player_name": "Jahan Dotson",
+    "position": "WR",
+    "average_pick": 2.104515867
+  },
+  {
+    "player_name": "Zack Moss",
+    "position": "RB",
+    "average_pick": 1.961824671
+  },
+  {
+    "player_name": "DeAndre Hopkins",
+    "position": "WR",
+    "average_pick": 1.948098852
+  },
+  {
+    "player_name": "Pat Freiermuth",
+    "position": "TE",
+    "average_pick": 1.894149202
+  },
+  {
+    "player_name": "Dalton Schultz",
+    "position": "TE",
+    "average_pick": 1.880896872
+  },
+  {
+    "player_name": "Kendre Miller",
+    "position": "RB",
+    "average_pick": 1.841693606
+  },
+  {
+    "player_name": "Rookie Pick 2.10",
+    "position": "K",
+    "average_pick": 1.841693606
+  },
+  {
+    "player_name": "Chase Brown",
+    "position": "RB",
+    "average_pick": 1.790690688
+  },
+  {
+    "player_name": "Gabe Davis",
+    "position": "WR",
+    "average_pick": 1.7781622
+  },
+  {
+    "player_name": "Rookie Pick 2.11",
+    "position": "K",
+    "average_pick": 1.728918689
+  },
+  {
+    "player_name": "Luke Musgrave",
+    "position": "TE",
+    "average_pick": 1.716822386
+  },
+  {
+    "player_name": "Khalil Shakir",
+    "position": "WR",
+    "average_pick": 1.578101571
+  },
+  {
+    "player_name": "Devin Singletary",
+    "position": "RB",
+    "average_pick": 1.523663086
+  },
+  {
+    "player_name": "Courtland Sutton",
+    "position": "WR",
+    "average_pick": 1.513002845
+  },
+  {
+    "player_name": "Sam Howell",
+    "position": "QB",
+    "average_pick": 1.513002845
+  },
+  {
+    "player_name": "Austin Ekeler",
+    "position": "RB",
+    "average_pick": 1.491905593
+  },
+  {
+    "player_name": "Michael Wilson",
+    "position": "WR",
+    "average_pick": 1.484799748
+  },
+  {
+    "player_name": "Dontayvion Wicks",
+    "position": "WR",
+    "average_pick": 1.457531649
+  },
+  {
+    "player_name": "Rookie Pick 2.12",
+    "position": "K",
+    "average_pick": 1.450589525
+  },
+  {
+    "player_name": "Raheem Mostert",
+    "position": "RB",
+    "average_pick": 1.44044054
+  },
+  {
+    "player_name": "Tyler Lockett",
+    "position": "WR",
+    "average_pick": 1.377921205
+  },
+  {
+    "player_name": "Mike Williams",
+    "position": "WR",
+    "average_pick": 1.314787962
+  },
+  {
+    "player_name": "Jerome Ford",
+    "position": "RB",
+    "average_pick": 1.287384024
+  },
+  {
+    "player_name": "Rookie Pick 3.01",
+    "position": "K",
+    "average_pick": 1.057622009
+  },
+  {
+    "player_name": "Curtis Samuel",
+    "position": "WR",
+    "average_pick": 1.057622009
+  },
+  {
+    "player_name": "Cade Otton",
+    "position": "TE",
+    "average_pick": 1.013993736
+  },
+  {
+    "player_name": "Roschon Johnson",
+    "position": "RB",
+    "average_pick": 0.9837001161
+  },
+  {
+    "player_name": "Isaiah Likely",
+    "position": "TE",
+    "average_pick": 0.9743518384
+  },
+  {
+    "player_name": "Demario Douglas",
+    "position": "WR",
+    "average_pick": 0.9473686385
+  },
+  {
+    "player_name": "Ty Chandler",
+    "position": "RB",
+    "average_pick": 0.9211326975
+  },
+  {
+    "player_name": "Gus Edwards",
+    "position": "RB",
+    "average_pick": 0.8749878962
+  },
+  {
+    "player_name": "Rookie Pick 3.02",
+    "position": "K",
+    "average_pick": 0.8627870996
+  },
+  {
+    "player_name": "Keaton Mitchell",
+    "position": "RB",
+    "average_pick": 0.8467043354
+  },
+  {
+    "player_name": "Aidan O'Connell",
+    "position": "QB",
+    "average_pick": 0.8467043354
+  },
+  {
+    "player_name": "Marvin Mims",
+    "position": "WR",
+    "average_pick": 0.8388935163
+  },
+  {
+    "player_name": "Rookie Pick 3.03",
+    "position": "K",
+    "average_pick": 0.8232561399
+  },
+  {
+    "player_name": "Joshua Palmer",
+    "position": "WR",
+    "average_pick": 0.8156616297
+  },
+  {
+    "player_name": "Gardner Minshew",
+    "position": "QB",
+    "average_pick": 0.7857570421
+  },
+  {
+    "player_name": "Rookie Pick 3.04",
+    "position": "K",
+    "average_pick": 0.7639966898
+  },
+  {
+    "player_name": "Rookie Pick 3.05",
+    "position": "K",
+    "average_pick": 0.6515317616
+  },
+  {
+    "player_name": "Wan'Dale Robinson",
+    "position": "WR",
+    "average_pick": 0.645521403
+  },
+  {
+    "player_name": "Jonathan Mingo",
+    "position": "WR",
+    "average_pick": 0.6216800452
+  },
+  {
+    "player_name": "Rookie Pick 3.06",
+    "position": "K",
+    "average_pick": 0.6159450677
+  },
+  {
+    "player_name": "Elijah Moore",
+    "position": "WR",
+    "average_pick": 0.5661761444
+  },
+  {
+    "player_name": "Miles Sanders",
+    "position": "RB",
+    "average_pick": 0.5661761444
+  },
+  {
+    "player_name": "Rookie Pick 3.07",
+    "position": "K",
+    "average_pick": 0.5609531885
+  },
+  {
+    "player_name": "Darnell Mooney",
+    "position": "WR",
+    "average_pick": 0.5556223502
+  },
+  {
+    "player_name": "Rashid Shaheed",
+    "position": "WR",
+    "average_pick": 0.5454184387
+  },
+  {
+    "player_name": "Chigoziem Okonkwo",
+    "position": "TE",
+    "average_pick": 0.5352515781
+  },
+  {
+    "player_name": "Rookie Pick 3.08",
+    "position": "K",
+    "average_pick": 0.5204285955
+  },
+  {
+    "player_name": "J.K. Dobbins",
+    "position": "RB",
+    "average_pick": 0.506016113
+  },
+  {
+    "player_name": "Rookie Pick 3.09",
+    "position": "K",
+    "average_pick": 0.4965837306
+  },
+  {
+    "player_name": "Antonio Gibson",
+    "position": "RB",
+    "average_pick": 0.4965837306
+  },
+  {
+    "player_name": "Tyler Allgeier",
+    "position": "RB",
+    "average_pick": 0.4783774903
+  },
+  {
+    "player_name": "Rookie Pick 3.10",
+    "position": "K",
+    "average_pick": 0.473964474
+  },
+  {
+    "player_name": "Tucker Kraft",
+    "position": "TE",
+    "average_pick": 0.4608387451
+  },
+  {
+    "player_name": "Alexander Mattison",
+    "position": "RB",
+    "average_pick": 0.4459423553
+  },
+  {
+    "player_name": "Jaleel McLaughlin",
+    "position": "RB",
+    "average_pick": 0.4459423553
+  },
+  {
+    "player_name": "Jalin Hyatt",
+    "position": "WR",
+    "average_pick": 0.4315274842
+  },
+  {
+    "player_name": "Brandin Cooks",
+    "position": "WR",
+    "average_pick": 0.4236025541
+  },
+  {
+    "player_name": "Trey Lance",
+    "position": "QB",
+    "average_pick": 0.421584964
+  },
+  {
+    "player_name": "Rookie Pick 3.11",
+    "position": "K",
+    "average_pick": 0.4195769835
+  },
+  {
+    "player_name": "Sam Darnold",
+    "position": "QB",
+    "average_pick": 0.3966596699
+  },
+  {
+    "player_name": "Treylon Burks",
+    "position": "WR",
+    "average_pick": 0.3930004978
+  },
+  {
+    "player_name": "Tank Bigsby",
+    "position": "RB",
+    "average_pick": 0.3856747805
+  },
+  {
+    "player_name": "Trey Palmer",
+    "position": "WR",
+    "average_pick": 0.371534793
+  },
+  {
+    "player_name": "Rookie Pick 3.12",
+    "position": "K",
+    "average_pick": 0.3545119065
+  },
+  {
+    "player_name": "Darren Waller",
+    "position": "TE",
+    "average_pick": 0.3351484503
+  },
+  {
+    "player_name": "Kendrick Bourne",
+    "position": "WR",
+    "average_pick": 0.3274265314
+  },
+  {
+    "player_name": "Rookie Pick 4.01",
+    "position": "K",
+    "average_pick": 0.2967734528
+  },
+  {
+    "player_name": "Greg Dulcich",
+    "position": "TE",
+    "average_pick": 0.2912414537
+  },
+  {
+    "player_name": "Rashod Bateman",
+    "position": "WR",
+    "average_pick": 0.2912414537
+  },
+  {
+    "player_name": "JuJu Smith-Schuster",
+    "position": "WR",
+    "average_pick": 0.2885547611
+  },
+  {
+    "player_name": "Israel Abanikanda",
+    "position": "RB",
+    "average_pick": 0.2858928531
+  },
+  {
+    "player_name": "Ezekiel Elliott",
+    "position": "RB",
+    "average_pick": 0.2779754831
+  },
+  {
+    "player_name": "Tyler Boyd",
+    "position": "WR",
+    "average_pick": 0.2702773727
+  },
+  {
+    "player_name": "Noah Fant",
+    "position": "TE",
+    "average_pick": 0.2652392732
+  },
+  {
+    "player_name": "Adam Thielen",
+    "position": "WR",
+    "average_pick": 0.2507518923
+  },
+  {
+    "player_name": "Rookie Pick 4.02",
+    "position": "K",
+    "average_pick": 0.246077757
+  },
+  {
+    "player_name": "AJ Dillon",
+    "position": "RB",
+    "average_pick": 0.2415585802
+  },
+  {
+    "player_name": "Rookie Pick 4.03",
+    "position": "K",
+    "average_pick": 0.2370558127
+  },
+  {
+    "player_name": "Taysom Hill",
+    "position": "TE",
+    "average_pick": 0.2370558127
+  },
+  {
+    "player_name": "Khalil Herbert",
+    "position": "RB",
+    "average_pick": 0.2348689808
+  },
+  {
+    "player_name": "Rookie Pick 4.04",
+    "position": "K",
+    "average_pick": 0.2283646397
+  },
+  {
+    "player_name": "Elijah Mitchell",
+    "position": "RB",
+    "average_pick": 0.2179014868
+  },
+  {
+    "player_name": "Dameon Pierce",
+    "position": "RB",
+    "average_pick": 0.2179014868
+  },
+  {
+    "player_name": "Rookie Pick 4.05",
+    "position": "K",
+    "average_pick": 0.2138396989
+  },
+  {
+    "player_name": "Jarrett Stidham",
+    "position": "QB",
+    "average_pick": 0.2059996979
+  },
+  {
+    "player_name": "Jacoby Brissett",
+    "position": "QB",
+    "average_pick": 0.2059996979
+  },
+  {
+    "player_name": "Michael Carter",
+    "position": "RB",
+    "average_pick": 0.2002948479
+  },
+  {
+    "player_name": "Rookie Pick 4.06",
+    "position": "K",
+    "average_pick": 0.1947479852
+  },
+  {
+    "player_name": "Alec Pierce",
+    "position": "WR",
+    "average_pick": 0.1841108415
+  },
+  {
+    "player_name": "Rookie Pick 4.07",
+    "position": "K",
+    "average_pick": 0.1824124252
+  },
+  {
+    "player_name": "Mac Jones",
+    "position": "QB",
+    "average_pick": 0.1692345176
+  },
+  {
+    "player_name": "A.T. Perry",
+    "position": "WR",
+    "average_pick": 0.1555602142
+  },
+  {
+    "player_name": "Hendon Hooker",
+    "position": "QB",
+    "average_pick": 0.1555602142
+  },
+  {
+    "player_name": "Rookie Pick 4.08",
+    "position": "K",
+    "average_pick": 0.1512522095
+  },
+  {
+    "player_name": "Rondale Moore",
+    "position": "WR",
+    "average_pick": 0.142990807
+  },
+  {
+    "player_name": "Jimmy Garoppolo",
+    "position": "QB",
+    "average_pick": 0.1409969489
+  },
+  {
+    "player_name": "Kenny Pickett",
+    "position": "QB",
+    "average_pick": 0.1409969489
+  },
+  {
+    "player_name": "Rookie Pick 4.09",
+    "position": "K",
+    "average_pick": 0.1377483377
+  },
+  {
+    "player_name": "Rookie Pick 4.10",
+    "position": "K",
+    "average_pick": 0.1289869705
+  },
+  {
+    "player_name": "Zay Jones",
+    "position": "WR",
+    "average_pick": 0.1242579235
+  },
+  {
+    "player_name": "Chris Rodriguez",
+    "position": "RB",
+    "average_pick": 0.1231116484
+  },
+  {
+    "player_name": "Hunter Henry",
+    "position": "TE",
+    "average_pick": 0.1126251219
+  },
+  {
+    "player_name": "Rookie Pick 5.01",
+    "position": "K",
+    "average_pick": 0.1110546816
+  },
+  {
+    "player_name": "Zach Ertz",
+    "position": "TE",
+    "average_pick": 0.1095061396
+  },
+  {
+    "player_name": "Parker Washington",
+    "position": "WR",
+    "average_pick": 0.1079791903
+  },
+  {
+    "player_name": "Michael Thomas",
+    "position": "WR",
+    "average_pick": 0.1079791903
+  },
+  {
+    "player_name": "Kyle Trask",
+    "position": "QB",
+    "average_pick": 0.10498887
+  },
+  {
+    "player_name": "Juwan Johnson",
+    "position": "TE",
+    "average_pick": 0.1035249093
+  },
+  {
+    "player_name": "Andrei Iosivas",
+    "position": "WR",
+    "average_pick": 0.1020813621
+  },
+  {
+    "player_name": "Jelani Woods",
+    "position": "TE",
+    "average_pick": 0.09925437321
+  },
+  {
+    "player_name": "Greg Dortch",
+    "position": "WR",
+    "average_pick": 0.09650567352
+  },
+  {
+    "player_name": "Rico Dowdle",
+    "position": "RB",
+    "average_pick": 0.08870792708
+  },
+  {
+    "player_name": "Rookie Pick 4.11",
+    "position": "K",
+    "average_pick": 0.08747098725
+  },
+  {
+    "player_name": "K.J. Osborn",
+    "position": "WR",
+    "average_pick": 0.08625129526
+  },
+  {
+    "player_name": "Dawson Knox",
+    "position": "TE",
+    "average_pick": 0.0850486106
+  },
+  {
+    "player_name": "Jameis Winston",
+    "position": "QB",
+    "average_pick": 0.08386269614
+  },
+  {
+    "player_name": "Tre Tucker",
+    "position": "WR",
+    "average_pick": 0.08386269614
+  },
+  {
+    "player_name": "Desmond Ridder",
+    "position": "QB",
+    "average_pick": 0.08154024566
+  },
+  {
+    "player_name": "Skyy Moore",
+    "position": "WR",
+    "average_pick": 0.08040325169
+  },
+  {
+    "player_name": "Cedric Tillman",
+    "position": "WR",
+    "average_pick": 0.08040325169
+  },
+  {
+    "player_name": "Colby Parkinson",
+    "position": "TE",
+    "average_pick": 0.0770865138
+  },
+  {
+    "player_name": "Tyler Conklin",
+    "position": "TE",
+    "average_pick": 0.06889555214
+  },
+  {
+    "player_name": "Tutu Atwell",
+    "position": "WR",
+    "average_pick": 0.06698759407
+  },
+  {
+    "player_name": "Jonnu Smith",
+    "position": "TE",
+    "average_pick": 0.06698759407
+  },
+  {
+    "player_name": "Joshua Dobbs",
+    "position": "QB",
+    "average_pick": 0.06698759407
+  },
+  {
+    "player_name": "Rookie Pick 4.12",
+    "position": "K",
+    "average_pick": 0.0660535217
+  },
+  {
+    "player_name": "Kenneth Gainwell",
+    "position": "RB",
+    "average_pick": 0.06332872869
+  },
+  {
+    "player_name": "Mike Gesicki",
+    "position": "TE",
+    "average_pick": 0.0624456754
+  },
+  {
+    "player_name": "Drew Lock",
+    "position": "QB",
+    "average_pick": 0.06157493537
+  },
+  {
+    "player_name": "Darius Slayton",
+    "position": "WR",
+    "average_pick": 0.0598697107
+  },
+  {
+    "player_name": "Joe Flacco",
+    "position": "QB",
+    "average_pick": 0.05821170965
+  },
+  {
+    "player_name": "Isaiah Spiller",
+    "position": "RB",
+    "average_pick": 0.05740000787
+  },
+  {
+    "player_name": "Jake Browning",
+    "position": "QB",
+    "average_pick": 0.0558104015
+  },
+  {
+    "player_name": "Kadarius Toney",
+    "position": "WR",
+    "average_pick": 0.05503218347
+  },
+  {
+    "player_name": "Jordan Mason",
+    "position": "RB",
+    "average_pick": 0.05350815041
+  },
+  {
+    "player_name": "Odell Beckham",
+    "position": "WR",
+    "average_pick": 0.05350815041
+  },
+  {
+    "player_name": "Bo Melton",
+    "position": "WR",
+    "average_pick": 0.05202632315
+  },
+  {
+    "player_name": "Allen Lazard",
+    "position": "WR",
+    "average_pick": 0.04918464305
+  },
+  {
+    "player_name": "John Metchie",
+    "position": "WR",
+    "average_pick": 0.04918464305
+  },
+  {
+    "player_name": "Emari Demercado",
+    "position": "RB",
+    "average_pick": 0.04649817565
+  },
+  {
+    "player_name": "Cam Akers",
+    "position": "RB",
+    "average_pick": 0.04649817565
+  },
+  {
+    "player_name": "Davis Allen",
+    "position": "TE",
+    "average_pick": 0.04521047903
+  },
+  {
+    "player_name": "Noah Gray",
+    "position": "TE",
+    "average_pick": 0.04395844322
+  },
+  {
+    "player_name": "Mike White",
+    "position": "QB",
+    "average_pick": 0.04334548843
+  },
+  {
+    "player_name": "Bailey Zappe",
+    "position": "QB",
+    "average_pick": 0.04274108065
+  },
+  {
+    "player_name": "Jamaal Williams",
+    "position": "RB",
+    "average_pick": 0.04274108065
+  },
+  {
+    "player_name": "Clyde Edwards-Helaire",
+    "position": "RB",
+    "average_pick": 0.04214510071
+  },
+  {
+    "player_name": "Daniel Bellinger",
+    "position": "TE",
+    "average_pick": 0.04214510071
+  },
+  {
+    "player_name": "David Bell",
+    "position": "WR",
+    "average_pick": 0.03928756235
+  },
+  {
+    "player_name": "D'Onta Foreman",
+    "position": "RB",
+    "average_pick": 0.03714167394
+  },
+  {
+    "player_name": "Zach Wilson",
+    "position": "QB",
+    "average_pick": 0.0366237719
+  },
+  {
+    "player_name": "Calvin Austin",
+    "position": "WR",
+    "average_pick": 0.03560953196
+  },
+  {
+    "player_name": "Brevin Jordan",
+    "position": "TE",
+    "average_pick": 0.03511299405
+  },
+  {
+    "player_name": "Demarcus Robinson",
+    "position": "WR",
+    "average_pick": 0.03414059281
+  },
+  {
+    "player_name": "Luke Schoonmaker",
+    "position": "TE",
+    "average_pick": 0.03414059281
+  },
+  {
+    "player_name": "Dalvin Cook",
+    "position": "RB",
+    "average_pick": 0.03182577918
+  },
+  {
+    "player_name": "Ryan Tannehill",
+    "position": "QB",
+    "average_pick": 0.03051292471
+  },
+  {
+    "player_name": "Justyn Ross",
+    "position": "WR",
+    "average_pick": 0.03051292471
+  },
+  {
+    "player_name": "Deuce Vaughn",
+    "position": "RB",
+    "average_pick": 0.0300874537
+  },
+  {
+    "player_name": "Hayden Hurst",
+    "position": "TE",
+    "average_pick": 0.02966791543
+  },
+  {
+    "player_name": "Gerald Everett",
+    "position": "TE",
+    "average_pick": 0.02804745256
+  },
+  {
+    "player_name": "Samaje Perine",
+    "position": "RB",
+    "average_pick": 0.02804745256
+  },
+  {
+    "player_name": "Jauan Jennings",
+    "position": "WR",
+    "average_pick": 0.0272707208
+  },
+  {
+    "player_name": "Irv Smith",
+    "position": "TE",
+    "average_pick": 0.02689045895
+  },
+  {
+    "player_name": "Adrian Peterson",
+    "position": "RB",
+    "average_pick": 0.02651549945
+  },
+  {
+    "player_name": "Xavier Gipson",
+    "position": "WR",
+    "average_pick": 0.02651549945
+  },
+  {
+    "player_name": "Eric Gray",
+    "position": "RB",
+    "average_pick": 0.02614576838
+  },
+  {
+    "player_name": "Sean Tucker",
+    "position": "RB",
+    "average_pick": 0.02542170088
+  },
+  {
+    "player_name": "Tim Patrick",
+    "position": "WR",
+    "average_pick": 0.02506722169
+  },
+  {
+    "player_name": "Tyler Higbee",
+    "position": "TE",
+    "average_pick": 0.02437302291
+  },
+  {
+    "player_name": "Stetson Bennett",
+    "position": "QB",
+    "average_pick": 0.02403316644
+  },
+  {
+    "player_name": "Justin Shorter",
+    "position": "WR",
+    "average_pick": 0.02369804892
+  },
+  {
+    "player_name": "Tom Brady",
+    "position": "QB",
+    "average_pick": 0.02369804892
+  },
+  {
+    "player_name": "Carson Wentz",
+    "position": "QB",
+    "average_pick": 0.02272047382
+  },
+  {
+    "player_name": "Tommy Tremble",
+    "position": "TE",
+    "average_pick": 0.02240366043
+  },
+  {
+    "player_name": "DJ Chark",
+    "position": "WR",
+    "average_pick": 0.02178322495
+  },
+  {
+    "player_name": "Zach Evans",
+    "position": "RB",
+    "average_pick": 0.02088463881
+  },
+  {
+    "player_name": "Josh Reynolds",
+    "position": "WR",
+    "average_pick": 0.02088463881
+  },
+  {
+    "player_name": "Evan Hull",
+    "position": "RB",
+    "average_pick": 0.01892945677
+  },
+  {
+    "player_name": "Tyrod Taylor",
+    "position": "QB",
+    "average_pick": 0.01892945677
+  },
+  {
+    "player_name": "Xavier Hutchinson",
+    "position": "WR",
+    "average_pick": 0.01840523411
+  },
+  {
+    "player_name": "Tyler Huntley",
+    "position": "QB",
+    "average_pick": 0.01644955393
+  },
+  {
+    "player_name": "Michael Gallup",
+    "position": "WR",
+    "average_pick": 0.01555107856
+  },
+  {
+    "player_name": "Joshua Kelley",
+    "position": "RB",
+    "average_pick": 0.01512041497
+  },
+  {
+    "player_name": "Kareem Hunt",
+    "position": "RB",
+    "average_pick": 0.01429453723
+  },
+  {
+    "player_name": "Justice Hill",
+    "position": "RB",
+    "average_pick": 0.01389867165
+  },
+  {
+    "player_name": "Charlie Jones",
+    "position": "WR",
+    "average_pick": 0.01351376897
+  },
+  {
+    "player_name": "Jalen Tolbert",
+    "position": "WR",
+    "average_pick": 0.01313952558
+  },
+  {
+    "player_name": "Taylor Heinicke",
+    "position": "QB",
+    "average_pick": 0.0127756463
+  },
+  {
+    "player_name": "Cole Turner",
+    "position": "TE",
+    "average_pick": 0.01242184411
+  },
+  {
+    "player_name": "Noah Brown",
+    "position": "WR",
+    "average_pick": 0.01174336243
+  },
+  {
+    "player_name": "Will Mallory",
+    "position": "TE",
+    "average_pick": 0.01141814777
+  },
+  {
+    "player_name": "Cameron Latu",
+    "position": "TE",
+    "average_pick": 0.01125893357
+  },
+  {
+    "player_name": "Jerick McKinnon",
+    "position": "RB",
+    "average_pick": 0.01110193945
+  },
+  {
+    "player_name": "Van Jefferson",
+    "position": "WR",
+    "average_pick": 0.01079448803
+  },
+  {
+    "player_name": "Tyquan Thornton",
+    "position": "WR",
+    "average_pick": 0.01049555102
+  },
+  {
+    "player_name": "Darnell Washington",
+    "position": "TE",
+    "average_pick": 0.009922283554
+  },
+  {
+    "player_name": "Mason Rudolph",
+    "position": "QB",
+    "average_pick": 0.009647500924
+  },
+  {
+    "player_name": "Chase Claypool",
+    "position": "WR",
+    "average_pick": 0.009380327983
+  },
+  {
+    "player_name": "Malik Willis",
+    "position": "QB",
+    "average_pick": 0.009120553993
+  },
+  {
+    "player_name": "Donald Parham",
+    "position": "TE",
+    "average_pick": 0.00886797405
+  },
+  {
+    "player_name": "Sean Clifford",
+    "position": "QB",
+    "average_pick": 0.008383604911
+  },
+  {
+    "player_name": "Kayshon Boutte",
+    "position": "WR",
+    "average_pick": 0.008151433658
+  },
+  {
+    "player_name": "Dorian Thompson-Robinson",
+    "position": "QB",
+    "average_pick": 0.007925692037
+  },
+  {
+    "player_name": "Jeff Wilson",
+    "position": "RB",
+    "average_pick": 0.007706201988
+  },
+  {
+    "player_name": "Marcus Mariota",
+    "position": "QB",
+    "average_pick": 0.007492790384
+  },
+  {
+    "player_name": "Damien Harris",
+    "position": "RB",
+    "average_pick": 0.007285288891
+  },
+  {
+    "player_name": "Jeremy Ruckert",
+    "position": "TE",
+    "average_pick": 0.006887366086
+  },
+  {
+    "player_name": "Brenton Strange",
+    "position": "TE",
+    "average_pick": 0.006696630904
+  },
+  {
+    "player_name": "Rashaad Penny",
+    "position": "RB",
+    "average_pick": 0.006511177843
+  },
+  {
+    "player_name": "Mack Hollins",
+    "position": "WR",
+    "average_pick": 0.006330860625
+  },
+  {
+    "player_name": "Ty Johnson",
+    "position": "RB",
+    "average_pick": 0.006155537019
+  },
+  {
+    "player_name": "Logan Thomas",
+    "position": "TE",
+    "average_pick": 0.005985068735
+  },
+  {
+    "player_name": "Davis Mills",
+    "position": "QB",
+    "average_pick": 0.005819321312
+  },
+  {
+    "player_name": "Terrace Marshall",
+    "position": "WR",
+    "average_pick": 0.005658164013
+  },
+  {
+    "player_name": "DeWayne McBride",
+    "position": "RB",
+    "average_pick": 0.005501469722
+  },
+  {
+    "player_name": "Ronnie Rivers",
+    "position": "RB",
+    "average_pick": 0.0052009792
+  },
+  {
+    "player_name": "Tyler Scott",
+    "position": "WR",
+    "average_pick": 0.00505694595
+  },
+  {
+    "player_name": "Pierre Strong",
+    "position": "RB",
+    "average_pick": 0.004780735337
+  },
+  {
+    "player_name": "Malik Cunningham",
+    "position": "QB",
+    "average_pick": 0.004648340105
+  },
+  {
+    "player_name": "Donovan Peoples-Jones",
+    "position": "WR",
+    "average_pick": 0.004519611359
+  },
+  {
+    "player_name": "Tyson Bagent",
+    "position": "QB",
+    "average_pick": 0.004394447561
+  },
+  {
+    "player_name": "Cooper Rush",
+    "position": "QB",
+    "average_pick": 0.004272749985
+  },
+  {
+    "player_name": "Kalif Raymond",
+    "position": "WR",
+    "average_pick": 0.004154422639
+  },
+  {
+    "player_name": "Deon Jackson",
+    "position": "RB",
+    "average_pick": 0.00403937219
+  },
+  {
+    "player_name": "Marquez Callaway",
+    "position": "WR",
+    "average_pick": 0.003927507889
+  },
+  {
+    "player_name": "Rakim Jarrett",
+    "position": "WR",
+    "average_pick": 0.0038187415
+  },
+  {
+    "player_name": "Hunter Renfrow",
+    "position": "WR",
+    "average_pick": 0.003712987233
+  },
+  {
+    "player_name": "Elijah Higgins",
+    "position": "TE",
+    "average_pick": 0.003610161669
+  },
+  {
+    "player_name": "Isaiah Hodgins",
+    "position": "WR",
+    "average_pick": 0.003510183704
+  },
+  {
+    "player_name": "Robert Woods",
+    "position": "WR",
+    "average_pick": 0.003412974477
+  },
+  {
+    "player_name": "Ke'Shawn Vaughn",
+    "position": "RB",
+    "average_pick": 0.003318457313
+  },
+  {
+    "player_name": "Tanner Hudson",
+    "position": "TE",
+    "average_pick": 0.003226557659
+  },
+  {
+    "player_name": "Mitch Trubisky",
+    "position": "QB",
+    "average_pick": 0.003137203027
+  },
+  {
+    "player_name": "Andy Dalton",
+    "position": "QB",
+    "average_pick": 0.003050322936
+  },
+  {
+    "player_name": "Durham Smythe",
+    "position": "TE",
+    "average_pick": 0.002965848857
+  },
+  {
+    "player_name": "Mecole Hardman",
+    "position": "WR",
+    "average_pick": 0.002883714161
+  },
+  {
+    "player_name": "Boston Scott",
+    "position": "RB",
+    "average_pick": 0.00280385406
+  },
+  {
+    "player_name": "Max Duggan",
+    "position": "QB",
+    "average_pick": 0.002726205564
+  },
+  {
+    "player_name": "Parris Campbell",
+    "position": "WR",
+    "average_pick": 0.002650707426
+  },
+  {
+    "player_name": "Robert Tonyan",
+    "position": "TE",
+    "average_pick": 0.002577300095
+  },
+  {
+    "player_name": "Salvon Ahmed",
+    "position": "RB",
+    "average_pick": 0.002505925668
+  },
+  {
+    "player_name": "Rob Gronkowski",
+    "position": "TE",
+    "average_pick": 0.002436527848
+  },
+  {
+    "player_name": "Cordarrelle Patterson",
+    "position": "RB",
+    "average_pick": 0.002369051896
+  },
+  {
+    "player_name": "Payne Durham",
+    "position": "TE",
+    "average_pick": 0.002303444589
+  },
+  {
+    "player_name": "Denzel Mims",
+    "position": "WR",
+    "average_pick": 0.002239654176
+  },
+  {
+    "player_name": "Keaontay Ingram",
+    "position": "RB",
+    "average_pick": 0.002177630342
+  },
+  {
+    "player_name": "Xazavian Valladay",
+    "position": "RB",
+    "average_pick": 0.002117324165
+  },
+  {
+    "player_name": "Jake Bobo",
+    "position": "WR",
+    "average_pick": 0.002058688076
+  },
+  {
+    "player_name": "Ronnie Bell",
+    "position": "WR",
+    "average_pick": 0.002001675824
+  },
+  {
+    "player_name": "Chris Brooks",
+    "position": "RB",
+    "average_pick": 0.001946242441
+  },
+  {
+    "player_name": "C.J. Uzomah",
+    "position": "TE",
+    "average_pick": 0.001892344201
+  },
+  {
+    "player_name": "Chase Edmonds",
+    "position": "RB",
+    "average_pick": 0.001839938592
+  },
+  {
+    "player_name": "Clayton Tune",
+    "position": "QB",
+    "average_pick": 0.001788984277
+  },
+  {
+    "player_name": "DeeJay Dallas",
+    "position": "RB",
+    "average_pick": 0.001739441064
+  },
+  {
+    "player_name": "DeVante Parker",
+    "position": "WR",
+    "average_pick": 0.001691269876
+  },
+  {
+    "player_name": "KJ Hamler",
+    "position": "WR",
+    "average_pick": "x"
+  },
+  {
+    "player_name": "Marquez Valdes-Scantling",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Malik Davis",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Matt Corral",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Jarvis Landry",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tiyon Evans",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Jake Haener",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Austin Hooper",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Melvin Gordon",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "D'Ernest Johnson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Leonard Fournette",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Henry Ruggs",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Sony Michel",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Trey Sermon",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Joshua Dobbs",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Cameron Latu",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Pierre Strong",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Adam Trautman",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tim Patrick",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Mike White",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Zakhari Franklin",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Dorian Thompson-Robinson",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Demarcus Robinson",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tommy Tremble",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Chris Brooks",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Cordarrelle Patterson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Brenton Strange",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Justice Hill",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Dez Bryant",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Malik Heath",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Matt Breida",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Ronnie Rivers",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Stetson Bennett",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Keaontay Ingram",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Laviska Shenault",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Justin Shorter",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Austin Hooper",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Marquez Valdes-Scantling",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Isaiah Hodgins",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Sam Hartman",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Jake Haener",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Terrace Marshall",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Mack Hollins",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Will Mallory",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Van Jefferson",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Ben Skowronek",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kevin Harris",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kyle Trask",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Josh Whyle",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Quez Watkins",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kenny McIntosh",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Isaiah Williams",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Devin Duvernay",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Zonovan Knight",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Taylor Heinicke",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Zack Kuntz",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Colby Parkinson",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "DeVante Parker",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Clayton Tune",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Marcus Mariota",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tyrod Taylor",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "D'Ernest Johnson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Trey Sermon",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Will Dissly",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Nelson Agholor",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tanner Hudson",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tommy DeVito",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Rakim Jarrett",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Mitch Trubisky",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Malik Willis",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Malik Davis",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kalif Raymond",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tyson Bagent",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Sean Clifford",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Leonard Fournette",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Robert Tonyan",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Davis Mills",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Malik Cunningham",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Jake Bobo",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Chase Edmonds",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Foster Moreau",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Parris Campbell",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Carson Wentz",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Ronnie Bell",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Andy Dalton",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Nick Westbrook-Ikhine",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tyrion Davis-Price",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Corey Davis",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Nyheim Hines",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Allen Robinson",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Emanuel Wilson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "James Robinson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Drew Sample",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Deneric Prince",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Samori Toure",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Durham Smythe",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Jaren Hall",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Deon Jackson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Hassan Haskins",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Richie James",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Trayveon Williams",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Chris Evans",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kyle Philips",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Danny Gray",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Lil'Jordan Humphrey",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Latavius Murray",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Isaiah McKenzie",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "KJ Hamler",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Hunter Long",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Marvin Jones",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Albert Okwuegbunam",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Cooper Rush",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Payne Durham",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Russell Gage",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "DeeJay Dallas",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Colt McCoy",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Kene Nwangwu",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Derius Davis",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Ronald Jones",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "KaVontae Turpin",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Sterling Shepard",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Olamide Zaccheaus",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Braxton Berrios",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Ke'Shawn Vaughn",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Max Duggan",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tom Brady",
+    "position": "QB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "River Cracraft",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Tanner Conner",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Brandon Powell",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Marquez Callaway",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Bryan Thompson",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Boston Scott",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Harrison Bryant",
+    "position": "TE",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Elijah Dotson",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Mohamed Ibrahim",
+    "position": "RB",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Deonte Harty",
+    "position": "WR",
+    "average_pick": ""
+  },
+  {
+    "player_name": "Bryce Ford-Wheaton",
+    "position": "WR",
+    "average_pick": ""
+  }
+]

@@ -1,5 +1,6 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
+import adp from '../data/adp.json';
 import {
     Player,
     Roster,
@@ -36,6 +37,22 @@ export function usePlayerData() {
     }, []);
 
     return playerData;
+}
+
+type adp = {
+    player_name: string;
+    position: string;
+    average_pick: number | string;
+};
+
+export function useAdpData(): [adp[], (playerName: string) => number] {
+    const [adpData] = useState(adp as adp[]);
+    const getAdp = (playerName: string) => {
+        return adpData.findIndex(
+            a => a.player_name.toLowerCase() === playerName.toLowerCase()
+        );
+    };
+    return [adpData, getAdp];
 }
 
 export function usePlayer(playerId: string) {

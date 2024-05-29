@@ -1,10 +1,16 @@
 import {useEffect, useRef, useState} from 'react';
 import {
+    useAdpData,
     useFetchRosters,
     useLeagueIdFromUrl,
     usePlayerData,
 } from '../../../hooks/hooks';
-import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
+import {
+    Player,
+    Roster,
+    User,
+    getAllUsers,
+} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
@@ -25,6 +31,7 @@ export default function BlueprintGenerator() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
+    const [_, getAdp] = useAdpData();
     const specifiedUser = allUsers?.[+teamId];
     const componentRef = useRef(null);
     const [cornerstones, setCornerstones] = useState(
@@ -42,20 +49,33 @@ export default function BlueprintGenerator() {
         return rosters.find(r => r.owner_id === ownerId);
     }
 
+    function isCornerstone(player?: Player) {
+        if (!player) return false;
+        const adp = getAdp(`${player.first_name} ${player.last_name}`);
+        return adp <= 50 && adp >= 0;
+    }
+
     useEffect(() => {
-        if (!rosters || rosters.length === 0 || !hasTeamId()) return;
+        if (!rosters || rosters.length === 0 || !hasTeamId() || !playerData)
+            return;
         const newRoster = getRosterFromTeamIdx(+teamId);
         if (!newRoster) throw new Error('roster not found');
         setCornerstones(
-            new Map<string, string[]>([
-                ['QB', []],
-                ['RB', []],
-                ['WR', []],
-                ['TE', []],
-            ])
+            new Map<string, string[]>(
+                ['QB', 'RB', 'WR', 'TE'].map(pos => [
+                    pos,
+                    newRoster.players
+                        .map(playerId => playerData[playerId])
+                        .filter(isCornerstone)
+                        .filter(player =>
+                            player.fantasy_positions.includes(pos)
+                        )
+                        .map(player => player.player_id),
+                ])
+            )
         );
         setRoster(newRoster);
-    }, [rosters, teamId]);
+    }, [rosters, teamId, playerData]);
 
     useEffect(() => {
         if (!leagueId) return;
