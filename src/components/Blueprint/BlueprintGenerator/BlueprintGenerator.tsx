@@ -36,8 +36,16 @@ export default function BlueprintGenerator() {
         ])
     );
 
+    function getRosterFromTeamIdx(idx: number) {
+        if (allUsers.length === 0 || !rosters) return;
+        const ownerId = allUsers[idx].user_id;
+        return rosters.find(r => r.owner_id === ownerId);
+    }
+
     useEffect(() => {
         if (!rosters || rosters.length === 0 || !hasTeamId()) return;
+        const newRoster = getRosterFromTeamIdx(+teamId);
+        if (!newRoster) throw new Error('roster not found');
         setCornerstones(
             new Map<string, string[]>([
                 ['QB', []],
@@ -46,10 +54,11 @@ export default function BlueprintGenerator() {
                 ['TE', []],
             ])
         );
-        setRoster(rosters[+teamId]);
+        setRoster(newRoster);
     }, [rosters, teamId]);
 
     useEffect(() => {
+        if (!leagueId) return;
         getAllUsers(leagueId).then(users => setAllUsers(users));
     }, [leagueId]);
 

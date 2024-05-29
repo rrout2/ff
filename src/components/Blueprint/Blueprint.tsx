@@ -35,6 +35,12 @@ export default function Blueprint() {
         roster?.players
     );
 
+    function getRosterFromTeamIdx(idx: number) {
+        if (allUsers.length === 0 || !rosters) return;
+        const ownerId = allUsers[idx].user_id;
+        return rosters.find(r => r.owner_id === ownerId);
+    }
+
     useEffect(() => {
         if (!leagueId) return;
         getLeague(leagueId).then(league => setLeague(league));
@@ -43,7 +49,9 @@ export default function Blueprint() {
 
     useEffect(() => {
         if (!rosters || rosters.length === 0 || !hasTeamId()) return;
-        setRoster(rosters[+teamId]);
+        const newRoster = getRosterFromTeamIdx(+teamId);
+        if (!newRoster) throw new Error('roster not found');
+        setRoster(newRoster);
     }, [rosters, teamId]);
 
     useEffect(() => {
