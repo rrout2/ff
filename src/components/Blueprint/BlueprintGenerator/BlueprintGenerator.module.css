@@ -69,9 +69,9 @@
 @font-face {
     font-family: 'Antarctican Headline';
     src: local('Antarctican Headline Bold'), local('Antarctican-Headline-Bold'),
-        url('AntarcticanHeadline-Bold.woff2') format('woff2'),
-        url('AntarcticanHeadline-Bold.woff') format('woff'),
-        url('AntarcticanHeadline-Bold.ttf') format('truetype');
+        url('fonts/AntarcticanHeadline-Bold.woff2') format('woff2'),
+        url('fonts/AntarcticanHeadline-Bold.woff') format('woff'),
+        url('fonts/AntarcticanHeadline-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
   }
@@ -79,7 +79,7 @@
 @font-face {
     font-family: 'Prohibition Test';
     src: local('Prohibition Test'), local('Prohibition-Test'),
-        url("ProhibitionTest-Regular.otf") format("opentype"),;
+        url("fonts/ProhibitionTest-Regular.otf") format("opentype"),;
     font-weight: 700;
     font-style: normal;
 }

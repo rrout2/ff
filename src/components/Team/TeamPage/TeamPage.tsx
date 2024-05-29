@@ -26,6 +26,12 @@ import {
 import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
 import Menu from '../../Menu/Menu';
+import {
+    FLEX,
+    WR_RB_FLEX,
+    WR_TE_FLEX,
+    SUPER_FLEX,
+} from '../../../consts/fantasy';
 
 // dynasty-ff#/team?leagueId=...&teamId=...
 export default function TeamPage() {
@@ -94,13 +100,13 @@ export default function TeamPage() {
 
     function humanReadablePosition(position: string) {
         switch (position) {
-            case 'FLEX':
+            case FLEX:
                 return 'WR/RB/TE';
-            case 'WRRB_FLEX':
+            case WR_RB_FLEX:
                 return 'WR/RB';
-            case 'REC_FLEX':
+            case WR_TE_FLEX:
                 return 'WR/TE';
-            case 'SUPER_FLEX':
+            case SUPER_FLEX:
                 return 'QB/WR/RB/TE';
         }
         return position;

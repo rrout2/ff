@@ -13,6 +13,18 @@ import {useQuery} from '@tanstack/react-query';
 import {LEAGUE_ID} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {sortBySearchRank} from '../components/Player/Search/PlayerSearch';
+import {
+    BENCH,
+    FLEX,
+    QB,
+    RB,
+    SUPER_FLEX,
+    SUPER_FLEX_SET,
+    TE,
+    WR,
+    WR_RB_FLEX,
+    WR_TE_FLEX,
+} from '../consts/fantasy';
 
 interface PlayerData {
     [key: string]: Player;
@@ -22,10 +34,9 @@ export function usePlayerData() {
     const [playerData, setPlayerData] = useState<PlayerData>();
 
     const preprocess = (pd: PlayerData) => {
-        const fantasyPositions = new Set(['QB', 'WR', 'RB', 'TE']);
         for (const playerId in pd) {
             const player = pd[playerId];
-            if (!fantasyPositions.has(player.position)) {
+            if (!SUPER_FLEX_SET.has(player.position)) {
                 delete pd[playerId];
             }
         }
@@ -125,8 +136,7 @@ export function useFetchRosters(leagueIdNewName: string) {
         queryKey: [leagueIdNewName],
         queryFn: async () => {
             if (!leagueIdNewName) throw new Error('leagueId is empty');
-            const huh = await getRosters(leagueIdNewName);
-            return huh;
+            return await getRosters(leagueIdNewName);
         },
         staleTime: 10000,
     });
@@ -174,7 +184,7 @@ export function useProjectedLineup(
         const remainingPlayers = new Set(playerIds);
         const starters: {player: Player; position: string}[] = [];
         Array.from(rosterSettings)
-            .filter(([position]) => position !== 'BN')
+            .filter(([position]) => position !== BENCH)
             .forEach(([position, count]) => {
                 const bestAtPosition = getBestNAtPosition(
                     position,
@@ -228,62 +238,62 @@ function getBestNAtPosition(
 ): Player[] {
     if (!playerData || !playerIds) return [];
     switch (position) {
-        case 'FLEX':
+        case FLEX:
             return playerIds
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
                 .filter(
                     p =>
                         !!p &&
-                        (p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB') ||
-                            p.fantasy_positions.includes('TE'))
+                        (p.fantasy_positions.includes(WR) ||
+                            p.fantasy_positions.includes(RB) ||
+                            p.fantasy_positions.includes(TE))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
-        case 'WRRB_FLEX':
+        case WR_RB_FLEX:
             return playerIds
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
                 .filter(
                     p =>
                         !!p &&
-                        (p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB'))
+                        (p.fantasy_positions.includes(WR) ||
+                            p.fantasy_positions.includes(RB))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
-        case 'REC_FLEX':
+        case WR_TE_FLEX:
             return playerIds
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
                 .filter(
                     p =>
                         !!p &&
-                        (p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('TE'))
+                        (p.fantasy_positions.includes(WR) ||
+                            p.fantasy_positions.includes(TE))
                 )
                 .sort(sortBySearchRank)
                 .slice(0, count);
 
-        case 'SUPER_FLEX':
+        case SUPER_FLEX:
             return playerIds
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
                 .filter(
                     p =>
                         !!p &&
-                        (p.fantasy_positions.includes('WR') ||
-                            p.fantasy_positions.includes('RB') ||
-                            p.fantasy_positions.includes('TE') ||
-                            p.fantasy_positions.includes('QB'))
+                        (p.fantasy_positions.includes(WR) ||
+                            p.fantasy_positions.includes(RB) ||
+                            p.fantasy_positions.includes(TE) ||
+                            p.fantasy_positions.includes(QB))
                 )
                 .sort((a, b) => {
                     // manually prioritizing QBs for super flex
-                    if (a.position === 'QB' && b.position !== 'QB') {
+                    if (a.position === QB && b.position !== QB) {
                         return -1;
                     }
-                    if (a.position !== 'QB' && b.position === 'QB') {
+                    if (a.position !== QB && b.position === QB) {
                         return 1;
                     }
                     return sortBySearchRank(a, b);

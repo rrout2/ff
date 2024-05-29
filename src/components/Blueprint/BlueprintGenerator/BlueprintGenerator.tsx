@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 import {sortBySearchRank} from '../../Player/Search/PlayerSearch';
 import {toPng} from 'html-to-image';
+import {FANTASY_POSITIONS} from '../../../consts/fantasy';
 export default function BlueprintGenerator() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState(NONE_TEAM_ID);
@@ -35,12 +36,7 @@ export default function BlueprintGenerator() {
     const specifiedUser = allUsers?.[+teamId];
     const componentRef = useRef(null);
     const [cornerstones, setCornerstones] = useState(
-        new Map<string, string[]>([
-            ['QB', []],
-            ['RB', []],
-            ['WR', []],
-            ['TE', []],
-        ])
+        new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
     );
 
     function getRosterFromTeamIdx(idx: number) {
@@ -56,17 +52,21 @@ export default function BlueprintGenerator() {
     }
 
     useEffect(() => {
-        if (!rosters || rosters.length === 0 || !hasTeamId() || !playerData)
+        if (!rosters || rosters.length === 0 || !hasTeamId() || !playerData) {
             return;
+        }
+
         const newRoster = getRosterFromTeamIdx(+teamId);
         if (!newRoster) throw new Error('roster not found');
+
+        const cornerstones = newRoster.players
+            .map(playerId => playerData[playerId])
+            .filter(isCornerstone);
         setCornerstones(
             new Map<string, string[]>(
-                ['QB', 'RB', 'WR', 'TE'].map(pos => [
+                FANTASY_POSITIONS.map(pos => [
                     pos,
-                    newRoster.players
-                        .map(playerId => playerData[playerId])
-                        .filter(isCornerstone)
+                    cornerstones
                         .filter(player =>
                             player.fantasy_positions.includes(pos)
                         )
@@ -128,7 +128,7 @@ export default function BlueprintGenerator() {
                 ref={componentRef}
             >
                 <div className={styles.positions}>
-                    {['QB', 'RB', 'WR', 'TE'].map(pos => (
+                    {FANTASY_POSITIONS.map(pos => (
                         <div className={styles.column}>
                             <div
                                 className={`${styles.positionChip} ${styles[pos]}`}
@@ -155,7 +155,7 @@ export default function BlueprintGenerator() {
     }
 
     function allPositionalSelectors() {
-        return ['QB', 'RB', 'WR', 'TE'].map(pos =>
+        return FANTASY_POSITIONS.map(pos =>
             playerSelectComponent(
                 roster?.players ?? [],
                 cornerstones.get(pos) ?? [],
