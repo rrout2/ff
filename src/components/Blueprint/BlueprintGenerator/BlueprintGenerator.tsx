@@ -48,7 +48,7 @@ export default function BlueprintGenerator() {
     function isCornerstone(player?: Player) {
         if (!player) return false;
         const adp = getAdp(`${player.first_name} ${player.last_name}`);
-        return adp <= 50 && adp >= 0;
+        return adp <= 75 && adp >= 0;
     }
 
     useEffect(() => {
