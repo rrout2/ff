@@ -128,7 +128,7 @@ export default function CornerstoneModule(props: {
                 onClick={() =>
                     toPng(
                         document.getElementsByClassName(
-                            styles.cornerstoneAssetsComponent
+                            styles.graphicComponent
                         )[0] as HTMLElement,
                         {backgroundColor: 'rgba(0, 0, 0, 0)'}
                     ).then(dataUrl => {
