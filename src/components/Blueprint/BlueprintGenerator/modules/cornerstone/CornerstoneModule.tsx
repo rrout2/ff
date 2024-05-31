@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
-import styles from './../../BlueprintGenerator.module.css';
+import styles from './CornerstoneModule.module.css';
 import {
     InputLabel,
     SelectChangeEvent,
@@ -52,13 +52,11 @@ export default function CornerstoneModule(props: {
             )
         );
     }, [roster]);
-    function cornerstoneAssetsComponent() {
+
+    function graphicComponent() {
         if (!playerData) return <></>;
         return (
-            <div
-                className={styles.cornerstoneAssetsComponent}
-                ref={componentRef}
-            >
+            <div className={styles.graphicComponent} ref={componentRef}>
                 <div className={styles.positions}>
                     {FANTASY_POSITIONS.map(pos => (
                         <div className={styles.column}>
@@ -174,7 +172,7 @@ export default function CornerstoneModule(props: {
 
     return (
         <>
-            {cornerstoneAssetsComponent()}
+            {graphicComponent()}
             {exportButton()}
             {allPositionalSelectors()}
         </>
