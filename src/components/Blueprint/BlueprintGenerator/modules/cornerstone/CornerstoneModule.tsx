@@ -123,7 +123,6 @@ export default function CornerstoneModule(props: {
         );
     }
     function exportButton() {
-        console.log(specifiedUser?.metadata?.team_name);
         return (
             <Button
                 variant="outlined"
