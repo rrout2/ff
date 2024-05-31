@@ -50,14 +50,12 @@ export function usePlayerData() {
     return playerData;
 }
 
-type adp = {
+type adpDatum = {
     player_name: string;
-    position: string;
-    average_pick: number | string;
 };
 
-export function useAdpData(): [adp[], (playerName: string) => number] {
-    const [adpData] = useState(adp as adp[]);
+export function useAdpData(): [adpDatum[], (playerName: string) => number] {
+    const [adpData] = useState(adp as adpDatum[]);
     const getAdp = (playerName: string) => {
         return adpData.findIndex(
             a => a.player_name.toLowerCase() === playerName.toLowerCase()

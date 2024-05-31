@@ -13,6 +13,7 @@ import {
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
 import {toPng} from 'html-to-image';
+
 export default function CornerstoneModule(props: {
     roster?: Roster;
     specifiedUser?: User;
