@@ -1,4 +1,5 @@
 # Dynasty Fantasy Football Site
+Homepage: https://rrout2.github.io/dynasty-ff/
 
 This project was set up using [react-gh-pages](https://github.com/gitname/react-gh-pages).
 
