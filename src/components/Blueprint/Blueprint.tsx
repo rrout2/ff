@@ -172,7 +172,7 @@ export default function Blueprint() {
                     <div>WR Bonus: {scoringSettings.bonus_rec_wr ?? 0}</div>
                     <div>TE Bonus: {scoringSettings.bonus_rec_te ?? 0}</div>
                 </div>
-
+                <div>Pass TD: {scoringSettings.pass_td}</div>
                 <div>Taxi #: {league.settings.taxi_slots}</div>
             </div>
         );
