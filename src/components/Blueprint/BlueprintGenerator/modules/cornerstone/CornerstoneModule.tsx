@@ -123,6 +123,7 @@ export default function CornerstoneModule(props: {
         );
     }
     function exportButton() {
+        console.log(specifiedUser?.metadata?.team_name);
         return (
             <Button
                 variant="outlined"
@@ -135,7 +136,10 @@ export default function CornerstoneModule(props: {
                     ).then(dataUrl => {
                         const link = document.createElement('a');
                         link.href = dataUrl;
-                        link.download = `${specifiedUser?.metadata?.team_name}_cornerstones.png`;
+                        link.download = `${
+                            specifiedUser?.metadata?.team_name ??
+                            specifiedUser?.display_name
+                        }_cornerstones.png`;
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
