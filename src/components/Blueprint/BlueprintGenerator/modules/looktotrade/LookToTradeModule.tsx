@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styles from './LookToTradeModule.module.css';
 import {usePlayerData} from '../../../../../hooks/hooks';
 import ExportButton from '../../shared/ExportButton';
@@ -28,6 +28,11 @@ export default function LookToTradeModule(props: {roster?: Roster}) {
         'placeholder',
         'placeholder',
     ]);
+
+    useEffect(() => {
+        if (!roster) return;
+        setPlayersToTrade([[], [], []]);
+    }, [roster]);
 
     const playerReducer = (
         acc: string,
