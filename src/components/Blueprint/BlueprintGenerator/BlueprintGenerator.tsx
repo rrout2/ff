@@ -98,7 +98,9 @@ export default function BlueprintGenerator() {
                     specifiedUser={specifiedUser}
                 />
             )}
-            {hasTeamId() && module === 'looktotrade' && <LookToTradeModule />}
+            {hasTeamId() && module === 'looktotrade' && (
+                <LookToTradeModule roster={roster} />
+            )}
         </div>
     );
 }
