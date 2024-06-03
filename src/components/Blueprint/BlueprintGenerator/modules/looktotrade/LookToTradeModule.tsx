@@ -11,11 +11,14 @@ import {
     TextField,
 } from '@mui/material';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
-import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
+import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
 
 const COLORS = ['#3CB6E9', '#EC336D', '#8AC73E'];
-export default function LookToTradeModule(props: {roster?: Roster}) {
-    const {roster} = props;
+export default function LookToTradeModule(props: {
+    roster?: Roster;
+    specifiedUser?: User;
+}) {
+    const {roster, specifiedUser} = props;
     const componentRef = useRef(null);
     const playerData = usePlayerData();
     const [playersToTrade, setPlayersToTrade] = useState<string[][]>([
@@ -162,7 +165,10 @@ export default function LookToTradeModule(props: {roster?: Roster}) {
             {
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={'TODO_looktotrade.png'}
+                    pngName={`${
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }_looktotrade.png`}
                 />
             }
         </>
