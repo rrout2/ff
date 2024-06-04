@@ -3,6 +3,7 @@ import {
     useFetchRosters,
     useLeagueIdFromUrl,
     usePlayerData,
+    useTitle,
 } from '../../../hooks/hooks';
 import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
@@ -52,6 +53,8 @@ export default function BlueprintGenerator() {
         if (!leagueId) return;
         getAllUsers(leagueId).then(users => setAllUsers(users));
     }, [leagueId]);
+
+    useTitle('Blueprint Generator');
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;

@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
-import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
+import {useAdpData, usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import styles from './CornerstoneModule.module.css';
 import {
     InputLabel,
@@ -24,6 +24,8 @@ export default function CornerstoneModule(props: {
     const [cornerstones, setCornerstones] = useState(
         new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
     );
+
+    useTitle('Cornerstones - Blueprint Generator');
 
     function isCornerstone(player?: Player) {
         if (!player) return false;

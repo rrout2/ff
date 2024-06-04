@@ -227,6 +227,16 @@ export function useProjectedLineup(
     return [startingLineup, bench, benchString];
 }
 
+export function useTitle(title: string) {
+    useEffect(() => {
+        const oldTitle = document.title;
+        document.title = title;
+        return () => {
+            document.title = oldTitle;
+        };
+    }, [title]);
+}
+
 function getBestNAtPosition(
     position: string,
     count: number,

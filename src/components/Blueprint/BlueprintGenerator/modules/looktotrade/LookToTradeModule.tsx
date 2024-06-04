@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import styles from './LookToTradeModule.module.css';
-import {usePlayerData} from '../../../../../hooks/hooks';
+import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import ExportButton from '../../shared/ExportButton';
 import {
     FormControl,
@@ -62,6 +62,8 @@ export default function LookToTradeModule(props: {
         if (!roster) return;
         setPlayersToTrade([[], [], []]);
     }, [roster]);
+
+    useTitle('Look to Trade - Blueprint Generator');
 
     const playerReducer = (
         acc: string,
