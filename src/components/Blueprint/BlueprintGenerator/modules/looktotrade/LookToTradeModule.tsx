@@ -8,12 +8,38 @@ import {
     MenuItem,
     Select,
     SelectChangeEvent,
-    TextField,
 } from '@mui/material';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
 
 const COLORS = ['#3CB6E9', '#EC336D', '#8AC73E'];
+const SUGGESTIONS = [
+    'Bellcow',
+    'Better DC',
+    'Certainty',
+    'Consistency',
+    'Cornerstone Asset',
+    'Developmental Asset',
+    'Diversify Team Investment',
+    'Downtier',
+    'Downtier/Rushing QB',
+    'Elite TE',
+    'Higher Ceiling',
+    'Higher Upside',
+    'Other Position',
+    'Pivot',
+    'Proven Asset',
+    'QB',
+    'RB',
+    'Rushing QB',
+    'Safer Long-Term Asset',
+    'Safer Situation',
+    'Starting Asset',
+    'WR',
+    'WR1',
+    'WR / RB',
+    'Younger Asset',
+];
 export default function LookToTradeModule(props: {
     roster?: Roster;
     specifiedUser?: User;
@@ -102,43 +128,60 @@ export default function LookToTradeModule(props: {
 
     function inReturnComponent(idx: number) {
         return (
-            <TextField
+            <FormControl
                 style={{
                     margin: '4px',
                 }}
-                value={inReturn[idx]}
-                onChange={e => {
-                    const newInReturn = [...inReturn];
-                    newInReturn[idx] = e.target.value;
-                    setInReturn(newInReturn);
-                }}
-            />
+            >
+                <InputLabel>{'Suggestion'}</InputLabel>
+                <Select
+                    value={inReturn[idx]}
+                    label={'Suggestion'}
+                    onChange={e => {
+                        const newInReturn = [...inReturn];
+                        newInReturn[idx] = e.target.value;
+                        setInReturn(newInReturn);
+                    }}
+                    multiple={false}
+                >
+                    <MenuItem value={'placeholder'} key={-1}>
+                        {'Choose a suggestion:'}
+                    </MenuItem>
+                    {SUGGESTIONS.map((suggestion, idx) => (
+                        <MenuItem value={suggestion} key={idx}>
+                            {suggestion}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
         );
     }
 
     function inputComponent() {
-        return playersToTrade.map((_, idx) => {
-            return (
-                <>
-                    {playerSelectComponent(
-                        roster?.players ?? [],
-                        playersToTrade[idx],
-                        (e: SelectChangeEvent<string[]>) => {
-                            const {
-                                target: {value},
-                            } = e;
-                            const newSelections = [...playersToTrade];
-                            newSelections[idx] =
-                                typeof value === 'string'
-                                    ? value.split(',')
-                                    : value;
-                            setPlayersToTrade(newSelections);
-                        }
-                    )}
-                    {inReturnComponent(idx)}
-                </>
-            );
-        });
+        return (
+            <div className={styles.inputComponent}>
+                {playersToTrade.map((_, idx) => (
+                    <>
+                        {playerSelectComponent(
+                            roster?.players ?? [],
+                            playersToTrade[idx],
+                            (e: SelectChangeEvent<string[]>) => {
+                                const {
+                                    target: {value},
+                                } = e;
+                                const newSelections = [...playersToTrade];
+                                newSelections[idx] =
+                                    typeof value === 'string'
+                                        ? value.split(',')
+                                        : value;
+                                setPlayersToTrade(newSelections);
+                            }
+                        )}
+                        {inReturnComponent(idx)}
+                    </>
+                ))}
+            </div>
+        );
     }
 
     function tradeSuggestion(send: string, receive: string, color: string) {
@@ -160,8 +203,10 @@ export default function LookToTradeModule(props: {
 
     return (
         <>
-            {inputComponent()}
-            {graphicComponent()}
+            <div className={styles.body}>
+                {graphicComponent()}
+                {inputComponent()}
+            </div>
             {
                 <ExportButton
                     className={styles.graphicComponent}

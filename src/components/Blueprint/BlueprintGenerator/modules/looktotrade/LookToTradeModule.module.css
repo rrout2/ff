@@ -37,3 +37,13 @@
     padding: /* top/bottom = */ 6px;
     margin: 8px 40px 8px 36px;
 }
+
+.body {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputComponent {
+    display: flex;
+    flex-direction: column;
+}
