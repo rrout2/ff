@@ -3,11 +3,13 @@ import styles from './LookToTradeModule.module.css';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import ExportButton from '../../shared/ExportButton';
 import {
+    Autocomplete,
     FormControl,
     InputLabel,
     MenuItem,
     Select,
     SelectChangeEvent,
+    TextField,
 } from '@mui/material';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
@@ -135,26 +137,19 @@ export default function LookToTradeModule(props: {
                     margin: '4px',
                 }}
             >
-                <InputLabel>{'Suggestion'}</InputLabel>
-                <Select
-                    value={inReturn[idx]}
-                    label={'Suggestion'}
-                    onChange={e => {
+                <Autocomplete
+                    options={SUGGESTIONS}
+                    inputValue={inReturn[idx]}
+                    onInputChange={(_event, newInputValue) => {
                         const newInReturn = [...inReturn];
-                        newInReturn[idx] = e.target.value;
+                        newInReturn[idx] = newInputValue;
                         setInReturn(newInReturn);
                     }}
-                    multiple={false}
-                >
-                    <MenuItem value={'placeholder'} key={-1}>
-                        {'Choose a suggestion:'}
-                    </MenuItem>
-                    {SUGGESTIONS.map((suggestion, idx) => (
-                        <MenuItem value={suggestion} key={idx}>
-                            {suggestion}
-                        </MenuItem>
-                    ))}
-                </Select>
+                    renderInput={params => (
+                        <TextField {...params} label="Suggestion" />
+                    )}
+                    freeSolo
+                />
             </FormControl>
         );
     }
