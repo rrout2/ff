@@ -2,16 +2,9 @@ import {useEffect, useRef, useState} from 'react';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import {useAdpData, usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import styles from './CornerstoneModule.module.css';
-import {
-    InputLabel,
-    SelectChangeEvent,
-    FormControl,
-    MenuItem,
-    Select,
-} from '@mui/material';
-import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
+import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 
 export default function CornerstoneModule(props: {
     roster?: Roster;
@@ -86,62 +79,18 @@ export default function CornerstoneModule(props: {
         );
     }
 
-    function playerSelectComponent(
-        players: string[],
-        selectedPlayerIds: string[],
-        onChange: (event: SelectChangeEvent<string[]>) => void,
-        position: string
-    ) {
-        if (!playerData) return <></>;
-        return (
-            <FormControl
-                style={{
-                    margin: '4px',
-                }}
-            >
-                <InputLabel>{position}</InputLabel>
-                <Select
-                    value={selectedPlayerIds}
-                    label={position}
-                    onChange={onChange}
-                    multiple={true}
-                >
-                    {players
-                        .map(playerId => playerData[playerId])
-                        .filter(
-                            player =>
-                                player &&
-                                player.fantasy_positions.includes(position)
-                        )
-                        .sort(sortBySearchRank)
-                        .map((player, idx) => (
-                            <MenuItem value={player.player_id} key={idx}>
-                                {player.first_name} {player.last_name}
-                            </MenuItem>
-                        ))}
-                </Select>
-            </FormControl>
-        );
-    }
-
     function allPositionalSelectors() {
-        return FANTASY_POSITIONS.map(pos =>
-            playerSelectComponent(
-                roster?.players ?? [],
-                cornerstones.get(pos) ?? [],
-                (e: SelectChangeEvent<string[]>) => {
-                    const {
-                        target: {value},
-                    } = e;
-                    cornerstones.set(
-                        pos,
-                        typeof value === 'string' ? value.split(',') : value
-                    );
+        return FANTASY_POSITIONS.map(pos => (
+            <PlayerSelectComponent
+                playerIds={roster?.players ?? []}
+                selectedPlayerIds={cornerstones.get(pos) ?? []}
+                position={pos}
+                onChange={(newPlayerIds: string[]) => {
+                    cornerstones.set(pos, newPlayerIds);
                     setCornerstones(new Map(cornerstones));
-                },
-                pos
-            )
-        );
+                }}
+            />
+        ));
     }
 
     return (

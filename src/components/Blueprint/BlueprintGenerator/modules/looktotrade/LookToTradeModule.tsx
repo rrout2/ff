@@ -2,17 +2,9 @@ import {useEffect, useRef, useState} from 'react';
 import styles from './LookToTradeModule.module.css';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import ExportButton from '../../shared/ExportButton';
-import {
-    Autocomplete,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    TextField,
-} from '@mui/material';
-import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
+import {Autocomplete, FormControl, TextField} from '@mui/material';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 
 const COLORS = ['#3CB6E9', '#EC336D', '#8AC73E'];
 const SUGGESTIONS = [
@@ -98,38 +90,6 @@ export default function LookToTradeModule(props: {
         );
     }
 
-    function playerSelectComponent(
-        players: string[],
-        selectedPlayerIds: string[],
-        onChange: (event: SelectChangeEvent<string[]>) => void
-    ) {
-        if (!playerData) return <></>;
-        return (
-            <FormControl
-                style={{
-                    margin: '4px',
-                }}
-            >
-                <InputLabel>{'Player'}</InputLabel>
-                <Select
-                    value={selectedPlayerIds}
-                    label={'Player'}
-                    onChange={onChange}
-                    multiple={true}
-                >
-                    {players
-                        .map(playerId => playerData[playerId])
-                        .sort(sortBySearchRank)
-                        .map((player, idx) => (
-                            <MenuItem value={player.player_id} key={idx}>
-                                {player.first_name} {player.last_name}
-                            </MenuItem>
-                        ))}
-                </Select>
-            </FormControl>
-        );
-    }
-
     function inReturnComponent(idx: number) {
         return (
             <FormControl
@@ -159,21 +119,15 @@ export default function LookToTradeModule(props: {
             <div className={styles.inputComponent}>
                 {playersToTrade.map((_, idx) => (
                     <>
-                        {playerSelectComponent(
-                            roster?.players ?? [],
-                            playersToTrade[idx],
-                            (e: SelectChangeEvent<string[]>) => {
-                                const {
-                                    target: {value},
-                                } = e;
+                        <PlayerSelectComponent
+                            playerIds={roster?.players ?? []}
+                            selectedPlayerIds={playersToTrade[idx]}
+                            onChange={(newPlayerIds: string[]) => {
                                 const newSelections = [...playersToTrade];
-                                newSelections[idx] =
-                                    typeof value === 'string'
-                                        ? value.split(',')
-                                        : value;
+                                newSelections[idx] = newPlayerIds;
                                 setPlayersToTrade(newSelections);
-                            }
-                        )}
+                            }}
+                        />
                         {inReturnComponent(idx)}
                     </>
                 ))}
