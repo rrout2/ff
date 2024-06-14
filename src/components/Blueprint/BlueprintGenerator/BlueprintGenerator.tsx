@@ -35,7 +35,7 @@ export default function BlueprintGenerator() {
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
-    const [module, setModule] = useState<Module>();
+    const [module, setModule] = useState<Module>(Module.Unspecified);
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
         setSpecifiedUser(allUsers?.[+teamId]);
@@ -95,7 +95,7 @@ export default function BlueprintGenerator() {
                     </MenuItem>
                     <MenuItem
                         value={Module.PlayersToTarget}
-                        key={'looktotrade'}
+                        key={'playerstotarget'}
                     >
                         Players to Target
                     </MenuItem>

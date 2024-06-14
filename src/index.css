@@ -15,7 +15,7 @@ code {
 @font-face {
   font-family: 'Prohibition Test';
   src: local('Prohibition Test'), local('Prohibition-Test'),
-      url("fonts/ProhibitionTest-Regular.otf") format("opentype"),;
+    url("fonts/ProhibitionTest-Regular.otf") format("opentype"), ;
   font-weight: 700;
   font-style: normal;
 }
@@ -23,9 +23,9 @@ code {
 @font-face {
   font-family: 'Antarctican Headline';
   src: local('Antarctican Headline Bold'), local('Antarctican-Headline-Bold'),
-      url('fonts/AntarcticanHeadline-Bold.woff2') format('woff2'),
-      url('fonts/AntarcticanHeadline-Bold.woff') format('woff'),
-      url('fonts/AntarcticanHeadline-Bold.ttf') format('truetype');
+    url('fonts/AntarcticanHeadline-Bold.woff2') format('woff2'),
+    url('fonts/AntarcticanHeadline-Bold.woff') format('woff'),
+    url('fonts/AntarcticanHeadline-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
@@ -34,10 +34,41 @@ code {
   font-family: 'Erbaum';
   src: url('fonts/Erbaum-Medium.eot');
   src: local('Erbaum Medium'), local('Erbaum-Medium'),
-      url('fonts/Erbaum-Medium.eot?#iefix') format('embedded-opentype'),
-      url('fonts/Erbaum-Medium.woff2') format('woff2'),
-      url('fonts/Erbaum-Medium.woff') format('woff'),
-      url('fonts/Erbaum-Medium.ttf') format('truetype');
+    url('fonts/Erbaum-Medium.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Erbaum-Medium.woff2') format('woff2'),
+    url('fonts/Erbaum-Medium.woff') format('woff'),
+    url('fonts/Erbaum-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Acumin Pro';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Acumin Pro'), url('fonts/Acumin-RPro.woff') format('woff');
+}
+
+
+@font-face {
+  font-family: 'Acumin Pro Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Acumin Pro Italic'), url('fonts/Acumin-ItPro.woff') format('woff');
+}
+
+
+@font-face {
+  font-family: 'Acumin Pro Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Acumin Pro Bold'), url('fonts/Acumin-BdPro.woff') format('woff');
+}
+
+
+@font-face {
+  font-family: 'Acumin Pro Bold Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Acumin Pro Bold Italic'), url('fonts/Acumin-BdItPro.woff') format('woff');
 }
