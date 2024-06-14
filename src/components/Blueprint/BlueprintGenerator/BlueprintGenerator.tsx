@@ -18,6 +18,15 @@ import {
     Select,
 } from '@mui/material';
 import LookToTradeModule from './modules/looktotrade/LookToTradeModule';
+import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
+
+enum Module {
+    Unspecified = '',
+    Cornerstone = 'cornerstones',
+    LookToTrade = 'looktotrade',
+    PlayersToTarget = 'playerstotarget',
+}
+
 export default function BlueprintGenerator() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useState(NONE_TEAM_ID);
@@ -26,7 +35,7 @@ export default function BlueprintGenerator() {
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
-    const [module, setModule] = useState('');
+    const [module, setModule] = useState<Module>();
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
         setSpecifiedUser(allUsers?.[+teamId]);
@@ -72,17 +81,23 @@ export default function BlueprintGenerator() {
                     value={module}
                     label="Module"
                     onChange={(event: SelectChangeEvent) => {
-                        setModule(event.target.value);
+                        setModule(event.target.value as Module);
                     }}
                 >
                     <MenuItem value={''} key={'chooseamodule'}>
                         Choose a module:
                     </MenuItem>
-                    <MenuItem value={'cornerstones'} key={'cornerstones'}>
+                    <MenuItem value={Module.Cornerstone} key={'cornerstones'}>
                         Cornerstones
                     </MenuItem>
-                    <MenuItem value={'looktotrade'} key={'looktotrade'}>
+                    <MenuItem value={Module.LookToTrade} key={'looktotrade'}>
                         Look to Trade
+                    </MenuItem>
+                    <MenuItem
+                        value={Module.PlayersToTarget}
+                        key={'looktotrade'}
+                    >
+                        Players to Target
                     </MenuItem>
                 </Select>
             </FormControl>
@@ -95,17 +110,20 @@ export default function BlueprintGenerator() {
                 margin: '4px',
             })}
             {hasTeamId() && moduleSelectComponent()}
-            {hasTeamId() && module === 'cornerstones' && (
+            {hasTeamId() && module === Module.Cornerstone && (
                 <CornerstoneModule
                     roster={roster}
                     specifiedUser={specifiedUser}
                 />
             )}
-            {hasTeamId() && module === 'looktotrade' && (
+            {hasTeamId() && module === Module.LookToTrade && (
                 <LookToTradeModule
                     roster={roster}
                     specifiedUser={specifiedUser}
                 />
+            )}
+            {hasTeamId() && module === Module.PlayersToTarget && (
+                <PlayersToTargetModule />
             )}
         </div>
     );
