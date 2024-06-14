@@ -44,6 +44,15 @@ export default function PlayersToTargetModule() {
 
     useTitle('Players to Target - Blueprint Generator');
 
+    function logoImage(team: NFLTeam) {
+        return (
+            <img
+                src={`https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/${team}.png`}
+                className={styles.teamLogo}
+            />
+        );
+    }
+
     function playerTarget(pos: string, name: string, team: NFLTeam) {
         return (
             <div key={name}>
@@ -51,10 +60,7 @@ export default function PlayersToTargetModule() {
                     <div className={`${styles.positionChip} ${styles[pos]}`}>
                         {pos}
                     </div>
-                    <img
-                        src={`https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/${team}.png`}
-                        className={styles.teamLogo}
-                    />
+                    {logoImage(team)}
                     <div className={styles.targetName}>{name}</div>
                 </div>
                 <div className={styles.subtitle}>{`${pos} - ${team}`}</div>
