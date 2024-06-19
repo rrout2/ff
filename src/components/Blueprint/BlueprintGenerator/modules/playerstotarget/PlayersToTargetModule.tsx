@@ -1,8 +1,10 @@
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import styles from './PlayersToTargetModule.module.css';
 import ExportButton from '../../shared/ExportButton';
 import {teamLogos} from '../../../../../consts/images';
+import {Autocomplete, FormControl, TextField} from '@mui/material';
+import {Player} from '../../../../../sleeper-api/sleeper-api';
 
 enum NFLTeam {
     ARI = 'ARI',
@@ -42,6 +44,23 @@ enum NFLTeam {
 export default function PlayersToTargetModule() {
     const playerData = usePlayerData();
     const componentRef = useRef(null);
+    const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
+        'NONE_PLAYER_ID',
+    ]);
+    const [allPlayers, setAllPlayers] = useState<Player[]>([]);
+
+    useEffect(() => {
+        const players: Player[] = [];
+        for (const playerId in playerData) {
+            const player = playerData[playerId];
+            players.push(player);
+        }
+        setAllPlayers(players);
+    }, [playerData]);
+
+    useEffect(() => {
+        console.log(playerSuggestions);
+    }, [playerSuggestions]);
 
     useTitle('Players to Target - Blueprint Generator');
 
@@ -68,6 +87,18 @@ export default function PlayersToTargetModule() {
         if (!playerData) return <></>;
         return (
             <div className={styles.graphicComponent} ref={componentRef}>
+                {playerSuggestions.map(playerId => {
+                    if (playerId === 'NONE_PLAYER_ID') {
+                        return;
+                    }
+                    const player = playerData[playerId];
+
+                    return playerTarget(
+                        player.position,
+                        `${player.first_name} ${player.last_name}`,
+                        NFLTeam.GB
+                    );
+                })}
                 {playerTarget('WR', 'Jayden Reed', NFLTeam.GB)}
                 {playerTarget('WR', 'Rashee Rice', NFLTeam.KC)}
                 {playerTarget('WR', 'Xavier Legette', NFLTeam.CAR)}
@@ -76,9 +107,47 @@ export default function PlayersToTargetModule() {
         );
     }
 
+    function huh(idx: number) {
+        if (!playerData) return <></>;
+        const opts = allPlayers.map(p => p.player_id);
+        opts.push('NONE_PLAYER_ID');
+        return (
+            <FormControl
+                style={{
+                    margin: '4px',
+                }}
+            >
+                <Autocomplete
+                    options={opts}
+                    getOptionLabel={option => {
+                        if (option === 'NONE_PLAYER_ID') {
+                            return 'Choose a player:';
+                        }
+                        const p = playerData[option];
+                        return `${p.first_name} ${p.last_name}`;
+                    }}
+                    renderOption={(props, option) => {
+                        const p = playerData[option];
+                        return <div>{`${p?.first_name} ${p?.last_name}`}</div>;
+                    }}
+                    value={playerSuggestions[idx]}
+                    onChange={(_event, newInputValue) => {
+                        playerSuggestions[idx] =
+                            newInputValue || 'NONE_PLAYER_ID';
+                        setPlayerSuggestions(playerSuggestions);
+                    }}
+                    renderInput={params => (
+                        <TextField {...params} label="Player" />
+                    )}
+                />
+            </FormControl>
+        );
+    }
+
     return (
         <>
             {graphicComponent()}
+            {huh(0)}
             {
                 <ExportButton
                     className={styles.graphicComponent}
