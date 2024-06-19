@@ -2,6 +2,7 @@ import {useRef} from 'react';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import styles from './PlayersToTargetModule.module.css';
 import ExportButton from '../../shared/ExportButton';
+import {teamLogos} from '../../../../../consts/images';
 
 enum NFLTeam {
     ARI = 'ARI',
@@ -45,12 +46,7 @@ export default function PlayersToTargetModule() {
     useTitle('Players to Target - Blueprint Generator');
 
     function logoImage(team: NFLTeam) {
-        return (
-            <img
-                src={`https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/${team}.png`}
-                className={styles.teamLogo}
-            />
-        );
+        return <img src={teamLogos.get(team)} className={styles.teamLogo} />;
     }
 
     function playerTarget(pos: string, name: string, team: NFLTeam) {
