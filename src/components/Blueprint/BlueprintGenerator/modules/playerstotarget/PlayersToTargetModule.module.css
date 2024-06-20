@@ -2,10 +2,11 @@
     background-color: #005D91;
     width: fit-content;
     color: white;
-    padding: 20px;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
-    gap: 50px
+    justify-content: space-around;
+    height: 560px;
 }
 
 .playerTargetBody {

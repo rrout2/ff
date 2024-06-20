@@ -43,7 +43,11 @@ export default function PlayersToTargetModule() {
 
         const player = playerData[playerId];
         const pos = player.position;
-        const name = `${player.first_name} ${player.last_name}`;
+        const fullName = `${player.first_name} ${player.last_name}`;
+        const displayName =
+            fullName.length >= 15
+                ? `${player.first_name[0]}. ${player.last_name}`
+                : fullName;
         const team = player.team;
 
         return (
@@ -53,7 +57,7 @@ export default function PlayersToTargetModule() {
                         {pos}
                     </div>
                     {logoImage(team)}
-                    <div className={styles.targetName}>{name}</div>
+                    <div className={styles.targetName}>{displayName}</div>
                 </div>
                 <div className={styles.subtitle}>{`${pos} - ${team}`}</div>
             </div>
