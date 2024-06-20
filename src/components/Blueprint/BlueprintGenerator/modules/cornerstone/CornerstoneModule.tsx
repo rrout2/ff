@@ -32,7 +32,12 @@ export default function CornerstoneModule(props: {
 
         const cornerstones = roster.players
             .map(playerId => playerData[playerId])
-            .filter(isCornerstone);
+            .filter(isCornerstone)
+            .sort(
+                (a, b) =>
+                    getAdp(`${a.first_name} ${a.last_name}`) -
+                    getAdp(`${b.first_name} ${b.last_name}`)
+            );
 
         setCornerstones(
             new Map<string, string[]>(
@@ -42,7 +47,8 @@ export default function CornerstoneModule(props: {
                         .filter(player =>
                             player.fantasy_positions.includes(pos)
                         )
-                        .map(player => player.player_id),
+                        .map(player => player.player_id)
+                        .slice(0, 3),
                 ])
             )
         );
