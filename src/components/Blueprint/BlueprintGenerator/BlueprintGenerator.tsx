@@ -123,7 +123,7 @@ export default function BlueprintGenerator() {
                 />
             )}
             {hasTeamId() && module === Module.PlayersToTarget && (
-                <PlayersToTargetModule />
+                <PlayersToTargetModule specifiedUser={specifiedUser} />
             )}
         </div>
     );

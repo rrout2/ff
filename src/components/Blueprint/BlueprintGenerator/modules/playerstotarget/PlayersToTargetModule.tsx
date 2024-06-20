@@ -4,10 +4,11 @@ import styles from './PlayersToTargetModule.module.css';
 import ExportButton from '../../shared/ExportButton';
 import {teamLogos} from '../../../../../consts/images';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
-import {Player} from '../../../../../sleeper-api/sleeper-api';
+import {Player, User} from '../../../../../sleeper-api/sleeper-api';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 
-export default function PlayersToTargetModule() {
+export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
+    const {specifiedUser} = props;
     const playerData = usePlayerData();
     const componentRef = useRef(null);
     const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
@@ -125,7 +126,10 @@ export default function PlayersToTargetModule() {
             {
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={'playerstotarget.png'}
+                    pngName={`${
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }_playerstotarget.png`}
                 />
             }
         </>
