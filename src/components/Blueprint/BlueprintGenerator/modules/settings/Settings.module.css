@@ -1,3 +1,9 @@
+.settingsBody {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
 .otherSettings {
     margin-top: 20px;
 }

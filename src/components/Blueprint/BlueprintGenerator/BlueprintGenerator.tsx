@@ -19,12 +19,14 @@ import {
 } from '@mui/material';
 import LookToTradeModule from './modules/looktotrade/LookToTradeModule';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
+import Settings from './modules/settings/Settings';
 
 enum Module {
     Unspecified = '',
     Cornerstone = 'cornerstones',
     LookToTrade = 'looktotrade',
     PlayersToTarget = 'playerstotarget',
+    Settings = 'settings',
 }
 
 export default function BlueprintGenerator() {
@@ -99,6 +101,9 @@ export default function BlueprintGenerator() {
                     >
                         Players to Target
                     </MenuItem>
+                    <MenuItem value={Module.Settings} key={'settings'}>
+                        Settings
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -124,6 +129,9 @@ export default function BlueprintGenerator() {
             )}
             {hasTeamId() && module === Module.PlayersToTarget && (
                 <PlayersToTargetModule specifiedUser={specifiedUser} />
+            )}
+            {hasTeamId() && module === Module.Settings && (
+                <Settings roster={roster} leagueId={leagueId} />
             )}
         </div>
     );
