@@ -2,6 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import adp from '../data/adp.json';
 import {
+    League,
     Player,
     Roster,
     User,
@@ -74,6 +75,15 @@ export function usePlayer(playerId: string) {
     }, [playerId, playerData]);
 
     return player;
+}
+
+export function useLeague(leagueId: string) {
+    const [league, setLeague] = useState<League>();
+    useEffect(() => {
+        if (!leagueId) return;
+        getLeague(leagueId).then(l => setLeague(l));
+    }, [leagueId]);
+    return league;
 }
 
 export function useFetchUsers(rosters?: Roster[]) {
@@ -164,6 +174,41 @@ export function useLeagueIdFromUrl(): [
     }, [leagueId]);
 
     return [leagueId, setLeagueId];
+}
+
+export function useRosterSettings(league?: League) {
+    const [rosterSettings, setRosterSettings] = useState(
+        new Map<string, number>()
+    );
+    useEffect(() => {
+        const settings = new Map<string, number>();
+        league?.roster_positions.forEach(pos => {
+            if (!settings.has(pos)) {
+                settings.set(pos, 0);
+            }
+            settings.set(pos, settings.get(pos)! + 1);
+        });
+        setRosterSettings(settings);
+    }, [league, league?.roster_positions]);
+    return rosterSettings;
+}
+
+export function useRosterSettingsFromId(leagueId?: string) {
+    const league = useLeague(leagueId === undefined ? '' : leagueId);
+    const [rosterSettings, setRosterSettings] = useState(
+        new Map<string, number>()
+    );
+    useEffect(() => {
+        const settings = new Map<string, number>();
+        league?.roster_positions?.forEach(pos => {
+            if (!settings.has(pos)) {
+                settings.set(pos, 0);
+            }
+            settings.set(pos, settings.get(pos)! + 1);
+        });
+        setRosterSettings(settings);
+    }, [league, league?.roster_positions]);
+    return rosterSettings;
 }
 
 export function useProjectedLineup(

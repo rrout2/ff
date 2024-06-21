@@ -2,10 +2,10 @@ import {Fragment, useEffect, useRef, useState} from 'react';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import styles from './PlayersToTargetModule.module.css';
 import ExportButton from '../../shared/ExportButton';
-import {teamLogos} from '../../../../../consts/images';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
 import {Player, User} from '../../../../../sleeper-api/sleeper-api';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
+import {logoImage} from '../../shared/Utilities';
 
 export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
     const {specifiedUser} = props;
@@ -33,10 +33,6 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
 
     useTitle('Players to Target - Blueprint Generator');
 
-    function logoImage(team: string) {
-        return <img src={teamLogos.get(team)} className={styles.teamLogo} />;
-    }
-
     function playerTarget(playerId: string, idx: number) {
         if (!playerData) {
             return <></>;
@@ -57,7 +53,7 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
                     <div className={`${styles.positionChip} ${styles[pos]}`}>
                         {pos}
                     </div>
-                    {logoImage(team)}
+                    {logoImage(team, styles.teamLogo)}
                     <div className={styles.targetName}>{displayName}</div>
                 </div>
                 <div className={styles.subtitle}>{`${pos} - ${team}`}</div>

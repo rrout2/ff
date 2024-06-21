@@ -1,5 +1,9 @@
 import {useEffect, useState} from 'react';
-import {usePlayerData, useProjectedLineup} from '../../../../../hooks/hooks';
+import {
+    usePlayerData,
+    useProjectedLineup,
+    useRosterSettings,
+} from '../../../../../hooks/hooks';
 import {
     League,
     Roster,
@@ -21,10 +25,7 @@ export default function Settings(props: {roster?: Roster; leagueId?: string}) {
     const {roster, leagueId} = props;
     const [league, setLeague] = useState<League>();
     const playerData = usePlayerData();
-    const [rosterSettings, setRosterSettings] = useState(
-        new Map<string, number>()
-    );
-
+    const rosterSettings = useRosterSettings(league);
     const [startingLineup, _, benchString] = useProjectedLineup(
         rosterSettings,
         roster?.players
@@ -34,17 +35,6 @@ export default function Settings(props: {roster?: Roster; leagueId?: string}) {
         if (!leagueId) return;
         getLeague(leagueId).then(league => setLeague(league));
     }, [leagueId]);
-
-    useEffect(() => {
-        const settings = new Map<string, number>();
-        league?.roster_positions.forEach(pos => {
-            if (!settings.has(pos)) {
-                settings.set(pos, 0);
-            }
-            settings.set(pos, settings.get(pos)! + 1);
-        });
-        setRosterSettings(settings);
-    }, [league?.roster_positions]);
 
     function humanReadablePosition(position: string) {
         switch (position) {

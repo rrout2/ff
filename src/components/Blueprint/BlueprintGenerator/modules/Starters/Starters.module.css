@@ -1,0 +1,72 @@
+.graphicComponent {
+    background-color: #005D91;
+    color: white;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 990px;
+}
+
+.playerTargetBody {
+    display: flex;
+    align-items: center;
+}
+
+.subtitle {
+    font-family: 'Acumin Pro Italic';
+    margin-left: 20px;
+    font-size: 22px;
+    padding-top: 10px; /* bc font is uncentered */
+}
+
+.targetName {
+    font-family: 'Prohibition Test', sans-serif;
+    font-size: 45px;
+    padding-bottom: 5px; /* bc font is uncentered */
+    margin-left: 10px;
+    text-shadow: -4px 4px #213965;
+}
+
+.positionChip {
+    font-family: 'Antarctican Headline';
+    font-size: 40px;
+    color: white;
+    padding: /* top/bottom = */ 4px /* left/right = */ 0px ;
+    border-radius: 12px;
+    box-shadow: -4px 4px #213965;
+    width: 94px;
+    text-align: center;
+}
+
+.QB {
+    background-color: #EC336D;
+}
+
+.RB {
+    background-color: #3DBCB1;
+}
+
+.WR {
+    background-color: #3CB6E9;
+}
+
+.TE {
+    background-color: #FBAD5B;
+}
+
+.FLEX {
+    background-color: #9DD4BD;
+}
+
+.SF {
+    background-color: #EF73A1;
+}
+
+.teamLogo {
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: -10px;
+    border: #103762 2px solid;
+}
