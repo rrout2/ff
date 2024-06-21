@@ -33,7 +33,7 @@ export default function Starters(props: {
 
         const fullName = `${player.first_name} ${player.last_name}`;
         const displayName =
-            fullName.length >= 100
+            fullName.length >= 100 // maybe adjust this?
                 ? `${player.first_name[0]}. ${player.last_name}`
                 : fullName;
         const team = player.team;
