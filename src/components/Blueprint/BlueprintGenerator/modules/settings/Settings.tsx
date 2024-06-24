@@ -21,8 +21,17 @@ import {
     WR_RB_FLEX,
     WR_TE_FLEX,
 } from '../../../../../consts/fantasy';
-export default function Settings(props: {roster?: Roster; leagueId?: string}) {
-    const {roster, leagueId} = props;
+
+export type SettingsProps = {
+    roster?: Roster;
+    leagueId?: string;
+    numRosters: number;
+};
+export default function Settings({
+    roster,
+    leagueId,
+    numRosters,
+}: SettingsProps) {
     const [league, setLeague] = useState<League>();
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
@@ -122,7 +131,7 @@ export default function Settings(props: {roster?: Roster; leagueId?: string}) {
         if (!scoringSettings) return <></>;
         return (
             <div className={styles.otherSettings}>
-                {/* <div>{rosters.length} team league</div> */}
+                <div>{numRosters} team league</div>
                 <div>SF: {rosterSettings.has(SUPER_FLEX) ? 'YES' : 'NO'}</div>
                 <div>PPR: {scoringSettings.rec ?? 0}</div>
                 <div className={styles.indented}>

@@ -136,7 +136,11 @@ export default function BlueprintGenerator() {
                 <PlayersToTargetModule specifiedUser={specifiedUser} />
             )}
             {hasTeamId() && module === Module.Settings && (
-                <Settings roster={roster} leagueId={leagueId} />
+                <Settings
+                    roster={roster}
+                    leagueId={leagueId}
+                    numRosters={rosters?.length ?? 0}
+                />
             )}
             {hasTeamId() && module === Module.Starters && (
                 <Starters roster={roster} specifiedUser={specifiedUser} />
