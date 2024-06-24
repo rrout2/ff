@@ -31,7 +31,9 @@ import tb from '../logos/tb.png';
 import ten from '../logos/ten.png';
 import was from '../logos/wsh.png';
 
-export const teamLogos: Map<string, string> = new Map([
+import blankLogo from '../logos/blank.png';
+
+const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
     ['atl', atl],
@@ -99,3 +101,5 @@ export const teamLogos: Map<string, string> = new Map([
     ['was', was],
     ['WAS', was],
 ]);
+
+export {teamLogos, blankLogo};

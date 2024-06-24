@@ -36,7 +36,7 @@ export default function Starters(props: {
             fullName.length >= 100 // maybe adjust this?
                 ? `${player.first_name[0]}. ${player.last_name}`
                 : fullName;
-        const team = player.team;
+        const team = player.team ?? 'FA';
 
         return (
             <div className={styles.playerTargetBody}>
