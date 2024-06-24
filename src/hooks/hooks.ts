@@ -77,7 +77,7 @@ export function usePlayer(playerId: string) {
     return player;
 }
 
-export function useLeague(leagueId: string) {
+export function useLeague(leagueId?: string) {
     const [league, setLeague] = useState<League>();
     useEffect(() => {
         if (!leagueId) return;

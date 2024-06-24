@@ -10,18 +10,15 @@ import {
 } from '@mui/material';
 import styles from './TeamPage.module.css';
 import {CSSProperties, useEffect, useState} from 'react';
-import {
-    League,
-    Roster,
-    User,
-    getLeague,
-} from '../../../sleeper-api/sleeper-api';
+import {Roster, User} from '../../../sleeper-api/sleeper-api';
 import {
     useFetchRosters,
     useFetchUser,
     useFetchUsers,
+    useLeague,
     useLeagueIdFromUrl,
     useProjectedLineup,
+    useRosterSettings,
 } from '../../../hooks/hooks';
 import {LEAGUE_ID, NONE_TEAM_ID, TEAM_ID} from '../../../consts/urlParams';
 import PlayerPreview from '../../Player/PlayerPreview/PlayerPreview';
@@ -38,28 +35,10 @@ export default function TeamPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [leagueId] = useLeagueIdFromUrl();
-    const [league, setLeague] = useState<League>();
+    const league = useLeague(leagueId);
     const [teamId, setTeamId] = useState('');
     const [roster, setRoster] = useState<Roster>();
-    const [rosterSettings, setRosterSettings] = useState(
-        new Map<string, number>()
-    );
-
-    useEffect(() => {
-        if (!leagueId) return;
-        getLeague(leagueId).then(league => setLeague(league));
-    }, [leagueId]);
-
-    useEffect(() => {
-        const settings = new Map<string, number>();
-        league?.roster_positions.forEach(pos => {
-            if (!settings.has(pos)) {
-                settings.set(pos, 0);
-            }
-            settings.set(pos, settings.get(pos)! + 1);
-        });
-        setRosterSettings(settings);
-    }, [league?.roster_positions]);
+    const rosterSettings = useRosterSettings(league);
 
     const [startingLineup, bench] = useProjectedLineup(
         rosterSettings,

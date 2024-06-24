@@ -1,17 +1,12 @@
 import {useEffect, useState} from 'react';
 import {useSearchParams} from 'react-router-dom';
-import {
-    League,
-    Roster,
-    getLeague,
-    getRosters,
-} from '../../sleeper-api/sleeper-api';
+import {Roster, getRosters} from '../../sleeper-api/sleeper-api';
 import styles from './League.module.css';
 import TeamPreview from '../Team/TeamPreview/TeamPreview';
 import {TextField, FormControl, Button} from '@mui/material';
 import {LEAGUE_ID} from '../../consts/urlParams';
 import Menu from '../Menu/Menu';
-import {useLeagueIdFromUrl} from '../../hooks/hooks';
+import {useLeague, useLeagueIdFromUrl} from '../../hooks/hooks';
 import {OpenInNew} from '@mui/icons-material';
 
 // dynasty-ff/#league?leagueId=...
@@ -19,12 +14,11 @@ export default function LeaguePage() {
     const setSearchParams = useSearchParams()[1];
     const [leagueId] = useLeagueIdFromUrl();
     const [input, setInput] = useState('');
-    const [league, setLeague] = useState<League>();
+    const league = useLeague(leagueId);
     const [rosters, setRosters] = useState<Roster[]>([]);
 
     useEffect(() => {
         if (!leagueId) return;
-        getLeague(leagueId).then(league => setLeague(league));
         getRosters(leagueId).then(rosters => setRosters(rosters));
     }, [leagueId]);
 

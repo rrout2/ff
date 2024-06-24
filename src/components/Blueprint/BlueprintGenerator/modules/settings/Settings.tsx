@@ -1,14 +1,10 @@
-import {useEffect, useState} from 'react';
 import {
+    useLeague,
     usePlayerData,
     useProjectedLineup,
     useRosterSettings,
 } from '../../../../../hooks/hooks';
-import {
-    League,
-    Roster,
-    getLeague,
-} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Settings.module.css';
 import {IconButton} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
@@ -32,18 +28,13 @@ export default function Settings({
     leagueId,
     numRosters,
 }: SettingsProps) {
-    const [league, setLeague] = useState<League>();
+    const league = useLeague(leagueId);
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
     const [startingLineup, _, benchString] = useProjectedLineup(
         rosterSettings,
         roster?.players
     );
-
-    useEffect(() => {
-        if (!leagueId) return;
-        getLeague(leagueId).then(league => setLeague(league));
-    }, [leagueId]);
 
     function humanReadablePosition(position: string) {
         switch (position) {
