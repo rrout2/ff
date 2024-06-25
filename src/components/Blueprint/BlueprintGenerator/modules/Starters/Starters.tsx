@@ -5,6 +5,7 @@ import {
     useLeagueIdFromUrl,
     useProjectedLineup,
     useRosterSettingsFromId,
+    useTitle,
 } from '../../../../../hooks/hooks';
 import {logoImage} from '../../shared/Utilities';
 import ExportButton from '../../shared/ExportButton';
@@ -21,6 +22,7 @@ export default function Starters(props: {
         roster?.players
     );
     const componentRef = useRef(null);
+    useTitle('Starters - Blueprint Generator');
 
     function playerTarget(player: Player, position: string) {
         let diplayPosition = position;
@@ -33,7 +35,7 @@ export default function Starters(props: {
 
         const fullName = `${player.first_name} ${player.last_name}`;
         const displayName =
-            fullName.length >= 100 // maybe adjust this?
+            fullName.length >= 20
                 ? `${player.first_name[0]}. ${player.last_name}`
                 : fullName;
         const team = player.team ?? 'FA';

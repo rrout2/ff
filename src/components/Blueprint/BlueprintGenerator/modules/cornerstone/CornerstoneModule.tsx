@@ -13,7 +13,7 @@ export default function CornerstoneModule(props: {
     const {roster, specifiedUser} = props;
     const playerData = usePlayerData();
     const componentRef = useRef(null);
-    const [_, getAdp] = useAdpData();
+    const {getAdp, sortByAdp} = useAdpData();
     const [cornerstones, setCornerstones] = useState(
         new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
     );
@@ -33,11 +33,7 @@ export default function CornerstoneModule(props: {
         const cornerstones = roster.players
             .map(playerId => playerData[playerId])
             .filter(isCornerstone)
-            .sort(
-                (a, b) =>
-                    getAdp(`${a.first_name} ${a.last_name}`) -
-                    getAdp(`${b.first_name} ${b.last_name}`)
-            );
+            .sort(sortByAdp);
 
         setCornerstones(
             new Map<string, string[]>(

@@ -3,6 +3,7 @@ import {
     usePlayerData,
     useProjectedLineup,
     useRosterSettings,
+    useTitle,
 } from '../../../../../hooks/hooks';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Settings.module.css';
@@ -35,6 +36,7 @@ export default function Settings({
         rosterSettings,
         roster?.players
     );
+    useTitle('Settings - Blueprint Generator');
 
     function humanReadablePosition(position: string) {
         switch (position) {

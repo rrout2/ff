@@ -13,7 +13,6 @@ import {
 import {useQuery} from '@tanstack/react-query';
 import {LEAGUE_ID} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
-import {sortBySearchRank} from '../components/Player/Search/PlayerSearch';
 import {
     BENCH,
     FLEX,
@@ -55,14 +54,21 @@ type adpDatum = {
     player_name: string;
 };
 
-export function useAdpData(): [adpDatum[], (playerName: string) => number] {
+export function useAdpData() {
     const [adpData] = useState(adp as adpDatum[]);
     const getAdp = (playerName: string) => {
-        return adpData.findIndex(
+        const adp = adpData.findIndex(
             a => a.player_name.toLowerCase() === playerName.toLowerCase()
         );
+        if (adp < 0) return Infinity;
+
+        return adp;
     };
-    return [adpData, getAdp];
+    const sortByAdp = (a: Player, b: Player) =>
+        getAdp(`${a.first_name} ${a.last_name}`) -
+        getAdp(`${b.first_name} ${b.last_name}`);
+
+    return {adpData, getAdp, sortByAdp};
 }
 
 export function usePlayer(playerId: string) {
@@ -221,6 +227,7 @@ export function useProjectedLineup(
     >([]);
     const [bench, setBench] = useState<Player[]>([]);
     const [benchString, setBenchString] = useState('');
+    const {getAdp, sortByAdp} = useAdpData();
 
     useEffect(() => {
         if (!playerData || !playerIds) return;
@@ -233,6 +240,8 @@ export function useProjectedLineup(
                     position,
                     count,
                     remainingPlayers,
+                    getAdp,
+                    sortByAdp,
                     playerData,
                     playerIds
                 );
@@ -286,10 +295,11 @@ function getBestNAtPosition(
     position: string,
     count: number,
     remainingPlayers: Set<string>,
-    playerData?: PlayerData,
-    playerIds?: string[]
+    getAdp: (playerName: string) => number,
+    sortByAdp: (a: Player, b: Player) => number,
+    playerData: PlayerData,
+    playerIds: string[]
 ): Player[] {
-    if (!playerData || !playerIds) return [];
     switch (position) {
         case FLEX:
             return playerIds
@@ -302,7 +312,7 @@ function getBestNAtPosition(
                             p.fantasy_positions.includes(RB) ||
                             p.fantasy_positions.includes(TE))
                 )
-                .sort(sortBySearchRank)
+                .sort(sortByAdp)
                 .slice(0, count);
         case WR_RB_FLEX:
             return playerIds
@@ -314,7 +324,7 @@ function getBestNAtPosition(
                         (p.fantasy_positions.includes(WR) ||
                             p.fantasy_positions.includes(RB))
                 )
-                .sort(sortBySearchRank)
+                .sort(sortByAdp)
                 .slice(0, count);
         case WR_TE_FLEX:
             return playerIds
@@ -326,7 +336,7 @@ function getBestNAtPosition(
                         (p.fantasy_positions.includes(WR) ||
                             p.fantasy_positions.includes(TE))
                 )
-                .sort(sortBySearchRank)
+                .sort(sortByAdp)
                 .slice(0, count);
 
         case SUPER_FLEX:
@@ -341,15 +351,33 @@ function getBestNAtPosition(
                             p.fantasy_positions.includes(TE) ||
                             p.fantasy_positions.includes(QB))
                 )
+                .sort(sortByAdp)
                 .sort((a, b) => {
-                    // manually prioritizing QBs for super flex
+                    // maybe adjust this
+                    const startingQbThreshold = 160;
+
+                    // manually prioritizing starting level QBs for super flex
                     if (a.position === QB && b.position !== QB) {
-                        return -1;
+                        if (
+                            getAdp(`${a.first_name} ${a.last_name}`) <
+                            startingQbThreshold
+                        ) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
                     }
                     if (a.position !== QB && b.position === QB) {
-                        return 1;
+                        if (
+                            getAdp(`${b.first_name} ${b.last_name}`) <
+                            startingQbThreshold
+                        ) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
                     }
-                    return sortBySearchRank(a, b);
+                    return sortByAdp(a, b);
                 })
                 .slice(0, count);
         default: // non-flex positions
@@ -357,7 +385,7 @@ function getBestNAtPosition(
                 .filter(p => remainingPlayers.has(p))
                 .map(p => playerData[p])
                 .filter(p => !!p && p.fantasy_positions.includes(position))
-                .sort(sortBySearchRank)
+                .sort(sortByAdp)
                 .slice(0, count);
     }
 }
