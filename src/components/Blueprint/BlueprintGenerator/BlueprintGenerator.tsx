@@ -63,9 +63,14 @@ export default function BlueprintGenerator() {
     }, [rosters, teamId, playerData]);
 
     useEffect(() => {
-        if (!leagueId) return;
-        getAllUsers(leagueId).then(users => setAllUsers(users));
-    }, [leagueId]);
+        if (!leagueId || !rosters) return;
+        const ownerIds = new Set(rosters.map(r => r.owner_id));
+        getAllUsers(leagueId).then(users =>
+            // filter to users included in owners.
+            // some leagues have users with no associated owner I think.
+            setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
+        );
+    }, [leagueId, rosters]);
 
     useTitle('Blueprint Generator');
 
