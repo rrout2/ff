@@ -5,8 +5,7 @@ import {
     Select,
     SelectChangeEvent,
 } from '@mui/material';
-import {usePlayerData} from '../../../../hooks/hooks';
-import {sortBySearchRank} from '../../../Player/Search/PlayerSearch';
+import {useAdpData, usePlayerData} from '../../../../hooks/hooks';
 
 export default function PlayerSelectComponent(props: {
     playerIds: string[];
@@ -15,6 +14,7 @@ export default function PlayerSelectComponent(props: {
     position?: string;
 }) {
     const {playerIds, selectedPlayerIds, onChange, position} = props;
+    const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
     if (!playerData) return <></>;
     return (
@@ -40,13 +40,13 @@ export default function PlayerSelectComponent(props: {
                 {playerIds
                     .map(playerId => playerData[playerId])
                     .filter(player => {
-                        if (!position) return true;
+                        if (!player) return false;
                         return (
-                            player &&
+                            !position ||
                             player.fantasy_positions.includes(position)
                         );
                     })
-                    .sort(sortBySearchRank)
+                    .sort(sortByAdp)
                     .map((player, idx) => (
                         <MenuItem value={player.player_id} key={idx}>
                             {player.first_name} {player.last_name}
