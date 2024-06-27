@@ -30,6 +30,7 @@ import sea from '../logos/sea.png';
 import tb from '../logos/tb.png';
 import ten from '../logos/ten.png';
 import was from '../logos/wsh.png';
+import nfl from '../logos/nfl.png';
 
 import blankLogo from '../logos/blank.png';
 
@@ -100,6 +101,10 @@ const teamLogos: Map<string, string> = new Map([
     ['TEN', ten],
     ['was', was],
     ['WAS', was],
+    ['RP', nfl],
+    ['rp', nfl],
+    ['RP-', nfl],
+    ['rp-', nfl],
 ]);
 
 export {teamLogos, blankLogo};

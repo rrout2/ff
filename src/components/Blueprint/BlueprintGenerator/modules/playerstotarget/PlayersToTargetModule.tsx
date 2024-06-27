@@ -60,7 +60,10 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
                     <div className={`${styles.positionChip} ${styles[pos]}`}>
                         {pos}
                     </div>
-                    {logoImage(player?.team, styles.teamLogo)}
+                    {logoImage(
+                        isRookiePick ? 'RP' : player?.team,
+                        styles.teamLogo
+                    )}
                     <div className={styles.targetName}>{displayName}</div>
                 </div>
                 <div className={styles.subtitle}>{`${pos} - ${
