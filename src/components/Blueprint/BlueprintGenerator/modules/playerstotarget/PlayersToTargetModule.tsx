@@ -37,15 +37,22 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
         if (!playerData) {
             return <></>;
         }
-
+        const isRookiePick = isRookiePickId(playerId);
         const player = playerData[playerId];
-        const pos = player.position;
-        const fullName = `${player.first_name} ${player.last_name}`;
+        if (!player && !isRookiePick) {
+            throw new Error(`Unexpected player ID: '${playerId}'`);
+        }
+
+        const pos = isRookiePick ? 'RP' : player.position;
+
+        const fullName = isRookiePick
+            ? rookiePickIdToString(playerId)
+            : `${player.first_name} ${player.last_name}`;
+
         const displayName =
-            fullName.length >= 15
+            !isRookiePick && fullName.length >= 15
                 ? `${player.first_name[0]}. ${player.last_name}`
                 : fullName;
-        const team = player.team;
 
         return (
             <div key={idx}>
@@ -53,10 +60,21 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
                     <div className={`${styles.positionChip} ${styles[pos]}`}>
                         {pos}
                     </div>
-                    {logoImage(team, styles.teamLogo)}
-                    <div className={styles.targetName}>{displayName}</div>
+                    {!isRookiePick && logoImage(player.team, styles.teamLogo)}
+                    <div
+                        className={`${styles.targetName} ${
+                            // css to make up for lack of logo image
+                            isRookiePick ? styles.rookiePickTarget : ''
+                        }`}
+                    >
+                        {displayName}
+                    </div>
                 </div>
-                <div className={styles.subtitle}>{`${pos} - ${team}`}</div>
+                <div className={styles.subtitle}>{`${pos} - ${
+                    isRookiePick
+                        ? playerId.substring(playerId.length - 4) // pull year from ID
+                        : player.team
+                }`}</div>
             </div>
         );
     }
@@ -72,6 +90,22 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
         );
     }
 
+    function isRookiePickId(id: string) {
+        return id.substring(0, 3) === 'RP-';
+    }
+
+    function rookiePickIdToString(rookiePickId: string) {
+        if (!isRookiePickId(rookiePickId)) {
+            throw new Error(
+                `Expected rookie pick ID to begin with 'RP-', instead got '${rookiePickId}'`
+            );
+        }
+        if (rookiePickId.substring(3, 9) === 'FIRST-') {
+            return `${rookiePickId.substring(9)} 1sts`;
+        }
+        return `${rookiePickId.substring(3)} Rookie Picks`;
+    }
+
     function playerAutocomplete(idx: number) {
         if (!playerData) return <></>;
 
@@ -79,6 +113,10 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
             .filter(p => !!p.team && p.status === 'Active')
             .sort(sortBySearchRank)
             .map(p => p.player_id);
+        opts.push('RP-2025');
+        opts.push('RP-2026');
+        opts.push('RP-FIRST-2025');
+        opts.push('RP-FIRST-2026');
 
         const [inputValue, setInputValue] = inputStateList[idx];
         return (
@@ -90,6 +128,9 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
                 <Autocomplete
                     options={opts}
                     getOptionLabel={option => {
+                        if (isRookiePickId(option)) {
+                            return rookiePickIdToString(option);
+                        }
                         const p = playerData[option];
                         return `${p.first_name} ${p.last_name}`;
                     }}

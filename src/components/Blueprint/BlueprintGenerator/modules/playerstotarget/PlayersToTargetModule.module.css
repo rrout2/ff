@@ -54,6 +54,14 @@
     background-color: #FBAD5B;
 }
 
+.RP {
+    background-color: #8d807d;
+}
+
+.rookiePickTarget {
+    padding-left: 42px;
+}
+
 .teamLogo {
     height: 50px;
     background-color: white;
