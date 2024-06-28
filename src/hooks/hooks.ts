@@ -11,7 +11,7 @@ import {
     getUser,
 } from '../sleeper-api/sleeper-api';
 import {useQuery} from '@tanstack/react-query';
-import {LEAGUE_ID} from '../consts/urlParams';
+import {LEAGUE_ID, MODULE, NONE_TEAM_ID, TEAM_ID} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {
     BENCH,
@@ -25,6 +25,7 @@ import {
     WR_RB_FLEX,
     WR_TE_FLEX,
 } from '../consts/fantasy';
+import {Module} from '../components/Blueprint/BlueprintGenerator/BlueprintGenerator';
 
 interface PlayerData {
     [key: string]: Player;
@@ -180,6 +181,57 @@ export function useLeagueIdFromUrl(): [
     }, [leagueId]);
 
     return [leagueId, setLeagueId];
+}
+
+export function useTeamIdFromUrl(): [string, Dispatch<SetStateAction<string>>] {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [teamId, setTeamId] = useState('');
+
+    useEffect(() => {
+        const teamIdFromUrl = searchParams.get(TEAM_ID);
+        if (!teamIdFromUrl) {
+            setTeamId(NONE_TEAM_ID);
+            return;
+        }
+
+        setTeamId(teamIdFromUrl);
+    }, [searchParams, setTeamId]);
+
+    useEffect(() => {
+        if (teamId === searchParams.get(TEAM_ID) || !teamId) return;
+
+        setSearchParams(searchParams => {
+            searchParams.set(TEAM_ID, teamId);
+            return searchParams;
+        });
+    }, [teamId, setSearchParams]);
+
+    return [teamId, setTeamId];
+}
+
+export function useModuleFromUrl(): [Module, Dispatch<SetStateAction<Module>>] {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [module, setModule] = useState(Module.Unspecified);
+
+    useEffect(() => {
+        const module = searchParams.get(MODULE);
+        if (!module) {
+            setModule(Module.Unspecified);
+            return;
+        }
+        setModule(module as Module);
+    }, [searchParams, setModule]);
+
+    useEffect(() => {
+        if (module === searchParams.get(MODULE) || !module) return;
+
+        setSearchParams(searchParams => {
+            searchParams.set(MODULE, module);
+            return searchParams;
+        });
+    }, [module, setSearchParams]);
+
+    return [module, setModule];
 }
 
 export function useRosterSettings(league?: League) {

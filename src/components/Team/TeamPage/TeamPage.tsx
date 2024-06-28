@@ -163,6 +163,10 @@ export default function TeamPage() {
     );
 }
 
+function getDisplayName(user?: User) {
+    return `${user?.metadata?.team_name ?? user?.display_name}`;
+}
+
 export function teamSelectComponent(
     teamId: string,
     setTeamId: (value: React.SetStateAction<string>) => void,
@@ -185,13 +189,12 @@ export function teamSelectComponent(
                 </MenuItem>
                 {!allUsers && specifiedUser && (
                     <MenuItem value={teamId} key={teamId}>
-                        {specifiedUser?.metadata?.team_name ??
-                            specifiedUser?.display_name}
+                        {getDisplayName(specifiedUser)}
                     </MenuItem>
                 )}
                 {allUsers?.map((u, idx) => (
                     <MenuItem value={idx} key={idx}>
-                        {u.metadata?.team_name ?? u.display_name}
+                        {getDisplayName(u)}
                     </MenuItem>
                 ))}
             </Select>

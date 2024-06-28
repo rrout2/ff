@@ -2,7 +2,9 @@ import {useEffect, useState} from 'react';
 import {
     useFetchRosters,
     useLeagueIdFromUrl,
+    useModuleFromUrl,
     usePlayerData,
+    useTeamIdFromUrl,
     useTitle,
 } from '../../../hooks/hooks';
 import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
@@ -22,7 +24,7 @@ import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModu
 import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
 
-enum Module {
+export enum Module {
     Unspecified = '',
     Cornerstone = 'cornerstones',
     LookToTrade = 'looktotrade',
@@ -33,13 +35,13 @@ enum Module {
 
 export default function BlueprintGenerator() {
     const [leagueId] = useLeagueIdFromUrl();
-    const [teamId, setTeamId] = useState(NONE_TEAM_ID);
+    const [teamId, setTeamId] = useTeamIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
-    const [module, setModule] = useState<Module>(Module.Unspecified);
+    const [module, setModule] = useModuleFromUrl();
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
         setSpecifiedUser(allUsers?.[+teamId]);
@@ -52,7 +54,13 @@ export default function BlueprintGenerator() {
     }
 
     useEffect(() => {
-        if (!rosters || rosters.length === 0 || !hasTeamId() || !playerData) {
+        if (
+            !rosters ||
+            rosters.length === 0 ||
+            !hasTeamId() ||
+            !playerData ||
+            allUsers.length === 0
+        ) {
             return;
         }
 
@@ -60,7 +68,7 @@ export default function BlueprintGenerator() {
         if (!newRoster) throw new Error('roster not found');
 
         setRoster(newRoster);
-    }, [rosters, teamId, playerData]);
+    }, [rosters, teamId, playerData, allUsers]);
 
     useEffect(() => {
         if (!leagueId || !rosters) return;
