@@ -3,7 +3,7 @@ import styles from './LookToTradeModule.module.css';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
 import ExportButton from '../../shared/ExportButton';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
-import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
 import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 
 const COLORS = ['#3CB6E9', '#EC336D', '#8AC73E'];
@@ -59,17 +59,20 @@ export default function LookToTradeModule(props: {
 
     useTitle('Look to Trade - Blueprint Generator');
 
-    const playerReducer = (
+    const playerIdReducer = (
         acc: string,
-        curr: Player,
+        currPlayerId: string,
         idx: number,
-        arr: Player[]
+        arr: string[]
     ) => {
-        const fullName = `${curr.first_name} ${curr.last_name}`;
+        const player = playerData![currPlayerId];
+        const displayValue = !player
+            ? currPlayerId
+            : `${player.first_name} ${player.last_name}`;
         if (idx + 1 !== arr.length) {
-            return `${acc}${fullName}/`;
+            return `${acc}${displayValue}/`;
         }
-        return `${acc}${fullName}`;
+        return `${acc}${displayValue}`;
     };
 
     function graphicComponent() {
@@ -79,9 +82,7 @@ export default function LookToTradeModule(props: {
                 <div className={styles.title}>LOOK TO TRADE:</div>
                 {[0, 1, 2].map(idx => {
                     return tradeSuggestion(
-                        playersToTrade[idx]
-                            .map(playerId => playerData[playerId])
-                            .reduce(playerReducer, ''),
+                        playersToTrade[idx].reduce(playerIdReducer, ''),
                         inReturn[idx].toLocaleUpperCase(),
                         COLORS[idx]
                     );
@@ -115,6 +116,14 @@ export default function LookToTradeModule(props: {
     }
 
     function inputComponent() {
+        const nonIdPlayerOptions: string[] = [];
+        for (let i = 1; i < 15; i++) {
+            nonIdPlayerOptions.push(
+                `Rookie Pick 1.${i < 10 ? `0${i}` : `${i}`}`
+            );
+        }
+        nonIdPlayerOptions.push('2025 1st');
+        nonIdPlayerOptions.push('2026 1st');
         return (
             <div className={styles.inputComponent}>
                 {playersToTrade.map((_, idx) => (
@@ -127,6 +136,7 @@ export default function LookToTradeModule(props: {
                                 newSelections[idx] = newPlayerIds;
                                 setPlayersToTrade(newSelections);
                             }}
+                            nonIdPlayerOptions={nonIdPlayerOptions}
                         />
                         {inReturnComponent(idx)}
                     </>

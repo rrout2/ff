@@ -11,12 +11,32 @@ export default function PlayerSelectComponent(props: {
     playerIds: string[];
     selectedPlayerIds: string[];
     onChange: (newPlayerIds: string[]) => void;
+    nonIdPlayerOptions?: string[];
     position?: string;
 }) {
-    const {playerIds, selectedPlayerIds, onChange, position} = props;
+    const {
+        playerIds,
+        selectedPlayerIds,
+        onChange,
+        position,
+        nonIdPlayerOptions,
+    } = props;
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
     if (!playerData) return <></>;
+
+    const allPlayerOptions = playerIds
+        .map(playerId => playerData[playerId])
+        .filter(player => {
+            if (!player) return false;
+            return !position || player.fantasy_positions.includes(position);
+        })
+        .sort(sortByAdp)
+        .map(p => p.player_id);
+
+    if (nonIdPlayerOptions) {
+        allPlayerOptions.push(...nonIdPlayerOptions);
+    }
     return (
         <FormControl
             style={{
@@ -37,21 +57,18 @@ export default function PlayerSelectComponent(props: {
                 }}
                 multiple={true}
             >
-                {playerIds
-                    .map(playerId => playerData[playerId])
-                    .filter(player => {
-                        if (!player) return false;
-                        return (
-                            !position ||
-                            player.fantasy_positions.includes(position)
-                        );
-                    })
-                    .sort(sortByAdp)
-                    .map((player, idx) => (
-                        <MenuItem value={player.player_id} key={idx}>
-                            {player.first_name} {player.last_name}
+                {allPlayerOptions.map((option, idx) => {
+                    const player = playerData[option];
+                    const value = !player ? option : player.player_id;
+                    const display = !player
+                        ? option
+                        : `${player.first_name} ${player.last_name}`;
+                    return (
+                        <MenuItem value={value} key={idx}>
+                            {display}
                         </MenuItem>
-                    ))}
+                    );
+                })}
             </Select>
         </FormControl>
     );
