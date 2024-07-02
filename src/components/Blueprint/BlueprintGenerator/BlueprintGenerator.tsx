@@ -23,6 +23,7 @@ import LookToTradeModule from './modules/looktotrade/LookToTradeModule';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
 import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
+import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 
 export enum Module {
     Unspecified = '',
@@ -31,6 +32,7 @@ export enum Module {
     PlayersToTarget = 'playerstotarget',
     Settings = 'settings',
     Starters = 'starters',
+    PositionalGrades = 'positionalgrades',
 }
 
 export default function BlueprintGenerator() {
@@ -122,6 +124,12 @@ export default function BlueprintGenerator() {
                     <MenuItem value={Module.Starters} key={'starters'}>
                         Starters
                     </MenuItem>
+                    <MenuItem
+                        value={Module.PositionalGrades}
+                        key={'positionalgrades'}
+                    >
+                        Positional Grades
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -158,6 +166,12 @@ export default function BlueprintGenerator() {
             )}
             {hasTeamId() && module === Module.Starters && (
                 <Starters roster={roster} specifiedUser={specifiedUser} />
+            )}
+            {hasTeamId() && module === Module.PositionalGrades && (
+                <PositionalGrades
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                />
             )}
         </div>
     );

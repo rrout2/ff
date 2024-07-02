@@ -1,0 +1,2089 @@
+{
+  "Sheet1": [
+    {
+      "Player": "Josh Allen",
+      "Value": "105.0890129",
+      "Position": "QB"
+    },
+    {
+      "Player": "Patrick Mahomes",
+      "Value": "102.1787317",
+      "Position": "QB"
+    },
+    {
+      "Player": "C.J. Stroud",
+      "Value": "99.34904637",
+      "Position": "QB"
+    },
+    {
+      "Player": "Jalen Hurts",
+      "Value": "96.59772485",
+      "Position": "QB"
+    },
+    {
+      "Player": "Lamar Jackson",
+      "Value": "93.92259702",
+      "Position": "QB"
+    },
+    {
+      "Player": "Justin Jefferson",
+      "Value": "91.3215528",
+      "Position": "WR"
+    },
+    {
+      "Player": "CeeDee Lamb",
+      "Value": "86.33356551",
+      "Position": "WR"
+    },
+    {
+      "Player": "Joe Burrow",
+      "Value": "86.33356551",
+      "Position": "QB"
+    },
+    {
+      "Player": "Caleb Williams",
+      "Value": "83.94268804",
+      "Position": "QB"
+    },
+    {
+      "Player": "JaMarr Chase",
+      "Value": "83.94268804",
+      "Position": "WR"
+    },
+    {
+      "Player": "Anthony Richardson",
+      "Value": "79.35773467",
+      "Position": "QB"
+    },
+    {
+      "Player": "Justin Herbert",
+      "Value": "77.16004228",
+      "Position": "QB"
+    },
+    {
+      "Player": "Amon-Ra St. Brown",
+      "Value": "75.02321166",
+      "Position": "WR"
+    },
+    {
+      "Player": "Marvin Harrison",
+      "Value": "75.02321166",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jordan Love",
+      "Value": "68.96126773",
+      "Position": "QB"
+    },
+    {
+      "Player": "Kyler Murray",
+      "Value": "67.05148976",
+      "Position": "QB"
+    },
+    {
+      "Player": "Bijan Robinson",
+      "Value": "67.05148976",
+      "Position": "RB"
+    },
+    {
+      "Player": "Trevor Lawrence",
+      "Value": "65.1946002",
+      "Position": "QB"
+    },
+    {
+      "Player": "Puka Nacua",
+      "Value": "63.3891344",
+      "Position": "WR"
+    },
+    {
+      "Player": "Christian McCaffrey",
+      "Value": "61.63366823",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jahmyr Gibbs",
+      "Value": "58.26723452",
+      "Position": "RB"
+    },
+    {
+      "Player": "Breece Hall",
+      "Value": "58.26723452",
+      "Position": "RB"
+    },
+    {
+      "Player": "Garrett Wilson",
+      "Value": "56.65361162",
+      "Position": "WR"
+    },
+    {
+      "Player": "Sam LaPorta",
+      "Value": "55.08467557",
+      "Position": "TE"
+    },
+    {
+      "Player": "A.J. Brown",
+      "Value": "55.08467557",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jayden Daniels",
+      "Value": "53.55918882",
+      "Position": "QB"
+    },
+    {
+      "Player": "Brock Purdy",
+      "Value": "50.63378354",
+      "Position": "QB"
+    },
+    {
+      "Player": "Tyreek Hill",
+      "Value": "50.63378354",
+      "Position": "WR"
+    },
+    {
+      "Player": "Malik Nabers",
+      "Value": "49.23155751",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jonathan Taylor",
+      "Value": "44.00037271",
+      "Position": "RB"
+    },
+    {
+      "Player": "Dak Prescott",
+      "Value": "44.00037271",
+      "Position": "QB"
+    },
+    {
+      "Player": "Brandon Aiyuk",
+      "Value": "40.44510246",
+      "Position": "WR"
+    },
+    {
+      "Player": "Chris Olave",
+      "Value": "39.32503654",
+      "Position": "WR"
+    },
+    {
+      "Player": "Drake London",
+      "Value": "39.32503654",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tua Tagovailoa",
+      "Value": "38.23598916",
+      "Position": "QB"
+    },
+    {
+      "Player": "Trey McBride",
+      "Value": "37.17710129",
+      "Position": "TE"
+    },
+    {
+      "Player": "Rome Odunze",
+      "Value": "35.14648636",
+      "Position": "WR"
+    },
+    {
+      "Player": "Travis Etienne",
+      "Value": "35.14648636",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jaylen Waddle",
+      "Value": "35.14648636",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jared Goff",
+      "Value": "34.1731576",
+      "Position": "QB"
+    },
+    {
+      "Player": "Drake Maye",
+      "Value": "33.2267837",
+      "Position": "QB"
+    },
+    {
+      "Player": "DeVonta Smith",
+      "Value": "32.3066182",
+      "Position": "WR"
+    },
+    {
+      "Player": "J.J. McCarthy",
+      "Value": "32.3066182",
+      "Position": "QB"
+    },
+    {
+      "Player": "Dalton Kincaid",
+      "Value": "32.3066182",
+      "Position": "TE"
+    },
+    {
+      "Player": "Saquon Barkley",
+      "Value": "30.54202927",
+      "Position": "RB"
+    },
+    {
+      "Player": "Brock Bowers",
+      "Value": "28.87382227",
+      "Position": "TE"
+    },
+    {
+      "Player": "DJ Moore",
+      "Value": "28.87382227",
+      "Position": "WR"
+    },
+    {
+      "Player": "Mark Andrews",
+      "Value": "27.29673281",
+      "Position": "TE"
+    },
+    {
+      "Player": "Nico Collins",
+      "Value": "27.29673281",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kyren Williams",
+      "Value": "26.54079109",
+      "Position": "RB"
+    },
+    {
+      "Player": "Michael Pittman",
+      "Value": "26.54079109",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kyle Pitts",
+      "Value": "25.80578404",
+      "Position": "TE"
+    },
+    {
+      "Player": "Zay Flowers",
+      "Value": "25.0911319",
+      "Position": "WR"
+    },
+    {
+      "Player": "Travis Kelce",
+      "Value": "23.06374556",
+      "Position": "TE"
+    },
+    {
+      "Player": "DeVon Achane",
+      "Value": "21.20017388",
+      "Position": "RB"
+    },
+    {
+      "Player": "T.J. Hockenson",
+      "Value": "20.61306714",
+      "Position": "TE"
+    },
+    {
+      "Player": "DK Metcalf",
+      "Value": "20.61306714",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tee Higgins",
+      "Value": "20.04221943",
+      "Position": "WR"
+    },
+    {
+      "Player": "Bryce Young",
+      "Value": "20.04221943",
+      "Position": "QB"
+    },
+    {
+      "Player": "Rachaad White",
+      "Value": "20.04221943",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tank Dell",
+      "Value": "19.48718049",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jordan Addison",
+      "Value": "18.94751251",
+      "Position": "WR"
+    },
+    {
+      "Player": "Josh Jacobs",
+      "Value": "18.42278982",
+      "Position": "RB"
+    },
+    {
+      "Player": "Brian Thomas",
+      "Value": "17.41653622",
+      "Position": "WR"
+    },
+    {
+      "Player": "George Pickens",
+      "Value": "16.9342116",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kenneth Walker",
+      "Value": "16.46524423",
+      "Position": "RB"
+    },
+    {
+      "Player": "Xavier Worthy",
+      "Value": "16.00926421",
+      "Position": "WR"
+    },
+    {
+      "Player": "Isiah Pacheco",
+      "Value": "15.56591186",
+      "Position": "RB"
+    },
+    {
+      "Player": "Deebo Samuel",
+      "Value": "15.56591186",
+      "Position": "WR"
+    },
+    {
+      "Player": "Mike Evans",
+      "Value": "14.71570106",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jonathon Brooks",
+      "Value": "14.71570106",
+      "Position": "RB"
+    },
+    {
+      "Player": "Baker Mayfield",
+      "Value": "13.91192881",
+      "Position": "QB"
+    },
+    {
+      "Player": "Stefon Diggs",
+      "Value": "13.52665899",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jaxon Smith-Njigba",
+      "Value": "13.52665899",
+      "Position": "WR"
+    },
+    {
+      "Player": "Ladd McConkey",
+      "Value": "13.52665899",
+      "Position": "WR"
+    },
+    {
+      "Player": "James Cook",
+      "Value": "13.15205864",
+      "Position": "RB"
+    },
+    {
+      "Player": "George Kittle",
+      "Value": "12.78783227",
+      "Position": "TE"
+    },
+    {
+      "Player": "Davante Adams",
+      "Value": "12.43369261",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kirk Cousins",
+      "Value": "12.0893603",
+      "Position": "QB"
+    },
+    {
+      "Player": "Keon Coleman",
+      "Value": "11.75456376",
+      "Position": "WR"
+    },
+    {
+      "Player": "DAndre Swift",
+      "Value": "11.75456376",
+      "Position": "RB"
+    },
+    {
+      "Player": "Deshaun Watson",
+      "Value": "11.11252896",
+      "Position": "QB"
+    },
+    {
+      "Player": "Jayden Reed",
+      "Value": "10.50556213",
+      "Position": "WR"
+    },
+    {
+      "Player": "Rashee Rice",
+      "Value": "9.931747862",
+      "Position": "WR"
+    },
+    {
+      "Player": "Bo Nix",
+      "Value": "9.931747862",
+      "Position": "QB"
+    },
+    {
+      "Player": "Cooper Kupp",
+      "Value": "9.38927535",
+      "Position": "WR"
+    },
+    {
+      "Player": "Derrick Henry",
+      "Value": "9.129253576",
+      "Position": "RB"
+    },
+    {
+      "Player": "Trey Benson",
+      "Value": "9.129253576",
+      "Position": "RB"
+    },
+    {
+      "Player": "Joe Mixon",
+      "Value": "8.876432711",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jake Ferguson",
+      "Value": "8.630613338",
+      "Position": "TE"
+    },
+    {
+      "Player": "Christian Kirk",
+      "Value": "8.630613338",
+      "Position": "WR"
+    },
+    {
+      "Player": "Marquise Brown",
+      "Value": "7.7135525",
+      "Position": "WR"
+    },
+    {
+      "Player": "Michael Penix",
+      "Value": "7.7135525",
+      "Position": "QB"
+    },
+    {
+      "Player": "Rhamondre Stevenson",
+      "Value": "7.499937334",
+      "Position": "RB"
+    },
+    {
+      "Player": "Evan Engram",
+      "Value": "7.292237918",
+      "Position": "TE"
+    },
+    {
+      "Player": "Terry McLaurin",
+      "Value": "7.090290422",
+      "Position": "WR"
+    },
+    {
+      "Player": "Javonte Williams",
+      "Value": "6.703018443",
+      "Position": "RB"
+    },
+    {
+      "Player": "David Njoku",
+      "Value": "6.703018443",
+      "Position": "TE"
+    },
+    {
+      "Player": "Alvin Kamara",
+      "Value": "6.703018443",
+      "Position": "RB"
+    },
+    {
+      "Player": "Will Levis",
+      "Value": "6.517388489",
+      "Position": "QB"
+    },
+    {
+      "Player": "Justin Fields",
+      "Value": "6.336899276",
+      "Position": "QB"
+    },
+    {
+      "Player": "Xavier Legette",
+      "Value": "6.336899276",
+      "Position": "WR"
+    },
+    {
+      "Player": "Amari Cooper",
+      "Value": "6.161408439",
+      "Position": "WR"
+    },
+    {
+      "Player": "Hollywood Brown",
+      "Value": "6.161408439",
+      "Position": "WR"
+    },
+    {
+      "Player": "Zamir White",
+      "Value": "5.990777555",
+      "Position": "RB"
+    },
+    {
+      "Player": "Ricky Pearsall",
+      "Value": "5.990777555",
+      "Position": "WR"
+    },
+    {
+      "Player": "Aaron Rodgers",
+      "Value": "5.506717264",
+      "Position": "QB"
+    },
+    {
+      "Player": "Adonai Mitchell",
+      "Value": "5.506717264",
+      "Position": "WR"
+    },
+    {
+      "Player": "Calvin Ridley",
+      "Value": "5.205940121",
+      "Position": "WR"
+    },
+    {
+      "Player": "Matthew Stafford",
+      "Value": "5.061769486",
+      "Position": "QB"
+    },
+    {
+      "Player": "Chris Godwin",
+      "Value": "4.785295411",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tyjae Spears",
+      "Value": "4.652773895",
+      "Position": "RB"
+    },
+    {
+      "Player": "David Montgomery",
+      "Value": "4.652773895",
+      "Position": "RB"
+    },
+    {
+      "Player": "Najee Harris",
+      "Value": "4.652773895",
+      "Position": "RB"
+    },
+    {
+      "Player": "Cole Kmet",
+      "Value": "4.523922362",
+      "Position": "TE"
+    },
+    {
+      "Player": "Christian Watson",
+      "Value": "4.398639177",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tony Pollard",
+      "Value": "4.398639177",
+      "Position": "RB"
+    },
+    {
+      "Player": "Diontae Johnson",
+      "Value": "4.27682552",
+      "Position": "WR"
+    },
+    {
+      "Player": "Keenan Allen",
+      "Value": "4.158385309",
+      "Position": "WR"
+    },
+    {
+      "Player": "Blake Corum",
+      "Value": "4.043225119",
+      "Position": "RB"
+    },
+    {
+      "Player": "JaLynn Polk",
+      "Value": "4.043225119",
+      "Position": "WR"
+    },
+    {
+      "Player": "Geno Smith",
+      "Value": "3.931254117",
+      "Position": "QB"
+    },
+    {
+      "Player": "Daniel Jones",
+      "Value": "3.613605199",
+      "Position": "QB"
+    },
+    {
+      "Player": "Ben Sinnott",
+      "Value": "3.416229922",
+      "Position": "TE"
+    },
+    {
+      "Player": "Aaron Jones",
+      "Value": "3.321622603",
+      "Position": "RB"
+    },
+    {
+      "Player": "Troy Franklin",
+      "Value": "2.886464773",
+      "Position": "WR"
+    },
+    {
+      "Player": "James Conner",
+      "Value": "2.886464773",
+      "Position": "RB"
+    },
+    {
+      "Player": "Zack Moss",
+      "Value": "2.728805938",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jaylen Wright",
+      "Value": "2.728805938",
+      "Position": "RB"
+    },
+    {
+      "Player": "Nick Chubb",
+      "Value": "2.653235787",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jerry Jeudy",
+      "Value": "2.579758436",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jameson Williams",
+      "Value": "2.438851915",
+      "Position": "WR"
+    },
+    {
+      "Player": "Josh Downs",
+      "Value": "2.438851915",
+      "Position": "WR"
+    },
+    {
+      "Player": "Roman Wilson",
+      "Value": "2.371311601",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kendre Miller",
+      "Value": "2.371311601",
+      "Position": "RB"
+    },
+    {
+      "Player": "Dallas Goedert",
+      "Value": "2.371311601",
+      "Position": "TE"
+    },
+    {
+      "Player": "Austin Ekeler",
+      "Value": "2.305641715",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jaylen Warren",
+      "Value": "2.305641715",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jahan Dotson",
+      "Value": "2.241790456",
+      "Position": "WR"
+    },
+    {
+      "Player": "Russell Wilson",
+      "Value": "2.241790456",
+      "Position": "QB"
+    },
+    {
+      "Player": "Dalton Schultz",
+      "Value": "2.179707461",
+      "Position": "TE"
+    },
+    {
+      "Player": "Pat Freiermuth",
+      "Value": "2.179707461",
+      "Position": "TE"
+    },
+    {
+      "Player": "DeAndre Hopkins",
+      "Value": "2.179707461",
+      "Position": "WR"
+    },
+    {
+      "Player": "Brian Robinson",
+      "Value": "2.119343761",
+      "Position": "RB"
+    },
+    {
+      "Player": "Zach Charbonnet",
+      "Value": "2.119343761",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jermaine Burton",
+      "Value": "2.119343761",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jakobi Meyers",
+      "Value": "2.060651742",
+      "Position": "WR"
+    },
+    {
+      "Player": "Quentin Johnston",
+      "Value": "1.948098852",
+      "Position": "WR"
+    },
+    {
+      "Player": "MarShawn Lloyd",
+      "Value": "1.894149202",
+      "Position": "RB"
+    },
+    {
+      "Player": "Derek Carr",
+      "Value": "1.841693606",
+      "Position": "QB"
+    },
+    {
+      "Player": "Malachi Corley",
+      "Value": "1.841693606",
+      "Position": "WR"
+    },
+    {
+      "Player": "Courtland Sutton",
+      "Value": "1.841693606",
+      "Position": "WR"
+    },
+    {
+      "Player": "Raheem Mostert",
+      "Value": "1.741100219",
+      "Position": "RB"
+    },
+    {
+      "Player": "Chase Brown",
+      "Value": "1.741100219",
+      "Position": "RB"
+    },
+    {
+      "Player": "JaTavion Sanders",
+      "Value": "1.600417733",
+      "Position": "TE"
+    },
+    {
+      "Player": "Devin Singletary",
+      "Value": "1.600417733",
+      "Position": "RB"
+    },
+    {
+      "Player": "Romeo Doubs",
+      "Value": "1.556096585",
+      "Position": "WR"
+    },
+    {
+      "Player": "Gardner Minshew",
+      "Value": "1.513002845",
+      "Position": "QB"
+    },
+    {
+      "Player": "Luke Musgrave",
+      "Value": "1.352236095",
+      "Position": "TE"
+    },
+    {
+      "Player": "Ezekiel Elliott",
+      "Value": "1.314787962",
+      "Position": "RB"
+    },
+    {
+      "Player": "Michael Wilson",
+      "Value": "1.208551896",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tyler Lockett",
+      "Value": "1.142540737",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jerome Ford",
+      "Value": "1.1108998",
+      "Position": "RB"
+    },
+    {
+      "Player": "Gus Edwards",
+      "Value": "1.080135111",
+      "Position": "RB"
+    },
+    {
+      "Player": "Javon Baker",
+      "Value": "1.050222404",
+      "Position": "WR"
+    },
+    {
+      "Player": "Isaiah Likely",
+      "Value": "0.992859209",
+      "Position": "TE"
+    },
+    {
+      "Player": "Khalil Shakir",
+      "Value": "0.965363475",
+      "Position": "WR"
+    },
+    {
+      "Player": "Rashid Shaheed",
+      "Value": "0.838893516",
+      "Position": "WR"
+    },
+    {
+      "Player": "Dontayvion Wicks",
+      "Value": "0.771110155",
+      "Position": "WR"
+    },
+    {
+      "Player": "Ray Davis",
+      "Value": "0.771110155",
+      "Position": "RB"
+    },
+    {
+      "Player": "Michael Mayer",
+      "Value": "0.749755426",
+      "Position": "TE"
+    },
+    {
+      "Player": "Luke McCaffrey",
+      "Value": "0.749755426",
+      "Position": "WR"
+    },
+    {
+      "Player": "Mike Williams",
+      "Value": "0.749755426",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jalen McMillan",
+      "Value": "0.728992084",
+      "Position": "WR"
+    },
+    {
+      "Player": "Gabe Davis",
+      "Value": "0.728992084",
+      "Position": "WR"
+    },
+    {
+      "Player": "Bucky Irving",
+      "Value": "0.728992084",
+      "Position": "RB"
+    },
+    {
+      "Player": "Cade Otton",
+      "Value": "0.689174504",
+      "Position": "TE"
+    },
+    {
+      "Player": "Roschon Johnson",
+      "Value": "0.689174504",
+      "Position": "RB"
+    },
+    {
+      "Player": "Chigoziem Okonkwo",
+      "Value": "0.689174504",
+      "Position": "TE"
+    },
+    {
+      "Player": "Kimani Vidal",
+      "Value": "0.670088859",
+      "Position": "RB"
+    },
+    {
+      "Player": "Joshua Palmer",
+      "Value": "0.670088859",
+      "Position": "WR"
+    },
+    {
+      "Player": "Aidan OConnell",
+      "Value": "0.651531762",
+      "Position": "QB"
+    },
+    {
+      "Player": "Chuba Hubbard",
+      "Value": "0.651531762",
+      "Position": "RB"
+    },
+    {
+      "Player": "J.K. Dobbins",
+      "Value": "0.651531762",
+      "Position": "RB"
+    },
+    {
+      "Player": "Audric Estime",
+      "Value": "0.633488575",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tucker Kraft",
+      "Value": "0.633488575",
+      "Position": "TE"
+    },
+    {
+      "Player": "Sam Howell",
+      "Value": "0.615945068",
+      "Position": "QB"
+    },
+    {
+      "Player": "Braelon Allen",
+      "Value": "0.598887401",
+      "Position": "RB"
+    },
+    {
+      "Player": "Marvin Mims",
+      "Value": "0.598887401",
+      "Position": "WR"
+    },
+    {
+      "Player": "Spencer Rattler",
+      "Value": "0.582302121",
+      "Position": "QB"
+    },
+    {
+      "Player": "Keaton Mitchell",
+      "Value": "0.550496753",
+      "Position": "RB"
+    },
+    {
+      "Player": "DeMario Douglas",
+      "Value": "0.535251578",
+      "Position": "WR"
+    },
+    {
+      "Player": "Devontez Walker",
+      "Value": "0.506016113",
+      "Position": "WR"
+    },
+    {
+      "Player": "Darnell Mooney",
+      "Value": "0.46512955",
+      "Position": "WR"
+    },
+    {
+      "Player": "Theo Johnson",
+      "Value": "0.45224849",
+      "Position": "TE"
+    },
+    {
+      "Player": "Tyrone Tracy",
+      "Value": "0.439724153",
+      "Position": "RB"
+    },
+    {
+      "Player": "Sam Darnold",
+      "Value": "0.439724153",
+      "Position": "QB"
+    },
+    {
+      "Player": "Curtis Samuel",
+      "Value": "0.4157064",
+      "Position": "WR"
+    },
+    {
+      "Player": "Dameon Pierce",
+      "Value": "0.40419404",
+      "Position": "RB"
+    },
+    {
+      "Player": "WanDale Robinson",
+      "Value": "0.393000498",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jordan Travis",
+      "Value": "0.393000498",
+      "Position": "QB"
+    },
+    {
+      "Player": "Tyler Allgeier",
+      "Value": "0.393000498",
+      "Position": "RB"
+    },
+    {
+      "Player": "Greg Dulcich",
+      "Value": "0.393000498",
+      "Position": "TE"
+    },
+    {
+      "Player": "Brandin Cooks",
+      "Value": "0.382116944",
+      "Position": "WR"
+    },
+    {
+      "Player": "Rashod Bateman",
+      "Value": "0.361245699",
+      "Position": "WR"
+    },
+    {
+      "Player": "Antonio Gibson",
+      "Value": "0.351241546",
+      "Position": "RB"
+    },
+    {
+      "Player": "Brenden Rice",
+      "Value": "0.351241546",
+      "Position": "WR"
+    },
+    {
+      "Player": "Ty Chandler",
+      "Value": "0.341514443",
+      "Position": "RB"
+    },
+    {
+      "Player": "Isaac Guerendo",
+      "Value": "0.341514443",
+      "Position": "RB"
+    },
+    {
+      "Player": "Will Shipley",
+      "Value": "0.322860909",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tank Bigsby",
+      "Value": "0.280563674",
+      "Position": "RB"
+    },
+    {
+      "Player": "Treylon Burks",
+      "Value": "0.265239273",
+      "Position": "WR"
+    },
+    {
+      "Player": "Juwan Johnson",
+      "Value": "0.257893873",
+      "Position": "TE"
+    },
+    {
+      "Player": "Erick All",
+      "Value": "0.257893873",
+      "Position": "TE"
+    },
+    {
+      "Player": "Malik Washington",
+      "Value": "0.250751892",
+      "Position": "WR"
+    },
+    {
+      "Player": "Rico Dowdle",
+      "Value": "0.243807698",
+      "Position": "RB"
+    },
+    {
+      "Player": "Adam Thielen",
+      "Value": "0.243807698",
+      "Position": "WR"
+    },
+    {
+      "Player": "Noah Fant",
+      "Value": "0.237055813",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jalin Hyatt",
+      "Value": "0.230490911",
+      "Position": "WR"
+    },
+    {
+      "Player": "Taysom Hill",
+      "Value": "0.211867035",
+      "Position": "TE"
+    },
+    {
+      "Player": "Dylan Laube",
+      "Value": "0.205999698",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jaleel McLaughlin",
+      "Value": "0.194747985",
+      "Position": "RB"
+    },
+    {
+      "Player": "Joe Milton",
+      "Value": "0.189354734",
+      "Position": "QB"
+    },
+    {
+      "Player": "Jonathan Mingo",
+      "Value": "0.184110842",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jacob Cowing",
+      "Value": "0.184110842",
+      "Position": "WR"
+    },
+    {
+      "Player": "Hunter Henry",
+      "Value": "0.184110842",
+      "Position": "TE"
+    },
+    {
+      "Player": "Rondale Moore",
+      "Value": "0.184110842",
+      "Position": "WR"
+    },
+    {
+      "Player": "Khalil Herbert",
+      "Value": "0.174054699",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jelani Woods",
+      "Value": "0.169234518",
+      "Position": "TE"
+    },
+    {
+      "Player": "Elijah Moore",
+      "Value": "0.159990921",
+      "Position": "WR"
+    },
+    {
+      "Player": "Alexander Mattison",
+      "Value": "0.151252209",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tyler Boyd",
+      "Value": "0.147063508",
+      "Position": "WR"
+    },
+    {
+      "Player": "Cade Stover",
+      "Value": "0.142990807",
+      "Position": "TE"
+    },
+    {
+      "Player": "Trey Lance",
+      "Value": "0.142990807",
+      "Position": "QB"
+    },
+    {
+      "Player": "Rasheen Ali",
+      "Value": "0.131437019",
+      "Position": "RB"
+    },
+    {
+      "Player": "Miles Sanders",
+      "Value": "0.131437019",
+      "Position": "RB"
+    },
+    {
+      "Player": "Mike Gesicki",
+      "Value": "0.12779707",
+      "Position": "TE"
+    },
+    {
+      "Player": "A.T. Perry",
+      "Value": "0.12779707",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jacoby Brissett",
+      "Value": "0.120816788",
+      "Position": "QB"
+    },
+    {
+      "Player": "AJ Dillon",
+      "Value": "0.120816788",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jaheim Bell",
+      "Value": "0.120816788",
+      "Position": "TE"
+    },
+    {
+      "Player": "Johnny Wilson",
+      "Value": "0.11747095",
+      "Position": "WR"
+    },
+    {
+      "Player": "Zay Jones",
+      "Value": "0.11421777",
+      "Position": "WR"
+    },
+    {
+      "Player": "Odell Beckham",
+      "Value": "0.11421777",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jameis Winston",
+      "Value": "0.10498887",
+      "Position": "QB"
+    },
+    {
+      "Player": "DJ Chark",
+      "Value": "0.099254373",
+      "Position": "WR"
+    },
+    {
+      "Player": "Frank Gore",
+      "Value": "0.099254373",
+      "Position": "RB"
+    },
+    {
+      "Player": "Joe Flacco",
+      "Value": "0.093833095",
+      "Position": "QB"
+    },
+    {
+      "Player": "Colby Parkinson",
+      "Value": "0.091234529",
+      "Position": "TE"
+    },
+    {
+      "Player": "Trey Palmer",
+      "Value": "0.091234529",
+      "Position": "WR"
+    },
+    {
+      "Player": "Taylor Heinicke",
+      "Value": "0.086251295",
+      "Position": "QB"
+    },
+    {
+      "Player": "Hendon Hooker",
+      "Value": "0.086251295",
+      "Position": "QB"
+    },
+    {
+      "Player": "Greg Dortch",
+      "Value": "0.086251295",
+      "Position": "WR"
+    },
+    {
+      "Player": "Evan Hull",
+      "Value": "0.081540246",
+      "Position": "RB"
+    },
+    {
+      "Player": "Elijah Mitchell",
+      "Value": "0.081540246",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jared Wiley",
+      "Value": "0.081540246",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jamari Thrash",
+      "Value": "0.081540246",
+      "Position": "WR"
+    },
+    {
+      "Player": "Alec Pierce",
+      "Value": "0.079282112",
+      "Position": "WR"
+    },
+    {
+      "Player": "Dawson Knox",
+      "Value": "0.079282112",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jake Browning",
+      "Value": "0.074951719",
+      "Position": "QB"
+    },
+    {
+      "Player": "Tyler Conklin",
+      "Value": "0.074951719",
+      "Position": "TE"
+    },
+    {
+      "Player": "K.J. Osborn",
+      "Value": "0.074951719",
+      "Position": "WR"
+    },
+    {
+      "Player": "Ainias Smith",
+      "Value": "0.074951719",
+      "Position": "WR"
+    },
+    {
+      "Player": "Cornelius Johnson",
+      "Value": "0.070857853",
+      "Position": "WR"
+    },
+    {
+      "Player": "Hayden Hurst",
+      "Value": "0.068895552",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jalen Coker",
+      "Value": "0.065132474",
+      "Position": "WR"
+    },
+    {
+      "Player": "Darius Slayton",
+      "Value": "0.065132474",
+      "Position": "WR"
+    },
+    {
+      "Player": "Darren Waller",
+      "Value": "0.063328729",
+      "Position": "TE"
+    },
+    {
+      "Player": "Zach Wilson",
+      "Value": "0.061574935",
+      "Position": "QB"
+    },
+    {
+      "Player": "Louis Rees-Zammit",
+      "Value": "0.061574935",
+      "Position": "RB"
+    },
+    {
+      "Player": "Clyde Edwards-Helaire",
+      "Value": "0.059869711",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jerick McKinnon",
+      "Value": "0.059869711",
+      "Position": "RB"
+    },
+    {
+      "Player": "Kenny Pickett",
+      "Value": "0.059869711",
+      "Position": "QB"
+    },
+    {
+      "Player": "Isaiah Davis",
+      "Value": "0.056599624",
+      "Position": "RB"
+    },
+    {
+      "Player": "Kenneth Gainwell",
+      "Value": "0.055032183",
+      "Position": "RB"
+    },
+    {
+      "Player": "Drew Lock",
+      "Value": "0.050585533",
+      "Position": "QB"
+    },
+    {
+      "Player": "Chase Claypool",
+      "Value": "0.049184643",
+      "Position": "WR"
+    },
+    {
+      "Player": "Michael Thomas",
+      "Value": "0.049184643",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jalen Tolbert",
+      "Value": "0.049184643",
+      "Position": "WR"
+    },
+    {
+      "Player": "Pierre Strong",
+      "Value": "0.047822549",
+      "Position": "RB"
+    },
+    {
+      "Player": "Devin Culp",
+      "Value": "0.046498176",
+      "Position": "TE"
+    },
+    {
+      "Player": "Andrei Iosivas",
+      "Value": "0.046498176",
+      "Position": "WR"
+    },
+    {
+      "Player": "AJ Barner",
+      "Value": "0.046498176",
+      "Position": "TE"
+    },
+    {
+      "Player": "JuJu Smith-Schuster",
+      "Value": "0.043958443",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kendrick Bourne",
+      "Value": "0.043958443",
+      "Position": "WR"
+    },
+    {
+      "Player": "Deuce Vaughn",
+      "Value": "0.042741081",
+      "Position": "RB"
+    },
+    {
+      "Player": "Bub Means",
+      "Value": "0.042741081",
+      "Position": "WR"
+    },
+    {
+      "Player": "Cedric Tillman",
+      "Value": "0.042741081",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tyler Higbee",
+      "Value": "0.042741081",
+      "Position": "TE"
+    },
+    {
+      "Player": "Hunter Renfrow",
+      "Value": "0.041557431",
+      "Position": "WR"
+    },
+    {
+      "Player": "Gerald Everett",
+      "Value": "0.041557431",
+      "Position": "TE"
+    },
+    {
+      "Player": "Dalvin Cook",
+      "Value": "0.041557431",
+      "Position": "RB"
+    },
+    {
+      "Player": "Daniel Bellinger",
+      "Value": "0.038199553",
+      "Position": "TE"
+    },
+    {
+      "Player": "Isaiah Spiller",
+      "Value": "0.038199553",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tutu Atwell",
+      "Value": "0.037141674",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kadarius Toney",
+      "Value": "0.036113091",
+      "Position": "WR"
+    },
+    {
+      "Player": "Mac Jones",
+      "Value": "0.035112994",
+      "Position": "QB"
+    },
+    {
+      "Player": "Dillon Johnson",
+      "Value": "0.035112994",
+      "Position": "RB"
+    },
+    {
+      "Player": "Luke Schoonmaker",
+      "Value": "0.035112994",
+      "Position": "TE"
+    },
+    {
+      "Player": "Davis Allen",
+      "Value": "0.035112994",
+      "Position": "TE"
+    },
+    {
+      "Player": "Skyy Moore",
+      "Value": "0.035112994",
+      "Position": "WR"
+    },
+    {
+      "Player": "Donald Parham",
+      "Value": "0.034140593",
+      "Position": "TE"
+    },
+    {
+      "Player": "Tre Tucker",
+      "Value": "0.034140593",
+      "Position": "WR"
+    },
+    {
+      "Player": "Noah Brown",
+      "Value": "0.033195121",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jonnu Smith",
+      "Value": "0.032275832",
+      "Position": "TE"
+    },
+    {
+      "Player": "Samaje Perine",
+      "Value": "0.031382002",
+      "Position": "RB"
+    },
+    {
+      "Player": "Israel Abanikanda",
+      "Value": "0.029667915",
+      "Position": "RB"
+    },
+    {
+      "Player": "DOnta Foreman",
+      "Value": "0.028846307",
+      "Position": "RB"
+    },
+    {
+      "Player": "Marquez Valdes-Scantling",
+      "Value": "0.028846307",
+      "Position": "WR"
+    },
+    {
+      "Player": "Keilan Robinson",
+      "Value": "0.028047453",
+      "Position": "RB"
+    },
+    {
+      "Player": "Chris Rodriguez",
+      "Value": "0.028047453",
+      "Position": "RB"
+    },
+    {
+      "Player": "Ryan Flournoy",
+      "Value": "0.027270721",
+      "Position": "WR"
+    },
+    {
+      "Player": "Desmond Ridder",
+      "Value": "0.027270721",
+      "Position": "QB"
+    },
+    {
+      "Player": "Jase McClellan",
+      "Value": "0.026515499",
+      "Position": "RB"
+    },
+    {
+      "Player": "Michael Gallup",
+      "Value": "0.025781193",
+      "Position": "WR"
+    },
+    {
+      "Player": "Eric Gray",
+      "Value": "0.025067222",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tyler Scott",
+      "Value": "0.024373023",
+      "Position": "WR"
+    },
+    {
+      "Player": "Donovan Peoples-Jones",
+      "Value": "0.023041767",
+      "Position": "WR"
+    },
+    {
+      "Player": "Darnell Washington",
+      "Value": "0.023041767",
+      "Position": "TE"
+    },
+    {
+      "Player": "Cody Schrader",
+      "Value": "0.023041767",
+      "Position": "RB"
+    },
+    {
+      "Player": "John Metchie",
+      "Value": "0.021783225",
+      "Position": "WR"
+    },
+    {
+      "Player": "Blake Watson",
+      "Value": "0.021783225",
+      "Position": "RB"
+    },
+    {
+      "Player": "Josh Reynolds",
+      "Value": "0.021783225",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jamaal Williams",
+      "Value": "0.021783225",
+      "Position": "RB"
+    },
+    {
+      "Player": "Anthony Gould",
+      "Value": "0.021179971",
+      "Position": "WR"
+    },
+    {
+      "Player": "Zach Ertz",
+      "Value": "0.020023121",
+      "Position": "TE"
+    },
+    {
+      "Player": "Joshua Dobbs",
+      "Value": "0.020023121",
+      "Position": "QB"
+    },
+    {
+      "Player": "Michael Pratt",
+      "Value": "0.01946861",
+      "Position": "QB"
+    },
+    {
+      "Player": "Sam Hartman",
+      "Value": "0.01946861",
+      "Position": "QB"
+    },
+    {
+      "Player": "Damien Harris",
+      "Value": "0.018929457",
+      "Position": "RB"
+    },
+    {
+      "Player": "Parker Washington",
+      "Value": "0.018929457",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jawhar Jordan",
+      "Value": "0.018405234",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jeff Wilson",
+      "Value": "0.018405234",
+      "Position": "RB"
+    },
+    {
+      "Player": "Mason Rudolph",
+      "Value": "0.017399939",
+      "Position": "QB"
+    },
+    {
+      "Player": "Kendall Milton",
+      "Value": "0.017399939",
+      "Position": "RB"
+    },
+    {
+      "Player": "Hayden Hatten",
+      "Value": "0.016449554",
+      "Position": "WR"
+    },
+    {
+      "Player": "Sione Vaki",
+      "Value": "0.015994008",
+      "Position": "DB"
+    },
+    {
+      "Player": "Cam Akers",
+      "Value": "0.015551079",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tyrod Taylor",
+      "Value": "0.015551079",
+      "Position": "QB"
+    },
+    {
+      "Player": "Kareem Hunt",
+      "Value": "0.015120415",
+      "Position": "RB"
+    },
+    {
+      "Player": "Michael Carter",
+      "Value": "0.015120415",
+      "Position": "RB"
+    },
+    {
+      "Player": "Justice Hill",
+      "Value": "0.013898672",
+      "Position": "RB"
+    },
+    {
+      "Player": "Sean Tucker",
+      "Value": "0.013898672",
+      "Position": "RB"
+    },
+    {
+      "Player": "Allen Lazard",
+      "Value": "0.013898672",
+      "Position": "WR"
+    },
+    {
+      "Player": "Emani Bailey",
+      "Value": "0.013513769",
+      "Position": "RB"
+    },
+    {
+      "Player": "Emari Demercado",
+      "Value": "0.012421844",
+      "Position": "RB"
+    },
+    {
+      "Player": "Jeremy Ruckert",
+      "Value": "0.012421844",
+      "Position": "TE"
+    },
+    {
+      "Player": "DeWayne McBride",
+      "Value": "0.01207784",
+      "Position": "RB"
+    },
+    {
+      "Player": "Joshua Kelley",
+      "Value": "0.01207784",
+      "Position": "RB"
+    },
+    {
+      "Player": "Calvin Austin",
+      "Value": "0.011101939",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tyquan Thornton",
+      "Value": "0.011101939",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jauan Jennings",
+      "Value": "0.011101939",
+      "Position": "WR"
+    },
+    {
+      "Player": "Xavier Hutchinson",
+      "Value": "0.010794488",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jarrett Stidham",
+      "Value": "0.010204893",
+      "Position": "QB"
+    },
+    {
+      "Player": "Noah Gray",
+      "Value": "0.009922284",
+      "Position": "TE"
+    },
+    {
+      "Player": "Tahj Washington",
+      "Value": "0.009922284",
+      "Position": "WR"
+    },
+    {
+      "Player": "Zach Evans",
+      "Value": "0.009380328",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tanner McLachlan",
+      "Value": "0.009380328",
+      "Position": "TE"
+    },
+    {
+      "Player": "Irv Smith",
+      "Value": "0.008383605",
+      "Position": "TE"
+    },
+    {
+      "Player": "Terique Owens",
+      "Value": "0.008151434",
+      "Position": "WR"
+    },
+    {
+      "Player": "Jordan Whittington",
+      "Value": "0.007925692",
+      "Position": "WR"
+    },
+    {
+      "Player": "Brevin Jordan",
+      "Value": "0.007706202",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jordan Mason",
+      "Value": "0.007706202",
+      "Position": "RB"
+    },
+    {
+      "Player": "Brenton Strange",
+      "Value": "0.007706202",
+      "Position": "TE"
+    },
+    {
+      "Player": "Demarcus Robinson",
+      "Value": "0.007706202",
+      "Position": "WR"
+    },
+    {
+      "Player": "Rashaad Penny",
+      "Value": "0.00749279",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tip Reiman",
+      "Value": "0.00749279",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jake Bobo",
+      "Value": "0.006887366",
+      "Position": "WR"
+    },
+    {
+      "Player": "Tom Brady",
+      "Value": "0.006696631",
+      "Position": "QB"
+    },
+    {
+      "Player": "Isaiah Hodgins",
+      "Value": "0.006696631",
+      "Position": "WR"
+    },
+    {
+      "Player": "Robert Woods",
+      "Value": "0.006696631",
+      "Position": "WR"
+    },
+    {
+      "Player": "Trey Sermon",
+      "Value": "0.006696631",
+      "Position": "RB"
+    },
+    {
+      "Player": "Charlie Jones",
+      "Value": "0.006511178",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kayshon Boutte",
+      "Value": "0.006330861",
+      "Position": "WR"
+    },
+    {
+      "Player": "David Bell",
+      "Value": "0.006330861",
+      "Position": "WR"
+    },
+    {
+      "Player": "Justyn Ross",
+      "Value": "0.006155537",
+      "Position": "WR"
+    },
+    {
+      "Player": "Taulia Tagovailoa",
+      "Value": "0.005985069",
+      "Position": "QB"
+    },
+    {
+      "Player": "Devaughn Vele",
+      "Value": "0.005819321",
+      "Position": "WR"
+    },
+    {
+      "Player": "Mecole Hardman",
+      "Value": "0.005819321",
+      "Position": "WR"
+    },
+    {
+      "Player": "Cameron Latu",
+      "Value": "0.005819321",
+      "Position": "TE"
+    },
+    {
+      "Player": "Tim Tebow",
+      "Value": "0.005349115",
+      "Position": "TE"
+    },
+    {
+      "Player": "Cole Turner",
+      "Value": "0.005200979",
+      "Position": "TE"
+    },
+    {
+      "Player": "Bo Melton",
+      "Value": "0.005200979",
+      "Position": "WR"
+    },
+    {
+      "Player": "Marquez Callaway",
+      "Value": "0.004780735",
+      "Position": "WR"
+    },
+    {
+      "Player": "Dallin Holker",
+      "Value": "0.00464834",
+      "Position": "TE"
+    },
+    {
+      "Player": "Ryan Tannehill",
+      "Value": "0.004519611",
+      "Position": "QB"
+    },
+    {
+      "Player": "Devin Duvernay",
+      "Value": "0.004519611",
+      "Position": "WR"
+    },
+    {
+      "Player": "Will Mallory",
+      "Value": "0.004394448",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jason Brownlee",
+      "Value": "0.004394448",
+      "Position": "WR"
+    },
+    {
+      "Player": "KeShawn Vaughn",
+      "Value": "0.003927508",
+      "Position": "RB"
+    },
+    {
+      "Player": "Xavier Gipson",
+      "Value": "0.003818742",
+      "Position": "WR"
+    },
+    {
+      "Player": "Casey Washington",
+      "Value": "0.003712987",
+      "Position": "WR"
+    },
+    {
+      "Player": "Boston Scott",
+      "Value": "0.003610162",
+      "Position": "RB"
+    },
+    {
+      "Player": "Josh Johnson",
+      "Value": "0.003510184",
+      "Position": "QB"
+    },
+    {
+      "Player": "Van Jefferson",
+      "Value": "0.003318457",
+      "Position": "WR"
+    },
+    {
+      "Player": "Denzel Mims",
+      "Value": "0.003137203",
+      "Position": "WR"
+    },
+    {
+      "Player": "Robert Tonyan",
+      "Value": "0.003050323",
+      "Position": "TE"
+    },
+    {
+      "Player": "Keaontay Ingram",
+      "Value": "0.002965849",
+      "Position": "RB"
+    },
+    {
+      "Player": "Max Duggan",
+      "Value": "0.002883714",
+      "Position": "QB"
+    },
+    {
+      "Player": "Devin Leary",
+      "Value": "0.002726206",
+      "Position": "QB"
+    },
+    {
+      "Player": "Xazavian Valladay",
+      "Value": "0.002650707",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tejhaun Palmer",
+      "Value": "0.0025773",
+      "Position": "WR"
+    },
+    {
+      "Player": "Elijah Higgins",
+      "Value": "0.002505926",
+      "Position": "TE"
+    },
+    {
+      "Player": "Isaiah Williams",
+      "Value": "0.002369052",
+      "Position": "WR"
+    },
+    {
+      "Player": "Justin Shorter",
+      "Value": "0.002239654",
+      "Position": "WR"
+    },
+    {
+      "Player": "Malik Davis",
+      "Value": "0.00217763",
+      "Position": "RB"
+    },
+    {
+      "Player": "Leonard Fournette",
+      "Value": "0.002117324",
+      "Position": "RB"
+    },
+    {
+      "Player": "Tim Patrick",
+      "Value": "0.002058688",
+      "Position": "WR"
+    },
+    {
+      "Player": "Logan Thomas",
+      "Value": "0.002001676",
+      "Position": "TE"
+    },
+    {
+      "Player": "Payne Durham",
+      "Value": "0.001946242",
+      "Position": "TE"
+    },
+    {
+      "Player": "Jimmy Garoppolo",
+      "Value": "0.001892344",
+      "Position": "QB"
+    },
+    {
+      "Player": "Terrace Marshall",
+      "Value": "0.001839939",
+      "Position": "WR"
+    },
+    {
+      "Player": "Xavier Weaver",
+      "Value": "0.001788984",
+      "Position": "WR"
+    },
+    {
+      "Player": "Kyle Philips",
+      "Value": "0.001739441",
+      "Position": "WR"
+    },
+    {
+      "Player": "Deon Jackson",
+      "Value": "0.00169127",
+      "Position": "RB"
+    },
+    {
+      "Player": "Melvin Gordon",
+      "Value": "0.001644433",
+      "Position": "RB"
+    },
+    {
+      "Player": "Parris Campbell",
+      "Value": "0.001598893",
+      "Position": "WR"
+    }
+  ]
+}

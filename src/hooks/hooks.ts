@@ -1,6 +1,7 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import adp from '../data/adp.json';
+import playerValuesJson from '../data/player_values.json';
 import {
     League,
     Player,
@@ -49,6 +50,30 @@ export function usePlayerData() {
     }, []);
 
     return playerData;
+}
+type PlayerValue = {
+    Player: string;
+    Value: string;
+    Position: string;
+};
+
+export function usePlayerValues() {
+    const [playerValues] = useState<PlayerValue[]>(playerValuesJson.Sheet1);
+
+    const getPlayerValue = (playerName: string) => {
+        const playerValue = playerValues.find(pv => pv.Player === playerName);
+        if (playerValue) return playerValue;
+
+        if (playerName.includes("'")) {
+            return playerValues.find(
+                pv => pv.Player === playerName.replaceAll("'", '')
+            );
+        }
+
+        return undefined;
+    };
+
+    return {playerValues, getPlayerValue};
 }
 
 type adpDatum = {
