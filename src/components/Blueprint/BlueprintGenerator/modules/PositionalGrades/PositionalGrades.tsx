@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styles from './PositionalGrades.module.css';
 import {Player, Roster, User} from '../../../../../sleeper-api/sleeper-api';
 import {usePlayerData, usePlayerValues} from '../../../../../hooks/hooks';
 import {FANTASY_POSITIONS, SUPER_FLEX_SET} from '../../../../../consts/fantasy';
+import {scale, slider} from '../../../../../consts/images';
+import ExportButton from '../../shared/ExportButton';
 
 interface PositionalGradesProps {
     roster?: Roster;
@@ -10,10 +12,11 @@ interface PositionalGradesProps {
 }
 
 const THRESHOLDS = new Map<string, number>([
-    ['QB', 250],
+    ['QB', 200],
     ['TE', 55],
     ['RB', 120],
     ['WR', 250],
+    ['DEPTH', 150],
 ]);
 
 export default function PositionalGrades({
@@ -22,6 +25,7 @@ export default function PositionalGrades({
 }: PositionalGradesProps) {
     const playerData = usePlayerData();
     const {getPlayerValue} = usePlayerValues();
+    const componentRef = useRef(null);
 
     function scoreByPosition(pos: string) {
         if (!SUPER_FLEX_SET.has(pos)) {
@@ -50,7 +54,7 @@ export default function PositionalGrades({
         if (!SUPER_FLEX_SET.has(pos)) {
             throw new Error(`Unknown position '${pos}'`);
         }
-        return Math.round((10 * score) / THRESHOLDS.get(pos)!);
+        return Math.min(Math.round((10 * score) / THRESHOLDS.get(pos)!), 10);
     }
 
     function sanityCheck() {
@@ -67,5 +71,49 @@ export default function PositionalGrades({
         });
     }
 
-    return <div>{sanityCheck()}</div>;
+    function scaleAndSlider(grade: number) {
+        if (grade < 0 || grade > 10) {
+            console.error(`grade out of range [0, 10]: '${grade}'`);
+        }
+        return (
+            <div className={styles.scaleAndSlider}>
+                <img src={scale} className={styles.scale} />
+                <img
+                    src={slider}
+                    className={`${styles.slider}`}
+                    style={{
+                        bottom: `${grade * 27.5 - 25}px`,
+                    }}
+                />
+            </div>
+        );
+    }
+
+    function graphicComponent() {
+        return (
+            <div className={styles.graphicComponent} ref={componentRef}>
+                {FANTASY_POSITIONS.map(position => {
+                    const score = scoreByPosition(position);
+                    const grade = gradeByPosition(position, score);
+                    return scaleAndSlider(grade);
+                })}
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            {sanityCheck()}
+            {graphicComponent()}
+            {
+                <ExportButton
+                    className={styles.graphicComponent}
+                    pngName={`${
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }_positional_grades.png`}
+                />
+            }
+        </div>
+    );
 }

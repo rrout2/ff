@@ -34,6 +34,9 @@ import nfl from '../logos/nfl.png';
 
 import blankLogo from '../logos/blank.png';
 
+import scale from '../assets/scale.png';
+import slider from '../assets/slider.png';
+
 const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
@@ -107,4 +110,4 @@ const teamLogos: Map<string, string> = new Map([
     ['rp-', nfl],
 ]);
 
-export {teamLogos, blankLogo};
+export {teamLogos, blankLogo, scale, slider};

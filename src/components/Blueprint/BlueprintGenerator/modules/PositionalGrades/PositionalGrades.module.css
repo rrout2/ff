@@ -1,1 +1,24 @@
-.PositionalGrades {}
+.graphicComponent {
+    background-color: #005D91;
+    padding: 35px 10px 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.scaleAndSlider {
+    position: relative;
+    width: 112px;
+}
+.scale {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider {
+    position: absolute;
+    width: 100%;
+    left: 4px;
+    bottom: 0;
+}
