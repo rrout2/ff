@@ -198,7 +198,7 @@ export function useTeamIdFromUrl(): [string, Dispatch<SetStateAction<string>>] {
     }, [searchParams, setTeamId]);
 
     useEffect(() => {
-        if (teamId === searchParams.get(TEAM_ID) || !teamId) return;
+        if (teamId === searchParams.get(TEAM_ID) || teamId === '') return;
 
         setSearchParams(searchParams => {
             searchParams.set(TEAM_ID, teamId);
