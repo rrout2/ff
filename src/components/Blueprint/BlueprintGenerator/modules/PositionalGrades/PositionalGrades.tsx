@@ -71,20 +71,25 @@ export default function PositionalGrades({
         });
     }
 
-    function scaleAndSlider(grade: number) {
+    function scaleAndSliderColumn(grade: number, position: string) {
         if (grade < 0 || grade > 10) {
             console.error(`grade out of range [0, 10]: '${grade}'`);
         }
         return (
-            <div className={styles.scaleAndSlider}>
-                <img src={scale} className={styles.scale} />
-                <img
-                    src={slider}
-                    className={`${styles.slider}`}
-                    style={{
-                        bottom: `${grade * 27.5 - 25}px`,
-                    }}
-                />
+            <div className={styles.column}>
+                <div className={styles.scaleAndSlider}>
+                    <img src={scale} className={styles.scale} />
+                    <img
+                        src={slider}
+                        className={`${styles.slider}`}
+                        style={{
+                            bottom: `${grade * 27.5 - 25}px`,
+                        }}
+                    />
+                </div>
+                <div className={`${styles.chip} ${styles[position]}`}>
+                    {position}
+                </div>
             </div>
         );
     }
@@ -95,7 +100,7 @@ export default function PositionalGrades({
                 {FANTASY_POSITIONS.map(position => {
                     const score = scoreByPosition(position);
                     const grade = gradeByPosition(position, score);
-                    return scaleAndSlider(grade);
+                    return scaleAndSliderColumn(grade, position);
                 })}
             </div>
         );
