@@ -46,9 +46,10 @@ export default function PositionalGrades({
                 const fullName = `${player.first_name} ${player.last_name}`;
                 const playerValue = getPlayerValue(fullName);
                 if (!playerValue) {
-                    throw new Error(
+                    console.warn(
                         `cannot find PlayerValue for player with name = '${fullName}'`
                     );
+                    return acc;
                 }
                 return acc + +playerValue.Value;
             }, 0);
