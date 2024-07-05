@@ -1,0 +1,52 @@
+.graphicComponent {
+    background-color: #005D91;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+}
+
+.title {
+    font-family: 'Erbaum';
+    font-size: 32px;
+    margin-bottom: -20px;
+}
+
+.score {
+    font-family: 'Prohibition Test';
+    font-size: 110px;
+    text-shadow: -6px 6px #213965;
+    padding-bottom: 5px; /* bc font is uncentered */
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.benchString {
+    font-family: 'Acumin Pro ExtraCondensed';
+    text-align: center;
+    margin-top: -20px;
+    width: 340px;
+}
+
+.scoreSection {
+    position: relative;
+    width: 300px;
+}
+
+.scoreBar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #cccccc;
+    transform: translateY(-50%);
+}
+.scoreFill {
+    background-color: #00a3e0;
+    height: 100%;
+    width: 70%;
+}

@@ -49,6 +49,13 @@ code {
   src: local('Acumin Pro'), url('fonts/Acumin-RPro.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Acumin Pro ExtraCondensed';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Acumin Pro ExtraCondensed'), url('fonts/Acumin_Pro_ExtraCondensed.otf') format('opentype');
+}
+
 
 @font-face {
   font-family: 'Acumin Pro Italic';

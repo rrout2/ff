@@ -24,6 +24,7 @@ import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModu
 import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
+import DepthScore from './modules/DepthScore/DepthScore';
 
 export enum Module {
     Unspecified = '',
@@ -33,6 +34,7 @@ export enum Module {
     Settings = 'settings',
     Starters = 'starters',
     PositionalGrades = 'positionalgrades',
+    DepthScore = 'depthscore',
 }
 
 export default function BlueprintGenerator() {
@@ -130,6 +132,9 @@ export default function BlueprintGenerator() {
                     >
                         Positional Grades
                     </MenuItem>
+                    <MenuItem value={Module.DepthScore} key={'depthscore'}>
+                        Depth Score
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -172,6 +177,9 @@ export default function BlueprintGenerator() {
                     roster={roster}
                     specifiedUser={specifiedUser}
                 />
+            )}
+            {hasTeamId() && module === Module.DepthScore && (
+                <DepthScore roster={roster} specifiedUser={specifiedUser} />
             )}
         </div>
     );
