@@ -15,7 +15,7 @@ interface PositionalGradesProps {
 const THRESHOLDS = new Map<string, number>([
     ['QB', 200],
     ['TE', 55],
-    ['RB', 120],
+    ['RB', 108],
     ['WR', 250],
     ['DEPTH', 150],
 ]);
