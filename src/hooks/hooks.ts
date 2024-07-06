@@ -28,7 +28,7 @@ import {
 } from '../consts/fantasy';
 import {Module} from '../components/Blueprint/BlueprintGenerator/BlueprintGenerator';
 
-interface PlayerData {
+export interface PlayerData {
     [key: string]: Player;
 }
 
