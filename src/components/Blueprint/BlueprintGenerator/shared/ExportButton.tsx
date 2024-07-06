@@ -58,7 +58,7 @@ export default function ExportButton(props: {
                 width: '120px',
             }}
         >
-            Export As PNG
+            {pngName ? 'Export As PNG' : 'Download Blueprint'}
         </Button>
     );
 }

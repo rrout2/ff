@@ -36,6 +36,7 @@ export enum Module {
     Starters = 'starters',
     PositionalGrades = 'positionalgrades',
     DepthScore = 'depthscore',
+    Unified = 'unified',
 }
 
 export default function BlueprintGenerator() {
@@ -108,6 +109,9 @@ export default function BlueprintGenerator() {
                 >
                     <MenuItem value={''} key={'chooseamodule'}>
                         Choose a module:
+                    </MenuItem>
+                    <MenuItem value={Module.Unified} key={'unified'}>
+                        Unified
                     </MenuItem>
                     <MenuItem value={Module.Cornerstone} key={'cornerstones'}>
                         Cornerstones
@@ -191,7 +195,8 @@ export default function BlueprintGenerator() {
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
                 margin: '4px',
             })}
-            {
+            {hasTeamId() && moduleSelectComponent()}
+            {module === Module.Unified && (
                 <ExportButton
                     className={[
                         'cornerstoneGraphic',
@@ -207,9 +212,8 @@ export default function BlueprintGenerator() {
                         specifiedUser?.display_name
                     }
                 />
-            }
-            {unifiedView()}
-            {hasTeamId() && moduleSelectComponent()}
+            )}
+            {module === Module.Unified && unifiedView()}
             {hasTeamId() && module === Module.Cornerstone && (
                 <CornerstoneModule
                     roster={roster}
