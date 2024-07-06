@@ -149,7 +149,7 @@ export default function BlueprintGenerator() {
         const hasId = hasTeamId();
         if (!hasId) return <></>;
         return (
-            <>
+            <div className={styles.allModules}>
                 <CornerstoneModule
                     roster={roster}
                     specifiedUser={specifiedUser}
@@ -186,7 +186,7 @@ export default function BlueprintGenerator() {
                     specifiedUser={specifiedUser}
                     graphicComponentClass="depthScoreGraphic"
                 />
-            </>
+            </div>
         );
     }
 

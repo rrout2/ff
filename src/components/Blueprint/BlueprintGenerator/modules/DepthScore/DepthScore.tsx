@@ -91,7 +91,7 @@ export default function DepthScore({
     }
 
     return (
-        <>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
             {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
@@ -103,6 +103,6 @@ export default function DepthScore({
             )}
             {overrideComponent()}
             {graphicComponent()}
-        </>
+        </div>
     );
 }

@@ -102,7 +102,7 @@ export default function CornerstoneModule(props: {
     }
 
     return (
-        <>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
             {graphicComponent()}
             {!graphicComponentClass && (
                 <ExportButton
@@ -114,6 +114,6 @@ export default function CornerstoneModule(props: {
                 />
             )}
             {allPositionalSelectors()}
-        </>
+        </div>
     );
 }

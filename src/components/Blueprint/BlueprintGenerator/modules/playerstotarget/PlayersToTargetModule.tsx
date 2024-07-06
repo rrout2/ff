@@ -159,7 +159,7 @@ export default function PlayersToTargetModule(props: {
         );
     }
     return (
-        <>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
             {graphicComponent()}
             {playerSuggestions.map((_, idx) => (
                 <Fragment key={idx}>{playerAutocomplete(idx)}</Fragment>
@@ -173,6 +173,6 @@ export default function PlayersToTargetModule(props: {
                     }_playerstotarget.png`}
                 />
             )}
-        </>
+        </div>
     );
 }

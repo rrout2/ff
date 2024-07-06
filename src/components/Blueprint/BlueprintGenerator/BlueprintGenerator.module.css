@@ -4,3 +4,9 @@
     margin: 20px;
     width: 800px;
 }
+
+.allModules {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
