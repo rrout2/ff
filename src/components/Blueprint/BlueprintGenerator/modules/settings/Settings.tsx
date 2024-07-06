@@ -30,12 +30,14 @@ export type SettingsProps = {
     leagueId?: string;
     specifiedUser?: User;
     numRosters: number;
+    graphicComponentClass?: string;
 };
 export default function Settings({
     roster,
     leagueId,
     numRosters,
     specifiedUser,
+    graphicComponentClass,
 }: SettingsProps) {
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
@@ -69,7 +71,12 @@ export default function Settings({
         const wrFlex = rosterSettings.get(WR_RB_FLEX) ?? 0;
         const wtFlex = rosterSettings.get(WR_TE_FLEX) ?? 0;
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 <div className={styles.row}>
                     <div className={`${styles.chip} ${styles.red}`}>
                         QB: {rosterSettings.get(QB)}
@@ -200,7 +207,7 @@ export default function Settings({
     return (
         <div>
             {graphicComponent()}
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -208,10 +215,10 @@ export default function Settings({
                         specifiedUser?.display_name
                     }_settings.png`}
                 />
-            }
-            {rosterSettingsComponent()}
-            {otherSettingsComponent()}
-            {rosterComponent()}
+            )}
+            {!graphicComponentClass && rosterSettingsComponent()}
+            {!graphicComponentClass && otherSettingsComponent()}
+            {!graphicComponentClass && rosterComponent()}
         </div>
     );
 }

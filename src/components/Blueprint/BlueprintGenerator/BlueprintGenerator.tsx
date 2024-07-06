@@ -25,6 +25,7 @@ import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import DepthScore from './modules/DepthScore/DepthScore';
+import ExportButton from './shared/ExportButton';
 
 export enum Module {
     Unspecified = '',
@@ -140,11 +141,74 @@ export default function BlueprintGenerator() {
         );
     }
 
+    function unifiedView() {
+        const hasId = hasTeamId();
+        if (!hasId) return <></>;
+        return (
+            <>
+                <CornerstoneModule
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="cornerstoneGraphic"
+                />
+                <LookToTradeModule
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="lookToTradeGraphic"
+                />
+                <PlayersToTargetModule
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="playersToTargetGraphic"
+                />
+                <Settings
+                    roster={roster}
+                    leagueId={leagueId}
+                    numRosters={rosters?.length ?? 0}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="settingsGraphic"
+                />
+                <Starters
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="startersGraphic"
+                />
+                <PositionalGrades
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="positionalGradesGraphic"
+                />
+                <DepthScore
+                    roster={roster}
+                    specifiedUser={specifiedUser}
+                    graphicComponentClass="depthScoreGraphic"
+                />
+            </>
+        );
+    }
+
     return (
         <div className={styles.blueprintPage}>
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
                 margin: '4px',
             })}
+            {
+                <ExportButton
+                    className={[
+                        'cornerstoneGraphic',
+                        'lookToTradeGraphic',
+                        'playersToTargetGraphic',
+                        'settingsGraphic',
+                        'startersGraphic',
+                        'positionalGradesGraphic',
+                        'depthScoreGraphic',
+                    ]}
+                    zipName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
+            }
+            {unifiedView()}
             {hasTeamId() && moduleSelectComponent()}
             {hasTeamId() && module === Module.Cornerstone && (
                 <CornerstoneModule

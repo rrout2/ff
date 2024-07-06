@@ -13,10 +13,15 @@ import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 interface DepthScoreProps {
     roster?: Roster;
     specifiedUser?: User;
+    graphicComponentClass?: string;
 }
 const THRESHOLD = 150;
 
-export default function DepthScore({roster, specifiedUser}: DepthScoreProps) {
+export default function DepthScore({
+    roster,
+    specifiedUser,
+    graphicComponentClass,
+}: DepthScoreProps) {
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
     const [_, bench, benchString] = useProjectedLineup(
@@ -42,7 +47,12 @@ export default function DepthScore({roster, specifiedUser}: DepthScoreProps) {
     function graphicComponent() {
         const score = calculateDepthScore();
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 <div className={styles.title}>DEPTH SCORE:</div>
                 <div className={styles.scoreSection}>
                     <div className={styles.scoreBar}>
@@ -82,7 +92,7 @@ export default function DepthScore({roster, specifiedUser}: DepthScoreProps) {
 
     return (
         <>
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -90,7 +100,7 @@ export default function DepthScore({roster, specifiedUser}: DepthScoreProps) {
                         specifiedUser?.display_name
                     }_depth_score.png`}
                 />
-            }
+            )}
             {overrideComponent()}
             {graphicComponent()}
         </>

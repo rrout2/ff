@@ -37,8 +37,9 @@ const SUGGESTIONS = [
 export default function LookToTradeModule(props: {
     roster?: Roster;
     specifiedUser?: User;
+    graphicComponentClass?: string;
 }) {
-    const {roster, specifiedUser} = props;
+    const {roster, specifiedUser, graphicComponentClass} = props;
     const componentRef = useRef(null);
     const playerData = usePlayerData();
     const [playersToTrade, setPlayersToTrade] = useState<string[][]>([
@@ -78,7 +79,12 @@ export default function LookToTradeModule(props: {
     function graphicComponent() {
         if (!playerData) return <></>;
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 <div className={styles.title}>LOOK TO TRADE:</div>
                 {[0, 1, 2].map(idx => {
                     return tradeSuggestion(
@@ -168,7 +174,7 @@ export default function LookToTradeModule(props: {
                 {graphicComponent()}
                 {inputComponent()}
             </div>
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -176,7 +182,7 @@ export default function LookToTradeModule(props: {
                         specifiedUser?.display_name
                     }_looktotrade.png`}
                 />
-            }
+            )}
         </>
     );
 }

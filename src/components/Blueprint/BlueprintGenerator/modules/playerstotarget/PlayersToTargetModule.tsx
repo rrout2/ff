@@ -7,8 +7,11 @@ import {Player, User} from '../../../../../sleeper-api/sleeper-api';
 import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {logoImage} from '../../shared/Utilities';
 
-export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
-    const {specifiedUser} = props;
+export default function PlayersToTargetModule(props: {
+    specifiedUser?: User;
+    graphicComponentClass?: string;
+}) {
+    const {specifiedUser, graphicComponentClass} = props;
     const playerData = usePlayerData();
     const componentRef = useRef(null);
     const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
@@ -78,7 +81,12 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
     function graphicComponent() {
         if (!playerData) return <></>;
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 {playerSuggestions.map((playerId, idx) => {
                     return playerTarget(playerId, idx);
                 })}
@@ -156,7 +164,7 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
             {playerSuggestions.map((_, idx) => (
                 <Fragment key={idx}>{playerAutocomplete(idx)}</Fragment>
             ))}
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -164,7 +172,7 @@ export default function PlayersToTargetModule(props: {specifiedUser?: User}) {
                         specifiedUser?.display_name
                     }_playerstotarget.png`}
                 />
-            }
+            )}
         </>
     );
 }

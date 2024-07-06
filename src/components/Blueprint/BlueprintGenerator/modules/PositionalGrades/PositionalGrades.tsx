@@ -10,6 +10,7 @@ import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 interface PositionalGradesProps {
     roster?: Roster;
     specifiedUser?: User;
+    graphicComponentClass?: string;
 }
 
 const THRESHOLDS = new Map<string, number>([
@@ -23,6 +24,7 @@ const THRESHOLDS = new Map<string, number>([
 export default function PositionalGrades({
     roster,
     specifiedUser,
+    graphicComponentClass,
 }: PositionalGradesProps) {
     const playerData = usePlayerData();
     const {getPlayerValue} = usePlayerValues();
@@ -98,7 +100,12 @@ export default function PositionalGrades({
 
     function graphicComponent() {
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 {FANTASY_POSITIONS.map(position => {
                     const grade = gradeByPosition(position);
                     return scaleAndSliderColumn(grade, position);
@@ -152,7 +159,7 @@ export default function PositionalGrades({
 
     return (
         <div>
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -160,7 +167,7 @@ export default function PositionalGrades({
                         specifiedUser?.display_name
                     }_positional_grades.png`}
                 />
-            }
+            )}
             {overrideComponent()}
             {graphicComponent()}
         </div>

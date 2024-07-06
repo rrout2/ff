@@ -13,8 +13,9 @@ import ExportButton from '../../shared/ExportButton';
 export default function Starters(props: {
     roster?: Roster;
     specifiedUser?: User;
+    graphicComponentClass?: string;
 }) {
-    const {roster, specifiedUser} = props;
+    const {roster, specifiedUser, graphicComponentClass} = props;
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
     const [startingLineup] = useProjectedLineup(
@@ -58,7 +59,12 @@ export default function Starters(props: {
 
     function graphicComponent() {
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 {startingLineup.map(({player, position}) => {
                     return playerTarget(player, position);
                 })}
@@ -68,7 +74,7 @@ export default function Starters(props: {
 
     return (
         <>
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -76,7 +82,7 @@ export default function Starters(props: {
                         specifiedUser?.display_name
                     }_starters.png`}
                 />
-            }
+            )}
             {graphicComponent()}
         </>
     );

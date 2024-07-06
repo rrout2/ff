@@ -9,8 +9,9 @@ import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 export default function CornerstoneModule(props: {
     roster?: Roster;
     specifiedUser?: User;
+    graphicComponentClass?: string;
 }) {
-    const {roster, specifiedUser} = props;
+    const {roster, specifiedUser, graphicComponentClass} = props;
     const playerData = usePlayerData();
     const componentRef = useRef(null);
     const {getAdp, sortByAdp} = useAdpData();
@@ -53,7 +54,12 @@ export default function CornerstoneModule(props: {
     function graphicComponent() {
         if (!playerData) return <></>;
         return (
-            <div className={styles.graphicComponent} ref={componentRef}>
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                }`}
+                ref={componentRef}
+            >
                 <div className={styles.positions}>
                     {FANTASY_POSITIONS.map(pos => (
                         <div className={styles.column}>
@@ -98,7 +104,7 @@ export default function CornerstoneModule(props: {
     return (
         <>
             {graphicComponent()}
-            {
+            {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
                     pngName={`${
@@ -106,7 +112,7 @@ export default function CornerstoneModule(props: {
                         specifiedUser?.display_name
                     }_cornerstones.png`}
                 />
-            }
+            )}
             {allPositionalSelectors()}
         </>
     );
