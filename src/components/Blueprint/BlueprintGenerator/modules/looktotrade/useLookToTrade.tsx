@@ -1,7 +1,7 @@
 import {FormControl, Autocomplete, TextField} from '@mui/material';
 import {useRef, useState, useEffect} from 'react';
 import {usePlayerData, useTitle} from '../../../../../hooks/hooks';
-import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 import styles from './LookToTradeModule.module.css';
 const COLORS = ['#3CB6E9', '#EC336D', '#8AC73E'];
