@@ -30,6 +30,7 @@ import {useCornerstone} from './modules/cornerstone/useCornerstone';
 import {useLookToTrade} from './modules/looktotrade/useLookToTrade';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
+import {useStarters} from './modules/Starters/useStarters';
 
 export enum Module {
     Unspecified = '',
@@ -66,6 +67,10 @@ export default function BlueprintGenerator() {
         rosters?.length ?? 0,
         leagueId,
         'settingsGraphic'
+    );
+    const {graphicComponent: startersGraphic} = useStarters(
+        roster,
+        'startersGraphic'
     );
 
     useEffect(() => {
@@ -175,16 +180,11 @@ export default function BlueprintGenerator() {
                     {lookToTradeGraphic}
                     {playersToTargetGraphic}
                     {settingsGraphic}
+                    {startersGraphic}
                 </div>
                 {allPositionalSelectors}
                 {lookToTradeInput}
                 {playersToTargetInput}
-
-                <Starters
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="startersGraphic"
-                />
                 <PositionalGrades
                     roster={roster}
                     specifiedUser={specifiedUser}
