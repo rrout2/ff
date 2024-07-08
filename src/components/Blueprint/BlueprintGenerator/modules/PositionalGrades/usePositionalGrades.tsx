@@ -135,16 +135,13 @@ export function usePositionalGrades(
 
     function overrideComponent() {
         return (
-            <div>
-                <div>Overrides:</div>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    {FANTASY_POSITIONS.map(pos => overrideSelector(pos))}
-                </div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}
+            >
+                {FANTASY_POSITIONS.map(pos => overrideSelector(pos))}
             </div>
         );
     }

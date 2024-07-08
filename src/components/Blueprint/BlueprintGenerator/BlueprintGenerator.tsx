@@ -32,6 +32,7 @@ import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
 import {useStarters} from './modules/Starters/useStarters';
 import {usePositionalGrades} from './modules/PositionalGrades/usePositionalGrades';
+import {useDepthScore} from './modules/DepthScore/useDepthScore';
 
 export enum Module {
     Unspecified = '',
@@ -73,6 +74,10 @@ export default function BlueprintGenerator() {
         roster,
         'startersGraphic'
     );
+    const {
+        graphicComponent: depthScoreGraphic,
+        overrideComponent: depthScoreOverride,
+    } = useDepthScore(roster, 'depthScoreGraphic');
     const {
         graphicComponent: positionalGradesGraphic,
         overrideComponent: positionalGradesOverride,
@@ -187,16 +192,13 @@ export default function BlueprintGenerator() {
                     {settingsGraphic}
                     {startersGraphic}
                     {positionalGradesGraphic}
+                    {depthScoreGraphic}
                 </div>
                 {allPositionalSelectors}
                 {lookToTradeInput}
                 {playersToTargetInput}
                 {positionalGradesOverride}
-                <DepthScore
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="depthScoreGraphic"
-                />
+                {depthScoreOverride}
             </div>
         );
     }
