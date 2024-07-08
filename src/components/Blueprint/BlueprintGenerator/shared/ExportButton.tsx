@@ -3,6 +3,7 @@ import {toPng} from 'html-to-image';
 import JSZip from 'jszip';
 import {saveAs} from 'file-saver';
 
+// TODO: cleanup/refactor
 export default function ExportButton(props: {
     className: string | string[];
     pngName?: string;
