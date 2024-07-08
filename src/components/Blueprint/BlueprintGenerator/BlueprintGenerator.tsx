@@ -26,6 +26,7 @@ import Starters from './modules/Starters/Starters';
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import DepthScore from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
+import {useCornerstone} from './modules/cornerstone/useCornerstone';
 
 export enum Module {
     Unspecified = '',
@@ -48,6 +49,8 @@ export default function BlueprintGenerator() {
     const playerData = usePlayerData();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [module, setModule] = useModuleFromUrl();
+    const {graphicComponent: cornerstoneGraphic, allPositionalSelectors} =
+        useCornerstone(roster, 'cornerstoneGraphic');
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
         setSpecifiedUser(allUsers?.[+teamId]);
@@ -150,11 +153,8 @@ export default function BlueprintGenerator() {
         if (!hasId) return <></>;
         return (
             <div className={styles.allModules}>
-                <CornerstoneModule
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="cornerstoneGraphic"
-                />
+                <div className={styles.offScreen}>{cornerstoneGraphic}</div>
+                {allPositionalSelectors}
                 <LookToTradeModule
                     roster={roster}
                     specifiedUser={specifiedUser}

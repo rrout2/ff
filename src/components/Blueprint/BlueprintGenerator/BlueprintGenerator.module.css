@@ -10,3 +10,9 @@
     flex-direction: column;
     gap: 20px
 }
+
+.offScreen {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+}
