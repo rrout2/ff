@@ -28,6 +28,7 @@ import DepthScore from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
 import {useCornerstone} from './modules/cornerstone/useCornerstone';
 import {useLookToTrade} from './modules/looktotrade/useLookToTrade';
+import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 
 export enum Module {
     Unspecified = '',
@@ -56,6 +57,10 @@ export default function BlueprintGenerator() {
         graphicComponent: lookToTradeGraphic,
         inputComponent: lookToTradeInput,
     } = useLookToTrade(roster, 'lookToTradeGraphic');
+    const {
+        graphicComponent: playersToTargetGraphic,
+        inputComponent: playersToTargetInput,
+    } = usePlayersToTarget('playersToTargetGraphic');
 
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
@@ -162,13 +167,11 @@ export default function BlueprintGenerator() {
                 <div className={styles.offScreen}>
                     {cornerstoneGraphic}
                     {lookToTradeGraphic}
+                    {playersToTargetGraphic}
                 </div>
                 {allPositionalSelectors}
                 {lookToTradeInput}
-                <PlayersToTargetModule
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="playersToTargetGraphic"
-                />
+                {playersToTargetInput}
                 <Settings
                     roster={roster}
                     leagueId={leagueId}
