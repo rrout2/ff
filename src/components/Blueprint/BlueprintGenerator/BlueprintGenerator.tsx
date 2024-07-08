@@ -208,19 +208,19 @@ export default function BlueprintGenerator() {
                             {lookToTradeInput}
                         </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                         <div className={styles.inputModule}>
                             Players to Target:
                             {playersToTargetInput}
                         </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Positional Grade Override:
                             {positionalGradesOverride}
                         </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Depth Score Override:
                             {depthScoreOverride}
