@@ -111,7 +111,7 @@ export function usePositionalGrades(
             throw new Error(`Unknown position '${pos}'`);
         }
         return (
-            <FormControl key={pos} style={{margin: '8px', width: '100px'}}>
+            <FormControl key={pos} style={{margin: '4px', width: '100px'}}>
                 <InputLabel>{pos}</InputLabel>
                 <Select
                     value={overrides.get(pos)!}
@@ -134,16 +134,7 @@ export function usePositionalGrades(
     }
 
     function overrideComponent() {
-        return (
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                }}
-            >
-                {FANTASY_POSITIONS.map(pos => overrideSelector(pos))}
-            </div>
-        );
+        return <>{FANTASY_POSITIONS.map(pos => overrideSelector(pos))}</>;
     }
 
     return {

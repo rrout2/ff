@@ -17,3 +17,8 @@
     top: -9999px;
     margin: 30px;
 }
+
+.inputModule {
+    display: flex;
+    flex-direction: column;
+}

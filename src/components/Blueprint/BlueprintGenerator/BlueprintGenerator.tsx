@@ -18,6 +18,7 @@ import {
     FormControl,
     MenuItem,
     Select,
+    Grid,
 } from '@mui/material';
 import LookToTradeModule from './modules/looktotrade/LookToTradeModule';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
@@ -194,11 +195,38 @@ export default function BlueprintGenerator() {
                     {positionalGradesGraphic}
                     {depthScoreGraphic}
                 </div>
-                {allPositionalSelectors}
-                {lookToTradeInput}
-                {playersToTargetInput}
-                {positionalGradesOverride}
-                {depthScoreOverride}
+                <Grid container spacing={1}>
+                    <Grid item xs={6}>
+                        <div className={styles.inputModule}>
+                            Cornerstones:
+                            {allPositionalSelectors}
+                        </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div className={styles.inputModule}>
+                            Look to Trade:
+                            {lookToTradeInput}
+                        </div>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <div className={styles.inputModule}>
+                            Players to Target:
+                            {playersToTargetInput}
+                        </div>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <div className={styles.inputModule}>
+                            Positional Grade Override:
+                            {positionalGradesOverride}
+                        </div>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <div className={styles.inputModule}>
+                            Depth Score Override:
+                            {depthScoreOverride}
+                        </div>
+                    </Grid>
+                </Grid>
             </div>
         );
     }

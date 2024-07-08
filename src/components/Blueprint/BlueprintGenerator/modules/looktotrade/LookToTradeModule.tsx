@@ -18,7 +18,7 @@ export default function LookToTradeModule(props: {
         <>
             <div className={styles.body}>
                 {graphicComponent}
-                {inputComponent}
+                <div className={styles.inputComponent}>{inputComponent}</div>
             </div>
             {!graphicComponentClass && (
                 <ExportButton

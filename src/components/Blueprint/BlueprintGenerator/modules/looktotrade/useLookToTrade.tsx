@@ -128,7 +128,7 @@ export function useLookToTrade(
         nonIdPlayerOptions.push('2025 1st');
         nonIdPlayerOptions.push('2026 1st');
         return (
-            <div className={styles.inputComponent}>
+            <>
                 {playersToTrade.map((_, idx) => (
                     <>
                         <PlayerSelectComponent
@@ -144,7 +144,7 @@ export function useLookToTrade(
                         {inReturnComponent(idx)}
                     </>
                 ))}
-            </div>
+            </>
         );
     }
 

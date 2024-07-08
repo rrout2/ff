@@ -110,6 +110,5 @@ export function useCornerstone(
             graphicComponentClass
         ),
         allPositionalSelectors: allPositionalSelectors(),
-        graphicRef: componentRef,
     };
 }
