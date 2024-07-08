@@ -29,6 +29,7 @@ import ExportButton from './shared/ExportButton';
 import {useCornerstone} from './modules/cornerstone/useCornerstone';
 import {useLookToTrade} from './modules/looktotrade/useLookToTrade';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
+import {useSettings} from './modules/settings/useSettings';
 
 export enum Module {
     Unspecified = '',
@@ -61,6 +62,11 @@ export default function BlueprintGenerator() {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
     } = usePlayersToTarget('playersToTargetGraphic');
+    const {graphicComponent: settingsGraphic} = useSettings(
+        rosters?.length ?? 0,
+        leagueId,
+        'settingsGraphic'
+    );
 
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
@@ -168,17 +174,12 @@ export default function BlueprintGenerator() {
                     {cornerstoneGraphic}
                     {lookToTradeGraphic}
                     {playersToTargetGraphic}
+                    {settingsGraphic}
                 </div>
                 {allPositionalSelectors}
                 {lookToTradeInput}
                 {playersToTargetInput}
-                <Settings
-                    roster={roster}
-                    leagueId={leagueId}
-                    numRosters={rosters?.length ?? 0}
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="settingsGraphic"
-                />
+
                 <Starters
                     roster={roster}
                     specifiedUser={specifiedUser}
