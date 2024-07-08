@@ -31,6 +31,7 @@ import {useLookToTrade} from './modules/looktotrade/useLookToTrade';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
 import {useStarters} from './modules/Starters/useStarters';
+import {usePositionalGrades} from './modules/PositionalGrades/usePositionalGrades';
 
 export enum Module {
     Unspecified = '',
@@ -72,6 +73,10 @@ export default function BlueprintGenerator() {
         roster,
         'startersGraphic'
     );
+    const {
+        graphicComponent: positionalGradesGraphic,
+        overrideComponent: positionalGradesOverride,
+    } = usePositionalGrades(roster, 'positionalGradesGraphic');
 
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
@@ -181,15 +186,12 @@ export default function BlueprintGenerator() {
                     {playersToTargetGraphic}
                     {settingsGraphic}
                     {startersGraphic}
+                    {positionalGradesGraphic}
                 </div>
                 {allPositionalSelectors}
                 {lookToTradeInput}
                 {playersToTargetInput}
-                <PositionalGrades
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                    graphicComponentClass="positionalGradesGraphic"
-                />
+                {positionalGradesOverride}
                 <DepthScore
                     roster={roster}
                     specifiedUser={specifiedUser}
