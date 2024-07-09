@@ -1,5 +1,5 @@
 import {FormControl, InputLabel, Select, MenuItem} from '@mui/material';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
     useLeagueIdFromUrl,
     useRosterSettingsFromId,
@@ -19,9 +19,25 @@ export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
     const {getPlayerValue} = usePlayerValues();
     const componentRef = useRef(null);
     const [override, setOverride] = useState(-1);
+    const [score, setScore] = useState(-1);
+    const [initialScore, setInitialScore] = useState(-1);
+
+    useEffect(() => {
+        if (!bench.length) return;
+        setScore(calculateDepthScoreOrOverride());
+    }, [bench, override]);
+
+    useEffect(() => {
+        if (!bench.length) return;
+        setInitialScore(calculateDepthScore());
+    }, [bench]);
+
+    function calculateDepthScoreOrOverride() {
+        if (override >= 0) return override;
+        return calculateDepthScore();
+    }
 
     function calculateDepthScore() {
-        if (override >= 0) return override;
         const score = bench.reduce((acc: number, curr: Player) => {
             const playerValue = getPlayerValue(
                 `${curr.first_name} ${curr.last_name}`
@@ -33,7 +49,6 @@ export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
     }
 
     function graphicComponent() {
-        const score = calculateDepthScore();
         return (
             <div
                 className={`${styles.graphicComponent} ${
@@ -58,7 +73,7 @@ export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
 
     function overrideComponent() {
         return (
-            <FormControl style={{margin: '8px', width: '100px'}}>
+            <FormControl style={{margin: '8px'}}>
                 <InputLabel>Override</InputLabel>
                 <Select
                     value={override}
@@ -67,7 +82,7 @@ export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
                         setOverride(+e.target.value);
                     }}
                 >
-                    <MenuItem value={-1}>None</MenuItem>
+                    <MenuItem value={-1}>None ({initialScore})</MenuItem>
                     {Array.from({length: 11}, (_, index) => (
                         <MenuItem key={index} value={index}>
                             {index}

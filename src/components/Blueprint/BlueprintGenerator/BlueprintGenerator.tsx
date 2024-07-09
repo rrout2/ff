@@ -1,9 +1,12 @@
 import {useEffect, useState} from 'react';
 import {
+    useAdpData,
     useFetchRosters,
+    useLeague,
     useLeagueIdFromUrl,
     useModuleFromUrl,
     usePlayerData,
+    useRosterSettings,
     useTeamIdFromUrl,
     useTitle,
 } from '../../../hooks/hooks';
@@ -34,6 +37,17 @@ import {useSettings} from './modules/settings/useSettings';
 import {useStarters} from './modules/Starters/useStarters';
 import {usePositionalGrades} from './modules/PositionalGrades/usePositionalGrades';
 import {useDepthScore} from './modules/DepthScore/useDepthScore';
+import {
+    QB,
+    RB,
+    WR,
+    TE,
+    BENCH,
+    FLEX,
+    WR_RB_FLEX,
+    WR_TE_FLEX,
+    SUPER_FLEX,
+} from '../../../consts/fantasy';
 
 export enum Module {
     Unspecified = '',
@@ -53,7 +67,9 @@ export default function BlueprintGenerator() {
     const {data: rosters} = useFetchRosters(leagueId);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
+    const league = useLeague(leagueId);
     const playerData = usePlayerData();
+    const rosterSettings = useRosterSettings(league);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [module, setModule] = useModuleFromUrl();
     const {graphicComponent: cornerstoneGraphic, allPositionalSelectors} =
@@ -82,6 +98,7 @@ export default function BlueprintGenerator() {
         graphicComponent: positionalGradesGraphic,
         overrideComponent: positionalGradesOverride,
     } = usePositionalGrades(roster, 'positionalGradesGraphic');
+    const {sortByAdp} = useAdpData();
 
     useEffect(() => {
         if (!allUsers.length || !hasTeamId()) return;
@@ -179,6 +196,44 @@ export default function BlueprintGenerator() {
             </FormControl>
         );
     }
+
+    function rosterComponent() {
+        if (!playerData) return <></>;
+        return roster?.players
+            .map(playerId => playerData[playerId])
+            .filter(player => !!player)
+            .sort(sortByAdp)
+            .map(player => {
+                return (
+                    <div>{`${player.position} - ${player.first_name} ${player.last_name}`}</div>
+                );
+            });
+    }
+
+    function settingsComponent() {
+        if (!playerData) return <></>;
+        const scoringSettings = league?.scoring_settings;
+        if (!scoringSettings) return <></>;
+        const wrtFlex = rosterSettings.get(FLEX) ?? 0;
+        const wrFlex = rosterSettings.get(WR_RB_FLEX) ?? 0;
+        const wtFlex = rosterSettings.get(WR_TE_FLEX) ?? 0;
+        return (
+            <div>
+                <div>QB: {rosterSettings.get(QB)}</div>
+                <div>RB: {rosterSettings.get(RB)}</div>
+                <div>WR: {rosterSettings.get(WR)}</div>
+                <div>TE: {rosterSettings.get(TE)}</div>
+                <div>FLEX: {wrtFlex + wrFlex + wtFlex}</div>
+                <div>BN: {rosterSettings.get(BENCH)}</div>
+                <div>TEAMS: {rosters?.length ?? 0}</div>
+                <div>SF: {rosterSettings.has(SUPER_FLEX) ? 'YES' : 'NO'}</div>
+                <div>PPR: {scoringSettings.rec ?? 0}</div>
+                <div>TEP: {scoringSettings.bonus_rec_te ?? 0}</div>
+                <div>TAXI: {league.settings.taxi_slots}</div>
+            </div>
+        );
+    }
+
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
 
@@ -203,13 +258,7 @@ export default function BlueprintGenerator() {
                             {allPositionalSelectors}
                         </div>
                     </Grid>
-                    <Grid item xs={6}>
-                        <div className={styles.inputModule}>
-                            Look to Trade:
-                            {lookToTradeInput}
-                        </div>
-                    </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Players to Target:
                             {playersToTargetInput}
@@ -221,10 +270,22 @@ export default function BlueprintGenerator() {
                             {positionalGradesOverride}
                         </div>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={6}>
+                        <div className={styles.inputModule}>
+                            Look to Trade:
+                            {lookToTradeInput}
+                        </div>
+                    </Grid>
+                    <Grid item xs={2}>
                         <div className={styles.inputModule}>
                             Depth Score Override:
                             {depthScoreOverride}
+                        </div>
+                    </Grid>
+                    <Grid item xs={4} className={styles.extraInfo}>
+                        <div>{rosterComponent()}</div>
+                        <div style={{textAlign: 'end'}}>
+                            {settingsComponent()}
                         </div>
                     </Grid>
                 </Grid>

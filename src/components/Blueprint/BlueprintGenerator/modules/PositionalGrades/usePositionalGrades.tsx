@@ -53,9 +53,7 @@ export function usePositionalGrades(
         if (!SUPER_FLEX_SET.has(pos)) {
             throw new Error(`Unknown position '${pos}'`);
         }
-        if (overrides.get(pos)! >= 0) {
-            return overrides.get(pos)!;
-        }
+
         return Math.min(Math.round((10 * score) / THRESHOLDS.get(pos)!), 10);
     }
 
@@ -99,7 +97,12 @@ export function usePositionalGrades(
                 ref={componentRef}
             >
                 {FANTASY_POSITIONS.map(position => {
-                    const grade = gradeByPosition(position);
+                    let grade = 0;
+                    if (overrides.get(position)! >= 0) {
+                        grade = overrides.get(position)!;
+                    } else {
+                        grade = gradeByPosition(position);
+                    }
                     return scaleAndSliderColumn(grade, position);
                 })}
             </div>
@@ -111,7 +114,7 @@ export function usePositionalGrades(
             throw new Error(`Unknown position '${pos}'`);
         }
         return (
-            <FormControl key={pos} style={{margin: '4px', width: '100px'}}>
+            <FormControl key={pos} style={{margin: '4px'}}>
                 <InputLabel>{pos}</InputLabel>
                 <Select
                     value={overrides.get(pos)!}
@@ -122,7 +125,9 @@ export function usePositionalGrades(
                         setOverrides(newOverrides);
                     }}
                 >
-                    <MenuItem value={-1}>None</MenuItem>
+                    <MenuItem value={-1}>
+                        None ({gradeByPosition(pos)})
+                    </MenuItem>
                     {Array.from({length: 11}, (_, index) => (
                         <MenuItem key={index} value={index}>
                             {index}
