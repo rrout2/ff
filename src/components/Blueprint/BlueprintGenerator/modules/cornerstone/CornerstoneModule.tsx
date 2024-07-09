@@ -1,14 +1,14 @@
 import styles from './CornerstoneModule.module.css';
-import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
 import {useCornerstone} from './useCornerstone';
 
 export default function CornerstoneModule(props: {
     roster?: Roster;
-    specifiedUser?: User;
+    teamName?: string;
     graphicComponentClass?: string;
 }) {
-    const {roster, specifiedUser, graphicComponentClass} = props;
+    const {roster, teamName, graphicComponentClass} = props;
     const {graphicComponent, allPositionalSelectors} = useCornerstone(
         roster,
         graphicComponentClass
@@ -20,10 +20,7 @@ export default function CornerstoneModule(props: {
             {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={`${
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }_cornerstones.png`}
+                    pngName={`${teamName}_cornerstones.png`}
                 />
             )}
             {allPositionalSelectors}

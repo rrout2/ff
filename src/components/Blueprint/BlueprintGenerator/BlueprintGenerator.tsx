@@ -68,7 +68,6 @@ export default function BlueprintGenerator() {
     } = usePlayersToTarget('playersToTargetGraphic');
     const {graphicComponent: settingsGraphic} = useSettings(
         rosters?.length ?? 0,
-        leagueId,
         'settingsGraphic'
     );
     const {graphicComponent: startersGraphic} = useStarters(
@@ -180,6 +179,8 @@ export default function BlueprintGenerator() {
             </FormControl>
         );
     }
+    const teamName =
+        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
 
     function unifiedView() {
         const hasId = hasTeamId();
@@ -248,47 +249,35 @@ export default function BlueprintGenerator() {
                         'positionalGradesGraphic',
                         'depthScoreGraphic',
                     ]}
-                    zipName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
+                    zipName={teamName}
                 />
             )}
             {module === Module.Unified && unifiedView()}
             {hasTeamId() && module === Module.Cornerstone && (
-                <CornerstoneModule
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                />
+                <CornerstoneModule roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.LookToTrade && (
-                <LookToTradeModule
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                />
+                <LookToTradeModule roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.PlayersToTarget && (
-                <PlayersToTargetModule specifiedUser={specifiedUser} />
+                <PlayersToTargetModule teamName={teamName} />
             )}
             {hasTeamId() && module === Module.Settings && (
                 <Settings
                     roster={roster}
                     leagueId={leagueId}
                     numRosters={rosters?.length ?? 0}
-                    specifiedUser={specifiedUser}
+                    teamName={teamName}
                 />
             )}
             {hasTeamId() && module === Module.Starters && (
-                <Starters roster={roster} specifiedUser={specifiedUser} />
+                <Starters roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.PositionalGrades && (
-                <PositionalGrades
-                    roster={roster}
-                    specifiedUser={specifiedUser}
-                />
+                <PositionalGrades roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.DepthScore && (
-                <DepthScore roster={roster} specifiedUser={specifiedUser} />
+                <DepthScore roster={roster} teamName={teamName} />
             )}
         </div>
     );

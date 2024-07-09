@@ -1,17 +1,17 @@
 import styles from './PositionalGrades.module.css';
-import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
 import {usePositionalGrades} from './usePositionalGrades';
 
 interface PositionalGradesProps {
     roster?: Roster;
-    specifiedUser?: User;
+    teamName?: string;
     graphicComponentClass?: string;
 }
 
 export default function PositionalGrades({
     roster,
-    specifiedUser,
+    teamName,
     graphicComponentClass,
 }: PositionalGradesProps) {
     const {graphicComponent, overrideComponent} = usePositionalGrades(
@@ -24,10 +24,7 @@ export default function PositionalGrades({
             {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={`${
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }_positional_grades.png`}
+                    pngName={`${teamName}_positional_grades.png`}
                 />
             )}
             {overrideComponent}

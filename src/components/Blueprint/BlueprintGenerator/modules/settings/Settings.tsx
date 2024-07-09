@@ -5,7 +5,7 @@ import {
     useRosterSettings,
     useTitle,
 } from '../../../../../hooks/hooks';
-import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Settings.module.css';
 import {IconButton} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
@@ -24,7 +24,7 @@ import {useSettings} from './useSettings';
 export type SettingsProps = {
     roster?: Roster;
     leagueId?: string;
-    specifiedUser?: User;
+    teamName?: string;
     numRosters: number;
     graphicComponentClass?: string;
 };
@@ -32,7 +32,7 @@ export default function Settings({
     roster,
     leagueId,
     numRosters,
-    specifiedUser,
+    teamName,
     graphicComponentClass,
 }: SettingsProps) {
     const league = useLeague(leagueId);
@@ -42,11 +42,7 @@ export default function Settings({
         rosterSettings,
         roster?.players
     );
-    const {graphicComponent} = useSettings(
-        numRosters,
-        leagueId,
-        graphicComponentClass
-    );
+    const {graphicComponent} = useSettings(numRosters, graphicComponentClass);
     useTitle('Settings - Blueprint Generator');
 
     function humanReadablePosition(position: string) {
@@ -159,10 +155,7 @@ export default function Settings({
             {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={`${
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }_settings.png`}
+                    pngName={`${teamName}_settings.png`}
                 />
             )}
             {!graphicComponentClass && rosterSettingsComponent()}

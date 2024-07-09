@@ -1,17 +1,17 @@
-import {Roster, User} from '../../../../../sleeper-api/sleeper-api';
+import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './DepthScore.module.css';
 import ExportButton from '../../shared/ExportButton';
 import {useDepthScore} from './useDepthScore';
 
 interface DepthScoreProps {
     roster?: Roster;
-    specifiedUser?: User;
+    teamName?: string;
     graphicComponentClass?: string;
 }
 
 export default function DepthScore({
     roster,
-    specifiedUser,
+    teamName,
     graphicComponentClass,
 }: DepthScoreProps) {
     const {graphicComponent, overrideComponent} = useDepthScore(
@@ -24,10 +24,7 @@ export default function DepthScore({
             {!graphicComponentClass && (
                 <ExportButton
                     className={styles.graphicComponent}
-                    pngName={`${
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }_depth_score.png`}
+                    pngName={`${teamName}_depth_score.png`}
                 />
             )}
             {overrideComponent}

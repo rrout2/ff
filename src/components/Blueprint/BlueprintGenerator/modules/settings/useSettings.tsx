@@ -12,15 +12,16 @@ import {
 } from '../../../../../consts/fantasy';
 import {
     useLeague,
+    useLeagueIdFromUrl,
     usePlayerData,
     useRosterSettings,
 } from '../../../../../hooks/hooks';
 import styles from './Settings.module.css';
 export function useSettings(
     numRosters: number,
-    leagueId?: string,
     graphicComponentClass?: string
 ) {
+    const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
