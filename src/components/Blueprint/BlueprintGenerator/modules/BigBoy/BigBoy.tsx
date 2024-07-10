@@ -29,6 +29,10 @@ export default function BigBoy() {
     const playerData = usePlayerData();
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
+    const [specifiedUser, setSpecifiedUser] = useState<User>();
+
+    const teamName =
+        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
 
     const {graphicComponent: settingsGraphic} = useSettings(
         rosters?.length ?? 0,
@@ -99,6 +103,10 @@ export default function BigBoy() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId()) return;
+        setSpecifiedUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
@@ -114,6 +122,7 @@ export default function BigBoy() {
                 {playersToTargetGraphicComponent()}
                 {positionalGradesGraphicComponent()}
                 {lookToTradeGraphicComponent()}
+                {teamNameComponent()}
                 <img src={blankblueprint} className={styles.base} />;
             </div>
         );
@@ -164,6 +173,11 @@ export default function BigBoy() {
             </div>
         );
     }
+
+    function teamNameComponent() {
+        return <div className={styles.teamNameGraphic}>{teamName}</div>;
+    }
+
     return (
         <div className={styles.BigBoy}>
             <ExportButton

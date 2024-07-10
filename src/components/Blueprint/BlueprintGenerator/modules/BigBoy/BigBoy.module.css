@@ -54,3 +54,13 @@
     top: 1675px;
     scale: 1.35;
 }
+
+.teamNameGraphic {
+    position: absolute;
+    color: white;
+    left: 210px;
+    top: 40px;
+    font-family: 'Cheddar Gothic Rough';
+    font-size: 140px;
+    text-shadow: -6px 6px #213965;;
+}
