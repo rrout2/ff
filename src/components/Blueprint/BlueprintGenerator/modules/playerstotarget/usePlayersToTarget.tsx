@@ -6,7 +6,10 @@ import {sortBySearchRank} from '../../../../Player/Search/PlayerSearch';
 import {logoImage} from '../../shared/Utilities';
 import styles from './PlayersToTargetModule.module.css';
 
-export function usePlayersToTarget(graphicComponentClass?: string) {
+export function usePlayersToTarget(
+    graphicComponentClass?: string,
+    transparent?: boolean
+) {
     const playerData = usePlayerData();
     const componentRef = useRef(null);
     const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
@@ -79,7 +82,7 @@ export function usePlayersToTarget(graphicComponentClass?: string) {
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 {playerSuggestions.map((playerId, idx) => {

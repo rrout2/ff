@@ -9,7 +9,11 @@ import {
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './DepthScore.module.css';
 const THRESHOLD = 150;
-export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
+export function useDepthScore(
+    roster?: Roster,
+    graphicComponentClass?: string,
+    transparent?: boolean
+) {
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
     const [_, bench, benchString] = useProjectedLineup(
@@ -53,7 +57,7 @@ export function useDepthScore(roster?: Roster, graphicComponentClass?: string) {
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 <div className={styles.title}>DEPTH SCORE:</div>

@@ -11,7 +11,8 @@ import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
 
 export function useCornerstone(
     roster?: Roster,
-    graphicComponentClass?: string
+    graphicComponentClass?: string,
+    transparent?: boolean
 ) {
     const playerData = usePlayerData();
     const {getAdp, sortByAdp} = useAdpData();
@@ -60,7 +61,7 @@ export function useCornerstone(
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 <div className={styles.positions}>

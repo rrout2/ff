@@ -1,8 +1,11 @@
 .graphicComponent {
-    background-color: #005D91;
     width: fit-content;
     color: white;
     padding-bottom: 20px;
+}
+
+.background {
+    background-color: #005D91;
 }
 
 .title {

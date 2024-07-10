@@ -1,6 +1,9 @@
 .graphicComponent {
-    background-color: #005D91;
     width: fit-content;
+}
+
+.background {
+    background-color: #005D91;
 }
 
 .positions {

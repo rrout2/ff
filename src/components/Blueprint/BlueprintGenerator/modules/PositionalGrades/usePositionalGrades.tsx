@@ -16,7 +16,8 @@ const THRESHOLDS = new Map<string, number>([
 
 export function usePositionalGrades(
     roster?: Roster,
-    graphicComponentClass?: string
+    graphicComponentClass?: string,
+    transparent?: boolean
 ) {
     const playerData = usePlayerData();
     const {getPlayerValue} = usePlayerValues();
@@ -93,7 +94,7 @@ export function usePositionalGrades(
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 {FANTASY_POSITIONS.map(position => {

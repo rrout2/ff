@@ -1,5 +1,4 @@
 .graphicComponent {
-    background-color: #005D91;
     width: fit-content;
     color: white;
     padding-left: 20px;
@@ -7,6 +6,10 @@
     flex-direction: column;
     justify-content: space-around;
     height: 560px;
+}
+
+.background {
+    background-color: #005D91;
 }
 
 .playerTargetBody {

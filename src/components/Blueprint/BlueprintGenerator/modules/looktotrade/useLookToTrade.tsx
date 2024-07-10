@@ -35,7 +35,8 @@ const SUGGESTIONS = [
 
 export function useLookToTrade(
     roster?: Roster,
-    graphicComponentClass?: string
+    graphicComponentClass?: string,
+    transparent?: boolean
 ) {
     const componentRef = useRef(null);
     const playerData = usePlayerData();
@@ -79,7 +80,7 @@ export function useLookToTrade(
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 <div className={styles.title}>LOOK TO TRADE:</div>
