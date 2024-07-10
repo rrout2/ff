@@ -40,3 +40,10 @@
     top: 1725px;
     scale: 1.22;
 }
+
+.positionalGradesGraphic {
+    position: absolute;
+    left: 310px;
+    top: 2525px;
+    scale: 1.2;
+}
