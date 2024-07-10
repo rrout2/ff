@@ -8,7 +8,11 @@ import {Roster, Player} from '../../../../../sleeper-api/sleeper-api';
 import {logoImage} from '../../shared/Utilities';
 import styles from './Starters.module.css';
 
-export function useStarters(roster?: Roster, graphicComponentClass?: string) {
+export function useStarters(
+    roster?: Roster,
+    graphicComponentClass?: string,
+    transparent?: boolean
+) {
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
     const [startingLineup] = useProjectedLineup(
@@ -54,7 +58,7 @@ export function useStarters(roster?: Roster, graphicComponentClass?: string) {
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 {startingLineup.map(({player, position}) => {

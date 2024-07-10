@@ -12,3 +12,10 @@
     top: 410px;
     scale: 1.55;
 }
+
+.startersGraphic {
+    position: absolute;
+    left: 200px;
+    top: 885px;
+    scale: 1;
+}

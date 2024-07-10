@@ -1,5 +1,4 @@
 .graphicComponent {
-    background-color: #005D91;
     color: white;
     padding-left: 20px;
     display: flex;
@@ -69,4 +68,8 @@
     border-radius: 50%;
     margin-left: -10px;
     border: #103762 2px solid;
+}
+
+.background {
+    background-color: #005D91;
 }
