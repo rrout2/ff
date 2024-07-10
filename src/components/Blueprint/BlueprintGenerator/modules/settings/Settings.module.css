@@ -31,8 +31,11 @@
     min-width: 200px;
 }
 
-.graphicComponent {
+.background {
     background-color: #005D91;
+}
+
+.graphicComponent {
     display: flex;
     flex-direction: column;
     padding: 8px;

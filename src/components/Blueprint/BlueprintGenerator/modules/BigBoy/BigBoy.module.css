@@ -1,12 +1,14 @@
-.BigBoy {}
+.fullBlueprint {
+    position: relative;
+}
 
 .base {
-    width: 1200px;
+    width: 2400px;
 }
 
 .settingsGraphic {
     position: absolute;
-    left: 44px;
-    top: 320px;
-    scale: 0.78;
+    left: 420px;
+    top: 410px;
+    scale: 1.55;
 }

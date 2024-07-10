@@ -19,7 +19,8 @@ import {
 import styles from './Settings.module.css';
 export function useSettings(
     numRosters: number,
-    graphicComponentClass?: string
+    graphicComponentClass?: string,
+    transparent?: boolean
 ) {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
@@ -37,7 +38,7 @@ export function useSettings(
             <div
                 className={`${styles.graphicComponent} ${
                     graphicComponentClass ?? ''
-                }`}
+                } ${transparent ? '' : styles.background}`}
                 ref={componentRef}
             >
                 <div className={styles.row}>
