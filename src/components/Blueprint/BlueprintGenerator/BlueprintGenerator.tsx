@@ -48,6 +48,7 @@ import {
     WR_TE_FLEX,
     SUPER_FLEX,
 } from '../../../consts/fantasy';
+import BigBoy from './modules/BigBoy/BigBoy';
 
 export enum Module {
     Unspecified = '',
@@ -59,6 +60,7 @@ export enum Module {
     PositionalGrades = 'positionalgrades',
     DepthScore = 'depthscore',
     Unified = 'unified',
+    BigBoy = 'bigboy',
 }
 
 export default function BlueprintGenerator() {
@@ -164,6 +166,9 @@ export default function BlueprintGenerator() {
                     </MenuItem>
                     <MenuItem value={Module.Unified} key={'unified'}>
                         Unified
+                    </MenuItem>
+                    <MenuItem value={Module.BigBoy} key={'bigboy'}>
+                        Big Boy
                     </MenuItem>
                     <MenuItem value={Module.Cornerstone} key={'cornerstones'}>
                         Cornerstones
@@ -340,6 +345,7 @@ export default function BlueprintGenerator() {
             {hasTeamId() && module === Module.DepthScore && (
                 <DepthScore roster={roster} teamName={teamName} />
             )}
+            {hasTeamId() && module === Module.BigBoy && <BigBoy />}
         </div>
     );
 }

@@ -1,0 +1,12 @@
+.BigBoy {}
+
+.base {
+    width: 1200px;
+}
+
+.settingsGraphic {
+    position: absolute;
+    left: 44px;
+    top: 320px;
+    scale: 0.78;
+}
