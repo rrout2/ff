@@ -31,7 +31,7 @@
     position: absolute;
     left: 1082px;
     top: 835px;
-    scale: 1.45;
+    scale: 1.4;
 }
 
 .playersToTargetGraphic {
@@ -63,4 +63,26 @@
     font-family: 'Cheddar Gothic Rough';
     font-size: 140px;
     text-shadow: -6px 6px #213965;;
+}
+
+.offScreen {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    margin: 30px;
+}
+
+.inputModule {
+    display: flex;
+    flex-direction: column;
+}
+
+.extraInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inputGrid {
+    width: 1000px !important;
 }

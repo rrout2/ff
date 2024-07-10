@@ -246,7 +246,7 @@ export default function BlueprintGenerator() {
         const hasId = hasTeamId();
         if (!hasId) return <></>;
         return (
-            <div className={styles.allModules}>
+            <>
                 <div className={styles.offScreen}>
                     {cornerstoneGraphic}
                     {lookToTradeGraphic}
@@ -294,7 +294,7 @@ export default function BlueprintGenerator() {
                         </div>
                     </Grid>
                 </Grid>
-            </div>
+            </>
         );
     }
 

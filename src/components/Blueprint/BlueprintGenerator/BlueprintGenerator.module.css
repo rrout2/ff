@@ -5,12 +5,6 @@
     width: fit-content;
 }
 
-.allModules {
-    display: flex;
-    flex-direction: column;
-    gap: 20px
-}
-
 .offScreen {
     position: absolute;
     left: -9999px;

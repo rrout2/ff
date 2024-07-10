@@ -6,10 +6,11 @@ import {saveAs} from 'file-saver';
 // TODO: cleanup/refactor
 export default function ExportButton(props: {
     className: string | string[];
+    label?: string;
     pngName?: string;
     zipName?: string;
 }) {
-    const {className, pngName, zipName} = props;
+    const {className, pngName, zipName, label} = props;
     let onclick: () => void;
     if (typeof className === 'string') {
         onclick = () =>
@@ -59,7 +60,7 @@ export default function ExportButton(props: {
                 width: '120px',
             }}
         >
-            {pngName ? 'Export As PNG' : 'Download Blueprint'}
+            {label || (pngName ? 'Export As PNG' : 'Download Blueprint')}
         </Button>
     );
 }
