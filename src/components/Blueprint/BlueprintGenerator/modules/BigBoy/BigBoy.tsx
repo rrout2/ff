@@ -18,6 +18,7 @@ import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {useCornerstone} from '../cornerstone/useCornerstone';
 import {useDepthScore} from '../DepthScore/useDepthScore';
+import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 
 export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
@@ -46,6 +47,11 @@ export default function BigBoy() {
 
     const {graphicComponent: depthScoreGraphic} = useDepthScore(
         roster,
+        undefined,
+        true
+    );
+
+    const {graphicComponent: playersToTargetGraphic} = usePlayersToTarget(
         undefined,
         true
     );
@@ -92,6 +98,7 @@ export default function BigBoy() {
                 {startersGraphicComponent()}
                 {cornerstoneGraphicComponent()}
                 {depthScoreGraphicComponent()}
+                {playersToTargetGraphicComponent()}
                 <img src={blankblueprint} className={styles.base} />;
             </div>
         );
@@ -116,6 +123,14 @@ export default function BigBoy() {
     function depthScoreGraphicComponent() {
         return (
             <div className={styles.depthScoreGraphic}>{depthScoreGraphic}</div>
+        );
+    }
+
+    function playersToTargetGraphicComponent() {
+        return (
+            <div className={styles.playersToTargetGraphic}>
+                {playersToTargetGraphic}
+            </div>
         );
     }
 

@@ -33,3 +33,10 @@
     top: 835px;
     scale: 1.45;
 }
+
+.playersToTargetGraphic {
+    position: absolute;
+    left: 1765px;
+    top: 1725px;
+    scale: 1.22;
+}
