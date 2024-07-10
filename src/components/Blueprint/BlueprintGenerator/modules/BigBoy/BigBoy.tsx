@@ -16,6 +16,7 @@ import {useStarters} from '../Starters/useStarters';
 import {useSettings} from '../settings/useSettings';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
+import {useCornerstone} from '../cornerstone/useCornerstone';
 
 export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
@@ -31,6 +32,12 @@ export default function BigBoy() {
         true
     );
     const {graphicComponent: startersGraphic} = useStarters(
+        roster,
+        undefined,
+        true
+    );
+
+    const {graphicComponent: cornerstoneGraphic} = useCornerstone(
         roster,
         undefined,
         true
@@ -76,6 +83,7 @@ export default function BigBoy() {
             <div className={styles.fullBlueprint}>
                 {settingsGraphicComponent()}
                 {startersGraphicComponent()}
+                {cornerstoneGraphicComponent()}
                 <img src={blankblueprint} className={styles.base} />;
             </div>
         );
@@ -87,6 +95,14 @@ export default function BigBoy() {
 
     function startersGraphicComponent() {
         return <div className={styles.startersGraphic}>{startersGraphic}</div>;
+    }
+
+    function cornerstoneGraphicComponent() {
+        return (
+            <div className={styles.cornerstoneGraphic}>
+                {cornerstoneGraphic}
+            </div>
+        );
     }
 
     return (
