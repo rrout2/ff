@@ -20,6 +20,7 @@ import {useCornerstone} from '../cornerstone/useCornerstone';
 import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {usePositionalGrades} from '../PositionalGrades/usePositionalGrades';
+import {useLookToTrade} from '../looktotrade/useLookToTrade';
 
 export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
@@ -62,6 +63,11 @@ export default function BigBoy() {
         undefined,
         true
     );
+
+    const {
+        graphicComponent: lookToTradeGraphic,
+        inputComponent: lookToTradeInput,
+    } = useLookToTrade(roster, undefined, true);
 
     useEffect(() => {
         if (
@@ -107,6 +113,7 @@ export default function BigBoy() {
                 {depthScoreGraphicComponent()}
                 {playersToTargetGraphicComponent()}
                 {positionalGradesGraphicComponent()}
+                {lookToTradeGraphicComponent()}
                 <img src={blankblueprint} className={styles.base} />;
             </div>
         );
@@ -150,13 +157,21 @@ export default function BigBoy() {
         );
     }
 
+    function lookToTradeGraphicComponent() {
+        return (
+            <div className={styles.lookToTradeGraphic}>
+                {lookToTradeGraphic}
+            </div>
+        );
+    }
     return (
         <div className={styles.BigBoy}>
             <ExportButton
                 className={styles.fullBlueprint}
                 pngName="test2.png"
             />
-            {fullBlueprint()}
+            {lookToTradeInput}
+            <div>{fullBlueprint()}</div>
         </div>
     );
 }
