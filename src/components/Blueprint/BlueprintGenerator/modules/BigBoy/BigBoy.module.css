@@ -62,7 +62,7 @@
     top: 40px;
     font-family: 'Cheddar Gothic Rough';
     font-size: 140px;
-    text-shadow: -6px 6px #213965;;
+    text-shadow: -6px 6px #213965;
 }
 
 .archetypeSilhouette {
@@ -82,8 +82,6 @@
 
 .archetype {
     position: absolute;
-    /* left: 1600px;
-    top: 315px; */
     right: 280px;
     bottom: 2475px;
     font-family: 'Prohibition Test';
@@ -94,6 +92,63 @@
     max-width: 500px;
     color: #8AC73E;
     z-index: 2;
+}
+
+.outlookImages {
+    position: absolute;
+    top: 900px;
+    left: 1675px;
+
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+}
+
+.outlookTitle {
+    position: absolute;
+    top: 812px;
+    left: 1750px;
+
+    font-family: 'Erbaum';
+    color: white;
+    font-size: 50px;
+}
+
+.outlookChips {
+    position: absolute;
+    top: 912px;
+    left: 1690px;
+
+    font-family: 'Erbaum';
+    color: white;
+    font-size: 50px;
+
+    display: flex;
+    width: 580px;
+    justify-content: space-between;
+}
+
+.outlookLabel {
+    font-family: 'Acumin Pro ExtraCondensed';
+    font-weight: bold;
+    text-align: center;
+    text-shadow: -3px 3px #213965;
+    font-size: 60px;
+}
+
+.outlookYear {
+    padding-bottom: -5px;
+    border-bottom: white 3px solid;
+    line-height: 50px;
+    padding: 0 8px;
+}
+
+.outlookChip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+    gap: 15px;
 }
 
 .smallerTeamName {

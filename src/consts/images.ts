@@ -38,7 +38,9 @@ import scale from '../assets/scale.png';
 import slider from '../assets/slider.png';
 import blankblueprint from '../assets/blankblueprint.jpg';
 import silhouette from '../assets/silhouette.png';
-
+import outlook1 from '../assets/outlook1.png';
+import outlook2 from '../assets/outlook2.png';
+import outlook3 from '../assets/outlook3.png';
 const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
@@ -112,4 +114,14 @@ const teamLogos: Map<string, string> = new Map([
     ['rp-', nfl],
 ]);
 
-export {teamLogos, blankLogo, scale, slider, blankblueprint, silhouette};
+export {
+    teamLogos,
+    blankLogo,
+    scale,
+    slider,
+    blankblueprint,
+    silhouette,
+    outlook1,
+    outlook2,
+    outlook3,
+};

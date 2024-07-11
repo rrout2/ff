@@ -1,5 +1,11 @@
 import {useEffect, useState} from 'react';
-import {blankblueprint, silhouette} from '../../../../../consts/images';
+import {
+    blankblueprint,
+    outlook1,
+    outlook2,
+    outlook3,
+    silhouette,
+} from '../../../../../consts/images';
 import {
     useLeagueIdFromUrl,
     useFetchRosters,
@@ -58,6 +64,30 @@ enum Archetype {
     EliteQBTE = 'ELITE QB/TE',
     RBHeavy = 'RB HEAVY',
 }
+
+const ArchetypeDetails = {
+    [Archetype.HardRebuild]: [['REBUILD', 'REBUILD', 'CONTEND']],
+    [Archetype.FutureValue]: [['REBUILD', 'CONTEND', 'CONTEND']],
+    [Archetype.WellRounded]: [['CONTEND', 'CONTEND', 'REBUILD']],
+    [Archetype.OneYearReload]: [['RELOAD', 'CONTEND', 'CONTEND']],
+    [Archetype.EliteValue]: [
+        ['CONTEND', 'CONTEND', 'RELOAD'],
+        ['CONTEND', 'CONTEND', 'CONTEND'],
+    ],
+    [Archetype.WRFactory]: [
+        ['CONTEND', 'CONTEND', 'RELOAD'],
+        ['CONTEND', 'CONTEND', 'REBUILD'],
+    ],
+    [Archetype.DualEliteQB]: [
+        ['CONTEND', 'CONTEND', 'RELOAD'],
+        ['REBUILD', 'CONTEND', 'CONTEND'],
+    ],
+    [Archetype.EliteQBTE]: [
+        ['CONTEND', 'CONTEND', 'RELOAD'],
+        ['REBUILD', 'CONTEND', 'CONTEND'],
+    ],
+    [Archetype.RBHeavy]: [['CONTEND', 'CONTEND', 'REBUILD']],
+};
 
 const ALL_ARCHETYPES = Object.values(Archetype);
 
@@ -164,7 +194,8 @@ export default function BigBoy() {
                 {lookToTradeGraphicComponent()}
                 {teamNameComponent()}
                 {archetypeComponent()}
-                <img src={blankblueprint} className={styles.base} />;
+                {threeYearOutlookComponent()}
+                <img src={blankblueprint} className={styles.base} />
             </div>
         );
     }
@@ -238,6 +269,35 @@ export default function BigBoy() {
                 <div className={styles.archetypeTitle}>TEAM ARCHETYPE:</div>
                 <div className={styles.archetype}>{archetype}</div>
                 <img src={silhouette} className={styles.archetypeSilhouette} />
+            </div>
+        );
+    }
+
+    function threeYearOutlookComponent() {
+        const outlook = ArchetypeDetails[archetype][0];
+
+        return (
+            <div>
+                <div className={styles.outlookTitle}>3-YEAR OUTLOOK:</div>
+                <div className={styles.outlookImages}>
+                    <img src={outlook1} />
+                    <img src={outlook2} />
+                    <img src={outlook3} />
+                </div>
+                <div className={styles.outlookChips}>
+                    <div className={styles.outlookChip}>
+                        <div className={styles.outlookYear}>YR 1</div>
+                        <div className={styles.outlookLabel}>{outlook[0]}</div>
+                    </div>
+                    <div className={styles.outlookChip}>
+                        <div className={styles.outlookYear}>YR 2</div>
+                        <div className={styles.outlookLabel}>{outlook[1]}</div>
+                    </div>
+                    <div className={styles.outlookChip}>
+                        <div className={styles.outlookYear}>YR 3</div>
+                        <div className={styles.outlookLabel}>{outlook[2]}</div>
+                    </div>
+                </div>
             </div>
         );
     }
