@@ -103,6 +103,11 @@ export default function BigBoy() {
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [showPreview, setShowPreview] = useState(false);
+    const [archIdx, setArchIdx] = useState(0);
+    const [archetype, setArchetype] = useState(Archetype.HardRebuild);
+    useEffect(() => {
+        setArchIdx(0);
+    }, [archetype]);
 
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
@@ -140,8 +145,6 @@ export default function BigBoy() {
         graphicComponent: lookToTradeGraphic,
         inputComponent: lookToTradeInput,
     } = useLookToTrade(roster, undefined, true);
-
-    const [archetype, setArchetype] = useState(Archetype.HardRebuild);
 
     useEffect(() => {
         if (
@@ -274,7 +277,8 @@ export default function BigBoy() {
     }
 
     function threeYearOutlookComponent() {
-        const outlook = ArchetypeDetails[archetype][0];
+        const idx = ArchetypeDetails[archetype].length <= archIdx ? 0 : archIdx;
+        const outlook = ArchetypeDetails[archetype][idx];
 
         return (
             <div>
@@ -405,22 +409,40 @@ export default function BigBoy() {
 
     function archetypeSelector() {
         return (
-            <FormControl>
-                <InputLabel>Archetype</InputLabel>
-                <Select
-                    value={archetype}
-                    label="Archetype"
-                    onChange={(event: SelectChangeEvent) => {
-                        setArchetype(event.target.value as Archetype);
-                    }}
-                >
-                    {ALL_ARCHETYPES.map((arch, idx) => (
-                        <MenuItem value={arch} key={idx}>
-                            {arch}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+            <>
+                <FormControl>
+                    <InputLabel>Archetype</InputLabel>
+                    <Select
+                        value={archetype}
+                        label="Archetype"
+                        onChange={(event: SelectChangeEvent) => {
+                            setArchetype(event.target.value as Archetype);
+                        }}
+                    >
+                        {ALL_ARCHETYPES.map((arch, idx) => (
+                            <MenuItem value={arch} key={idx}>
+                                {arch}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                {ArchetypeDetails[archetype].length > 1 && (
+                    <FormControl>
+                        <Select
+                            value={archIdx.toString()}
+                            onChange={(event: SelectChangeEvent) => {
+                                setArchIdx(+event.target.value);
+                            }}
+                        >
+                            {ArchetypeDetails[archetype].map((outlook, idx) => (
+                                <MenuItem value={idx} key={idx}>
+                                    {outlook.join('/')}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                )}
+            </>
         );
     }
 
