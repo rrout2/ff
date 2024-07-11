@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {blankblueprint} from '../../../../../consts/images';
+import {blankblueprint, silhouette} from '../../../../../consts/images';
 import {
     useLeagueIdFromUrl,
     useFetchRosters,
@@ -137,6 +137,7 @@ export default function BigBoy() {
                 {positionalGradesGraphicComponent()}
                 {lookToTradeGraphicComponent()}
                 {teamNameComponent()}
+                {archetypeComponent()}
                 <img src={blankblueprint} className={styles.base} />;
             </div>
         );
@@ -201,6 +202,15 @@ export default function BigBoy() {
         return (
             <div className={styles.lookToTradeGraphic}>
                 {lookToTradeGraphic}
+            </div>
+        );
+    }
+
+    function archetypeComponent() {
+        return (
+            <div>
+                <div className={styles.archetypeTitle}>TEAM ARCHETYPE:</div>
+                <img src={silhouette} className={styles.archetypeSilhouette} />
             </div>
         );
     }

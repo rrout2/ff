@@ -65,6 +65,21 @@
     text-shadow: -6px 6px #213965;;
 }
 
+.archetypeSilhouette {
+    position: absolute;
+    left: 1800px;
+    top: 175px;
+}
+
+.archetypeTitle {
+    position: absolute;
+    left: 1700px;
+    top: 115px;
+    font-family: 'Erbaum';
+    color: white;
+    font-size: 50px;
+}
+
 .smallerTeamName {
     font-size: 120px;
 }
