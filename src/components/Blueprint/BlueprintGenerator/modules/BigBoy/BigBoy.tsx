@@ -206,7 +206,18 @@ export default function BigBoy() {
     }
 
     function teamNameComponent() {
-        return <div className={styles.teamNameGraphic}>{teamName}</div>;
+        if (!teamName) return <></>;
+        const longName = teamName.length >= 16;
+        const veryLongName = teamName.length >= 24;
+        return (
+            <div
+                className={`${styles.teamNameGraphic} ${
+                    longName ? styles.smallerTeamName : ''
+                } ${veryLongName ? styles.smallestTeamName : ''}`}
+            >
+                {teamName}
+            </div>
+        );
     }
 
     function rosterComponent() {
