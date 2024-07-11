@@ -151,6 +151,7 @@ export default function BlueprintGenerator() {
             <FormControl
                 style={{
                     margin: '4px',
+                    maxWidth: '800px',
                 }}
             >
                 <InputLabel>Module</InputLabel>
@@ -302,6 +303,7 @@ export default function BlueprintGenerator() {
         <div className={styles.blueprintPage}>
             {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
                 margin: '4px',
+                maxWidth: '800px',
             })}
             {hasTeamId() && moduleSelectComponent()}
             {module === Module.Unified && (
