@@ -80,6 +80,22 @@
     font-size: 50px;
 }
 
+.archetype {
+    position: absolute;
+    /* left: 1600px;
+    top: 315px; */
+    right: 280px;
+    bottom: 2475px;
+    font-family: 'Prohibition Test';
+    color: white;
+    font-size: 140px;
+    -webkit-text-stroke: 3px white;
+    text-shadow: -10px 10px #213965;
+    max-width: 500px;
+    color: #8AC73E;
+    z-index: 2;
+}
+
 .smallerTeamName {
     font-size: 120px;
 }

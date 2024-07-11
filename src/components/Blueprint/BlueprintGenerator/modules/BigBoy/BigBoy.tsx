@@ -24,7 +24,17 @@ import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {usePositionalGrades} from '../PositionalGrades/usePositionalGrades';
 import {useLookToTrade} from '../looktotrade/useLookToTrade';
-import {FormControlLabel, FormGroup, Grid, Switch} from '@mui/material';
+import {
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Switch,
+} from '@mui/material';
 import {
     FLEX,
     WR_RB_FLEX,
@@ -36,6 +46,20 @@ import {
     BENCH,
     SUPER_FLEX,
 } from '../../../../../consts/fantasy';
+
+enum Archetype {
+    HardRebuild = 'HARD REBUILD',
+    FutureValue = 'FUTURE VALUE',
+    WellRounded = 'WELL ROUNDED',
+    OneYearReload = 'ONE YEAR RELOAD',
+    EliteValue = 'ELITE VALUE',
+    WRFactory = 'WR FACTORY',
+    DualEliteQB = 'DUAL ELITE QB',
+    EliteQBTE = 'ELITE QB/TE',
+    RBHeavy = 'RB HEAVY',
+}
+
+const ALL_ARCHETYPES = Object.values(Archetype);
 
 export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
@@ -86,6 +110,8 @@ export default function BigBoy() {
         graphicComponent: lookToTradeGraphic,
         inputComponent: lookToTradeInput,
     } = useLookToTrade(roster, undefined, true);
+
+    const [archetype, setArchetype] = useState(Archetype.HardRebuild);
 
     useEffect(() => {
         if (
@@ -210,6 +236,7 @@ export default function BigBoy() {
         return (
             <div>
                 <div className={styles.archetypeTitle}>TEAM ARCHETYPE:</div>
+                <div className={styles.archetype}>{archetype}</div>
                 <img src={silhouette} className={styles.archetypeSilhouette} />
             </div>
         );
@@ -307,9 +334,33 @@ export default function BigBoy() {
                             {settingsComponent()}
                         </div>
                     </Grid>
+                    <Grid item xs={4}>
+                        <div>{archetypeSelector()}</div>
+                    </Grid>
                 </Grid>
                 {togglePreview()}
             </>
+        );
+    }
+
+    function archetypeSelector() {
+        return (
+            <FormControl>
+                <InputLabel>Archetype</InputLabel>
+                <Select
+                    value={archetype}
+                    label="Archetype"
+                    onChange={(event: SelectChangeEvent) => {
+                        setArchetype(event.target.value as Archetype);
+                    }}
+                >
+                    {ALL_ARCHETYPES.map((arch, idx) => (
+                        <MenuItem value={arch} key={idx}>
+                            {arch}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
         );
     }
 
