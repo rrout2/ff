@@ -186,3 +186,19 @@
     display: flex;
     flex-direction: column;
 }
+
+.rebuildContendScaleGraphic {
+    position: absolute;
+    top: 2125px;
+    left: 205px;
+}
+
+.scaleAndSlider {
+    position: relative;
+}
+
+.slider {
+    position: absolute;
+    left: 0;
+    top: -30px;
+}

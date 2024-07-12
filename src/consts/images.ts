@@ -41,6 +41,8 @@ import silhouette from '../assets/silhouette.png';
 import outlook1 from '../assets/outlook1.png';
 import outlook2 from '../assets/outlook2.png';
 import outlook3 from '../assets/outlook3.png';
+import rebuildContendScale from '../assets/rebuildContendScale.png';
+import circleSlider from '../assets/circleSlider.png';
 const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
@@ -124,4 +126,6 @@ export {
     outlook1,
     outlook2,
     outlook3,
+    rebuildContendScale,
+    circleSlider,
 };

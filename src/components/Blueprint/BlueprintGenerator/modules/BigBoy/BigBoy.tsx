@@ -1,9 +1,11 @@
 import {useEffect, useState} from 'react';
 import {
     blankblueprint,
+    circleSlider,
     outlook1,
     outlook2,
     outlook3,
+    rebuildContendScale,
     silhouette,
 } from '../../../../../consts/images';
 import {
@@ -40,6 +42,8 @@ import {
     Select,
     SelectChangeEvent,
     Switch,
+    TextField,
+    styled,
 } from '@mui/material';
 import {
     FLEX,
@@ -52,6 +56,11 @@ import {
     BENCH,
     SUPER_FLEX,
 } from '../../../../../consts/fantasy';
+import {
+    Unstable_NumberInput as NumberInput,
+    numberInputClasses,
+} from '@mui/base/Unstable_NumberInput';
+import {Button} from '@mui/base';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
@@ -103,6 +112,8 @@ export default function BigBoy() {
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [showPreview, setShowPreview] = useState(false);
+    const [rebuildContendValue, setRebuildContendValue] = useState(50);
+
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
     useEffect(() => {
@@ -198,8 +209,48 @@ export default function BigBoy() {
                 {teamNameComponent()}
                 {archetypeComponent()}
                 {threeYearOutlookComponent()}
+                {contendRebuildScaleComponent()}
                 <img src={blankblueprint} className={styles.base} />
             </div>
+        );
+    }
+
+    function contendRebuildScaleComponent() {
+        return (
+            <div className={styles.rebuildContendScaleGraphic}>
+                <div className={styles.scaleAndSlider}>
+                    <img src={rebuildContendScale} />
+                    <img
+                        src={circleSlider}
+                        className={styles.slider}
+                        style={{left: `${rebuildContendValue * 5.45}px`}}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    function contendRebuildScaleInput() {
+        return (
+            <NumberInput
+                value={rebuildContendValue}
+                onChange={(_, value) => {
+                    setRebuildContendValue(value || 0);
+                }}
+                min={0}
+                max={100}
+                slots={{
+                    input: TextField,
+                }}
+                slotProps={{
+                    incrementButton: {
+                        children: '+',
+                    },
+                    decrementButton: {
+                        children: '-',
+                    },
+                }}
+            />
         );
     }
 
@@ -397,6 +448,10 @@ export default function BigBoy() {
                     </Grid>
                     <Grid item xs={4}>
                         <div>{archetypeSelector()}</div>
+                    </Grid>
+                    <Grid item xs={4}>
+                        Rebuild(0) - Contend(100)
+                        <div>{contendRebuildScaleInput()}</div>
                     </Grid>
                 </Grid>
                 {togglePreview()}
