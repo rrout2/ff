@@ -49,7 +49,7 @@ export function useDepthScore(
             if (!playerValue) return acc;
             return acc + +playerValue.Value;
         }, 0);
-        return Math.round((10 * score) / THRESHOLD);
+        return Math.min(Math.round((10 * score) / THRESHOLD), 10);
     }
 
     function graphicComponent() {
