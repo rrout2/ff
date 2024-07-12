@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react';
 import {
     blankblueprint,
     circleSlider,
+    draftCapitalBackground,
+    draftCapitalScale,
     outlook1,
     outlook2,
     outlook3,
@@ -108,6 +110,8 @@ export default function BigBoy() {
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [showPreview, setShowPreview] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
+    const [draftCapitalValue, setDraftCapitalValue] = useState(50);
+    const [draftCapitalNotes, setDraftCapitalNotes] = useState('placeholder');
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -205,8 +209,65 @@ export default function BigBoy() {
                 {archetypeComponent()}
                 {threeYearOutlookComponent()}
                 {contendRebuildScaleComponent()}
+                {draftCapitalGradeComponent()}
                 <img src={blankblueprint} className={styles.base} />
             </div>
+        );
+    }
+
+    function draftCapitalGradeComponent() {
+        return (
+            <div className={styles.draftCapitalGradeGraphic}>
+                <div className={styles.scaleAndSlider}>
+                    <img src={draftCapitalScale} />
+                    <img
+                        src={circleSlider}
+                        className={styles.otherSlider}
+                        style={{left: `${draftCapitalValue * 7.8}px`}}
+                    />
+                </div>
+                <div className={styles.draftCapitalBackground}>
+                    <img src={draftCapitalBackground} />
+                </div>
+                <div className={styles.draftCapitalText}>
+                    {draftCapitalNotes.toUpperCase()}
+                </div>
+            </div>
+        );
+    }
+
+    function draftCapitalGradeInput() {
+        return (
+            <NumberInput
+                value={draftCapitalValue}
+                onChange={(_, value) => {
+                    setDraftCapitalValue(value || 0);
+                }}
+                min={0}
+                max={100}
+                slots={{
+                    input: TextField,
+                }}
+                slotProps={{
+                    incrementButton: {
+                        children: '+',
+                    },
+                    decrementButton: {
+                        children: '-',
+                    },
+                }}
+            />
+        );
+    }
+
+    function draftCapitalNotesInput() {
+        return (
+            <TextField
+                style={{margin: '4px'}}
+                label={'Draft Capital Notes'}
+                value={draftCapitalNotes}
+                onChange={e => setDraftCapitalNotes(e.target.value)}
+            />
         );
     }
 
@@ -447,6 +508,9 @@ export default function BigBoy() {
                     <Grid item xs={4}>
                         Rebuild(0) - Contend(100)
                         <div>{contendRebuildScaleInput()}</div>
+                        Draft Capital Grade
+                        <div>{draftCapitalGradeInput()}</div>
+                        {draftCapitalNotesInput()}
                     </Grid>
                 </Grid>
                 {togglePreview()}

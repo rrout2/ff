@@ -202,3 +202,31 @@
     left: 0;
     top: -30px;
 }
+
+.otherSlider {
+    position: absolute;
+    left: 0;
+    top: -20px;
+    width: 100px;
+}
+
+.draftCapitalGradeGraphic {
+    position: absolute;
+    top: 2530px;
+    left: 1405px;
+}
+
+.draftCapitalBackground {
+    margin-top: 40px;
+}
+
+.draftCapitalText {
+    position: absolute;
+    left: 0;
+    top: 125px;
+    color: white;
+    font-size: 40px;
+    font-family: 'Antarctican Headline';
+    width: 880px;
+    text-align: center;
+}

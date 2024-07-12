@@ -43,6 +43,8 @@ import outlook2 from '../assets/outlook2.png';
 import outlook3 from '../assets/outlook3.png';
 import rebuildContendScale from '../assets/rebuildContendScale.png';
 import circleSlider from '../assets/circleSlider.png';
+import draftCapitalScale from '../assets/draftCapitalScale.png';
+import draftCapitalBackground from '../assets/draftCapitalBackground.png';
 const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
@@ -128,4 +130,6 @@ export {
     outlook3,
     rebuildContendScale,
     circleSlider,
+    draftCapitalScale,
+    draftCapitalBackground,
 };
