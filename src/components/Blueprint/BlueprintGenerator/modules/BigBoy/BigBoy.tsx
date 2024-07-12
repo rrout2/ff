@@ -35,6 +35,7 @@ import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {usePositionalGrades} from '../PositionalGrades/usePositionalGrades';
 import {useLookToTrade} from '../looktotrade/useLookToTrade';
 import {
+    Button,
     FormControl,
     FormControlLabel,
     FormGroup,
@@ -112,6 +113,8 @@ export default function BigBoy() {
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
     const [draftCapitalValue, setDraftCapitalValue] = useState(50);
     const [draftCapitalNotes, setDraftCapitalNotes] = useState('placeholder');
+    const [comments, setComments] = useState<string[]>([]);
+    const [currentComment, setCurrentComment] = useState('');
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -210,8 +213,51 @@ export default function BigBoy() {
                 {threeYearOutlookComponent()}
                 {contendRebuildScaleComponent()}
                 {draftCapitalGradeComponent()}
+                {commentsComponent()}
                 <img src={blankblueprint} className={styles.base} />
             </div>
+        );
+    }
+
+    function commentsInput() {
+        return (
+            <div className={styles.inputModule}>
+                Suggestions/Comments:
+                <TextField
+                    value={currentComment}
+                    onChange={e => setCurrentComment(e.target.value)}
+                />
+                <Button
+                    disabled={!currentComment}
+                    onClick={() => {
+                        setComments([...comments, currentComment]);
+                    }}
+                >
+                    Add comment
+                </Button>
+                <Button
+                    disabled={comments.length === 0}
+                    onClick={() => {
+                        const newComments = [...comments];
+                        setComments(
+                            newComments.slice(0, newComments.length - 1)
+                        );
+                    }}
+                >
+                    Remove
+                </Button>
+            </div>
+        );
+    }
+
+    function commentsComponent() {
+        // const comments = ['abc', 'def'];
+        return (
+            <ul className={styles.commentsGraphic}>
+                {comments.map(c => {
+                    return <li>{c}</li>;
+                })}
+            </ul>
         );
     }
 
@@ -511,6 +557,9 @@ export default function BigBoy() {
                         Draft Capital Grade
                         <div>{draftCapitalGradeInput()}</div>
                         {draftCapitalNotesInput()}
+                    </Grid>
+                    <Grid item xs={4}>
+                        {commentsInput()}
                     </Grid>
                 </Grid>
                 {togglePreview()}
