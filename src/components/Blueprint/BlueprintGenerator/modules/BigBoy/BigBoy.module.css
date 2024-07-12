@@ -181,3 +181,8 @@
 .inputGrid {
     width: 1000px !important;
 }
+
+.archetypeSelectors {
+    display: flex;
+    flex-direction: column;
+}

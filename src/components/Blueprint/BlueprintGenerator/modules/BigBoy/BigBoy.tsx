@@ -103,10 +103,10 @@ export default function BigBoy() {
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [showPreview, setShowPreview] = useState(false);
-    const [archIdx, setArchIdx] = useState(0);
+    const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
     useEffect(() => {
-        setArchIdx(0);
+        setOutlooks(ArchetypeDetails[archetype][0]);
     }, [archetype]);
 
     const teamName =
@@ -277,9 +277,6 @@ export default function BigBoy() {
     }
 
     function threeYearOutlookComponent() {
-        const idx = ArchetypeDetails[archetype].length <= archIdx ? 0 : archIdx;
-        const outlook = ArchetypeDetails[archetype][idx];
-
         return (
             <div>
                 <div className={styles.outlookTitle}>3-YEAR OUTLOOK:</div>
@@ -291,15 +288,15 @@ export default function BigBoy() {
                 <div className={styles.outlookChips}>
                     <div className={styles.outlookChip}>
                         <div className={styles.outlookYear}>YR 1</div>
-                        <div className={styles.outlookLabel}>{outlook[0]}</div>
+                        <div className={styles.outlookLabel}>{outlooks[0]}</div>
                     </div>
                     <div className={styles.outlookChip}>
                         <div className={styles.outlookYear}>YR 2</div>
-                        <div className={styles.outlookLabel}>{outlook[1]}</div>
+                        <div className={styles.outlookLabel}>{outlooks[1]}</div>
                     </div>
                     <div className={styles.outlookChip}>
                         <div className={styles.outlookYear}>YR 3</div>
-                        <div className={styles.outlookLabel}>{outlook[2]}</div>
+                        <div className={styles.outlookLabel}>{outlooks[2]}</div>
                     </div>
                 </div>
             </div>
@@ -408,9 +405,10 @@ export default function BigBoy() {
     }
 
     function archetypeSelector() {
+        if (outlooks.length === 0) return <></>;
         return (
-            <>
-                <FormControl>
+            <div className={styles.inputModule}>
+                <FormControl style={{margin: '4px'}}>
                     <InputLabel>Archetype</InputLabel>
                     <Select
                         value={archetype}
@@ -426,23 +424,32 @@ export default function BigBoy() {
                         ))}
                     </Select>
                 </FormControl>
-                {ArchetypeDetails[archetype].length > 1 && (
-                    <FormControl>
+                {[0, 1, 2].map(idx => (
+                    <FormControl style={{margin: '4px'}}>
+                        <InputLabel>Year {idx + 1}</InputLabel>
                         <Select
-                            value={archIdx.toString()}
+                            label={`Year ${idx + 1}`}
+                            value={outlooks[idx]}
                             onChange={(event: SelectChangeEvent) => {
-                                setArchIdx(+event.target.value);
+                                const newOutlooks = outlooks.slice();
+                                newOutlooks[idx] = event.target.value;
+                                setOutlooks(newOutlooks);
                             }}
                         >
-                            {ArchetypeDetails[archetype].map((outlook, idx) => (
-                                <MenuItem value={idx} key={idx}>
-                                    {outlook.join('/')}
-                                </MenuItem>
-                            ))}
+                            <MenuItem value={'CONTEND'} key={'CONTEND'}>
+                                {'CONTEND'}
+                            </MenuItem>
+                            <MenuItem value={'REBUILD'} key={'REBUILD'}>
+                                {'REBUILD'}
+                            </MenuItem>
+
+                            <MenuItem value={'RELOAD'} key={'RELOAD'}>
+                                {'RELOAD'}
+                            </MenuItem>
                         </Select>
                     </FormControl>
-                )}
-            </>
+                ))}
+            </div>
         );
     }
 
