@@ -43,7 +43,6 @@ import {
     SelectChangeEvent,
     Switch,
     TextField,
-    styled,
 } from '@mui/material';
 import {
     FLEX,
@@ -56,11 +55,7 @@ import {
     BENCH,
     SUPER_FLEX,
 } from '../../../../../consts/fantasy';
-import {
-    Unstable_NumberInput as NumberInput,
-    numberInputClasses,
-} from '@mui/base/Unstable_NumberInput';
-import {Button} from '@mui/base';
+import {Unstable_NumberInput as NumberInput} from '@mui/base/Unstable_NumberInput';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
