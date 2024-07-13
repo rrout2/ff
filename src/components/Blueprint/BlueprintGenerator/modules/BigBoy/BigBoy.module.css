@@ -233,11 +233,11 @@
 
 .commentsGraphic {
     position: absolute;
-
     top: 2857.39px;
     left: 1377.75px;
-    color: white;
+    width: 850px;
 
+    color: white;
     font-family: 'Acumin Pro';
     font-weight: lighter;
     font-size: 25px;
