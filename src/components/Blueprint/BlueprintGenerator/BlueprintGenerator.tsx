@@ -30,11 +30,14 @@ import {
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
 import Settings from './modules/settings/Settings';
 import {StartersModule, StartersGraphic} from './modules/Starters/Starters';
-import DepthScore from './modules/DepthScore/DepthScore';
+import {
+    DepthScore,
+    GraphicComponent as DepthScoreGraphic,
+    OverrideComponent as DepthScoreOverride,
+} from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
-import {useDepthScore} from './modules/DepthScore/useDepthScore';
 import {
     QB,
     RB,
@@ -90,10 +93,6 @@ export default function BlueprintGenerator() {
         rosters?.length ?? 0,
         'settingsGraphic'
     );
-    const {
-        graphicComponent: depthScoreGraphic,
-        overrideComponent: depthScoreOverride,
-    } = useDepthScore(roster, 'depthScoreGraphic');
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
         Map<string, number>
     >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
@@ -110,6 +109,7 @@ export default function BlueprintGenerator() {
     const [cornerstones, setCornerstones] = useState(
         new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
     );
+    const [depthScoreOverride, setDepthScoreOverride] = useState(-1);
     const {sortByAdp} = useAdpData();
 
     useEffect(() => {
@@ -283,7 +283,12 @@ export default function BlueprintGenerator() {
                         graphicComponentClass={'positionalGradesGraphic'}
                         transparent={false}
                     />
-                    {depthScoreGraphic}
+                    <DepthScoreGraphic
+                        override={depthScoreOverride}
+                        graphicComponentClass={'depthScoreGraphic'}
+                        roster={roster}
+                        transparent={false}
+                    />
                 </div>
                 <Grid container spacing={1}>
                     <Grid item xs={6}>
@@ -326,7 +331,11 @@ export default function BlueprintGenerator() {
                     <Grid item xs={2}>
                         <div className={styles.inputModule}>
                             Depth Score Override:
-                            {depthScoreOverride}
+                            <DepthScoreOverride
+                                override={depthScoreOverride}
+                                setOverride={setDepthScoreOverride}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={4} className={styles.extraInfo}>

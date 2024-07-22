@@ -29,7 +29,6 @@ import ExportButton from '../../shared/ExportButton';
 import {useSettings} from '../settings/useSettings';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
-import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {
     FormControl,
@@ -69,7 +68,10 @@ import {
     AllPositionalSelectors as CornerstoneSelectors,
 } from '../cornerstone/CornerstoneModule';
 import {StartersGraphic} from '../Starters/Starters';
-
+import {
+    GraphicComponent as DepthScoreGraphic,
+    OverrideComponent as DepthScoreOverride,
+} from '../DepthScore/DepthScore';
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -173,6 +175,7 @@ export default function BigBoy() {
             )
         );
     }, [roster, playerData]);
+    const [depthScoreOverride, setDepthScoreOverride] = useState(-1);
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -188,11 +191,6 @@ export default function BigBoy() {
         undefined,
         true
     );
-
-    const {
-        graphicComponent: depthScoreGraphic,
-        overrideComponent: depthScoreOverride,
-    } = useDepthScore(roster, undefined, true);
 
     const {
         graphicComponent: playersToTargetGraphic,
@@ -428,7 +426,13 @@ export default function BigBoy() {
 
     function depthScoreGraphicComponent() {
         return (
-            <div className={styles.depthScoreGraphic}>{depthScoreGraphic}</div>
+            <div className={styles.depthScoreGraphic}>
+                <DepthScoreGraphic
+                    override={depthScoreOverride}
+                    transparent={true}
+                    roster={roster}
+                />
+            </div>
         );
     }
 
@@ -598,7 +602,11 @@ export default function BigBoy() {
                     <Grid item xs={2}>
                         <div className={styles.inputModule}>
                             Depth Score Override:
-                            {depthScoreOverride}
+                            <DepthScoreOverride
+                                override={depthScoreOverride}
+                                setOverride={setDepthScoreOverride}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={4} className={styles.extraInfo}>
