@@ -26,7 +26,6 @@ import {
     getAllUsers,
 } from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
-import {useStarters} from '../Starters/useStarters';
 import {useSettings} from '../settings/useSettings';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
@@ -69,6 +68,7 @@ import {
     GraphicComponent as CornerstoneGraphic,
     AllPositionalSelectors as CornerstoneSelectors,
 } from '../cornerstone/CornerstoneModule';
+import {StartersGraphic} from '../Starters/Starters';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
@@ -185,11 +185,6 @@ export default function BigBoy() {
 
     const {graphicComponent: settingsGraphic} = useSettings(
         rosters?.length ?? 0,
-        undefined,
-        true
-    );
-    const {graphicComponent: startersGraphic} = useStarters(
-        roster,
         undefined,
         true
     );
@@ -413,7 +408,11 @@ export default function BigBoy() {
     }
 
     function startersGraphicComponent() {
-        return <div className={styles.startersGraphic}>{startersGraphic}</div>;
+        return (
+            <div className={styles.startersGraphic}>
+                <StartersGraphic roster={roster} transparent={true} />
+            </div>
+        );
     }
 
     function cornerstoneGraphicComponent() {

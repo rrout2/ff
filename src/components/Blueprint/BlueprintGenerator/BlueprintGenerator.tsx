@@ -29,12 +29,11 @@ import {
 } from '@mui/material';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
 import Settings from './modules/settings/Settings';
-import Starters from './modules/Starters/Starters';
+import {StartersModule, StartersGraphic} from './modules/Starters/Starters';
 import DepthScore from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
-import {useStarters} from './modules/Starters/useStarters';
 import {useDepthScore} from './modules/DepthScore/useDepthScore';
 import {
     QB,
@@ -90,10 +89,6 @@ export default function BlueprintGenerator() {
     const {graphicComponent: settingsGraphic} = useSettings(
         rosters?.length ?? 0,
         'settingsGraphic'
-    );
-    const {graphicComponent: startersGraphic} = useStarters(
-        roster,
-        'startersGraphic'
     );
     const {
         graphicComponent: depthScoreGraphic,
@@ -277,7 +272,11 @@ export default function BlueprintGenerator() {
                     />
                     {playersToTargetGraphic}
                     {settingsGraphic}
-                    {startersGraphic}
+                    <StartersGraphic
+                        roster={roster}
+                        transparent={false}
+                        graphicComponentClass={'startersGraphic'}
+                    />
                     <PositionalGradesGraphic
                         overrides={positionalGradeOverrides}
                         roster={roster}
@@ -381,7 +380,7 @@ export default function BlueprintGenerator() {
                 />
             )}
             {hasTeamId() && module === Module.Starters && (
-                <Starters roster={roster} teamName={teamName} />
+                <StartersModule roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.PositionalGrades && (
                 <PositionalGrades roster={roster} teamName={teamName} />
