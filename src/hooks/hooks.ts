@@ -51,7 +51,7 @@ export function usePlayerData() {
 
     return playerData;
 }
-type PlayerValue = {
+export type PlayerValue = {
     Player: string;
     Value: string;
     Position: string;

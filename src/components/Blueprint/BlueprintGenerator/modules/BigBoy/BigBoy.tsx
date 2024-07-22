@@ -32,7 +32,6 @@ import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {useCornerstone} from '../cornerstone/useCornerstone';
 import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
-import {usePositionalGrades} from '../PositionalGrades/usePositionalGrades';
 import {useLookToTrade} from '../looktotrade/useLookToTrade';
 import {
     FormControl,
@@ -56,8 +55,13 @@ import {
     TE,
     BENCH,
     SUPER_FLEX,
+    FANTASY_POSITIONS,
 } from '../../../../../consts/fantasy';
 import {Unstable_NumberInput as NumberInput} from '@mui/base/Unstable_NumberInput';
+import {
+    GraphicComponent as PositionalGradesGraphic,
+    OverrideComponent as PositionalGradesOverride,
+} from '../PositionalGrades/PositionalGrades';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
@@ -117,6 +121,9 @@ export default function BigBoy() {
         'comment 2',
         'comment 3',
     ]);
+    const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
+        Map<string, number>
+    >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -150,11 +157,6 @@ export default function BigBoy() {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
     } = usePlayersToTarget(undefined, true);
-
-    const {
-        graphicComponent: positionalGradesGraphic,
-        overrideComponent: positionalGradesOverride,
-    } = usePositionalGrades(roster, undefined, true);
 
     const {
         graphicComponent: lookToTradeGraphic,
@@ -398,7 +400,11 @@ export default function BigBoy() {
     function positionalGradesGraphicComponent() {
         return (
             <div className={styles.positionalGradesGraphic}>
-                {positionalGradesGraphic}
+                <PositionalGradesGraphic
+                    overrides={positionalGradeOverrides}
+                    roster={roster}
+                    transparent={true}
+                />
             </div>
         );
     }
@@ -519,7 +525,11 @@ export default function BigBoy() {
                     <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Positional Grade Override:
-                            {positionalGradesOverride}
+                            <PositionalGradesOverride
+                                overrides={positionalGradeOverrides}
+                                setOverrides={setPositionalGradeOverrides}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={6}>
