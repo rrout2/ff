@@ -32,7 +32,6 @@ import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {useCornerstone} from '../cornerstone/useCornerstone';
 import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
-import {useLookToTrade} from '../looktotrade/useLookToTrade';
 import {
     FormControl,
     FormControlLabel,
@@ -62,6 +61,10 @@ import {
     GraphicComponent as PositionalGradesGraphic,
     OverrideComponent as PositionalGradesOverride,
 } from '../PositionalGrades/PositionalGrades';
+import {
+    GraphicComponent as LookToTradeGraphic,
+    InputComponent as LookToTradeInput,
+} from '../looktotrade/LookToTradeModule';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
@@ -124,6 +127,16 @@ export default function BigBoy() {
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
         Map<string, number>
     >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
+    const [playersToTrade, setPlayersToTrade] = useState<string[][]>([
+        [],
+        [],
+        [],
+    ]);
+    const [inReturn, setInReturn] = useState<string[]>([
+        'placeholder',
+        'placeholder',
+        'placeholder',
+    ]);
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -157,11 +170,6 @@ export default function BigBoy() {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
     } = usePlayersToTarget(undefined, true);
-
-    const {
-        graphicComponent: lookToTradeGraphic,
-        inputComponent: lookToTradeInput,
-    } = useLookToTrade(roster, undefined, true);
 
     useEffect(() => {
         if (
@@ -412,7 +420,11 @@ export default function BigBoy() {
     function lookToTradeGraphicComponent() {
         return (
             <div className={styles.lookToTradeGraphic}>
-                {lookToTradeGraphic}
+                <LookToTradeGraphic
+                    inReturn={inReturn}
+                    playersToTrade={playersToTrade}
+                    transparent={true}
+                />
             </div>
         );
     }
@@ -535,7 +547,13 @@ export default function BigBoy() {
                     <Grid item xs={6}>
                         <div className={styles.inputModule}>
                             Look to Trade:
-                            {lookToTradeInput}
+                            <LookToTradeInput
+                                playersToTrade={playersToTrade}
+                                setPlayersToTrade={setPlayersToTrade}
+                                inReturn={inReturn}
+                                setInReturn={setInReturn}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={2}>

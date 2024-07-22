@@ -23,15 +23,12 @@ import {
     Select,
     Grid,
 } from '@mui/material';
-import LookToTradeModule from './modules/looktotrade/LookToTradeModule';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
 import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
-import {PositionalGrades} from './modules/PositionalGrades/PositionalGrades';
 import DepthScore from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
 import {useCornerstone} from './modules/cornerstone/useCornerstone';
-import {useLookToTrade} from './modules/looktotrade/useLookToTrade';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
 import {useStarters} from './modules/Starters/useStarters';
@@ -50,10 +47,15 @@ import {
 } from '../../../consts/fantasy';
 import BigBoy from './modules/BigBoy/BigBoy';
 import {
+    PositionalGrades,
     GraphicComponent as PositionalGradesGraphic,
     OverrideComponent as PositionalGradesOverride,
 } from './modules/PositionalGrades/PositionalGrades';
-
+import {
+    LookToTradeModule,
+    GraphicComponent as LookToTradeGraphic,
+    InputComponent as LookToTradeInput,
+} from './modules/looktotrade/LookToTradeModule';
 export enum Module {
     Unspecified = '',
     Cornerstone = 'cornerstones',
@@ -81,10 +83,6 @@ export default function BlueprintGenerator() {
     const {graphicComponent: cornerstoneGraphic, allPositionalSelectors} =
         useCornerstone(roster, 'cornerstoneGraphic');
     const {
-        graphicComponent: lookToTradeGraphic,
-        inputComponent: lookToTradeInput,
-    } = useLookToTrade(roster, 'lookToTradeGraphic');
-    const {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
     } = usePlayersToTarget('playersToTargetGraphic');
@@ -103,6 +101,16 @@ export default function BlueprintGenerator() {
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
         Map<string, number>
     >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
+    const [playersToTrade, setPlayersToTrade] = useState<string[][]>([
+        [],
+        [],
+        [],
+    ]);
+    const [inReturn, setInReturn] = useState<string[]>([
+        'placeholder',
+        'placeholder',
+        'placeholder',
+    ]);
     const {sortByAdp} = useAdpData();
 
     useEffect(() => {
@@ -253,7 +261,12 @@ export default function BlueprintGenerator() {
             <>
                 <div className={styles.offScreen}>
                     {cornerstoneGraphic}
-                    {lookToTradeGraphic}
+                    <LookToTradeGraphic
+                        inReturn={inReturn}
+                        playersToTrade={playersToTrade}
+                        graphicComponentClass={'lookToTradeGraphic'}
+                        transparent={false}
+                    />
                     {playersToTargetGraphic}
                     {settingsGraphic}
                     {startersGraphic}
@@ -290,7 +303,13 @@ export default function BlueprintGenerator() {
                     <Grid item xs={6}>
                         <div className={styles.inputModule}>
                             Look to Trade:
-                            {lookToTradeInput}
+                            <LookToTradeInput
+                                playersToTrade={playersToTrade}
+                                setPlayersToTrade={setPlayersToTrade}
+                                inReturn={inReturn}
+                                setInReturn={setInReturn}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={2}>
