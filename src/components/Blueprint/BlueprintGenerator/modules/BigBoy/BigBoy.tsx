@@ -35,7 +35,6 @@ import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {usePositionalGrades} from '../PositionalGrades/usePositionalGrades';
 import {useLookToTrade} from '../looktotrade/useLookToTrade';
 import {
-    Button,
     FormControl,
     FormControlLabel,
     FormGroup,
@@ -113,8 +112,11 @@ export default function BigBoy() {
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
     const [draftCapitalValue, setDraftCapitalValue] = useState(50);
     const [draftCapitalNotes, setDraftCapitalNotes] = useState('placeholder');
-    const [comments, setComments] = useState<string[]>([]);
-    const [currentComment, setCurrentComment] = useState('');
+    const [comments, setComments] = useState<string[]>([
+        'comment 1',
+        'comment 2',
+        'comment 3',
+    ]);
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -223,35 +225,25 @@ export default function BigBoy() {
         return (
             <div className={styles.inputModule}>
                 Suggestions/Comments:
-                <TextField
-                    value={currentComment}
-                    onChange={e => setCurrentComment(e.target.value)}
-                />
-                <Button
-                    disabled={!currentComment}
-                    onClick={() => {
-                        setComments([...comments, currentComment]);
-                    }}
-                >
-                    Add comment
-                </Button>
-                <Button
-                    disabled={comments.length === 0}
-                    onClick={() => {
-                        const newComments = [...comments];
-                        setComments(
-                            newComments.slice(0, newComments.length - 1)
-                        );
-                    }}
-                >
-                    Remove
-                </Button>
+                {comments.map((comment, idx) => {
+                    return (
+                        <TextField
+                            style={{margin: '4px'}}
+                            key={idx}
+                            value={comment}
+                            onChange={e => {
+                                const newComments = comments.slice();
+                                newComments[idx] = e.target.value;
+                                setComments(newComments);
+                            }}
+                        />
+                    );
+                })}
             </div>
         );
     }
 
     function commentsComponent() {
-        // const comments = ['abc', 'def'];
         return (
             <ul className={styles.commentsGraphic}>
                 {comments.map(c => {
