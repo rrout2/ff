@@ -14,7 +14,11 @@ import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
-import CornerstoneModule from './modules/cornerstone/CornerstoneModule';
+import {
+    CornerstoneModule,
+    GraphicComponent as CornerstoneGraphic,
+    AllPositionalSelectors as CornerstoneSelectors,
+} from './modules/cornerstone/CornerstoneModule';
 import {
     InputLabel,
     SelectChangeEvent,
@@ -28,7 +32,6 @@ import Settings from './modules/settings/Settings';
 import Starters from './modules/Starters/Starters';
 import DepthScore from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
-import {useCornerstone} from './modules/cornerstone/useCornerstone';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {useSettings} from './modules/settings/useSettings';
 import {useStarters} from './modules/Starters/useStarters';
@@ -80,8 +83,6 @@ export default function BlueprintGenerator() {
     const rosterSettings = useRosterSettings(league);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [module, setModule] = useModuleFromUrl();
-    const {graphicComponent: cornerstoneGraphic, allPositionalSelectors} =
-        useCornerstone(roster, 'cornerstoneGraphic');
     const {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
@@ -111,6 +112,9 @@ export default function BlueprintGenerator() {
         'placeholder',
         'placeholder',
     ]);
+    const [cornerstones, setCornerstones] = useState(
+        new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
+    );
     const {sortByAdp} = useAdpData();
 
     useEffect(() => {
@@ -260,7 +264,11 @@ export default function BlueprintGenerator() {
         return (
             <>
                 <div className={styles.offScreen}>
-                    {cornerstoneGraphic}
+                    <CornerstoneGraphic
+                        cornerstones={cornerstones}
+                        graphicComponentClass={'cornerstoneGraphic'}
+                        transparent={false}
+                    />
                     <LookToTradeGraphic
                         inReturn={inReturn}
                         playersToTrade={playersToTrade}
@@ -282,7 +290,11 @@ export default function BlueprintGenerator() {
                     <Grid item xs={6}>
                         <div className={styles.inputModule}>
                             Cornerstones:
-                            {allPositionalSelectors}
+                            <CornerstoneSelectors
+                                cornerstones={cornerstones}
+                                setCornerstones={setCornerstones}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={3}>

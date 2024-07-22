@@ -20,6 +20,7 @@ import {
     useRosterSettings,
 } from '../../../../../hooks/hooks';
 import {
+    Player,
     Roster,
     User,
     getAllUsers,
@@ -29,7 +30,6 @@ import {useStarters} from '../Starters/useStarters';
 import {useSettings} from '../settings/useSettings';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
-import {useCornerstone} from '../cornerstone/useCornerstone';
 import {useDepthScore} from '../DepthScore/useDepthScore';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {
@@ -65,6 +65,10 @@ import {
     GraphicComponent as LookToTradeGraphic,
     InputComponent as LookToTradeInput,
 } from '../looktotrade/LookToTradeModule';
+import {
+    GraphicComponent as CornerstoneGraphic,
+    AllPositionalSelectors as CornerstoneSelectors,
+} from '../cornerstone/CornerstoneModule';
 
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
@@ -108,7 +112,7 @@ export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
-    const {sortByAdp} = useAdpData();
+    const {sortByAdp, getAdp} = useAdpData();
     const [teamId] = useTeamIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const playerData = usePlayerData();
@@ -137,6 +141,38 @@ export default function BigBoy() {
         'placeholder',
         'placeholder',
     ]);
+    const [cornerstones, setCornerstones] = useState(
+        new Map<string, string[]>(FANTASY_POSITIONS.map(pos => [pos, []]))
+    );
+    function isCornerstone(player?: Player) {
+        if (!player) return false;
+        // this is probably pretty brittle
+        const adp = getAdp(`${player.first_name} ${player.last_name}`);
+        return adp <= 75 && adp >= 0;
+    }
+
+    useEffect(() => {
+        if (!roster || !playerData) return;
+
+        const cornerstones = roster.players
+            .map(playerId => playerData[playerId])
+            .filter(isCornerstone)
+            .sort(sortByAdp);
+
+        setCornerstones(
+            new Map<string, string[]>(
+                FANTASY_POSITIONS.map(pos => [
+                    pos,
+                    cornerstones
+                        .filter(player =>
+                            player.fantasy_positions.includes(pos)
+                        )
+                        .map(player => player.player_id)
+                        .slice(0, 3),
+                ])
+            )
+        );
+    }, [roster, playerData]);
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
     const [archetype, setArchetype] = useState(Archetype.HardRebuild);
@@ -157,9 +193,6 @@ export default function BigBoy() {
         undefined,
         true
     );
-
-    const {graphicComponent: cornerstoneGraphic, allPositionalSelectors} =
-        useCornerstone(roster, undefined, true);
 
     const {
         graphicComponent: depthScoreGraphic,
@@ -386,7 +419,10 @@ export default function BigBoy() {
     function cornerstoneGraphicComponent() {
         return (
             <div className={styles.cornerstoneGraphic}>
-                {cornerstoneGraphic}
+                <CornerstoneGraphic
+                    cornerstones={cornerstones}
+                    transparent={true}
+                />
             </div>
         );
     }
@@ -525,7 +561,11 @@ export default function BigBoy() {
                     <Grid item xs={6}>
                         <div className={styles.inputModule}>
                             Cornerstones:
-                            {allPositionalSelectors}
+                            <CornerstoneSelectors
+                                cornerstones={cornerstones}
+                                setCornerstones={setCornerstones}
+                                roster={roster}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={3}>
