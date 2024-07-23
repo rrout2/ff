@@ -26,7 +26,6 @@ import {
     getAllUsers,
 } from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
-import {useSettings} from '../settings/useSettings';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
@@ -72,6 +71,7 @@ import {
     GraphicComponent as DepthScoreGraphic,
     OverrideComponent as DepthScoreOverride,
 } from '../DepthScore/DepthScore';
+import {GraphicComponent as SettingsGraphic} from '../settings/Settings';
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -185,12 +185,6 @@ export default function BigBoy() {
 
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
-
-    const {graphicComponent: settingsGraphic} = useSettings(
-        rosters?.length ?? 0,
-        undefined,
-        true
-    );
 
     const {
         graphicComponent: playersToTargetGraphic,
@@ -402,7 +396,14 @@ export default function BigBoy() {
     }
 
     function settingsGraphicComponent() {
-        return <div className={styles.settingsGraphic}>{settingsGraphic}</div>;
+        return (
+            <div className={styles.settingsGraphic}>
+                <SettingsGraphic
+                    numRosters={rosters?.length ?? 0}
+                    transparent={true}
+                />
+            </div>
+        );
     }
 
     function startersGraphicComponent() {

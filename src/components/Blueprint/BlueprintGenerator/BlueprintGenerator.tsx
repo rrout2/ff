@@ -28,7 +28,10 @@ import {
     Grid,
 } from '@mui/material';
 import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
-import Settings from './modules/settings/Settings';
+import {
+    Settings,
+    GraphicComponent as SettingsGraphic,
+} from './modules/settings/Settings';
 import {StartersModule, StartersGraphic} from './modules/Starters/Starters';
 import {
     DepthScore,
@@ -37,7 +40,6 @@ import {
 } from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
 import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
-import {useSettings} from './modules/settings/useSettings';
 import {
     QB,
     RB,
@@ -89,10 +91,6 @@ export default function BlueprintGenerator() {
         graphicComponent: playersToTargetGraphic,
         inputComponent: playersToTargetInput,
     } = usePlayersToTarget('playersToTargetGraphic');
-    const {graphicComponent: settingsGraphic} = useSettings(
-        rosters?.length ?? 0,
-        'settingsGraphic'
-    );
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
         Map<string, number>
     >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
@@ -271,7 +269,11 @@ export default function BlueprintGenerator() {
                         transparent={false}
                     />
                     {playersToTargetGraphic}
-                    {settingsGraphic}
+                    <SettingsGraphic
+                        numRosters={rosters?.length ?? 0}
+                        graphicComponentClass="settingsGraphic"
+                        transparent={false}
+                    />
                     <StartersGraphic
                         roster={roster}
                         transparent={false}

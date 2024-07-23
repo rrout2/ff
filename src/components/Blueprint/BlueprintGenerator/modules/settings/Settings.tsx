@@ -1,5 +1,6 @@
 import {
     useLeague,
+    useLeagueIdFromUrl,
     usePlayerData,
     useProjectedLineup,
     useRosterSettings,
@@ -13,13 +14,16 @@ import {
     BENCH,
     FLEX,
     FLEX_SET,
+    QB,
+    RB,
     SUPER_FLEX,
     SUPER_FLEX_SET,
+    TE,
+    WR,
     WR_RB_FLEX,
     WR_TE_FLEX,
 } from '../../../../../consts/fantasy';
 import ExportButton from '../../shared/ExportButton';
-import {useSettings} from './useSettings';
 
 export type SettingsProps = {
     roster?: Roster;
@@ -28,7 +32,7 @@ export type SettingsProps = {
     numRosters: number;
     graphicComponentClass?: string;
 };
-export default function Settings({
+function Settings({
     roster,
     leagueId,
     numRosters,
@@ -42,7 +46,6 @@ export default function Settings({
         rosterSettings,
         roster?.players
     );
-    const {graphicComponent} = useSettings(numRosters, graphicComponentClass);
     useTitle('Settings - Blueprint Generator');
 
     function humanReadablePosition(position: string) {
@@ -150,7 +153,11 @@ export default function Settings({
             <div
                 style={{position: 'absolute', left: '-9999px', top: '-9999px'}}
             >
-                {graphicComponent}
+                <GraphicComponent
+                    numRosters={numRosters}
+                    graphicComponentClass={graphicComponentClass}
+                    transparent={false}
+                />
             </div>
             {!graphicComponentClass && (
                 <ExportButton
@@ -178,3 +185,76 @@ function copyWrapper(text: string, className?: string) {
         </div>
     );
 }
+
+interface graphicProps {
+    numRosters: number;
+    graphicComponentClass?: string;
+    transparent?: boolean;
+}
+function GraphicComponent({
+    numRosters,
+    graphicComponentClass,
+    transparent,
+}: graphicProps) {
+    const [leagueId] = useLeagueIdFromUrl();
+    const league = useLeague(leagueId);
+    const playerData = usePlayerData();
+    const rosterSettings = useRosterSettings(league);
+    function graphicComponent() {
+        if (!playerData) return <></>;
+        const scoringSettings = league?.scoring_settings;
+        if (!scoringSettings) return <></>;
+        const wrtFlex = rosterSettings.get(FLEX) ?? 0;
+        const wrFlex = rosterSettings.get(WR_RB_FLEX) ?? 0;
+        const wtFlex = rosterSettings.get(WR_TE_FLEX) ?? 0;
+        return (
+            <div
+                className={`${styles.graphicComponent} ${
+                    graphicComponentClass ?? ''
+                } ${transparent ? '' : styles.background}`}
+            >
+                <div className={styles.row}>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        QB: {rosterSettings.get(QB)}
+                    </div>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        RB: {rosterSettings.get(RB)}
+                    </div>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        WR: {rosterSettings.get(WR)}
+                    </div>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        TE: {rosterSettings.get(TE)}
+                    </div>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        FLEX: {wrtFlex + wrFlex + wtFlex}
+                    </div>
+                    <div className={`${styles.chip} ${styles.red}`}>
+                        BN: {rosterSettings.get(BENCH)}
+                    </div>
+                </div>
+                <div className={styles.row}>
+                    <div className={`${styles.chip} ${styles.blue}`}>
+                        TEAMS: {numRosters}
+                    </div>
+                    <div className={`${styles.chip} ${styles.blue}`}>
+                        SF: {rosterSettings.has(SUPER_FLEX) ? 'YES' : 'NO'}
+                    </div>
+                    <div className={`${styles.chip} ${styles.blue}`}>
+                        PPR: {scoringSettings.rec ?? 0}
+                    </div>
+                    <div className={`${styles.chip} ${styles.blue}`}>
+                        TEP: {scoringSettings.bonus_rec_te ?? 0}
+                    </div>
+                    <div className={`${styles.chip} ${styles.blue}`}>
+                        TAXI: {league.settings.taxi_slots}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return graphicComponent();
+}
+
+export {Settings, GraphicComponent};
