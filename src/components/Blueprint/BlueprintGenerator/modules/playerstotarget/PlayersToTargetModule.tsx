@@ -164,8 +164,9 @@ function InputComponent({playerSuggestions, setPlayerSuggestions}: inputProps) {
                         if (reason === 'clear' || newInputValue === null) {
                             return;
                         }
-                        playerSuggestions[idx] = newInputValue;
-                        setPlayerSuggestions(playerSuggestions);
+                        const newPlayerSuggestions = [...playerSuggestions];
+                        newPlayerSuggestions[idx] = newInputValue;
+                        setPlayerSuggestions(newPlayerSuggestions);
                     }}
                     inputValue={inputValue}
                     onInputChange={(_event, value, _reason) => {
