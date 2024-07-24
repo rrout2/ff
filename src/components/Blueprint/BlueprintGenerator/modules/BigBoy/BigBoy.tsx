@@ -28,7 +28,6 @@ import {
 import ExportButton from '../../shared/ExportButton';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
-import {usePlayersToTarget} from '../playerstotarget/usePlayersToTarget';
 import {
     FormControl,
     FormControlLabel,
@@ -72,6 +71,10 @@ import {
     OverrideComponent as DepthScoreOverride,
 } from '../DepthScore/DepthScore';
 import {GraphicComponent as SettingsGraphic} from '../settings/Settings';
+import {
+    GraphicComponent as PlayersToTargetGraphic,
+    InputComponent as PlayersToTargetInput,
+} from '../playerstotarget/PlayersToTargetModule';
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -182,14 +185,15 @@ export default function BigBoy() {
     useEffect(() => {
         setOutlooks(ArchetypeDetails[archetype][0]);
     }, [archetype]);
+    const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
+        '10229',
+        '5849',
+        '4866',
+        '10859',
+    ]);
 
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
-
-    const {
-        graphicComponent: playersToTargetGraphic,
-        inputComponent: playersToTargetInput,
-    } = usePlayersToTarget(undefined, true);
 
     useEffect(() => {
         if (
@@ -440,7 +444,10 @@ export default function BigBoy() {
     function playersToTargetGraphicComponent() {
         return (
             <div className={styles.playersToTargetGraphic}>
-                {playersToTargetGraphic}
+                <PlayersToTargetGraphic
+                    playerSuggestions={playerSuggestions}
+                    transparent={true}
+                />
             </div>
         );
     }
@@ -575,7 +582,10 @@ export default function BigBoy() {
                     <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Players to Target:
-                            {playersToTargetInput}
+                            <PlayersToTargetInput
+                                playerSuggestions={playerSuggestions}
+                                setPlayerSuggestions={setPlayerSuggestions}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={3}>

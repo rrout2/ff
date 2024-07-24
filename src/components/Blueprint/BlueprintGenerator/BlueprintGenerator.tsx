@@ -27,7 +27,11 @@ import {
     Select,
     Grid,
 } from '@mui/material';
-import PlayersToTargetModule from './modules/playerstotarget/PlayersToTargetModule';
+import {
+    PlayersToTargetModule,
+    GraphicComponent as PlayersToTargetGraphic,
+    InputComponent as PlayersToTargetInput,
+} from './modules/playerstotarget/PlayersToTargetModule';
 import {
     Settings,
     GraphicComponent as SettingsGraphic,
@@ -39,7 +43,6 @@ import {
     OverrideComponent as DepthScoreOverride,
 } from './modules/DepthScore/DepthScore';
 import ExportButton from './shared/ExportButton';
-import {usePlayersToTarget} from './modules/playerstotarget/usePlayersToTarget';
 import {
     QB,
     RB,
@@ -87,10 +90,6 @@ export default function BlueprintGenerator() {
     const rosterSettings = useRosterSettings(league);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [module, setModule] = useModuleFromUrl();
-    const {
-        graphicComponent: playersToTargetGraphic,
-        inputComponent: playersToTargetInput,
-    } = usePlayersToTarget('playersToTargetGraphic');
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
         Map<string, number>
     >(new Map(FANTASY_POSITIONS.map(pos => [pos, -1])));
@@ -147,6 +146,13 @@ export default function BlueprintGenerator() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
+
+    const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
+        '10229',
+        '5849',
+        '4866',
+        '10859',
+    ]);
 
     useTitle('Blueprint Generator');
 
@@ -268,7 +274,11 @@ export default function BlueprintGenerator() {
                         graphicComponentClass={'lookToTradeGraphic'}
                         transparent={false}
                     />
-                    {playersToTargetGraphic}
+                    <PlayersToTargetGraphic
+                        playerSuggestions={playerSuggestions}
+                        graphicComponentClass={'playersToTargetGraphic'}
+                        transparent={false}
+                    />
                     <SettingsGraphic
                         numRosters={rosters?.length ?? 0}
                         graphicComponentClass="settingsGraphic"
@@ -306,7 +316,10 @@ export default function BlueprintGenerator() {
                     <Grid item xs={3}>
                         <div className={styles.inputModule}>
                             Players to Target:
-                            {playersToTargetInput}
+                            <PlayersToTargetInput
+                                playerSuggestions={playerSuggestions}
+                                setPlayerSuggestions={setPlayerSuggestions}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={3}>
