@@ -650,7 +650,6 @@ export default function BigBoy() {
                         {commentsInput()}
                     </Grid>
                 </Grid>
-                {togglePreview()}
             </>
         );
     }
@@ -711,10 +710,14 @@ export default function BigBoy() {
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
             />
-            {inputsComponent()}
-            <div className={!showPreview ? styles.offScreen : ''}>
-                {fullBlueprint()}
+            {togglePreview()}
+            <div className={styles.inputsAndPreview}>
+                {inputsComponent()}
+                {showPreview && (
+                    <div className={styles.smaller}>{fullBlueprint()}</div>
+                )}
             </div>
+            <div className={styles.offScreen}>{fullBlueprint()}</div>
         </div>
     );
 }

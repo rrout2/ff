@@ -180,6 +180,7 @@
 
 .inputGrid {
     width: 1000px !important;
+    height: fit-content;
 }
 
 .archetypeSelectors {
@@ -241,4 +242,15 @@
     font-family: 'Acumin Pro';
     font-weight: lighter;
     font-size: 25px;
+}
+
+.smaller {
+    transform-origin: top left;
+    scale: 0.3;
+}
+
+.inputsAndPreview {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 }
