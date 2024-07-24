@@ -8,7 +8,7 @@ import {
 } from '../../../../../hooks/hooks';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Settings.module.css';
-import {IconButton} from '@mui/material';
+import {IconButton, TextField} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
 import {
     BENCH,
@@ -24,6 +24,7 @@ import {
     WR_TE_FLEX,
 } from '../../../../../consts/fantasy';
 import ExportButton from '../../shared/ExportButton';
+import {Dispatch, SetStateAction} from 'react';
 
 export type SettingsProps = {
     roster?: Roster;
@@ -186,13 +187,33 @@ function copyWrapper(text: string, className?: string) {
     );
 }
 
+interface inputProps {
+    otherSettings: string;
+    setOtherSettings: Dispatch<SetStateAction<string>>;
+}
+
+function InputComponent({otherSettings, setOtherSettings}: inputProps) {
+    return (
+        <TextField
+            style={{margin: '4px'}}
+            label={'Other Settings'}
+            value={otherSettings}
+            onChange={e => {
+                setOtherSettings(e.target.value);
+            }}
+        />
+    );
+}
+
 interface graphicProps {
     numRosters: number;
+    otherSettings?: string;
     graphicComponentClass?: string;
     transparent?: boolean;
 }
 function GraphicComponent({
     numRosters,
+    otherSettings,
     graphicComponentClass,
     transparent,
 }: graphicProps) {
@@ -250,6 +271,9 @@ function GraphicComponent({
                         TAXI: {league.settings.taxi_slots}
                     </div>
                 </div>
+                {otherSettings !== undefined && (
+                    <div className={styles.otherSettings}>{otherSettings}</div>
+                )}
             </div>
         );
     }
@@ -257,4 +281,4 @@ function GraphicComponent({
     return graphicComponent();
 }
 
-export {Settings, GraphicComponent};
+export {Settings, GraphicComponent, InputComponent};

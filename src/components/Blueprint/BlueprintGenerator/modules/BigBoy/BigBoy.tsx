@@ -70,7 +70,10 @@ import {
     GraphicComponent as DepthScoreGraphic,
     OverrideComponent as DepthScoreOverride,
 } from '../DepthScore/DepthScore';
-import {GraphicComponent as SettingsGraphic} from '../settings/Settings';
+import {
+    GraphicComponent as SettingsGraphic,
+    InputComponent as SettingsInput,
+} from '../settings/Settings';
 import {
     GraphicComponent as PlayersToTargetGraphic,
     InputComponent as PlayersToTargetInput,
@@ -191,6 +194,8 @@ export default function BigBoy() {
         '4866',
         '10859',
     ]);
+
+    const [otherSettings, setOtherSettings] = useState('');
 
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
@@ -404,6 +409,7 @@ export default function BigBoy() {
             <div className={styles.settingsGraphic}>
                 <SettingsGraphic
                     numRosters={rosters?.length ?? 0}
+                    otherSettings={otherSettings}
                     transparent={true}
                 />
             </div>
@@ -561,6 +567,10 @@ export default function BigBoy() {
                 <div>PPR: {scoringSettings.rec ?? 0}</div>
                 <div>TEP: {scoringSettings.bonus_rec_te ?? 0}</div>
                 <div>TAXI: {league.settings.taxi_slots}</div>
+                <SettingsInput
+                    otherSettings={otherSettings}
+                    setOtherSettings={setOtherSettings}
+                />
             </div>
         );
     }
@@ -622,7 +632,7 @@ export default function BigBoy() {
                     </Grid>
                     <Grid item xs={4} className={styles.extraInfo}>
                         <div>{rosterComponent()}</div>
-                        <div style={{textAlign: 'end'}}>
+                        <div style={{textAlign: 'end', maxWidth: '120px'}}>
                             {settingsComponent()}
                         </div>
                     </Grid>

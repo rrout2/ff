@@ -68,3 +68,13 @@
 .blue {
     background-color: #3CB6E9;
  }
+
+.otherSettings {
+    color: white;
+    font-family: 'Acumin Pro';
+    font-weight: lighter;
+    font-size: 25px;
+
+    margin-top: 42px;
+    margin-left: 150px;
+}
