@@ -552,10 +552,16 @@ export default function BigBoy() {
                             )
                             .map(player => {
                                 const fullName = `${player.first_name} ${player.last_name}`;
+                                const positionalAdp =
+                                    getPositionalAdp(fullName);
                                 return (
                                     <div className={styles.rosterPlayer}>
                                         <div>{fullName}</div>
-                                        <div>{getPositionalAdp(fullName)}</div>
+                                        <div>
+                                            {positionalAdp === Infinity
+                                                ? '∞'
+                                                : positionalAdp}
+                                        </div>
                                     </div>
                                 );
                             })}
