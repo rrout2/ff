@@ -78,6 +78,7 @@ export function usePlayerValues() {
 
 type adpDatum = {
     player_name: string;
+    Position: string;
 };
 
 export function useAdpData() {
@@ -88,13 +89,25 @@ export function useAdpData() {
         );
         if (adp < 0) return Infinity;
 
-        return adp;
+        return adp + 1;
+    };
+    const getPositionalAdp = (playerName: string) => {
+        const idx = getAdp(playerName) - 1;
+        if (idx >= adpData.length) return Infinity;
+
+        const adp = adpData
+            .filter(player => player.Position === adpData[idx].Position)
+            .findIndex(
+                a => a.player_name.toLowerCase() === playerName.toLowerCase()
+            );
+        if (adp < 0) return Infinity;
+        return adp + 1;
     };
     const sortByAdp = (a: Player, b: Player) =>
         getAdp(`${a.first_name} ${a.last_name}`) -
         getAdp(`${b.first_name} ${b.last_name}`);
 
-    return {adpData, getAdp, sortByAdp};
+    return {adpData, getAdp, sortByAdp, getPositionalAdp};
 }
 
 export function usePlayer(playerId: string) {

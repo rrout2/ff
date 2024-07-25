@@ -120,7 +120,7 @@ export default function BigBoy() {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
-    const {sortByAdp, getAdp} = useAdpData();
+    const {sortByAdp, getAdp, getPositionalAdp} = useAdpData();
     const [teamId] = useTeamIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const playerData = usePlayerData();
@@ -536,15 +536,33 @@ export default function BigBoy() {
 
     function rosterComponent() {
         if (!playerData) return <></>;
-        return roster?.players
+        const allPlayers = roster?.players
             .map(playerId => playerData[playerId])
-            .filter(player => !!player)
-            .sort(sortByAdp)
-            .map(player => {
-                return (
-                    <div>{`${player.position} - ${player.first_name} ${player.last_name}`}</div>
-                );
-            });
+            .sort(sortByAdp);
+        if (!allPlayers) return <></>;
+
+        return (
+            <div className={styles.fullRoster}>
+                {FANTASY_POSITIONS.map(pos => (
+                    <div className={styles.positionColumn}>
+                        <b>{pos}</b>
+                        {allPlayers
+                            .filter(
+                                player => !!player && player.position === pos
+                            )
+                            .map(player => {
+                                const fullName = `${player.first_name} ${player.last_name}`;
+                                return (
+                                    <div className={styles.rosterPlayer}>
+                                        <div>{fullName}</div>
+                                        <div>{getPositionalAdp(fullName)}</div>
+                                    </div>
+                                );
+                            })}
+                    </div>
+                ))}
+            </div>
+        );
     }
 
     function settingsComponent() {
@@ -579,26 +597,10 @@ export default function BigBoy() {
         return (
             <>
                 <Grid container spacing={1} className={styles.inputGrid}>
-                    <Grid item xs={6}>
-                        <div className={styles.inputModule}>
-                            Cornerstones:
-                            <CornerstoneSelectors
-                                cornerstones={cornerstones}
-                                setCornerstones={setCornerstones}
-                                roster={roster}
-                            />
-                        </div>
+                    <Grid item xs={8}>
+                        <div>{rosterComponent()}</div>
                     </Grid>
-                    <Grid item xs={3}>
-                        <div className={styles.inputModule}>
-                            Players to Target:
-                            <PlayersToTargetInput
-                                playerSuggestions={playerSuggestions}
-                                setPlayerSuggestions={setPlayerSuggestions}
-                            />
-                        </div>
-                    </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={2.5}>
                         <div className={styles.inputModule}>
                             Positional Grade Override:
                             <PositionalGradesOverride
@@ -608,14 +610,17 @@ export default function BigBoy() {
                             />
                         </div>
                     </Grid>
+                    <Grid item xs={1.5} className={styles.extraInfo}>
+                        <div style={{textAlign: 'end', maxWidth: '120px'}}>
+                            {settingsComponent()}
+                        </div>
+                    </Grid>
                     <Grid item xs={6}>
                         <div className={styles.inputModule}>
-                            Look to Trade:
-                            <LookToTradeInput
-                                playersToTrade={playersToTrade}
-                                setPlayersToTrade={setPlayersToTrade}
-                                inReturn={inReturn}
-                                setInReturn={setInReturn}
+                            Cornerstones:
+                            <CornerstoneSelectors
+                                cornerstones={cornerstones}
+                                setCornerstones={setCornerstones}
                                 roster={roster}
                             />
                         </div>
@@ -630,14 +635,29 @@ export default function BigBoy() {
                             />
                         </div>
                     </Grid>
-                    <Grid item xs={4} className={styles.extraInfo}>
-                        <div>{rosterComponent()}</div>
-                        <div style={{textAlign: 'end', maxWidth: '120px'}}>
-                            {settingsComponent()}
-                        </div>
-                    </Grid>
                     <Grid item xs={4}>
                         <div>{archetypeSelector()}</div>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <div className={styles.inputModule}>
+                            Look to Trade:
+                            <LookToTradeInput
+                                playersToTrade={playersToTrade}
+                                setPlayersToTrade={setPlayersToTrade}
+                                inReturn={inReturn}
+                                setInReturn={setInReturn}
+                                roster={roster}
+                            />
+                        </div>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div className={styles.inputModule}>
+                            Players to Target:
+                            <PlayersToTargetInput
+                                playerSuggestions={playerSuggestions}
+                                setPlayerSuggestions={setPlayerSuggestions}
+                            />
+                        </div>
                     </Grid>
                     <Grid item xs={4}>
                         Rebuild(0) - Contend(100)
@@ -645,8 +665,6 @@ export default function BigBoy() {
                         Draft Capital Grade
                         <div>{draftCapitalGradeInput()}</div>
                         {draftCapitalNotesInput()}
-                    </Grid>
-                    <Grid item xs={4}>
                         {commentsInput()}
                     </Grid>
                 </Grid>
