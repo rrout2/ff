@@ -127,6 +127,22 @@ function GraphicComponent({
         return `${acc}${displayValue}`;
     };
 
+    const shortenedPlayerIdReducer = (
+        acc: string,
+        currPlayerId: string,
+        idx: number,
+        arr: string[]
+    ) => {
+        const player = playerData![currPlayerId];
+        const displayValue = !player
+            ? currPlayerId
+            : `${player.first_name[0]}. ${player.last_name}`;
+        if (idx + 1 !== arr.length) {
+            return `${acc}${displayValue}/`;
+        }
+        return `${acc}${displayValue}`;
+    };
+
     return (
         <div
             className={`${styles.graphicComponent} ${
@@ -135,8 +151,18 @@ function GraphicComponent({
         >
             <div className={styles.title}>LOOK TO TRADE:</div>
             {[0, 1, 2].map(idx => {
+                const tradeAwayString = playersToTrade[idx].reduce(
+                    playerIdReducer,
+                    ''
+                );
+                const shortenedTradeAwayString = playersToTrade[idx].reduce(
+                    shortenedPlayerIdReducer,
+                    ''
+                );
                 return tradeSuggestion(
-                    playersToTrade[idx].reduce(playerIdReducer, ''),
+                    tradeAwayString.length < 26
+                        ? tradeAwayString
+                        : shortenedTradeAwayString,
                     inReturn[idx].toLocaleUpperCase(),
                     COLORS[idx]
                 );
