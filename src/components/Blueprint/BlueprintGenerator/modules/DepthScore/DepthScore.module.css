@@ -34,6 +34,10 @@
     width: 340px;
 }
 
+.longBench {
+    font-size: 13px;
+}
+
 .scoreSection {
     position: relative;
     width: 300px;

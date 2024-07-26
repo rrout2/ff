@@ -77,6 +77,8 @@ function GraphicComponent({
         return calculateDepthScore(bench, getPlayerValue);
     }
 
+    const longBench = benchString.length > 305;
+
     return (
         <div
             className={`${styles.graphicComponent} ${
@@ -93,7 +95,13 @@ function GraphicComponent({
                 </div>
                 <div className={styles.score}>{score}/10</div>
             </div>
-            <div className={styles.benchString}>{benchString}</div>
+            <div
+                className={`${styles.benchString}${
+                    longBench ? ` ${styles.longBench}` : ''
+                }`}
+            >
+                {benchString}
+            </div>
         </div>
     );
 }
