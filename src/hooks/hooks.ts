@@ -221,6 +221,35 @@ export function useLeagueIdFromUrl(): [
     return [leagueId, setLeagueId];
 }
 
+export function useParamFromUrl(
+    param: string,
+    defaultValue?: string
+): [string, Dispatch<SetStateAction<string>>] {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        const valueFromUrl = searchParams.get(param);
+        if (!valueFromUrl) {
+            setValue(defaultValue ?? '');
+            return;
+        }
+
+        setValue(valueFromUrl);
+    }, [searchParams, setValue]);
+
+    useEffect(() => {
+        if (value === searchParams.get(param)) return;
+
+        setSearchParams(searchParams => {
+            searchParams.set(param, value);
+            return searchParams;
+        });
+    }, [value, setSearchParams]);
+
+    return [value, setValue];
+}
+
 export function useTeamIdFromUrl(): [string, Dispatch<SetStateAction<string>>] {
     const [searchParams, setSearchParams] = useSearchParams();
     const [teamId, setTeamId] = useState('');
