@@ -6,8 +6,8 @@ import {
     useRosterSettingsFromId,
     useTitle,
 } from '../../../../../hooks/hooks';
-import ExportButton from '../../shared/ExportButton';
-import {logoImage} from '../../shared/Utilities';
+import ExportButton from '../../../shared/ExportButton';
+import {logoImage} from '../../../shared/Utilities';
 
 function StartersModule(props: {
     roster?: Roster;

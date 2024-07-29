@@ -1,9 +1,9 @@
 import styles from './LookToTradeModule.module.css';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {usePlayerData} from '../../../../../hooks/hooks';
 import {Dispatch, SetStateAction, useState} from 'react';
-import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
+import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
 
 const SUGGESTIONS = [

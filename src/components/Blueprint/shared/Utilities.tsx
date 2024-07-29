@@ -1,4 +1,4 @@
-import {blankLogo, teamLogos} from '../../../../consts/images';
+import {blankLogo, teamLogos} from '../../../consts/images';
 
 export function logoImage(team?: string, className?: string) {
     return (

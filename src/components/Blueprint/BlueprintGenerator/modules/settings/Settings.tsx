@@ -23,7 +23,7 @@ import {
     WR_RB_FLEX,
     WR_TE_FLEX,
 } from '../../../../../consts/fantasy';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {Dispatch, SetStateAction} from 'react';
 
 export type SettingsProps = {

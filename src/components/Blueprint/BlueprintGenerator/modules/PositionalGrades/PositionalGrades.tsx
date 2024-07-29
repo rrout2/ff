@@ -1,6 +1,6 @@
 import styles from './PositionalGrades.module.css';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {
     InputLabel,
     SelectChangeEvent,

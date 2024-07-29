@@ -1,9 +1,9 @@
 import styles from './CornerstoneModule.module.css';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
-import PlayerSelectComponent from '../../shared/PlayerSelectComponent';
+import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {SetStateAction, useEffect, useState} from 'react';
 
 function CornerstoneModule(props: {

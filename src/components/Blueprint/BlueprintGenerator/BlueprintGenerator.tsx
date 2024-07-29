@@ -42,7 +42,7 @@ import {
     GraphicComponent as DepthScoreGraphic,
     OverrideComponent as DepthScoreOverride,
 } from './modules/DepthScore/DepthScore';
-import ExportButton from './shared/ExportButton';
+import ExportButton from '../shared/ExportButton';
 import {
     QB,
     RB,

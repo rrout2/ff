@@ -25,7 +25,7 @@ import {
     User,
     getAllUsers,
 } from '../../../../../sleeper-api/sleeper-api';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import styles from './BigBoy.module.css';
 import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {

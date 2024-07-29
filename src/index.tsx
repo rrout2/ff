@@ -12,6 +12,7 @@ import PlayerSearch from './components/Player/Search/PlayerSearch';
 import NflTeam from './components/NflTeam/NflTeam';
 import AllTransactions from './components/Transactions/AllTransactions';
 import BlueprintGenerator from './components/Blueprint/BlueprintGenerator/BlueprintGenerator';
+import NewGenerator from './components/Blueprint/v2/NewGenerator';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -36,6 +37,7 @@ root.render(
                         path="/blueprint-gen"
                         element={<BlueprintGenerator />}
                     />
+                    <Route path="/blueprintv2" element={<NewGenerator />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>

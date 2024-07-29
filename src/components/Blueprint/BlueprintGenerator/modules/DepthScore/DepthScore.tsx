@@ -1,6 +1,6 @@
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './DepthScore.module.css';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {

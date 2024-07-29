@@ -1,7 +1,7 @@
 import styles from './PlayersToTargetModule.module.css';
-import ExportButton from '../../shared/ExportButton';
+import ExportButton from '../../../shared/ExportButton';
 import {usePlayerData} from '../../../../../hooks/hooks';
-import {logoImage} from '../../shared/Utilities';
+import {logoImage} from '../../../shared/Utilities';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
 import {Dispatch, Fragment, SetStateAction, useEffect, useState} from 'react';
 import {Player} from '../../../../../sleeper-api/sleeper-api';

@@ -5,7 +5,7 @@ import {
     Select,
     SelectChangeEvent,
 } from '@mui/material';
-import {useAdpData, usePlayerData} from '../../../../hooks/hooks';
+import {useAdpData, usePlayerData} from '../../../hooks/hooks';
 
 export default function PlayerSelectComponent(props: {
     playerIds: string[];
