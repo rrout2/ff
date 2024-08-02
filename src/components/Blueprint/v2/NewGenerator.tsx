@@ -32,7 +32,7 @@ export default function NewGenerator() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [roster, setRoster] = useState<Roster>();
-    const league = useLeague(leagueId);
+    const _league = useLeague(leagueId);
     const playerData = usePlayerData();
 
     useEffect(() => {
@@ -44,6 +44,11 @@ export default function NewGenerator() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
+
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId()) return;
+        setSpecifiedUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
 
     useEffect(() => {
         if (
@@ -103,8 +108,15 @@ export default function NewGenerator() {
                 margin: '4px',
             })}
             {hasTeamId() && moduleSelectComponent()}
-            {module === Module.Roster && !!roster && (
-                <RosterModule roster={roster} />
+            {module === Module.Roster && !!roster && !!rosters && (
+                <RosterModule
+                    roster={roster}
+                    numRosters={rosters.length}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
             )}
         </div>
     );

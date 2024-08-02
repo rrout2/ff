@@ -33,7 +33,7 @@ import was from '../assets/logos/wsh.png';
 import nfl from '../assets/logos/nfl.png';
 
 import blankLogo from '../assets/logos/blank.png';
-
+import blueprint2 from '../assets/blueprint2.0.png';
 import scale from '../assets/scale.png';
 import slider from '../assets/slider.png';
 import blankblueprint from '../assets/blankblueprint.jpg';
@@ -132,4 +132,5 @@ export {
     circleSlider,
     draftCapitalScale,
     draftCapitalBackground,
+    blueprint2,
 };
