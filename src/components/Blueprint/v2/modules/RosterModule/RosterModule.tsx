@@ -107,7 +107,7 @@ export function InputComponent({
         <>
             {FANTASY_POSITIONS.map(pos => {
                 return (
-                    <FormControl>
+                    <FormControl style={{margin: '4px'}}>
                         <InputLabel>{pos}</InputLabel>
                         <Select
                             label={pos}
