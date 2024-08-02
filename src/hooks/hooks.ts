@@ -239,7 +239,7 @@ export function useParamFromUrl(
     }, [searchParams, setValue]);
 
     useEffect(() => {
-        if (value === searchParams.get(param)) return;
+        if (value === searchParams.get(param) || value === '') return;
 
         setSearchParams(searchParams => {
             searchParams.set(param, value);
