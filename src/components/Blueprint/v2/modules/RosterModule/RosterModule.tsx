@@ -90,7 +90,8 @@ export default function RosterModule({
                                         </div>
                                     </div>
                                 );
-                            })}
+                            })
+                            .slice(0, 10)}
                     </div>
                 ))}
             </div>
