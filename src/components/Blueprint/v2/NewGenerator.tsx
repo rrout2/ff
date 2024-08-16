@@ -18,10 +18,12 @@ import {
 } from '@mui/material';
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
 import RosterModule from './modules/RosterModule/RosterModule';
+import SettingsModule from './modules/SettingsModule/SettingsModule';
 
 export enum Module {
     Unspecified = 'unspecified',
     Roster = 'roster',
+    Settings = 'settings',
 }
 
 export default function NewGenerator() {
@@ -97,6 +99,9 @@ export default function NewGenerator() {
                     <MenuItem value={Module.Roster} key={Module.Roster}>
                         Roster
                     </MenuItem>
+                    <MenuItem value={Module.Settings} key={Module.Settings}>
+                        Settings
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -116,6 +121,16 @@ export default function NewGenerator() {
                         specifiedUser?.metadata?.team_name ??
                         specifiedUser?.display_name
                     }
+                />
+            )}
+            {module === Module.Settings && (
+                <SettingsModule
+                    leagueId={leagueId}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                    numRosters={rosters?.length}
                 />
             )}
         </div>

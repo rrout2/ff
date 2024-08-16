@@ -1,0 +1,59 @@
+.graphicComponent {
+    background-color: #005D91;
+    color: #09153A;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    width: fit-content;
+}
+
+.settingTile {
+    font-family: 'Erbaum';
+    color: #09153A;
+    font-size: 30px;
+    line-height: 0.9;
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.multiColoredTileContainer {
+    position: relative;
+    width: 65px;
+    height: 32px;
+}
+
+.multiColorBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.colorRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.multiColorValue {
+    position: absolute;
+    font-family: 'Erbaum';
+    font-size: 30px;
+    width: 65px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.9;
+}
+
+.sizeOfFour {
+    width: 32.5px;
+    height: 16px;
+}
+
+.sizeOfThree {
+    width: 21.67px;
+    height: 32px;
+}
