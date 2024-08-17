@@ -134,7 +134,7 @@ function InputComponent({playerSuggestions, setPlayerSuggestions}: inputProps) {
         if (!playerData) return <></>;
 
         const opts = allPlayers
-            .filter(p => !!p.team && p.status === 'Active')
+            .filter(p => !!p.team)
             .sort(sortBySearchRank)
             .map(p => p.player_id);
         opts.push('RP-2025');
