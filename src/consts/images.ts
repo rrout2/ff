@@ -32,6 +32,39 @@ import ten from '../assets/logos/ten.png';
 import was from '../assets/logos/wsh.png';
 import nfl from '../assets/logos/nfl.png';
 
+// import ariSilh from '../assets/logos/silhouettes/ARI.png';
+import atlSilh from '../assets/logos/silhouettes/ATL.png';
+import balSilh from '../assets/logos/silhouettes/BAL.png';
+import bufSilh from '../assets/logos/silhouettes/BUF.png';
+import carSilh from '../assets/logos/silhouettes/CAR.png';
+// import chiSilh from '../assets/logos/silhouettes/CHI.png';
+import cinSilh from '../assets/logos/silhouettes/CIN.png';
+import cleSilh from '../assets/logos/silhouettes/CLE.png';
+import dalSilh from '../assets/logos/silhouettes/DAL.png';
+import denSilh from '../assets/logos/silhouettes/DEN.png';
+import detSilh from '../assets/logos/silhouettes/DET.png';
+import gbSilh from '../assets/logos/silhouettes/GB.png';
+import houSilh from '../assets/logos/silhouettes/HOU.png';
+import indSilh from '../assets/logos/silhouettes/IND.png';
+// import jacSilh from '../assets/logos/silhouettes/JAC.png';
+import kcSilh from '../assets/logos/silhouettes/KC.png';
+// import lvSilh from '../assets/logos/silhouettes/LV.png';
+// import lacSilh from '../assets/logos/silhouettes/LAC.png';
+// import larSilh from '../assets/logos/silhouettes/LAR.png';
+import miaSilh from '../assets/logos/silhouettes/MIA.png';
+import minSilh from '../assets/logos/silhouettes/MIN.png';
+import neSilh from '../assets/logos/silhouettes/NE.png';
+import noSilh from '../assets/logos/silhouettes/NO.png';
+// import nygSilh from '../assets/logos/silhouettes/NYG.png';
+import nyjSilh from '../assets/logos/silhouettes/NYJ.png';
+import phiSilh from '../assets/logos/silhouettes/PHI.png';
+import pitSilh from '../assets/logos/silhouettes/PIT.png';
+import sfSilh from '../assets/logos/silhouettes/SF.png';
+import seaSilh from '../assets/logos/silhouettes/SEA.png';
+import tbSilh from '../assets/logos/silhouettes/TB.png';
+import tenSilh from '../assets/logos/silhouettes/TEN.png';
+import wasSilh from '../assets/logos/silhouettes/WAS.png';
+
 import blankLogo from '../assets/logos/blank.png';
 import blueprint2 from '../assets/blueprint2.0.png';
 import scale from '../assets/scale.png';
@@ -118,6 +151,75 @@ const teamLogos: Map<string, string> = new Map([
     ['rp-', nfl],
 ]);
 
+const teamSilhouettes: Map<string, string> = new Map([
+    // ['ari', ariSilh],
+    // ['ARI', ariSilh],
+    ['atl', atlSilh],
+    ['ATL', atlSilh],
+    ['bal', balSilh],
+    ['BAL', balSilh],
+    ['buf', bufSilh],
+    ['BUF', bufSilh],
+    ['car', carSilh],
+    ['CAR', carSilh],
+    // ['chi', chiSilh],
+    // ['CHI', chiSilh],
+    ['cin', cinSilh],
+    ['CIN', cinSilh],
+    ['cle', cleSilh],
+    ['CLE', cleSilh],
+    ['dal', dalSilh],
+    ['DAL', dalSilh],
+    ['den', denSilh],
+    ['DEN', denSilh],
+    ['det', detSilh],
+    ['DET', detSilh],
+    ['gb', gbSilh],
+    ['GB', gbSilh],
+    ['hou', houSilh],
+    ['HOU', houSilh],
+    ['ind', indSilh],
+    ['IND', indSilh],
+    // ['jac', jacSilh],
+    // ['JAC', jacSilh],
+    // ['jax', jacSilh],
+    // ['JAX', jacSilh],
+    ['kc', kcSilh],
+    ['KC', kcSilh],
+    // ['lv', lvSilh],
+    // ['LV', lvSilh],
+    // ['lac', lacSilh],
+    // ['LAC', lacSilh],
+    // ['lar', larSilh],
+    // ['LAR', larSilh],
+    ['mia', miaSilh],
+    ['MIA', miaSilh],
+    ['min', minSilh],
+    ['MIN', minSilh],
+    ['ne', neSilh],
+    ['NE', neSilh],
+    ['no', noSilh],
+    ['NO', noSilh],
+    // ['nyg', nygSilh],
+    // ['NYG', nygSilh],
+    ['nyj', nyjSilh],
+    ['NYJ', nyjSilh],
+    ['phi', phiSilh],
+    ['PHI', phiSilh],
+    ['pit', pitSilh],
+    ['PIT', pitSilh],
+    ['sf', sfSilh],
+    ['SF', sfSilh],
+    ['sea', seaSilh],
+    ['SEA', seaSilh],
+    ['tb', tbSilh],
+    ['TB', tbSilh],
+    ['ten', tenSilh],
+    ['TEN', tenSilh],
+    ['was', wasSilh],
+    ['WAS', wasSilh],
+]);
+
 export {
     teamLogos,
     blankLogo,
@@ -133,4 +235,5 @@ export {
     draftCapitalScale,
     draftCapitalBackground,
     blueprint2,
+    teamSilhouettes,
 };

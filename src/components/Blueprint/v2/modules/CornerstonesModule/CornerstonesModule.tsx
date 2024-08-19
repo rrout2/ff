@@ -6,6 +6,7 @@ import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import {Grid} from '@mui/material';
+import {teamSilhouettes} from '../../../../../consts/images';
 
 interface CornerstonesModuleProps {
     roster?: Roster;
@@ -39,6 +40,10 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     background: positionToColor[position],
                 }}
             >
+                <img
+                    src={teamSilhouettes.get(player.team) ?? ''}
+                    className={styles.teamLogo}
+                />
                 <img
                     src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`}
                     onError={({currentTarget}) => {
