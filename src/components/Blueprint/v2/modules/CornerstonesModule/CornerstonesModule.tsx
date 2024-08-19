@@ -24,7 +24,6 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
     useEffect(() => {
         if (!roster || !playerData) return;
         setCornerstones(
-            // [NONE_PLAYER_ID]
             roster.players
                 .map(p => playerData[p])
                 .sort(sortByAdp)
