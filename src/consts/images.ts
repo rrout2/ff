@@ -37,7 +37,7 @@ import atlSilh from '../assets/logos/silhouettes/ATL.png';
 import balSilh from '../assets/logos/silhouettes/BAL.png';
 import bufSilh from '../assets/logos/silhouettes/BUF.png';
 import carSilh from '../assets/logos/silhouettes/CAR.png';
-// import chiSilh from '../assets/logos/silhouettes/CHI.png';
+import chiSilh from '../assets/logos/silhouettes/CHI.png';
 import cinSilh from '../assets/logos/silhouettes/CIN.png';
 import cleSilh from '../assets/logos/silhouettes/CLE.png';
 import dalSilh from '../assets/logos/silhouettes/DAL.png';
@@ -46,10 +46,10 @@ import detSilh from '../assets/logos/silhouettes/DET.png';
 import gbSilh from '../assets/logos/silhouettes/GB.png';
 import houSilh from '../assets/logos/silhouettes/HOU.png';
 import indSilh from '../assets/logos/silhouettes/IND.png';
-// import jacSilh from '../assets/logos/silhouettes/JAC.png';
+import jaxSilh from '../assets/logos/silhouettes/JAX.png';
 import kcSilh from '../assets/logos/silhouettes/KC.png';
 // import lvSilh from '../assets/logos/silhouettes/LV.png';
-// import lacSilh from '../assets/logos/silhouettes/LAC.png';
+import lacSilh from '../assets/logos/silhouettes/LAC.png';
 // import larSilh from '../assets/logos/silhouettes/LAR.png';
 import miaSilh from '../assets/logos/silhouettes/MIA.png';
 import minSilh from '../assets/logos/silhouettes/MIN.png';
@@ -162,8 +162,8 @@ const teamSilhouettes: Map<string, string> = new Map([
     ['BUF', bufSilh],
     ['car', carSilh],
     ['CAR', carSilh],
-    // ['chi', chiSilh],
-    // ['CHI', chiSilh],
+    ['chi', chiSilh],
+    ['CHI', chiSilh],
     ['cin', cinSilh],
     ['CIN', cinSilh],
     ['cle', cleSilh],
@@ -180,16 +180,16 @@ const teamSilhouettes: Map<string, string> = new Map([
     ['HOU', houSilh],
     ['ind', indSilh],
     ['IND', indSilh],
-    // ['jac', jacSilh],
-    // ['JAC', jacSilh],
-    // ['jax', jacSilh],
-    // ['JAX', jacSilh],
+    ['jac', jaxSilh],
+    ['JAC', jaxSilh],
+    ['jax', jaxSilh],
+    ['JAX', jaxSilh],
     ['kc', kcSilh],
     ['KC', kcSilh],
     // ['lv', lvSilh],
     // ['LV', lvSilh],
-    // ['lac', lacSilh],
-    // ['LAC', lacSilh],
+    ['lac', lacSilh],
+    ['LAC', lacSilh],
     // ['lar', larSilh],
     // ['LAR', larSilh],
     ['mia', miaSilh],

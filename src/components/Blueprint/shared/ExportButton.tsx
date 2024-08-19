@@ -16,15 +16,20 @@ export default function ExportButton(props: {
         onclick = () =>
             toPng(
                 document.getElementsByClassName(className)[0] as HTMLElement,
-                {backgroundColor: 'rgba(0, 0, 0, 0)'}
-            ).then(dataUrl => {
-                const link = document.createElement('a');
-                link.href = dataUrl;
-                link.download = pngName || 'default_name.png';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
+                {
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    cacheBust: true,
+                }
+            )
+                .then(dataUrl => {
+                    const link = document.createElement('a');
+                    link.href = dataUrl;
+                    link.download = pngName || 'default_name.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                })
+                .catch(console.error);
     } else {
         onclick = () => {
             const zip = new JSZip();
@@ -36,19 +41,23 @@ export default function ExportButton(props: {
                     }
                 );
             });
-            Promise.all(dataUrlPromises).then(dataUrls => {
-                dataUrls.forEach((dataUrl, idx) => {
-                    const content = dataUrl.substring(
-                        dataUrl.indexOf('base64,') + 'base64,'.length
-                    );
-                    zip.file(`${className[idx]}.png`, content, {
-                        base64: true,
+            Promise.all(dataUrlPromises)
+                .then(dataUrls => {
+                    dataUrls.forEach((dataUrl, idx) => {
+                        const content = dataUrl.substring(
+                            dataUrl.indexOf('base64,') + 'base64,'.length
+                        );
+                        zip.file(`${className[idx]}.png`, content, {
+                            base64: true,
+                        });
                     });
-                });
-                zip.generateAsync({type: 'blob'}).then(blob => {
-                    saveAs(blob, zipName || 'blueprint-components');
-                });
-            });
+                    zip.generateAsync({type: 'blob'})
+                        .then(blob => {
+                            saveAs(blob, zipName || 'blueprint-components');
+                        })
+                        .catch(console.error);
+                })
+                .catch(console.error);
         };
     }
     return (

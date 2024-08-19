@@ -7,13 +7,15 @@ import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import {Grid} from '@mui/material';
 import {teamSilhouettes} from '../../../../../consts/images';
+import ExportButton from '../../../shared/ExportButton';
 
 interface CornerstonesModuleProps {
     roster?: Roster;
+    teamName?: string;
 }
 
 export default function CornerstonesModule(props: CornerstonesModuleProps) {
-    const {roster} = props;
+    const {roster, teamName} = props;
     const [cornerstones, setCornerstones] = useState<string[]>([]);
     const playerData = usePlayerData();
     const {getPositionalAdp, sortByAdp} = useAdpData();
@@ -29,10 +31,11 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
         );
     }, [roster, playerData]);
 
-    function cornerstoneTile(playerId: string) {
-        if (!playerData) return <></>;
+    function cornerstoneTile(playerId?: string) {
+        if (!playerData || !playerId) return <></>;
         const player = playerData[playerId];
         const position = player.position;
+        const teamLogo = teamSilhouettes.get(player.team);
         return (
             <div
                 className={styles.cornerstoneTile}
@@ -40,10 +43,9 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     background: positionToColor[position],
                 }}
             >
-                <img
-                    src={teamSilhouettes.get(player.team) ?? ''}
-                    className={styles.teamLogo}
-                />
+                {!!teamLogo && (
+                    <img src={teamLogo} className={styles.teamLogo} />
+                )}
                 <img
                     src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`}
                     onError={({currentTarget}) => {
@@ -76,20 +78,27 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
     }
 
     return (
-        <div className={styles.CornerstonesModule}>
+        <>
+            <ExportButton
+                className={styles.graphicComponent}
+                pngName={`${teamName}_cornerstones.png`}
+            />
             <InputComponent
                 playerIds={roster?.players ?? []}
                 cornerstones={cornerstones}
                 setCornerstones={setCornerstones}
             />
-            <Grid container spacing={0} style={{width: '1000px'}}>
-                {cornerstones.map(playerId => (
-                    <Grid item xs={6}>
-                        {cornerstoneTile(playerId)}
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
+            <div className={styles.graphicComponent}>
+                <div className={styles.graphicRow}>
+                    {cornerstoneTile(cornerstones[0])}
+                    {cornerstoneTile(cornerstones[1])}
+                </div>
+                <div className={styles.graphicRow}>
+                    {cornerstoneTile(cornerstones[2])}
+                    {cornerstoneTile(cornerstones[3])}
+                </div>
+            </div>
+        </>
     );
 }
 
@@ -100,9 +109,6 @@ interface InputComponentProps {
 }
 export function InputComponent(props: InputComponentProps) {
     const {playerIds, cornerstones, setCornerstones} = props;
-    // useEffect(() => {
-    //     setCornerstones([]);
-    // }, [playerIds]);
     return (
         <PlayerSelectComponent
             playerIds={playerIds}

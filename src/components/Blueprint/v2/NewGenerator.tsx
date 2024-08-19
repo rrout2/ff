@@ -142,7 +142,13 @@ export default function NewGenerator() {
                 />
             )}
             {module === Module.Cornerstones && (
-                <CornerstonesModule roster={roster} />
+                <CornerstonesModule
+                    roster={roster}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
             )}
         </div>
     );

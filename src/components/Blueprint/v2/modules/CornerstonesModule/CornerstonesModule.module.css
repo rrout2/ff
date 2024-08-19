@@ -1,9 +1,19 @@
-.CornerstonesModule {}
+.graphicComponent {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: fit-content;
+}
 
+.graphicRow {
+    display: flex;
+    flex-direction: row;
+    gap: inherit;
+}
 .cornerstoneTile {
     position: relative;
     width: 500px;
-    height: 250px;
+    height: 255px;
     overflow: hidden;
 }
 
@@ -11,7 +21,6 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    /* width: 100%; */
     height: 110%;
     opacity: 0.3;
 }
