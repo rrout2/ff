@@ -5,7 +5,6 @@ import styles from './CornerstonesModule.module.css';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
-import {Grid} from '@mui/material';
 import {teamSilhouettes} from '../../../../../consts/images';
 import ExportButton from '../../../shared/ExportButton';
 
