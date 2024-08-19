@@ -13,6 +13,7 @@ export default function PlayerSelectComponent(props: {
     onChange: (newPlayerIds: string[]) => void;
     nonIdPlayerOptions?: string[];
     position?: string;
+    label?: string;
 }) {
     const {
         playerIds,
@@ -20,6 +21,7 @@ export default function PlayerSelectComponent(props: {
         onChange,
         position,
         nonIdPlayerOptions,
+        label,
     } = props;
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
@@ -41,12 +43,13 @@ export default function PlayerSelectComponent(props: {
         <FormControl
             style={{
                 margin: '4px',
+                minWidth: '100px',
             }}
         >
-            <InputLabel>{position ?? 'Player'}</InputLabel>
+            <InputLabel>{label ?? position ?? 'Player'}</InputLabel>
             <Select
                 value={selectedPlayerIds}
-                label={position ?? 'Player'}
+                label={label ?? position ?? 'Player'}
                 onChange={(e: SelectChangeEvent<string[]>) => {
                     const {
                         target: {value},

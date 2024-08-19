@@ -1,0 +1,61 @@
+.CornerstonesModule {}
+
+.cornerstoneTile {
+    position: relative;
+    width: 500px;
+    height: 250px;
+}
+
+.headshot {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+}
+
+.positionalAdp {
+    position: absolute;
+
+    font-family: 'Prohibition Test';
+    line-height: 0.9;
+    font-size: 20px;
+    padding: 6px;
+}
+
+
+.tileText {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    color: #09153A;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.firstName {
+    font-family: 'Erbaum';
+    font-size: 16px;
+
+    margin-bottom: -5px;
+}
+
+.lastName {
+    font-family: 'Prohibition Test';
+    font-size: 52px;
+
+    line-height: 0.9;
+
+    margin-bottom: 16px;
+}
+
+.teamName,
+.number {
+    font-family: 'Prohibition Test';
+    font-size: 20px;
+
+    font-style: oblique;
+}

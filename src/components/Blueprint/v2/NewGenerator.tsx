@@ -19,11 +19,13 @@ import {
 import {NONE_TEAM_ID} from '../../../consts/urlParams';
 import RosterModule from './modules/RosterModule/RosterModule';
 import SettingsModule from './modules/SettingsModule/SettingsModule';
+import CornerstonesModule from './modules/CornerstonesModule/CornerstonesModule';
 
 export enum Module {
     Unspecified = 'unspecified',
     Roster = 'roster',
     Settings = 'settings',
+    Cornerstones = 'cornerstones',
 }
 
 export default function NewGenerator() {
@@ -102,6 +104,12 @@ export default function NewGenerator() {
                     <MenuItem value={Module.Settings} key={Module.Settings}>
                         Settings
                     </MenuItem>
+                    <MenuItem
+                        value={Module.Cornerstones}
+                        key={Module.Cornerstones}
+                    >
+                        Cornerstones
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -132,6 +140,9 @@ export default function NewGenerator() {
                     }
                     numRosters={rosters?.length}
                 />
+            )}
+            {module === Module.Cornerstones && (
+                <CornerstonesModule roster={roster} />
             )}
         </div>
     );

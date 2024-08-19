@@ -83,7 +83,7 @@ type adpDatum = {
 
 export function useAdpData() {
     const [adpData] = useState(adp as adpDatum[]);
-    const getAdp = (playerName: string) => {
+    const getAdp = (playerName: string): number => {
         const adp = adpData.findIndex(
             a => a.player_name.toLowerCase() === playerName.toLowerCase()
         );
@@ -103,7 +103,7 @@ export function useAdpData() {
         if (adp < 0) return Infinity;
         return adp + 1;
     };
-    const sortByAdp = (a: Player, b: Player) =>
+    const sortByAdp = (a: Player, b: Player): number =>
         getAdp(`${a.first_name} ${a.last_name}`) -
         getAdp(`${b.first_name} ${b.last_name}`);
 

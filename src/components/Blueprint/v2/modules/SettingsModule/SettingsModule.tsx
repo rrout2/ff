@@ -12,19 +12,12 @@ import {
     WR_TE_FLEX,
 } from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
+import {color} from '../../consts/colors';
 
 interface SettingsModuleProps {
     leagueId?: string;
     teamName?: string;
     numRosters?: number;
-}
-enum color {
-    white = '#FFFFFF',
-    qb = '#FCB040',
-    rb = '#32C6F4',
-    wr = '#AF76B3',
-    te = '#D7DF21',
-    red = '#D55455',
 }
 
 export default function SettingsModule(props: SettingsModuleProps) {
