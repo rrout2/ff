@@ -5,6 +5,7 @@ enum color {
     wr = '#AF76B3',
     te = '#D7DF21',
     red = '#D55455',
+    none = 'gray',
 }
 
 const positionToColor: {[key: string]: color} = {
@@ -12,6 +13,7 @@ const positionToColor: {[key: string]: color} = {
     RB: color.rb,
     WR: color.wr,
     TE: color.te,
+    none: color.none,
 };
 
 export {color, positionToColor};

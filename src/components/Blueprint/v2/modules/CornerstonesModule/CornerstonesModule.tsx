@@ -5,13 +5,15 @@ import styles from './CornerstonesModule.module.css';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
-import {teamSilhouettes} from '../../../../../consts/images';
+import {nflSilhouette, teamSilhouettes} from '../../../../../consts/images';
 import ExportButton from '../../../shared/ExportButton';
 
 interface CornerstonesModuleProps {
     roster?: Roster;
     teamName?: string;
 }
+
+const NONE_PLAYER_ID = 'None';
 
 export default function CornerstonesModule(props: CornerstonesModuleProps) {
     const {roster, teamName} = props;
@@ -22,6 +24,7 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
     useEffect(() => {
         if (!roster || !playerData) return;
         setCornerstones(
+            // [NONE_PLAYER_ID]
             roster.players
                 .map(p => playerData[p])
                 .sort(sortByAdp)
@@ -32,7 +35,16 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
 
     function cornerstoneTile(playerId?: string) {
         if (!playerData || !playerId) return <></>;
-        const player = playerData[playerId];
+        const defaultPlayer = {
+            position: 'none',
+            team: '',
+            player_id: NONE_PLAYER_ID,
+            first_name: '',
+            last_name: 'None',
+            number: 0,
+        };
+        const player =
+            playerId !== NONE_PLAYER_ID ? playerData[playerId] : defaultPlayer;
         const position = player.position;
         const teamLogo = teamSilhouettes.get(player.team);
         return (
@@ -46,7 +58,11 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     <img src={teamLogo} className={styles.teamLogo} />
                 )}
                 <img
-                    src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`}
+                    src={
+                        player.player_id === NONE_PLAYER_ID
+                            ? nflSilhouette
+                            : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`
+                    }
                     onError={({currentTarget}) => {
                         currentTarget.onerror = null;
                         currentTarget.src =
@@ -54,12 +70,14 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     }}
                     className={styles.headshot}
                 />
-                <div className={styles.positionalAdp}>
-                    {player.position}{' '}
-                    {getPositionalAdp(
-                        `${player.first_name} ${player.last_name}`
-                    )}
-                </div>
+                {player.player_id !== NONE_PLAYER_ID && (
+                    <div className={styles.positionalAdp}>
+                        {player.position}{' '}
+                        {getPositionalAdp(
+                            `${player.first_name} ${player.last_name}`
+                        )}
+                    </div>
+                )}
                 <div className={styles.tileText}>
                     <div className={styles.firstName}>
                         {player.first_name.toLocaleUpperCase()}
@@ -70,7 +88,9 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     <div className={styles.teamName}>
                         {mapToFullTeamName.get(player.team)}
                     </div>
-                    <div className={styles.number}># {player.number}</div>
+                    {player.player_id !== NONE_PLAYER_ID && (
+                        <div className={styles.number}># {player.number}</div>
+                    )}
                 </div>
             </div>
         );
@@ -111,6 +131,7 @@ export function InputComponent(props: InputComponentProps) {
     return (
         <PlayerSelectComponent
             playerIds={playerIds}
+            nonIdPlayerOptions={[NONE_PLAYER_ID]}
             selectedPlayerIds={cornerstones}
             onChange={setCornerstones}
             label="Cornerstones"

@@ -64,6 +64,7 @@ import seaSilh from '../assets/logos/silhouettes/SEA.png';
 import tbSilh from '../assets/logos/silhouettes/TB.png';
 import tenSilh from '../assets/logos/silhouettes/TEN.png';
 import wasSilh from '../assets/logos/silhouettes/WAS.png';
+import nflSilhouette from '../assets/logos/silhouettes/nfl_logo.png';
 
 import blankLogo from '../assets/logos/blank.png';
 import blueprint2 from '../assets/blueprint2.0.png';
@@ -236,4 +237,5 @@ export {
     draftCapitalBackground,
     blueprint2,
     teamSilhouettes,
+    nflSilhouette,
 };
