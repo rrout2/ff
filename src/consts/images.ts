@@ -1,38 +1,38 @@
-import ari from '../assets/logos/ari.png';
-import atl from '../assets/logos/atl.png';
-import bal from '../assets/logos/bal.png';
-import buf from '../assets/logos/buf.png';
-import car from '../assets/logos/car.png';
-import chi from '../assets/logos/chi.png';
-import cin from '../assets/logos/cin.png';
-import cle from '../assets/logos/cle.png';
-import dal from '../assets/logos/dal.png';
-import den from '../assets/logos/den.png';
-import det from '../assets/logos/det.png';
-import gb from '../assets/logos/gb.png';
-import hou from '../assets/logos/hou.png';
-import ind from '../assets/logos/ind.png';
-import jac from '../assets/logos/jax.png';
-import kc from '../assets/logos/kc.png';
-import lv from '../assets/logos/lv.png';
-import lac from '../assets/logos/lac.png';
-import lar from '../assets/logos/lar.png';
-import mia from '../assets/logos/mia.png';
-import min from '../assets/logos/min.png';
-import ne from '../assets/logos/ne.png';
-import no from '../assets/logos/no.png';
-import nyg from '../assets/logos/nyg.png';
-import nyj from '../assets/logos/nyj.png';
-import phi from '../assets/logos/phi.png';
-import pit from '../assets/logos/pit.png';
-import sf from '../assets/logos/sf.png';
-import sea from '../assets/logos/sea.png';
-import tb from '../assets/logos/tb.png';
-import ten from '../assets/logos/ten.png';
-import was from '../assets/logos/wsh.png';
-import nfl from '../assets/logos/nfl.png';
+import ari from '../assets/logos/standard/ari.png';
+import atl from '../assets/logos/standard/atl.png';
+import bal from '../assets/logos/standard/bal.png';
+import buf from '../assets/logos/standard/buf.png';
+import car from '../assets/logos/standard/car.png';
+import chi from '../assets/logos/standard/chi.png';
+import cin from '../assets/logos/standard/cin.png';
+import cle from '../assets/logos/standard/cle.png';
+import dal from '../assets/logos/standard/dal.png';
+import den from '../assets/logos/standard/den.png';
+import det from '../assets/logos/standard/det.png';
+import gb from '../assets/logos/standard/gb.png';
+import hou from '../assets/logos/standard/hou.png';
+import ind from '../assets/logos/standard/ind.png';
+import jac from '../assets/logos/standard/jax.png';
+import kc from '../assets/logos/standard/kc.png';
+import lv from '../assets/logos/standard/lv.png';
+import lac from '../assets/logos/standard/lac.png';
+import lar from '../assets/logos/standard/lar.png';
+import mia from '../assets/logos/standard/mia.png';
+import min from '../assets/logos/standard/min.png';
+import ne from '../assets/logos/standard/ne.png';
+import no from '../assets/logos/standard/no.png';
+import nyg from '../assets/logos/standard/nyg.png';
+import nyj from '../assets/logos/standard/nyj.png';
+import phi from '../assets/logos/standard/phi.png';
+import pit from '../assets/logos/standard/pit.png';
+import sf from '../assets/logos/standard/sf.png';
+import sea from '../assets/logos/standard/sea.png';
+import tb from '../assets/logos/standard/tb.png';
+import ten from '../assets/logos/standard/ten.png';
+import was from '../assets/logos/standard/wsh.png';
+import nfl from '../assets/logos/standard/nfl.png';
 
-// import ariSilh from '../assets/logos/silhouettes/ARI.png';
+import ariSilh from '../assets/logos/silhouettes/ARI.png';
 import atlSilh from '../assets/logos/silhouettes/ATL.png';
 import balSilh from '../assets/logos/silhouettes/BAL.png';
 import bufSilh from '../assets/logos/silhouettes/BUF.png';
@@ -153,8 +153,8 @@ const teamLogos: Map<string, string> = new Map([
 ]);
 
 const teamSilhouettes: Map<string, string> = new Map([
-    // ['ari', ariSilh],
-    // ['ARI', ariSilh],
+    ['ari', ariSilh],
+    ['ARI', ariSilh],
     ['atl', atlSilh],
     ['ATL', atlSilh],
     ['bal', balSilh],
