@@ -19,7 +19,7 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
     const {roster, teamName} = props;
     const [cornerstones, setCornerstones] = useState<string[]>([]);
     const playerData = usePlayerData();
-    const {getPositionalAdp, sortByAdp} = useAdpData();
+    const {sortByAdp} = useAdpData();
 
     useEffect(() => {
         if (!roster || !playerData) return;
@@ -32,6 +32,28 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
         );
     }, [roster, playerData]);
 
+    return (
+        <>
+            <ExportButton
+                className={styles.graphicComponent}
+                pngName={`${teamName}_cornerstones.png`}
+            />
+            <InputComponent
+                playerIds={roster?.players ?? []}
+                cornerstones={cornerstones}
+                setCornerstones={setCornerstones}
+            />
+            <GraphicComponent cornerstones={cornerstones} />
+        </>
+    );
+}
+interface GraphicComponentProps {
+    cornerstones: string[];
+}
+
+export function GraphicComponent({cornerstones}: GraphicComponentProps) {
+    const playerData = usePlayerData();
+    const {getPositionalAdp} = useAdpData();
     function cornerstoneTile(playerId?: string) {
         if (!playerData || !playerId) return <></>;
         const defaultPlayer = {
@@ -101,32 +123,19 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
             </div>
         );
     }
-
     return (
-        <>
-            <ExportButton
-                className={styles.graphicComponent}
-                pngName={`${teamName}_cornerstones.png`}
-            />
-            <InputComponent
-                playerIds={roster?.players ?? []}
-                cornerstones={cornerstones}
-                setCornerstones={setCornerstones}
-            />
-            <div className={styles.graphicComponent}>
-                <div className={styles.graphicRow}>
-                    {cornerstoneTile(cornerstones[0])}
-                    {cornerstoneTile(cornerstones[1])}
-                </div>
-                <div className={styles.graphicRow}>
-                    {cornerstoneTile(cornerstones[2])}
-                    {cornerstoneTile(cornerstones[3])}
-                </div>
+        <div className={styles.graphicComponent}>
+            <div className={styles.graphicRow}>
+                {cornerstoneTile(cornerstones[0])}
+                {cornerstoneTile(cornerstones[1])}
             </div>
-        </>
+            <div className={styles.graphicRow}>
+                {cornerstoneTile(cornerstones[2])}
+                {cornerstoneTile(cornerstones[3])}
+            </div>
+        </div>
     );
 }
-
 interface InputComponentProps {
     playerIds: string[];
     cornerstones: string[];

@@ -13,6 +13,7 @@ import {
 } from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
 import {color} from '../../consts/colors';
+import {League} from '../../../../../sleeper-api/sleeper-api';
 
 interface SettingsModuleProps {
     leagueId?: string;
@@ -22,9 +23,27 @@ interface SettingsModuleProps {
 
 export default function SettingsModule(props: SettingsModuleProps) {
     const {leagueId, teamName, numRosters} = props;
+
+    return (
+        <>
+            <ExportButton
+                className={styles.graphicComponent}
+                pngName={`${teamName}_settings.png`}
+            />
+            <GraphicComponent leagueId={leagueId} numRosters={numRosters} />
+        </>
+    );
+}
+
+export function GraphicComponent({
+    leagueId,
+    numRosters,
+}: {
+    leagueId?: string;
+    numRosters?: number;
+}) {
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
-
     function multiColorBackground(background: color[]) {
         if (background.length === 4) {
             return (
@@ -110,51 +129,39 @@ export default function SettingsModule(props: SettingsModuleProps) {
         }
     }
 
-    function graphicComponent() {
-        const wrtFlex = rosterSettings.get(FLEX) ?? 0;
-        const wrFlex = rosterSettings.get(WR_RB_FLEX) ?? 0;
-        const wtFlex = rosterSettings.get(WR_TE_FLEX) ?? 0;
+    function numFlexes() {
         return (
-            <div className={styles.graphicComponent}>
-                {settingTile(numRosters ?? 0, color.white)}
-                {settingTile(
-                    (league?.scoring_settings?.rec ?? 0).toFixed(1),
-                    color.white
-                )}
-                {settingTile(
-                    (league?.scoring_settings?.bonus_rec_te ?? 0).toFixed(1),
-                    color.white
-                )}
-                {settingTile(rosterSettings.get(QB) ?? 0, color.qb)}
-                {settingTile(rosterSettings.get(RB) ?? 0, color.rb)}
-                {settingTile(rosterSettings.get(WR) ?? 0, color.wr)}
-                {settingTile(rosterSettings.get(TE) ?? 0, color.te)}
-                {settingTile(
-                    wrtFlex + wrFlex + wtFlex,
-                    color.rb,
-                    color.wr,
-                    color.te
-                )}
-                {settingTile(
-                    rosterSettings.get(SUPER_FLEX) ?? 0,
-                    color.qb,
-                    color.rb,
-                    color.wr,
-                    color.te
-                )}
-                {settingTile(rosterSettings.get(BENCH) ?? 0, color.red)}
-                {settingTile(league?.settings.taxi_slots ?? 0, color.red)}
-            </div>
+            (rosterSettings.get(FLEX) ?? 0) +
+            (rosterSettings.get(WR_RB_FLEX) ?? 0) +
+            (rosterSettings.get(WR_TE_FLEX) ?? 0)
         );
     }
 
     return (
-        <>
-            <ExportButton
-                className={styles.graphicComponent}
-                pngName={`${teamName}_settings.png`}
-            />
-            {graphicComponent()}
-        </>
+        <div className={styles.graphicComponent}>
+            {settingTile(numRosters ?? 0, color.white)}
+            {settingTile(
+                (league?.scoring_settings?.rec ?? 0).toFixed(1),
+                color.white
+            )}
+            {settingTile(
+                (league?.scoring_settings?.bonus_rec_te ?? 0).toFixed(1),
+                color.white
+            )}
+            {settingTile(rosterSettings.get(QB) ?? 0, color.qb)}
+            {settingTile(rosterSettings.get(RB) ?? 0, color.rb)}
+            {settingTile(rosterSettings.get(WR) ?? 0, color.wr)}
+            {settingTile(rosterSettings.get(TE) ?? 0, color.te)}
+            {settingTile(numFlexes(), color.rb, color.wr, color.te)}
+            {settingTile(
+                rosterSettings.get(SUPER_FLEX) ?? 0,
+                color.qb,
+                color.rb,
+                color.wr,
+                color.te
+            )}
+            {settingTile(rosterSettings.get(BENCH) ?? 0, color.red)}
+            {settingTile(league?.settings.taxi_slots ?? 0, color.red)}
+        </div>
     );
 }

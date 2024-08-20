@@ -2,7 +2,7 @@ import {Dispatch, SetStateAction, useState} from 'react';
 import {COLORS} from '../../../../../consts/colors';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
-import {Roster} from '../../../../../sleeper-api/sleeper-api';
+import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './RosterModule.module.css';
 import {FormControl, InputLabel, MenuItem, Select} from '@mui/material';
 import ExportButton from '../../../shared/ExportButton';
@@ -17,7 +17,7 @@ export default function RosterModule({
     teamName?: string;
 }) {
     const playerData = usePlayerData();
-    const {sortByAdp, getPositionalAdp} = useAdpData();
+    const {sortByAdp} = useAdpData();
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
     );
@@ -26,6 +26,33 @@ export default function RosterModule({
     const allPlayers = roster.players
         .map(playerId => playerData[playerId])
         .sort(sortByAdp);
+
+    return (
+        <>
+            <InputComponent rankStateMap={rankStateMap} />
+            <ExportButton
+                className={styles.fullRoster}
+                pngName={`${teamName}_roster.png`}
+            />
+            <GraphicComponent
+                allPlayers={allPlayers}
+                rankStateMap={rankStateMap}
+                numRosters={numRosters}
+            />
+        </>
+    );
+}
+
+export function GraphicComponent({
+    allPlayers,
+    rankStateMap,
+    numRosters,
+}: {
+    allPlayers: Player[];
+    rankStateMap: Map<string, [string, Dispatch<SetStateAction<string>>]>;
+    numRosters: number;
+}) {
+    const {getPositionalAdp} = useAdpData();
 
     function positionalAdpToColor(adp: number) {
         if (adp <= 20) {
@@ -46,57 +73,49 @@ export default function RosterModule({
     }
 
     return (
-        <>
-            <InputComponent rankStateMap={rankStateMap} />
-            <ExportButton
-                className={styles.fullRoster}
-                pngName={`${teamName}_roster.png`}
-            />
-            <div className={styles.fullRoster}>
-                {FANTASY_POSITIONS.map(pos => (
-                    <div className={styles.positionColumn}>
-                        <div
-                            className={styles.positionHeader}
-                            style={{
-                                color: COLORS.get(pos),
-                            }}
-                        >
-                            <div>{pos}</div>
-                            <div className={styles.postionalRank}>
-                                {rankStateMap.get(pos)?.[0]} / {numRosters}
-                            </div>
+        <div className={styles.fullRoster}>
+            {FANTASY_POSITIONS.map(pos => (
+                <div className={styles.positionColumn}>
+                    <div
+                        className={styles.positionHeader}
+                        style={{
+                            color: COLORS.get(pos),
+                        }}
+                    >
+                        <div>{pos}</div>
+                        <div className={styles.postionalRank}>
+                            {rankStateMap.get(pos)?.[0]} / {numRosters}
                         </div>
-                        {allPlayers
-                            .filter(
-                                player => !!player && player.position === pos
-                            )
-                            .map(player => {
-                                const fullName = `${player.first_name} ${player.last_name}`;
-                                const positionalAdp =
-                                    getPositionalAdp(fullName);
-                                return (
-                                    <div className={styles.rosterPlayer}>
-                                        <div>{fullName.toUpperCase()}</div>
-                                        <div
-                                            style={{
-                                                color: positionalAdpToColor(
-                                                    positionalAdp
-                                                ),
-                                            }}
-                                        >
-                                            {positionalAdp === Infinity
-                                                ? '-'
-                                                : positionalAdp}
-                                        </div>
-                                    </div>
-                                );
-                            })
-                            .slice(0, 10)}
                     </div>
-                ))}
-            </div>
-        </>
+                    {allPlayers
+                        .filter(player => !!player && player.position === pos)
+                        .map(player => {
+                            const fullName = `${player.first_name} ${player.last_name}`;
+                            const positionalAdp = getPositionalAdp(fullName);
+                            return (
+                                <div className={styles.rosterPlayer}>
+                                    <div>{fullName.toUpperCase()}</div>
+                                    <div
+                                        style={{
+                                            color: positionalAdpToColor(
+                                                positionalAdp
+                                            ),
+                                        }}
+                                    >
+                                        {positionalAdp === Infinity
+                                            ? '-'
+                                            : positionalAdp}
+                                    </div>
+                                </div>
+                            );
+                        })
+                        .slice(0, 10)}
+                </div>
+            ))}
+        </div>
     );
+    //     </>
+    // );
 }
 
 export function InputComponent({

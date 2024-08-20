@@ -20,12 +20,14 @@ import {NONE_TEAM_ID} from '../../../consts/urlParams';
 import RosterModule from './modules/RosterModule/RosterModule';
 import SettingsModule from './modules/SettingsModule/SettingsModule';
 import CornerstonesModule from './modules/CornerstonesModule/CornerstonesModule';
+import UnifiedModule from './modules/UnifiedModule/UnifiedModule';
 
 export enum Module {
     Unspecified = 'unspecified',
     Roster = 'roster',
     Settings = 'settings',
     Cornerstones = 'cornerstones',
+    Unified = 'unified',
 }
 
 export default function NewGenerator() {
@@ -110,6 +112,9 @@ export default function NewGenerator() {
                     >
                         Cornerstones
                     </MenuItem>
+                    <MenuItem value={Module.Unified} key={Module.Unified}>
+                        Unified
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -149,6 +154,9 @@ export default function NewGenerator() {
                         specifiedUser?.display_name
                     }
                 />
+            )}
+            {module === Module.Unified && (
+                <UnifiedModule roster={roster} numRosters={rosters?.length} />
             )}
         </div>
     );
