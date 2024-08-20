@@ -81,7 +81,7 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                     className={styles.tileText}
                     style={
                         player.player_id === NONE_PLAYER_ID
-                            ? {color: 'red'}
+                            ? {color: 'black'}
                             : {}
                     }
                 >
