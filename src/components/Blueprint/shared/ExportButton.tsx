@@ -38,6 +38,7 @@ export default function ExportButton(props: {
                     document.getElementsByClassName(cn)[0] as HTMLElement,
                     {
                         backgroundColor: 'rgba(0, 0, 0, 0)',
+                        cacheBust: true,
                     }
                 );
             });

@@ -49,9 +49,13 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
 }
 interface GraphicComponentProps {
     cornerstones: string[];
+    graphicClassName?: string;
 }
 
-export function GraphicComponent({cornerstones}: GraphicComponentProps) {
+export function GraphicComponent({
+    cornerstones,
+    graphicClassName,
+}: GraphicComponentProps) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
     function cornerstoneTile(playerId?: string) {
@@ -124,7 +128,7 @@ export function GraphicComponent({cornerstones}: GraphicComponentProps) {
         );
     }
     return (
-        <div className={styles.graphicComponent}>
+        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
             <div className={styles.graphicRow}>
                 {cornerstoneTile(cornerstones[0])}
                 {cornerstoneTile(cornerstones[1])}

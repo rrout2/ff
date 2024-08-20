@@ -13,7 +13,6 @@ import {
 } from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
 import {color} from '../../consts/colors';
-import {League} from '../../../../../sleeper-api/sleeper-api';
 
 interface SettingsModuleProps {
     leagueId?: string;
@@ -34,14 +33,17 @@ export default function SettingsModule(props: SettingsModuleProps) {
         </>
     );
 }
-
-export function GraphicComponent({
-    leagueId,
-    numRosters,
-}: {
+export interface GraphicComponentProps {
+    graphicClassName?: string;
     leagueId?: string;
     numRosters?: number;
-}) {
+}
+
+export function GraphicComponent({
+    graphicClassName,
+    leagueId,
+    numRosters,
+}: GraphicComponentProps) {
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
     function multiColorBackground(background: color[]) {
@@ -138,7 +140,7 @@ export function GraphicComponent({
     }
 
     return (
-        <div className={styles.graphicComponent}>
+        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
             {settingTile(numRosters ?? 0, color.white)}
             {settingTile(
                 (league?.scoring_settings?.rec ?? 0).toFixed(1),

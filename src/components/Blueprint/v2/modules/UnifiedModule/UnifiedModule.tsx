@@ -61,15 +61,30 @@ export default function UnifiedModule({
 
     return (
         <div className={styles.UnifiedModule}>
-            <ExportButton className={[]} zipName={`${teamName}_unified.zip`} />
+            <ExportButton
+                className={[
+                    'rosterGraphic',
+                    'settingsGraphic',
+                    'cornerstonesGraphic',
+                ]}
+                zipName={`${teamName}_unified.zip`}
+            />
             {inputs()}
-            <CornerstonesGraphic cornerstones={cornerstones} />
+            <CornerstonesGraphic
+                cornerstones={cornerstones}
+                graphicClassName="cornerstonesGraphic"
+            />
             <RosterGraphic
                 allPlayers={allPlayers}
                 rankStateMap={rankStateMap}
                 numRosters={numRosters ?? 0}
+                graphicClassName="rosterGraphic"
             />
-            <SettingsGraphic leagueId={leagueId} numRosters={numRosters ?? 0} />
+            <SettingsGraphic
+                leagueId={leagueId}
+                numRosters={numRosters ?? 0}
+                graphicClassName="settingsGraphic"
+            />
         </div>
     );
 }

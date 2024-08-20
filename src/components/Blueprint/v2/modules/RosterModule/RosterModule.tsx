@@ -43,15 +43,19 @@ export default function RosterModule({
     );
 }
 
-export function GraphicComponent({
-    allPlayers,
-    rankStateMap,
-    numRosters,
-}: {
+interface GraphicComponentProps {
+    graphicClassName?: string;
     allPlayers: Player[];
     rankStateMap: Map<string, [string, Dispatch<SetStateAction<string>>]>;
     numRosters: number;
-}) {
+}
+
+export function GraphicComponent({
+    graphicClassName,
+    allPlayers,
+    rankStateMap,
+    numRosters,
+}: GraphicComponentProps) {
     const {getPositionalAdp} = useAdpData();
 
     function positionalAdpToColor(adp: number) {
@@ -73,7 +77,7 @@ export function GraphicComponent({
     }
 
     return (
-        <div className={styles.fullRoster}>
+        <div className={`${styles.fullRoster} ${graphicClassName ?? ''}`}>
             {FANTASY_POSITIONS.map(pos => (
                 <div className={styles.positionColumn}>
                     <div
@@ -114,8 +118,6 @@ export function GraphicComponent({
             ))}
         </div>
     );
-    //     </>
-    // );
 }
 
 export function InputComponent({
