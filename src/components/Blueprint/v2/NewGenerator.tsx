@@ -156,7 +156,14 @@ export default function NewGenerator() {
                 />
             )}
             {module === Module.Unified && (
-                <UnifiedModule roster={roster} numRosters={rosters?.length} />
+                <UnifiedModule
+                    roster={roster}
+                    numRosters={rosters?.length}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
             )}
         </div>
     );
