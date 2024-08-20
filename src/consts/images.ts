@@ -48,7 +48,7 @@ import houSilh from '../assets/logos/silhouettes/HOU.png';
 import indSilh from '../assets/logos/silhouettes/IND.png';
 import jaxSilh from '../assets/logos/silhouettes/JAX.png';
 import kcSilh from '../assets/logos/silhouettes/KC.png';
-// import lvSilh from '../assets/logos/silhouettes/LV.png';
+import lvSilh from '../assets/logos/silhouettes/LV.png';
 import lacSilh from '../assets/logos/silhouettes/LAC.png';
 import larSilh from '../assets/logos/silhouettes/LAR.png';
 import miaSilh from '../assets/logos/silhouettes/MIA.png';
@@ -187,8 +187,8 @@ const teamSilhouettes: Map<string, string> = new Map([
     ['JAX', jaxSilh],
     ['kc', kcSilh],
     ['KC', kcSilh],
-    // ['lv', lvSilh],
-    // ['LV', lvSilh],
+    ['lv', lvSilh],
+    ['LV', lvSilh],
     ['lac', lacSilh],
     ['LAC', lacSilh],
     ['lar', larSilh],
