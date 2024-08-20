@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import {
     useFetchRosters,
-    useLeague,
     useLeagueIdFromUrl,
     useParamFromUrl,
     usePlayerData,
@@ -38,7 +37,6 @@ export default function NewGenerator() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [roster, setRoster] = useState<Roster>();
-    const _league = useLeague(leagueId);
     const playerData = usePlayerData();
 
     useEffect(() => {
