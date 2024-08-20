@@ -39,7 +39,7 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
             team: '',
             player_id: NONE_PLAYER_ID,
             first_name: '',
-            last_name: 'None',
+            last_name: 'N/A',
             number: 0,
         };
         const player =
@@ -77,7 +77,14 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                         )}
                     </div>
                 )}
-                <div className={styles.tileText}>
+                <div
+                    className={styles.tileText}
+                    style={
+                        player.player_id === NONE_PLAYER_ID
+                            ? {color: 'red'}
+                            : {}
+                    }
+                >
                     <div className={styles.firstName}>
                         {player.first_name.toLocaleUpperCase()}
                     </div>
