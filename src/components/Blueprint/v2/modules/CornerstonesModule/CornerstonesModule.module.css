@@ -27,8 +27,10 @@
 .headshot {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 40px;
     height: 100%;
+    object-fit: cover;
+        aspect-ratio: 1 / 1;
 }
 
 .positionalAdp {
