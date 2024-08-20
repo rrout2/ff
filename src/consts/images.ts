@@ -50,12 +50,12 @@ import jaxSilh from '../assets/logos/silhouettes/JAX.png';
 import kcSilh from '../assets/logos/silhouettes/KC.png';
 // import lvSilh from '../assets/logos/silhouettes/LV.png';
 import lacSilh from '../assets/logos/silhouettes/LAC.png';
-// import larSilh from '../assets/logos/silhouettes/LAR.png';
+import larSilh from '../assets/logos/silhouettes/LAR.png';
 import miaSilh from '../assets/logos/silhouettes/MIA.png';
 import minSilh from '../assets/logos/silhouettes/MIN.png';
 import neSilh from '../assets/logos/silhouettes/NE.png';
 import noSilh from '../assets/logos/silhouettes/NO.png';
-// import nygSilh from '../assets/logos/silhouettes/NYG.png';
+import nygSilh from '../assets/logos/silhouettes/NYG.png';
 import nyjSilh from '../assets/logos/silhouettes/NYJ.png';
 import phiSilh from '../assets/logos/silhouettes/PHI.png';
 import pitSilh from '../assets/logos/silhouettes/PIT.png';
@@ -191,8 +191,8 @@ const teamSilhouettes: Map<string, string> = new Map([
     // ['LV', lvSilh],
     ['lac', lacSilh],
     ['LAC', lacSilh],
-    // ['lar', larSilh],
-    // ['LAR', larSilh],
+    ['lar', larSilh],
+    ['LAR', larSilh],
     ['mia', miaSilh],
     ['MIA', miaSilh],
     ['min', minSilh],
@@ -201,8 +201,8 @@ const teamSilhouettes: Map<string, string> = new Map([
     ['NE', neSilh],
     ['no', noSilh],
     ['NO', noSilh],
-    // ['nyg', nygSilh],
-    // ['NYG', nygSilh],
+    ['nyg', nygSilh],
+    ['NYG', nygSilh],
     ['nyj', nyjSilh],
     ['NYJ', nyjSilh],
     ['phi', phiSilh],
