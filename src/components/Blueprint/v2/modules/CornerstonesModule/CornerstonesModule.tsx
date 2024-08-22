@@ -26,6 +26,7 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
         setCornerstones(
             roster.players
                 .map(p => playerData[p])
+                .filter(p => !!p)
                 .sort(sortByAdp)
                 .map(p => p.player_id)
                 .slice(0, 4)

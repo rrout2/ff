@@ -37,6 +37,7 @@ export default function UnifiedModule({
         if (!roster || !playerData) return;
         const allPlayers = roster.players
             .map(playerId => playerData[playerId])
+            .filter(p => !!p)
             .sort(sortByAdp);
         setAllPlayers(allPlayers);
         setCornerstones(allPlayers.map(p => p.player_id).slice(0, 4));
