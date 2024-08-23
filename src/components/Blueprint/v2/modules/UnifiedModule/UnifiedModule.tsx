@@ -1,7 +1,11 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './UnifiedModule.module.css';
-import {useLeagueIdFromUrl} from '../../../../../hooks/hooks';
+import {
+    useAdpData,
+    useLeagueIdFromUrl,
+    usePlayerData,
+} from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
     InputComponent as CornerstonesInput,
@@ -31,9 +35,20 @@ export default function UnifiedModule({
     teamName,
 }: UnifiedModuleProps): JSX.Element {
     const {cornerstones, setCornerstones} = useCornerstones(roster);
-    const [allPlayers, _setAllPlayers] = useState<Player[]>([]);
+    const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys} = useBuySells(roster);
+    const playerData = usePlayerData();
+    const {sortByAdp} = useAdpData();
+    useEffect(() => {
+        if (!roster || !playerData) return;
+        setAllPlayers(
+            roster.players
+                .map(playerId => playerData[playerId])
+                .filter(p => !!p)
+                .sort(sortByAdp)
+        );
+    }, [roster, playerData]);
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
