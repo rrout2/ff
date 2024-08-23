@@ -153,7 +153,11 @@ function BuyTile({playerId}: {playerId: string}) {
             </div>
             <img
                 className={styles.playerImg}
-                src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`}
+                src={
+                    player.espn_id
+                        ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${player.espn_id}.png`
+                        : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`
+                }
             />
             <div className={styles.buyLabel}>BUY</div>
         </div>

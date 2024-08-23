@@ -205,7 +205,7 @@ export type Player = {
     age: number;
     stats_id: string;
     birth_country: string;
-    espn_id: string;
+    espn_id: null | string;
     search_rank: number;
     first_name: string;
     depth_chart_order: number;
