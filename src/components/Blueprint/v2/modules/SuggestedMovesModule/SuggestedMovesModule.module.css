@@ -1,3 +1,17 @@
+.graphicComponent {
+    background-color: #005D91;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    gap: 96px
+}
+
+.buySellColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
 .sellTile {
     width: 622px;
     height: 140px;
