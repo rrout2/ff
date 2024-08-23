@@ -12,10 +12,7 @@ export type SuggestedMovesModuleProps = {
     teamName?: string;
 };
 
-export default function SuggestedMovesModule({
-    roster,
-    teamName,
-}: SuggestedMovesModuleProps) {
+export function useBuySells(roster: Roster | undefined) {
     const [sells, setSells] = useState<string[]>([]);
     const [buys, setBuys] = useState<string[]>([
         '10229',
@@ -25,11 +22,20 @@ export default function SuggestedMovesModule({
         '11565',
         '11638',
     ]);
-
     useEffect(() => {
         if (!roster) return;
         setSells(roster.players.slice(0, 3));
     }, [roster]);
+
+    return {sells, setSells, buys, setBuys};
+}
+
+export default function SuggestedMovesModule({
+    roster,
+    teamName,
+}: SuggestedMovesModuleProps) {
+    const {sells, setSells, buys, setBuys} = useBuySells(roster);
+
     return (
         <>
             <ExportButton
@@ -51,15 +57,15 @@ export default function SuggestedMovesModule({
 export interface GraphicComponentProps {
     sells: string[];
     buys: string[];
-    className?: string;
+    graphicClassName?: string;
 }
 export function GraphicComponent({
     sells,
     buys,
-    className,
+    graphicClassName,
 }: GraphicComponentProps) {
     return (
-        <div className={`${styles.graphicComponent} ${className || ''}`}>
+        <div className={`${styles.graphicComponent} ${graphicClassName || ''}`}>
             {sells.length > 0 &&
                 sells.map((s, idx) => (
                     <div key={idx} className={styles.buySellColumn}>

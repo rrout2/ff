@@ -17,6 +17,11 @@ import {
 import {GraphicComponent as SettingsGraphic} from '../SettingsModule/SettingsModule';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
+import {
+    GraphicComponent as SuggestedMovesGraphic,
+    InputComponent as SuggestedMovesInput,
+    useBuySells,
+} from '../SuggestedMovesModule/SuggestedMovesModule';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -33,6 +38,7 @@ export default function UnifiedModule({
     const {sortByAdp} = useAdpData();
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     const [leagueId] = useLeagueIdFromUrl();
+    const {sells, setSells, buys, setBuys} = useBuySells(roster);
     useEffect(() => {
         if (!roster || !playerData) return;
         const allPlayers = roster.players
@@ -56,6 +62,13 @@ export default function UnifiedModule({
                     cornerstones={cornerstones}
                 />
                 <RosterInput rankStateMap={rankStateMap} />
+                <SuggestedMovesInput
+                    playerIds={roster?.players ?? []}
+                    sells={sells}
+                    setSells={setSells}
+                    buys={buys}
+                    setBuys={setBuys}
+                />
             </>
         );
     }
@@ -85,6 +98,11 @@ export default function UnifiedModule({
                 leagueId={leagueId}
                 numRosters={numRosters ?? 0}
                 graphicClassName="settingsGraphic"
+            />
+            <SuggestedMovesGraphic
+                sells={sells}
+                buys={buys}
+                graphicClassName="suggestedMovesGraphic"
             />
         </div>
     );
