@@ -15,12 +15,10 @@ interface CornerstonesModuleProps {
 
 const NONE_PLAYER_ID = 'None';
 
-export default function CornerstonesModule(props: CornerstonesModuleProps) {
-    const {roster, teamName} = props;
+export function useCornerstones(roster?: Roster) {
     const [cornerstones, setCornerstones] = useState<string[]>([]);
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
-
     useEffect(() => {
         if (!roster || !playerData) return;
         setCornerstones(
@@ -32,6 +30,12 @@ export default function CornerstonesModule(props: CornerstonesModuleProps) {
                 .slice(0, 4)
         );
     }, [roster, playerData]);
+    return {cornerstones, setCornerstones};
+}
+
+export default function CornerstonesModule(props: CornerstonesModuleProps) {
+    const {roster, teamName} = props;
+    const {cornerstones, setCornerstones} = useCornerstones(roster);
 
     return (
         <>

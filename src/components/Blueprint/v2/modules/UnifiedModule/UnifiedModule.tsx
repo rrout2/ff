@@ -1,14 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './UnifiedModule.module.css';
-import {
-    useAdpData,
-    useLeagueIdFromUrl,
-    usePlayerData,
-} from '../../../../../hooks/hooks';
+import {useLeagueIdFromUrl} from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
     InputComponent as CornerstonesInput,
+    useCornerstones,
 } from '../CornerstonesModule/CornerstonesModule';
 import {
     GraphicComponent as RosterGraphic,
@@ -33,45 +30,32 @@ export default function UnifiedModule({
     numRosters,
     teamName,
 }: UnifiedModuleProps): JSX.Element {
-    const [cornerstones, setCornerstones] = useState<string[]>([]);
-    const playerData = usePlayerData();
-    const {sortByAdp} = useAdpData();
-    const [allPlayers, setAllPlayers] = useState<Player[]>([]);
+    const {cornerstones, setCornerstones} = useCornerstones(roster);
+    const [allPlayers, _setAllPlayers] = useState<Player[]>([]);
     const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys} = useBuySells(roster);
-    useEffect(() => {
-        if (!roster || !playerData) return;
-        const allPlayers = roster.players
-            .map(playerId => playerData[playerId])
-            .filter(p => !!p)
-            .sort(sortByAdp);
-        setAllPlayers(allPlayers);
-        setCornerstones(allPlayers.map(p => p.player_id).slice(0, 4));
-    }, [roster, playerData]);
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
     );
 
-    function inputs() {
-        return (
-            <>
-                <CornerstonesInput
-                    playerIds={roster?.players ?? []}
-                    setCornerstones={setCornerstones}
-                    cornerstones={cornerstones}
-                />
-                <RosterInput rankStateMap={rankStateMap} />
-                <SuggestedMovesInput
-                    playerIds={roster?.players ?? []}
-                    sells={sells}
-                    setSells={setSells}
-                    buys={buys}
-                    setBuys={setBuys}
-                />
-            </>
-        );
-    }
+    const UnifiedInputs = () => (
+        <>
+            <CornerstonesInput
+                playerIds={roster?.players ?? []}
+                setCornerstones={setCornerstones}
+                cornerstones={cornerstones}
+            />
+            <RosterInput rankStateMap={rankStateMap} />
+            <SuggestedMovesInput
+                playerIds={roster?.players ?? []}
+                sells={sells}
+                setSells={setSells}
+                buys={buys}
+                setBuys={setBuys}
+            />
+        </>
+    );
 
     return (
         <div className={styles.UnifiedModule}>
@@ -83,7 +67,7 @@ export default function UnifiedModule({
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
-            {inputs()}
+            <UnifiedInputs />
             <CornerstonesGraphic
                 cornerstones={cornerstones}
                 graphicClassName="cornerstonesGraphic"
