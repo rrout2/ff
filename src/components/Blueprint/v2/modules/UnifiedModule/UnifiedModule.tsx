@@ -79,6 +79,7 @@ export default function UnifiedModule({
                     'rosterGraphic',
                     'settingsGraphic',
                     'cornerstonesGraphic',
+                    'suggestedMovesGraphic',
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
