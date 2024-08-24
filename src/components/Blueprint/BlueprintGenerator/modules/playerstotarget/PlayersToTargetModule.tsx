@@ -198,7 +198,11 @@ function InputComponent({
 }
 
 export function isRookiePickId(id: string) {
-    return id.substring(0, 3) === 'RP-';
+    return (
+        id.substring(0, 3) === 'RP-' ||
+        id.includes('Rookie Pick') ||
+        id.includes(' 1st')
+    );
 }
 
 export function rookiePickIdToString(rookiePickId: string) {

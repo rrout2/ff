@@ -3,10 +3,16 @@ import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './SuggestedMovesModule.module.css';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
-import {InputComponent as PlayersToTargetInput} from '../../../BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
+import {
+    InputComponent as PlayersToTargetInput,
+    isRookiePickId,
+    rookiePickIdToString,
+} from '../../../BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
 import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import ExportButton from '../../../shared/ExportButton';
+import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
+import {nflLogo} from '../../../../../consts/images';
 export type SuggestedMovesModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -81,14 +87,34 @@ export function GraphicComponent({
         </div>
     );
 }
+type miniPlayer = {
+    first_name: string;
+    last_name: string;
+    position: string;
+    sport: string;
+    team: string;
+    player_id: string;
+    espn_id?: string;
+};
 function SellTile({playerId}: {playerId: string}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
-    const player = playerData?.[playerId];
+    let player = playerData?.[playerId] as miniPlayer;
 
     if (!player) {
         console.warn(`Player ${playerId} not found in player data`);
-        return null;
+        if (isRookiePickId(playerId)) {
+            player = {
+                first_name: '',
+                last_name: playerId,
+                position: 'none',
+                sport: 'nfl',
+                team: 'TBD',
+                player_id: playerId,
+            };
+        } else {
+            return null;
+        }
     }
 
     return (
@@ -100,12 +126,14 @@ function SellTile({playerId}: {playerId: string}) {
                 <div className={styles.sellLabel}>&#8594;&nbsp;SELL</div>
             </div>
             <div className={styles.sellTileText}>
-                <div className={styles.positionalAdp}>
-                    {player.position}&nbsp;
-                    {getPositionalAdp(
-                        `${player.first_name} ${player.last_name}`
-                    )}
-                </div>
+                {FANTASY_POSITIONS.includes(player.position) && (
+                    <div className={styles.positionalAdp}>
+                        {player.position}&nbsp;
+                        {getPositionalAdp(
+                            `${player.first_name} ${player.last_name}`
+                        )}
+                    </div>
+                )}
                 <div className={styles.playerName}>
                     {player.first_name} {player.last_name}
                 </div>
@@ -121,11 +149,32 @@ function SellTile({playerId}: {playerId: string}) {
 function BuyTile({playerId}: {playerId: string}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
-    const player = playerData?.[playerId];
+
+    let player = playerData?.[playerId] as miniPlayer;
 
     if (!player) {
         console.warn(`Player ${playerId} not found in player data`);
-        return null;
+        if (isRookiePickId(playerId)) {
+            player = {
+                first_name: '',
+                last_name: rookiePickIdToString(playerId),
+                position: 'none',
+                sport: 'nfl',
+                team: 'TBD',
+                player_id: playerId,
+            };
+        } else {
+            return null;
+        }
+    }
+
+    function getImageSrc(player: miniPlayer) {
+        if (isRookiePickId(player.player_id)) {
+            return nflLogo;
+        }
+        return player.espn_id
+            ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${player.espn_id}.png`
+            : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
     }
 
     return (
@@ -137,12 +186,14 @@ function BuyTile({playerId}: {playerId: string}) {
                         background: positionToColor[player.position],
                     }}
                 >
-                    <div className={styles.positionalAdp}>
-                        {player.position}&nbsp;
-                        {getPositionalAdp(
-                            `${player.first_name} ${player.last_name}`
-                        )}
-                    </div>
+                    {FANTASY_POSITIONS.includes(player.position) && (
+                        <div className={styles.positionalAdp}>
+                            {player.position}&nbsp;
+                            {getPositionalAdp(
+                                `${player.first_name} ${player.last_name}`
+                            )}
+                        </div>
+                    )}
                     <div className={styles.playerName}>
                         {player.first_name} {player.last_name}
                     </div>
@@ -151,14 +202,7 @@ function BuyTile({playerId}: {playerId: string}) {
                     </div>
                 </div>
             </div>
-            <img
-                className={styles.playerImg}
-                src={
-                    player.espn_id
-                        ? `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${player.espn_id}.png`
-                        : `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`
-                }
-            />
+            <img className={styles.playerImg} src={getImageSrc(player)} />
             <div className={styles.buyLabel}>BUY</div>
         </div>
     );
@@ -172,11 +216,18 @@ export interface InputComponentProps {
 }
 export function InputComponent(props: InputComponentProps) {
     const {playerIds, sells, setSells, buys, setBuys} = props;
+    const nonIdPlayerOptions: string[] = [];
+    for (let i = 1; i < 15; i++) {
+        nonIdPlayerOptions.push(`Rookie Pick 1.${i < 10 ? `0${i}` : `${i}`}`);
+    }
+    nonIdPlayerOptions.push('2025 1st');
+    nonIdPlayerOptions.push('2026 1st');
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', width: '500px'}}>
             <PlayerSelectComponent
                 playerIds={playerIds}
+                nonIdPlayerOptions={nonIdPlayerOptions}
                 selectedPlayerIds={sells}
                 onChange={setSells}
                 label="Sells"

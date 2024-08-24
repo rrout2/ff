@@ -238,4 +238,5 @@ export {
     blueprint2,
     teamSilhouettes,
     nflSilhouette,
+    nfl as nflLogo,
 };
