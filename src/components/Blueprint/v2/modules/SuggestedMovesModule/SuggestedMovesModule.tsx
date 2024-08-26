@@ -28,10 +28,19 @@ export function useBuySells(roster: Roster | undefined) {
         '11565',
         '11638',
     ]);
+    const playerData = usePlayerData();
+    const {sortByAdp} = useAdpData();
     useEffect(() => {
-        if (!roster) return;
-        setSells(roster.players.slice(0, 3));
-    }, [roster]);
+        if (!roster || !playerData) return;
+        setSells(
+            roster.players
+                .map(p => playerData[p])
+                .filter(p => !!p)
+                .sort(sortByAdp)
+                .map(p => p.player_id)
+                .slice(0, 3)
+        );
+    }, [roster, playerData]);
 
     return {sells, setSells, buys, setBuys};
 }
@@ -113,7 +122,7 @@ function SellTile({playerId}: {playerId: string}) {
                 player_id: playerId,
             };
         } else {
-            return null;
+            return <></>;
         }
     }
 
