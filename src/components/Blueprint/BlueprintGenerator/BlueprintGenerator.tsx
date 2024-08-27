@@ -66,6 +66,7 @@ import {
     GraphicComponent as LookToTradeGraphic,
     InputComponent as LookToTradeInput,
 } from './modules/looktotrade/LookToTradeModule';
+import WaiverTargets from './modules/WaiverTargets/WaiverTargets';
 export enum Module {
     Unspecified = '',
     Cornerstone = 'cornerstones',
@@ -77,6 +78,7 @@ export enum Module {
     DepthScore = 'depthscore',
     Unified = 'unified',
     BigBoy = 'bigboy',
+    WaiverTargets = 'waivertargets',
 }
 
 export default function BlueprintGenerator() {
@@ -211,6 +213,12 @@ export default function BlueprintGenerator() {
                     </MenuItem>
                     <MenuItem value={Module.DepthScore} key={'depthscore'}>
                         Depth Score
+                    </MenuItem>
+                    <MenuItem
+                        value={Module.WaiverTargets}
+                        key={'waivertargets'}
+                    >
+                        Waiver Targets
                     </MenuItem>
                 </Select>
             </FormControl>
@@ -413,6 +421,9 @@ export default function BlueprintGenerator() {
                 <DepthScore roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.BigBoy && <BigBoy />}
+            {hasTeamId() && module === Module.WaiverTargets && (
+                <WaiverTargets />
+            )}
         </div>
     );
 }

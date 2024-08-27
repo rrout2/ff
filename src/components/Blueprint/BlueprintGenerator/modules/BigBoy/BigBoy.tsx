@@ -58,6 +58,10 @@ import {
     OverrideComponent as PositionalGradesOverride,
 } from '../PositionalGrades/PositionalGrades';
 import {
+    GraphicComponent as WaiverTargetsGraphic,
+    InputComponent as WaiverTargetsInput,
+} from '../WaiverTargets/WaiverTargets';
+import {
     GraphicComponent as LookToTradeGraphic,
     InputComponent as LookToTradeInput,
 } from '../looktotrade/LookToTradeModule';
@@ -128,6 +132,7 @@ export default function BigBoy() {
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [showPreview, setShowPreview] = useState(false);
+    const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
     const [draftCapitalValue, setDraftCapitalValue] = useState(50);
     const [draftCapitalNotes, setDraftCapitalNotes] = useState('placeholder');
@@ -196,6 +201,7 @@ export default function BigBoy() {
     ]);
 
     const [otherSettings, setOtherSettings] = useState('');
+    const [waiverTarget, setWaiverTarget] = useState<string>('');
 
     const teamName =
         specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
@@ -251,7 +257,16 @@ export default function BigBoy() {
                 {lookToTradeGraphicComponent()}
                 {teamNameComponent()}
                 {archetypeComponent()}
-                {threeYearOutlookComponent()}
+                {isRedraft ? (
+                    <div className={styles.waiverTargetsGraphic}>
+                        <div className={styles.waiverTargetTitle}>
+                            WAIVER TARGETS
+                        </div>
+                        <WaiverTargetsGraphic target={waiverTarget} />
+                    </div>
+                ) : (
+                    threeYearOutlookComponent()
+                )}
                 {contendRebuildScaleComponent()}
                 {draftCapitalGradeComponent()}
                 {commentsComponent()}
@@ -399,6 +414,22 @@ export default function BigBoy() {
                         />
                     }
                     label="Show Preview"
+                />
+            </FormGroup>
+        );
+    }
+    function toggleRedraft() {
+        return (
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={isRedraft}
+                            onChange={e => setIsRedraft(e.target.checked)}
+                            inputProps={{'aria-label': 'controlled'}}
+                        />
+                    }
+                    label="Redraft?"
                 />
             </FormGroup>
         );
@@ -698,31 +729,38 @@ export default function BigBoy() {
                         ))}
                     </Select>
                 </FormControl>
-                {[0, 1, 2].map(idx => (
-                    <FormControl style={{margin: '4px'}}>
-                        <InputLabel>Year {idx + 1}</InputLabel>
-                        <Select
-                            label={`Year ${idx + 1}`}
-                            value={outlooks[idx]}
-                            onChange={(event: SelectChangeEvent) => {
-                                const newOutlooks = outlooks.slice();
-                                newOutlooks[idx] = event.target.value;
-                                setOutlooks(newOutlooks);
-                            }}
-                        >
-                            <MenuItem value={'CONTEND'} key={'CONTEND'}>
-                                {'CONTEND'}
-                            </MenuItem>
-                            <MenuItem value={'REBUILD'} key={'REBUILD'}>
-                                {'REBUILD'}
-                            </MenuItem>
+                {!isRedraft &&
+                    [0, 1, 2].map(idx => (
+                        <FormControl style={{margin: '4px'}}>
+                            <InputLabel>Year {idx + 1}</InputLabel>
+                            <Select
+                                label={`Year ${idx + 1}`}
+                                value={outlooks[idx]}
+                                onChange={(event: SelectChangeEvent) => {
+                                    const newOutlooks = outlooks.slice();
+                                    newOutlooks[idx] = event.target.value;
+                                    setOutlooks(newOutlooks);
+                                }}
+                            >
+                                <MenuItem value={'CONTEND'} key={'CONTEND'}>
+                                    {'CONTEND'}
+                                </MenuItem>
+                                <MenuItem value={'REBUILD'} key={'REBUILD'}>
+                                    {'REBUILD'}
+                                </MenuItem>
 
-                            <MenuItem value={'RELOAD'} key={'RELOAD'}>
-                                {'RELOAD'}
-                            </MenuItem>
-                        </Select>
-                    </FormControl>
-                ))}
+                                <MenuItem value={'RELOAD'} key={'RELOAD'}>
+                                    {'RELOAD'}
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    ))}
+                {isRedraft && (
+                    <WaiverTargetsInput
+                        target={waiverTarget}
+                        setTarget={setWaiverTarget}
+                    />
+                )}
             </div>
         );
     }
@@ -735,6 +773,7 @@ export default function BigBoy() {
                 label="Download Blueprint"
             />
             {togglePreview()}
+            {toggleRedraft()}
             <div className={styles.inputsAndPreview}>
                 {inputsComponent()}
                 {showPreview && (
