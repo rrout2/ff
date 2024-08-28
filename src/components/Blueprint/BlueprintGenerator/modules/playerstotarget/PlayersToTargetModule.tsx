@@ -114,12 +114,14 @@ interface inputProps {
     playerSuggestions: string[];
     setPlayerSuggestions: Dispatch<SetStateAction<string[]>>;
     label?: string;
+    styles?: React.CSSProperties;
 }
 
 function InputComponent({
     playerSuggestions,
     setPlayerSuggestions,
     label,
+    styles,
 }: inputProps) {
     const inputStateList = playerSuggestions.map(suggestionId => {
         return useState(suggestionId);
@@ -152,6 +154,7 @@ function InputComponent({
             <FormControl
                 style={{
                     margin: '4px',
+                    ...styles,
                 }}
             >
                 <Autocomplete
