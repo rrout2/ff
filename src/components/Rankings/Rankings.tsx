@@ -27,6 +27,7 @@ export default function Rankings() {
     );
     const [playersToAdd, setPlayersToAdd] = useState<string[]>(['10229']);
     const playerData = usePlayerData();
+
     useEffect(() => {
         const newAllTieredPlayers = new Set<string>();
         tiers.forEach((players, _) => {
@@ -36,6 +37,7 @@ export default function Rankings() {
         });
         setAllTieredPlayers(newAllTieredPlayers);
     }, [tiers]);
+
     if (!playerData) return <></>;
 
     function addToTier(tier: Tier, player: string) {
@@ -53,6 +55,19 @@ export default function Rankings() {
                         players.filter(p => p !== player)
                     );
                 }
+            });
+            return newTiers;
+        });
+    }
+
+    function removePlayer(playerId: string) {
+        setTiers((tiers: Map<Tier, string[]>) => {
+            const newTiers = new Map(tiers);
+            newTiers.forEach((players, currentTier) => {
+                newTiers.set(
+                    currentTier,
+                    players.filter(p => p !== playerId)
+                );
             });
             return newTiers;
         });
@@ -99,21 +114,7 @@ export default function Rankings() {
                 />
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <IconButton
-                        onClick={() => {
-                            setTiers((tiers: Map<Tier, string[]>) => {
-                                const newTiers = new Map(tiers);
-                                newTiers.forEach((players, currentTier) => {
-                                    newTiers.set(
-                                        currentTier,
-                                        players.filter(
-                                            p => p !== playersToAdd[0]
-                                        )
-                                    );
-                                });
-                                return newTiers;
-                            });
-                        }}
-                        style={{aspectRatio: '1/1'}}
+                        onClick={() => removePlayer(playersToAdd[0])}
                         disabled={!allTieredPlayers.has(playersToAdd[0])}
                     >
                         <Delete />
@@ -138,7 +139,12 @@ export default function Rankings() {
                             ?.map(playerId => playerData[playerId])
                             .filter(player => !!player)
                             .map(player => (
-                                <span>
+                                <span
+                                    onClick={() => {
+                                        setPlayersToAdd([player.player_id]);
+                                    }}
+                                    className={styles.playerName}
+                                >
                                     {player.first_name + ' ' + player.last_name}
                                 </span>
                             ))}
