@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {
+    blankRedraftBp,
     blankblueprint,
     circleSlider,
     draftCapitalBackground,
@@ -8,6 +9,7 @@ import {
     outlook2,
     outlook3,
     rebuildContendScale,
+    riskSafetyScale,
     silhouette,
 } from '../../../../../consts/images';
 import {
@@ -259,9 +261,6 @@ export default function BigBoy() {
                 {archetypeComponent()}
                 {isRedraft ? (
                     <div className={styles.waiverTargetsGraphic}>
-                        <div className={styles.waiverTargetTitle}>
-                            WAIVER TARGETS
-                        </div>
                         <WaiverTargetsGraphic target={waiverTarget} />
                     </div>
                 ) : (
@@ -270,7 +269,10 @@ export default function BigBoy() {
                 {contendRebuildScaleComponent()}
                 {draftCapitalGradeComponent()}
                 {commentsComponent()}
-                <img src={blankblueprint} className={styles.base} />
+                <img
+                    src={isRedraft ? blankRedraftBp : blankblueprint}
+                    className={styles.base}
+                />
             </div>
         );
     }
@@ -367,7 +369,9 @@ export default function BigBoy() {
         return (
             <div className={styles.rebuildContendScaleGraphic}>
                 <div className={styles.scaleAndSlider}>
-                    <img src={rebuildContendScale} />
+                    <img
+                        src={isRedraft ? riskSafetyScale : rebuildContendScale}
+                    />
                     <img
                         src={circleSlider}
                         className={styles.slider}
@@ -516,7 +520,11 @@ export default function BigBoy() {
     function archetypeComponent() {
         return (
             <div>
-                <div className={styles.archetypeTitle}>TEAM ARCHETYPE:</div>
+                {!isRedraft && (
+                    <div className={styles.archetypeTitle}>
+                        {'TEAM ARCHETYPE:'}
+                    </div>
+                )}
                 <div className={styles.archetype}>{archetype}</div>
                 <img src={silhouette} className={styles.archetypeSilhouette} />
             </div>
@@ -697,9 +705,13 @@ export default function BigBoy() {
                         </div>
                     </Grid>
                     <Grid item xs={4}>
-                        Rebuild(0) - Contend(100)
+                        {isRedraft
+                            ? 'Risk(0) - Safety(100)'
+                            : 'Rebuild(0) - Contend(100)'}
                         <div>{contendRebuildScaleInput()}</div>
-                        Draft Capital Grade
+                        {isRedraft
+                            ? 'Overall Team Grade'
+                            : 'Draft Capital Grade'}
                         <div>{draftCapitalGradeInput()}</div>
                         {draftCapitalNotesInput()}
                         {commentsInput()}
@@ -714,7 +726,9 @@ export default function BigBoy() {
         return (
             <div className={styles.inputModule}>
                 <FormControl style={{margin: '4px'}}>
-                    <InputLabel>Archetype</InputLabel>
+                    <InputLabel>
+                        {isRedraft ? 'Team Build' : 'Archetype'}
+                    </InputLabel>
                     <Select
                         value={archetype}
                         label="Archetype"

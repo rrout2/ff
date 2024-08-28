@@ -16,17 +16,10 @@
 .waiverTargetsGraphic {
     position: absolute;
     right: 270px;
-    top: 870px;
+    top: 920px;
     scale: 1.9;
 }
 
-.waiverTargetTitle {
-    font-family: 'Erbaum';
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 5px;
-}
 .startersGraphic {
     position: absolute;
     left: 200px;
