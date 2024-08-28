@@ -71,7 +71,7 @@ import blueprint2 from '../assets/blueprint2.0.png';
 import scale from '../assets/scale.png';
 import slider from '../assets/slider.png';
 import blankblueprint from '../assets/blankblueprint.jpg';
-import blankRedraftBp from '../assets/redraft-blueprint.png';
+import blankRedraftBp from '../assets/blueprintredraft.png';
 import riskSafetyScale from '../assets/riskSafetyScale.png';
 import silhouette from '../assets/silhouette.png';
 import outlook1 from '../assets/outlook1.png';
