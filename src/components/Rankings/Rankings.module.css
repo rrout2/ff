@@ -1,1 +1,31 @@
-.Rankings {}
+.addRemoveButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
+}
+
+.playerInputRow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    height: fit-content;
+}
+
+.addToTierButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+
+    width: fit-content;
+}
+
+.addToTierRow {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    align-items: center;
+}
