@@ -66,6 +66,39 @@ import tenSilh from '../assets/logos/silhouettes/TEN.png';
 import wasSilh from '../assets/logos/silhouettes/WAS.png';
 import nflSilhouette from '../assets/logos/silhouettes/nfl_logo.png';
 
+import ariBg from '../assets/teamBackgrounds/ARI.png';
+import atlBg from '../assets/teamBackgrounds/ATL.png';
+import balBg from '../assets/teamBackgrounds/BAL.png';
+import bufBg from '../assets/teamBackgrounds/BUF.png';
+import carBg from '../assets/teamBackgrounds/CAR.png';
+import chiBg from '../assets/teamBackgrounds/CHI.png';
+import cinBg from '../assets/teamBackgrounds/CIN.png';
+import cleBg from '../assets/teamBackgrounds/CLE.png';
+import dalBg from '../assets/teamBackgrounds/DAL.png';
+import denBg from '../assets/teamBackgrounds/DEN.png';
+import detBg from '../assets/teamBackgrounds/DET.png';
+import gbBg from '../assets/teamBackgrounds/GB.png';
+import houBg from '../assets/teamBackgrounds/HOU.png';
+import indBg from '../assets/teamBackgrounds/IND.png';
+import jacBg from '../assets/teamBackgrounds/JAX.png';
+import kcBg from '../assets/teamBackgrounds/KC.png';
+import lacBg from '../assets/teamBackgrounds/LAC.png';
+import larBg from '../assets/teamBackgrounds/LAR.png';
+import lvBg from '../assets/teamBackgrounds/LV.png';
+import miaBg from '../assets/teamBackgrounds/MIA.png';
+import minBg from '../assets/teamBackgrounds/MIN.png';
+import neBg from '../assets/teamBackgrounds/NE.png';
+import noBg from '../assets/teamBackgrounds/NO.png';
+import nygBg from '../assets/teamBackgrounds/NYG.png';
+import nyjBg from '../assets/teamBackgrounds/NYJ.png';
+import phiBg from '../assets/teamBackgrounds/PHI.png';
+import pitBg from '../assets/teamBackgrounds/PIT.png';
+import sfBg from '../assets/teamBackgrounds/SF.png';
+import seaBg from '../assets/teamBackgrounds/SEA.png';
+import tbBg from '../assets/teamBackgrounds/TB.png';
+import tenBg from '../assets/teamBackgrounds/TEN.png';
+import wasBg from '../assets/teamBackgrounds/WAS.png';
+
 import blankLogo from '../assets/logos/blank.png';
 import blueprint2 from '../assets/blueprint2.0.png';
 import scale from '../assets/scale.png';
@@ -152,6 +185,75 @@ const teamLogos: Map<string, string> = new Map([
     ['rp', nfl],
     ['RP-', nfl],
     ['rp-', nfl],
+]);
+
+const teamBackgrounds: Map<string, string> = new Map([
+    ['ari', ariBg],
+    ['ARI', ariBg],
+    ['atl', atlBg],
+    ['ATL', atlBg],
+    ['bal', balBg],
+    ['BAL', balBg],
+    ['buf', bufBg],
+    ['BUF', bufBg],
+    ['car', carBg],
+    ['CAR', carBg],
+    ['chi', chiBg],
+    ['CHI', chiBg],
+    ['cin', cinBg],
+    ['CIN', cinBg],
+    ['cle', cleBg],
+    ['CLE', cleBg],
+    ['dal', dalBg],
+    ['DAL', dalBg],
+    ['den', denBg],
+    ['DEN', denBg],
+    ['det', detBg],
+    ['DET', detBg],
+    ['gb', gbBg],
+    ['GB', gbBg],
+    ['hou', houBg],
+    ['HOU', houBg],
+    ['ind', indBg],
+    ['IND', indBg],
+    ['jac', jacBg],
+    ['JAC', jacBg],
+    ['jax', jacBg],
+    ['JAX', jacBg],
+    ['kc', kcBg],
+    ['KC', kcBg],
+    ['lv', lvBg],
+    ['LV', lvBg],
+    ['lac', lacBg],
+    ['LAC', lacBg],
+    ['lar', larBg],
+    ['LAR', larBg],
+    ['mia', miaBg],
+    ['MIA', miaBg],
+    ['min', minBg],
+    ['MIN', minBg],
+    ['ne', neBg],
+    ['NE', neBg],
+    ['no', noBg],
+    ['NO', noBg],
+    ['nyg', nygBg],
+    ['NYG', nygBg],
+    ['nyj', nyjBg],
+    ['NYJ', nyjBg],
+    ['phi', phiBg],
+    ['PHI', phiBg],
+    ['pit', pitBg],
+    ['PIT', pitBg],
+    ['sf', sfBg],
+    ['SF', sfBg],
+    ['sea', seaBg],
+    ['SEA', seaBg],
+    ['tb', tbBg],
+    ['TB', tbBg],
+    ['ten', tenBg],
+    ['TEN', tenBg],
+    ['was', wasBg],
+    ['WAS', wasBg],
 ]);
 
 const teamSilhouettes: Map<string, string> = new Map([
@@ -241,6 +343,7 @@ export {
     draftCapitalBackground,
     blueprint2,
     teamSilhouettes,
+    teamBackgrounds,
     nflSilhouette,
     nfl as nflLogo,
 };

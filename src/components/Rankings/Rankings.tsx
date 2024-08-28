@@ -4,6 +4,8 @@ import {Button, IconButton} from '@mui/material';
 import {InputComponent as SearchablePlayerInput} from '../Blueprint/BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
 import {usePlayerData} from '../../hooks/hooks';
 import {Delete} from '@mui/icons-material';
+import {Player} from '../../sleeper-api/sleeper-api';
+import {teamBackgrounds, teamLogos} from '../../consts/images';
 
 enum Tier {
     S = 'S',
@@ -75,6 +77,7 @@ export default function Rankings() {
 
     return (
         <div>
+            <PlayerCard playerId={playersToAdd[0]} opponent="KC" />
             <div className={styles.addRemoveButtons}>
                 <Button
                     variant={'outlined'}
@@ -153,4 +156,51 @@ export default function Rankings() {
             </div>
         </div>
     );
+}
+
+interface PlayerCardProps {
+    playerId: string;
+    opponent: string;
+}
+
+export function PlayerCard({playerId, opponent}: PlayerCardProps) {
+    const playerData = usePlayerData();
+    const [player, setPlayer] = useState<Player>();
+    useEffect(() => {
+        if (!playerData) return;
+        setPlayer(playerData[playerId]);
+    }, [playerId, playerData]);
+
+    if (!player) return <></>;
+    return (
+        <div className={styles.playerCard}>
+            <img
+                src={teamBackgrounds.get(player.team)}
+                className={styles.background}
+            />
+            <img
+                src={`https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`}
+                className={styles.headshot}
+            />
+            <div className={styles.opponent}>
+                <div>VS</div>
+                <img
+                    src={teamLogos.get(opponent)}
+                    className={styles.opponentLogo}
+                />
+            </div>
+            <div
+                className={styles.playerCardName}
+            >{`${player.first_name[0]}. ${player.last_name}`}</div>
+        </div>
+    );
+}
+
+interface TierGraphicProps {
+    tier: string;
+    players: string[];
+}
+
+export function TierGraphic() {
+    return <></>;
 }
