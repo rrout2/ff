@@ -89,3 +89,8 @@
         -webkit-text-stroke: 0.5px #010101;
     }
 }
+
+.tierGraphic {
+    display: flex;
+    flex-direction: row;
+}

@@ -5,7 +5,7 @@ import {InputComponent as SearchablePlayerInput} from '../Blueprint/BlueprintGen
 import {usePlayerData} from '../../hooks/hooks';
 import {Delete} from '@mui/icons-material';
 import {Player} from '../../sleeper-api/sleeper-api';
-import {teamBackgrounds, teamLogos} from '../../consts/images';
+import {teamBackgrounds, teamLogos, tierLogos} from '../../consts/images';
 
 enum Tier {
     S = 'S',
@@ -77,7 +77,6 @@ export default function Rankings() {
 
     return (
         <div>
-            <PlayerCard playerId={playersToAdd[0]} opponent="KC" />
             <div className={styles.addRemoveButtons}>
                 <Button
                     variant={'outlined'}
@@ -154,6 +153,13 @@ export default function Rankings() {
                     </div>
                 ))}
             </div>
+            {ALL_TIERS.map(tier => (
+                <TierGraphic
+                    key={tier}
+                    tier={tier}
+                    players={tiers.get(tier)!}
+                />
+            ))}
         </div>
     );
 }
@@ -197,10 +203,21 @@ export function PlayerCard({playerId, opponent}: PlayerCardProps) {
 }
 
 interface TierGraphicProps {
-    tier: string;
+    tier: Tier;
     players: string[];
 }
 
-export function TierGraphic() {
-    return <></>;
+export function TierGraphic({tier, players}: TierGraphicProps) {
+    return (
+        <div className={styles.tierGraphic}>
+            <img src={tierLogos.get(tier)} style={{width: '250px'}} />
+            {players.map(playerId => (
+                <PlayerCard
+                    key={playerId}
+                    playerId={playerId}
+                    opponent={'SEA'}
+                />
+            ))}
+        </div>
+    );
 }

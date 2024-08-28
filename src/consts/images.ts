@@ -114,6 +114,29 @@ import rebuildContendScale from '../assets/rebuildContendScale.png';
 import circleSlider from '../assets/circleSlider.png';
 import draftCapitalScale from '../assets/draftCapitalScale.png';
 import draftCapitalBackground from '../assets/draftCapitalBackground.png';
+
+import sTier from '../assets/tiers/S.png';
+import aTier from '../assets/tiers/A.png';
+import bTier from '../assets/tiers/B.png';
+import cTier from '../assets/tiers/C.png';
+import dTier from '../assets/tiers/D.png';
+import eTier from '../assets/tiers/E.png';
+import fTier from '../assets/tiers/F.png';
+import gTier from '../assets/tiers/G.png';
+import hTier from '../assets/tiers/H.png';
+
+const tierLogos: Map<string, string> = new Map([
+    ['S', sTier],
+    ['A', aTier],
+    ['B', bTier],
+    ['C', cTier],
+    ['D', dTier],
+    ['E', eTier],
+    ['F', fTier],
+    ['G', gTier],
+    ['H', hTier],
+]);
+
 const teamLogos: Map<string, string> = new Map([
     ['ari', ari],
     ['ARI', ari],
@@ -345,5 +368,6 @@ export {
     teamSilhouettes,
     teamBackgrounds,
     nflSilhouette,
+    tierLogos,
     nfl as nflLogo,
 };
