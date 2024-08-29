@@ -4,8 +4,14 @@ import JSZip from 'jszip';
 import {saveAs} from 'file-saver';
 import {FileDownload} from '@mui/icons-material';
 
-// TODO: cleanup/refactor
-export default function ExportButton(props: {
+export default function ExportButton({
+    className: elementClassName,
+    label: buttonLabel,
+    pngName: fileName,
+    zipName: zipFileName,
+    downloadIcon: showDownloadIcon,
+    disabled: isDisabled,
+}: {
     className: string | string[];
     label?: string;
     pngName?: string;
@@ -13,81 +19,77 @@ export default function ExportButton(props: {
     downloadIcon?: boolean;
     disabled?: boolean;
 }) {
-    const {className, pngName, zipName, label, downloadIcon, disabled} = props;
-    let onclick: () => void;
-    if (typeof className === 'string') {
-        onclick = () =>
-            toPng(
-                document.getElementsByClassName(className)[0] as HTMLElement,
-                {
+    const handleExport = async () => {
+        let elements: HTMLElement[] = [];
+        if (typeof elementClassName === 'string') {
+            elements = Array.from(
+                document.getElementsByClassName(elementClassName)
+            ) as HTMLElement[];
+        } else {
+            elements = elementClassName.map(
+                className =>
+                    document.getElementsByClassName(className)[0] as HTMLElement
+            );
+        }
+
+        if (elements.length === 1) {
+            const dataUrl = await toPng(elements[0], {
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                cacheBust: true,
+            });
+
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = fileName || 'default_name.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            const zip = new JSZip();
+            const dataUrlPromises = elements.map(element => {
+                return toPng(element, {
                     backgroundColor: 'rgba(0, 0, 0, 0)',
                     cacheBust: true,
-                }
-            )
-                .then(dataUrl => {
-                    const link = document.createElement('a');
-                    link.href = dataUrl;
-                    link.download = pngName || 'default_name.png';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                })
-                .catch(console.error);
-    } else {
-        onclick = () => {
-            const zip = new JSZip();
-            const dataUrlPromises = className.map(cn => {
-                return toPng(
-                    document.getElementsByClassName(cn)[0] as HTMLElement,
-                    {
-                        backgroundColor: 'rgba(0, 0, 0, 0)',
-                        cacheBust: true,
-                    }
-                );
+                });
             });
-            Promise.all(dataUrlPromises)
-                .then(dataUrls => {
-                    dataUrls.forEach((dataUrl, idx) => {
-                        const content = dataUrl.substring(
-                            dataUrl.indexOf('base64,') + 'base64,'.length
-                        );
-                        zip.file(`${className[idx]}.png`, content, {
-                            base64: true,
-                        });
-                    });
-                    zip.generateAsync({type: 'blob'})
-                        .then(blob => {
-                            saveAs(blob, zipName || 'blueprint-components');
-                        })
-                        .catch(console.error);
-                })
-                .catch(console.error);
-        };
-    }
 
-    if (downloadIcon) {
+            const dataUrls = await Promise.all(dataUrlPromises);
+
+            dataUrls.forEach((dataUrl, idx) => {
+                const content = dataUrl.substring(
+                    dataUrl.indexOf('base64,') + 'base64,'.length
+                );
+                zip.file(`${elementClassName[idx]}.png`, content, {
+                    base64: true,
+                });
+            });
+
+            const blob = await zip.generateAsync({type: 'blob'});
+            saveAs(blob, zipFileName || 'blueprint-components');
+        }
+    };
+
+    if (showDownloadIcon) {
         return (
             <Tooltip title="Download">
-                <IconButton
-                    onClick={onclick}
-                    disabled={disabled !== undefined ? disabled : false}
-                >
+                <IconButton onClick={handleExport} disabled={isDisabled}>
                     <FileDownload />
                 </IconButton>
             </Tooltip>
         );
     }
+
     return (
         <Button
             variant="outlined"
-            onClick={onclick}
+            onClick={handleExport}
             style={{
                 margin: '8px',
                 width: '120px',
             }}
-            disabled={disabled !== undefined ? disabled : false}
+            disabled={isDisabled}
         >
-            {label || (pngName ? 'Export As PNG' : 'Download Blueprint')}
+            {buttonLabel || (fileName ? 'Export As PNG' : 'Download Blueprint')}
         </Button>
     );
 }
