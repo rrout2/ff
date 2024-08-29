@@ -204,6 +204,8 @@ const teamLogos: Map<string, string> = new Map([
     ['TEN', ten],
     ['was', was],
     ['WAS', was],
+    ['wsh', was],
+    ['WSH', was],
     ['RP', nfl],
     ['rp', nfl],
     ['RP-', nfl],

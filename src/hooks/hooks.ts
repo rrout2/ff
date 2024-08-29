@@ -2,6 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import adp from '../data/adp.json';
 import playerValuesJson from '../data/player_values.json';
+import nflScheduleJson from '../data/nfl_schedule.json';
 import {
     League,
     Player,
@@ -27,6 +28,20 @@ import {
     WR_TE_FLEX,
 } from '../consts/fantasy';
 import {Module} from '../components/Blueprint/BlueprintGenerator/BlueprintGenerator';
+
+type TeamSchedule = {
+    [week: string]: string;
+};
+
+type NFLSeasonSchedule = {
+    [team: string]: TeamSchedule;
+};
+
+export function useNflSchedule() {
+    const [nflSchedule] = useState<NFLSeasonSchedule>(nflScheduleJson);
+
+    return nflSchedule;
+}
 
 export interface PlayerData {
     [key: string]: Player;

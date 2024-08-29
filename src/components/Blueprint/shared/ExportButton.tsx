@@ -1,7 +1,8 @@
-import {Button} from '@mui/material';
+import {Button, IconButton} from '@mui/material';
 import {toPng} from 'html-to-image';
 import JSZip from 'jszip';
 import {saveAs} from 'file-saver';
+import {FileDownload} from '@mui/icons-material';
 
 // TODO: cleanup/refactor
 export default function ExportButton(props: {
@@ -9,8 +10,9 @@ export default function ExportButton(props: {
     label?: string;
     pngName?: string;
     zipName?: string;
+    downloadIcon?: boolean;
 }) {
-    const {className, pngName, zipName, label} = props;
+    const {className, pngName, zipName, label, downloadIcon} = props;
     let onclick: () => void;
     if (typeof className === 'string') {
         onclick = () =>
@@ -60,6 +62,14 @@ export default function ExportButton(props: {
                 })
                 .catch(console.error);
         };
+    }
+
+    if (downloadIcon) {
+        return (
+            <IconButton onClick={onclick}>
+                <FileDownload />
+            </IconButton>
+        );
     }
     return (
         <Button
