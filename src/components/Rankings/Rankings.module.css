@@ -49,10 +49,9 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        aspect-ratio: 1 / 1;
-        width: 100%;
+        width: inherit;
+            height: inherit;
         object-fit: cover;
-
 
         filter: drop-shadow(5px 5px 5px black);
     }
