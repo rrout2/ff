@@ -287,8 +287,8 @@ export default function Rankings() {
                             {tier} Tier
                         </Button>
                         {tiers
-                            .get(tier)
-                            ?.map(playerId => playerData[playerId])
+                            .get(tier)!
+                            .map(playerId => playerData[playerId])
                             .filter(player => !!player)
                             .map(player => (
                                 <span
@@ -310,6 +310,9 @@ export default function Rankings() {
                         tier={tier}
                         players={tiers.get(tier)!}
                         week={week}
+                        handlePlayerClicked={(playerId: string) => {
+                            setPlayersToAdd([playerId]);
+                        }}
                     />
                 ))}
             </div>
@@ -320,9 +323,10 @@ export default function Rankings() {
 interface PlayerCardProps {
     playerId: string;
     opponent?: string;
+    onClick: () => void;
 }
 
-export function PlayerCard({playerId, opponent}: PlayerCardProps) {
+export function PlayerCard({playerId, opponent, onClick}: PlayerCardProps) {
     const playerData = usePlayerData();
     const [player, setPlayer] = useState<Player>();
     useEffect(() => {
@@ -332,7 +336,10 @@ export function PlayerCard({playerId, opponent}: PlayerCardProps) {
 
     if (!player) return <></>;
     return (
-        <div className={`${styles.playerCard} player-${playerId}`}>
+        <div
+            className={`${styles.playerCard} player-${playerId}`}
+            onClick={onClick}
+        >
             <img
                 src={teamBackgrounds.get(player.team)}
                 className={styles.background}
@@ -361,9 +368,15 @@ interface TierGraphicProps {
     tier: Tier;
     players: string[];
     week: number;
+    handlePlayerClicked: (playerId: string) => void;
 }
 
-export function TierGraphic({tier, players, week}: TierGraphicProps) {
+export function TierGraphic({
+    tier,
+    players,
+    week,
+    handlePlayerClicked,
+}: TierGraphicProps) {
     const nflSchedule = useNflSchedule();
     const playerData = usePlayerData();
     if (!nflSchedule || !playerData) return <></>;
@@ -405,6 +418,7 @@ export function TierGraphic({tier, players, week}: TierGraphicProps) {
                         key={playerId}
                         playerId={playerId}
                         opponent={getOpponent(playerId)}
+                        onClick={() => handlePlayerClicked(playerId)}
                     />
                 );
             })}
