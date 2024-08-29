@@ -379,7 +379,7 @@ export function TierGraphic({tier, players, week}: TierGraphicProps) {
 
     return (
         <div className={`${styles.tierGraphic} ${tier}-tier`}>
-            <img src={tierLogos.get(tier)} style={{width: '250px'}} />
+            <img src={tierLogos.get(tier)} style={{height: '300px'}} />
             {players.map(playerId => {
                 return (
                     <PlayerCard

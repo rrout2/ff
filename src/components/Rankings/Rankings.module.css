@@ -37,6 +37,7 @@
 .playerCard {
     position: relative;
     width: 250px;
+    height: 300px;
 
     overflow: hidden;
 
