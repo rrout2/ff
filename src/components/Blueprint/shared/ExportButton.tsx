@@ -1,4 +1,4 @@
-import {Button, IconButton} from '@mui/material';
+import {Button, IconButton, Tooltip} from '@mui/material';
 import {toPng} from 'html-to-image';
 import JSZip from 'jszip';
 import {saveAs} from 'file-saver';
@@ -11,8 +11,9 @@ export default function ExportButton(props: {
     pngName?: string;
     zipName?: string;
     downloadIcon?: boolean;
+    disabled?: boolean;
 }) {
-    const {className, pngName, zipName, label, downloadIcon} = props;
+    const {className, pngName, zipName, label, downloadIcon, disabled} = props;
     let onclick: () => void;
     if (typeof className === 'string') {
         onclick = () =>
@@ -66,9 +67,14 @@ export default function ExportButton(props: {
 
     if (downloadIcon) {
         return (
-            <IconButton onClick={onclick}>
-                <FileDownload />
-            </IconButton>
+            <Tooltip title="Download">
+                <IconButton
+                    onClick={onclick}
+                    disabled={disabled !== undefined ? disabled : false}
+                >
+                    <FileDownload />
+                </IconButton>
+            </Tooltip>
         );
     }
     return (
@@ -79,6 +85,7 @@ export default function ExportButton(props: {
                 margin: '8px',
                 width: '120px',
             }}
+            disabled={disabled !== undefined ? disabled : false}
         >
             {label || (pngName ? 'Export As PNG' : 'Download Blueprint')}
         </Button>

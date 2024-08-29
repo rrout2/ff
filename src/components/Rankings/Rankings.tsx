@@ -230,6 +230,12 @@ export default function Rankings() {
                     >
                         <ArrowDropDown />
                     </IconButton>
+                    <ExportButton
+                        className={`player-${playersToAdd[0]}`}
+                        pngName={`player-${playersToAdd[0]}.png`}
+                        downloadIcon={true}
+                        disabled={!allTieredPlayers.has(playersToAdd[0])}
+                    />
                 </div>
             </div>
             <div>
@@ -313,7 +319,7 @@ export function PlayerCard({playerId, opponent}: PlayerCardProps) {
 
     if (!player) return <></>;
     return (
-        <div className={styles.playerCard}>
+        <div className={`${styles.playerCard} player-${playerId}`}>
             <img
                 src={teamBackgrounds.get(player.team)}
                 className={styles.background}
