@@ -7,6 +7,7 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    Tooltip,
 } from '@mui/material';
 import {InputComponent as SearchablePlayerInput} from '../Blueprint/BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
 import {useAdpData, useNflSchedule, usePlayerData} from '../../hooks/hooks';
@@ -174,62 +175,74 @@ export default function Rankings() {
                     styles={{width: '300px'}}
                 />
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <IconButton
-                        onClick={() => removePlayer(playersToAdd[0])}
-                        disabled={!allTieredPlayers.has(playersToAdd[0])}
-                    >
-                        <Delete />
-                    </IconButton>
-                    <IconButton
-                        onClick={() => {
-                            const {tier, idx} = getWhichTier(playersToAdd[0]);
-                            if (!tier || idx <= 0) return;
-                            const newPlayers = [...tiers.get(tier)!];
-                            newPlayers.splice(idx, 1);
-                            newPlayers.splice(idx - 1, 0, playersToAdd[0]);
-                            setTiers((tiers: Map<Tier, string[]>) => {
-                                const newTiers = new Map(tiers);
-                                newTiers.set(tier, newPlayers);
-                                return newTiers;
-                            });
-                        }}
-                        disabled={
-                            !allTieredPlayers.has(playersToAdd[0]) ||
-                            getWhichTier(playersToAdd[0]).idx <= 0
-                        }
-                    >
-                        <ArrowDropUp />
-                    </IconButton>
-                    <IconButton
-                        onClick={() => {
-                            const {tier, idx} = getWhichTier(playersToAdd[0]);
-                            if (
-                                !tier ||
-                                idx < 0 ||
-                                idx >= tiers.get(tier)!.length - 1
-                            ) {
-                                return;
+                    <Tooltip title="Remove from rankings">
+                        <IconButton
+                            onClick={() => removePlayer(playersToAdd[0])}
+                            disabled={!allTieredPlayers.has(playersToAdd[0])}
+                        >
+                            <Delete />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Move up within tier">
+                        <IconButton
+                            onClick={() => {
+                                const {tier, idx} = getWhichTier(
+                                    playersToAdd[0]
+                                );
+                                if (!tier || idx <= 0) return;
+                                const newPlayers = [...tiers.get(tier)!];
+                                newPlayers.splice(idx, 1);
+                                newPlayers.splice(idx - 1, 0, playersToAdd[0]);
+                                setTiers((tiers: Map<Tier, string[]>) => {
+                                    const newTiers = new Map(tiers);
+                                    newTiers.set(tier, newPlayers);
+                                    return newTiers;
+                                });
+                            }}
+                            disabled={
+                                !allTieredPlayers.has(playersToAdd[0]) ||
+                                getWhichTier(playersToAdd[0]).idx <= 0
                             }
-                            const newPlayers = [...tiers.get(tier)!];
-                            newPlayers.splice(idx, 1);
-                            newPlayers.splice(idx + 1, 0, playersToAdd[0]);
-                            setTiers((tiers: Map<Tier, string[]>) => {
-                                const newTiers = new Map(tiers);
-                                newTiers.set(tier, newPlayers);
-                                return newTiers;
-                            });
-                        }}
-                        disabled={(() => {
-                            const {tier, idx} = getWhichTier(playersToAdd[0]);
-                            return (
-                                !tier ||
-                                idx < 0 ||
-                                idx >= tiers.get(tier)!.length - 1
-                            );
-                        })()}
-                    >
-                        <ArrowDropDown />
-                    </IconButton>
+                        >
+                            <ArrowDropUp />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Move down within tier">
+                        <IconButton
+                            onClick={() => {
+                                const {tier, idx} = getWhichTier(
+                                    playersToAdd[0]
+                                );
+                                if (
+                                    !tier ||
+                                    idx < 0 ||
+                                    idx >= tiers.get(tier)!.length - 1
+                                ) {
+                                    return;
+                                }
+                                const newPlayers = [...tiers.get(tier)!];
+                                newPlayers.splice(idx, 1);
+                                newPlayers.splice(idx + 1, 0, playersToAdd[0]);
+                                setTiers((tiers: Map<Tier, string[]>) => {
+                                    const newTiers = new Map(tiers);
+                                    newTiers.set(tier, newPlayers);
+                                    return newTiers;
+                                });
+                            }}
+                            disabled={(() => {
+                                const {tier, idx} = getWhichTier(
+                                    playersToAdd[0]
+                                );
+                                return (
+                                    !tier ||
+                                    idx < 0 ||
+                                    idx >= tiers.get(tier)!.length - 1
+                                );
+                            })()}
+                        >
+                            <ArrowDropDown />
+                        </IconButton>
+                    </Tooltip>
                     <ExportButton
                         className={`player-${playersToAdd[0]}`}
                         pngName={`player-${playersToAdd[0]}.png`}

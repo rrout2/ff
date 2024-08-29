@@ -11,8 +11,10 @@ export default function ExportButton({
     zipName: zipFileName,
     downloadIcon: showDownloadIcon,
     disabled: isDisabled,
+    tooltipTitle,
 }: {
     className: string | string[];
+    tooltipTitle?: string;
     label?: string;
     pngName?: string;
     zipName?: string;
@@ -71,7 +73,7 @@ export default function ExportButton({
 
     if (showDownloadIcon) {
         return (
-            <Tooltip title="Download">
+            <Tooltip title={tooltipTitle || 'Download'}>
                 <IconButton onClick={handleExport} disabled={isDisabled}>
                     <FileDownload />
                 </IconButton>
