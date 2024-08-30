@@ -27,6 +27,7 @@ export default function ExportButton({
             elements = Array.from(
                 document.getElementsByClassName(elementClassName)
             ) as HTMLElement[];
+            elements = [elements[0]];
         } else {
             elements = elementClassName.map(
                 className =>
