@@ -1,8 +1,10 @@
-import {Button, IconButton, Tooltip} from '@mui/material';
+import {IconButton, Tooltip} from '@mui/material';
 import {toPng} from 'html-to-image';
 import JSZip from 'jszip';
 import {saveAs} from 'file-saver';
 import {FileDownload} from '@mui/icons-material';
+import {useState} from 'react';
+import {LoadingButton} from '@mui/lab';
 
 export default function ExportButton({
     className: elementClassName,
@@ -21,6 +23,8 @@ export default function ExportButton({
     downloadIcon?: boolean;
     disabled?: boolean;
 }) {
+    const [loading, setLoading] = useState(false);
+
     const handleExport = async () => {
         let elements: HTMLElement[] = [];
         if (typeof elementClassName === 'string') {
@@ -83,16 +87,20 @@ export default function ExportButton({
     }
 
     return (
-        <Button
+        <LoadingButton
             variant="outlined"
-            onClick={handleExport}
+            onClick={() => {
+                setLoading(true);
+                handleExport().finally(() => setLoading(false));
+            }}
             style={{
                 margin: '8px',
                 width: '120px',
             }}
             disabled={isDisabled}
+            loading={loading}
         >
             {buttonLabel || (fileName ? 'Export As PNG' : 'Download Blueprint')}
-        </Button>
+        </LoadingButton>
     );
 }
