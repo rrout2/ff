@@ -357,9 +357,11 @@ export function PlayerCard({playerId, opponent, onClick}: PlayerCardProps) {
                     />
                 </div>
             )}
-            <div
-                className={styles.playerCardName}
-            >{`${player.first_name[0]}. ${player.last_name}`}</div>
+            <div className={styles.playerCardNameWrapper}>
+                <div className={styles.playerCardName}>
+                    {`${player.first_name[0]}. ${player.last_name}`}
+                </div>
+            </div>
         </div>
     );
 }
