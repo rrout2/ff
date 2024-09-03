@@ -392,7 +392,9 @@ export function PlayerCard({
                 </div>
             )}
             {!!getRank && (
-                <div className={styles.playerRank}>{getRank(playerId)}</div>
+                <div className={styles.playerRankWrapper}>
+                    <div className={styles.playerRank}>{getRank(playerId)}</div>
+                </div>
             )}
             <div className={styles.playerCardNameWrapper}>
                 <div className={styles.playerCardName}>

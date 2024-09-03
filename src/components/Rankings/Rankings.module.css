@@ -51,7 +51,7 @@
         left: 0;
         bottom: 0;
         width: inherit;
-            height: inherit;
+        height: inherit;
         object-fit: cover;
 
         filter: drop-shadow(5px 5px 5px black);
@@ -96,17 +96,27 @@
 
         padding-top: 5px;
         padding-bottom: 10px;
-        }
-        
-        .playerRank {
-            position: absolute;
-            top: 10px;
-            right: 16px;
-            font-family: 'Prohibition Test';
-            -webkit-text-stroke: 0.5px #010101;
-            font-size: 36px;
-            color: #f9f5e5;
     }
+}
+
+.playerRank {
+    font-family: 'Prohibition Test';
+    color: #010101;
+    font-size: 36px;
+    padding-bottom: 5px;
+}
+
+.playerRankWrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    background-color: #f9f5e5;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .tierGraphic {
