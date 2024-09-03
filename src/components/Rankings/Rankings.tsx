@@ -3,10 +3,13 @@ import styles from './Rankings.module.css';
 import {
     Button,
     FormControl,
+    FormControlLabel,
+    FormGroup,
     IconButton,
     InputLabel,
     MenuItem,
     Select,
+    Switch,
     Tooltip,
 } from '@mui/material';
 import {InputComponent as SearchablePlayerInput} from '../Blueprint/BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
@@ -39,10 +42,10 @@ export default function Rankings() {
     const [playersToAdd, setPlayersToAdd] = useState<string[]>(['10229']);
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
-
     const [week, setWeek] = useState(1);
-
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
+    const [displayRanks, setDisplayRanks] = useState(true);
+
     useEffect(() => {
         const players: Player[] = [];
         for (const playerId in playerData) {
@@ -114,6 +117,16 @@ export default function Rankings() {
         );
         if (!tier) return {tier: tier, idx: -1};
         return {tier, idx: tiers.get(tier)!.indexOf(playerId)};
+    }
+
+    function getRank(playerId: string) {
+        const {tier, idx} = getWhichTier(playerId);
+        let numBefore = 0;
+        for (const t in ALL_TIERS) {
+            if (ALL_TIERS[t] === tier) break;
+            numBefore += tiers.get(ALL_TIERS[t])!.length;
+        }
+        return numBefore + idx + 1;
     }
 
     return (
@@ -249,6 +262,19 @@ export default function Rankings() {
                         downloadIcon={true}
                         disabled={!allTieredPlayers.has(playersToAdd[0])}
                     />
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={displayRanks}
+                                    onChange={e =>
+                                        setDisplayRanks(e.target.checked)
+                                    }
+                                />
+                            }
+                            label="Show Ranks"
+                        />
+                    </FormGroup>
                 </div>
             </div>
             <div>
@@ -313,6 +339,7 @@ export default function Rankings() {
                         handlePlayerClicked={(playerId: string) => {
                             setPlayersToAdd([playerId]);
                         }}
+                        getRank={displayRanks ? getRank : undefined}
                     />
                 ))}
             </div>
@@ -323,10 +350,16 @@ export default function Rankings() {
 interface PlayerCardProps {
     playerId: string;
     opponent?: string;
+    getRank?: (playerId: string) => number;
     onClick: () => void;
 }
 
-export function PlayerCard({playerId, opponent, onClick}: PlayerCardProps) {
+export function PlayerCard({
+    playerId,
+    opponent,
+    onClick,
+    getRank,
+}: PlayerCardProps) {
     const playerData = usePlayerData();
     const [player, setPlayer] = useState<Player>();
     useEffect(() => {
@@ -335,6 +368,7 @@ export function PlayerCard({playerId, opponent, onClick}: PlayerCardProps) {
     }, [playerId, playerData]);
 
     if (!player) return <></>;
+
     return (
         <div
             className={`${styles.playerCard} player-${playerId}`}
@@ -357,6 +391,9 @@ export function PlayerCard({playerId, opponent, onClick}: PlayerCardProps) {
                     />
                 </div>
             )}
+            {!!getRank && (
+                <div className={styles.playerRank}>{getRank(playerId)}</div>
+            )}
             <div className={styles.playerCardNameWrapper}>
                 <div className={styles.playerCardName}>
                     {`${player.first_name[0]}. ${player.last_name}`}
@@ -371,6 +408,7 @@ interface TierGraphicProps {
     players: string[];
     week: number;
     handlePlayerClicked: (playerId: string) => void;
+    getRank?: (playerId: string) => number;
 }
 
 export function TierGraphic({
@@ -378,6 +416,7 @@ export function TierGraphic({
     players,
     week,
     handlePlayerClicked,
+    getRank,
 }: TierGraphicProps) {
     const nflSchedule = useNflSchedule();
     const playerData = usePlayerData();
@@ -421,6 +460,7 @@ export function TierGraphic({
                         playerId={playerId}
                         opponent={getOpponent(playerId)}
                         onClick={() => handlePlayerClicked(playerId)}
+                        getRank={getRank}
                     />
                 );
             })}
