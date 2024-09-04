@@ -124,6 +124,7 @@ import eTier from '../assets/tiers/E.png';
 import fTier from '../assets/tiers/F.png';
 import gTier from '../assets/tiers/G.png';
 import hTier from '../assets/tiers/H.png';
+import iTier from '../assets/tiers/I.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -135,6 +136,7 @@ const tierLogos: Map<string, string> = new Map([
     ['F', fTier],
     ['G', gTier],
     ['H', hTier],
+    ['I', iTier],
 ]);
 
 const teamLogos: Map<string, string> = new Map([
