@@ -12,7 +12,7 @@ import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import ExportButton from '../../../shared/ExportButton';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
-import {nflLogo} from '../../../../../consts/images';
+import {buyIcon, nflLogo, sellIcon} from '../../../../../consts/images';
 export type SuggestedMovesModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -132,7 +132,10 @@ function SellTile({playerId}: {playerId: string}) {
             style={{background: positionToColor[player.position]}}
         >
             <div className={styles.sellLabelCol}>
-                <div className={styles.sellLabel}>&#8594;&nbsp;SELL</div>
+                <div className={styles.sellLabel}>
+                    <img src={sellIcon} className={styles.sellIcon} />
+                    &nbsp;SELL
+                </div>
             </div>
             <div className={styles.sellTileText}>
                 {FANTASY_POSITIONS.includes(player.position) && (
@@ -209,7 +212,10 @@ function BuyTile({playerId}: {playerId: string}) {
                 </div>
             </div>
             <img className={styles.playerImg} src={getImageSrc(player)} />
-            <div className={styles.buyLabel}>BUY</div>
+            <div className={styles.buyLabel}>
+                BUY&nbsp;
+                <img src={buyIcon} className={styles.sellIcon} />
+            </div>
         </div>
     );
 }

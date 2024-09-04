@@ -114,6 +114,9 @@ import rebuildContendScale from '../assets/rebuildContendScale.png';
 import circleSlider from '../assets/circleSlider.png';
 import draftCapitalScale from '../assets/draftCapitalScale.png';
 import draftCapitalBackground from '../assets/draftCapitalBackground.png';
+import buyIcon from '../assets/2.0/BUY.png';
+import sellIcon from '../assets/2.0/SELL.png';
+import holdIcon from '../assets/2.0/HOLD.png';
 
 import sTier from '../assets/tiers/S.png';
 import aTier from '../assets/tiers/A.png';
@@ -374,4 +377,7 @@ export {
     nflSilhouette,
     tierLogos,
     nfl as nflLogo,
+    buyIcon,
+    sellIcon,
+    holdIcon,
 };
