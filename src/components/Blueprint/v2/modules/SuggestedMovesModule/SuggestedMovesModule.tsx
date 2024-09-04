@@ -13,6 +13,7 @@ import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import ExportButton from '../../../shared/ExportButton';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import {buyIcon, nflLogo, sellIcon} from '../../../../../consts/images';
+import {FormControlLabel, Switch} from '@mui/material';
 export type SuggestedMovesModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -30,6 +31,9 @@ export function useBuySells(roster: Roster | undefined) {
     ]);
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
+    const [plusMap, setPlusMap] = useState(
+        new Map<string, boolean>(buys.map(b => [b, false]))
+    );
     useEffect(() => {
         if (!roster || !playerData) return;
         setSells(
@@ -42,14 +46,15 @@ export function useBuySells(roster: Roster | undefined) {
         );
     }, [roster, playerData]);
 
-    return {sells, setSells, buys, setBuys};
+    return {sells, setSells, buys, setBuys, plusMap, setPlusMap};
 }
 
 export default function SuggestedMovesModule({
     roster,
     teamName,
 }: SuggestedMovesModuleProps) {
-    const {sells, setSells, buys, setBuys} = useBuySells(roster);
+    const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
+        useBuySells(roster);
 
     return (
         <>
@@ -63,8 +68,10 @@ export default function SuggestedMovesModule({
                 setSells={setSells}
                 buys={buys}
                 setBuys={setBuys}
+                plusMap={plusMap}
+                setPlusMap={setPlusMap}
             />
-            <GraphicComponent sells={sells} buys={buys} />
+            <GraphicComponent sells={sells} buys={buys} plusMap={plusMap} />
         </>
     );
 }
@@ -73,11 +80,13 @@ export interface GraphicComponentProps {
     sells: string[];
     buys: string[];
     graphicClassName?: string;
+    plusMap: Map<string, boolean>;
 }
 export function GraphicComponent({
     sells,
     buys,
     graphicClassName,
+    plusMap,
 }: GraphicComponentProps) {
     return (
         <div className={`${styles.graphicComponent} ${graphicClassName || ''}`}>
@@ -86,10 +95,16 @@ export function GraphicComponent({
                     <div key={idx} className={styles.buySellColumn}>
                         <SellTile playerId={s} />
                         {idx * 2 < buys.length && (
-                            <BuyTile playerId={buys[idx * 2]} />
+                            <BuyTile
+                                playerId={buys[idx * 2]}
+                                plus={plusMap.get(buys[idx * 2]) ?? false}
+                            />
                         )}
                         {idx * 2 + 1 < buys.length && (
-                            <BuyTile playerId={buys[idx * 2 + 1]} />
+                            <BuyTile
+                                playerId={buys[idx * 2 + 1]}
+                                plus={plusMap.get(buys[idx * 2 + 1]) ?? false}
+                            />
                         )}
                     </div>
                 ))}
@@ -158,7 +173,7 @@ function SellTile({playerId}: {playerId: string}) {
     );
 }
 
-function BuyTile({playerId}: {playerId: string}) {
+function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
 
@@ -205,6 +220,7 @@ function BuyTile({playerId}: {playerId: string}) {
                     )}
                     <div className={styles.playerName}>
                         {player.first_name} {player.last_name}
+                        {plus && ' (+)'}
                     </div>
                     <div className={styles.teamName}>
                         {mapToFullTeamName.get(player.team)}
@@ -225,9 +241,13 @@ export interface InputComponentProps {
     setSells: (newSells: string[]) => void;
     buys: string[];
     setBuys: (newBuys: string[]) => void;
+    plusMap?: Map<string, boolean>;
+    setPlusMap?: (newPlusMap: Map<string, boolean>) => void;
 }
 export function InputComponent(props: InputComponentProps) {
-    const {playerIds, sells, setSells, buys, setBuys} = props;
+    const {playerIds, sells, setSells, buys, setBuys, plusMap, setPlusMap} =
+        props;
+    const playerData = usePlayerData();
     const nonIdPlayerOptions: string[] = [];
     for (let i = 1; i < 15; i++) {
         nonIdPlayerOptions.push(`Rookie Pick 1.${i < 10 ? `0${i}` : `${i}`}`);
@@ -244,13 +264,43 @@ export function InputComponent(props: InputComponentProps) {
                 onChange={setSells}
                 label="Sells"
             />
-            <PlayersToTargetInput
-                playerSuggestions={buys}
-                setPlayerSuggestions={
-                    setBuys as Dispatch<SetStateAction<string[]>>
-                }
-                label="Buy"
-            />
+            <div className={styles.buyInput}>
+                <div className={styles.playerBuyColumnInput}>
+                    <PlayersToTargetInput
+                        playerSuggestions={buys}
+                        setPlayerSuggestions={
+                            setBuys as Dispatch<SetStateAction<string[]>>
+                        }
+                        label="Buy"
+                    />
+                </div>
+                <div className={styles.buyPlusColumn}>
+                    {plusMap &&
+                        setPlusMap &&
+                        playerData &&
+                        buys.map(playerId => {
+                            const plus = plusMap.get(playerId) ?? false;
+                            return (
+                                <FormControlLabel
+                                    label={'plus?'}
+                                    control={
+                                        <Switch
+                                            checked={plus}
+                                            onChange={() =>
+                                                setPlusMap(
+                                                    new Map(plusMap).set(
+                                                        playerId,
+                                                        !plus
+                                                    )
+                                                )
+                                            }
+                                        />
+                                    }
+                                />
+                            );
+                        })}
+                </div>
+            </div>
         </div>
     );
 }

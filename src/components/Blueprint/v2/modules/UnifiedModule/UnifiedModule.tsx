@@ -37,7 +37,8 @@ export default function UnifiedModule({
     const {cornerstones, setCornerstones} = useCornerstones(roster);
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     const [leagueId] = useLeagueIdFromUrl();
-    const {sells, setSells, buys, setBuys} = useBuySells(roster);
+    const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
+        useBuySells(roster);
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     useEffect(() => {
@@ -68,6 +69,8 @@ export default function UnifiedModule({
                 setSells={setSells}
                 buys={buys}
                 setBuys={setBuys}
+                plusMap={plusMap}
+                setPlusMap={setPlusMap}
             />
         </>
     );
@@ -103,6 +106,7 @@ export default function UnifiedModule({
                 sells={sells}
                 buys={buys}
                 graphicClassName="suggestedMovesGraphic"
+                plusMap={plusMap}
             />
         </div>
     );

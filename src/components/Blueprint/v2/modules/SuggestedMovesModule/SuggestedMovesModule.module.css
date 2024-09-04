@@ -147,3 +147,22 @@
     flex-direction: row;
     align-items: center;
 }
+
+.buyInput {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.playerBuyColumnInput {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.buyPlusColumn {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: space-around;
+}
