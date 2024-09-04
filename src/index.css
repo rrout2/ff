@@ -89,3 +89,10 @@ code {
     font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Prohibition';
+    src: local('Prohibition Regular'), local('Prohibition-Regular'),
+        url('fonts/prohibition/Prohibition-Regular.woff2') format('woff2'),
+        url('fonts/prohibition/Prohibition-Regular.woff') format('woff'),
+}

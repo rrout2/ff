@@ -22,7 +22,7 @@
     justify-content: space-between;
 
     .playerName {
-        font-family: 'Prohibition Test';
+        font-family: 'Prohibition';
         font-size: 52px;
 
         padding-bottom: 5px;
@@ -36,7 +36,7 @@
     }
 
     .positionalAdp {
-        font-family: 'Prohibition Test';
+        font-family: 'Prohibition';
         font-size: 24px;
         line-height: 0.9;
     }
@@ -103,7 +103,7 @@
 
 
     .playerName {
-        font-family: 'Prohibition Test';
+        font-family: 'Prohibition';
         font-size: 44px;
 
         padding-bottom: 5px;
@@ -119,7 +119,7 @@
     }
 
     .positionalAdp {
-        font-family: 'Prohibition Test';
+        font-family: 'Prohibition';
         font-size: 20px;
         line-height: 0.9;
     }
