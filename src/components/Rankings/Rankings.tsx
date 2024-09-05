@@ -18,6 +18,7 @@ import {ArrowDropDown, ArrowDropUp, Delete} from '@mui/icons-material';
 import {Player} from '../../sleeper-api/sleeper-api';
 import {teamBackgrounds, teamLogos, tierLogos} from '../../consts/images';
 import ExportButton from '../Blueprint/shared/ExportButton';
+import {useSearchParams} from 'react-router-dom';
 
 enum Tier {
     S = 'S',
@@ -44,6 +45,7 @@ export default function Rankings() {
     const [week, setWeek] = useState(1);
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     const [displayRanks, setDisplayRanks] = useState(true);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         const players: Player[] = [];
@@ -65,7 +67,61 @@ export default function Rankings() {
         setAllTieredPlayers(newAllTieredPlayers);
     }, [tiers]);
 
+    useEffect(() => {
+        const newTiers = new Map(tiers);
+        ALL_TIERS.forEach(tier => {
+            const tierFromUrl = searchParams.get(tierToUrlParam(tier));
+            if (!tierFromUrl) {
+                newTiers.delete(tier);
+                return;
+            }
+
+            newTiers.set(tier, tierFromUrl.split(','));
+        });
+        setTiers(newTiers);
+    }, [searchParams]);
+
     if (!playerData) return <></>;
+
+    function tierToUrlParam(tier: Tier) {
+        return tier.toLowerCase() + 'Tier';
+    }
+
+    function saveTiers() {
+        setSearchParams(searchParams => {
+            ALL_TIERS.forEach(tier => {
+                if (!tiers.has(tier) || tiers.get(tier)!.length === 0) {
+                    searchParams.delete(tierToUrlParam(tier));
+                } else {
+                    searchParams.set(
+                        tierToUrlParam(tier),
+                        tiers.get(tier)!.join(',')
+                    );
+                }
+            });
+            return searchParams;
+        });
+    }
+
+    function hasUnsavedChanges() {
+        return ALL_TIERS.some(tier => {
+            const urlParam = tierToUrlParam(tier);
+            if (!tiers.has(tier) && searchParams.has(urlParam)) {
+                return true;
+            }
+            if (
+                tiers.has(tier) &&
+                tiers.get(tier)!.length > 0 &&
+                !searchParams.has(urlParam)
+            ) {
+                return true;
+            }
+            const playersInTier = tiers.get(tier) ?? [];
+            const playersInUrl = searchParams.get(urlParam) ?? '';
+
+            return playersInTier.join(',') !== playersInUrl;
+        });
+    }
 
     function addToTier(tier: Tier, player: string) {
         if (tiers.get(tier)!.includes(player)) {
@@ -131,6 +187,15 @@ export default function Rankings() {
     return (
         <div>
             <div className={styles.addRemoveButtons}>
+                <Tooltip title="Save to URL">
+                    <Button
+                        variant={'outlined'}
+                        onClick={saveTiers}
+                        disabled={!hasUnsavedChanges()}
+                    >
+                        {hasUnsavedChanges() ? 'Save' : 'Saved!'}
+                    </Button>
+                </Tooltip>
                 <Button
                     variant={'outlined'}
                     onClick={() => {
