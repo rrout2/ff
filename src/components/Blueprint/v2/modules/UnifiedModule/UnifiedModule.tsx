@@ -23,6 +23,11 @@ import {
     InputComponent as SuggestedMovesInput,
     useBuySells,
 } from '../SuggestedMovesModule/SuggestedMovesModule';
+import {
+    GraphicComponent as HoldsGraphic,
+    InputComponent as HoldsInput,
+    useHolds,
+} from '../HoldsModule/HoldsModule';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -39,6 +44,7 @@ export default function UnifiedModule({
     const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
+    const {holds, setHolds, comments, setComments} = useHolds(roster);
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     useEffect(() => {
@@ -72,6 +78,13 @@ export default function UnifiedModule({
                 plusMap={plusMap}
                 setPlusMap={setPlusMap}
             />
+            <HoldsInput
+                playerIds={roster?.players ?? []}
+                holds={holds}
+                setHolds={setHolds}
+                comments={comments}
+                setComments={setComments}
+            />
         </>
     );
 
@@ -83,6 +96,7 @@ export default function UnifiedModule({
                     'settingsGraphic',
                     'cornerstonesGraphic',
                     'suggestedMovesGraphic',
+                    'holdsGraphic',
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
@@ -107,6 +121,11 @@ export default function UnifiedModule({
                 buys={buys}
                 graphicClassName="suggestedMovesGraphic"
                 plusMap={plusMap}
+            />
+            <HoldsGraphic
+                holds={holds}
+                comments={comments}
+                graphicClassName="holdsGraphic"
             />
         </div>
     );

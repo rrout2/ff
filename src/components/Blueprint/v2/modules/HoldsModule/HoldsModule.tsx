@@ -55,15 +55,18 @@ export default function HoldsModule({roster, teamName}: HoldsModuleProps) {
     );
 }
 
+export type GraphicComponentProps = {
+    holds: string[];
+    comments: string[];
+    graphicClassName?: string;
+};
 export function GraphicComponent({
     holds,
     comments,
-}: {
-    holds: string[];
-    comments: string[];
-}) {
+    graphicClassName,
+}: GraphicComponentProps) {
     return (
-        <div className={styles.graphicComponent}>
+        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
             {holds.map((h, idx) => (
                 <div key={idx} className={styles.holdColumn}>
                     <SellHoldTile playerId={h} isHold={true} />
@@ -83,11 +86,11 @@ export type InputComponentProps = {
 };
 
 export function InputComponent({
+    playerIds,
     holds,
     setHolds,
     comments,
     setComments,
-    playerIds,
 }: InputComponentProps) {
     const playerData = usePlayerData();
     if (!playerData) return <></>;
