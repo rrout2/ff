@@ -12,7 +12,12 @@ import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import ExportButton from '../../../shared/ExportButton';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
-import {buyIcon, nflLogo, sellIcon} from '../../../../../consts/images';
+import {
+    buyIcon,
+    holdIcon,
+    nflLogo,
+    sellIcon,
+} from '../../../../../consts/images';
 import {FormControlLabel, Switch} from '@mui/material';
 export type SuggestedMovesModuleProps = {
     roster?: Roster;
@@ -93,7 +98,7 @@ export function GraphicComponent({
             {sells.length > 0 &&
                 sells.map((s, idx) => (
                     <div key={idx} className={styles.buySellColumn}>
-                        <SellTile playerId={s} />
+                        <SellHoldTile playerId={s} />
                         {idx * 2 < buys.length && (
                             <BuyTile
                                 playerId={buys[idx * 2]}
@@ -120,7 +125,13 @@ type miniPlayer = {
     player_id: string;
     espn_id?: string;
 };
-function SellTile({playerId}: {playerId: string}) {
+export function SellHoldTile({
+    playerId,
+    isHold,
+}: {
+    playerId: string;
+    isHold?: boolean;
+}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
     let player = playerData?.[playerId] as miniPlayer;
@@ -147,10 +158,18 @@ function SellTile({playerId}: {playerId: string}) {
             style={{background: positionToColor[player.position]}}
         >
             <div className={styles.sellLabelCol}>
-                <div className={styles.sellLabel}>
-                    <img src={sellIcon} className={styles.sellIcon} />
-                    &nbsp;SELL
-                </div>
+                {!isHold && (
+                    <div className={styles.sellLabel}>
+                        <img src={sellIcon} className={styles.sellIcon} />
+                        &nbsp;SELL
+                    </div>
+                )}
+                {isHold && (
+                    <div className={styles.sellLabel}>
+                        <img src={holdIcon} className={styles.sellIcon} />
+                        &nbsp;HOLD
+                    </div>
+                )}
             </div>
             <div className={styles.sellTileText}>
                 {FANTASY_POSITIONS.includes(player.position) && (

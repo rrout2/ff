@@ -15,6 +15,7 @@ export default function PlayerSelectComponent(props: {
     position?: string;
     label?: string;
     multiple?: boolean;
+    maxSelections?: number;
 }) {
     const {
         playerIds,
@@ -24,6 +25,7 @@ export default function PlayerSelectComponent(props: {
         nonIdPlayerOptions,
         label,
         multiple,
+        maxSelections,
     } = props;
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
@@ -56,9 +58,16 @@ export default function PlayerSelectComponent(props: {
                     const {
                         target: {value},
                     } = e;
-                    onChange(
-                        typeof value === 'string' ? value.split(',') : value
-                    );
+                    const newPlayerIds =
+                        typeof value === 'string' ? value.split(',') : value;
+                    if (
+                        multiple &&
+                        maxSelections &&
+                        newPlayerIds.length > maxSelections
+                    ) {
+                        return;
+                    }
+                    onChange(newPlayerIds);
                 }}
                 multiple={multiple ?? true}
             >

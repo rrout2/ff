@@ -1,0 +1,38 @@
+.inputComponent {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+}
+
+.graphicComponent {
+    display: flex;
+    flex-direction: column;
+    width: 622px;
+
+    gap: 50px;
+}
+
+.comment {
+    font-family: 'Erbaum';
+    line-height: 0.9;
+    font-size: 18px;
+    color: #09153A;
+
+    width: 80%;
+    height: 106px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.holdColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

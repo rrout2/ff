@@ -21,6 +21,7 @@ import SettingsModule from './modules/SettingsModule/SettingsModule';
 import CornerstonesModule from './modules/CornerstonesModule/CornerstonesModule';
 import UnifiedModule from './modules/UnifiedModule/UnifiedModule';
 import SuggestedMovesModule from './modules/SuggestedMovesModule/SuggestedMovesModule';
+import HoldsModule from './modules/HoldsModule/HoldsModule';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -29,6 +30,7 @@ export enum Module {
     Cornerstones = 'cornerstones',
     SuggestedMoves = 'suggestedmoves',
     Unified = 'unified',
+    Holds = 'holds',
 }
 
 export default function NewGenerator() {
@@ -121,6 +123,9 @@ export default function NewGenerator() {
                     >
                         Suggested Moves
                     </MenuItem>
+                    <MenuItem value={Module.Holds} key={Module.Holds}>
+                        Holds
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -173,6 +178,15 @@ export default function NewGenerator() {
             )}
             {module === Module.SuggestedMoves && (
                 <SuggestedMovesModule
+                    roster={roster}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
+            )}
+            {module === Module.Holds && (
+                <HoldsModule
                     roster={roster}
                     teamName={
                         specifiedUser?.metadata?.team_name ??
