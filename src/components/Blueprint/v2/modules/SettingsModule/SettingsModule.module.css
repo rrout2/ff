@@ -9,7 +9,7 @@
 }
 
 .settingTile {
-    font-family: 'Erbaum';
+    font-family: 'Erbaum Medium';
     color: #09153A;
     font-size: 30px;
     line-height: 0.9;
@@ -38,7 +38,7 @@
 
 .multiColorValue {
     position: absolute;
-    font-family: 'Erbaum';
+    font-family: 'Erbaum Medium';
     font-size: 30px;
     width: 65px;
     height: 32px;
