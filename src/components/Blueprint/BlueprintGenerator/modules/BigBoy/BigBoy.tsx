@@ -694,7 +694,7 @@ export default function BigBoy() {
                     <Grid item xs={4}>
                         <div>{archetypeSelector()}</div>
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={4}>
                         <div className={styles.inputModule}>
                             Look to Trade:
                             <LookToTradeInput
@@ -715,7 +715,7 @@ export default function BigBoy() {
                             />
                         </div>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2.5}>
                         {isRedraft
                             ? 'Risk(0) - Safety(100)'
                             : 'Rebuild(0) - Contend(100)'}
@@ -727,8 +727,9 @@ export default function BigBoy() {
                         {draftCapitalNotesInput()}
                         {commentsInput()}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2.5}>
                         <div className={styles.inputModule}>
+                            Starters:
                             <StartersInput
                                 startingLineup={startingLineup}
                                 setStartingLineup={setStartingLineup}
