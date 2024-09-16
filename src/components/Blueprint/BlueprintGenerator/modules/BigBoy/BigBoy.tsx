@@ -20,6 +20,7 @@ import {
     useAdpData,
     useLeague,
     useRosterSettings,
+    useProjectedLineup,
 } from '../../../../../hooks/hooks';
 import {
     Player,
@@ -71,7 +72,10 @@ import {
     GraphicComponent as CornerstoneGraphic,
     AllPositionalSelectors as CornerstoneSelectors,
 } from '../cornerstone/CornerstoneModule';
-import {StartersGraphic} from '../Starters/Starters';
+import {
+    StartersGraphic,
+    InputComponent as StartersInput,
+} from '../Starters/Starters';
 import {
     GraphicComponent as DepthScoreGraphic,
     OverrideComponent as DepthScoreOverride,
@@ -133,6 +137,10 @@ export default function BigBoy() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
+    const {startingLineup, setStartingLineup} = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
     const [showPreview, setShowPreview] = useState(false);
     const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
@@ -454,7 +462,10 @@ export default function BigBoy() {
     function startersGraphicComponent() {
         return (
             <div className={styles.startersGraphic}>
-                <StartersGraphic roster={roster} transparent={true} />
+                <StartersGraphic
+                    startingLineup={startingLineup}
+                    transparent={true}
+                />
             </div>
         );
     }
@@ -715,6 +726,15 @@ export default function BigBoy() {
                         <div>{draftCapitalGradeInput()}</div>
                         {draftCapitalNotesInput()}
                         {commentsInput()}
+                    </Grid>
+                    <Grid item xs={4}>
+                        <div className={styles.inputModule}>
+                            <StartersInput
+                                startingLineup={startingLineup}
+                                setStartingLineup={setStartingLineup}
+                                roster={roster}
+                            />
+                        </div>
                     </Grid>
                 </Grid>
             </>

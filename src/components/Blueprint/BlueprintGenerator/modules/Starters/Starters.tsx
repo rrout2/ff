@@ -2,12 +2,25 @@ import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Starters.module.css';
 import {
     useLeagueIdFromUrl,
+    usePlayerData,
     useProjectedLineup,
     useRosterSettingsFromId,
     useTitle,
 } from '../../../../../hooks/hooks';
 import ExportButton from '../../../shared/ExportButton';
 import {logoImage} from '../../../shared/Utilities';
+import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
+import {
+    RB,
+    TE,
+    WR,
+    WR_RB_FLEX,
+    WR_TE_FLEX,
+    SUPER_FLEX,
+    FLEX,
+    FLEX_SET,
+    SUPER_FLEX_SET,
+} from '../../../../../consts/fantasy';
 
 function StartersModule(props: {
     roster?: Roster;
@@ -16,6 +29,12 @@ function StartersModule(props: {
 }) {
     const {roster, teamName, graphicComponentClass} = props;
     useTitle('Starters - Blueprint Generator');
+    const [leagueId] = useLeagueIdFromUrl();
+    const rosterSettings = useRosterSettingsFromId(leagueId);
+    const {startingLineup, setStartingLineup} = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
 
     return (
         <>
@@ -25,8 +44,13 @@ function StartersModule(props: {
                     pngName={`${teamName}_starters.png`}
                 />
             )}
-            <StartersGraphic
+            <InputComponent
+                startingLineup={startingLineup}
+                setStartingLineup={setStartingLineup}
                 roster={roster}
+            />
+            <StartersGraphic
+                startingLineup={startingLineup}
                 transparent={false}
                 graphicComponentClass={graphicComponentClass}
             />
@@ -34,18 +58,74 @@ function StartersModule(props: {
     );
 }
 
-function StartersGraphic(props: {
+function InputComponent(props: {
+    startingLineup: Lineup;
+    setStartingLineup: React.Dispatch<React.SetStateAction<Lineup>>;
     roster?: Roster;
+}) {
+    const {startingLineup, setStartingLineup, roster} = props;
+    const playerData = usePlayerData();
+
+    if (!playerData) return <></>;
+
+    function isPlayerInPosition(player: Player, position: string) {
+        switch (position) {
+            case WR_RB_FLEX:
+                return player.position === WR || player.position === RB;
+            case WR_TE_FLEX:
+                return player.position === WR || player.position === TE;
+            case FLEX:
+                return FLEX_SET.has(player.position);
+            case SUPER_FLEX:
+                return SUPER_FLEX_SET.has(player.position);
+            default:
+                return !!player && player.position === position;
+        }
+    }
+
+    return (
+        <>
+            {startingLineup.map(({player, position}, idx) => {
+                return (
+                    <PlayerSelectComponent
+                        key={idx}
+                        playerIds={(roster?.players ?? [])
+                            .map(p => playerData[p])
+                            .filter(p => !!p)
+                            .filter(p => isPlayerInPosition(p, position))
+                            .map(p => p.player_id)}
+                        selectedPlayerIds={[player.player_id]}
+                        onChange={([newPlayerId]: string[]) => {
+                            setStartingLineup((oldLineup: Lineup) => {
+                                const newLineup = [...oldLineup];
+                                newLineup[idx] = {
+                                    player: playerData[newPlayerId],
+                                    position: position,
+                                };
+                                return newLineup;
+                            });
+                        }}
+                        multiple={false}
+                        maxSelections={1}
+                        label={position}
+                    />
+                );
+            })}
+        </>
+    );
+}
+
+export type Lineup = {
+    player: Player;
+    position: string;
+}[];
+
+function StartersGraphic(props: {
+    startingLineup?: Lineup;
     transparent?: boolean;
     graphicComponentClass?: string;
 }) {
-    const {roster, transparent, graphicComponentClass} = props;
-    const [leagueId] = useLeagueIdFromUrl();
-    const rosterSettings = useRosterSettingsFromId(leagueId);
-    const [startingLineup] = useProjectedLineup(
-        rosterSettings,
-        roster?.players
-    );
+    const {startingLineup, transparent, graphicComponentClass} = props;
 
     function playerTarget(player: Player, position: string) {
         let diplayPosition = position;
@@ -85,11 +165,11 @@ function StartersGraphic(props: {
                 graphicComponentClass ?? ''
             } ${transparent ? '' : styles.background}`}
         >
-            {startingLineup.map(({player, position}) => {
+            {startingLineup?.map(({player, position}) => {
                 return playerTarget(player, position);
             })}
         </div>
     );
 }
 
-export {StartersModule, StartersGraphic};
+export {StartersModule, StartersGraphic, InputComponent};

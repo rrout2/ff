@@ -6,6 +6,7 @@ import {
     useLeagueIdFromUrl,
     useModuleFromUrl,
     usePlayerData,
+    useProjectedLineup,
     useRosterSettings,
     useTeamIdFromUrl,
     useTitle,
@@ -90,6 +91,10 @@ export default function BlueprintGenerator() {
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
+    const {startingLineup} = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [module, setModule] = useModuleFromUrl();
     const [positionalGradeOverrides, setPositionalGradeOverrides] = useState<
@@ -293,7 +298,7 @@ export default function BlueprintGenerator() {
                         transparent={false}
                     />
                     <StartersGraphic
-                        roster={roster}
+                        startingLineup={startingLineup}
                         transparent={false}
                         graphicComponentClass={'startersGraphic'}
                     />

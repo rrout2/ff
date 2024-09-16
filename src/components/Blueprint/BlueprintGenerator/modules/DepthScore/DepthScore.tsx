@@ -60,7 +60,7 @@ function GraphicComponent({
 }: graphicProps) {
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
-    const [_starters, bench, benchString] = useProjectedLineup(
+    const {bench, benchString} = useProjectedLineup(
         rosterSettings,
         roster?.players
     );
@@ -114,10 +114,7 @@ function OverrideComponent({override, setOverride, roster}: overrideProps) {
     const [initialScore, setInitialScore] = useState(-1);
     const [leagueId] = useLeagueIdFromUrl();
     const rosterSettings = useRosterSettingsFromId(leagueId);
-    const [_, bench, _benchString] = useProjectedLineup(
-        rosterSettings,
-        roster?.players
-    );
+    const {bench} = useProjectedLineup(rosterSettings, roster?.players);
     const {getPlayerValue} = usePlayerValues();
     useEffect(() => {
         if (!bench.length) return;

@@ -43,7 +43,7 @@ function Settings({
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
-    const [startingLineup, _, benchString] = useProjectedLineup(
+    const {startingLineup, benchString} = useProjectedLineup(
         rosterSettings,
         roster?.players
     );

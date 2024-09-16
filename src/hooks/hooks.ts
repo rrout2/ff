@@ -28,6 +28,7 @@ import {
     WR_TE_FLEX,
 } from '../consts/fantasy';
 import {Module} from '../components/Blueprint/BlueprintGenerator/BlueprintGenerator';
+import {Lineup} from '../components/Blueprint/BlueprintGenerator/modules/Starters/Starters';
 
 type TeamSchedule = {
     [week: string]: string;
@@ -354,11 +355,9 @@ export function useRosterSettingsFromId(leagueId?: string) {
 export function useProjectedLineup(
     rosterSettings: Map<string, number>,
     playerIds?: string[]
-): [{player: Player; position: string}[], Player[], string] {
+) {
     const playerData = usePlayerData();
-    const [startingLineup, setStartingLineup] = useState<
-        {player: Player; position: string}[]
-    >([]);
+    const [startingLineup, setStartingLineup] = useState<Lineup>([]);
     const [bench, setBench] = useState<Player[]>([]);
     const [benchString, setBenchString] = useState('');
     const {getAdp, sortByAdp} = useAdpData();
@@ -412,7 +411,7 @@ export function useProjectedLineup(
         );
     }, [playerData, playerIds, rosterSettings]);
 
-    return [startingLineup, bench, benchString];
+    return {startingLineup, setStartingLineup, bench, benchString};
 }
 
 export function useTitle(title: string) {

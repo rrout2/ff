@@ -40,7 +40,7 @@ export default function TeamPage() {
     const [roster, setRoster] = useState<Roster>();
     const rosterSettings = useRosterSettings(league);
 
-    const [startingLineup, bench] = useProjectedLineup(
+    const {startingLineup, bench} = useProjectedLineup(
         rosterSettings,
         roster?.players
     );
