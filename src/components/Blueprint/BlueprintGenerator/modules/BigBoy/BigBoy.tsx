@@ -35,7 +35,7 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
-    Grid,
+    Grid2,
     InputLabel,
     MenuItem,
     Select,
@@ -652,11 +652,11 @@ export default function BigBoy() {
     function inputsComponent() {
         return (
             <>
-                <Grid container spacing={1} className={styles.inputGrid}>
-                    <Grid item xs={8}>
+                <Grid2 container spacing={1} className={styles.inputGrid}>
+                    <Grid2 size={8}>
                         <div>{rosterComponent()}</div>
-                    </Grid>
-                    <Grid item xs={2.5}>
+                    </Grid2>
+                    <Grid2 size={2.5}>
                         <div className={styles.inputModule}>
                             Positional Grade Override:
                             <PositionalGradesOverride
@@ -665,13 +665,13 @@ export default function BigBoy() {
                                 roster={roster}
                             />
                         </div>
-                    </Grid>
-                    <Grid item xs={1.5} className={styles.extraInfo}>
+                    </Grid2>
+                    <Grid2 size={1.5} className={styles.extraInfo}>
                         <div style={{textAlign: 'end', maxWidth: '120px'}}>
                             {settingsComponent()}
                         </div>
-                    </Grid>
-                    <Grid item xs={6}>
+                    </Grid2>
+                    <Grid2 size={6}>
                         <div className={styles.inputModule}>
                             Cornerstones:
                             <CornerstoneSelectors
@@ -680,8 +680,8 @@ export default function BigBoy() {
                                 roster={roster}
                             />
                         </div>
-                    </Grid>
-                    <Grid item xs={2}>
+                    </Grid2>
+                    <Grid2 size={2}>
                         <div className={styles.inputModule}>
                             Depth Score Override:
                             <DepthScoreOverride
@@ -690,11 +690,11 @@ export default function BigBoy() {
                                 roster={roster}
                             />
                         </div>
-                    </Grid>
-                    <Grid item xs={4}>
+                    </Grid2>
+                    <Grid2 size={4}>
                         <div>{archetypeSelector()}</div>
-                    </Grid>
-                    <Grid item xs={4}>
+                    </Grid2>
+                    <Grid2 size={4}>
                         <div className={styles.inputModule}>
                             Look to Trade:
                             <LookToTradeInput
@@ -705,8 +705,8 @@ export default function BigBoy() {
                                 roster={roster}
                             />
                         </div>
-                    </Grid>
-                    <Grid item xs={3}>
+                    </Grid2>
+                    <Grid2 size={3}>
                         <div className={styles.inputModule}>
                             Players to Target:
                             <PlayersToTargetInput
@@ -714,8 +714,8 @@ export default function BigBoy() {
                                 setPlayerSuggestions={setPlayerSuggestions}
                             />
                         </div>
-                    </Grid>
-                    <Grid item xs={2.5}>
+                    </Grid2>
+                    <Grid2 size={2.5}>
                         {isRedraft
                             ? 'Risk(0) - Safety(100)'
                             : 'Rebuild(0) - Contend(100)'}
@@ -726,8 +726,8 @@ export default function BigBoy() {
                         <div>{draftCapitalGradeInput()}</div>
                         {draftCapitalNotesInput()}
                         {commentsInput()}
-                    </Grid>
-                    <Grid item xs={2.5}>
+                    </Grid2>
+                    <Grid2 size={2.5}>
                         <div className={styles.inputModule}>
                             Starters:
                             <StartersInput
@@ -736,8 +736,8 @@ export default function BigBoy() {
                                 roster={roster}
                             />
                         </div>
-                    </Grid>
-                </Grid>
+                    </Grid2>
+                </Grid2>
             </>
         );
     }
