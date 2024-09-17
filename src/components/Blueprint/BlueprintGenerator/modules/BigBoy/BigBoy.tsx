@@ -55,7 +55,6 @@ import {
     SUPER_FLEX,
     FANTASY_POSITIONS,
 } from '../../../../../consts/fantasy';
-import {Unstable_NumberInput as NumberInput} from '@mui/base/Unstable_NumberInput';
 import {
     GraphicComponent as PositionalGradesGraphic,
     OverrideComponent as PositionalGradesOverride,
@@ -88,6 +87,7 @@ import {
     GraphicComponent as PlayersToTargetGraphic,
     InputComponent as PlayersToTargetInput,
 } from '../playerstotarget/PlayersToTargetModule';
+import StyledNumberInput from '../../../shared/StyledNumberInput';
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -340,24 +340,13 @@ export default function BigBoy() {
 
     function draftCapitalGradeInput() {
         return (
-            <NumberInput
+            <StyledNumberInput
                 value={draftCapitalValue}
                 onChange={(_, value) => {
                     setDraftCapitalValue(value || 0);
                 }}
                 min={0}
                 max={100}
-                slots={{
-                    input: TextField,
-                }}
-                slotProps={{
-                    incrementButton: {
-                        children: '+',
-                    },
-                    decrementButton: {
-                        children: '-',
-                    },
-                }}
             />
         );
     }
@@ -392,24 +381,13 @@ export default function BigBoy() {
 
     function contendRebuildScaleInput() {
         return (
-            <NumberInput
+            <StyledNumberInput
                 value={rebuildContendValue}
                 onChange={(_, value) => {
                     setRebuildContendValue(value || 0);
                 }}
                 min={0}
                 max={100}
-                slots={{
-                    input: TextField,
-                }}
-                slotProps={{
-                    incrementButton: {
-                        children: '+',
-                    },
-                    decrementButton: {
-                        children: '-',
-                    },
-                }}
             />
         );
     }

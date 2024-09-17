@@ -22,6 +22,7 @@ import CornerstonesModule from './modules/CornerstonesModule/CornerstonesModule'
 import UnifiedModule from './modules/UnifiedModule/UnifiedModule';
 import SuggestedMovesModule from './modules/SuggestedMovesModule/SuggestedMovesModule';
 import HoldsModule from './modules/HoldsModule/HoldsModule';
+import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModule';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -31,6 +32,7 @@ export enum Module {
     SuggestedMoves = 'suggestedmoves',
     Unified = 'unified',
     Holds = 'holds',
+    RisersFallers = 'risersfallers',
 }
 
 export default function NewGenerator() {
@@ -126,6 +128,12 @@ export default function NewGenerator() {
                     <MenuItem value={Module.Holds} key={Module.Holds}>
                         Holds
                     </MenuItem>
+                    <MenuItem
+                        value={Module.RisersFallers}
+                        key={Module.RisersFallers}
+                    >
+                        Risers/Fallers
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -187,6 +195,15 @@ export default function NewGenerator() {
             )}
             {module === Module.Holds && (
                 <HoldsModule
+                    roster={roster}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
+            )}
+            {module === Module.RisersFallers && (
+                <RisersFallersModule
                     roster={roster}
                     teamName={
                         specifiedUser?.metadata?.team_name ??
