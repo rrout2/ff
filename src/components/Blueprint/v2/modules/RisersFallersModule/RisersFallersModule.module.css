@@ -1,3 +1,39 @@
 .inputRow {
     display: flex;
 }
+
+.graphicComponent {
+    background-color: #005D91;
+
+    color: white;
+    font-family: 'Prohibition';
+
+    display: flex;
+    flex-direction: row;
+}
+
+.nameColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    width: 140px;
+    margin: 0 10px;
+}
+
+.risers {
+    align-items: end;
+}
+
+.wholeColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.columnBorder {
+    border-right: 1px solid white;
+}
+
+.arrowContainer {
+    height: 100px;
+}

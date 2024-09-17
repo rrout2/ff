@@ -17,14 +17,13 @@ function useRisersFallers(roster?: Roster) {
     const {sortByAdp} = useAdpData();
     useEffect(() => {
         if (!roster || !playerData) return;
-        const firstFew = roster.players
+        const players = roster.players
             .map(p => playerData[p])
             .filter(p => !!p)
             .sort(sortByAdp)
-            .map(p => p.player_id)
-            .slice(0, 3);
-        setRisers(firstFew);
-        setFallers([...firstFew]);
+            .map(p => p.player_id);
+        setRisers(players.slice(0, 3));
+        setFallers(players.slice(3, 6));
     }, [roster, playerData]);
     return {
         risers,
@@ -65,6 +64,63 @@ export default function RisersFallersModule({
                 fallerValues={fallerValues}
                 setFallerValues={setFallerValues}
             />
+            <GraphicComponent
+                risers={risers}
+                fallers={fallers}
+                riserValues={riserValues}
+                fallerValues={fallerValues}
+            />
+        </div>
+    );
+}
+
+type GraphicComponentProps = {
+    risers: string[];
+    fallers: string[];
+    riserValues: number[];
+    fallerValues: number[];
+};
+export function GraphicComponent({
+    risers,
+    fallers,
+    riserValues,
+    fallerValues,
+}: GraphicComponentProps) {
+    const playerData = usePlayerData();
+
+    if (!playerData) return <></>;
+    return (
+        <div className={styles.graphicComponent}>
+            <div className={`${styles.wholeColumn} ${styles.columnBorder}`}>
+                <div className={`${styles.nameColumn} ${styles.risers}`}>
+                    {risers.map(playerId => (
+                        <div>
+                            {playerData[playerId].first_name}{' '}
+                            {playerData[playerId].last_name}
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.arrowContainer}>
+                    {fallerValues.map((value, idx) => (
+                        <div key={idx}>+{value.toFixed(1)}%</div>
+                    ))}
+                </div>
+            </div>
+            <div className={styles.wholeColumn}>
+                <div className={styles.arrowContainer}>
+                    {riserValues.map((value, idx) => (
+                        <div key={idx}>+{value}%</div>
+                    ))}
+                </div>
+                <div className={styles.nameColumn}>
+                    {fallers.map(playerId => (
+                        <div>
+                            {playerData[playerId].first_name}{' '}
+                            {playerData[playerId].last_name}
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
