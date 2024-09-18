@@ -4,6 +4,7 @@ import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
+import ExportButton from '../../../shared/ExportButton';
 export type RisersFallersModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -53,6 +54,10 @@ export default function RisersFallersModule({
 
     return (
         <div>
+            <ExportButton
+                className={styles.graphicComponent}
+                pngName={`${teamName}_risers_fallers.png`}
+            />
             <InputComponent
                 playerIds={roster?.players || []}
                 risers={risers}
@@ -92,7 +97,9 @@ export function GraphicComponent({
     return (
         <div className={styles.graphicComponent}>
             <div className={`${styles.wholeColumn} ${styles.columnBorder}`}>
-                <div className={`${styles.nameColumn} ${styles.risers}`}>
+                <div
+                    className={`${styles.columnSection} ${styles.nameColumn} ${styles.alignFlexEnd}`}
+                >
                     {risers.map(playerId => (
                         <div>
                             {playerData[playerId].first_name}{' '}
@@ -100,19 +107,25 @@ export function GraphicComponent({
                         </div>
                     ))}
                 </div>
-                <div className={styles.arrowContainer}>
-                    {fallerValues.map((value, idx) => (
-                        <div key={idx}>+{value.toFixed(1)}%</div>
-                    ))}
+                <div
+                    className={`${styles.arrowContainer} ${styles.alignFlexEnd}`}
+                >
+                    <div className={styles.columnSection}>
+                        {fallerValues.map((value, idx) => (
+                            <div key={idx}>{value.toFixed(1)}%</div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className={styles.wholeColumn}>
                 <div className={styles.arrowContainer}>
-                    {riserValues.map((value, idx) => (
-                        <div key={idx}>+{value}%</div>
-                    ))}
+                    <div className={styles.columnSection}>
+                        {riserValues.map((value, idx) => (
+                            <div key={idx}>+{value.toFixed(1)}%</div>
+                        ))}
+                    </div>
                 </div>
-                <div className={styles.nameColumn}>
+                <div className={`${styles.columnSection} ${styles.nameColumn}`}>
                     {fallers.map(playerId => (
                         <div>
                             {playerData[playerId].first_name}{' '}
