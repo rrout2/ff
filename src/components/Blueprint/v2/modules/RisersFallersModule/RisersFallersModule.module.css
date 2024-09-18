@@ -19,9 +19,9 @@
     height: 90px;
     width: 140px;
     justify-content: space-evenly;
-    }
-    
-    .nameColumn {
+}
+
+.nameColumn {
     margin: 0 10px;
 }
 
@@ -33,8 +33,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
-        height: 230px;
+    height: 230px;
 }
 
 .columnBorder {
@@ -43,5 +42,19 @@
 
 .arrowContainer {
     height: 117.5px;
-        display: flex;
+    display: flex;
+}
+
+.valueAndArrow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.arrowImage {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
 }

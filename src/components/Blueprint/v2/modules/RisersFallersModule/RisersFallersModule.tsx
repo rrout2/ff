@@ -5,6 +5,7 @@ import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
 import ExportButton from '../../../shared/ExportButton';
+import {scale} from '../../../../../consts/images';
 export type RisersFallersModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -110,18 +111,48 @@ export function GraphicComponent({
                 <div
                     className={`${styles.arrowContainer} ${styles.alignFlexEnd}`}
                 >
-                    <div className={styles.columnSection}>
+                    <div
+                        className={styles.columnSection}
+                        style={{width: '100%'}}
+                    >
                         {fallerValues.map((value, idx) => (
-                            <div key={idx}>{value.toFixed(1)}%</div>
+                            <div key={idx} className={styles.valueAndArrow}>
+                                <div>{value.toFixed(1)}%</div>
+                                <div
+                                    className={`${styles.arrowImage} ${styles.alignFlexEnd}`}
+                                >
+                                    <img
+                                        src={scale}
+                                        style={{
+                                            width: `${-1 * value}%`,
+                                            height: '10px',
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </div>
             <div className={styles.wholeColumn}>
                 <div className={styles.arrowContainer}>
-                    <div className={styles.columnSection}>
+                    <div
+                        className={styles.columnSection}
+                        style={{width: '100%'}}
+                    >
                         {riserValues.map((value, idx) => (
-                            <div key={idx}>+{value.toFixed(1)}%</div>
+                            <div key={idx} className={styles.valueAndArrow}>
+                                <div className={styles.arrowImage}>
+                                    <img
+                                        src={scale}
+                                        style={{
+                                            width: `${value}%`,
+                                            height: '10px',
+                                        }}
+                                    />
+                                </div>
+                                <div>+{value.toFixed(1)}%</div>
+                            </div>
                         ))}
                     </div>
                 </div>
