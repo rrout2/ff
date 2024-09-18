@@ -10,7 +10,7 @@ export type RisersFallersModuleProps = {
     roster?: Roster;
     teamName?: string;
 };
-function useRisersFallers(roster?: Roster) {
+export function useRisersFallers(roster?: Roster) {
     const [risers, setRisers] = useState<string[]>([]);
     const [riserValues, setRiserValues] = useState<number[]>([10, 20, 30]);
     const [fallers, setFallers] = useState<string[]>([]);
@@ -85,18 +85,20 @@ type GraphicComponentProps = {
     fallers: string[];
     riserValues: number[];
     fallerValues: number[];
+    graphicClassName?: string;
 };
 export function GraphicComponent({
     risers,
     fallers,
     riserValues,
     fallerValues,
+    graphicClassName,
 }: GraphicComponentProps) {
     const playerData = usePlayerData();
 
     if (!playerData) return <></>;
     return (
-        <div className={styles.graphicComponent}>
+        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
             <div className={`${styles.wholeColumn} ${styles.columnBorder}`}>
                 <div
                     className={`${styles.columnSection} ${styles.nameColumn} ${styles.alignFlexEnd}`}

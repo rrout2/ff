@@ -28,6 +28,11 @@ import {
     InputComponent as HoldsInput,
     useHolds,
 } from '../HoldsModule/HoldsModule';
+import {
+    GraphicComponent as RisersFallersGraphic,
+    InputComponent as RisersFallersInput,
+    useRisersFallers,
+} from '../RisersFallersModule/RisersFallersModule';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -45,6 +50,16 @@ export default function UnifiedModule({
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
     const {holds, setHolds, comments, setComments} = useHolds(roster);
+    const {
+        risers,
+        setRisers,
+        riserValues,
+        setRiserValues,
+        fallers,
+        setFallers,
+        fallerValues,
+        setFallerValues,
+    } = useRisersFallers(roster);
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     useEffect(() => {
@@ -85,6 +100,17 @@ export default function UnifiedModule({
                 comments={comments}
                 setComments={setComments}
             />
+            <RisersFallersInput
+                playerIds={roster?.players ?? []}
+                risers={risers}
+                setRisers={setRisers}
+                riserValues={riserValues}
+                setRiserValues={setRiserValues}
+                fallers={fallers}
+                setFallers={setFallers}
+                fallerValues={fallerValues}
+                setFallerValues={setFallerValues}
+            />
         </>
     );
 
@@ -97,6 +123,7 @@ export default function UnifiedModule({
                     'cornerstonesGraphic',
                     'suggestedMovesGraphic',
                     'holdsGraphic',
+                    'risersFallersGraphic',
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
@@ -126,6 +153,13 @@ export default function UnifiedModule({
                 holds={holds}
                 comments={comments}
                 graphicClassName="holdsGraphic"
+            />
+            <RisersFallersGraphic
+                risers={risers}
+                fallers={fallers}
+                riserValues={riserValues}
+                fallerValues={fallerValues}
+                graphicClassName="risersFallersGraphic"
             />
         </div>
     );
