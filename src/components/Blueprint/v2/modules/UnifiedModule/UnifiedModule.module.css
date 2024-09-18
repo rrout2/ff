@@ -1,1 +1,4 @@
-.UnifiedModule {}
+.gridItem {
+    display: flex;
+    flex-direction: column;
+}

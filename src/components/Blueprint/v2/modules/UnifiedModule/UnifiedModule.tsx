@@ -33,6 +33,7 @@ import {
     InputComponent as RisersFallersInput,
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
+import {Grid2} from '@mui/material';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -76,46 +77,8 @@ export default function UnifiedModule({
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
     );
 
-    const UnifiedInputs = () => (
-        <>
-            <CornerstonesInput
-                playerIds={roster?.players ?? []}
-                setCornerstones={setCornerstones}
-                cornerstones={cornerstones}
-            />
-            <RosterInput rankStateMap={rankStateMap} />
-            <SuggestedMovesInput
-                playerIds={roster?.players ?? []}
-                sells={sells}
-                setSells={setSells}
-                buys={buys}
-                setBuys={setBuys}
-                plusMap={plusMap}
-                setPlusMap={setPlusMap}
-            />
-            <HoldsInput
-                playerIds={roster?.players ?? []}
-                holds={holds}
-                setHolds={setHolds}
-                comments={comments}
-                setComments={setComments}
-            />
-            <RisersFallersInput
-                playerIds={roster?.players ?? []}
-                risers={risers}
-                setRisers={setRisers}
-                riserValues={riserValues}
-                setRiserValues={setRiserValues}
-                fallers={fallers}
-                setFallers={setFallers}
-                fallerValues={fallerValues}
-                setFallerValues={setFallerValues}
-            />
-        </>
-    );
-
     return (
-        <div className={styles.UnifiedModule}>
+        <div>
             <ExportButton
                 className={[
                     'rosterGraphic',
@@ -127,7 +90,30 @@ export default function UnifiedModule({
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
-            <UnifiedInputs />
+            <UnifiedInputs
+                roster={roster}
+                cornerstones={cornerstones}
+                setCornerstones={setCornerstones}
+                sells={sells}
+                setSells={setSells}
+                buys={buys}
+                setBuys={setBuys}
+                plusMap={plusMap}
+                setPlusMap={setPlusMap}
+                holds={holds}
+                setHolds={setHolds}
+                comments={comments}
+                setComments={setComments}
+                risers={risers}
+                setRisers={setRisers}
+                riserValues={riserValues}
+                setRiserValues={setRiserValues}
+                fallers={fallers}
+                setFallers={setFallers}
+                fallerValues={fallerValues}
+                setFallerValues={setFallerValues}
+                rankStateMap={rankStateMap}
+            />
             <CornerstonesGraphic
                 cornerstones={cornerstones}
                 graphicClassName="cornerstonesGraphic"
@@ -162,5 +148,113 @@ export default function UnifiedModule({
                 graphicClassName="risersFallersGraphic"
             />
         </div>
+    );
+}
+
+export type UnifiedInputsProps = {
+    roster: Roster | undefined;
+    cornerstones: string[];
+    setCornerstones: (cornerstones: string[]) => void;
+    sells: string[];
+    setSells: (sells: string[]) => void;
+    buys: string[];
+    setBuys: (buys: string[]) => void;
+    plusMap: Map<string, boolean>;
+    setPlusMap: (plusMap: Map<string, boolean>) => void;
+    holds: string[];
+    setHolds: (holds: string[]) => void;
+    comments: string[];
+    setComments: (comments: string[]) => void;
+    risers: string[];
+    setRisers: (risers: string[]) => void;
+    riserValues: number[];
+    setRiserValues: (values: number[]) => void;
+    fallers: string[];
+    setFallers: (fallers: string[]) => void;
+    fallerValues: number[];
+    setFallerValues: (values: number[]) => void;
+    rankStateMap: Map<
+        string,
+        [string, React.Dispatch<React.SetStateAction<string>>]
+    >;
+};
+
+export function UnifiedInputs({
+    roster,
+    cornerstones,
+    setCornerstones,
+    sells,
+    setSells,
+    buys,
+    setBuys,
+    plusMap,
+    setPlusMap,
+    holds,
+    setHolds,
+    comments,
+    setComments,
+    risers,
+    setRisers,
+    riserValues,
+    setRiserValues,
+    fallers,
+    setFallers,
+    fallerValues,
+    setFallerValues,
+    rankStateMap,
+}: UnifiedInputsProps) {
+    return (
+        <Grid2 container spacing={1} style={{width: '1000px'}}>
+            <Grid2 size={8} className={styles.gridItem}>
+                Cornerstones
+                <CornerstonesInput
+                    playerIds={roster?.players ?? []}
+                    setCornerstones={setCornerstones}
+                    cornerstones={cornerstones}
+                />
+            </Grid2>
+            <Grid2 size={4} className={styles.gridItem}>
+                Roster
+                <div>
+                    <RosterInput rankStateMap={rankStateMap} />
+                </div>
+            </Grid2>
+            <Grid2 size={8} className={styles.gridItem}>
+                Suggested Moves
+                <SuggestedMovesInput
+                    playerIds={roster?.players ?? []}
+                    sells={sells}
+                    setSells={setSells}
+                    buys={buys}
+                    setBuys={setBuys}
+                    plusMap={plusMap}
+                    setPlusMap={setPlusMap}
+                />
+            </Grid2>
+            <Grid2 size={4} className={styles.gridItem}>
+                Risers/Fallers
+                <RisersFallersInput
+                    playerIds={roster?.players ?? []}
+                    risers={risers}
+                    setRisers={setRisers}
+                    riserValues={riserValues}
+                    setRiserValues={setRiserValues}
+                    fallers={fallers}
+                    setFallers={setFallers}
+                    fallerValues={fallerValues}
+                    setFallerValues={setFallerValues}
+                />
+            </Grid2>
+            <Grid2 size={12} className={styles.gridItem}>
+                Holds
+                <HoldsInput
+                    playerIds={roster?.players ?? []}
+                    holds={holds}
+                    setHolds={setHolds}
+                    comments={comments}
+                    setComments={setComments}
+                />
+            </Grid2>
+        </Grid2>
     );
 }
