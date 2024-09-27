@@ -5,7 +5,14 @@ import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
 import ExportButton from '../../../shared/ExportButton';
-import {scale} from '../../../../../consts/images';
+import {
+    longGreen,
+    longRed,
+    mediumGreen,
+    mediumRed,
+    shortGreen,
+    shortRed,
+} from '../../../../../consts/images';
 export type RisersFallersModuleProps = {
     roster?: Roster;
     teamName?: string;
@@ -95,6 +102,8 @@ export function GraphicComponent({
     graphicClassName,
 }: GraphicComponentProps) {
     const playerData = usePlayerData();
+    const reds = [shortRed, mediumRed, longRed];
+    const greens = [shortGreen, mediumGreen, longGreen];
 
     if (!playerData) return <></>;
     return (
@@ -119,17 +128,13 @@ export function GraphicComponent({
                     >
                         {fallerValues.map((value, idx) => (
                             <div key={idx} className={styles.valueAndArrow}>
-                                <div>{value.toFixed(1)}%</div>
+                                <div className={styles.value}>
+                                    {value.toFixed(1)}%
+                                </div>
                                 <div
                                     className={`${styles.arrowImage} ${styles.alignFlexEnd}`}
                                 >
-                                    <img
-                                        src={scale}
-                                        style={{
-                                            width: `${-1 * value}%`,
-                                            height: '10px',
-                                        }}
-                                    />
+                                    <img src={reds[idx]} />
                                 </div>
                             </div>
                         ))}
@@ -145,15 +150,11 @@ export function GraphicComponent({
                         {riserValues.map((value, idx) => (
                             <div key={idx} className={styles.valueAndArrow}>
                                 <div className={styles.arrowImage}>
-                                    <img
-                                        src={scale}
-                                        style={{
-                                            width: `${value}%`,
-                                            height: '10px',
-                                        }}
-                                    />
+                                    <img src={greens[idx]} />
                                 </div>
-                                <div>+{value.toFixed(1)}%</div>
+                                <div className={styles.value}>
+                                    +{value.toFixed(1)}%
+                                </div>
                             </div>
                         ))}
                     </div>

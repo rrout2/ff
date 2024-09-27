@@ -91,6 +91,12 @@ code {
 }
 
 @font-face {
+    font-family: 'Acumin Pro Condensed';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acumin Pro Condensed'), url('fonts/AcuminProCond-Regular.woff') format('woff');
+}
+@font-face {
     font-family: 'Acumin Pro ExtraCondensed';
     font-style: normal;
     font-weight: normal;

@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     height: 90px;
-    width: 140px;
+    width: 110px;
     justify-content: space-evenly;
 }
 
@@ -54,7 +54,13 @@
 
 
 .arrowImage {
-    width: 65%;
     display: flex;
     flex-direction: column;
+}
+
+.value {
+    font-family: 'Acumin Pro Condensed';
+    font-weight: bold;
+    padding-top: 5px;
+    /* bc font is uncentered */
 }

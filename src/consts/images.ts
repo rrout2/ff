@@ -129,6 +129,13 @@ import gTier from '../assets/tiers/G.png';
 import hTier from '../assets/tiers/H.png';
 import iTier from '../assets/tiers/I.png';
 
+import shortRed from '../assets/2.0/arrows/short_red.png';
+import shortGreen from '../assets/2.0/arrows/short_green.png';
+import mediumRed from '../assets/2.0/arrows/medium_red.png';
+import mediumGreen from '../assets/2.0/arrows/medium_green.png';
+import longRed from '../assets/2.0/arrows/long_red.png';
+import longGreen from '../assets/2.0/arrows/long_green.png';
+
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -356,6 +363,12 @@ const teamSilhouettes: Map<string, string> = new Map([
 ]);
 
 export {
+    shortGreen,
+    shortRed,
+    mediumGreen,
+    mediumRed,
+    longGreen,
+    longRed,
     teamLogos,
     blankLogo,
     scale,
