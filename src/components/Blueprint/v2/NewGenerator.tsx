@@ -23,6 +23,7 @@ import UnifiedModule from './modules/UnifiedModule/UnifiedModule';
 import SuggestedMovesModule from './modules/SuggestedMovesModule/SuggestedMovesModule';
 import HoldsModule from './modules/HoldsModule/HoldsModule';
 import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModule';
+import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -33,6 +34,7 @@ export enum Module {
     Unified = 'unified',
     Holds = 'holds',
     RisersFallers = 'risersfallers',
+    PositionalGrades = 'positionalgrades',
 }
 
 export default function NewGenerator() {
@@ -134,6 +136,12 @@ export default function NewGenerator() {
                     >
                         Risers/Fallers
                     </MenuItem>
+                    <MenuItem
+                        value={Module.PositionalGrades}
+                        key={Module.PositionalGrades}
+                    >
+                        Positional Grades
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -205,6 +213,15 @@ export default function NewGenerator() {
             {module === Module.RisersFallers && (
                 <RisersFallersModule
                     roster={roster}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
+            )}
+            {module === Module.PositionalGrades && (
+                <PositionalGrades
+                    // roster={roster}
                     teamName={
                         specifiedUser?.metadata?.team_name ??
                         specifiedUser?.display_name
