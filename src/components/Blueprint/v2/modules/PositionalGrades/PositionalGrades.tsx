@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './PositionalGrades.module.css';
 import {Layer, RegularPolygon, Shape, Stage, Text} from 'react-konva';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
@@ -6,12 +6,21 @@ import ExportButton from '../../../shared/ExportButton';
 import {COLORS} from '../../../../../consts/colors';
 
 export function usePositionalGrades() {
-    const [overall, setOverall] = useState(1);
-    const [qb, setQb] = useState(1);
-    const [rb, setRb] = useState(1);
-    const [wr, setWr] = useState(1);
-    const [te, setTe] = useState(1);
-    const [depth, setDepth] = useState(1);
+    const [overall, setOverall] = useState(7);
+    const [qb, setQb] = useState(7);
+    const [rb, setRb] = useState(7);
+    const [wr, setWr] = useState(7);
+    const [te, setTe] = useState(7);
+    const [depth, setDepth] = useState(7);
+    useEffect(() => {
+        // Needed to force re-render to center grade values.
+        setOverall(8);
+        setQb(8);
+        setRb(8);
+        setWr(8);
+        setTe(8);
+        setDepth(8);
+    }, []);
     return {
         overall,
         setOverall,
@@ -288,21 +297,23 @@ const GradeCircles = ({coordinates}: GradeShapeProps) => {
 const GradeLabels = ({coordinates}: GradeShapeProps) => {
     return (
         <>
-            {coordinates.map(({x, y, grade, position}) => (
-                <Text
-                    key={position}
-                    text={grade.toString()}
-                    x={x - 25}
-                    y={y - 23}
-                    width={50}
-                    height={50}
-                    fontSize={20}
-                    fontFamily="Erbaum"
-                    fill={'#023049'}
-                    align="center"
-                    verticalAlign="middle"
-                />
-            ))}
+            {coordinates.map(({x, y, grade, position}) => {
+                return (
+                    <Text
+                        key={position}
+                        x={x - 25}
+                        y={y - 23}
+                        width={50}
+                        height={50}
+                        fontSize={20}
+                        fontFamily="Erbaum"
+                        fill={'#023049'}
+                        align="center"
+                        verticalAlign="middle"
+                        text={grade.toString()}
+                    />
+                );
+            })}
         </>
     );
 };
