@@ -5,13 +5,13 @@ import StyledNumberInput from '../../../shared/StyledNumberInput';
 import ExportButton from '../../../shared/ExportButton';
 import {COLORS} from '../../../../../consts/colors';
 
-function usePositionalGrades() {
-    const [overall, setOverall] = useState(10);
-    const [qb, setQb] = useState(10);
-    const [rb, setRb] = useState(10);
-    const [wr, setWr] = useState(10);
-    const [te, setTe] = useState(10);
-    const [depth, setDepth] = useState(10);
+export function usePositionalGrades() {
+    const [overall, setOverall] = useState(1);
+    const [qb, setQb] = useState(1);
+    const [rb, setRb] = useState(1);
+    const [wr, setWr] = useState(1);
+    const [te, setTe] = useState(1);
+    const [depth, setDepth] = useState(1);
     return {
         overall,
         setOverall,
@@ -162,6 +162,7 @@ type GraphicComponentProps = {
     wr: number;
     te: number;
     depth: number;
+    graphicClassName?: string;
 };
 export function GraphicComponent({
     overall,
@@ -170,6 +171,7 @@ export function GraphicComponent({
     wr,
     te,
     depth,
+    graphicClassName,
 }: GraphicComponentProps) {
     const hexRadius = 250;
     const coordinates: {
@@ -216,7 +218,11 @@ export function GraphicComponent({
         },
     ];
     return (
-        <Stage width={600} height={600} className={styles.graphicComponent}>
+        <Stage
+            width={600}
+            height={600}
+            className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}
+        >
             <Layer>
                 <BackgroundHexagon radius={500} />
                 <BackgroundHexagon radius={400} />
@@ -290,8 +296,8 @@ const GradeLabels = ({coordinates}: GradeShapeProps) => {
                     y={y - 23}
                     width={50}
                     height={50}
-                    fontFamily="Erbaum"
                     fontSize={20}
+                    fontFamily="Erbaum"
                     fill={'#023049'}
                     align="center"
                     verticalAlign="middle"

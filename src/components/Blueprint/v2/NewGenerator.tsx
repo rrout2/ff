@@ -221,7 +221,6 @@ export default function NewGenerator() {
             )}
             {module === Module.PositionalGrades && (
                 <PositionalGrades
-                    // roster={roster}
                     teamName={
                         specifiedUser?.metadata?.team_name ??
                         specifiedUser?.display_name

@@ -34,6 +34,11 @@ import {
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
 import {Grid2} from '@mui/material';
+import {
+    GraphicComponent as PositionalGradesGraphic,
+    InputComponent as PositionalGradesInput,
+    usePositionalGrades,
+} from '../PositionalGrades/PositionalGrades';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -61,6 +66,20 @@ export default function UnifiedModule({
         fallerValues,
         setFallerValues,
     } = useRisersFallers(roster);
+    const {
+        overall,
+        setOverall,
+        qb,
+        setQb,
+        rb,
+        setRb,
+        wr,
+        setWr,
+        te,
+        setTe,
+        depth,
+        setDepth,
+    } = usePositionalGrades();
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     useEffect(() => {
@@ -87,6 +106,7 @@ export default function UnifiedModule({
                     'suggestedMovesGraphic',
                     'holdsGraphic',
                     'risersFallersGraphic',
+                    'positionalGradesGraphic',
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
@@ -113,6 +133,18 @@ export default function UnifiedModule({
                 fallerValues={fallerValues}
                 setFallerValues={setFallerValues}
                 rankStateMap={rankStateMap}
+                overall={overall}
+                setOverall={setOverall}
+                qb={qb}
+                setQb={setQb}
+                rb={rb}
+                setRb={setRb}
+                wr={wr}
+                setWr={setWr}
+                te={te}
+                setTe={setTe}
+                depth={depth}
+                setDepth={setDepth}
             />
             <CornerstonesGraphic
                 cornerstones={cornerstones}
@@ -147,6 +179,15 @@ export default function UnifiedModule({
                 fallerValues={fallerValues}
                 graphicClassName="risersFallersGraphic"
             />
+            <PositionalGradesGraphic
+                overall={overall}
+                qb={qb}
+                rb={rb}
+                wr={wr}
+                te={te}
+                depth={depth}
+                graphicClassName="positionalGradesGraphic"
+            />
         </div>
     );
 }
@@ -177,6 +218,18 @@ export type UnifiedInputsProps = {
         string,
         [string, React.Dispatch<React.SetStateAction<string>>]
     >;
+    overall: number;
+    setOverall: (value: number) => void;
+    qb: number;
+    setQb: (value: number) => void;
+    rb: number;
+    setRb: (value: number) => void;
+    wr: number;
+    setWr: (value: number) => void;
+    te: number;
+    setTe: (value: number) => void;
+    depth: number;
+    setDepth: (value: number) => void;
 };
 
 export function UnifiedInputs({
@@ -202,6 +255,18 @@ export function UnifiedInputs({
     fallerValues,
     setFallerValues,
     rankStateMap,
+    overall,
+    setOverall,
+    qb,
+    setQb,
+    rb,
+    setRb,
+    wr,
+    setWr,
+    te,
+    setTe,
+    depth,
+    setDepth,
 }: UnifiedInputsProps) {
     return (
         <Grid2 container spacing={1} style={{width: '1000px'}}>
@@ -245,7 +310,7 @@ export function UnifiedInputs({
                     setFallerValues={setFallerValues}
                 />
             </Grid2>
-            <Grid2 size={12} className={styles.gridItem}>
+            <Grid2 size={4} className={styles.gridItem}>
                 Holds
                 <HoldsInput
                     playerIds={roster?.players ?? []}
@@ -253,6 +318,23 @@ export function UnifiedInputs({
                     setHolds={setHolds}
                     comments={comments}
                     setComments={setComments}
+                />
+            </Grid2>
+            <Grid2 size={4} className={styles.gridItem}>
+                Positional Grades
+                <PositionalGradesInput
+                    overall={overall}
+                    setOverall={setOverall}
+                    qb={qb}
+                    setQb={setQb}
+                    rb={rb}
+                    setRb={setRb}
+                    wr={wr}
+                    setWr={setWr}
+                    te={te}
+                    setTe={setTe}
+                    depth={depth}
+                    setDepth={setDepth}
                 />
             </Grid2>
         </Grid2>
