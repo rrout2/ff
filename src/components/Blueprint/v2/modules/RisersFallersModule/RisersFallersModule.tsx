@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import styles from './RisersFallersModule.module.css';
-import {Roster} from '../../../../../sleeper-api/sleeper-api';
+import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
@@ -106,6 +106,15 @@ export function GraphicComponent({
     const greens = [shortGreen, mediumGreen, longGreen];
 
     if (!playerData) return <></>;
+
+    function maybeShortenedName(player: Player) {
+        const fullName = `${player.first_name} ${player.last_name}`;
+        if (fullName.length >= 16) {
+            return `${player.first_name[0]}. ${player.last_name}`;
+        }
+        return fullName;
+    }
+
     return (
         <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
             <div className={`${styles.wholeColumn} ${styles.columnBorder}`}>
@@ -113,10 +122,7 @@ export function GraphicComponent({
                     className={`${styles.columnSection} ${styles.nameColumn} ${styles.alignFlexEnd}`}
                 >
                     {risers.map(playerId => (
-                        <div>
-                            {playerData[playerId].first_name}{' '}
-                            {playerData[playerId].last_name}
-                        </div>
+                        <div>{maybeShortenedName(playerData[playerId])}</div>
                     ))}
                 </div>
                 <div
@@ -161,10 +167,7 @@ export function GraphicComponent({
                 </div>
                 <div className={`${styles.columnSection} ${styles.nameColumn}`}>
                     {fallers.map(playerId => (
-                        <div>
-                            {playerData[playerId].first_name}{' '}
-                            {playerData[playerId].last_name}
-                        </div>
+                        <div>{maybeShortenedName(playerData[playerId])}</div>
                     ))}
                 </div>
             </div>
