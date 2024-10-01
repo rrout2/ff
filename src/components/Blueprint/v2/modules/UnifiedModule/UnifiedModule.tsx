@@ -39,6 +39,12 @@ import {
     InputComponent as PositionalGradesInput,
     usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
+import {
+    Outlook,
+    useThreeYearOutlook,
+    InputComponent as ThreeYearOutlookInput,
+    GraphicComponent as ThreeYearOutlookGraphic,
+} from '../ThreeYearOutlook/ThreeYearOutlook';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -80,6 +86,12 @@ export default function UnifiedModule({
         depth,
         setDepth,
     } = usePositionalGrades();
+    const {
+        values: outlookValues,
+        setValues: setOutlookValues,
+        outlook,
+        setOutlook,
+    } = useThreeYearOutlook();
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     useEffect(() => {
@@ -107,6 +119,7 @@ export default function UnifiedModule({
                     'holdsGraphic',
                     'risersFallersGraphic',
                     'positionalGradesGraphic',
+                    'threeYearOutlookGraphic',
                 ]}
                 zipName={`${teamName}_unified.zip`}
             />
@@ -145,6 +158,10 @@ export default function UnifiedModule({
                 setTe={setTe}
                 depth={depth}
                 setDepth={setDepth}
+                outlookValues={outlookValues}
+                setOutlookValues={setOutlookValues}
+                outlook={outlook}
+                setOutlook={setOutlook}
             />
             <CornerstonesGraphic
                 cornerstones={cornerstones}
@@ -188,6 +205,11 @@ export default function UnifiedModule({
                 depth={depth}
                 graphicClassName="positionalGradesGraphic"
             />
+            <ThreeYearOutlookGraphic
+                values={outlookValues}
+                outlook={outlook}
+                graphicClassName="threeYearOutlookGraphic"
+            />
         </div>
     );
 }
@@ -230,6 +252,10 @@ export type UnifiedInputsProps = {
     setTe: (value: number) => void;
     depth: number;
     setDepth: (value: number) => void;
+    outlookValues: number[];
+    setOutlookValues: (values: number[]) => void;
+    outlook: Outlook;
+    setOutlook: (outlook: Outlook) => void;
 };
 
 export function UnifiedInputs({
@@ -267,6 +293,10 @@ export function UnifiedInputs({
     setTe,
     depth,
     setDepth,
+    outlookValues,
+    setOutlookValues,
+    outlook,
+    setOutlook,
 }: UnifiedInputsProps) {
     return (
         <Grid2 container spacing={1} style={{width: '1000px'}}>
@@ -336,6 +366,17 @@ export function UnifiedInputs({
                     comments={comments}
                     setComments={setComments}
                 />
+            </Grid2>
+            <Grid2 size={8} className={styles.gridItem}>
+                Three Year Outlook
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <ThreeYearOutlookInput
+                        values={outlookValues}
+                        setValues={setOutlookValues}
+                        outlook={outlook}
+                        setOutlook={setOutlook}
+                    />
+                </div>
             </Grid2>
         </Grid2>
     );

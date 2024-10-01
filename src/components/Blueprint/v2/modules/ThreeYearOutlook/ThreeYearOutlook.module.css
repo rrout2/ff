@@ -1,0 +1,13 @@
+.graphicComponent {
+    background-color: #005D91;
+    width: fit-content;
+}
+
+.outlookInputColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    flex-wrap: wrap;
+    height: 350px;
+}

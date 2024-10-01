@@ -30,19 +30,7 @@ code {
     font-style: normal;
 }
 
-/* @font-face {
-    font-family: 'Erbaum';
-    src: url('fonts/Erbaum-Medium.eot');
-    src: local('Erbaum Medium'), local('Erbaum-Medium'),
-        url('fonts/Erbaum-Medium.eot?#iefix') format('embedded-opentype'),
-        url('fonts/Erbaum-Medium.woff2') format('woff2'),
-        url('fonts/Erbaum-Medium.woff') format('woff'),
-        url('fonts/Erbaum-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-*/ @font-face {
+@font-face {
     font-family: 'Erbaum';
     src: local('Erbaum Regular'), local('Erbaum-Regular'),
         url('fonts/erbaum/Erbaum-Regular.otf') format('opentype'),

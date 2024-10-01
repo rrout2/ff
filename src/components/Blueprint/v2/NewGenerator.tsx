@@ -24,6 +24,7 @@ import SuggestedMovesModule from './modules/SuggestedMovesModule/SuggestedMovesM
 import HoldsModule from './modules/HoldsModule/HoldsModule';
 import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModule';
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
+import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -35,6 +36,7 @@ export enum Module {
     Holds = 'holds',
     RisersFallers = 'risersfallers',
     PositionalGrades = 'positionalgrades',
+    ThreeYearOutlook = 'threeyearoutlook',
 }
 
 export default function NewGenerator() {
@@ -106,6 +108,9 @@ export default function NewGenerator() {
                     <MenuItem value={Module.Unspecified} key={'chooseamodule'}>
                         Choose a module:
                     </MenuItem>
+                    <MenuItem value={Module.Unified} key={Module.Unified}>
+                        Unified
+                    </MenuItem>
                     <MenuItem value={Module.Roster} key={Module.Roster}>
                         Roster
                     </MenuItem>
@@ -118,9 +123,7 @@ export default function NewGenerator() {
                     >
                         Cornerstones
                     </MenuItem>
-                    <MenuItem value={Module.Unified} key={Module.Unified}>
-                        Unified
-                    </MenuItem>
+
                     <MenuItem
                         value={Module.SuggestedMoves}
                         key={Module.SuggestedMoves}
@@ -141,6 +144,12 @@ export default function NewGenerator() {
                         key={Module.PositionalGrades}
                     >
                         Positional Grades
+                    </MenuItem>
+                    <MenuItem
+                        value={Module.ThreeYearOutlook}
+                        key={Module.ThreeYearOutlook}
+                    >
+                        Three Year Outlook
                     </MenuItem>
                 </Select>
             </FormControl>
@@ -221,6 +230,14 @@ export default function NewGenerator() {
             )}
             {module === Module.PositionalGrades && (
                 <PositionalGrades
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
+            )}
+            {module === Module.ThreeYearOutlook && (
+                <ThreeYearOutlook
                     teamName={
                         specifiedUser?.metadata?.team_name ??
                         specifiedUser?.display_name
