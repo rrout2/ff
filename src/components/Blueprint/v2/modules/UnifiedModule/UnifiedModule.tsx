@@ -284,7 +284,7 @@ export function UnifiedInputs({
                     <RosterInput rankStateMap={rankStateMap} />
                 </div>
             </Grid2>
-            <Grid2 size={8} className={styles.gridItem}>
+            <Grid2 size={6} className={styles.gridItem}>
                 Suggested Moves
                 <SuggestedMovesInput
                     playerIds={roster?.players ?? []}
@@ -296,7 +296,7 @@ export function UnifiedInputs({
                     setPlusMap={setPlusMap}
                 />
             </Grid2>
-            <Grid2 size={4} className={styles.gridItem}>
+            <Grid2 size={3.5} className={styles.gridItem}>
                 Risers/Fallers
                 <RisersFallersInput
                     playerIds={roster?.players ?? []}
@@ -310,17 +310,7 @@ export function UnifiedInputs({
                     setFallerValues={setFallerValues}
                 />
             </Grid2>
-            <Grid2 size={4} className={styles.gridItem}>
-                Holds
-                <HoldsInput
-                    playerIds={roster?.players ?? []}
-                    holds={holds}
-                    setHolds={setHolds}
-                    comments={comments}
-                    setComments={setComments}
-                />
-            </Grid2>
-            <Grid2 size={4} className={styles.gridItem}>
+            <Grid2 size={2.5} className={styles.gridItem} style={{gap: '6px'}}>
                 Positional Grades
                 <PositionalGradesInput
                     overall={overall}
@@ -335,6 +325,16 @@ export function UnifiedInputs({
                     setTe={setTe}
                     depth={depth}
                     setDepth={setDepth}
+                />
+            </Grid2>
+            <Grid2 size={4} className={styles.gridItem}>
+                Holds
+                <HoldsInput
+                    playerIds={roster?.players ?? []}
+                    holds={holds}
+                    setHolds={setHolds}
+                    comments={comments}
+                    setComments={setComments}
                 />
             </Grid2>
         </Grid2>
