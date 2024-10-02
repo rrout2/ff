@@ -25,6 +25,7 @@ import HoldsModule from './modules/HoldsModule/HoldsModule';
 import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModule';
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
+import BigBoy from './modules/BigBoy/BigBoy';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -37,6 +38,7 @@ export enum Module {
     RisersFallers = 'risersfallers',
     PositionalGrades = 'positionalgrades',
     ThreeYearOutlook = 'threeyearoutlook',
+    BigBoy = 'bigboy',
 }
 
 export default function NewGenerator() {
@@ -151,6 +153,9 @@ export default function NewGenerator() {
                     >
                         Three Year Outlook
                     </MenuItem>
+                    <MenuItem value={Module.BigBoy} key={Module.BigBoy}>
+                        Big Boy
+                    </MenuItem>
                 </Select>
             </FormControl>
         );
@@ -243,6 +248,9 @@ export default function NewGenerator() {
                         specifiedUser?.display_name
                     }
                 />
+            )}
+            {module === Module.BigBoy && (
+                <BigBoy roster={roster} numRosters={rosters?.length} />
             )}
         </div>
     );

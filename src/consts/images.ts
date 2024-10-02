@@ -136,6 +136,8 @@ import mediumGreen from '../assets/2.0/arrows/medium_green.png';
 import longRed from '../assets/2.0/arrows/long_red.png';
 import longGreen from '../assets/2.0/arrows/long_green.png';
 
+import blankBlueprintV2 from '../assets/2.0/blankblueprint.png';
+
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -393,4 +395,5 @@ export {
     buyIcon,
     sellIcon,
     holdIcon,
+    blankBlueprintV2,
 };

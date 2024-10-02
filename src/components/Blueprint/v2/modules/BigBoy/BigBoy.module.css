@@ -1,0 +1,11 @@
+.fullBlueprint {
+    position: relative;
+}
+
+.rosterGraphic {
+    position: absolute;
+    top: 285px;
+    left: 50px;
+    transform-origin: top left;
+    scale: 0.88;
+}

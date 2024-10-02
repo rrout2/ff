@@ -48,6 +48,7 @@ interface GraphicComponentProps {
     allPlayers: Player[];
     rankStateMap: Map<string, [string, Dispatch<SetStateAction<string>>]>;
     numRosters: number;
+    transparent?: boolean;
 }
 
 export function GraphicComponent({
@@ -55,6 +56,7 @@ export function GraphicComponent({
     allPlayers,
     rankStateMap,
     numRosters,
+    transparent = false,
 }: GraphicComponentProps) {
     const {getPositionalAdp} = useAdpData();
 
@@ -77,7 +79,10 @@ export function GraphicComponent({
     }
 
     return (
-        <div className={`${styles.fullRoster} ${graphicClassName ?? ''}`}>
+        <div
+            className={`${styles.fullRoster} ${graphicClassName ?? ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
+        >
             {FANTASY_POSITIONS.map(pos => (
                 <div className={styles.positionColumn}>
                     <div
