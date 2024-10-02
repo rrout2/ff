@@ -86,15 +86,20 @@ export interface GraphicComponentProps {
     buys: string[];
     graphicClassName?: string;
     plusMap: Map<string, boolean>;
+    transparent?: boolean;
 }
 export function GraphicComponent({
     sells,
     buys,
     graphicClassName,
     plusMap,
+    transparent = false,
 }: GraphicComponentProps) {
     return (
-        <div className={`${styles.graphicComponent} ${graphicClassName || ''}`}>
+        <div
+            className={`${styles.graphicComponent} ${graphicClassName || ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
+        >
             {sells.length > 0 &&
                 sells.map((s, idx) => (
                     <div key={idx} className={styles.buySellColumn}>

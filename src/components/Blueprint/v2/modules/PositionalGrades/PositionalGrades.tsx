@@ -172,6 +172,7 @@ type GraphicComponentProps = {
     te: number;
     depth: number;
     graphicClassName?: string;
+    transparent?: boolean;
 };
 export function GraphicComponent({
     overall,
@@ -181,6 +182,7 @@ export function GraphicComponent({
     te,
     depth,
     graphicClassName,
+    transparent = false,
 }: GraphicComponentProps) {
     const hexRadius = 250;
     const coordinates: {
@@ -231,6 +233,7 @@ export function GraphicComponent({
             width={600}
             height={600}
             className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
         >
             <Layer>
                 <BackgroundHexagon radius={500} />

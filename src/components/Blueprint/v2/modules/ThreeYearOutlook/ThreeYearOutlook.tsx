@@ -119,12 +119,14 @@ type GraphicComponentProps = {
     values: number[];
     outlook: Outlook;
     graphicClassName?: string;
+    transparent?: boolean;
 };
 
 export function GraphicComponent({
     graphicClassName,
     outlook,
     values,
+    transparent = false,
 }: GraphicComponentProps) {
     const width = 600;
     const height = 400;
@@ -186,6 +188,7 @@ export function GraphicComponent({
             width={width + 20}
             height={height}
             className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
         >
             <Layer>
                 <Line

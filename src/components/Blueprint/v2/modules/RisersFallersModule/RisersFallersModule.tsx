@@ -19,7 +19,7 @@ export type RisersFallersModuleProps = {
 };
 export function useRisersFallers(roster?: Roster) {
     const [risers, setRisers] = useState<string[]>([]);
-    const [riserValues, setRiserValues] = useState<number[]>([10, 20, 30]);
+    const [riserValues, setRiserValues] = useState<number[]>([30, 20, 10]);
     const [fallers, setFallers] = useState<string[]>([]);
     const [fallerValues, setFallerValues] = useState<number[]>([-10, -20, -30]);
     const playerData = usePlayerData();
@@ -93,6 +93,7 @@ type GraphicComponentProps = {
     riserValues: number[];
     fallerValues: number[];
     graphicClassName?: string;
+    transparent?: boolean;
 };
 export function GraphicComponent({
     risers,
@@ -100,10 +101,11 @@ export function GraphicComponent({
     riserValues,
     fallerValues,
     graphicClassName,
+    transparent = false,
 }: GraphicComponentProps) {
     const playerData = usePlayerData();
     const reds = [shortRed, mediumRed, longRed];
-    const greens = [shortGreen, mediumGreen, longGreen];
+    const greens = [shortGreen, mediumGreen, longGreen].reverse();
 
     if (!playerData) return <></>;
 
@@ -116,7 +118,10 @@ export function GraphicComponent({
     }
 
     return (
-        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
+        <div
+            className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
+        >
             <div className={`${styles.wholeColumn} ${styles.columnBorder}`}>
                 <div
                     className={`${styles.columnSection} ${styles.nameColumn} ${styles.alignFlexEnd}`}

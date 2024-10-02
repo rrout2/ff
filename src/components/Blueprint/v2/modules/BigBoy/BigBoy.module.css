@@ -18,3 +18,42 @@
     transform-origin: top left;
     scale: 0.884;
 }
+
+.cornerstonesGraphic {
+    position: absolute;
+    bottom: 80px;
+    left: 410px;
+    transform-origin: bottom left;
+    scale: 0.4;
+}
+
+.risersFallersGraphic {
+    position: absolute;
+    bottom: 415px;
+    left: 75px;
+}
+
+.suggestedMovesGraphic {
+    position: absolute;
+    bottom: 55px;
+    left: 910px;
+    scale: 0.44;
+    transform-origin: bottom left;
+}
+
+.holdsGraphic {
+    position: absolute;
+    scale: 0.44;
+    transform-origin: bottom left;
+    bottom: 60px;
+    left: 1870px;
+}
+
+
+.positionalGradesGraphic {
+    position: absolute;
+    scale: 0.59;
+    transform-origin: bottom left;
+    bottom: 15px;
+    left: 40px;
+}

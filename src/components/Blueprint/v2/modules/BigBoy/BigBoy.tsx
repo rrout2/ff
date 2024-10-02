@@ -9,41 +9,31 @@ import {
 } from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
-    InputComponent as CornerstonesInput,
     useCornerstones,
 } from '../CornerstonesModule/CornerstonesModule';
-import {
-    GraphicComponent as RosterGraphic,
-    InputComponent as RosterInput,
-} from '../RosterModule/RosterModule';
+import {GraphicComponent as RosterGraphic} from '../RosterModule/RosterModule';
 import {GraphicComponent as SettingsGraphic} from '../SettingsModule/SettingsModule';
 import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
 import {
     GraphicComponent as SuggestedMovesGraphic,
-    InputComponent as SuggestedMovesInput,
     useBuySells,
 } from '../SuggestedMovesModule/SuggestedMovesModule';
 import {
     GraphicComponent as HoldsGraphic,
-    InputComponent as HoldsInput,
     useHolds,
 } from '../HoldsModule/HoldsModule';
 import {
     GraphicComponent as RisersFallersGraphic,
-    InputComponent as RisersFallersInput,
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
-import {Grid2} from '@mui/material';
 import {
     GraphicComponent as PositionalGradesGraphic,
-    InputComponent as PositionalGradesInput,
     usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
 import {
     Outlook,
     useThreeYearOutlook,
-    InputComponent as ThreeYearOutlookInput,
     GraphicComponent as ThreeYearOutlookGraphic,
 } from '../ThreeYearOutlook/ThreeYearOutlook';
 import {UnifiedInputs} from '../UnifiedModule/UnifiedModule';
@@ -190,7 +180,27 @@ interface FullBlueprintProps {
     numRosters?: number;
 }
 
-function FullBlueprint({roster, numRosters, rankStateMap}: FullBlueprintProps) {
+function FullBlueprint({
+    roster,
+    numRosters,
+    rankStateMap,
+    cornerstones,
+    risers,
+    fallers,
+    riserValues,
+    fallerValues,
+    sells,
+    buys,
+    plusMap,
+    holds,
+    comments,
+    overall,
+    qb,
+    rb,
+    wr,
+    te,
+    depth,
+}: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     const [leagueId] = useLeagueIdFromUrl();
@@ -218,6 +228,40 @@ function FullBlueprint({roster, numRosters, rankStateMap}: FullBlueprintProps) {
                 <SettingsGraphic
                     leagueId={leagueId}
                     numRosters={numRosters ?? 0}
+                    transparent={true}
+                />
+            </div>
+            <div className={styles.cornerstonesGraphic}>
+                <CornerstonesGraphic cornerstones={cornerstones} />
+            </div>
+            <div className={styles.risersFallersGraphic}>
+                <RisersFallersGraphic
+                    risers={risers}
+                    riserValues={riserValues}
+                    fallers={fallers}
+                    fallerValues={fallerValues}
+                    transparent={true}
+                />
+            </div>
+            <div className={styles.suggestedMovesGraphic}>
+                <SuggestedMovesGraphic
+                    transparent={true}
+                    sells={sells}
+                    buys={buys}
+                    plusMap={plusMap}
+                />
+            </div>
+            <div className={styles.holdsGraphic}>
+                <HoldsGraphic holds={holds} comments={comments} />
+            </div>
+            <div className={styles.positionalGradesGraphic}>
+                <PositionalGradesGraphic
+                    overall={overall}
+                    qb={qb}
+                    rb={rb}
+                    wr={wr}
+                    te={te}
+                    depth={depth}
                     transparent={true}
                 />
             </div>
