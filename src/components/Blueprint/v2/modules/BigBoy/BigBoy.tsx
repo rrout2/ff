@@ -193,6 +193,7 @@ interface FullBlueprintProps {
 function FullBlueprint({roster, numRosters, rankStateMap}: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
+    const [leagueId] = useLeagueIdFromUrl();
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     useEffect(() => {
         if (!roster || !playerData) return;
@@ -210,6 +211,13 @@ function FullBlueprint({roster, numRosters, rankStateMap}: FullBlueprintProps) {
                     allPlayers={allPlayers}
                     numRosters={numRosters ?? 0}
                     rankStateMap={rankStateMap}
+                    transparent={true}
+                />
+            </div>
+            <div className={styles.settingsGraphic}>
+                <SettingsGraphic
+                    leagueId={leagueId}
+                    numRosters={numRosters ?? 0}
                     transparent={true}
                 />
             </div>

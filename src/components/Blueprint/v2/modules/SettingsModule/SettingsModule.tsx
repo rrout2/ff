@@ -37,12 +37,14 @@ export interface GraphicComponentProps {
     graphicClassName?: string;
     leagueId?: string;
     numRosters?: number;
+    transparent?: boolean;
 }
 
 export function GraphicComponent({
     graphicClassName,
     leagueId,
     numRosters,
+    transparent = false,
 }: GraphicComponentProps) {
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
@@ -140,7 +142,10 @@ export function GraphicComponent({
     }
 
     return (
-        <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
+        <div
+            className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}
+            style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
+        >
             {settingTile(numRosters ?? 0, color.white)}
             {settingTile(
                 (league?.scoring_settings?.rec ?? 0).toFixed(1),

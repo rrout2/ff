@@ -9,3 +9,12 @@
     transform-origin: top left;
     scale: 0.88;
 }
+
+.settingsGraphic {
+    position: absolute;
+    top: 124px;
+    left: 39px;
+
+    transform-origin: top left;
+    scale: 0.884;
+}
