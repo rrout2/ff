@@ -1,7 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import styles from './BigBoy.module.css';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
-import {blankBlueprintV2} from '../../../../../consts/images';
+import {
+    blankBlueprintV2,
+    dualEliteGraphCCO,
+    dualEliteGraphRCC,
+    eliteValueGraphCCC,
+    eliteValueGraphCCO,
+    futureValueGraph,
+    hardRebuildGraphRRC,
+    hardRebuildGraphRRR,
+    oneYearReloadGraph,
+    rbHeavyGraph,
+    wellRoundedGraphCCO,
+    wellRoundedGraphCCR,
+    wrFactorGraphCCR,
+    wrFactoryGraphCCO,
+} from '../../../../../consts/images';
 import {
     useLeagueIdFromUrl,
     usePlayerData,
@@ -36,7 +51,7 @@ import {
     useThreeYearOutlook,
     GraphicComponent as ThreeYearOutlookGraphic,
 } from '../ThreeYearOutlook/ThreeYearOutlook';
-import {UnifiedInputs} from '../UnifiedModule/UnifiedModule';
+import {Archetype, UnifiedInputs} from '../UnifiedModule/UnifiedModule';
 
 interface BigBoyProps {
     roster?: Roster;
@@ -46,7 +61,6 @@ interface BigBoyProps {
 
 export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
     const {cornerstones, setCornerstones} = useCornerstones(roster);
-    const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
     const {holds, setHolds, comments, setComments} = useHolds(roster);
@@ -83,6 +97,10 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
+    );
+
+    const [archetype, setArchetype] = useState<Archetype>(
+        Archetype.FutureValue
     );
 
     return (
@@ -126,6 +144,8 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setOutlookValues={setOutlookValues}
                 outlook={outlook}
                 setOutlook={setOutlook}
+                archetype={archetype}
+                setArchetype={setArchetype}
             />
             <FullBlueprint
                 roster={roster}
@@ -150,6 +170,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 outlook={outlook}
                 numRosters={numRosters}
                 teamName={teamName}
+                archetype={archetype}
             />
         </div>
     );
@@ -179,6 +200,7 @@ interface FullBlueprintProps {
     depth: number;
     outlookValues: number[];
     outlook: Outlook;
+    archetype: Archetype;
     numRosters?: number;
     teamName?: string;
 }
@@ -204,6 +226,7 @@ function FullBlueprint({
     te,
     depth,
     teamName,
+    archetype,
 }: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
@@ -218,6 +241,40 @@ function FullBlueprint({
                 .sort(sortByAdp)
         );
     }, [roster, playerData]);
+
+    function getGraphFromArchetype(archetype: Archetype) {
+        switch (archetype) {
+            case Archetype.HardRebuild_RRC:
+                return hardRebuildGraphRRC;
+            case Archetype.HardRebuild_RRR:
+                return hardRebuildGraphRRR;
+            case Archetype.WellRounded_CCR:
+                return wellRoundedGraphCCR;
+            case Archetype.WellRounded_CCO:
+                return wellRoundedGraphCCO;
+            case Archetype.DualEliteQB_CCO:
+                return dualEliteGraphCCO;
+            case Archetype.DualEliteQB_RCC:
+                return dualEliteGraphRCC;
+            case Archetype.EliteValue_CCC:
+                return eliteValueGraphCCC;
+            case Archetype.EliteValue_CCO:
+                return eliteValueGraphCCO;
+            case Archetype.FutureValue:
+                return futureValueGraph;
+            case Archetype.WRFactory_CCO:
+                return wrFactoryGraphCCO;
+            case Archetype.WRFactory_CCR:
+                return wrFactorGraphCCR;
+            case Archetype.OneYearReload:
+                return oneYearReloadGraph;
+            case Archetype.RBHeavy:
+                return rbHeavyGraph;
+            default:
+                return Archetype.UNSPECIFIED;
+        }
+    }
+
     return (
         <div className={styles.fullBlueprint}>
             <div className={styles.teamName}>{teamName}</div>
@@ -269,6 +326,9 @@ function FullBlueprint({
                     depth={depth}
                     transparent={true}
                 />
+            </div>
+            <div className={styles.threeYearOutlook}>
+                <img src={getGraphFromArchetype(archetype)} />
             </div>
             <img src={blankBlueprintV2} />
         </div>

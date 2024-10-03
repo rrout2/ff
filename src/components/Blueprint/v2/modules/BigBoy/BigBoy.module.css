@@ -66,3 +66,11 @@
     font-size: 50px;
     color: white;
 }
+
+.threeYearOutlook {
+    position: absolute;
+    transform-origin: top left;
+    scale: 0.25;
+    top: 591px;
+    left: 490px;
+}

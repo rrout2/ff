@@ -33,7 +33,7 @@ import {
     InputComponent as RisersFallersInput,
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
-import {Grid2} from '@mui/material';
+import {Grid2, MenuItem, Select, SelectChangeEvent} from '@mui/material';
 import {
     GraphicComponent as PositionalGradesGraphic,
     InputComponent as PositionalGradesInput,
@@ -214,6 +214,26 @@ export default function UnifiedModule({
     );
 }
 
+export enum Archetype {
+    UNSPECIFIED = 'UNSPECIFIED',
+
+    HardRebuild_RRC = 'HARD REBUILD - RRC',
+    HardRebuild_RRR = 'HARD REBUILD - RRR',
+    FutureValue = 'FUTURE VALUE',
+    WellRounded_CCO = 'WELL ROUNDED - CCO',
+    WellRounded_CCR = 'WELL ROUNDED - CCR',
+    OneYearReload = 'ONE YEAR RELOAD',
+    EliteValue_CCC = 'ELITE VALUE - CCC',
+    EliteValue_CCO = 'ELITE VALUE - CCO',
+    WRFactory_CCO = 'WR FACTORY - CCO',
+    WRFactory_CCR = 'WR FACTORY - CCR',
+    DualEliteQB_CCO = 'DUAL ELITE QB - CCO',
+    DualEliteQB_RCC = 'DUAL ELITE QB - RCC',
+    RBHeavy = 'RB HEAVY',
+}
+
+export const ALL_ARCHETYPES = Object.values(Archetype);
+
 export type UnifiedInputsProps = {
     roster: Roster | undefined;
     cornerstones: string[];
@@ -256,6 +276,8 @@ export type UnifiedInputsProps = {
     setOutlookValues: (values: number[]) => void;
     outlook: Outlook;
     setOutlook: (outlook: Outlook) => void;
+    archetype?: Archetype;
+    setArchetype?: (archetype: Archetype) => void;
 };
 
 export function UnifiedInputs({
@@ -297,6 +319,8 @@ export function UnifiedInputs({
     setOutlookValues,
     outlook,
     setOutlook,
+    archetype,
+    setArchetype,
 }: UnifiedInputsProps) {
     return (
         <Grid2 container spacing={1} style={{width: '1000px'}}>
@@ -367,7 +391,7 @@ export function UnifiedInputs({
                     setComments={setComments}
                 />
             </Grid2>
-            <Grid2 size={8} className={styles.gridItem}>
+            <Grid2 size={5.5} className={styles.gridItem}>
                 Three Year Outlook
                 <div style={{display: 'flex', flexDirection: 'row'}}>
                     <ThreeYearOutlookInput
@@ -378,6 +402,24 @@ export function UnifiedInputs({
                     />
                 </div>
             </Grid2>
+            {!!archetype && !!setArchetype && (
+                <Grid2 size={2.5} className={styles.gridItem}>
+                    Archetype
+                    <Select
+                        label="Archetype"
+                        value={archetype}
+                        onChange={(event: SelectChangeEvent) => {
+                            setArchetype(event.target.value as Archetype);
+                        }}
+                    >
+                        {ALL_ARCHETYPES.map((arch, idx) => (
+                            <MenuItem value={arch} key={idx}>
+                                {arch}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </Grid2>
+            )}
         </Grid2>
     );
 }

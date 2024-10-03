@@ -137,6 +137,19 @@ import longRed from '../assets/2.0/arrows/long_red.png';
 import longGreen from '../assets/2.0/arrows/long_green.png';
 
 import blankBlueprintV2 from '../assets/2.0/blankblueprint.png';
+import oneYearReloadGraph from '../assets/2.0/outlook_graphs/1R-OCC.png';
+import dualEliteGraphCCO from '../assets/2.0/outlook_graphs/DQ & QT-CCO.png';
+import dualEliteGraphRCC from '../assets/2.0/outlook_graphs/DQ & QT-RCC.png';
+import eliteValueGraphCCC from '../assets/2.0/outlook_graphs/EV-CCC.png';
+import eliteValueGraphCCO from '../assets/2.0/outlook_graphs/EV-CCO.png';
+import futureValueGraph from '../assets/2.0/outlook_graphs/FV-RCC.png';
+import hardRebuildGraphRRC from '../assets/2.0/outlook_graphs/HR-RRC.png';
+import hardRebuildGraphRRR from '../assets/2.0/outlook_graphs/HR-RRR.png';
+import wrFactoryGraphCCO from '../assets/2.0/outlook_graphs/WF-CCO.png';
+import wrFactorGraphCCR from '../assets/2.0/outlook_graphs/WF-CCR.png';
+import wellRoundedGraphCCO from '../assets/2.0/outlook_graphs/WR-CCO.png';
+import wellRoundedGraphCCR from '../assets/2.0/outlook_graphs/WR-CCR.png';
+import rbHeavyGraph from '../assets/2.0/outlook_graphs/RH-CCR.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -396,4 +409,17 @@ export {
     sellIcon,
     holdIcon,
     blankBlueprintV2,
+    oneYearReloadGraph,
+    dualEliteGraphCCO,
+    dualEliteGraphRCC,
+    eliteValueGraphCCC,
+    eliteValueGraphCCO,
+    futureValueGraph,
+    hardRebuildGraphRRC,
+    hardRebuildGraphRRR,
+    wrFactoryGraphCCO,
+    wrFactorGraphCCR,
+    wellRoundedGraphCCO,
+    wellRoundedGraphCCR,
+    rbHeavyGraph,
 };
