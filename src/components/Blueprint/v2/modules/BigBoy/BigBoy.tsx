@@ -7,6 +7,8 @@ import {
     dualEliteDVMRCC,
     dualEliteGraphCCO,
     dualEliteGraphRCC,
+    eliteQbTeDVMRCC,
+    eliteQbTeDVMCCO,
     eliteValueDVMCCC,
     eliteValueDVMCCO,
     eliteValueGraphCCC,
@@ -353,8 +355,10 @@ function getGraphFromArchetype(archetype: Archetype) {
         case Archetype.WellRounded_CCO:
             return wellRoundedGraphCCO;
         case Archetype.DualEliteQB_CCO:
+        case Archetype.EliteQBTE_CCO:
             return dualEliteGraphCCO;
         case Archetype.DualEliteQB_RCC:
+        case Archetype.EliteQBTE_RCC:
             return dualEliteGraphRCC;
         case Archetype.EliteValue_CCC:
             return eliteValueGraphCCC;
@@ -403,6 +407,10 @@ function getDvmFromArchetype(archetype: Archetype) {
             return oneYearReloadDVM;
         case Archetype.RBHeavy:
             return rbHeavyDVM;
+        case Archetype.EliteQBTE_CCO:
+            return eliteQbTeDVMCCO;
+        case Archetype.EliteQBTE_RCC:
+            return eliteQbTeDVMRCC;
         default:
             return Archetype.UNSPECIFIED;
     }
@@ -463,6 +471,9 @@ function getLabelFromArchetype(archetype: Archetype) {
             return 'One Year Reload';
         case Archetype.RBHeavy:
             return 'RB Heavy';
+        case Archetype.EliteQBTE_CCO:
+        case Archetype.EliteQBTE_RCC:
+            return 'Elite QB/TE';
         default:
             return 'Unspecified';
     }
@@ -478,6 +489,7 @@ function getColorFromArchetype(archetype: Archetype) {
         case Archetype.FutureValue:
         case Archetype.DualEliteQB_RCC:
         case Archetype.OneYearReload:
+        case Archetype.EliteQBTE_RCC:
             return '#31C4F3'; // blue
         case Archetype.HardRebuild_RRC:
         case Archetype.HardRebuild_RRR:
@@ -486,6 +498,7 @@ function getColorFromArchetype(archetype: Archetype) {
         case Archetype.EliteValue_CCC:
         case Archetype.EliteValue_CCO:
         case Archetype.DualEliteQB_CCO:
+        case Archetype.EliteQBTE_CCO:
             return '#8DC53E'; // green
         default:
             return 'white';

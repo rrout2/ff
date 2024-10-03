@@ -230,6 +230,8 @@ export enum Archetype {
     DualEliteQB_CCO = 'DUAL ELITE QB - CCO',
     DualEliteQB_RCC = 'DUAL ELITE QB - RCC',
     RBHeavy = 'RB HEAVY',
+    EliteQBTE_RCC = 'ELITE QB/TE - RCC',
+    EliteQBTE_CCO = 'ELITE QB/TE - CCO',
 }
 
 export const ALL_ARCHETYPES = Object.values(Archetype);

@@ -164,7 +164,8 @@ import wrFactoryDVMCCR from '../assets/2.0/dvms/WF-CCR.png';
 import wellRoundedDVMCCO from '../assets/2.0/dvms/WR-CCO.png';
 import wellRoundedDVMCCR from '../assets/2.0/dvms/WR-CCR.png';
 import rbHeavyDVM from '../assets/2.0/dvms/RH-CCR.png';
-
+import eliteQbTeDVMCCO from '../assets/2.0/dvms/QT-CCO.png';
+import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -449,4 +450,6 @@ export {
     wellRoundedDVMCCO,
     wellRoundedDVMCCR,
     rbHeavyDVM,
+    eliteQbTeDVMCCO,
+    eliteQbTeDVMRCC,
 };
