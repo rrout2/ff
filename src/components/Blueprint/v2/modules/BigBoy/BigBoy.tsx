@@ -41,9 +41,10 @@ import {UnifiedInputs} from '../UnifiedModule/UnifiedModule';
 interface BigBoyProps {
     roster?: Roster;
     numRosters?: number;
+    teamName?: string;
 }
 
-export default function BigBoy({roster, numRosters}: BigBoyProps) {
+export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
     const {cornerstones, setCornerstones} = useCornerstones(roster);
     const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
@@ -148,6 +149,7 @@ export default function BigBoy({roster, numRosters}: BigBoyProps) {
                 outlookValues={outlookValues}
                 outlook={outlook}
                 numRosters={numRosters}
+                teamName={teamName}
             />
         </div>
     );
@@ -178,6 +180,7 @@ interface FullBlueprintProps {
     outlookValues: number[];
     outlook: Outlook;
     numRosters?: number;
+    teamName?: string;
 }
 
 function FullBlueprint({
@@ -200,6 +203,7 @@ function FullBlueprint({
     wr,
     te,
     depth,
+    teamName,
 }: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
@@ -216,6 +220,7 @@ function FullBlueprint({
     }, [roster, playerData]);
     return (
         <div className={styles.fullBlueprint}>
+            <div className={styles.teamName}>{teamName}</div>
             <div className={styles.rosterGraphic}>
                 <RosterGraphic
                     allPlayers={allPlayers}

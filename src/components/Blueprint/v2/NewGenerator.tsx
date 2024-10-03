@@ -250,7 +250,14 @@ export default function NewGenerator() {
                 />
             )}
             {module === Module.BigBoy && (
-                <BigBoy roster={roster} numRosters={rosters?.length} />
+                <BigBoy
+                    roster={roster}
+                    numRosters={rosters?.length}
+                    teamName={
+                        specifiedUser?.metadata?.team_name ??
+                        specifiedUser?.display_name
+                    }
+                />
             )}
         </div>
     );

@@ -57,3 +57,12 @@
     bottom: 15px;
     left: 40px;
 }
+
+.teamName {
+    position: absolute;
+    top: 15px;
+    left: 60px;
+    font-family: 'Cheddar Gothic Rough';
+    font-size: 50px;
+    color: white;
+}
