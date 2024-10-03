@@ -102,3 +102,13 @@
     top: 52px;
     left: 950px;
 }
+
+.archetypeGraphLabel {
+    position: absolute;
+    font-family: 'Erbaum Medium';
+    width: 250px;
+    text-align: center;
+    rotate: -90deg;
+    top: 690px;
+    left: 290px;
+}

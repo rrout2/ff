@@ -326,6 +326,13 @@ function FullBlueprint({
                     />
                 </div>
             </div>
+            <div
+                className={styles.archetypeGraphLabel}
+                style={{color: getColorFromArchetype(archetype)}}
+            >
+                ⎯⎯&nbsp;&nbsp;{getLabelFromArchetype(archetype).toUpperCase()}
+                &nbsp;&nbsp;⎯⎯
+            </div>
             <div className={styles.dvm}>
                 <img src={getDvmFromArchetype(archetype)} />
             </div>
@@ -431,5 +438,56 @@ function getStartOfCode(archetype: Archetype) {
             return 'RH-CCR';
         default:
             return '??-???';
+    }
+}
+function getLabelFromArchetype(archetype: Archetype) {
+    switch (archetype) {
+        case Archetype.HardRebuild_RRC:
+        case Archetype.HardRebuild_RRR:
+            return 'Hard Rebuild';
+        case Archetype.WellRounded_CCR:
+        case Archetype.WellRounded_CCO:
+            return 'Well Rounded';
+        case Archetype.DualEliteQB_CCO:
+        case Archetype.DualEliteQB_RCC:
+            return 'Dual Elite QB';
+        case Archetype.EliteValue_CCC:
+        case Archetype.EliteValue_CCO:
+            return 'Elite Value';
+        case Archetype.FutureValue:
+            return 'Future Value';
+        case Archetype.WRFactory_CCO:
+        case Archetype.WRFactory_CCR:
+            return 'WR Factory';
+        case Archetype.OneYearReload:
+            return 'One Year Reload';
+        case Archetype.RBHeavy:
+            return 'RB Heavy';
+        default:
+            return 'Unspecified';
+    }
+}
+
+function getColorFromArchetype(archetype: Archetype) {
+    switch (archetype) {
+        case Archetype.WellRounded_CCR:
+        case Archetype.WellRounded_CCO:
+        case Archetype.WRFactory_CCR:
+        case Archetype.RBHeavy:
+            return '#FAB03F'; // orange
+        case Archetype.FutureValue:
+        case Archetype.DualEliteQB_RCC:
+        case Archetype.OneYearReload:
+            return '#31C4F3'; // blue
+        case Archetype.HardRebuild_RRC:
+        case Archetype.HardRebuild_RRR:
+            return '#D25354'; // red
+        case Archetype.WRFactory_CCO:
+        case Archetype.EliteValue_CCC:
+        case Archetype.EliteValue_CCO:
+        case Archetype.DualEliteQB_CCO:
+            return '#8DC53E'; // green
+        default:
+            return 'white';
     }
 }
