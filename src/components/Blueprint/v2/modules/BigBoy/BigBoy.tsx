@@ -120,6 +120,12 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         Archetype.FutureValue
     );
 
+    const [otherSettings, setOtherSettings] = useState<string>('');
+    const [rookiePickComments, setRookiePickComments] = useState([
+        'comment 1',
+        'comment 2',
+    ]);
+
     return (
         <div>
             <UnifiedInputs
@@ -163,6 +169,10 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setOutlook={setOutlook}
                 archetype={archetype}
                 setArchetype={setArchetype}
+                otherSettings={otherSettings}
+                setOtherSettings={setOtherSettings}
+                rookiePickComments={rookiePickComments}
+                setRookiePickComments={setRookiePickComments}
             />
             <FullBlueprint
                 roster={roster}
@@ -188,6 +198,8 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 numRosters={numRosters}
                 teamName={teamName}
                 archetype={archetype}
+                otherSettings={otherSettings}
+                rookiePickComments={rookiePickComments}
             />
         </div>
     );
@@ -220,6 +232,8 @@ interface FullBlueprintProps {
     archetype: Archetype;
     numRosters?: number;
     teamName?: string;
+    otherSettings: string;
+    rookiePickComments: string[];
 }
 
 function FullBlueprint({
@@ -244,6 +258,8 @@ function FullBlueprint({
     depth,
     teamName,
     archetype,
+    otherSettings,
+    rookiePickComments,
 }: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
@@ -271,6 +287,13 @@ function FullBlueprint({
     return (
         <div className={styles.fullBlueprint}>
             <div className={styles.teamName}>{teamName}</div>
+            <div className={styles.otherSettings}>{otherSettings}</div>
+            <div className={styles.rookiePickComment1}>
+                {rookiePickComments[0]}
+            </div>
+            <div className={styles.rookiePickComment2}>
+                {rookiePickComments[1]}
+            </div>
             <div className={styles.rosterGraphic}>
                 <RosterGraphic
                     allPlayers={allPlayers}
@@ -444,6 +467,10 @@ function getStartOfCode(archetype: Archetype) {
             return '1R-OCC';
         case Archetype.RBHeavy:
             return 'RH-CCR';
+        case Archetype.EliteQBTE_CCO:
+            return 'QT-CCO';
+        case Archetype.EliteQBTE_RCC:
+            return 'QT-RCC';
         default:
             return '??-???';
     }

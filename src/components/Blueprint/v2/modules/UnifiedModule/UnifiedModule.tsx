@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './UnifiedModule.module.css';
 import {
@@ -33,7 +33,13 @@ import {
     InputComponent as RisersFallersInput,
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
-import {Grid2, MenuItem, Select, SelectChangeEvent} from '@mui/material';
+import {
+    Grid2,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    TextField,
+} from '@mui/material';
 import {
     GraphicComponent as PositionalGradesGraphic,
     InputComponent as PositionalGradesInput,
@@ -280,6 +286,10 @@ export type UnifiedInputsProps = {
     setOutlook: (outlook: Outlook) => void;
     archetype?: Archetype;
     setArchetype?: (archetype: Archetype) => void;
+    otherSettings?: string;
+    setOtherSettings?: (otherSettings: string) => void;
+    rookiePickComments?: string[];
+    setRookiePickComments?: (comments: string[]) => void;
 };
 
 export function UnifiedInputs({
@@ -323,6 +333,10 @@ export function UnifiedInputs({
     setOutlook,
     archetype,
     setArchetype,
+    otherSettings,
+    setOtherSettings,
+    rookiePickComments,
+    setRookiePickComments,
 }: UnifiedInputsProps) {
     return (
         <Grid2 container spacing={1} style={{width: '1000px'}}>
@@ -421,6 +435,45 @@ export function UnifiedInputs({
                             </MenuItem>
                         ))}
                     </Select>
+                </Grid2>
+            )}
+            {!!setOtherSettings && (
+                <Grid2 size={2} className={styles.gridItem}>
+                    Other Settings
+                    <TextField
+                        value={otherSettings}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            setOtherSettings(event.target.value);
+                        }}
+                        label="Other Settings"
+                    />
+                </Grid2>
+            )}
+            {!!setRookiePickComments && !!rookiePickComments && (
+                <Grid2
+                    size={2}
+                    className={styles.gridItem}
+                    style={{gap: '6px'}}
+                >
+                    Rookie Pick Comments
+                    {rookiePickComments.map((comment, idx) => (
+                        <TextField
+                            key={idx}
+                            value={comment}
+                            onChange={(
+                                event: ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setRookiePickComments(
+                                    rookiePickComments.map((currComment, i) =>
+                                        i === idx
+                                            ? event.target.value
+                                            : currComment
+                                    )
+                                );
+                            }}
+                            label={`${idx + 2024} Comments`}
+                        />
+                    ))}
                 </Grid2>
             )}
         </Grid2>

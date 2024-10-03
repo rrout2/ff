@@ -112,3 +112,36 @@
     top: 690px;
     left: 290px;
 }
+
+.otherSettings {
+    position: absolute;
+    color: white;
+    font-family: 'Erbaum Medium';
+    font-size: 22px;
+    top: 188px;
+    left: 150px;
+}
+
+.rookiePickComment1 {
+    position: absolute;
+    color: white;
+    font-family: 'Erbaum';
+    font-size: 16px;
+    width: 350px;
+    height: 50px;
+    text-align: center;
+    top: 675px;
+    left: 1790px;
+}
+
+.rookiePickComment2 {
+    position: absolute;
+    color: white;
+    font-family: 'Erbaum';
+    font-size: 16px;
+    width: 350px;
+    height: 50px;
+    text-align: center;
+    top: 790px;
+    left: 1790px;
+}
