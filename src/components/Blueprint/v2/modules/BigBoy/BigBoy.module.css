@@ -72,7 +72,16 @@
     transform-origin: top left;
     scale: 0.25;
     top: 591px;
-    left: 490px;
+    left: 495.4px;
+}
+
+.graphCrop {
+    width: 1250px;
+    overflow: hidden;
+}
+
+.graph {
+    margin: 0px 0px 0px -10px;
 }
 
 .dvm {

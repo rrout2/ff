@@ -308,7 +308,12 @@ function FullBlueprint({
                 />
             </div>
             <div className={styles.threeYearOutlook}>
-                <img src={getGraphFromArchetype(archetype)} />
+                <div className={styles.graphCrop}>
+                    <img
+                        src={getGraphFromArchetype(archetype)}
+                        className={styles.graph}
+                    />
+                </div>
             </div>
             <div className={styles.dvm}>
                 <img src={getDvmFromArchetype(archetype)} />
