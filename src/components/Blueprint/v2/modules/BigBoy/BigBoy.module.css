@@ -122,28 +122,23 @@
     left: 150px;
 }
 
-.rookiePickComment1 {
-    position: absolute;
-    color: white;
-    font-family: 'Erbaum';
-    font-size: 16px;
-    width: 350px;
-    height: 50px;
-    text-align: center;
-    top: 675px;
-    left: 1790px;
-}
-
+.rookiePickComment1,
 .rookiePickComment2 {
     position: absolute;
     color: white;
     font-family: 'Erbaum';
-    font-size: 16px;
     width: 350px;
     height: 50px;
     text-align: center;
-    top: 790px;
     left: 1790px;
+}
+
+.rookiePickComment1 {
+    top: 675px;
+}
+
+.rookiePickComment2 {
+    top: 790px;
 }
 
 .suggestionsAndComments {

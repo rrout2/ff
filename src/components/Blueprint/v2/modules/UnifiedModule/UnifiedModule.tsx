@@ -280,10 +280,10 @@ export type UnifiedInputsProps = {
     setTe: (value: number) => void;
     depth: number;
     setDepth: (value: number) => void;
-    outlookValues: number[];
-    setOutlookValues: (values: number[]) => void;
-    outlook: Outlook;
-    setOutlook: (outlook: Outlook) => void;
+    outlookValues?: number[];
+    setOutlookValues?: (values: number[]) => void;
+    outlook?: Outlook;
+    setOutlook?: (outlook: Outlook) => void;
     archetype?: Archetype;
     setArchetype?: (archetype: Archetype) => void;
     otherSettings?: string;
@@ -411,44 +411,55 @@ export function UnifiedInputs({
                     setComments={setComments}
                 />
             </Grid2>
-            {!archetype && (
-                <Grid2 size={5.5} className={styles.gridItem}>
-                    Three Year Outlook
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <ThreeYearOutlookInput
-                            values={outlookValues}
-                            setValues={setOutlookValues}
-                            outlook={outlook}
-                            setOutlook={setOutlook}
-                        />
-                    </div>
-                </Grid2>
-            )}
-            <Grid2 size={3} className={styles.gridItem}>
-                Archetype
-                {!!archetype && !!setArchetype && (
-                    <Select
-                        value={archetype}
-                        onChange={(event: SelectChangeEvent) => {
-                            setArchetype(event.target.value as Archetype);
-                        }}
-                    >
-                        {ALL_ARCHETYPES.map((arch, idx) => (
-                            <MenuItem value={arch} key={idx}>
-                                {arch}
-                            </MenuItem>
-                        ))}
-                    </Select>
+            {!archetype &&
+                outlookValues &&
+                setOutlookValues &&
+                setOutlook &&
+                outlook &&
+                setOutlook && (
+                    <Grid2 size={5.5} className={styles.gridItem}>
+                        Three Year Outlook
+                        <div style={{display: 'flex', flexDirection: 'row'}}>
+                            <ThreeYearOutlookInput
+                                values={outlookValues}
+                                setValues={setOutlookValues}
+                                outlook={outlook}
+                                setOutlook={setOutlook}
+                            />
+                        </div>
+                    </Grid2>
                 )}
-                Other Settings
+            <Grid2 size={3} className={styles.gridItem}>
+                {!!archetype && !!setArchetype && (
+                    <>
+                        Archetype
+                        <Select
+                            value={archetype}
+                            onChange={(event: SelectChangeEvent) => {
+                                setArchetype(event.target.value as Archetype);
+                            }}
+                        >
+                            {ALL_ARCHETYPES.map((arch, idx) => (
+                                <MenuItem value={arch} key={idx}>
+                                    {arch}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </>
+                )}
                 {!!setOtherSettings && (
-                    <TextField
-                        value={otherSettings}
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            setOtherSettings(event.target.value);
-                        }}
-                        label="Other Settings"
-                    />
+                    <>
+                        Other Settings
+                        <TextField
+                            value={otherSettings}
+                            onChange={(
+                                event: ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setOtherSettings(event.target.value);
+                            }}
+                            label="Other Settings"
+                        />
+                    </>
                 )}
                 {!!setRookiePickComments && !!rookiePickComments && (
                     <div

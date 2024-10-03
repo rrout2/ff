@@ -63,11 +63,6 @@ import {
     GraphicComponent as PositionalGradesGraphic,
     usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
-import {
-    Outlook,
-    useThreeYearOutlook,
-    GraphicComponent as ThreeYearOutlookGraphic,
-} from '../ThreeYearOutlook/ThreeYearOutlook';
 import {Archetype, UnifiedInputs} from '../UnifiedModule/UnifiedModule';
 
 interface BigBoyProps {
@@ -105,12 +100,6 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         depth,
         setDepth,
     } = usePositionalGrades();
-    const {
-        values: outlookValues,
-        setValues: setOutlookValues,
-        outlook,
-        setOutlook,
-    } = useThreeYearOutlook();
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
@@ -137,6 +126,11 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
 
     return (
         <div>
+            <ExportButton
+                className={styles.fullBlueprint}
+                pngName={`${teamName}_blueprint.png`}
+                label="Download Blueprint"
+            />
             <UnifiedInputs
                 roster={roster}
                 cornerstones={cornerstones}
@@ -172,10 +166,6 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setTe={setTe}
                 depth={depth}
                 setDepth={setDepth}
-                outlookValues={outlookValues}
-                setOutlookValues={setOutlookValues}
-                outlook={outlook}
-                setOutlook={setOutlook}
                 archetype={archetype}
                 setArchetype={setArchetype}
                 otherSettings={otherSettings}
@@ -204,8 +194,6 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 wr={wr}
                 te={te}
                 depth={depth}
-                outlookValues={outlookValues}
-                outlook={outlook}
                 numRosters={numRosters}
                 teamName={teamName}
                 archetype={archetype}
@@ -239,8 +227,6 @@ interface FullBlueprintProps {
     wr: number;
     te: number;
     depth: number;
-    outlookValues: number[];
-    outlook: Outlook;
     archetype: Archetype;
     numRosters?: number;
     teamName?: string;
@@ -302,10 +288,22 @@ function FullBlueprint({
         <div className={styles.fullBlueprint}>
             <div className={styles.teamName}>{teamName}</div>
             <div className={styles.otherSettings}>{otherSettings}</div>
-            <div className={styles.rookiePickComment1}>
+            <div
+                className={styles.rookiePickComment1}
+                style={{
+                    fontSize:
+                        rookiePickComments[0].length > 60 ? '12px' : '16px',
+                }}
+            >
                 {rookiePickComments[0]}
             </div>
-            <div className={styles.rookiePickComment2}>
+            <div
+                className={styles.rookiePickComment2}
+                style={{
+                    fontSize:
+                        rookiePickComments[0].length > 60 ? '12px' : '16px',
+                }}
+            >
                 {rookiePickComments[1]}
             </div>
             <div className={styles.suggestionsAndComments}>
