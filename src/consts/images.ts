@@ -151,6 +151,20 @@ import wellRoundedGraphCCO from '../assets/2.0/outlook_graphs/WR-CCO.png';
 import wellRoundedGraphCCR from '../assets/2.0/outlook_graphs/WR-CCR.png';
 import rbHeavyGraph from '../assets/2.0/outlook_graphs/RH-CCR.png';
 
+import oneYearReloadDVM from '../assets/2.0/dvms/1R-OCC.png';
+import dualEliteDVMCCO from '../assets/2.0/dvms/DQ-CCO.png';
+import dualEliteDVMRCC from '../assets/2.0/dvms/DQ-RCC.png';
+import eliteValueDVMCCC from '../assets/2.0/dvms/EV-CCC.png';
+import eliteValueDVMCCO from '../assets/2.0/dvms/EV-CCO.png';
+import futureValueDVM from '../assets/2.0/dvms/FV-RCC.png';
+import hardRebuildDVMRRC from '../assets/2.0/dvms/HR-RRC.png';
+import hardRebuildDVMRRR from '../assets/2.0/dvms/HR-RRR.png';
+import wrFactoryDVMCCO from '../assets/2.0/dvms/WF-CCO.png';
+import wrFactoryDVMCCR from '../assets/2.0/dvms/WF-CCR.png';
+import wellRoundedDVMCCO from '../assets/2.0/dvms/WR-CCO.png';
+import wellRoundedDVMCCR from '../assets/2.0/dvms/WR-CCR.png';
+import rbHeavyDVM from '../assets/2.0/dvms/RH-CCR.png';
+
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -422,4 +436,17 @@ export {
     wellRoundedGraphCCO,
     wellRoundedGraphCCR,
     rbHeavyGraph,
+    oneYearReloadDVM,
+    dualEliteDVMCCO,
+    dualEliteDVMRCC,
+    eliteValueDVMCCC,
+    eliteValueDVMCCO,
+    futureValueDVM,
+    hardRebuildDVMRRC,
+    hardRebuildDVMRRR,
+    wrFactoryDVMCCO,
+    wrFactoryDVMCCR,
+    wellRoundedDVMCCO,
+    wellRoundedDVMCCR,
+    rbHeavyDVM,
 };

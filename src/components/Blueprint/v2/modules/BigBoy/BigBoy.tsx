@@ -3,18 +3,31 @@ import styles from './BigBoy.module.css';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import {
     blankBlueprintV2,
+    dualEliteDVMCCO,
+    dualEliteDVMRCC,
     dualEliteGraphCCO,
     dualEliteGraphRCC,
+    eliteValueDVMCCC,
+    eliteValueDVMCCO,
     eliteValueGraphCCC,
     eliteValueGraphCCO,
+    futureValueDVM,
     futureValueGraph,
+    hardRebuildDVMRRC,
+    hardRebuildDVMRRR,
     hardRebuildGraphRRC,
     hardRebuildGraphRRR,
+    oneYearReloadDVM,
     oneYearReloadGraph,
+    rbHeavyDVM,
     rbHeavyGraph,
+    wellRoundedDVMCCO,
+    wellRoundedDVMCCR,
     wellRoundedGraphCCO,
     wellRoundedGraphCCR,
     wrFactorGraphCCR,
+    wrFactoryDVMCCO,
+    wrFactoryDVMCCR,
     wrFactoryGraphCCO,
 } from '../../../../../consts/images';
 import {
@@ -242,39 +255,6 @@ function FullBlueprint({
         );
     }, [roster, playerData]);
 
-    function getGraphFromArchetype(archetype: Archetype) {
-        switch (archetype) {
-            case Archetype.HardRebuild_RRC:
-                return hardRebuildGraphRRC;
-            case Archetype.HardRebuild_RRR:
-                return hardRebuildGraphRRR;
-            case Archetype.WellRounded_CCR:
-                return wellRoundedGraphCCR;
-            case Archetype.WellRounded_CCO:
-                return wellRoundedGraphCCO;
-            case Archetype.DualEliteQB_CCO:
-                return dualEliteGraphCCO;
-            case Archetype.DualEliteQB_RCC:
-                return dualEliteGraphRCC;
-            case Archetype.EliteValue_CCC:
-                return eliteValueGraphCCC;
-            case Archetype.EliteValue_CCO:
-                return eliteValueGraphCCO;
-            case Archetype.FutureValue:
-                return futureValueGraph;
-            case Archetype.WRFactory_CCO:
-                return wrFactoryGraphCCO;
-            case Archetype.WRFactory_CCR:
-                return wrFactorGraphCCR;
-            case Archetype.OneYearReload:
-                return oneYearReloadGraph;
-            case Archetype.RBHeavy:
-                return rbHeavyGraph;
-            default:
-                return Archetype.UNSPECIFIED;
-        }
-    }
-
     return (
         <div className={styles.fullBlueprint}>
             <div className={styles.teamName}>{teamName}</div>
@@ -330,7 +310,76 @@ function FullBlueprint({
             <div className={styles.threeYearOutlook}>
                 <img src={getGraphFromArchetype(archetype)} />
             </div>
+            <div className={styles.dvm}>
+                <img src={getDvmFromArchetype(archetype)} />
+            </div>
             <img src={blankBlueprintV2} />
         </div>
     );
+}
+
+function getGraphFromArchetype(archetype: Archetype) {
+    switch (archetype) {
+        case Archetype.HardRebuild_RRC:
+            return hardRebuildGraphRRC;
+        case Archetype.HardRebuild_RRR:
+            return hardRebuildGraphRRR;
+        case Archetype.WellRounded_CCR:
+            return wellRoundedGraphCCR;
+        case Archetype.WellRounded_CCO:
+            return wellRoundedGraphCCO;
+        case Archetype.DualEliteQB_CCO:
+            return dualEliteGraphCCO;
+        case Archetype.DualEliteQB_RCC:
+            return dualEliteGraphRCC;
+        case Archetype.EliteValue_CCC:
+            return eliteValueGraphCCC;
+        case Archetype.EliteValue_CCO:
+            return eliteValueGraphCCO;
+        case Archetype.FutureValue:
+            return futureValueGraph;
+        case Archetype.WRFactory_CCO:
+            return wrFactoryGraphCCO;
+        case Archetype.WRFactory_CCR:
+            return wrFactorGraphCCR;
+        case Archetype.OneYearReload:
+            return oneYearReloadGraph;
+        case Archetype.RBHeavy:
+            return rbHeavyGraph;
+        default:
+            return Archetype.UNSPECIFIED;
+    }
+}
+
+function getDvmFromArchetype(archetype: Archetype) {
+    switch (archetype) {
+        case Archetype.HardRebuild_RRC:
+            return hardRebuildDVMRRC;
+        case Archetype.HardRebuild_RRR:
+            return hardRebuildDVMRRR;
+        case Archetype.WellRounded_CCR:
+            return wellRoundedDVMCCR;
+        case Archetype.WellRounded_CCO:
+            return wellRoundedDVMCCO;
+        case Archetype.DualEliteQB_CCO:
+            return dualEliteDVMCCO;
+        case Archetype.DualEliteQB_RCC:
+            return dualEliteDVMRCC;
+        case Archetype.EliteValue_CCC:
+            return eliteValueDVMCCC;
+        case Archetype.EliteValue_CCO:
+            return eliteValueDVMCCO;
+        case Archetype.FutureValue:
+            return futureValueDVM;
+        case Archetype.WRFactory_CCO:
+            return wrFactoryDVMCCO;
+        case Archetype.WRFactory_CCR:
+            return wrFactoryDVMCCR;
+        case Archetype.OneYearReload:
+            return oneYearReloadDVM;
+        case Archetype.RBHeavy:
+            return rbHeavyDVM;
+        default:
+            return Archetype.UNSPECIFIED;
+    }
 }

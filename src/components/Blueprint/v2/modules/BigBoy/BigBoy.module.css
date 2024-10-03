@@ -74,3 +74,11 @@
     top: 591px;
     left: 490px;
 }
+
+.dvm {
+    position: absolute;
+    transform-origin: top left;
+    scale: 0.25;
+    top: 52px;
+    left: 950px;
+}
