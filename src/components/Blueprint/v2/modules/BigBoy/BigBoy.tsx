@@ -64,6 +64,7 @@ import {
     usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
 import {Archetype, UnifiedInputs} from '../UnifiedModule/UnifiedModule';
+import {FormGroup, FormControlLabel, Switch} from '@mui/material';
 
 interface BigBoyProps {
     roster?: Roster;
@@ -124,6 +125,25 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         'suggestion 6',
     ]);
 
+    const [showPreview, setShowPreview] = useState(false);
+
+    const PreviewToggle = () => {
+        return (
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={showPreview}
+                            onChange={e => setShowPreview(e.target.checked)}
+                            inputProps={{'aria-label': 'controlled'}}
+                        />
+                    }
+                    label="Show Preview"
+                />
+            </FormGroup>
+        );
+    };
+
     return (
         <div>
             <ExportButton
@@ -131,6 +151,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
             />
+            <PreviewToggle />
             <UnifiedInputs
                 roster={roster}
                 cornerstones={cornerstones}
@@ -175,32 +196,34 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 suggestionsAndComments={suggestionsAndComments}
                 setSuggestionsAndComments={setSuggestionsAndComments}
             />
-            <FullBlueprint
-                roster={roster}
-                cornerstones={cornerstones}
-                sells={sells}
-                buys={buys}
-                plusMap={plusMap}
-                holds={holds}
-                comments={comments}
-                risers={risers}
-                riserValues={riserValues}
-                fallers={fallers}
-                fallerValues={fallerValues}
-                rankStateMap={rankStateMap}
-                overall={overall}
-                qb={qb}
-                rb={rb}
-                wr={wr}
-                te={te}
-                depth={depth}
-                numRosters={numRosters}
-                teamName={teamName}
-                archetype={archetype}
-                otherSettings={otherSettings}
-                rookiePickComments={rookiePickComments}
-                suggestionsAndComments={suggestionsAndComments}
-            />
+            <div className={showPreview ? '' : styles.offScreen}>
+                <FullBlueprint
+                    roster={roster}
+                    cornerstones={cornerstones}
+                    sells={sells}
+                    buys={buys}
+                    plusMap={plusMap}
+                    holds={holds}
+                    comments={comments}
+                    risers={risers}
+                    riserValues={riserValues}
+                    fallers={fallers}
+                    fallerValues={fallerValues}
+                    rankStateMap={rankStateMap}
+                    overall={overall}
+                    qb={qb}
+                    rb={rb}
+                    wr={wr}
+                    te={te}
+                    depth={depth}
+                    numRosters={numRosters}
+                    teamName={teamName}
+                    archetype={archetype}
+                    otherSettings={otherSettings}
+                    rookiePickComments={rookiePickComments}
+                    suggestionsAndComments={suggestionsAndComments}
+                />
+            </div>
         </div>
     );
 }

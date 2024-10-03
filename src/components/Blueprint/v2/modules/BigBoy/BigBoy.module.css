@@ -151,3 +151,17 @@
     top: 200px;
     left: 1790px;
 }
+
+
+
+.offScreen {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    margin: 30px;
+}
+
+.preview {
+    transform-origin: top left;
+    scale: 0.3;
+}

@@ -343,7 +343,11 @@ export function UnifiedInputs({
     setSuggestionsAndComments,
 }: UnifiedInputsProps) {
     return (
-        <Grid2 container spacing={1} style={{width: '1000px'}}>
+        <Grid2
+            container
+            spacing={1}
+            style={{width: '1000px', height: 'fit-content'}}
+        >
             <Grid2 size={8} className={styles.gridItem}>
                 Cornerstones
                 <CornerstonesInput
