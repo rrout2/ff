@@ -126,6 +126,15 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         'comment 2',
     ]);
 
+    const [suggestionsAndComments, setSuggestionsAndComments] = useState([
+        'suggestion 1',
+        'suggestion 2',
+        'suggestion 3',
+        'suggestion 4',
+        'suggestion 5',
+        'suggestion 6',
+    ]);
+
     return (
         <div>
             <UnifiedInputs
@@ -173,6 +182,8 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setOtherSettings={setOtherSettings}
                 rookiePickComments={rookiePickComments}
                 setRookiePickComments={setRookiePickComments}
+                suggestionsAndComments={suggestionsAndComments}
+                setSuggestionsAndComments={setSuggestionsAndComments}
             />
             <FullBlueprint
                 roster={roster}
@@ -200,6 +211,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 archetype={archetype}
                 otherSettings={otherSettings}
                 rookiePickComments={rookiePickComments}
+                suggestionsAndComments={suggestionsAndComments}
             />
         </div>
     );
@@ -234,6 +246,7 @@ interface FullBlueprintProps {
     teamName?: string;
     otherSettings: string;
     rookiePickComments: string[];
+    suggestionsAndComments: string[];
 }
 
 function FullBlueprint({
@@ -260,6 +273,7 @@ function FullBlueprint({
     archetype,
     otherSettings,
     rookiePickComments,
+    suggestionsAndComments,
 }: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
@@ -293,6 +307,13 @@ function FullBlueprint({
             </div>
             <div className={styles.rookiePickComment2}>
                 {rookiePickComments[1]}
+            </div>
+            <div className={styles.suggestionsAndComments}>
+                <ul>
+                    {suggestionsAndComments.map((suggestion, i) => (
+                        <li key={i}>{suggestion}</li>
+                    ))}
+                </ul>
             </div>
             <div className={styles.rosterGraphic}>
                 <RosterGraphic

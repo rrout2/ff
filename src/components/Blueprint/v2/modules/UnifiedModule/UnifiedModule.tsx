@@ -290,6 +290,8 @@ export type UnifiedInputsProps = {
     setOtherSettings?: (otherSettings: string) => void;
     rookiePickComments?: string[];
     setRookiePickComments?: (comments: string[]) => void;
+    suggestionsAndComments?: string[];
+    setSuggestionsAndComments?: (suggestionsAndComments: string[]) => void;
 };
 
 export function UnifiedInputs({
@@ -337,6 +339,8 @@ export function UnifiedInputs({
     setOtherSettings,
     rookiePickComments,
     setRookiePickComments,
+    suggestionsAndComments,
+    setSuggestionsAndComments,
 }: UnifiedInputsProps) {
     return (
         <Grid2 container spacing={1} style={{width: '1000px'}}>
@@ -420,9 +424,9 @@ export function UnifiedInputs({
                     </div>
                 </Grid2>
             )}
-            {!!archetype && !!setArchetype && (
-                <Grid2 size={2.5} className={styles.gridItem}>
-                    Archetype
+            <Grid2 size={3} className={styles.gridItem}>
+                Archetype
+                {!!archetype && !!setArchetype && (
                     <Select
                         value={archetype}
                         onChange={(event: SelectChangeEvent) => {
@@ -435,11 +439,9 @@ export function UnifiedInputs({
                             </MenuItem>
                         ))}
                     </Select>
-                </Grid2>
-            )}
-            {!!setOtherSettings && (
-                <Grid2 size={2} className={styles.gridItem}>
-                    Other Settings
+                )}
+                Other Settings
+                {!!setOtherSettings && (
                     <TextField
                         value={otherSettings}
                         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -447,31 +449,61 @@ export function UnifiedInputs({
                         }}
                         label="Other Settings"
                     />
-                </Grid2>
-            )}
-            {!!setRookiePickComments && !!rookiePickComments && (
+                )}
+                {!!setRookiePickComments && !!rookiePickComments && (
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '6px',
+                        }}
+                    >
+                        Rookie Pick Comments
+                        {rookiePickComments.map((comment, idx) => (
+                            <TextField
+                                key={idx}
+                                value={comment}
+                                onChange={(
+                                    event: ChangeEvent<HTMLInputElement>
+                                ) => {
+                                    setRookiePickComments(
+                                        rookiePickComments.map(
+                                            (currComment, i) =>
+                                                i === idx
+                                                    ? event.target.value
+                                                    : currComment
+                                        )
+                                    );
+                                }}
+                                label={`${idx + 2024} Comments`}
+                            />
+                        ))}
+                    </div>
+                )}
+            </Grid2>
+            {!!setSuggestionsAndComments && !!suggestionsAndComments && (
                 <Grid2
-                    size={2}
+                    size={4.5}
                     className={styles.gridItem}
                     style={{gap: '6px'}}
                 >
-                    Rookie Pick Comments
-                    {rookiePickComments.map((comment, idx) => (
+                    Suggestions and Comments
+                    {suggestionsAndComments.map((comment, idx) => (
                         <TextField
                             key={idx}
                             value={comment}
                             onChange={(
                                 event: ChangeEvent<HTMLInputElement>
                             ) => {
-                                setRookiePickComments(
-                                    rookiePickComments.map((currComment, i) =>
-                                        i === idx
-                                            ? event.target.value
-                                            : currComment
+                                setSuggestionsAndComments(
+                                    suggestionsAndComments.map(
+                                        (currComment, i) =>
+                                            i === idx
+                                                ? event.target.value
+                                                : currComment
                                     )
                                 );
                             }}
-                            label={`${idx + 2024} Comments`}
                         />
                     ))}
                 </Grid2>
