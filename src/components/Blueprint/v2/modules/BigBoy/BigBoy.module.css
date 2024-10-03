@@ -67,6 +67,17 @@
     color: white;
 }
 
+.bpCode {
+    position: absolute;
+    width: 360px;
+    text-align: center;
+    color: #D25354;
+    font-family: 'Erbaum Medium';
+    font-size: 40px;
+    top: 52px;
+    left: 1783px;
+}
+
 .threeYearOutlook {
     position: absolute;
     transform-origin: top left;

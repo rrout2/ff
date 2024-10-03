@@ -391,22 +391,23 @@ export function UnifiedInputs({
                     setComments={setComments}
                 />
             </Grid2>
-            <Grid2 size={5.5} className={styles.gridItem}>
-                Three Year Outlook
-                <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <ThreeYearOutlookInput
-                        values={outlookValues}
-                        setValues={setOutlookValues}
-                        outlook={outlook}
-                        setOutlook={setOutlook}
-                    />
-                </div>
-            </Grid2>
+            {!archetype && (
+                <Grid2 size={5.5} className={styles.gridItem}>
+                    Three Year Outlook
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <ThreeYearOutlookInput
+                            values={outlookValues}
+                            setValues={setOutlookValues}
+                            outlook={outlook}
+                            setOutlook={setOutlook}
+                        />
+                    </div>
+                </Grid2>
+            )}
             {!!archetype && !!setArchetype && (
                 <Grid2 size={2.5} className={styles.gridItem}>
                     Archetype
                     <Select
-                        label="Archetype"
                         value={archetype}
                         onChange={(event: SelectChangeEvent) => {
                             setArchetype(event.target.value as Archetype);

@@ -34,6 +34,8 @@ import {
     useLeagueIdFromUrl,
     usePlayerData,
     useAdpData,
+    useLeague,
+    useRosterSettings,
 } from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
@@ -41,7 +43,7 @@ import {
 } from '../CornerstonesModule/CornerstonesModule';
 import {GraphicComponent as RosterGraphic} from '../RosterModule/RosterModule';
 import {GraphicComponent as SettingsGraphic} from '../SettingsModule/SettingsModule';
-import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
+import {FANTASY_POSITIONS, SUPER_FLEX} from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
 import {
     GraphicComponent as SuggestedMovesGraphic,
@@ -244,6 +246,8 @@ function FullBlueprint({
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
     const [leagueId] = useLeagueIdFromUrl();
+    const league = useLeague(leagueId);
+    const rosterSettings = useRosterSettings(league);
     const [allPlayers, setAllPlayers] = useState<Player[]>([]);
     useEffect(() => {
         if (!roster || !playerData) return;
@@ -254,6 +258,13 @@ function FullBlueprint({
                 .sort(sortByAdp)
         );
     }, [roster, playerData]);
+
+    function getBlueprintCode() {
+        const isSuperflex = rosterSettings.has(SUPER_FLEX);
+        return `${getStartOfCode(archetype)}-${numRosters ?? 0}-${
+            isSuperflex ? 'SF' : '1Q'
+        }`;
+    }
 
     return (
         <div className={styles.fullBlueprint}>
@@ -318,6 +329,7 @@ function FullBlueprint({
             <div className={styles.dvm}>
                 <img src={getDvmFromArchetype(archetype)} />
             </div>
+            <div className={styles.bpCode}>{getBlueprintCode()}</div>
             <img src={blankBlueprintV2} />
         </div>
     );
@@ -386,5 +398,38 @@ function getDvmFromArchetype(archetype: Archetype) {
             return rbHeavyDVM;
         default:
             return Archetype.UNSPECIFIED;
+    }
+}
+
+function getStartOfCode(archetype: Archetype) {
+    switch (archetype) {
+        case Archetype.HardRebuild_RRC:
+            return 'HR-RRC';
+        case Archetype.HardRebuild_RRR:
+            return 'HR-RRR';
+        case Archetype.WellRounded_CCR:
+            return 'WR-CCR';
+        case Archetype.WellRounded_CCO:
+            return 'WR-CCO';
+        case Archetype.DualEliteQB_CCO:
+            return 'DQ-CCO';
+        case Archetype.DualEliteQB_RCC:
+            return 'DQ-RCC';
+        case Archetype.EliteValue_CCC:
+            return 'EV-CCC';
+        case Archetype.EliteValue_CCO:
+            return 'EV-CCO';
+        case Archetype.FutureValue:
+            return 'FV-RCC';
+        case Archetype.WRFactory_CCO:
+            return 'WF-CCO';
+        case Archetype.WRFactory_CCR:
+            return 'WF-CCR';
+        case Archetype.OneYearReload:
+            return '1R-OCC';
+        case Archetype.RBHeavy:
+            return 'RH-CCR';
+        default:
+            return '??-???';
     }
 }
