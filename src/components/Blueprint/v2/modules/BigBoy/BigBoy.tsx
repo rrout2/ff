@@ -331,9 +331,10 @@ function FullBlueprint({
             </div>
             <div className={styles.suggestionsAndComments}>
                 <ul>
-                    {suggestionsAndComments.map((suggestion, i) => (
-                        <li key={i}>{suggestion}</li>
-                    ))}
+                    {suggestionsAndComments.map(
+                        (suggestion, i) =>
+                            !!suggestion && <li key={i}>{suggestion}</li>
+                    )}
                 </ul>
             </div>
             <div className={styles.rosterGraphic}>
