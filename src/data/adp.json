@@ -1,5006 +1,3089 @@
 [
   {
     "player_name": "Josh Allen",
+    "Team": "BUF",
     "Position": "QB",
-    "Average Pick": 1,
-    "Min Pick": 1,
-    "Max Pick": 1,
-    "Std Dev": 0,
-    "Change": 0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": "- 12 Team Leagues"
+    "Average Rank": 1.5,
+    "Community Rank": 22
   },
   {
     "player_name": "Patrick Mahomes",
+    "Team": "KC",
     "Position": "QB",
-    "Average Pick": 2.25,
-    "Min Pick": 2,
-    "Max Pick": 3,
-    "Std Dev": 0.5,
-    "Change": -0.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": "- TEP"
+    "Average Rank": 2.75,
+    "Community Rank": 68
   },
   {
     "player_name": "C.J. Stroud",
+    "Team": "HOU",
     "Position": "QB",
-    "Average Pick": 3.25,
-    "Min Pick": 2,
-    "Max Pick": 5,
-    "Std Dev": 1.26,
-    "Change": -0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 3.5,
+    "Community Rank": 43
   },
   {
     "player_name": "Jalen Hurts",
+    "Team": "PHI",
     "Position": "QB",
-    "Average Pick": 4.5,
-    "Min Pick": 4,
-    "Max Pick": 6,
-    "Std Dev": 1,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 4.25,
+    "Community Rank": 38
   },
   {
     "player_name": "Lamar Jackson",
+    "Team": "BAL",
     "Position": "QB",
-    "Average Pick": 5.25,
-    "Min Pick": 4,
-    "Max Pick": 7,
-    "Std Dev": 1.26,
-    "Change": 0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Justin Jefferson",
-    "Position": "WR",
-    "Average Pick": 6,
-    "Min Pick": 3,
-    "Max Pick": 8,
-    "Std Dev": 2.45,
-    "Change": -0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "CeeDee Lamb",
-    "Position": "WR",
-    "Average Pick": 8,
-    "Min Pick": 6,
-    "Max Pick": 10,
-    "Std Dev": 1.83,
-    "Change": -0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 4.5,
+    "Community Rank": 33
   },
   {
     "player_name": "Joe Burrow",
+    "Team": "CIN",
     "Position": "QB",
-    "Average Pick": 8.75,
-    "Min Pick": 7,
-    "Max Pick": 12,
-    "Std Dev": 2.36,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Caleb Williams",
-    "Position": "QB",
-    "Average Pick": 9,
-    "Min Pick": 6,
-    "Max Pick": 13,
-    "Std Dev": 3.56,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ja'Marr Chase",
-    "Position": "WR",
-    "Average Pick": 9.75,
-    "Min Pick": 8,
-    "Max Pick": 11,
-    "Std Dev": 1.5,
-    "Change": 1,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Anthony Richardson",
-    "Position": "QB",
-    "Average Pick": 11.75,
-    "Min Pick": 10,
-    "Max Pick": 15,
-    "Std Dev": 2.36,
-    "Change": -2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Justin Herbert",
-    "Position": "QB",
-    "Average Pick": 12.5,
-    "Min Pick": 8,
-    "Max Pick": 16,
-    "Std Dev": 3.7,
-    "Change": -1.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Amon-Ra St. Brown",
-    "Position": "WR",
-    "Average Pick": 13.25,
-    "Min Pick": 12,
-    "Max Pick": 15,
-    "Std Dev": 1.26,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Marvin Harrison",
-    "Position": "WR",
-    "Average Pick": 13.75,
-    "Min Pick": 10,
-    "Max Pick": 18,
-    "Std Dev": 3.3,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jordan Love",
-    "Position": "QB",
-    "Average Pick": 16.75,
-    "Min Pick": 12,
-    "Max Pick": 20,
-    "Std Dev": 3.4,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kyler Murray",
-    "Position": "QB",
-    "Average Pick": 17,
-    "Min Pick": 14,
-    "Max Pick": 21,
-    "Std Dev": 2.94,
-    "Change": -1.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Bijan Robinson",
-    "Position": "RB",
-    "Average Pick": 17,
-    "Min Pick": 14,
-    "Max Pick": 23,
-    "Std Dev": 4.08,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Trevor Lawrence",
-    "Position": "QB",
-    "Average Pick": 18.5,
-    "Min Pick": 14,
-    "Max Pick": 23,
-    "Std Dev": 3.7,
-    "Change": 4,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Puka Nacua",
-    "Position": "WR",
-    "Average Pick": 19.5,
-    "Min Pick": 16,
-    "Max Pick": 22,
-    "Std Dev": 2.65,
-    "Change": -0.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Christian McCaffrey",
-    "Position": "RB",
-    "Average Pick": 20.75,
-    "Min Pick": 9,
-    "Max Pick": 30,
-    "Std Dev": 8.85,
-    "Change": 2.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jahmyr Gibbs",
-    "Position": "RB",
-    "Average Pick": 22,
-    "Min Pick": 19,
-    "Max Pick": 25,
-    "Std Dev": 2.94,
-    "Change": 0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Breece Hall",
-    "Position": "RB",
-    "Average Pick": 22.5,
-    "Min Pick": 17,
-    "Max Pick": 26,
-    "Std Dev": 3.87,
-    "Change": -2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Garrett Wilson",
-    "Position": "WR",
-    "Average Pick": 23.25,
-    "Min Pick": 19,
-    "Max Pick": 28,
-    "Std Dev": 3.77,
-    "Change": -1.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Sam LaPorta",
-    "Position": "TE",
-    "Average Pick": 24,
-    "Min Pick": 18,
-    "Max Pick": 27,
-    "Std Dev": 4.08,
-    "Change": 3,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "A.J. Brown",
-    "Position": "WR",
-    "Average Pick": 24,
-    "Min Pick": 21,
-    "Max Pick": 27,
-    "Std Dev": 2.94,
-    "Change": 1,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 7.25,
+    "Community Rank": 78
   },
   {
     "player_name": "Jayden Daniels",
+    "Team": "WAS",
     "Position": "QB",
-    "Average Pick": 25.25,
-    "Min Pick": 20,
-    "Max Pick": 30,
-    "Std Dev": 4.57,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 7.75,
+    "Community Rank": 109
+  },
+  {
+    "player_name": "Justin Jefferson",
+    "Team": "MIN",
+    "Position": "WR",
+    "Average Rank": 8,
+    "Community Rank": 3
+  },
+  {
+    "player_name": "CeeDee Lamb",
+    "Team": "DAL",
+    "Position": "WR",
+    "Average Rank": 8.75,
+    "Community Rank": 8
+  },
+  {
+    "player_name": "Kyler Murray",
+    "Team": "ARI",
+    "Position": "QB",
+    "Average Rank": 9,
+    "Community Rank": 95
+  },
+  {
+    "player_name": "Jordan Love",
+    "Team": "GB",
+    "Position": "QB",
+    "Average Rank": 10.5,
+    "Community Rank": 88
+  },
+  {
+    "player_name": "Caleb Williams",
+    "Team": "CHI",
+    "Position": "QB",
+    "Average Rank": 11.5,
+    "Community Rank": 123
+  },
+  {
+    "player_name": "2024 Rookie 1.01",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 12.33,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Ja'Marr Chase",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 13.5,
+    "Community Rank": 9
+  },
+  {
+    "player_name": "2024 Rookie 1.02",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 16,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Marvin Harrison",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 17,
+    "Community Rank": 15
+  },
+  {
+    "player_name": "Amon-Ra St. Brown",
+    "Team": "DET",
+    "Position": "WR",
+    "Average Rank": 17,
+    "Community Rank": 13
   },
   {
     "player_name": "Brock Purdy",
+    "Team": "SF",
     "Position": "QB",
-    "Average Pick": 27,
-    "Min Pick": 21,
-    "Max Pick": 32,
-    "Std Dev": 4.55,
-    "Change": -0.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 19.5,
+    "Community Rank": 124
   },
   {
-    "player_name": "Tyreek Hill",
-    "Position": "WR",
-    "Average Pick": 27.75,
-    "Min Pick": 17,
-    "Max Pick": 33,
-    "Std Dev": 7.37,
-    "Change": 3,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Anthony Richardson",
+    "Team": "IND",
+    "Position": "QB",
+    "Average Rank": 19.75,
+    "Community Rank": 58
+  },
+  {
+    "player_name": "2024 Rookie 1.03",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 20,
+    "Community Rank": ""
   },
   {
     "player_name": "Malik Nabers",
+    "Team": "NYG",
     "Position": "WR",
-    "Average Pick": 28.5,
-    "Min Pick": 25,
-    "Max Pick": 34,
-    "Std Dev": 4.04,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 20.25,
+    "Community Rank": 39
   },
   {
-    "player_name": "Jonathan Taylor",
+    "player_name": "Bijan Robinson",
+    "Team": "ATL",
     "Position": "RB",
-    "Average Pick": 32.5,
-    "Min Pick": 31,
-    "Max Pick": 35,
-    "Std Dev": 1.91,
-    "Change": 0.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 21,
+    "Community Rank": 2
   },
   {
-    "player_name": "Dak Prescott",
+    "player_name": "Justin Herbert",
+    "Team": "LAC",
     "Position": "QB",
-    "Average Pick": 32.75,
-    "Min Pick": 25,
-    "Max Pick": 50,
-    "Std Dev": 11.62,
-    "Change": -5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Brandon Aiyuk",
-    "Position": "WR",
-    "Average Pick": 35.5,
-    "Min Pick": 29,
-    "Max Pick": 41,
-    "Std Dev": 5.2,
-    "Change": 6.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Chris Olave",
-    "Position": "WR",
-    "Average Pick": 36,
-    "Min Pick": 31,
-    "Max Pick": 46,
-    "Std Dev": 6.78,
-    "Change": -2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Drake London",
-    "Position": "WR",
-    "Average Pick": 36.25,
-    "Min Pick": 30,
-    "Max Pick": 48,
-    "Std Dev": 8.26,
-    "Change": -4.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tua Tagovailoa",
-    "Position": "QB",
-    "Average Pick": 37.25,
-    "Min Pick": 32,
-    "Max Pick": 40,
-    "Std Dev": 3.59,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Trey McBride",
-    "Position": "TE",
-    "Average Pick": 38.5,
-    "Min Pick": 30,
-    "Max Pick": 53,
-    "Std Dev": 10.41,
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rome Odunze",
-    "Position": "WR",
-    "Average Pick": 40,
-    "Min Pick": 37,
-    "Max Pick": 49,
-    "Std Dev": 6,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Travis Etienne",
-    "Position": "RB",
-    "Average Pick": 40.25,
-    "Min Pick": 33,
-    "Max Pick": 45,
-    "Std Dev": 5.12,
-    "Change": 14.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jaylen Waddle",
-    "Position": "WR",
-    "Average Pick": 40.5,
-    "Min Pick": 36,
-    "Max Pick": 45,
-    "Std Dev": 4.65,
-    "Change": -3.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jared Goff",
-    "Position": "QB",
-    "Average Pick": 41,
-    "Min Pick": 28,
-    "Max Pick": 52,
-    "Std Dev": 11.02,
-    "Change": 3.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Drake Maye",
-    "Position": "QB",
-    "Average Pick": 42,
-    "Min Pick": 36,
-    "Max Pick": 47,
-    "Std Dev": 4.55,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DeVonta Smith",
-    "Position": "WR",
-    "Average Pick": 43,
-    "Min Pick": 35,
-    "Max Pick": 52,
-    "Std Dev": 7.26,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "J.J. McCarthy",
-    "Position": "QB",
-    "Average Pick": 43.25,
-    "Min Pick": 38,
-    "Max Pick": 50,
-    "Std Dev": 5.12,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dalton Kincaid",
-    "Position": "TE",
-    "Average Pick": 43.75,
-    "Min Pick": 35,
-    "Max Pick": 56,
-    "Std Dev": 8.85,
-    "Change": 5.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Saquon Barkley",
-    "Position": "RB",
-    "Average Pick": 45,
-    "Min Pick": 35,
-    "Max Pick": 57,
-    "Std Dev": 9.93,
-    "Change": 3.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Brock Bowers",
-    "Position": "TE",
-    "Average Pick": 47.25,
-    "Min Pick": 34,
-    "Max Pick": 58,
-    "Std Dev": 9.98,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DJ Moore",
-    "Position": "WR",
-    "Average Pick": 47.75,
-    "Min Pick": 45,
-    "Max Pick": 54,
-    "Std Dev": 4.19,
-    "Change": -5.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 22.75,
+    "Community Rank": 116
   },
   {
     "player_name": "Nico Collins",
+    "Team": "HOU",
     "Position": "WR",
-    "Average Pick": 49.25,
-    "Min Pick": 47,
-    "Max Pick": 53,
-    "Std Dev": 2.63,
-    "Change": -0.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 23.75,
+    "Community Rank": 27
   },
   {
-    "player_name": "Mark Andrews",
-    "Position": "TE",
-    "Average Pick": 49.25,
-    "Min Pick": 42,
-    "Max Pick": 60,
-    "Std Dev": 8.46,
-    "Change": 4,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Pittman",
-    "Position": "WR",
-    "Average Pick": 50.25,
-    "Min Pick": 39,
-    "Max Pick": 73,
-    "Std Dev": 15.44,
-    "Change": -6.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kyren Williams",
-    "Position": "RB",
-    "Average Pick": 50.25,
-    "Min Pick": 44,
-    "Max Pick": 55,
-    "Std Dev": 4.86,
-    "Change": -5.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kyle Pitts",
-    "Position": "TE",
-    "Average Pick": 51.25,
-    "Min Pick": 40,
-    "Max Pick": 57,
-    "Std Dev": 8.02,
-    "Change": -0.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zay Flowers",
-    "Position": "WR",
-    "Average Pick": 52.75,
-    "Min Pick": 48,
-    "Max Pick": 57,
-    "Std Dev": 4.43,
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Travis Kelce",
-    "Position": "TE",
-    "Average Pick": 55.5,
-    "Min Pick": 38,
-    "Max Pick": 67,
-    "Std Dev": 12.5,
-    "Change": 19.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "De'Von Achane",
-    "Position": "RB",
-    "Average Pick": 58,
-    "Min Pick": 51,
-    "Max Pick": 67,
-    "Std Dev": 6.68,
-    "Change": -7.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "T.J. Hockenson",
-    "Position": "TE",
-    "Average Pick": 59.25,
-    "Min Pick": 40,
-    "Max Pick": 78,
-    "Std Dev": 20.02,
-    "Change": -2.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DK Metcalf",
-    "Position": "WR",
-    "Average Pick": 59.25,
-    "Min Pick": 54,
-    "Max Pick": 63,
-    "Std Dev": 3.86,
-    "Change": 2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tee Higgins",
-    "Position": "WR",
-    "Average Pick": 60.5,
-    "Min Pick": 51,
-    "Max Pick": 78,
-    "Std Dev": 12.12,
-    "Change": -9.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rachaad White",
-    "Position": "RB",
-    "Average Pick": 60.75,
-    "Min Pick": 51,
-    "Max Pick": 70,
-    "Std Dev": 8.14,
-    "Change": 5.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Bryce Young",
+    "player_name": "Drake Maye",
+    "Team": "NE",
     "Position": "QB",
-    "Average Pick": 60.75,
-    "Min Pick": 47,
-    "Max Pick": 72,
-    "Std Dev": 11.79,
-    "Change": 6.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 24.25,
+    "Community Rank": 187
   },
   {
-    "player_name": "Tank Dell",
-    "Position": "WR",
-    "Average Pick": 61.75,
-    "Min Pick": 53,
-    "Max Pick": 66,
-    "Std Dev": 5.91,
-    "Change": -6,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jordan Addison",
-    "Position": "WR",
-    "Average Pick": 62.25,
-    "Min Pick": 54,
-    "Max Pick": 72,
-    "Std Dev": 7.41,
-    "Change": -0.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Josh Jacobs",
+    "player_name": "Jahmyr Gibbs",
+    "Team": "DET",
     "Position": "RB",
-    "Average Pick": 63,
-    "Min Pick": 42,
-    "Max Pick": 80,
-    "Std Dev": 16.43,
-    "Change": 10.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 24.75,
+    "Community Rank": 5
   },
   {
-    "player_name": "Brian Thomas",
+    "player_name": "Puka Nacua",
+    "Team": "LAR",
     "Position": "WR",
-    "Average Pick": 65.5,
-    "Min Pick": 62,
-    "Max Pick": 68,
-    "Std Dev": 2.65,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 25,
+    "Community Rank": 4
   },
   {
-    "player_name": "George Pickens",
+    "player_name": "Garrett Wilson",
+    "Team": "NYJ",
     "Position": "WR",
-    "Average Pick": 66,
-    "Min Pick": 59,
-    "Max Pick": 74,
-    "Std Dev": 6.16,
-    "Change": -0.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 25,
+    "Community Rank": 10
   },
   {
-    "player_name": "Kenneth Walker",
+    "player_name": "Breece Hall",
+    "Team": "NYJ",
     "Position": "RB",
-    "Average Pick": 67,
-    "Min Pick": 58,
-    "Max Pick": 74,
-    "Std Dev": 7.07,
-    "Change": -5.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 26.25,
+    "Community Rank": 6
   },
   {
-    "player_name": "Xavier Worthy",
-    "Position": "WR",
-    "Average Pick": 68,
-    "Min Pick": 60,
-    "Max Pick": 80,
-    "Std Dev": 8.83,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isiah Pacheco",
-    "Position": "RB",
-    "Average Pick": 69,
-    "Min Pick": 60,
-    "Max Pick": 83,
-    "Std Dev": 10.23,
-    "Change": 8.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Deebo Samuel",
-    "Position": "WR",
-    "Average Pick": 69.5,
-    "Min Pick": 62,
-    "Max Pick": 85,
-    "Std Dev": 10.47,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Mike Evans",
-    "Position": "WR",
-    "Average Pick": 71.5,
-    "Min Pick": 55,
-    "Max Pick": 87,
-    "Std Dev": 13.3,
-    "Change": 7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jonathon Brooks",
-    "Position": "RB",
-    "Average Pick": 71.75,
-    "Min Pick": 52,
-    "Max Pick": 97,
-    "Std Dev": 18.66,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Baker Mayfield",
+    "player_name": "Trevor Lawrence",
+    "Team": "JAX",
     "Position": "QB",
-    "Average Pick": 73.5,
-    "Min Pick": 55,
-    "Max Pick": 90,
-    "Std Dev": 14.34,
-    "Change": -2.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 28.25,
+    "Community Rank": 149
   },
   {
-    "player_name": "Stefon Diggs",
+    "player_name": "2024 Rookie 1.04",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 29.33,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "A.J. Brown",
+    "Team": "PHI",
     "Position": "WR",
-    "Average Pick": 74,
-    "Min Pick": 62,
-    "Max Pick": 90,
-    "Std Dev": 13.37,
-    "Change": 0.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 31.25,
+    "Community Rank": 11
   },
   {
-    "player_name": "Jaxon Smith-Njigba",
-    "Position": "WR",
-    "Average Pick": 74,
-    "Min Pick": 63,
-    "Max Pick": 79,
-    "Std Dev": 7.44,
-    "Change": -8.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "2024 Rookie 1.05",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 34,
+    "Community Rank": ""
   },
   {
-    "player_name": "Ladd McConkey",
-    "Position": "WR",
-    "Average Pick": 74.75,
-    "Min Pick": 66,
-    "Max Pick": 89,
-    "Std Dev": 10.72,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "James Cook",
-    "Position": "RB",
-    "Average Pick": 75.75,
-    "Min Pick": 71,
-    "Max Pick": 81,
-    "Std Dev": 4.27,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "George Kittle",
-    "Position": "TE",
-    "Average Pick": 76.75,
-    "Min Pick": 69,
-    "Max Pick": 87,
-    "Std Dev": 8.02,
-    "Change": 8,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Davante Adams",
-    "Position": "WR",
-    "Average Pick": 77.75,
-    "Min Pick": 70,
-    "Max Pick": 82,
-    "Std Dev": 5.44,
-    "Change": 3.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kirk Cousins",
+    "player_name": "Dak Prescott",
+    "Team": "DAL",
     "Position": "QB",
-    "Average Pick": 78.75,
-    "Min Pick": 72,
-    "Max Pick": 88,
-    "Std Dev": 6.8,
-    "Change": -12.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 34.5,
+    "Community Rank": 98
   },
   {
-    "player_name": "Keon Coleman",
-    "Position": "WR",
-    "Average Pick": 79,
-    "Min Pick": 61,
-    "Max Pick": 102,
-    "Std Dev": 17.57,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "D'Andre Swift",
+    "player_name": "Devon Achane",
+    "Team": "MIA",
     "Position": "RB",
-    "Average Pick": 79.5,
-    "Min Pick": 77,
-    "Max Pick": 83,
-    "Std Dev": 3,
-    "Change": 13,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 35.5,
+    "Community Rank": 23
   },
   {
-    "player_name": "Deshaun Watson",
+    "player_name": "Tua Tagovailoa",
+    "Team": "MIA",
     "Position": "QB",
-    "Average Pick": 81.75,
-    "Min Pick": 68,
-    "Max Pick": 108,
-    "Std Dev": 17.86,
-    "Change": -13.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 36.5,
+    "Community Rank": 103
   },
   {
-    "player_name": "Jayden Reed",
+    "player_name": "Drake London",
+    "Team": "ATL",
     "Position": "WR",
-    "Average Pick": 83.25,
-    "Min Pick": 68,
-    "Max Pick": 108,
-    "Std Dev": 17.8,
-    "Change": -19.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 36.75,
+    "Community Rank": 21
+  },
+  {
+    "player_name": "Rome Odunze",
+    "Team": "CHI",
+    "Position": "WR",
+    "Average Rank": 39.75,
+    "Community Rank": 66
+  },
+  {
+    "player_name": "Tyreek Hill",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 40.5,
+    "Community Rank": 7
   },
   {
     "player_name": "Rashee Rice",
+    "Team": "KC",
     "Position": "WR",
-    "Average Pick": 85,
-    "Min Pick": 76,
-    "Max Pick": 96,
-    "Std Dev": 8.87,
-    "Change": -23.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 42,
+    "Community Rank": 70
+  },
+  {
+    "player_name": "Chris Olave",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 42.25,
+    "Community Rank": 19
+  },
+  {
+    "player_name": "Jonathan Taylor",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 42.5,
+    "Community Rank": 12
+  },
+  {
+    "player_name": "Brandon Aiyuk",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 44.25,
+    "Community Rank": 24
+  },
+  {
+    "player_name": "2024 Rookie 1.06",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 44.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Jaylen Waddle",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 45.5,
+    "Community Rank": 34
+  },
+  {
+    "player_name": "DeVonta Smith",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 46.75,
+    "Community Rank": 31
+  },
+  {
+    "player_name": "Jared Goff",
+    "Team": "DET",
+    "Position": "QB",
+    "Average Rank": 47,
+    "Community Rank": 106
+  },
+  {
+    "player_name": "Brock Bowers",
+    "Team": "LV",
+    "Position": "TE",
+    "Average Rank": 47.75,
+    "Community Rank": 120
+  },
+  {
+    "player_name": "2024 Rookie 1.07",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 48,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Trey McBride",
+    "Team": "ARI",
+    "Position": "TE",
+    "Average Rank": 49,
+    "Community Rank": 60
+  },
+  {
+    "player_name": "Sam LaPorta",
+    "Team": "DET",
+    "Position": "TE",
+    "Average Rank": 50.25,
+    "Community Rank": 20
+  },
+  {
+    "player_name": "2025 EARLY-MID 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 51.75,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Brian Thomas",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 52.25,
+    "Community Rank": 86
+  },
+  {
+    "player_name": "DK Metcalf",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 52.75,
+    "Community Rank": 65
+  },
+  {
+    "player_name": "Saquon Barkley",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 53.75,
+    "Community Rank": 14
+  },
+  {
+    "player_name": "Xavier Worthy",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 53.75,
+    "Community Rank": 96
+  },
+  {
+    "player_name": "Zay Flowers",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 54.75,
+    "Community Rank": 97
+  },
+  {
+    "player_name": "Kyren Williams",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 55.25,
+    "Community Rank": 16
+  },
+  {
+    "player_name": "DJ Moore",
+    "Team": "CHI",
+    "Position": "WR",
+    "Average Rank": 55.75,
+    "Community Rank": 26
+  },
+  {
+    "player_name": "Jayden Reed",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 55.75,
+    "Community Rank": 59
+  },
+  {
+    "player_name": "Jaxon Smith-Njigba",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 56,
+    "Community Rank": 115
+  },
+  {
+    "player_name": "Christian McCaffrey",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 59,
+    "Community Rank": 1
+  },
+  {
+    "player_name": "2026 EARLY-MID 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 59.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Baker Mayfield",
+    "Team": "TB",
+    "Position": "QB",
+    "Average Rank": 61.25,
+    "Community Rank": 107
+  },
+  {
+    "player_name": "George Pickens",
+    "Team": "PIT",
+    "Position": "WR",
+    "Average Rank": 61.75,
+    "Community Rank": 52
+  },
+  {
+    "player_name": "Ladd McConkey",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 62.5,
+    "Community Rank": 110
+  },
+  {
+    "player_name": "James Cook",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 62.75,
+    "Community Rank": 45
+  },
+  {
+    "player_name": "Tee Higgins",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 63.75,
+    "Community Rank": 47
+  },
+  {
+    "player_name": "Travis Etienne",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 65,
+    "Community Rank": 37
+  },
+  {
+    "player_name": "J.J. McCarthy",
+    "Team": "MIN",
+    "Position": "QB",
+    "Average Rank": 65.25,
+    "Community Rank": 813
+  },
+  {
+    "player_name": "Jonathon Brooks",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 67.25,
+    "Community Rank": 55
+  },
+  {
+    "player_name": "Jordan Addison",
+    "Team": "MIN",
+    "Position": "WR",
+    "Average Rank": 68.25,
+    "Community Rank": 90
+  },
+  {
+    "player_name": "Kenneth Walker",
+    "Team": "SEA",
+    "Position": "RB",
+    "Average Rank": 68.5,
+    "Community Rank": 72
+  },
+  {
+    "player_name": "2024 Rookie 1.08",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 68.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Deebo Samuel",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 69.5,
+    "Community Rank": 29
+  },
+  {
+    "player_name": "Dalton Kincaid",
+    "Team": "BUF",
+    "Position": "TE",
+    "Average Rank": 71.25,
+    "Community Rank": 81
+  },
+  {
+    "player_name": "Kyle Pitts",
+    "Team": "ATL",
+    "Position": "TE",
+    "Average Rank": 72,
+    "Community Rank": 40
+  },
+  {
+    "player_name": "2024 Rookie 1.09",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 73,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "T.J. Hockenson",
+    "Team": "MIN",
+    "Position": "TE",
+    "Average Rank": 76.5,
+    "Community Rank": 140
+  },
+  {
+    "player_name": "Nathaniel Dell",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 78.25,
+    "Community Rank": 48
+  },
+  {
+    "player_name": "Josh Jacobs",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 78.75,
+    "Community Rank": 30
+  },
+  {
+    "player_name": "2024 Rookie 1.10",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 80,
+    "Community Rank": ""
   },
   {
     "player_name": "Bo Nix",
+    "Team": "DEN",
     "Position": "QB",
-    "Average Pick": 85.5,
-    "Min Pick": 73,
-    "Max Pick": 93,
-    "Std Dev": 9,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 80.5,
+    "Community Rank": 202
   },
   {
-    "player_name": "Cooper Kupp",
+    "player_name": "Michael Pittman",
+    "Team": "IND",
     "Position": "WR",
-    "Average Pick": 87.5,
-    "Min Pick": 81,
-    "Max Pick": 96,
-    "Std Dev": 6.56,
-    "Change": 6.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 81.75,
+    "Community Rank": 46
   },
   {
-    "player_name": "Derrick Henry",
+    "player_name": "Isiah Pacheco",
+    "Team": "KC",
     "Position": "RB",
-    "Average Pick": 88.5,
-    "Min Pick": 87,
-    "Max Pick": 91,
-    "Std Dev": 1.73,
-    "Change": 18,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 82.5,
+    "Community Rank": 17
   },
   {
-    "player_name": "Trey Benson",
-    "Position": "RB",
-    "Average Pick": 88.75,
-    "Min Pick": 82,
-    "Max Pick": 104,
-    "Std Dev": 10.24,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "2025 MID-LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 82.75,
+    "Community Rank": ""
   },
   {
-    "player_name": "Joe Mixon",
-    "Position": "RB",
-    "Average Pick": 89.25,
-    "Min Pick": 79,
-    "Max Pick": 102,
-    "Std Dev": 9.81,
-    "Change": 8.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jake Ferguson",
-    "Position": "TE",
-    "Average Pick": 90,
-    "Min Pick": 60,
-    "Max Pick": 119,
-    "Std Dev": 24.1,
-    "Change": 5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Christian Kirk",
-    "Position": "WR",
-    "Average Pick": 90.75,
-    "Min Pick": 86,
-    "Max Pick": 94,
-    "Std Dev": 3.95,
-    "Change": 1.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Marquise Brown",
-    "Position": "WR",
-    "Average Pick": 94,
-    "Min Pick": 94,
-    "Max Pick": 94,
-    "Std Dev": "",
-    "Change": 7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Penix",
-    "Position": "QB",
-    "Average Pick": 94.75,
-    "Min Pick": 73,
-    "Max Pick": 105,
-    "Std Dev": 14.66,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rhamondre Stevenson",
-    "Position": "RB",
-    "Average Pick": 95.75,
-    "Min Pick": 92,
-    "Max Pick": 103,
-    "Std Dev": 4.99,
-    "Change": 21.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Evan Engram",
-    "Position": "TE",
-    "Average Pick": 96,
-    "Min Pick": 83,
-    "Max Pick": 114,
-    "Std Dev": 13.04,
-    "Change": -5.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Terry McLaurin",
-    "Position": "WR",
-    "Average Pick": 97.25,
-    "Min Pick": 84,
-    "Max Pick": 112,
-    "Std Dev": 13,
-    "Change": 3.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Javonte Williams",
-    "Position": "RB",
-    "Average Pick": 99.25,
-    "Min Pick": 93,
-    "Max Pick": 107,
-    "Std Dev": 5.8,
-    "Change": -2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "David Njoku",
-    "Position": "TE",
-    "Average Pick": 99.25,
-    "Min Pick": 82,
-    "Max Pick": 119,
-    "Std Dev": 18.06,
-    "Change": -0.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Alvin Kamara",
-    "Position": "RB",
-    "Average Pick": 99.75,
-    "Min Pick": 90,
-    "Max Pick": 112,
-    "Std Dev": 9.32,
-    "Change": 2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Will Levis",
-    "Position": "QB",
-    "Average Pick": 100.25,
-    "Min Pick": 86,
-    "Max Pick": 120,
-    "Std Dev": 14.93,
-    "Change": -20.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Justin Fields",
-    "Position": "QB",
-    "Average Pick": 101,
-    "Min Pick": 22,
-    "Max Pick": 138,
-    "Std Dev": 53.21,
-    "Change": -3.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Xavier Legette",
-    "Position": "WR",
-    "Average Pick": 101.5,
-    "Min Pick": 86,
-    "Max Pick": 115,
-    "Std Dev": 14.66,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Amari Cooper",
-    "Position": "WR",
-    "Average Pick": 102.25,
-    "Min Pick": 94,
-    "Max Pick": 110,
-    "Std Dev": 6.85,
-    "Change": -5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hollywood Brown",
-    "Position": "WR",
-    "Average Pick": 102.33,
-    "Min Pick": 96,
-    "Max Pick": 107,
-    "Std Dev": 5.69,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zamir White",
-    "Position": "RB",
-    "Average Pick": 103,
-    "Min Pick": 97,
-    "Max Pick": 111,
-    "Std Dev": 6.32,
-    "Change": 33.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ricky Pearsall",
-    "Position": "WR",
-    "Average Pick": 103.75,
-    "Min Pick": 100,
-    "Max Pick": 111,
-    "Std Dev": 4.99,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Aaron Rodgers",
-    "Position": "QB",
-    "Average Pick": 106.25,
-    "Min Pick": 100,
-    "Max Pick": 110,
-    "Std Dev": 4.5,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Adonai Mitchell",
-    "Position": "WR",
-    "Average Pick": 106.75,
-    "Min Pick": 98,
-    "Max Pick": 114,
-    "Std Dev": 7.54,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Calvin Ridley",
-    "Position": "WR",
-    "Average Pick": 108.25,
-    "Min Pick": 99,
-    "Max Pick": 126,
-    "Std Dev": 12.74,
-    "Change": -7.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Matthew Stafford",
-    "Position": "QB",
-    "Average Pick": 109.25,
-    "Min Pick": 98,
-    "Max Pick": 123,
-    "Std Dev": 10.59,
-    "Change": -9.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "2027 EARLY-MID 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 83,
+    "Community Rank": ""
   },
   {
     "player_name": "Chris Godwin",
+    "Team": "TB",
     "Position": "WR",
-    "Average Pick": 111.25,
-    "Min Pick": 95,
-    "Max Pick": 131,
-    "Std Dev": 16.38,
-    "Change": -12,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyjae Spears",
-    "Position": "RB",
-    "Average Pick": 112,
-    "Min Pick": 97,
-    "Max Pick": 123,
-    "Std Dev": 10.89,
-    "Change": -9.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "David Montgomery",
-    "Position": "RB",
-    "Average Pick": 112.25,
-    "Min Pick": 97,
-    "Max Pick": 133,
-    "Std Dev": 16.24,
-    "Change": -2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Najee Harris",
-    "Position": "RB",
-    "Average Pick": 112.75,
-    "Min Pick": 106,
-    "Max Pick": 126,
-    "Std Dev": 9,
-    "Change": -2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cole Kmet",
-    "Position": "TE",
-    "Average Pick": 113.25,
-    "Min Pick": 95,
-    "Max Pick": 125,
-    "Std Dev": 14.2,
-    "Change": 6.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Christian Watson",
-    "Position": "WR",
-    "Average Pick": 114,
-    "Min Pick": 111,
-    "Max Pick": 120,
-    "Std Dev": 4.08,
-    "Change": -17.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tony Pollard",
-    "Position": "RB",
-    "Average Pick": 114.25,
-    "Min Pick": 107,
-    "Max Pick": 118,
-    "Std Dev": 4.99,
-    "Change": 1.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Diontae Johnson",
-    "Position": "WR",
-    "Average Pick": 115.25,
-    "Min Pick": 98,
-    "Max Pick": 143,
-    "Std Dev": 19.96,
-    "Change": -20.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Keenan Allen",
-    "Position": "WR",
-    "Average Pick": 116.5,
-    "Min Pick": 102,
-    "Max Pick": 124,
-    "Std Dev": 9.98,
-    "Change": -5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ja'Lynn Polk",
-    "Position": "WR",
-    "Average Pick": 117.75,
-    "Min Pick": 106,
-    "Max Pick": 128,
-    "Std Dev": 9.25,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Blake Corum",
-    "Position": "RB",
-    "Average Pick": 117.75,
-    "Min Pick": 108,
-    "Max Pick": 127,
-    "Std Dev": 7.8,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Geno Smith",
-    "Position": "QB",
-    "Average Pick": 118.25,
-    "Min Pick": 83,
-    "Max Pick": 140,
-    "Std Dev": 25.62,
-    "Change": -5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Daniel Jones",
-    "Position": "QB",
-    "Average Pick": 121.25,
-    "Min Pick": 87,
-    "Max Pick": 146,
-    "Std Dev": 26.29,
-    "Change": 14,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ben Sinnott",
-    "Position": "TE",
-    "Average Pick": 123.25,
-    "Min Pick": 108,
-    "Max Pick": 135,
-    "Std Dev": 11.93,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Aaron Jones",
-    "Position": "RB",
-    "Average Pick": 124.75,
-    "Min Pick": 114,
-    "Max Pick": 139,
-    "Std Dev": 10.9,
-    "Change": 6.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Troy Franklin",
-    "Position": "WR",
-    "Average Pick": 129,
-    "Min Pick": 127,
-    "Max Pick": 131,
-    "Std Dev": 1.83,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "James Conner",
-    "Position": "RB",
-    "Average Pick": 129.5,
-    "Min Pick": 121,
-    "Max Pick": 144,
-    "Std Dev": 10.21,
-    "Change": -4,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zack Moss",
-    "Position": "RB",
-    "Average Pick": 131.5,
-    "Min Pick": 122,
-    "Max Pick": 150,
-    "Std Dev": 12.66,
-    "Change": 11.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jaylen Wright",
-    "Position": "RB",
-    "Average Pick": 131.75,
-    "Min Pick": 106,
-    "Max Pick": 156,
-    "Std Dev": 24.47,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Nick Chubb",
-    "Position": "RB",
-    "Average Pick": 132.75,
-    "Min Pick": 118,
-    "Max Pick": 141,
-    "Std Dev": 10.11,
-    "Change": 4.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jerry Jeudy",
-    "Position": "WR",
-    "Average Pick": 133.25,
-    "Min Pick": 123,
-    "Max Pick": 160,
-    "Std Dev": 17.86,
-    "Change": -2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 83.25,
+    "Community Rank": 53
   },
   {
     "player_name": "Jameson Williams",
+    "Team": "DET",
     "Position": "WR",
-    "Average Pick": 135.25,
-    "Min Pick": 113,
-    "Max Pick": 148,
-    "Std Dev": 15.65,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 85,
+    "Community Rank": 54
   },
   {
-    "player_name": "Josh Downs",
-    "Position": "WR",
-    "Average Pick": 135.75,
-    "Min Pick": 127,
-    "Max Pick": 145,
-    "Std Dev": 7.89,
-    "Change": -24.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Roman Wilson",
-    "Position": "WR",
-    "Average Pick": 136.5,
-    "Min Pick": 122,
-    "Max Pick": 146,
-    "Std Dev": 10.72,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kendre Miller",
-    "Position": "RB",
-    "Average Pick": 136.75,
-    "Min Pick": 122,
-    "Max Pick": 154,
-    "Std Dev": 13.65,
-    "Change": 8.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dallas Goedert",
+    "player_name": "George Kittle",
+    "Team": "SF",
     "Position": "TE",
-    "Average Pick": 136.75,
-    "Min Pick": 126,
-    "Max Pick": 142,
-    "Std Dev": 7.54,
-    "Change": -18.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 88.5,
+    "Community Rank": 89
   },
   {
-    "player_name": "Austin Ekeler",
-    "Position": "RB",
-    "Average Pick": 137.5,
-    "Min Pick": 93,
-    "Max Pick": 176,
-    "Std Dev": 34.76,
-    "Change": 15,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jaylen Warren",
-    "Position": "RB",
-    "Average Pick": 137.75,
-    "Min Pick": 128,
-    "Max Pick": 152,
-    "Std Dev": 10.34,
-    "Change": -7.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jahan Dotson",
-    "Position": "WR",
-    "Average Pick": 138.25,
-    "Min Pick": 124,
-    "Max Pick": 163,
-    "Std Dev": 17.52,
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Russell Wilson",
+    "player_name": "Michael Penix",
+    "Team": "ATL",
     "Position": "QB",
-    "Average Pick": 138.5,
-    "Min Pick": 126,
-    "Max Pick": 150,
-    "Std Dev": 10.12,
-    "Change": -11.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 88.75,
+    "Community Rank": 222
   },
   {
-    "player_name": "Dalton Schultz",
-    "Position": "TE",
-    "Average Pick": 139,
-    "Min Pick": 120,
-    "Max Pick": 150,
-    "Std Dev": 13.19,
-    "Change": 5.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Pat Freiermuth",
-    "Position": "TE",
-    "Average Pick": 139.25,
-    "Min Pick": 114,
-    "Max Pick": 158,
-    "Std Dev": 21,
-    "Change": 4.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DeAndre Hopkins",
+    "player_name": "Keon Coleman",
+    "Team": "BUF",
     "Position": "WR",
-    "Average Pick": 139.75,
-    "Min Pick": 129,
-    "Max Pick": 152,
-    "Std Dev": 9.46,
-    "Change": 3.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 90,
+    "Community Rank": 114
+  },
+  {
+    "player_name": "Rhamondre Stevenson",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 90,
+    "Community Rank": 76
+  },
+  {
+    "player_name": "2024 Rookie 1.11",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 92,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Will Levis",
+    "Team": "TEN",
+    "Position": "QB",
+    "Average Rank": 92.75,
+    "Community Rank": 93
+  },
+  {
+    "player_name": "Rachaad White",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 94.5,
+    "Community Rank": 28
+  },
+  {
+    "player_name": "2026 MID-LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 95,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Alvin Kamara",
+    "Team": "NO",
+    "Position": "RB",
+    "Average Rank": 97.5,
+    "Community Rank": 69
+  },
+  {
+    "player_name": "2024 Rookie 1.12",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 98,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Mike Evans",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 98.75,
+    "Community Rank": 36
+  },
+  {
+    "player_name": "Justin Fields",
+    "Team": "PIT",
+    "Position": "QB",
+    "Average Rank": 100,
+    "Community Rank": 159
+  },
+  {
+    "player_name": "Mark Andrews",
+    "Team": "BAL",
+    "Position": "TE",
+    "Average Rank": 100,
+    "Community Rank": 80
   },
   {
     "player_name": "Brian Robinson",
+    "Team": "WAS",
     "Position": "RB",
-    "Average Pick": 140.25,
-    "Min Pick": 134,
-    "Max Pick": 151,
-    "Std Dev": 7.8,
-    "Change": -26.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 100.5,
+    "Community Rank": 104
   },
   {
-    "player_name": "Zach Charbonnet",
+    "player_name": "Joe Mixon",
+    "Team": "HOU",
     "Position": "RB",
-    "Average Pick": 140.75,
-    "Min Pick": 137,
-    "Max Pick": 143,
-    "Std Dev": 2.87,
-    "Change": -1.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 100.75,
+    "Community Rank": 44
   },
   {
-    "player_name": "Jermaine Burton",
-    "Position": "WR",
-    "Average Pick": 140.75,
-    "Min Pick": 117,
-    "Max Pick": 161,
-    "Std Dev": 20.37,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jakobi Meyers",
-    "Position": "WR",
-    "Average Pick": 141.75,
-    "Min Pick": 129,
-    "Max Pick": 147,
-    "Std Dev": 8.54,
-    "Change": -10.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Quentin Johnston",
-    "Position": "WR",
-    "Average Pick": 143.75,
-    "Min Pick": 121,
-    "Max Pick": 160,
-    "Std Dev": 16.86,
-    "Change": -16.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "MarShawn Lloyd",
+    "player_name": "Trey Benson",
+    "Team": "ARI",
     "Position": "RB",
-    "Average Pick": 144.5,
-    "Min Pick": 133,
-    "Max Pick": 166,
-    "Std Dev": 15.11,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 102,
+    "Community Rank": 137
   },
   {
-    "player_name": "Derek Carr",
+    "player_name": "Kirk Cousins",
+    "Team": "ATL",
     "Position": "QB",
-    "Average Pick": 145.25,
-    "Min Pick": 132,
-    "Max Pick": 152,
-    "Std Dev": 9.07,
-    "Change": -19.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 102,
+    "Community Rank": 83
   },
   {
-    "player_name": "Malachi Corley",
-    "Position": "WR",
-    "Average Pick": 145.25,
-    "Min Pick": 134,
-    "Max Pick": 151,
-    "Std Dev": 8.02,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Courtland Sutton",
-    "Position": "WR",
-    "Average Pick": 145.5,
-    "Min Pick": 133,
-    "Max Pick": 163,
-    "Std Dev": 13,
-    "Change": 6.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Raheem Mostert",
+    "player_name": "David Montgomery",
+    "Team": "DET",
     "Position": "RB",
-    "Average Pick": 147,
-    "Min Pick": 107,
-    "Max Pick": 166,
-    "Std Dev": 27.22,
-    "Change": 6.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 103,
+    "Community Rank": 62
   },
   {
-    "player_name": "Chase Brown",
-    "Position": "RB",
-    "Average Pick": 147,
-    "Min Pick": 130,
-    "Max Pick": 162,
-    "Std Dev": 14.31,
-    "Change": -1,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ja'Tavion Sanders",
-    "Position": "TE",
-    "Average Pick": 150.25,
-    "Min Pick": 137,
-    "Max Pick": 160,
-    "Std Dev": 9.64,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Devin Singletary",
-    "Position": "RB",
-    "Average Pick": 150.5,
-    "Min Pick": 144,
-    "Max Pick": 161,
-    "Std Dev": 7.33,
-    "Change": 1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Romeo Doubs",
+    "player_name": "Davante Adams",
+    "Team": "LV",
     "Position": "WR",
-    "Average Pick": 151.5,
-    "Min Pick": 132,
-    "Max Pick": 165,
-    "Std Dev": 13.92,
-    "Change": -15.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 103.25,
+    "Community Rank": 18
   },
   {
-    "player_name": "Gardner Minshew",
+    "player_name": "Derrick Henry",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 104,
+    "Community Rank": 74
+  },
+  {
+    "player_name": "Bryce Young",
+    "Team": "CAR",
     "Position": "QB",
-    "Average Pick": 152.25,
-    "Min Pick": 139,
-    "Max Pick": 164,
-    "Std Dev": 11.73,
-    "Change": 23.08,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 104.25,
+    "Community Rank": 188
   },
   {
-    "player_name": "Luke Musgrave",
-    "Position": "TE",
-    "Average Pick": 156.75,
-    "Min Pick": 147,
-    "Max Pick": 168,
-    "Std Dev": 10.34,
-    "Change": -9.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ezekiel Elliott",
-    "Position": "RB",
-    "Average Pick": 157.25,
-    "Min Pick": 134,
-    "Max Pick": 172,
-    "Std Dev": 16.88,
-    "Change": 55.08,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Wilson",
-    "Position": "WR",
-    "Average Pick": 160.75,
-    "Min Pick": 157,
-    "Max Pick": 166,
-    "Std Dev": 3.86,
-    "Change": -8.08,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Lockett",
-    "Position": "WR",
-    "Average Pick": 162.75,
-    "Min Pick": 158,
-    "Max Pick": 166,
-    "Std Dev": 3.4,
-    "Change": -7.42,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jerome Ford",
-    "Position": "RB",
-    "Average Pick": 163,
-    "Min Pick": 148,
-    "Max Pick": 195,
-    "Std Dev": 21.59,
-    "Change": -5.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Gus Edwards",
-    "Position": "RB",
-    "Average Pick": 164.75,
-    "Min Pick": 153,
-    "Max Pick": 185,
-    "Std Dev": 14.24,
-    "Change": 6.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Javon Baker",
-    "Position": "WR",
-    "Average Pick": 165.5,
-    "Min Pick": 154,
-    "Max Pick": 177,
-    "Std Dev": 12.71,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaiah Likely",
-    "Position": "TE",
-    "Average Pick": 167,
-    "Min Pick": 158,
-    "Max Pick": 177,
-    "Std Dev": 7.87,
-    "Change": 0.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Khalil Shakir",
-    "Position": "WR",
-    "Average Pick": 168,
-    "Min Pick": 159,
-    "Max Pick": 181,
-    "Std Dev": 9.83,
-    "Change": -17.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rashid Shaheed",
-    "Position": "WR",
-    "Average Pick": 173.5,
-    "Min Pick": 159,
-    "Max Pick": 189,
-    "Std Dev": 15.2,
-    "Change": 14.83,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dontayvion Wicks",
-    "Position": "WR",
-    "Average Pick": 176,
-    "Min Pick": 164,
-    "Max Pick": 207,
-    "Std Dev": 20.74,
-    "Change": -22.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ray Davis",
-    "Position": "RB",
-    "Average Pick": 176.5,
-    "Min Pick": 169,
-    "Max Pick": 186,
-    "Std Dev": 7.59,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Mayer",
-    "Position": "TE",
-    "Average Pick": 177,
-    "Min Pick": 167,
-    "Max Pick": 186,
-    "Std Dev": 8.04,
-    "Change": -47.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Luke McCaffrey",
-    "Position": "WR",
-    "Average Pick": 177,
-    "Min Pick": 157,
-    "Max Pick": 193,
-    "Std Dev": 15.94,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Mike Williams",
-    "Position": "WR",
-    "Average Pick": 177.5,
-    "Min Pick": 169,
-    "Max Pick": 196,
-    "Std Dev": 12.5,
-    "Change": -20.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jalen McMillan",
-    "Position": "WR",
-    "Average Pick": 178,
-    "Min Pick": 170,
-    "Max Pick": 185,
-    "Std Dev": 7.16,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Gabe Davis",
-    "Position": "WR",
-    "Average Pick": 178,
-    "Min Pick": 172,
-    "Max Pick": 184,
-    "Std Dev": 5.89,
-    "Change": -31.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Bucky Irving",
-    "Position": "RB",
-    "Average Pick": 178.5,
-    "Min Pick": 173,
-    "Max Pick": 183,
-    "Std Dev": 4.2,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cade Otton",
-    "Position": "TE",
-    "Average Pick": 180,
-    "Min Pick": 170,
-    "Max Pick": 190,
-    "Std Dev": 9.97,
-    "Change": -13.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Chigoziem Okonkwo",
-    "Position": "TE",
-    "Average Pick": 180.25,
-    "Min Pick": 156,
-    "Max Pick": 196,
-    "Std Dev": 18.73,
-    "Change": 8.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Roschon Johnson",
-    "Position": "RB",
-    "Average Pick": 180.25,
-    "Min Pick": 157,
-    "Max Pick": 204,
-    "Std Dev": 20.55,
-    "Change": -12.92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kimani Vidal",
-    "Position": "RB",
-    "Average Pick": 181,
-    "Min Pick": 165,
-    "Max Pick": 199,
-    "Std Dev": 16.57,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Joshua Palmer",
-    "Position": "WR",
-    "Average Pick": 181.5,
-    "Min Pick": 177,
-    "Max Pick": 191,
-    "Std Dev": 6.45,
-    "Change": -7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Aidan O'Connell",
+    "player_name": "Matthew Stafford",
+    "Team": "LAR",
     "Position": "QB",
-    "Average Pick": 182,
-    "Min Pick": 148,
-    "Max Pick": 212,
-    "Std Dev": 26.85,
-    "Change": -9.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 104.25,
+    "Community Rank": 79
+  },
+  {
+    "player_name": "Deshaun Watson",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 105.5,
+    "Community Rank": 150
+  },
+  {
+    "player_name": "2027 MID-LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 108.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Stefon Diggs",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 109.25,
+    "Community Rank": 32
+  },
+  {
+    "player_name": "Geno Smith",
+    "Team": "SEA",
+    "Position": "QB",
+    "Average Rank": 110.75,
+    "Community Rank": 126
   },
   {
     "player_name": "J.K. Dobbins",
+    "Team": "LAC",
     "Position": "RB",
-    "Average Pick": 182,
-    "Min Pick": 167,
-    "Max Pick": 197,
-    "Std Dev": 12.49,
-    "Change": 9,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 111,
+    "Community Rank": 131
   },
   {
-    "player_name": "Chuba Hubbard",
-    "Position": "RB",
-    "Average Pick": 182,
-    "Min Pick": 161,
-    "Max Pick": 203,
-    "Std Dev": 18.65,
-    "Change": -45.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Audric Estime",
-    "Position": "RB",
-    "Average Pick": 183,
-    "Min Pick": 171,
-    "Max Pick": 201,
-    "Std Dev": 14.7,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tucker Kraft",
+    "player_name": "Jake Ferguson",
+    "Team": "DAL",
     "Position": "TE",
-    "Average Pick": 183,
-    "Min Pick": 159,
-    "Max Pick": 197,
-    "Std Dev": 16.87,
-    "Change": 11.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 111.5,
+    "Community Rank": 56
   },
   {
-    "player_name": "Sam Howell",
-    "Position": "QB",
-    "Average Pick": 184.5,
-    "Min Pick": 176,
-    "Max Pick": 198,
-    "Std Dev": 10.63,
-    "Change": -32.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Braelon Allen",
-    "Position": "RB",
-    "Average Pick": 185.25,
-    "Min Pick": 170,
-    "Max Pick": 201,
-    "Std Dev": 15.52,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Marvin Mims",
+    "player_name": "Terry McLaurin",
+    "Team": "WAS",
     "Position": "WR",
-    "Average Pick": 185.5,
-    "Min Pick": 175,
-    "Max Pick": 190,
-    "Std Dev": 7.05,
-    "Change": -12.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 113.25,
+    "Community Rank": 41
   },
   {
-    "player_name": "Spencer Rattler",
-    "Position": "QB",
-    "Average Pick": 186.75,
-    "Min Pick": 178,
-    "Max Pick": 193,
-    "Std Dev": 6.29,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Keaton Mitchell",
-    "Position": "RB",
-    "Average Pick": 188.5,
-    "Min Pick": 178,
-    "Max Pick": 200,
-    "Std Dev": 11.62,
-    "Change": -15.83,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DeMario Douglas",
-    "Position": "WR",
-    "Average Pick": 189.75,
-    "Min Pick": 180,
-    "Max Pick": 202,
-    "Std Dev": 10.53,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Devontez Walker",
-    "Position": "WR",
-    "Average Pick": 191,
-    "Min Pick": 168,
-    "Max Pick": 211,
-    "Std Dev": 20.8,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Darnell Mooney",
-    "Position": "WR",
-    "Average Pick": 194.5,
-    "Min Pick": 182,
-    "Max Pick": 202,
-    "Std Dev": 9.57,
-    "Change": -6.83,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Theo Johnson",
+    "player_name": "Travis Kelce",
+    "Team": "KC",
     "Position": "TE",
-    "Average Pick": 195.75,
-    "Min Pick": 167,
-    "Max Pick": 210,
-    "Std Dev": 20.06,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 113.25,
+    "Community Rank": 67
   },
   {
-    "player_name": "Tyrone Tracy",
+    "player_name": "Derek Carr",
+    "Team": "NO",
+    "Position": "QB",
+    "Average Rank": 114.25,
+    "Community Rank": 196
+  },
+  {
+    "player_name": "Xavier Legette",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 114.5,
+    "Community Rank": 151
+  },
+  {
+    "player_name": "Amari Cooper",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 115,
+    "Community Rank": 87
+  },
+  {
+    "player_name": "Tony Pollard",
+    "Team": "TEN",
     "Position": "RB",
-    "Average Pick": 196,
-    "Min Pick": 169,
-    "Max Pick": 216,
-    "Std Dev": 19.95,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 115.5,
+    "Community Rank": 57
+  },
+  {
+    "player_name": "Daniel Jones",
+    "Team": "NYG",
+    "Position": "QB",
+    "Average Rank": 115.5,
+    "Community Rank": 148
   },
   {
     "player_name": "Sam Darnold",
+    "Team": "MIN",
     "Position": "QB",
-    "Average Pick": 196.75,
-    "Min Pick": 173,
-    "Max Pick": 218,
-    "Std Dev": 18.71,
-    "Change": 2.92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Curtis Samuel",
-    "Position": "WR",
-    "Average Pick": 198.5,
-    "Min Pick": 181,
-    "Max Pick": 231,
-    "Std Dev": 23.63,
-    "Change": -33.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dameon Pierce",
-    "Position": "RB",
-    "Average Pick": 199,
-    "Min Pick": 190,
-    "Max Pick": 216,
-    "Std Dev": 11.83,
-    "Change": 22,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Wan'Dale Robinson",
-    "Position": "WR",
-    "Average Pick": 200,
-    "Min Pick": 186,
-    "Max Pick": 211,
-    "Std Dev": 10.74,
-    "Change": -17.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jordan Travis",
-    "Position": "QB",
-    "Average Pick": 200.5,
-    "Min Pick": 183,
-    "Max Pick": 217,
-    "Std Dev": 15.72,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Allgeier",
-    "Position": "RB",
-    "Average Pick": 200.5,
-    "Min Pick": 184,
-    "Max Pick": 224,
-    "Std Dev": 17,
-    "Change": -7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Greg Dulcich",
-    "Position": "TE",
-    "Average Pick": 200.75,
-    "Min Pick": 185,
-    "Max Pick": 216,
-    "Std Dev": 13.57,
-    "Change": 9.92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Brandin Cooks",
-    "Position": "WR",
-    "Average Pick": 201.25,
-    "Min Pick": 196,
-    "Max Pick": 207,
-    "Std Dev": 5.12,
-    "Change": -3.92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rashod Bateman",
-    "Position": "WR",
-    "Average Pick": 203.75,
-    "Min Pick": 193,
-    "Max Pick": 219,
-    "Std Dev": 11,
-    "Change": 6.92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Antonio Gibson",
-    "Position": "RB",
-    "Average Pick": 204.25,
-    "Min Pick": 187,
-    "Max Pick": 212,
-    "Std Dev": 11.62,
-    "Change": -12.58,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Brenden Rice",
-    "Position": "WR",
-    "Average Pick": 204.5,
-    "Min Pick": 190,
-    "Max Pick": 226,
-    "Std Dev": 16.28,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ty Chandler",
-    "Position": "RB",
-    "Average Pick": 205,
-    "Min Pick": 199,
-    "Max Pick": 213,
-    "Std Dev": 5.89,
-    "Change": -35.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaac Guerendo",
-    "Position": "RB",
-    "Average Pick": 205.25,
-    "Min Pick": 187,
-    "Max Pick": 218,
-    "Std Dev": 13.07,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Will Shipley",
-    "Position": "RB",
-    "Average Pick": 207.75,
-    "Min Pick": 203,
-    "Max Pick": 211,
-    "Std Dev": 3.4,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tank Bigsby",
-    "Position": "RB",
-    "Average Pick": 212.25,
-    "Min Pick": 199,
-    "Max Pick": 220,
-    "Std Dev": 10.01,
-    "Change": -11.58,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Treylon Burks",
-    "Position": "WR",
-    "Average Pick": 214,
-    "Min Pick": 208,
-    "Max Pick": 223,
-    "Std Dev": 6.48,
-    "Change": -14,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Juwan Johnson",
-    "Position": "TE",
-    "Average Pick": 215,
-    "Min Pick": 182,
-    "Max Pick": 229,
-    "Std Dev": 22.29,
-    "Change": 32.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Erick All",
-    "Position": "TE",
-    "Average Pick": 215.25,
-    "Min Pick": 187,
-    "Max Pick": 248,
-    "Std Dev": 27.52,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Malik Washington",
-    "Position": "WR",
-    "Average Pick": 216.25,
-    "Min Pick": 181,
-    "Max Pick": 250,
-    "Std Dev": 28.37,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rico Dowdle",
-    "Position": "RB",
-    "Average Pick": 217,
-    "Min Pick": 200,
-    "Max Pick": 244,
-    "Std Dev": 19.49,
-    "Change": 36,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Adam Thielen",
-    "Position": "WR",
-    "Average Pick": 217.25,
-    "Min Pick": 205,
-    "Max Pick": 235,
-    "Std Dev": 12.66,
-    "Change": -1.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Noah Fant",
-    "Position": "TE",
-    "Average Pick": 218,
-    "Min Pick": 193,
-    "Max Pick": 234,
-    "Std Dev": 17.64,
-    "Change": -4,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jalin Hyatt",
-    "Position": "WR",
-    "Average Pick": 219.25,
-    "Min Pick": 209,
-    "Max Pick": 229,
-    "Std Dev": 8.42,
-    "Change": -22.58,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Taysom Hill",
-    "Position": "TE",
-    "Average Pick": 222.5,
-    "Min Pick": 214,
-    "Max Pick": 243,
-    "Std Dev": 13.87,
-    "Change": -4.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dylan Laube",
-    "Position": "RB",
-    "Average Pick": 223.75,
-    "Min Pick": 215,
-    "Max Pick": 233,
-    "Std Dev": 8.22,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jaleel McLaughlin",
-    "Position": "RB",
-    "Average Pick": 225,
-    "Min Pick": 205,
-    "Max Pick": 235,
-    "Std Dev": 13.93,
-    "Change": -29.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Joe Milton",
-    "Position": "QB",
-    "Average Pick": 226.67,
-    "Min Pick": 158,
-    "Max Pick": 266,
-    "Std Dev": 59.68,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jonathan Mingo",
-    "Position": "WR",
-    "Average Pick": 227,
-    "Min Pick": 218,
-    "Max Pick": 232,
-    "Std Dev": 6.22,
-    "Change": -43.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jacob Cowing",
-    "Position": "WR",
-    "Average Pick": 227.25,
-    "Min Pick": 221,
-    "Max Pick": 239,
-    "Std Dev": 8.02,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hunter Henry",
-    "Position": "TE",
-    "Average Pick": 227.75,
-    "Min Pick": 215,
-    "Max Pick": 246,
-    "Std Dev": 13.07,
-    "Change": 16.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rondale Moore",
-    "Position": "WR",
-    "Average Pick": 227.75,
-    "Min Pick": 217,
-    "Max Pick": 236,
-    "Std Dev": 7.93,
-    "Change": 8.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Khalil Herbert",
-    "Position": "RB",
-    "Average Pick": 229.75,
-    "Min Pick": 201,
-    "Max Pick": 251,
-    "Std Dev": 22.56,
-    "Change": -11.42,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jelani Woods",
-    "Position": "TE",
-    "Average Pick": 230.5,
-    "Min Pick": 215,
-    "Max Pick": 237,
-    "Std Dev": 10.41,
-    "Change": 18.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Elijah Moore",
-    "Position": "WR",
-    "Average Pick": 232.25,
-    "Min Pick": 212,
-    "Max Pick": 261,
-    "Std Dev": 20.85,
-    "Change": -45.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Alexander Mattison",
-    "Position": "RB",
-    "Average Pick": 234.5,
-    "Min Pick": 220,
-    "Max Pick": 247,
-    "Std Dev": 11.96,
-    "Change": -39,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Boyd",
-    "Position": "WR",
-    "Average Pick": 235.67,
-    "Min Pick": 217,
-    "Max Pick": 247,
-    "Std Dev": 16.29,
-    "Change": -22.34,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cade Stover",
-    "Position": "TE",
-    "Average Pick": 236,
-    "Min Pick": 223,
-    "Max Pick": 252,
-    "Std Dev": 13.44,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Trey Lance",
-    "Position": "QB",
-    "Average Pick": 236.75,
-    "Min Pick": 225,
-    "Max Pick": 259,
-    "Std Dev": 15.15,
-    "Change": -39.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Rasheen Ali",
-    "Position": "RB",
-    "Average Pick": 239,
-    "Min Pick": 222,
-    "Max Pick": 272,
-    "Std Dev": 22.46,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Miles Sanders",
-    "Position": "RB",
-    "Average Pick": 239.5,
-    "Min Pick": 221,
-    "Max Pick": 258,
-    "Std Dev": 26.16,
-    "Change": -52.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Mike Gesicki",
-    "Position": "TE",
-    "Average Pick": 240,
-    "Min Pick": 227,
-    "Max Pick": 270,
-    "Std Dev": 20.22,
-    "Change": 25.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "A.T. Perry",
-    "Position": "WR",
-    "Average Pick": 240.75,
-    "Min Pick": 219,
-    "Max Pick": 260,
-    "Std Dev": 21.28,
-    "Change": -7.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jacoby Brissett",
-    "Position": "QB",
-    "Average Pick": 242.25,
-    "Min Pick": 175,
-    "Max Pick": 338,
-    "Std Dev": 68.67,
-    "Change": -19.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "AJ Dillon",
-    "Position": "RB",
-    "Average Pick": 242.5,
-    "Min Pick": 183,
-    "Max Pick": 288,
-    "Std Dev": 44.8,
-    "Change": -25.17,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jaheim Bell",
-    "Position": "TE",
-    "Average Pick": 242.67,
-    "Min Pick": 236,
-    "Max Pick": 253,
-    "Std Dev": 9.07,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Johnny Wilson",
-    "Position": "WR",
-    "Average Pick": 243.5,
-    "Min Pick": 222,
-    "Max Pick": 283,
-    "Std Dev": 27.14,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zay Jones",
-    "Position": "WR",
-    "Average Pick": 244,
-    "Min Pick": 212,
-    "Max Pick": 271,
-    "Std Dev": 25.47,
-    "Change": -3,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Odell Beckham",
-    "Position": "WR",
-    "Average Pick": 244.5,
-    "Min Pick": 239,
-    "Max Pick": 259,
-    "Std Dev": 9.68,
-    "Change": 26.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jameis Winston",
-    "Position": "QB",
-    "Average Pick": 247,
-    "Min Pick": 204,
-    "Max Pick": 289,
-    "Std Dev": 42.51,
-    "Change": 8,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DJ Chark",
-    "Position": "WR",
-    "Average Pick": 249.25,
-    "Min Pick": 235,
-    "Max Pick": 258,
-    "Std Dev": 10.21,
-    "Change": 53.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Frank Gore",
-    "Position": "RB",
-    "Average Pick": 249.5,
-    "Min Pick": 242,
-    "Max Pick": 265,
-    "Std Dev": 10.85,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Joe Flacco",
-    "Position": "QB",
-    "Average Pick": 251,
-    "Min Pick": 231,
-    "Max Pick": 281,
-    "Std Dev": 26.46,
-    "Change": 17,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Colby Parkinson",
-    "Position": "TE",
-    "Average Pick": 252,
-    "Min Pick": 240,
-    "Max Pick": 262,
-    "Std Dev": 11.14,
-    "Change": 6,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Trey Palmer",
-    "Position": "WR",
-    "Average Pick": 252.25,
-    "Min Pick": 241,
-    "Max Pick": 264,
-    "Std Dev": 11.93,
-    "Change": -50.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Taylor Heinicke",
-    "Position": "QB",
-    "Average Pick": 254,
-    "Min Pick": 254,
-    "Max Pick": 254,
-    "Std Dev": "",
-    "Change": 68,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hendon Hooker",
-    "Position": "QB",
-    "Average Pick": 254.5,
-    "Min Pick": 227,
-    "Max Pick": 277,
-    "Std Dev": 20.87,
-    "Change": -21.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Greg Dortch",
-    "Position": "WR",
-    "Average Pick": 254.75,
-    "Min Pick": 206,
-    "Max Pick": 295,
-    "Std Dev": 37.11,
-    "Change": -4.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Evan Hull",
-    "Position": "RB",
-    "Average Pick": 256,
-    "Min Pick": 245,
-    "Max Pick": 281,
-    "Std Dev": 16.79,
-    "Change": 52,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Elijah Mitchell",
-    "Position": "RB",
-    "Average Pick": 256.25,
-    "Min Pick": 238,
-    "Max Pick": 289,
-    "Std Dev": 22.57,
-    "Change": -35.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jared Wiley",
-    "Position": "TE",
-    "Average Pick": 256.5,
-    "Min Pick": 237,
-    "Max Pick": 303,
-    "Std Dev": 31.4,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jamari Thrash",
-    "Position": "WR",
-    "Average Pick": 256.75,
-    "Min Pick": 251,
-    "Max Pick": 263,
-    "Std Dev": 5.68,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Alec Pierce",
-    "Position": "WR",
-    "Average Pick": 257.25,
-    "Min Pick": 225,
-    "Max Pick": 286,
-    "Std Dev": 25.32,
-    "Change": -30.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dawson Knox",
-    "Position": "TE",
-    "Average Pick": 257.5,
-    "Min Pick": 249,
-    "Max Pick": 282,
-    "Std Dev": 16.34,
-    "Change": -3,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jake Browning",
-    "Position": "QB",
-    "Average Pick": 259.25,
-    "Min Pick": 233,
-    "Max Pick": 287,
-    "Std Dev": 25.04,
-    "Change": 10.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Conklin",
-    "Position": "TE",
-    "Average Pick": 259.25,
-    "Min Pick": 236,
-    "Max Pick": 317,
-    "Std Dev": 38.68,
-    "Change": 2.75,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "K.J. Osborn",
-    "Position": "WR",
-    "Average Pick": 259.67,
-    "Min Pick": 235,
-    "Max Pick": 276,
-    "Std Dev": 21.73,
-    "Change": -5.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ainias Smith",
-    "Position": "WR",
-    "Average Pick": 259.75,
-    "Min Pick": 238,
-    "Max Pick": 296,
-    "Std Dev": 26.54,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cornelius Johnson",
-    "Position": "WR",
-    "Average Pick": 261.67,
-    "Min Pick": 247,
-    "Max Pick": 280,
-    "Std Dev": 16.8,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hayden Hurst",
-    "Position": "TE",
-    "Average Pick": 262.67,
-    "Min Pick": 206,
-    "Max Pick": 305,
-    "Std Dev": 51.03,
-    "Change": 29.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jalen Coker",
-    "Position": "WR",
-    "Average Pick": 264.33,
-    "Min Pick": 213,
-    "Max Pick": 336,
-    "Std Dev": 63.97,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Darius Slayton",
-    "Position": "WR",
-    "Average Pick": 264.67,
-    "Min Pick": 245,
-    "Max Pick": 296,
-    "Std Dev": 27.43,
-    "Change": 2.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Darren Waller",
-    "Position": "TE",
-    "Average Pick": 265,
-    "Min Pick": 257,
-    "Max Pick": 273,
-    "Std Dev": 11.31,
-    "Change": -59.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zach Wilson",
-    "Position": "QB",
-    "Average Pick": 266,
-    "Min Pick": 222,
-    "Max Pick": 312,
-    "Std Dev": 37.09,
-    "Change": 18.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Louis Rees-Zammit",
-    "Position": "RB",
-    "Average Pick": 266,
-    "Min Pick": 263,
-    "Max Pick": 268,
-    "Std Dev": 2.65,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jerick McKinnon",
-    "Position": "RB",
-    "Average Pick": 267,
-    "Min Pick": 267,
-    "Max Pick": 267,
-    "Std Dev": "",
-    "Change": 60,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Clyde Edwards-Helaire",
-    "Position": "RB",
-    "Average Pick": 267,
-    "Min Pick": 256,
-    "Max Pick": 298,
-    "Std Dev": 20.67,
-    "Change": 12.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kenny Pickett",
-    "Position": "QB",
-    "Average Pick": 267.75,
-    "Min Pick": 246,
-    "Max Pick": 322,
-    "Std Dev": 36.26,
-    "Change": -31.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaiah Davis",
-    "Position": "RB",
-    "Average Pick": 269.67,
-    "Min Pick": 254,
-    "Max Pick": 286,
-    "Std Dev": 16.01,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kenneth Gainwell",
-    "Position": "RB",
-    "Average Pick": 270.5,
-    "Min Pick": 267,
-    "Max Pick": 274,
-    "Std Dev": 4.95,
-    "Change": -5.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Drew Lock",
-    "Position": "QB",
-    "Average Pick": 273.5,
-    "Min Pick": 213,
-    "Max Pick": 362,
-    "Std Dev": 63.76,
-    "Change": -7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Chase Claypool",
-    "Position": "WR",
-    "Average Pick": 274,
-    "Min Pick": 230,
-    "Max Pick": 318,
-    "Std Dev": 62.23,
-    "Change": 59,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Thomas",
-    "Position": "WR",
-    "Average Pick": 274.5,
-    "Min Pick": 261,
-    "Max Pick": 288,
-    "Std Dev": 19.09,
-    "Change": -28.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jalen Tolbert",
-    "Position": "WR",
-    "Average Pick": 274.75,
-    "Min Pick": 260,
-    "Max Pick": 311,
-    "Std Dev": 24.3,
-    "Change": 46.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Pierre Strong",
-    "Position": "RB",
-    "Average Pick": 275,
-    "Min Pick": 275,
-    "Max Pick": 275,
-    "Std Dev": "",
-    "Change": 82,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Devin Culp",
-    "Position": "TE",
-    "Average Pick": 276,
-    "Min Pick": 276,
-    "Max Pick": 276,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Andrei Iosivas",
-    "Position": "WR",
-    "Average Pick": 276,
-    "Min Pick": 245,
-    "Max Pick": 305,
-    "Std Dev": 30.4,
-    "Change": -28,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "AJ Barner",
-    "Position": "TE",
-    "Average Pick": 276.33,
-    "Min Pick": 257,
-    "Max Pick": 299,
-    "Std Dev": 21.2,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "JuJu Smith-Schuster",
-    "Position": "WR",
-    "Average Pick": 278,
-    "Min Pick": 269,
-    "Max Pick": 287,
-    "Std Dev": 12.73,
-    "Change": -67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kendrick Bourne",
-    "Position": "WR",
-    "Average Pick": 278.33,
-    "Min Pick": 259,
-    "Max Pick": 301,
-    "Std Dev": 21.2,
-    "Change": -71.83,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Deuce Vaughn",
-    "Position": "RB",
-    "Average Pick": 279,
-    "Min Pick": 270,
-    "Max Pick": 286,
-    "Std Dev": 8.19,
-    "Change": 12.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Bub Means",
-    "Position": "WR",
-    "Average Pick": 279.33,
-    "Min Pick": 264,
-    "Max Pick": 297,
-    "Std Dev": 16.62,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cedric Tillman",
-    "Position": "WR",
-    "Average Pick": 279.5,
-    "Min Pick": 268,
-    "Max Pick": 291,
-    "Std Dev": 16.26,
-    "Change": -23,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Higbee",
-    "Position": "TE",
-    "Average Pick": 279.67,
-    "Min Pick": 256,
-    "Max Pick": 316,
-    "Std Dev": 31.94,
-    "Change": 19.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hunter Renfrow",
-    "Position": "WR",
-    "Average Pick": 280,
-    "Min Pick": 280,
-    "Max Pick": 280,
-    "Std Dev": "",
-    "Change": 86,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Gerald Everett",
-    "Position": "TE",
-    "Average Pick": 280.33,
-    "Min Pick": 269,
-    "Max Pick": 301,
-    "Std Dev": 17.93,
-    "Change": 13.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dalvin Cook",
-    "Position": "RB",
-    "Average Pick": 280.5,
-    "Min Pick": 232,
-    "Max Pick": 329,
-    "Std Dev": 68.59,
-    "Change": 9,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Daniel Bellinger",
-    "Position": "TE",
-    "Average Pick": 283.33,
-    "Min Pick": 255,
-    "Max Pick": 320,
-    "Std Dev": 33.29,
-    "Change": -3.83,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaiah Spiller",
-    "Position": "RB",
-    "Average Pick": 283.5,
-    "Min Pick": 241,
-    "Max Pick": 326,
-    "Std Dev": 60.1,
-    "Change": -15,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tutu Atwell",
-    "Position": "WR",
-    "Average Pick": 284.67,
-    "Min Pick": 274,
-    "Max Pick": 295,
-    "Std Dev": 10.5,
-    "Change": -21.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kadarius Toney",
-    "Position": "WR",
-    "Average Pick": 285.67,
-    "Min Pick": 260,
-    "Max Pick": 300,
-    "Std Dev": 22.28,
-    "Change": -15.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Luke Schoonmaker",
-    "Position": "TE",
-    "Average Pick": 286,
-    "Min Pick": 250,
-    "Max Pick": 322,
-    "Std Dev": 50.91,
-    "Change": 1,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Dillon Johnson",
-    "Position": "RB",
-    "Average Pick": 286,
-    "Min Pick": 278,
-    "Max Pick": 294,
-    "Std Dev": 11.31,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Mac Jones",
-    "Position": "QB",
-    "Average Pick": 286,
-    "Min Pick": 265,
-    "Max Pick": 327,
-    "Std Dev": 35.51,
-    "Change": -56,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Davis Allen",
-    "Position": "TE",
-    "Average Pick": 286.5,
-    "Min Pick": 264,
-    "Max Pick": 309,
-    "Std Dev": 31.82,
-    "Change": -9.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Skyy Moore",
-    "Position": "WR",
-    "Average Pick": 286.5,
-    "Min Pick": 278,
-    "Max Pick": 295,
-    "Std Dev": 12.02,
-    "Change": -30,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Donald Parham",
-    "Position": "TE",
-    "Average Pick": 287,
-    "Min Pick": 240,
-    "Max Pick": 334,
-    "Std Dev": 66.47,
-    "Change": 48,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tre Tucker",
-    "Position": "WR",
-    "Average Pick": 287.33,
-    "Min Pick": 263,
-    "Max Pick": 329,
-    "Std Dev": 36.25,
-    "Change": -32.33,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Noah Brown",
-    "Position": "WR",
-    "Average Pick": 288.5,
-    "Min Pick": 243,
-    "Max Pick": 334,
-    "Std Dev": 64.35,
-    "Change": 36.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jonnu Smith",
-    "Position": "TE",
-    "Average Pick": 289.25,
-    "Min Pick": 216,
-    "Max Pick": 356,
-    "Std Dev": 57.45,
-    "Change": -26.25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Samaje Perine",
-    "Position": "RB",
-    "Average Pick": 290.5,
-    "Min Pick": 262,
-    "Max Pick": 319,
-    "Std Dev": 40.31,
-    "Change": 3.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Israel Abanikanda",
-    "Position": "RB",
-    "Average Pick": 292,
-    "Min Pick": 284,
-    "Max Pick": 300,
-    "Std Dev": 11.31,
-    "Change": -80.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "D'Onta Foreman",
-    "Position": "RB",
-    "Average Pick": 293,
-    "Min Pick": 282,
-    "Max Pick": 304,
-    "Std Dev": 15.56,
-    "Change": -9,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Marquez Valdes-Scantling",
-    "Position": "WR",
-    "Average Pick": 293.5,
-    "Min Pick": 251,
-    "Max Pick": 336,
-    "Std Dev": 60.1,
-    "Change": 102.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Keilan Robinson",
-    "Position": "RB",
-    "Average Pick": 294,
-    "Min Pick": 294,
-    "Max Pick": 294,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Chris Rodriguez",
-    "Position": "RB",
-    "Average Pick": 294.67,
-    "Min Pick": 279,
-    "Max Pick": 321,
-    "Std Dev": 22.94,
-    "Change": -53.34,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Ryan Flournoy",
-    "Position": "WR",
-    "Average Pick": 295.33,
-    "Min Pick": 284,
-    "Max Pick": 312,
-    "Std Dev": 14.74,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Desmond Ridder",
-    "Position": "QB",
-    "Average Pick": 295.67,
-    "Min Pick": 279,
-    "Max Pick": 317,
-    "Std Dev": 19.43,
-    "Change": -39.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jase McClellan",
-    "Position": "RB",
-    "Average Pick": 296.33,
-    "Min Pick": 246,
-    "Max Pick": 363,
-    "Std Dev": 60.19,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Gallup",
-    "Position": "WR",
-    "Average Pick": 297,
-    "Min Pick": 282,
-    "Max Pick": 307,
-    "Std Dev": 13.23,
-    "Change": 18,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Eric Gray",
-    "Position": "RB",
-    "Average Pick": 298.67,
-    "Min Pick": 278,
-    "Max Pick": 325,
-    "Std Dev": 24.01,
-    "Change": -2.17,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyler Scott",
-    "Position": "WR",
-    "Average Pick": 299,
-    "Min Pick": 299,
-    "Max Pick": 299,
-    "Std Dev": "",
-    "Change": 56,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Donovan Peoples-Jones",
-    "Position": "WR",
-    "Average Pick": 301,
-    "Min Pick": 279,
-    "Max Pick": 331,
-    "Std Dev": 26.91,
-    "Change": 58,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Darnell Washington",
-    "Position": "TE",
-    "Average Pick": 301.5,
-    "Min Pick": 290,
-    "Max Pick": 313,
-    "Std Dev": 16.26,
-    "Change": 29.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cody Schrader",
-    "Position": "RB",
-    "Average Pick": 301.67,
-    "Min Pick": 283,
-    "Max Pick": 339,
-    "Std Dev": 32.33,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "John Metchie",
-    "Position": "WR",
-    "Average Pick": 303,
-    "Min Pick": 285,
-    "Max Pick": 321,
-    "Std Dev": 25.46,
-    "Change": -29,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Blake Watson",
-    "Position": "RB",
-    "Average Pick": 303.33,
-    "Min Pick": 276,
-    "Max Pick": 349,
-    "Std Dev": 39.8,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Josh Reynolds",
-    "Position": "WR",
-    "Average Pick": 303.33,
-    "Min Pick": 272,
-    "Max Pick": 328,
-    "Std Dev": 28.59,
-    "Change": 1.17,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jamaal Williams",
-    "Position": "RB",
-    "Average Pick": 303.5,
-    "Min Pick": 292,
-    "Max Pick": 315,
-    "Std Dev": 16.26,
-    "Change": -24.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Anthony Gould",
-    "Position": "WR",
-    "Average Pick": 304,
-    "Min Pick": 290,
-    "Max Pick": 318,
-    "Std Dev": 19.8,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zach Ertz",
-    "Position": "TE",
-    "Average Pick": 306,
-    "Min Pick": 306,
-    "Max Pick": 306,
-    "Std Dev": 0,
-    "Change": -60.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Joshua Dobbs",
-    "Position": "QB",
-    "Average Pick": 306.5,
-    "Min Pick": 255,
-    "Max Pick": 358,
-    "Std Dev": 72.83,
-    "Change": -43.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Pratt",
-    "Position": "QB",
-    "Average Pick": 307,
-    "Min Pick": 274,
-    "Max Pick": 340,
-    "Std Dev": 46.67,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Sam Hartman",
-    "Position": "QB",
-    "Average Pick": 307,
-    "Min Pick": 289,
-    "Max Pick": 325,
-    "Std Dev": 25.46,
-    "Change": 40,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Damien Harris",
-    "Position": "RB",
-    "Average Pick": 308,
-    "Min Pick": 308,
-    "Max Pick": 308,
-    "Std Dev": "",
-    "Change": 34,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Parker Washington",
-    "Position": "WR",
-    "Average Pick": 308.67,
-    "Min Pick": 291,
-    "Max Pick": 341,
-    "Std Dev": 28.04,
-    "Change": -62.67,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jeff Wilson",
-    "Position": "RB",
-    "Average Pick": 309,
-    "Min Pick": 309,
-    "Max Pick": 309,
-    "Std Dev": "",
-    "Change": 31,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jawhar Jordan",
-    "Position": "RB",
-    "Average Pick": 309,
-    "Min Pick": 307,
-    "Max Pick": 311,
-    "Std Dev": 2.83,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Mason Rudolph",
-    "Position": "QB",
-    "Average Pick": 311,
-    "Min Pick": 265,
-    "Max Pick": 357,
-    "Std Dev": 65.05,
-    "Change": 21,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kendall Milton",
-    "Position": "RB",
-    "Average Pick": 311.5,
-    "Min Pick": 288,
-    "Max Pick": 335,
-    "Std Dev": 33.23,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Hayden Hatten",
-    "Position": "WR",
-    "Average Pick": 313,
-    "Min Pick": 313,
-    "Max Pick": 313,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Sione Vaki",
-    "Position": "RB",
-    "Average Pick": 314.5,
-    "Min Pick": 292,
-    "Max Pick": 337,
-    "Std Dev": 31.82,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Cam Akers",
-    "Position": "RB",
-    "Average Pick": 315,
-    "Min Pick": 304,
-    "Max Pick": 326,
-    "Std Dev": 15.56,
-    "Change": -39,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyrod Taylor",
-    "Position": "QB",
-    "Average Pick": 315.5,
-    "Min Pick": 298,
-    "Max Pick": 333,
-    "Std Dev": 24.75,
-    "Change": -7.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Kareem Hunt",
-    "Position": "RB",
-    "Average Pick": 316,
-    "Min Pick": 293,
-    "Max Pick": 339,
-    "Std Dev": 32.53,
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Michael Carter",
-    "Position": "RB",
-    "Average Pick": 316,
-    "Min Pick": 316,
-    "Max Pick": 316,
-    "Std Dev": "",
-    "Change": -92,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Justice Hill",
-    "Position": "RB",
-    "Average Pick": 319,
-    "Min Pick": 303,
-    "Max Pick": 335,
-    "Std Dev": 22.63,
-    "Change": 0,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Sean Tucker",
-    "Position": "RB",
-    "Average Pick": 319,
-    "Min Pick": 319,
-    "Max Pick": 319,
-    "Std Dev": "",
-    "Change": -21.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Allen Lazard",
-    "Position": "WR",
-    "Average Pick": 319.5,
-    "Min Pick": 297,
-    "Max Pick": 342,
-    "Std Dev": 31.82,
-    "Change": -45.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Emani Bailey",
-    "Position": "RB",
-    "Average Pick": 320,
-    "Min Pick": 320,
-    "Max Pick": 320,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Emari Demercado",
-    "Position": "RB",
-    "Average Pick": 323,
-    "Min Pick": 323,
-    "Max Pick": 323,
-    "Std Dev": "",
-    "Change": -47,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jeremy Ruckert",
-    "Position": "TE",
-    "Average Pick": 323,
-    "Min Pick": 265,
-    "Max Pick": 381,
-    "Std Dev": 82.02,
-    "Change": 21,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "DeWayne McBride",
-    "Position": "RB",
-    "Average Pick": 324,
-    "Min Pick": 296,
-    "Max Pick": 352,
-    "Std Dev": 39.6,
-    "Change": 28,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Joshua Kelley",
-    "Position": "RB",
-    "Average Pick": 324,
-    "Min Pick": 324,
-    "Max Pick": 324,
-    "Std Dev": "",
-    "Change": -8,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tyquan Thornton",
-    "Position": "WR",
-    "Average Pick": 327,
-    "Min Pick": 327,
-    "Max Pick": 327,
-    "Std Dev": "",
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Calvin Austin",
-    "Position": "WR",
-    "Average Pick": 327,
-    "Min Pick": 292,
-    "Max Pick": 346,
-    "Std Dev": 30.35,
-    "Change": -41.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jauan Jennings",
-    "Position": "WR",
-    "Average Pick": 327.5,
-    "Min Pick": 324,
-    "Max Pick": 331,
-    "Std Dev": 4.95,
-    "Change": -32.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Xavier Hutchinson",
-    "Position": "WR",
-    "Average Pick": 328,
-    "Min Pick": 300,
-    "Max Pick": 356,
-    "Std Dev": 39.6,
-    "Change": -19,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jarrett Stidham",
-    "Position": "QB",
-    "Average Pick": 330,
-    "Min Pick": 330,
-    "Max Pick": 330,
-    "Std Dev": "",
-    "Change": -107,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Noah Gray",
-    "Position": "TE",
-    "Average Pick": 331.5,
-    "Min Pick": 315,
-    "Max Pick": 348,
-    "Std Dev": 23.33,
-    "Change": -53.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tahj Washington",
-    "Position": "WR",
-    "Average Pick": 331.5,
-    "Min Pick": 302,
-    "Max Pick": 361,
-    "Std Dev": 41.72,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tanner McLachlan",
-    "Position": "TE",
-    "Average Pick": 333,
-    "Min Pick": 314,
-    "Max Pick": 352,
-    "Std Dev": 26.87,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Zach Evans",
-    "Position": "RB",
-    "Average Pick": 333,
-    "Min Pick": 333,
-    "Max Pick": 333,
-    "Std Dev": "",
-    "Change": -28.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Irv Smith",
-    "Position": "TE",
-    "Average Pick": 337.5,
-    "Min Pick": 332,
-    "Max Pick": 343,
-    "Std Dev": 7.78,
-    "Change": -42,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Terique Owens",
-    "Position": "WR",
-    "Average Pick": 338,
-    "Min Pick": 338,
-    "Max Pick": 338,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Jordan Whittington",
-    "Position": "WR",
-    "Average Pick": 339,
-    "Min Pick": 323,
-    "Max Pick": 355,
-    "Std Dev": 22.63,
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Brevin Jordan",
-    "Position": "TE",
-    "Average Pick": 340,
-    "Min Pick": 340,
-    "Max Pick": 340,
-    "Std Dev": "",
-    "Change": -54,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 116.25,
+    "Community Rank": 495
   },
   {
     "player_name": "Jordan Mason",
+    "Team": "SF",
     "Position": "RB",
-    "Average Pick": 340.5,
-    "Min Pick": 330,
-    "Max Pick": 351,
-    "Std Dev": 14.85,
-    "Change": -69.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 116.75,
+    "Community Rank": 395
   },
   {
-    "player_name": "Demarcus Robinson",
+    "player_name": "Calvin Ridley",
+    "Team": "TEN",
     "Position": "WR",
-    "Average Pick": 340.5,
-    "Min Pick": 310,
-    "Max Pick": 371,
-    "Std Dev": 43.13,
-    "Change": -53.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 117.75,
+    "Community Rank": 50
   },
   {
-    "player_name": "Brenton Strange",
+    "player_name": "Cooper Kupp",
+    "Team": "LAR",
+    "Position": "WR",
+    "Average Rank": 117.75,
+    "Community Rank": 25
+  },
+  {
+    "player_name": "Christian Kirk",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 118.25,
+    "Community Rank": 51
+  },
+  {
+    "player_name": "2024 EARLY 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 119.25,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Diontae Johnson",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 121,
+    "Community Rank": 102
+  },
+  {
+    "player_name": "Najee Harris",
+    "Team": "PIT",
+    "Position": "RB",
+    "Average Rank": 123.5,
+    "Community Rank": 42
+  },
+  {
+    "player_name": "Ja'Lynn Polk",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 125.25,
+    "Community Rank": 163
+  },
+  {
+    "player_name": "David Njoku",
+    "Team": "CLE",
     "Position": "TE",
-    "Average Pick": 340.5,
-    "Min Pick": 337,
-    "Max Pick": 344,
-    "Std Dev": 4.95,
-    "Change": 4.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 126.5,
+    "Community Rank": 158
   },
   {
-    "player_name": "Rashaad Penny",
+    "player_name": "Aaron Jones",
+    "Team": "MIN",
     "Position": "RB",
-    "Average Pick": 341,
-    "Min Pick": 328,
-    "Max Pick": 354,
-    "Std Dev": 18.38,
-    "Change": 5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 128,
+    "Community Rank": 75
   },
   {
-    "player_name": "Tip Reiman",
+    "player_name": "Tyjae Spears",
+    "Team": "TEN",
+    "Position": "RB",
+    "Average Rank": 128.25,
+    "Community Rank": 94
+  },
+  {
+    "player_name": "Aaron Rodgers",
+    "Team": "NYJ",
+    "Position": "QB",
+    "Average Rank": 129.5,
+    "Community Rank": 92
+  },
+  {
+    "player_name": "James Conner",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 130.5,
+    "Community Rank": 35
+  },
+  {
+    "player_name": "Javonte Williams",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 131.25,
+    "Community Rank": 77
+  },
+  {
+    "player_name": "Braelon Allen",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 131.5,
+    "Community Rank": 161
+  },
+  {
+    "player_name": "Zach Charbonnet",
+    "Team": "SEA",
+    "Position": "RB",
+    "Average Rank": 132,
+    "Community Rank": 162
+  },
+  {
+    "player_name": "Evan Engram",
+    "Team": "JAX",
     "Position": "TE",
-    "Average Pick": 341,
-    "Min Pick": 341,
-    "Max Pick": 341,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 132.25,
+    "Community Rank": 99
   },
   {
-    "player_name": "Jake Bobo",
+    "player_name": "Dallas Goedert",
+    "Team": "PHI",
+    "Position": "TE",
+    "Average Rank": 133,
+    "Community Rank": 85
+  },
+  {
+    "player_name": "Christian Watson",
+    "Team": "GB",
     "Position": "WR",
-    "Average Pick": 344.5,
-    "Min Pick": 342,
-    "Max Pick": 347,
-    "Std Dev": 3.54,
-    "Change": 42.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 133.5,
+    "Community Rank": 61
   },
   {
-    "player_name": "Robert Woods",
-    "Position": "WR",
-    "Average Pick": 345,
-    "Min Pick": 345,
-    "Max Pick": 345,
-    "Std Dev": "",
-    "Change": 24,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tom Brady",
-    "Position": "QB",
-    "Average Pick": 345,
-    "Min Pick": 345,
-    "Max Pick": 345,
-    "Std Dev": "",
-    "Change": -45,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaiah Hodgins",
-    "Position": "WR",
-    "Average Pick": 345,
-    "Min Pick": 314,
-    "Max Pick": 376,
-    "Std Dev": 43.84,
-    "Change": 23,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Trey Sermon",
+    "player_name": "Jaylen Warren",
+    "Team": "PIT",
     "Position": "RB",
-    "Average Pick": 345.5,
-    "Min Pick": 308,
-    "Max Pick": 383,
-    "Std Dev": 53.03,
-    "Change": 62.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 137.75,
+    "Community Rank": 49
   },
   {
-    "player_name": "Charlie Jones",
+    "player_name": "Bucky Irving",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 137.75,
+    "Community Rank": 198
+  },
+  {
+    "player_name": "Ricky Pearsall",
+    "Team": "SF",
     "Position": "WR",
-    "Average Pick": 346,
-    "Min Pick": 346,
-    "Max Pick": 346,
-    "Std Dev": "",
-    "Change": -26,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 138,
+    "Community Rank": 166
   },
   {
-    "player_name": "Kayshon Boutte",
+    "player_name": "Zack Moss",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 139.5,
+    "Community Rank": 138
+  },
+  {
+    "player_name": "D'Andre Swift",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 141,
+    "Community Rank": 63
+  },
+  {
+    "player_name": "2024 MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 141.25,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Isaiah Likely",
+    "Team": "BAL",
+    "Position": "TE",
+    "Average Rank": 141.5,
+    "Community Rank": 160
+  },
+  {
+    "player_name": "Josh Downs",
+    "Team": "IND",
     "Position": "WR",
-    "Average Pick": 347,
-    "Min Pick": 347,
-    "Max Pick": 347,
-    "Std Dev": "",
-    "Change": -9,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 141.5,
+    "Community Rank": 117
   },
   {
-    "player_name": "David Bell",
+    "player_name": "Adonai Mitchell",
+    "Team": "IND",
     "Position": "WR",
-    "Average Pick": 347.5,
-    "Min Pick": 344,
-    "Max Pick": 351,
-    "Std Dev": 4.95,
-    "Change": -65.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 141.5,
+    "Community Rank": 165
   },
   {
-    "player_name": "Justyn Ross",
+    "player_name": "Devin Singletary",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 142,
+    "Community Rank": 146
+  },
+  {
+    "player_name": "2025 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 146.75,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Keenan Allen",
+    "Team": "CHI",
     "Position": "WR",
-    "Average Pick": 348,
-    "Min Pick": 348,
-    "Max Pick": 348,
-    "Std Dev": "",
-    "Change": -57,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 147.75,
+    "Community Rank": 73
   },
   {
-    "player_name": "Taulia Tagovailoa",
+    "player_name": "Russell Wilson",
+    "Team": "PIT",
     "Position": "QB",
-    "Average Pick": 349,
-    "Min Pick": 349,
-    "Max Pick": 349,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 149.25,
+    "Community Rank": 184
+  },
+  {
+    "player_name": "Khalil Shakir",
+    "Team": "BUF",
+    "Position": "WR",
+    "Average Rank": 149.25,
+    "Community Rank": 119
+  },
+  {
+    "player_name": "Dontayvion Wicks",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 151.5,
+    "Community Rank": 111
+  },
+  {
+    "player_name": "Andy Dalton",
+    "Team": "CAR",
+    "Position": "QB",
+    "Average Rank": 152,
+    "Community Rank": 578
+  },
+  {
+    "player_name": "Nick Chubb",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 153.5,
+    "Community Rank": 64
+  },
+  {
+    "player_name": "Blake Corum",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 153.75,
+    "Community Rank": 136
+  },
+  {
+    "player_name": "Quentin Johnston",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 155.5,
+    "Community Rank": 174
+  },
+  {
+    "player_name": "Chase Brown",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 156,
+    "Community Rank": 105
+  },
+  {
+    "player_name": "2026 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 158,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Romeo Doubs",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 160.25,
+    "Community Rank": 121
+  },
+  {
+    "player_name": "Zamir White",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 160.5,
+    "Community Rank": 101
+  },
+  {
+    "player_name": "Jakobi Meyers",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 162.25,
+    "Community Rank": 153
+  },
+  {
+    "player_name": "Rashid Shaheed",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 162.5,
+    "Community Rank": 185
+  },
+  {
+    "player_name": "Jalen McMillan",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 164.75,
+    "Community Rank": 205
+  },
+  {
+    "player_name": "Courtland Sutton",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 165.5,
+    "Community Rank": 118
+  },
+  {
+    "player_name": "Jaylen Wright",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 166,
+    "Community Rank": 172
+  },
+  {
+    "player_name": "Jerome Ford",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 166,
+    "Community Rank": 147
+  },
+  {
+    "player_name": "Jerry Jeudy",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 169,
+    "Community Rank": 145
+  },
+  {
+    "player_name": "Marquise Brown",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 170.5,
+    "Community Rank": 112
+  },
+  {
+    "player_name": "2027 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 170.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Pat Freiermuth",
+    "Team": "PIT",
+    "Position": "TE",
+    "Average Rank": 171.25,
+    "Community Rank": 91
+  },
+  {
+    "player_name": "Austin Ekeler",
+    "Team": "WAS",
+    "Position": "RB",
+    "Average Rank": 172.5,
+    "Community Rank": 154
+  },
+  {
+    "player_name": "Ben Sinnott",
+    "Team": "WAS",
+    "Position": "TE",
+    "Average Rank": 173.25,
+    "Community Rank": 206
+  },
+  {
+    "player_name": "2024 LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 173.33,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "MarShawn Lloyd",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 173.75,
+    "Community Rank": 181
+  },
+  {
+    "player_name": "Tucker Kraft",
+    "Team": "GB",
+    "Position": "TE",
+    "Average Rank": 174.75,
+    "Community Rank": 239
+  },
+  {
+    "player_name": "Jermaine Burton",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 175.5,
+    "Community Rank": 169
+  },
+  {
+    "player_name": "Gardner Minshew",
+    "Team": "LV",
+    "Position": "QB",
+    "Average Rank": 177.25,
+    "Community Rank": 212
+  },
+  {
+    "player_name": "Michael Wilson",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 180,
+    "Community Rank": 176
+  },
+  {
+    "player_name": "Cole Kmet",
+    "Team": "CHI",
+    "Position": "TE",
+    "Average Rank": 180.5,
+    "Community Rank": 84
+  },
+  {
+    "player_name": "Dalton Schultz",
+    "Team": "HOU",
+    "Position": "TE",
+    "Average Rank": 180.75,
+    "Community Rank": 100
+  },
+  {
+    "player_name": "2025 MID-LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 181.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Tank Bigsby",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 182.5,
+    "Community Rank": 125
+  },
+  {
+    "player_name": "DeAndre Hopkins",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 183.25,
+    "Community Rank": 144
+  },
+  {
+    "player_name": "Ray Davis",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 183.25,
+    "Community Rank": 167
+  },
+  {
+    "player_name": "Roschon Johnson",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 183.25,
+    "Community Rank": 142
+  },
+  {
+    "player_name": "Wan'Dale Robinson",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 184,
+    "Community Rank": 193
+  },
+  {
+    "player_name": "Rico Dowdle",
+    "Team": "DAL",
+    "Position": "RB",
+    "Average Rank": 184.5,
+    "Community Rank": 130
+  },
+  {
+    "player_name": "Darnell Mooney",
+    "Team": "ATL",
+    "Position": "WR",
+    "Average Rank": 184.75,
+    "Community Rank": 134
+  },
+  {
+    "player_name": "2026 MID-LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 185,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Carson Steele",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 185.33,
+    "Community Rank": 186
+  },
+  {
+    "player_name": "Tyler Allgeier",
+    "Team": "ATL",
+    "Position": "RB",
+    "Average Rank": 186,
+    "Community Rank": 82
+  },
+  {
+    "player_name": "Gabe Davis",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 186.5,
+    "Community Rank": 152
+  },
+  {
+    "player_name": "Malachi Corley",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 187.25,
+    "Community Rank": 175
+  },
+  {
+    "player_name": "Noah Fant",
+    "Team": "SEA",
+    "Position": "TE",
+    "Average Rank": 187.5,
+    "Community Rank": 168
+  },
+  {
+    "player_name": "Roman Wilson",
+    "Team": "PIT",
+    "Position": "WR",
+    "Average Rank": 188,
+    "Community Rank": 197
+  },
+  {
+    "player_name": "Chuba Hubbard",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 188.25,
+    "Community Rank": 132
+  },
+  {
+    "player_name": "Troy Franklin",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 188.25,
+    "Community Rank": 189
+  },
+  {
+    "player_name": "Andrei Iosivas",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 190,
+    "Community Rank": 244
+  },
+  {
+    "player_name": "Kendre Miller",
+    "Team": "NO",
+    "Position": "RB",
+    "Average Rank": 193,
+    "Community Rank": 129
+  },
+  {
+    "player_name": "DeMario Douglas",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 194.25,
+    "Community Rank": 135
+  },
+  {
+    "player_name": "Luke Musgrave",
+    "Team": "GB",
+    "Position": "TE",
+    "Average Rank": 195.5,
+    "Community Rank": 127
+  },
+  {
+    "player_name": "Tyler Lockett",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 197.25,
+    "Community Rank": 128
+  },
+  {
+    "player_name": "Curtis Samuel",
+    "Team": "BUF",
+    "Position": "WR",
+    "Average Rank": 198.25,
+    "Community Rank": 71
+  },
+  {
+    "player_name": "Jahan Dotson",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 199,
+    "Community Rank": 156
+  },
+  {
+    "player_name": "Michael Mayer",
+    "Team": "LV",
+    "Position": "TE",
+    "Average Rank": 199.5,
+    "Community Rank": 248
+  },
+  {
+    "player_name": "2027 MID-LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 201,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Joshua Palmer",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 201.25,
+    "Community Rank": 141
+  },
+  {
+    "player_name": "Colby Parkinson",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 201.5,
+    "Community Rank": 313
+  },
+  {
+    "player_name": "Javon Baker",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 202.25,
+    "Community Rank": 207
+  },
+  {
+    "player_name": "Raheem Mostert",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 202.67,
+    "Community Rank": 155
+  },
+  {
+    "player_name": "Hunter Henry",
+    "Team": "NE",
+    "Position": "TE",
+    "Average Rank": 204.5,
+    "Community Rank": 191
+  },
+  {
+    "player_name": "Gus Edwards",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 205.5,
+    "Community Rank": 157
+  },
+  {
+    "player_name": "Keaton Mitchell",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 207,
+    "Community Rank": 143
+  },
+  {
+    "player_name": "Antonio Gibson",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 208,
+    "Community Rank": 178
+  },
+  {
+    "player_name": "Audric Estime",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 210,
+    "Community Rank": 177
+  },
+  {
+    "player_name": "Luke McCaffrey",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 210.67,
+    "Community Rank": 217
+  },
+  {
+    "player_name": "Greg Dulcich",
+    "Team": "DEN",
+    "Position": "TE",
+    "Average Rank": 210.75,
+    "Community Rank": 246
+  },
+  {
+    "player_name": "Cade Otton",
+    "Team": "TB",
+    "Position": "TE",
+    "Average Rank": 214.67,
+    "Community Rank": 180
+  },
+  {
+    "player_name": "Rashod Bateman",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 215,
+    "Community Rank": 199
+  },
+  {
+    "player_name": "Tyrone Tracy",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 215,
+    "Community Rank": 277
+  },
+  {
+    "player_name": "Sam Howell",
+    "Team": "SEA",
+    "Position": "QB",
+    "Average Rank": 217.5,
+    "Community Rank": 224
+  },
+  {
+    "player_name": "Ezekiel Elliott",
+    "Team": "DAL",
+    "Position": "RB",
+    "Average Rank": 217.75,
+    "Community Rank": 113
+  },
+  {
+    "player_name": "Kimani Vidal",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 219,
+    "Community Rank": 220
+  },
+  {
+    "player_name": "Jauan Jennings",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 219.67,
+    "Community Rank": 297
+  },
+  {
+    "player_name": "Khalil Herbert",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 220,
+    "Community Rank": 173
+  },
+  {
+    "player_name": "Elijah Moore",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 220.75,
+    "Community Rank": 216
+  },
+  {
+    "player_name": "Alec Pierce",
+    "Team": "IND",
+    "Position": "WR",
+    "Average Rank": 222,
+    "Community Rank": 283
+  },
+  {
+    "player_name": "Ja'Tavion Sanders",
+    "Team": "CAR",
+    "Position": "TE",
+    "Average Rank": 222.5,
+    "Community Rank": 211
+  },
+  {
+    "player_name": "Chigoziem Okonkwo",
+    "Team": "TEN",
+    "Position": "TE",
+    "Average Rank": 224.75,
+    "Community Rank": 226
+  },
+  {
+    "player_name": "2024 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 225,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Mike Williams",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 225.25,
+    "Community Rank": 133
+  },
+  {
+    "player_name": "Mike Gesicki",
+    "Team": "CIN",
+    "Position": "TE",
+    "Average Rank": 225.5,
+    "Community Rank": 242
+  },
+  {
+    "player_name": "Brandin Cooks",
+    "Team": "DAL",
+    "Position": "WR",
+    "Average Rank": 226,
+    "Community Rank": 164
+  },
+  {
+    "player_name": "Elijah Mitchell",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 226.33,
+    "Community Rank": 523
+  },
+  {
+    "player_name": "2025 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 226.75,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Marvin Mims",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 227.25,
+    "Community Rank": 179
+  },
+  {
+    "player_name": "Jordan Whittington",
+    "Team": "LAR",
+    "Position": "WR",
+    "Average Rank": 228.33,
+    "Community Rank": 254
+  },
+  {
+    "player_name": "Jacoby Brissett",
+    "Team": "NE",
+    "Position": "QB",
+    "Average Rank": 228.5,
+    "Community Rank": 438
   },
   {
     "player_name": "Devaughn Vele",
+    "Team": "DEN",
     "Position": "WR",
-    "Average Pick": 350,
-    "Min Pick": 350,
-    "Max Pick": 350,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 229,
+    "Community Rank": 252
   },
   {
-    "player_name": "Mecole Hardman",
+    "player_name": "Erick All",
+    "Team": "CIN",
+    "Position": "TE",
+    "Average Rank": 229,
+    "Community Rank": 286
+  },
+  {
+    "player_name": "Jaleel McLaughlin",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 229.67,
+    "Community Rank": 170
+  },
+  {
+    "player_name": "Ty Chandler",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 231,
+    "Community Rank": 171
+  },
+  {
+    "player_name": "Jalen Tolbert",
+    "Team": "DAL",
     "Position": "WR",
-    "Average Pick": 350,
-    "Min Pick": 350,
-    "Max Pick": 350,
-    "Std Dev": "",
-    "Change": 25,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 231.75,
+    "Community Rank": 529
   },
   {
-    "player_name": "Cameron Latu",
-    "Position": "TE",
-    "Average Pick": 350.5,
-    "Min Pick": 332,
-    "Max Pick": 369,
-    "Std Dev": 26.16,
-    "Change": -24,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "2026 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 232.5,
+    "Community Rank": ""
   },
   {
-    "player_name": "Tim Tebow",
-    "Position": "TE",
-    "Average Pick": 353,
-    "Min Pick": 353,
-    "Max Pick": 353,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Dameon Pierce",
+    "Team": "HOU",
+    "Position": "RB",
+    "Average Rank": 233,
+    "Community Rank": 108
   },
   {
-    "player_name": "Cole Turner",
-    "Position": "TE",
-    "Average Pick": 354,
-    "Min Pick": 354,
-    "Max Pick": 354,
-    "Std Dev": "",
-    "Change": -31,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Trey Lance",
+    "Team": "DAL",
+    "Position": "QB",
+    "Average Rank": 233.5,
+    "Community Rank": 214
   },
   {
-    "player_name": "Bo Melton",
+    "player_name": "Jalin Hyatt",
+    "Team": "NYG",
     "Position": "WR",
-    "Average Pick": 354,
-    "Min Pick": 353,
-    "Max Pick": 355,
-    "Std Dev": 1.41,
-    "Change": -82,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 233.5,
+    "Community Rank": 210
   },
   {
-    "player_name": "Marquez Callaway",
+    "player_name": "2027 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 234,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Jonathan Mingo",
+    "Team": "CAR",
     "Position": "WR",
-    "Average Pick": 357,
-    "Min Pick": 357,
-    "Max Pick": 357,
-    "Std Dev": "",
-    "Change": 7,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 235.75,
+    "Community Rank": 259
   },
   {
-    "player_name": "Dallin Holker",
+    "player_name": "Parker Washington",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 236,
+    "Community Rank": 686
+  },
+  {
+    "player_name": "Aidan O'Connell",
+    "Team": "LV",
+    "Position": "QB",
+    "Average Rank": 236.25,
+    "Community Rank": 270
+  },
+  {
+    "player_name": "Devontez Walker",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 237,
+    "Community Rank": 194
+  },
+  {
+    "player_name": "Cam Akers",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 237.25,
+    "Community Rank": 213
+  },
+  {
+    "player_name": "Justice Hill",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 239,
+    "Community Rank": 241
+  },
+  {
+    "player_name": "Hendon Hooker",
+    "Team": "DET",
+    "Position": "QB",
+    "Average Rank": 239.5,
+    "Community Rank": 235
+  },
+  {
+    "player_name": "Drew Lock",
+    "Team": "NYG",
+    "Position": "QB",
+    "Average Rank": 240,
+    "Community Rank": 762
+  },
+  {
+    "player_name": "Samaje Perine",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 243.25,
+    "Community Rank": 574
+  },
+  {
+    "player_name": "Kenny Pickett",
+    "Team": "PHI",
+    "Position": "QB",
+    "Average Rank": 243.5,
+    "Community Rank": 559
+  },
+  {
+    "player_name": "Isaac Guerendo",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 245.33,
+    "Community Rank": 272
+  },
+  {
+    "player_name": "Theo Johnson",
+    "Team": "NYG",
     "Position": "TE",
-    "Average Pick": 358,
-    "Min Pick": 358,
-    "Max Pick": 358,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 246.67,
+    "Community Rank": 284
+  },
+  {
+    "player_name": "Dalvin Cook",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 246.67,
+    "Community Rank": 749
+  },
+  {
+    "player_name": "Will Shipley",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 247,
+    "Community Rank": 208
+  },
+  {
+    "player_name": "Juwan Johnson",
+    "Team": "NO",
+    "Position": "TE",
+    "Average Rank": 247.75,
+    "Community Rank": 233
+  },
+  {
+    "player_name": "Kareem Hunt",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 249.33,
+    "Community Rank": 228
+  },
+  {
+    "player_name": "Cedric Tillman",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 250.25,
+    "Community Rank": 509
+  },
+  {
+    "player_name": "Malik Washington",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 251.67,
+    "Community Rank": 232
+  },
+  {
+    "player_name": "Isaiah Davis",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 252,
+    "Community Rank": 289
+  },
+  {
+    "player_name": "Treylon Burks",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 253.5,
+    "Community Rank": 230
+  },
+  {
+    "player_name": "Spencer Rattler",
+    "Team": "NO",
+    "Position": "QB",
+    "Average Rank": 253.75,
+    "Community Rank": 296
+  },
+  {
+    "player_name": "Kenneth Gainwell",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 258.25,
+    "Community Rank": 517
   },
   {
     "player_name": "Ryan Tannehill",
+    "Team": "TEN",
     "Position": "QB",
-    "Average Pick": 359,
-    "Min Pick": 359,
-    "Max Pick": 359,
-    "Std Dev": "",
-    "Change": -68,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 259,
+    "Community Rank": 497
   },
   {
-    "player_name": "Devin Duvernay",
+    "player_name": "2026 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 259.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Zach Wilson",
+    "Team": "DEN",
+    "Position": "QB",
+    "Average Rank": 260,
+    "Community Rank": 553
+  },
+  {
+    "player_name": "Johnny Wilson",
+    "Team": "PHI",
     "Position": "WR",
-    "Average Pick": 359,
-    "Min Pick": 359,
-    "Max Pick": 359,
-    "Std Dev": "",
-    "Change": -0.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 260,
+    "Community Rank": 279
   },
   {
-    "player_name": "Jason Brownlee",
+    "player_name": "Adam Thielen",
+    "Team": "CAR",
     "Position": "WR",
-    "Average Pick": 360,
-    "Min Pick": 360,
-    "Max Pick": 360,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 261.25,
+    "Community Rank": 122
   },
   {
-    "player_name": "Will Mallory",
-    "Position": "TE",
-    "Average Pick": 360,
-    "Min Pick": 360,
-    "Max Pick": 360,
-    "Std Dev": "",
-    "Change": -34,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "2024 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 262,
+    "Community Rank": ""
   },
   {
-    "player_name": "Ke'Shawn Vaughn",
+    "player_name": "Jamaal Williams",
+    "Team": "NO",
     "Position": "RB",
-    "Average Pick": 364,
-    "Min Pick": 364,
-    "Max Pick": 364,
-    "Std Dev": "",
-    "Change": 6,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 262.33,
+    "Community Rank": 471
   },
   {
-    "player_name": "Xavier Gipson",
+    "player_name": "AJ Dillon",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 262.67,
+    "Community Rank": 201
+  },
+  {
+    "player_name": "Miles Sanders",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 263.25,
+    "Community Rank": 293
+  },
+  {
+    "player_name": "D'Onta Foreman",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 263.5,
+    "Community Rank": 190
+  },
+  {
+    "player_name": "Tyler Boyd",
+    "Team": "TEN",
     "Position": "WR",
-    "Average Pick": 365,
-    "Min Pick": 365,
-    "Max Pick": 365,
-    "Std Dev": "",
-    "Change": -69,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 263.67,
+    "Community Rank": 200
+  },
+  {
+    "player_name": "Clyde Edwards-Helaire",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 264,
+    "Community Rank": 238
+  },
+  {
+    "player_name": "Brenden Rice",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 264,
+    "Community Rank": 218
+  },
+  {
+    "player_name": "Alexander Mattison",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 264,
+    "Community Rank": 219
+  },
+  {
+    "player_name": "Rondale Moore",
+    "Team": "ATL",
+    "Position": "WR",
+    "Average Rank": 264.33,
+    "Community Rank": 223
+  },
+  {
+    "player_name": "Noah Brown",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 265.33,
+    "Community Rank": 564
+  },
+  {
+    "player_name": "Zay Jones",
+    "Team": "",
+    "Position": "WR",
+    "Average Rank": 266.67,
+    "Community Rank": 227
+  },
+  {
+    "player_name": "2025 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 267,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "DJ Chark",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 267,
+    "Community Rank": 678
+  },
+  {
+    "player_name": "John Metchie",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 268,
+    "Community Rank": 613
+  },
+  {
+    "player_name": "Kendrick Bourne",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 268.25,
+    "Community Rank": 287
+  },
+  {
+    "player_name": "Israel Abanikanda",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 268.33,
+    "Community Rank": 449
+  },
+  {
+    "player_name": "Jonnu Smith",
+    "Team": "MIA",
+    "Position": "TE",
+    "Average Rank": 268.5,
+    "Community Rank": 225
+  },
+  {
+    "player_name": "Jalen Coker",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 268.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Dylan Laube",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 268.67,
+    "Community Rank": 182
+  },
+  {
+    "player_name": "Tutu Atwell",
+    "Team": "LAR",
+    "Position": "WR",
+    "Average Rank": 268.67,
+    "Community Rank": 651
+  },
+  {
+    "player_name": "Jacob Cowing",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 269.33,
+    "Community Rank": 273
+  },
+  {
+    "player_name": "Taysom Hill",
+    "Team": "NO",
+    "Position": "TE",
+    "Average Rank": 270.67,
+    "Community Rank": 215
+  },
+  {
+    "player_name": "A.T. Perry",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 270.67,
+    "Community Rank": 510
+  },
+  {
+    "player_name": "Greg Dortch",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 270.75,
+    "Community Rank": 589
+  },
+  {
+    "player_name": "Daniel Bellinger",
+    "Team": "NYG",
+    "Position": "TE",
+    "Average Rank": 270.75,
+    "Community Rank": 526
+  },
+  {
+    "player_name": "Jordan Travis",
+    "Team": "NYJ",
+    "Position": "QB",
+    "Average Rank": 271,
+    "Community Rank": 229
+  },
+  {
+    "player_name": "Jarrett Stidham",
+    "Team": "DEN",
+    "Position": "QB",
+    "Average Rank": 271.5,
+    "Community Rank": 785
+  },
+  {
+    "player_name": "Deuce Vaughn",
+    "Team": "DAL",
+    "Position": "RB",
+    "Average Rank": 272.33,
+    "Community Rank": 204
+  },
+  {
+    "player_name": "K.J. Osborn",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 273,
+    "Community Rank": 231
+  },
+  {
+    "player_name": "Tyquan Thornton",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 273.33,
+    "Community Rank": 609
+  },
+  {
+    "player_name": "Odell Beckham",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 273.67,
+    "Community Rank": 203
+  },
+  {
+    "player_name": "Michael Gallup",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 274,
+    "Community Rank": 304
+  },
+  {
+    "player_name": "Jameis Winston",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 276,
+    "Community Rank": 555
+  },
+  {
+    "player_name": "Trey Palmer",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 276.5,
+    "Community Rank": 221
+  },
+  {
+    "player_name": "Chris Rodriguez",
+    "Team": "WAS",
+    "Position": "RB",
+    "Average Rank": 277,
+    "Community Rank": 695
+  },
+  {
+    "player_name": "Darius Slayton",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 278,
+    "Community Rank": 237
+  },
+  {
+    "player_name": "Skyy Moore",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 278,
+    "Community Rank": 554
+  },
+  {
+    "player_name": "Dawson Knox",
+    "Team": "BUF",
+    "Position": "TE",
+    "Average Rank": 279,
+    "Community Rank": 139
+  },
+  {
+    "player_name": "Anthony Gould",
+    "Team": "IND",
+    "Position": "WR",
+    "Average Rank": 280,
+    "Community Rank": 265
+  },
+  {
+    "player_name": "Ainias Smith",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 281,
+    "Community Rank": 260
+  },
+  {
+    "player_name": "Josh Reynolds",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 281.25,
+    "Community Rank": 234
+  },
+  {
+    "player_name": "Donovan Peoples-Jones",
+    "Team": "DET",
+    "Position": "WR",
+    "Average Rank": 281.33,
+    "Community Rank": 419
+  },
+  {
+    "player_name": "2027 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 281.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Tyler Conklin",
+    "Team": "NYJ",
+    "Position": "TE",
+    "Average Rank": 282.33,
+    "Community Rank": 597
+  },
+  {
+    "player_name": "Calvin Austin",
+    "Team": "PIT",
+    "Position": "WR",
+    "Average Rank": 283.67,
+    "Community Rank": 527
+  },
+  {
+    "player_name": "Jamari Thrash",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 284,
+    "Community Rank": 183
+  },
+  {
+    "player_name": "Darren Waller",
+    "Team": "NYG",
+    "Position": "TE",
+    "Average Rank": 284,
+    "Community Rank": 560
+  },
+  {
+    "player_name": "Michael Thomas",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 284,
+    "Community Rank": 294
+  },
+  {
+    "player_name": "Cade Stover",
+    "Team": "HOU",
+    "Position": "TE",
+    "Average Rank": 285.5,
+    "Community Rank": 269
+  },
+  {
+    "player_name": "JuJu Smith-Schuster",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 287,
+    "Community Rank": 263
+  },
+  {
+    "player_name": "Jared Wiley",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 287.5,
+    "Community Rank": 245
+  },
+  {
+    "player_name": "Brevin Jordan",
+    "Team": "HOU",
+    "Position": "TE",
+    "Average Rank": 288,
+    "Community Rank": 649
+  },
+  {
+    "player_name": "Luke Schoonmaker",
+    "Team": "DAL",
+    "Position": "TE",
+    "Average Rank": 289.33,
+    "Community Rank": 565
+  },
+  {
+    "player_name": "Deneric Prince",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 290.5,
+    "Community Rank": 236
+  },
+  {
+    "player_name": "Tre Tucker",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 291.5,
+    "Community Rank": 303
+  },
+  {
+    "player_name": "Jelani Woods",
+    "Team": "IND",
+    "Position": "TE",
+    "Average Rank": 291.5,
+    "Community Rank": 195
   },
   {
     "player_name": "Casey Washington",
+    "Team": "ATL",
     "Position": "WR",
-    "Average Pick": 366,
-    "Min Pick": 366,
-    "Max Pick": 366,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 292,
+    "Community Rank": 278
   },
   {
-    "player_name": "Boston Scott",
-    "Position": "RB",
-    "Average Pick": 367,
-    "Min Pick": 367,
-    "Max Pick": 367,
-    "Std Dev": "",
-    "Change": 9,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Josh Johnson",
-    "Position": "QB",
-    "Average Pick": 368,
-    "Min Pick": 368,
-    "Max Pick": 368,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Van Jefferson",
+    "player_name": "Kadarius Toney",
+    "Team": "KC",
     "Position": "WR",
-    "Average Pick": 370,
-    "Min Pick": 370,
-    "Max Pick": 370,
-    "Std Dev": "",
-    "Change": -42,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Denzel Mims",
-    "Position": "WR",
-    "Average Pick": 372,
-    "Min Pick": 372,
-    "Max Pick": 372,
-    "Std Dev": "",
-    "Change": 12,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Robert Tonyan",
-    "Position": "TE",
-    "Average Pick": 373,
-    "Min Pick": 373,
-    "Max Pick": 373,
-    "Std Dev": "",
-    "Change": 6,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Keaontay Ingram",
-    "Position": "RB",
-    "Average Pick": 374,
-    "Min Pick": 374,
-    "Max Pick": 374,
-    "Std Dev": "",
-    "Change": 11,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Max Duggan",
-    "Position": "QB",
-    "Average Pick": 375,
-    "Min Pick": 375,
-    "Max Pick": 375,
-    "Std Dev": "",
-    "Change": 2,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Devin Leary",
-    "Position": "QB",
-    "Average Pick": 377,
-    "Min Pick": 377,
-    "Max Pick": 377,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Xazavian Valladay",
-    "Position": "RB",
-    "Average Pick": 378,
-    "Min Pick": 378,
-    "Max Pick": 378,
-    "Std Dev": "",
-    "Change": 8,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 292.5,
+    "Community Rank": 288
   },
   {
     "player_name": "Tejhaun Palmer",
+    "Team": "ARI",
     "Position": "WR",
-    "Average Pick": 379,
-    "Min Pick": 379,
-    "Max Pick": 379,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 293,
+    "Community Rank": 275
   },
   {
-    "player_name": "Elijah Higgins",
-    "Position": "TE",
-    "Average Pick": 380,
-    "Min Pick": 380,
-    "Max Pick": 380,
-    "Std Dev": "",
-    "Change": -13,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Isaiah Williams",
+    "player_name": "Allen Lazard",
+    "Team": "NYJ",
     "Position": "WR",
-    "Average Pick": 382,
-    "Min Pick": 382,
-    "Max Pick": 382,
-    "Std Dev": "",
-    "Change": -26,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 293,
+    "Community Rank": 596
   },
   {
-    "player_name": "Justin Shorter",
-    "Position": "WR",
-    "Average Pick": 384,
-    "Min Pick": 384,
-    "Max Pick": 384,
-    "Std Dev": "",
-    "Change": -84,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Desmond Ridder",
+    "Team": "ARI",
+    "Position": "QB",
+    "Average Rank": 293.5,
+    "Community Rank": 563
   },
   {
-    "player_name": "Malik Davis",
+    "player_name": "Mac Jones",
+    "Team": "JAX",
+    "Position": "QB",
+    "Average Rank": 295,
+    "Community Rank": 679
+  },
+  {
+    "player_name": "Michael Carter",
+    "Team": "ARI",
     "Position": "RB",
-    "Average Pick": 385,
-    "Min Pick": 385,
-    "Max Pick": 385,
-    "Std Dev": "",
-    "Change": 12,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 302.33,
+    "Community Rank": 705
   },
   {
-    "player_name": "Leonard Fournette",
-    "Position": "RB",
-    "Average Pick": 386,
-    "Min Pick": 386,
-    "Max Pick": 386,
-    "Std Dev": "",
-    "Change": 19,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
-  },
-  {
-    "player_name": "Tim Patrick",
+    "player_name": "Tyrell Shavers",
+    "Team": "BUF",
     "Position": "WR",
-    "Average Pick": 387,
-    "Min Pick": 387,
-    "Max Pick": 387,
-    "Std Dev": "",
-    "Change": -89,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 304,
+    "Community Rank": 417
   },
   {
-    "player_name": "Logan Thomas",
-    "Position": "TE",
-    "Average Pick": 388,
-    "Min Pick": 388,
-    "Max Pick": 388,
-    "Std Dev": "",
-    "Change": -39,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Jerick McKinnon",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 306,
+    "Community Rank": 561
   },
   {
-    "player_name": "Payne Durham",
+    "player_name": "Noah Gray",
+    "Team": "KC",
     "Position": "TE",
-    "Average Pick": 389,
-    "Min Pick": 389,
-    "Max Pick": 389,
-    "Std Dev": "",
-    "Change": -6,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 306.33,
+    "Community Rank": 617
+  },
+  {
+    "player_name": "Sean Tucker",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 307,
+    "Community Rank": 541
+  },
+  {
+    "player_name": "Rashaad Penny",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 308,
+    "Community Rank": 312
+  },
+  {
+    "player_name": "Jaheim Bell",
+    "Team": "NE",
+    "Position": "TE",
+    "Average Rank": 309,
+    "Community Rank": 264
+  },
+  {
+    "player_name": "Zach Evans",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 309.5,
+    "Community Rank": 731
+  },
+  {
+    "player_name": "Tyler Higbee",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 311,
+    "Community Rank": 292
+  },
+  {
+    "player_name": "Damien Harris",
+    "Team": "",
+    "Position": "RB",
+    "Average Rank": 311.33,
+    "Community Rank": 321
+  },
+  {
+    "player_name": "Malik Willis",
+    "Team": "TEN",
+    "Position": "QB",
+    "Average Rank": 313,
+    "Community Rank": 607
+  },
+  {
+    "player_name": "Ronnie Rivers",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 313,
+    "Community Rank": 621
+  },
+  {
+    "player_name": "Evan Hull",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 315.33,
+    "Community Rank": 532
+  },
+  {
+    "player_name": "Davis Allen",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 316,
+    "Community Rank": 710
+  },
+  {
+    "player_name": "Jake Bobo",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 316.5,
+    "Community Rank": 450
+  },
+  {
+    "player_name": "Jeff Wilson",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 317.33,
+    "Community Rank": 769
   },
   {
     "player_name": "Jimmy Garoppolo",
+    "Team": "LAR",
     "Position": "QB",
-    "Average Pick": 390,
-    "Min Pick": 390,
-    "Max Pick": 390,
-    "Std Dev": "",
-    "Change": -153.5,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 319,
+    "Community Rank": 767
+  },
+  {
+    "player_name": "Bub Means",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 319,
+    "Community Rank": 295
+  },
+  {
+    "player_name": "Will Dissly",
+    "Team": "LAC",
+    "Position": "TE",
+    "Average Rank": 319,
+    "Community Rank": 774
+  },
+  {
+    "player_name": "Justyn Ross",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 320,
+    "Community Rank": 416
+  },
+  {
+    "player_name": "Xavier Hutchinson",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 320.5,
+    "Community Rank": 551
+  },
+  {
+    "player_name": "Dyami Brown",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 320.67,
+    "Community Rank": 654
+  },
+  {
+    "player_name": "Kayshon Boutte",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 323.33,
+    "Community Rank": 441
+  },
+  {
+    "player_name": "Charlie Jones",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 323.33,
+    "Community Rank": 458
+  },
+  {
+    "player_name": "Tyler Scott",
+    "Team": "CHI",
+    "Position": "WR",
+    "Average Rank": 325,
+    "Community Rank": 557
+  },
+  {
+    "player_name": "Tommy DeVito",
+    "Team": "NYG",
+    "Position": "QB",
+    "Average Rank": 326,
+    "Community Rank": 562
+  },
+  {
+    "player_name": "Xavier Gipson",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 326,
+    "Community Rank": 548
+  },
+  {
+    "player_name": "Hunter Renfrow",
+    "Team": "",
+    "Position": "WR",
+    "Average Rank": 326.33,
+    "Community Rank": 492
+  },
+  {
+    "player_name": "Emari Demercado",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 326.33,
+    "Community Rank": 693
+  },
+  {
+    "player_name": "Isaiah Hodgins",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 326.67,
+    "Community Rank": 379
+  },
+  {
+    "player_name": "Keilan Robinson",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 327,
+    "Community Rank": 276
+  },
+  {
+    "player_name": "Dorian Thompson-Robinson",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 327,
+    "Community Rank": 451
   },
   {
     "player_name": "Terrace Marshall",
+    "Team": "CAR",
     "Position": "WR",
-    "Average Pick": 391,
-    "Min Pick": 391,
-    "Max Pick": 391,
-    "Std Dev": "",
-    "Change": -40,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 327.67,
+    "Community Rank": 439
   },
   {
-    "player_name": "Xavier Weaver",
-    "Position": "WR",
-    "Average Pick": 392,
-    "Min Pick": 392,
-    "Max Pick": 392,
-    "Std Dev": "",
-    "Change": "",
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "player_name": "Isaiah Spiller",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 330.33,
+    "Community Rank": 360
   },
   {
-    "player_name": "Kyle Philips",
+    "player_name": "Rasheen Ali",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 330.5,
+    "Community Rank": 255
+  },
+  {
+    "player_name": "Kenny McIntosh",
+    "Team": "SEA",
+    "Position": "RB",
+    "Average Rank": 331,
+    "Community Rank": 626
+  },
+  {
+    "player_name": "Jase McClellan",
+    "Team": "ATL",
+    "Position": "RB",
+    "Average Rank": 332,
+    "Community Rank": 291
+  },
+  {
+    "player_name": "Jawhar Jordan",
+    "Team": "HOU",
+    "Position": "RB",
+    "Average Rank": 333.5,
+    "Community Rank": 282
+  },
+  {
+    "player_name": "David Bell",
+    "Team": "CLE",
     "Position": "WR",
-    "Average Pick": 393,
-    "Min Pick": 393,
-    "Max Pick": 393,
-    "Std Dev": "",
-    "Change": 12,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 334.67,
+    "Community Rank": 727
+  },
+  {
+    "player_name": "Joshua Kelley",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 335.33,
+    "Community Rank": 459
+  },
+  {
+    "player_name": "Cordarrelle Patterson",
+    "Team": "PIT",
+    "Position": "RB",
+    "Average Rank": 346.5,
+    "Community Rank": 467
+  },
+  {
+    "player_name": "Joshua Dobbs",
+    "Team": "SF",
+    "Position": "QB",
+    "Average Rank": 348,
+    "Community Rank": 558
+  },
+  {
+    "player_name": "Bo Melton",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 350,
+    "Community Rank": 567
+  },
+  {
+    "player_name": "Trey Sermon",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 351.5,
+    "Community Rank": 786
+  },
+  {
+    "player_name": "Kylen Granson",
+    "Team": "IND",
+    "Position": "TE",
+    "Average Rank": 353,
+    "Community Rank": 352
+  },
+  {
+    "player_name": "Logan Thomas",
+    "Team": "",
+    "Position": "TE",
+    "Average Rank": 356,
+    "Community Rank": 298
+  },
+  {
+    "player_name": "Ronnie Bell",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 356,
+    "Community Rank": 454
+  },
+  {
+    "player_name": "Keaontay Ingram",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 357.5,
+    "Community Rank": 720
+  },
+  {
+    "player_name": "Chase Edmonds",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 357.5,
+    "Community Rank": 308
+  },
+  {
+    "player_name": "Pierre Strong",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 358.5,
+    "Community Rank": 726
   },
   {
     "player_name": "Deon Jackson",
+    "Team": "NYG",
     "Position": "RB",
-    "Average Pick": 394,
-    "Min Pick": 394,
-    "Max Pick": 394,
-    "Std Dev": "",
-    "Change": -31,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 366,
+    "Community Rank": 332
   },
   {
-    "player_name": "Melvin Gordon",
+    "player_name": "Leonard Fournette",
+    "Team": "",
     "Position": "RB",
-    "Average Pick": 395,
-    "Min Pick": 395,
-    "Max Pick": 395,
-    "Std Dev": "",
-    "Change": 8,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 367,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Eric Gray",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 370,
+    "Community Rank": 646
+  },
+  {
+    "player_name": "Gerald Everett",
+    "Team": "CHI",
+    "Position": "TE",
+    "Average Rank": 370.5,
+    "Community Rank": 290
+  },
+  {
+    "player_name": "Hassan Haskins",
+    "Team": "TEN",
+    "Position": "RB",
+    "Average Rank": 371,
+    "Community Rank": 387
+  },
+  {
+    "player_name": "Boston Scott",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 372,
+    "Community Rank": 807
+  },
+  {
+    "player_name": "Tyrion Davis-Price",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 373,
+    "Community Rank": 372
+  },
+  {
+    "player_name": "Jake Browning",
+    "Team": "CIN",
+    "Position": "QB",
+    "Average Rank": 373,
+    "Community Rank": 775
+  },
+  {
+    "player_name": "Marquez Valdes-Scantling",
+    "Team": "",
+    "Position": "WR",
+    "Average Rank": 373.5,
+    "Community Rank": 556
+  },
+  {
+    "player_name": "DeWayne McBride",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 374,
+    "Community Rank": 568
+  },
+  {
+    "player_name": "Chris Evans",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 375,
+    "Community Rank": 375
+  },
+  {
+    "player_name": "Darnell Washington",
+    "Team": "PIT",
+    "Position": "TE",
+    "Average Rank": 375.5,
+    "Community Rank": 681
+  },
+  {
+    "player_name": "Kevin Harris",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 376.5,
+    "Community Rank": 392
+  },
+  {
+    "player_name": "Brenton Strange",
+    "Team": "JAX",
+    "Position": "TE",
+    "Average Rank": 376.5,
+    "Community Rank": 683
+  },
+  {
+    "player_name": "D'Ernest Johnson",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 377.5,
+    "Community Rank": 680
   },
   {
     "player_name": "Parris Campbell",
+    "Team": "PHI",
     "Position": "WR",
-    "Average Pick": 396,
-    "Min Pick": 396,
-    "Max Pick": 396,
-    "Std Dev": "",
-    "Change": -18,
-    "": "",
-    "__1": "",
-    "Dynasty Superflex ADP": ""
+    "Average Rank": 378.5,
+    "Community Rank": 309
+  },
+  {
+    "player_name": "Mecole Hardman",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 379.5,
+    "Community Rank": 674
+  },
+  {
+    "player_name": "Derius Davis",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 380.5,
+    "Community Rank": 520
+  },
+  {
+    "player_name": "Kyle Philips",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 381.5,
+    "Community Rank": 380
+  },
+  {
+    "player_name": "Devin Duvernay",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 382.5,
+    "Community Rank": 518
+  },
+  {
+    "player_name": "Braxton Berrios",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 383.5,
+    "Community Rank": 583
+  },
+  {
+    "player_name": "JaMycal Hasty",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 384.5,
+    "Community Rank": 490
+  },
+  {
+    "player_name": "Irv Smith",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 385.5,
+    "Community Rank": 592
+  },
+  {
+    "player_name": "Allen Robinson",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 386.5,
+    "Community Rank": 469
+  },
+  {
+    "player_name": "Eno Benjamin",
+    "Team": "NO",
+    "Position": "RB",
+    "Average Rank": 389,
+    "Community Rank": 639
+  },
+  {
+    "player_name": "DeeJay Dallas",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 390.5,
+    "Community Rank": 795
+  },
+  {
+    "player_name": "Travis Homer",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 391.5,
+    "Community Rank": 500
+  },
+  {
+    "player_name": "Matt Breida",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 392.5,
+    "Community Rank": 765
+  },
+  {
+    "player_name": "Latavius Murray",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 393.5,
+    "Community Rank": 652
+  },
+  {
+    "player_name": "Deonte Harty",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 394.5,
+    "Community Rank": 542
+  },
+  {
+    "player_name": "Tim Patrick",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 397,
+    "Community Rank": 528
+  },
+  {
+    "player_name": "Craig Reynolds",
+    "Team": "DET",
+    "Position": "RB",
+    "Average Rank": 398,
+    "Community Rank": 462
+  },
+  {
+    "player_name": "Ke'Shawn Vaughn",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 399,
+    "Community Rank": 633
+  },
+  {
+    "player_name": "Kene Nwangwu",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 400.5,
+    "Community Rank": 346
+  },
+  {
+    "player_name": "Ty Johnson",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 401.5,
+    "Community Rank": 483
+  },
+  {
+    "player_name": "Elijah Higgins",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 403,
+    "Community Rank": 547
+  },
+  {
+    "player_name": "Harrison Bryant",
+    "Team": "LV",
+    "Position": "TE",
+    "Average Rank": 404,
+    "Community Rank": 756
+  },
+  {
+    "player_name": "Jeremy Ruckert",
+    "Team": "NYJ",
+    "Position": "TE",
+    "Average Rank": 406.5,
+    "Community Rank": 388
+  },
+  {
+    "player_name": "DeVante Parker",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 407.5,
+    "Community Rank": 301
+  },
+  {
+    "player_name": "Bailey Zappe",
+    "Team": "NE",
+    "Position": "QB",
+    "Average Rank": 408,
+    "Community Rank": 391
+  },
+  {
+    "player_name": "Equanimeous St. Brown",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 408.5,
+    "Community Rank": 669
+  },
+  {
+    "player_name": "Clayton Tune",
+    "Team": "ARI",
+    "Position": "QB",
+    "Average Rank": 409,
+    "Community Rank": 627
+  },
+  {
+    "player_name": "Mo Alie-Cox",
+    "Team": "IND",
+    "Position": "TE",
+    "Average Rank": 409.5,
+    "Community Rank": 580
+  },
+  {
+    "player_name": "Taylor Heinicke",
+    "Team": "ATL",
+    "Position": "QB",
+    "Average Rank": 410,
+    "Community Rank": 478
+  },
+  {
+    "player_name": "Tyler Huntley",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 411,
+    "Community Rank": 315
+  },
+  {
+    "player_name": "Mike White",
+    "Team": "MIA",
+    "Position": "QB",
+    "Average Rank": 412,
+    "Community Rank": 812
   }
 ]
