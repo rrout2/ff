@@ -214,7 +214,7 @@ function scoreByPosition(
         }, 0);
 }
 
-function gradeByPosition(
+export function gradeByPosition(
     pos: string,
     getPlayerValue: (playerName: string) => PlayerValue | undefined,
     playerData?: PlayerData,

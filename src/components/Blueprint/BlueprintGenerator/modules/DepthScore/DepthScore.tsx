@@ -147,7 +147,7 @@ function OverrideComponent({override, setOverride, roster}: overrideProps) {
     );
 }
 
-function calculateDepthScore(
+export function calculateDepthScore(
     bench: Player[],
     getPlayerValue: (playerName: string) => PlayerValue | undefined
 ) {
