@@ -91,7 +91,7 @@ export default function BlueprintGenerator() {
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
     const rosterSettings = useRosterSettings(league);
-    const {startingLineup} = useProjectedLineup(
+    const {startingLineup, bench, benchString} = useProjectedLineup(
         rosterSettings,
         roster?.players
     );
@@ -311,8 +311,9 @@ export default function BlueprintGenerator() {
                     <DepthScoreGraphic
                         override={depthScoreOverride}
                         graphicComponentClass={'depthScoreGraphic'}
-                        roster={roster}
                         transparent={false}
+                        bench={bench}
+                        benchString={benchString}
                     />
                 </div>
                 <Grid container spacing={1}>

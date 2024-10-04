@@ -388,6 +388,15 @@ export function useProjectedLineup(
             });
 
         setStartingLineup(starters);
+    }, [playerData, playerIds, rosterSettings]);
+
+    useEffect(() => {
+        if (!playerData || !playerIds) return;
+        const remainingPlayers = new Set(playerIds);
+
+        startingLineup.forEach(p => {
+            remainingPlayers.delete(p.player.player_id);
+        });
 
         const benchPlayerList = Array.from(remainingPlayers)
             .map(p => playerData[p])
@@ -409,7 +418,7 @@ export function useProjectedLineup(
                 }, '')
                 .toLocaleUpperCase()
         );
-    }, [playerData, playerIds, rosterSettings]);
+    }, [startingLineup]);
 
     return {startingLineup, setStartingLineup, bench, benchString};
 }

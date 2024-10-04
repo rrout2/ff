@@ -9,6 +9,8 @@ import {
     useProjectedLineup,
     usePlayerValues,
     PlayerValue,
+    useLeague,
+    useRosterSettings,
 } from '../../../../../hooks/hooks';
 const THRESHOLD = 150;
 interface DepthScoreProps {
@@ -23,6 +25,13 @@ function DepthScore({
     graphicComponentClass,
 }: DepthScoreProps) {
     const [override, setOverride] = useState(-1);
+    const [leagueId] = useLeagueIdFromUrl();
+    const league = useLeague(leagueId);
+    const rosterSettings = useRosterSettings(league);
+    const {bench, benchString} = useProjectedLineup(
+        rosterSettings,
+        roster?.players
+    );
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
             {!graphicComponentClass && (
@@ -40,7 +49,8 @@ function DepthScore({
                 override={override}
                 graphicComponentClass={graphicComponentClass}
                 transparent={false}
-                roster={roster}
+                benchString={benchString}
+                bench={bench}
             />
         </div>
     );
@@ -48,22 +58,18 @@ function DepthScore({
 
 interface graphicProps {
     override: number;
+    bench: Player[];
+    benchString: string;
     graphicComponentClass?: string;
     transparent?: boolean;
-    roster?: Roster;
 }
 function GraphicComponent({
     override,
     graphicComponentClass,
     transparent,
-    roster,
+    benchString,
+    bench,
 }: graphicProps) {
-    const [leagueId] = useLeagueIdFromUrl();
-    const rosterSettings = useRosterSettingsFromId(leagueId);
-    const {bench, benchString} = useProjectedLineup(
-        rosterSettings,
-        roster?.players
-    );
     const [score, setScore] = useState(-1);
 
     useEffect(() => {

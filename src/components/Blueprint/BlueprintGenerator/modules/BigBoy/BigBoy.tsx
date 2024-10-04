@@ -137,10 +137,8 @@ export default function BigBoy() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [roster, setRoster] = useState<Roster>();
     const [specifiedUser, setSpecifiedUser] = useState<User>();
-    const {startingLineup, setStartingLineup} = useProjectedLineup(
-        rosterSettings,
-        roster?.players
-    );
+    const {startingLineup, setStartingLineup, bench, benchString} =
+        useProjectedLineup(rosterSettings, roster?.players);
     const [showPreview, setShowPreview] = useState(false);
     const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
@@ -465,7 +463,8 @@ export default function BigBoy() {
                 <DepthScoreGraphic
                     override={depthScoreOverride}
                     transparent={true}
-                    roster={roster}
+                    bench={bench}
+                    benchString={benchString}
                 />
             </div>
         );
