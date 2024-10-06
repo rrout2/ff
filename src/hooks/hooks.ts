@@ -101,7 +101,9 @@ export function useAdpData() {
     const [adpData] = useState(adp as adpDatum[]);
     const getAdp = (playerName: string): number => {
         const adp = adpData.findIndex(
-            a => a.player_name.toLowerCase() === playerName.toLowerCase()
+            a =>
+                a.player_name.replace(/\W/g, '').toLowerCase() ===
+                playerName.replace(/\W/g, '').toLowerCase()
         );
         if (adp < 0) return Infinity;
 
@@ -114,7 +116,9 @@ export function useAdpData() {
         const adp = adpData
             .filter(player => player.Position === adpData[idx].Position)
             .findIndex(
-                a => a.player_name.toLowerCase() === playerName.toLowerCase()
+                a =>
+                    a.player_name.replace(/\W/g, '').toLowerCase() ===
+                    playerName.replace(/\W/g, '').toLowerCase()
             );
         if (adp < 0) return Infinity;
         return adp + 1;
