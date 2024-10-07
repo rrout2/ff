@@ -144,10 +144,40 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         );
     };
 
+    const FullBlueprintWithProps = ({isPreview}: {isPreview: boolean}) => (
+        <FullBlueprint
+            roster={roster}
+            cornerstones={cornerstones}
+            sells={sells}
+            buys={buys}
+            plusMap={plusMap}
+            holds={holds}
+            comments={comments}
+            risers={risers}
+            riserValues={riserValues}
+            fallers={fallers}
+            fallerValues={fallerValues}
+            rankStateMap={rankStateMap}
+            overall={overall}
+            qb={qb}
+            rb={rb}
+            wr={wr}
+            te={te}
+            depth={depth}
+            numRosters={numRosters}
+            teamName={teamName}
+            archetype={archetype}
+            otherSettings={otherSettings}
+            rookiePickComments={rookiePickComments}
+            suggestionsAndComments={suggestionsAndComments}
+            isPreview={isPreview}
+        />
+    );
+
     return (
         <div>
             <ExportButton
-                className={styles.fullBlueprint}
+                className={styles.exportableClass}
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
             />
@@ -196,33 +226,9 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 suggestionsAndComments={suggestionsAndComments}
                 setSuggestionsAndComments={setSuggestionsAndComments}
             />
-            <div className={showPreview ? '' : styles.offScreen}>
-                <FullBlueprint
-                    roster={roster}
-                    cornerstones={cornerstones}
-                    sells={sells}
-                    buys={buys}
-                    plusMap={plusMap}
-                    holds={holds}
-                    comments={comments}
-                    risers={risers}
-                    riserValues={riserValues}
-                    fallers={fallers}
-                    fallerValues={fallerValues}
-                    rankStateMap={rankStateMap}
-                    overall={overall}
-                    qb={qb}
-                    rb={rb}
-                    wr={wr}
-                    te={te}
-                    depth={depth}
-                    numRosters={numRosters}
-                    teamName={teamName}
-                    archetype={archetype}
-                    otherSettings={otherSettings}
-                    rookiePickComments={rookiePickComments}
-                    suggestionsAndComments={suggestionsAndComments}
-                />
+            {showPreview && <FullBlueprintWithProps isPreview={true} />}
+            <div className={styles.offScreen}>
+                <FullBlueprintWithProps isPreview={false} />
             </div>
         </div>
     );
@@ -256,6 +262,7 @@ interface FullBlueprintProps {
     otherSettings: string;
     rookiePickComments: string[];
     suggestionsAndComments: string[];
+    isPreview: boolean;
 }
 
 function FullBlueprint({
@@ -283,6 +290,7 @@ function FullBlueprint({
     otherSettings,
     rookiePickComments,
     suggestionsAndComments,
+    isPreview,
 }: FullBlueprintProps) {
     const playerData = usePlayerData();
     const {sortByAdp} = useAdpData();
@@ -308,104 +316,111 @@ function FullBlueprint({
     }
 
     return (
-        <div className={styles.fullBlueprint}>
-            <div className={styles.teamName}>{teamName}</div>
-            <div className={styles.otherSettings}>{otherSettings}</div>
+        <div className={isPreview ? undefined : styles.exportableClass}>
             <div
-                className={styles.rookiePickComment1}
-                style={{
-                    fontSize:
-                        rookiePickComments[0].length > 60 ? '12px' : '16px',
-                }}
+                className={`${styles.fullBlueprint} ${
+                    isPreview ? styles.previewSize : styles.fullSize
+                }`}
             >
-                {rookiePickComments[0]}
-            </div>
-            <div
-                className={styles.rookiePickComment2}
-                style={{
-                    fontSize:
-                        rookiePickComments[0].length > 60 ? '12px' : '16px',
-                }}
-            >
-                {rookiePickComments[1]}
-            </div>
-            <div className={styles.suggestionsAndComments}>
-                <ul>
-                    {suggestionsAndComments.map(
-                        (suggestion, i) =>
-                            !!suggestion && <li key={i}>{suggestion}</li>
-                    )}
-                </ul>
-            </div>
-            <div className={styles.rosterGraphic}>
-                <RosterGraphic
-                    allPlayers={allPlayers}
-                    numRosters={numRosters ?? 0}
-                    rankStateMap={rankStateMap}
-                    transparent={true}
-                />
-            </div>
-            <div className={styles.settingsGraphic}>
-                <SettingsGraphic
-                    leagueId={leagueId}
-                    numRosters={numRosters ?? 0}
-                    transparent={true}
-                />
-            </div>
-            <div className={styles.cornerstonesGraphic}>
-                <CornerstonesGraphic cornerstones={cornerstones} />
-            </div>
-            <div className={styles.risersFallersGraphic}>
-                <RisersFallersGraphic
-                    risers={risers}
-                    riserValues={riserValues}
-                    fallers={fallers}
-                    fallerValues={fallerValues}
-                    transparent={true}
-                />
-            </div>
-            <div className={styles.suggestedMovesGraphic}>
-                <SuggestedMovesGraphic
-                    transparent={true}
-                    sells={sells}
-                    buys={buys}
-                    plusMap={plusMap}
-                />
-            </div>
-            <div className={styles.holdsGraphic}>
-                <HoldsGraphic holds={holds} comments={comments} />
-            </div>
-            <div className={styles.positionalGradesGraphic}>
-                <PositionalGradesGraphic
-                    overall={overall}
-                    qb={qb}
-                    rb={rb}
-                    wr={wr}
-                    te={te}
-                    depth={depth}
-                    transparent={true}
-                />
-            </div>
-            <div className={styles.threeYearOutlook}>
-                <div className={styles.graphCrop}>
-                    <img
-                        src={getGraphFromArchetype(archetype)}
-                        className={styles.graph}
+                <div className={styles.teamName}>{teamName}</div>
+                <div className={styles.otherSettings}>{otherSettings}</div>
+                <div
+                    className={styles.rookiePickComment1}
+                    style={{
+                        fontSize:
+                            rookiePickComments[0].length > 60 ? '12px' : '16px',
+                    }}
+                >
+                    {rookiePickComments[0]}
+                </div>
+                <div
+                    className={styles.rookiePickComment2}
+                    style={{
+                        fontSize:
+                            rookiePickComments[0].length > 60 ? '12px' : '16px',
+                    }}
+                >
+                    {rookiePickComments[1]}
+                </div>
+                <div className={styles.suggestionsAndComments}>
+                    <ul>
+                        {suggestionsAndComments.map(
+                            (suggestion, i) =>
+                                !!suggestion && <li key={i}>{suggestion}</li>
+                        )}
+                    </ul>
+                </div>
+                <div className={styles.rosterGraphic}>
+                    <RosterGraphic
+                        allPlayers={allPlayers}
+                        numRosters={numRosters ?? 0}
+                        rankStateMap={rankStateMap}
+                        transparent={true}
                     />
                 </div>
+                <div className={styles.settingsGraphic}>
+                    <SettingsGraphic
+                        leagueId={leagueId}
+                        numRosters={numRosters ?? 0}
+                        transparent={true}
+                    />
+                </div>
+                <div className={styles.cornerstonesGraphic}>
+                    <CornerstonesGraphic cornerstones={cornerstones} />
+                </div>
+                <div className={styles.risersFallersGraphic}>
+                    <RisersFallersGraphic
+                        risers={risers}
+                        riserValues={riserValues}
+                        fallers={fallers}
+                        fallerValues={fallerValues}
+                        transparent={true}
+                    />
+                </div>
+                <div className={styles.suggestedMovesGraphic}>
+                    <SuggestedMovesGraphic
+                        transparent={true}
+                        sells={sells}
+                        buys={buys}
+                        plusMap={plusMap}
+                    />
+                </div>
+                <div className={styles.holdsGraphic}>
+                    <HoldsGraphic holds={holds} comments={comments} />
+                </div>
+                <div className={styles.positionalGradesGraphic}>
+                    <PositionalGradesGraphic
+                        overall={overall}
+                        qb={qb}
+                        rb={rb}
+                        wr={wr}
+                        te={te}
+                        depth={depth}
+                        transparent={true}
+                    />
+                </div>
+                <div className={styles.threeYearOutlook}>
+                    <div className={styles.graphCrop}>
+                        <img
+                            src={getGraphFromArchetype(archetype)}
+                            className={styles.graph}
+                        />
+                    </div>
+                </div>
+                <div
+                    className={styles.archetypeGraphLabel}
+                    style={{color: getColorFromArchetype(archetype)}}
+                >
+                    ⎯⎯&nbsp;&nbsp;
+                    {getLabelFromArchetype(archetype).toUpperCase()}
+                    &nbsp;&nbsp;⎯⎯
+                </div>
+                <div className={styles.dvm}>
+                    <img src={getDvmFromArchetype(archetype)} />
+                </div>
+                <div className={styles.bpCode}>{getBlueprintCode()}</div>
+                <img src={blankBlueprintV2} />
             </div>
-            <div
-                className={styles.archetypeGraphLabel}
-                style={{color: getColorFromArchetype(archetype)}}
-            >
-                ⎯⎯&nbsp;&nbsp;{getLabelFromArchetype(archetype).toUpperCase()}
-                &nbsp;&nbsp;⎯⎯
-            </div>
-            <div className={styles.dvm}>
-                <img src={getDvmFromArchetype(archetype)} />
-            </div>
-            <div className={styles.bpCode}>{getBlueprintCode()}</div>
-            <img src={blankBlueprintV2} />
         </div>
     );
 }

@@ -1,5 +1,21 @@
 .fullBlueprint {
     position: relative;
+    width: fit-content;
+}
+
+.exportableClass {
+    width: calc(2174px * 2);
+    height: calc(1248px * 2);
+}
+
+.fullSize {
+    transform-origin: top left;
+    scale: 2;
+}
+
+.previewSize {
+    transform-origin: top left;
+    scale: 0.9;
 }
 
 .rosterGraphic {
