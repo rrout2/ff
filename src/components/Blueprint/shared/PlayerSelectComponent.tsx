@@ -6,6 +6,7 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import {useAdpData, usePlayerData} from '../../../hooks/hooks';
+import {useEffect, useState} from 'react';
 
 export default function PlayerSelectComponent(props: {
     playerIds: string[];
@@ -29,20 +30,22 @@ export default function PlayerSelectComponent(props: {
     } = props;
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
+    const [allPlayerOptions, setAllPlayerOptions] = useState<string[]>([]);
+
+    useEffect(() => {
+        if (!playerData) return;
+        const playerOpts = playerIds
+            .map(playerId => playerData[playerId])
+            .filter(player => !!player)
+            .sort(sortByAdp)
+            .map(p => p.player_id);
+        if (nonIdPlayerOptions) {
+            playerOpts.push(...nonIdPlayerOptions);
+        }
+        setAllPlayerOptions(playerOpts);
+    }, [playerIds, playerData, nonIdPlayerOptions]);
     if (!playerData) return <></>;
 
-    const allPlayerOptions = playerIds
-        .map(playerId => playerData[playerId])
-        .filter(player => {
-            if (!player) return false;
-            return !position || player.fantasy_positions.includes(position);
-        })
-        .sort(sortByAdp)
-        .map(p => p.player_id);
-
-    if (nonIdPlayerOptions) {
-        allPlayerOptions.push(...nonIdPlayerOptions);
-    }
     return (
         <FormControl
             style={{

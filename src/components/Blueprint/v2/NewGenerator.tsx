@@ -6,7 +6,12 @@ import {
     usePlayerData,
     useTeamIdFromUrl,
 } from '../../../hooks/hooks';
-import {User, Roster, getAllUsers} from '../../../sleeper-api/sleeper-api';
+import {
+    User,
+    Roster,
+    getAllUsers,
+    Player,
+} from '../../../sleeper-api/sleeper-api';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {
     FormControl,
@@ -26,6 +31,7 @@ import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModu
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
+import PlayerSelectComponent from '../shared/PlayerSelectComponent';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -86,6 +92,24 @@ export default function NewGenerator() {
 
         setRoster(newRoster);
     }, [rosters, teamId, playerData, allUsers]);
+
+    const [allPlayers, setAllPlayers] = useState<string[]>([]);
+    useEffect(() => {
+        const players: string[] = [];
+        for (const playerId in playerData) {
+            players.push(playerId);
+        }
+        setAllPlayers(players);
+    }, [playerData]);
+
+    const [nonSleeperIds, setNonSleeperIds] = useState<string[]>([]);
+
+    useEffect(() => {
+        const customRoster = {
+            players: nonSleeperIds,
+        } as Roster;
+        setRoster(customRoster);
+    }, [nonSleeperIds]);
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
@@ -163,10 +187,27 @@ export default function NewGenerator() {
 
     return (
         <div>
-            {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
-                margin: '4px',
-            })}
-            {hasTeamId() && moduleSelectComponent()}
+            {!leagueId && (
+                <PlayerSelectComponent
+                    playerIds={allPlayers}
+                    selectedPlayerIds={nonSleeperIds}
+                    onChange={setNonSleeperIds}
+                    multiple={true}
+                    label="Roster"
+                />
+            )}
+            {!!leagueId &&
+                teamSelectComponent(
+                    teamId,
+                    setTeamId,
+                    allUsers,
+                    specifiedUser,
+                    {
+                        margin: '4px',
+                    }
+                )}
+            {(hasTeamId() || nonSleeperIds.length > 0) &&
+                moduleSelectComponent()}
             {module === Module.Roster && !!roster && !!rosters && (
                 <RosterModule
                     roster={roster}
