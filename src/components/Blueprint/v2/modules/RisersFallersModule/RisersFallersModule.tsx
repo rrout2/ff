@@ -140,7 +140,7 @@ export function GraphicComponent({
                         {fallerValues.map((value, idx) => (
                             <div key={idx} className={styles.valueAndArrow}>
                                 <div className={styles.value}>
-                                    {value.toFixed(1)}%
+                                    {value.toFixed(0)}%
                                 </div>
                                 <div
                                     className={`${styles.arrowImage} ${styles.alignFlexEnd}`}
@@ -164,7 +164,7 @@ export function GraphicComponent({
                                     <img src={greens[idx]} />
                                 </div>
                                 <div className={styles.value}>
-                                    +{value.toFixed(1)}%
+                                    +{value.toFixed(0)}%
                                 </div>
                             </div>
                         ))}
