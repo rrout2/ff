@@ -51,6 +51,7 @@ import {
     InputComponent as ThreeYearOutlookInput,
     GraphicComponent as ThreeYearOutlookGraphic,
 } from '../ThreeYearOutlook/ThreeYearOutlook';
+import {ALL_ARCHETYPES, Archetype} from '../../consts/archetypes';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -219,28 +220,6 @@ export default function UnifiedModule({
         </div>
     );
 }
-
-export enum Archetype {
-    UNSPECIFIED = 'UNSPECIFIED',
-
-    HardRebuild_RRC = 'HARD REBUILD - RRC',
-    HardRebuild_RRR = 'HARD REBUILD - RRR',
-    FutureValue = 'FUTURE VALUE',
-    WellRounded_CCO = 'WELL ROUNDED - CCO',
-    WellRounded_CCR = 'WELL ROUNDED - CCR',
-    OneYearReload = 'ONE YEAR RELOAD',
-    EliteValue_CCC = 'ELITE VALUE - CCC',
-    EliteValue_CCO = 'ELITE VALUE - CCO',
-    WRFactory_CCO = 'WR FACTORY - CCO',
-    WRFactory_CCR = 'WR FACTORY - CCR',
-    DualEliteQB_CCO = 'DUAL ELITE QB - CCO',
-    DualEliteQB_RCC = 'DUAL ELITE QB - RCC',
-    RBHeavy = 'RB HEAVY',
-    EliteQBTE_RCC = 'ELITE QB/TE - RCC',
-    EliteQBTE_CCO = 'ELITE QB/TE - CCO',
-}
-
-export const ALL_ARCHETYPES = Object.values(Archetype);
 
 export type UnifiedInputsProps = {
     roster: Roster | undefined;
