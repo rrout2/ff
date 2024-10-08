@@ -13,7 +13,7 @@ export default function RosterModule({
     teamName,
 }: {
     roster: Roster;
-    numRosters: number;
+    numRosters?: number;
     teamName?: string;
 }) {
     const playerData = usePlayerData();
@@ -47,7 +47,7 @@ interface GraphicComponentProps {
     graphicClassName?: string;
     allPlayers: Player[];
     rankStateMap: Map<string, [string, Dispatch<SetStateAction<string>>]>;
-    numRosters: number;
+    numRosters?: number;
     transparent?: boolean;
 }
 
@@ -84,7 +84,7 @@ export function GraphicComponent({
             style={{backgroundColor: transparent ? 'transparent' : '#005D91'}}
         >
             {FANTASY_POSITIONS.map(pos => (
-                <div className={styles.positionColumn}>
+                <div className={styles.positionColumn} key={pos}>
                     <div
                         className={styles.positionHeader}
                         style={{
@@ -93,7 +93,7 @@ export function GraphicComponent({
                     >
                         <div>{pos}</div>
                         <div className={styles.postionalRank}>
-                            {rankStateMap.get(pos)?.[0]} / {numRosters}
+                            {rankStateMap.get(pos)?.[0]} / {numRosters ?? 0}
                         </div>
                     </div>
                     {allPlayers
@@ -134,7 +134,7 @@ export function InputComponent({
         <>
             {FANTASY_POSITIONS.map(pos => {
                 return (
-                    <FormControl style={{margin: '4px'}}>
+                    <FormControl style={{margin: '4px'}} key={pos}>
                         <InputLabel>{pos}</InputLabel>
                         <Select
                             label={pos}

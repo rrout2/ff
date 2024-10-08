@@ -6,12 +6,7 @@ import {
     usePlayerData,
     useTeamIdFromUrl,
 } from '../../../hooks/hooks';
-import {
-    User,
-    Roster,
-    getAllUsers,
-    Player,
-} from '../../../sleeper-api/sleeper-api';
+import {User, Roster, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
 import {
     FormControl,
@@ -19,8 +14,10 @@ import {
     Select,
     SelectChangeEvent,
     MenuItem,
+    TextField,
+    Button,
 } from '@mui/material';
-import {NONE_TEAM_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID, NONE_TEAM_ID} from '../../../consts/urlParams';
 import RosterModule from './modules/RosterModule/RosterModule';
 import SettingsModule from './modules/SettingsModule/SettingsModule';
 import CornerstonesModule from './modules/CornerstonesModule/CornerstonesModule';
@@ -32,6 +29,9 @@ import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
 import PlayerSelectComponent from '../shared/PlayerSelectComponent';
+import {FLEX, QB, RB, SUPER_FLEX, TE, WR} from '../../../consts/fantasy';
+import StyledNumberInput from '../shared/StyledNumberInput';
+import {useSearchParams} from 'react-router-dom';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -48,7 +48,8 @@ export enum Module {
 }
 
 export default function NewGenerator() {
-    const [leagueId] = useLeagueIdFromUrl();
+    const [leagueId, setLeagueId] = useLeagueIdFromUrl();
+    const [leagueIdWrapper, setLeagueIdWrapper] = useState(leagueId);
     const [teamId, setTeamId] = useTeamIdFromUrl();
     const [module, setModule] = useParamFromUrl('module', Module.Unspecified);
     const {data: rosters} = useFetchRosters(leagueId);
@@ -103,6 +104,59 @@ export default function NewGenerator() {
     }, [playerData]);
 
     const [nonSleeperIds, setNonSleeperIds] = useState<string[]>([]);
+    const [nonSleeperRosterSettings, setNonSleeperRosterSettings] = useState(
+        new Map([
+            [QB, 1],
+            [RB, 2],
+            [WR, 2],
+            [TE, 1],
+            [FLEX, 2],
+            [SUPER_FLEX, 1],
+        ])
+    );
+
+    const [_searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(QB);
+                searchParams.delete(RB);
+                searchParams.delete(WR);
+                searchParams.delete(TE);
+                searchParams.delete(FLEX);
+                searchParams.delete(SUPER_FLEX);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(QB, '' + nonSleeperRosterSettings.get(QB));
+                searchParams.set(RB, '' + nonSleeperRosterSettings.get(RB));
+                searchParams.set(WR, '' + nonSleeperRosterSettings.get(WR));
+                searchParams.set(TE, '' + nonSleeperRosterSettings.get(TE));
+                searchParams.set(FLEX, '' + nonSleeperRosterSettings.get(FLEX));
+                searchParams.set(
+                    SUPER_FLEX,
+                    '' + nonSleeperRosterSettings.get(SUPER_FLEX)
+                );
+                return searchParams;
+            });
+        }
+    }, [nonSleeperRosterSettings, leagueId]);
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete('nonSleeperIds');
+                return searchParams;
+            });
+            return;
+        }
+        setSearchParams(searchParams => {
+            searchParams.set('nonSleeperIds', nonSleeperIds.join(','));
+            return searchParams;
+        });
+    }, [nonSleeperIds, leagueId]);
 
     useEffect(() => {
         const customRoster = {
@@ -188,13 +242,61 @@ export default function NewGenerator() {
     return (
         <div>
             {!leagueId && (
-                <PlayerSelectComponent
-                    playerIds={allPlayers}
-                    selectedPlayerIds={nonSleeperIds}
-                    onChange={setNonSleeperIds}
-                    multiple={true}
-                    label="Roster"
-                />
+                <>
+                    <TextField
+                        value={leagueIdWrapper}
+                        onChange={e => setLeagueIdWrapper(e.target.value)}
+                        label="Sleeper ID"
+                    />
+                    <Button
+                        variant="outlined"
+                        onClick={() => setLeagueId(leagueIdWrapper)}
+                        disabled={!leagueIdWrapper}
+                    >
+                        {'submit'}
+                    </Button>
+                    or
+                    <div>
+                        <PlayerSelectComponent
+                            playerIds={allPlayers}
+                            selectedPlayerIds={nonSleeperIds}
+                            onChange={setNonSleeperIds}
+                            multiple={true}
+                            label="Roster"
+                        />
+                        {[QB, RB, WR, TE, FLEX, SUPER_FLEX].map(position => (
+                            <StyledNumberInput
+                                key={position}
+                                value={nonSleeperRosterSettings.get(position)}
+                                onChange={(_, value) => {
+                                    const newMap = new Map(
+                                        nonSleeperRosterSettings
+                                    );
+                                    newMap.set(position, value || 0);
+                                    setNonSleeperRosterSettings(newMap);
+                                }}
+                                label={position}
+                                min={0}
+                                max={10}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+            {!!leagueId && (
+                <Button
+                    variant="outlined"
+                    onClick={() => {
+                        setSearchParams(searchParams => {
+                            searchParams.delete(LEAGUE_ID);
+                            return searchParams;
+                        });
+                        setLeagueIdWrapper('');
+                        setLeagueId('');
+                    }}
+                >
+                    {'New League'}
+                </Button>
             )}
             {!!leagueId &&
                 teamSelectComponent(
@@ -208,10 +310,10 @@ export default function NewGenerator() {
                 )}
             {(hasTeamId() || nonSleeperIds.length > 0) &&
                 moduleSelectComponent()}
-            {module === Module.Roster && !!roster && !!rosters && (
+            {module === Module.Roster && !!roster && (
                 <RosterModule
                     roster={roster}
-                    numRosters={rosters.length}
+                    numRosters={rosters?.length}
                     teamName={
                         specifiedUser?.metadata?.team_name ??
                         specifiedUser?.display_name

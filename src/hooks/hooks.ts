@@ -325,8 +325,17 @@ export function useRosterSettings(league?: League) {
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
+    const [searchParams] = useSearchParams();
     useEffect(() => {
         const settings = new Map<string, number>();
+        if (!league) {
+            settings.set(QB, +searchParams.get(QB)!);
+            settings.set(RB, +searchParams.get(RB)!);
+            settings.set(WR, +searchParams.get(WR)!);
+            settings.set(TE, +searchParams.get(TE)!);
+            settings.set(FLEX, +searchParams.get(FLEX)!);
+            settings.set(SUPER_FLEX, +searchParams.get(SUPER_FLEX)!);
+        }
         league?.roster_positions.forEach(pos => {
             if (!settings.has(pos)) {
                 settings.set(pos, 0);
@@ -334,7 +343,7 @@ export function useRosterSettings(league?: League) {
             settings.set(pos, settings.get(pos)! + 1);
         });
         setRosterSettings(settings);
-    }, [league, league?.roster_positions]);
+    }, [league, league?.roster_positions, searchParams]);
     return rosterSettings;
 }
 

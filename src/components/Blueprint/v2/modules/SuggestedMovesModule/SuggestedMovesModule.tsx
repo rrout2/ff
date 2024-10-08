@@ -306,6 +306,7 @@ export function InputComponent(props: InputComponentProps) {
                             const plus = plusMap.get(playerId) ?? false;
                             return (
                                 <FormControlLabel
+                                    key={playerId}
                                     label={'plus?'}
                                     control={
                                         <Switch
