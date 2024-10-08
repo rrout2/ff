@@ -357,6 +357,7 @@ export default function NewGenerator() {
                                     setPpr(value || 0);
                                 }}
                                 label="PPR"
+                                step={0.5}
                                 min={0}
                                 max={10}
                             />
