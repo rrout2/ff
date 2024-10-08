@@ -1,5 +1,5 @@
 import styles from './SettingsModule.module.css';
-import {useLeague, useRosterSettings} from '../../../../../hooks/hooks';
+import {useLeague, useRosterSettingsFromId} from '../../../../../hooks/hooks';
 import {
     BENCH,
     FLEX,
@@ -47,7 +47,7 @@ export function GraphicComponent({
     transparent = false,
 }: GraphicComponentProps) {
     const league = useLeague(leagueId);
-    const rosterSettings = useRosterSettings(league);
+    const rosterSettings = useRosterSettingsFromId(leagueId);
     function multiColorBackground(background: color[]) {
         if (background.length === 4) {
             return (

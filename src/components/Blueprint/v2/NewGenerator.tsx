@@ -29,7 +29,17 @@ import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
 import PlayerSelectComponent from '../shared/PlayerSelectComponent';
-import {FLEX, QB, RB, SUPER_FLEX, TE, WR} from '../../../consts/fantasy';
+import {
+    FLEX,
+    PPR,
+    QB,
+    RB,
+    SUPER_FLEX,
+    TAXI_SLOTS,
+    TE,
+    TE_BONUS,
+    WR,
+} from '../../../consts/fantasy';
 import StyledNumberInput from '../shared/StyledNumberInput';
 import {useSearchParams} from 'react-router-dom';
 
@@ -114,8 +124,33 @@ export default function NewGenerator() {
             [SUPER_FLEX, 1],
         ])
     );
+    const [ppr, setPpr] = useState(1);
+    const [teBonus, setTeBonus] = useState(0.5);
+    const [numRosters, setNumRosters] = useState(rosters?.length ?? 12);
+    const [taxiSlots, setTaxiSlots] = useState(0);
+    const [teamName, setTeamName] = useState(
+        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name ?? ''
+    );
 
     const [_searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(PPR);
+                searchParams.delete(TE_BONUS);
+                searchParams.delete(TAXI_SLOTS);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(PPR, '' + ppr);
+                searchParams.set(TE_BONUS, '' + teBonus);
+                searchParams.set(TAXI_SLOTS, '' + taxiSlots);
+                return searchParams;
+            });
+        }
+    }, [ppr, teBonus, taxiSlots, leagueId]);
 
     useEffect(() => {
         if (leagueId) {
@@ -143,20 +178,6 @@ export default function NewGenerator() {
             });
         }
     }, [nonSleeperRosterSettings, leagueId]);
-
-    useEffect(() => {
-        if (leagueId) {
-            setSearchParams(searchParams => {
-                searchParams.delete('nonSleeperIds');
-                return searchParams;
-            });
-            return;
-        }
-        setSearchParams(searchParams => {
-            searchParams.set('nonSleeperIds', nonSleeperIds.join(','));
-            return searchParams;
-        });
-    }, [nonSleeperIds, leagueId]);
 
     useEffect(() => {
         const customRoster = {
@@ -243,163 +264,200 @@ export default function NewGenerator() {
         <div>
             {!leagueId && (
                 <>
-                    <TextField
-                        value={leagueIdWrapper}
-                        onChange={e => setLeagueIdWrapper(e.target.value)}
-                        label="Sleeper ID"
-                    />
-                    <Button
-                        variant="outlined"
-                        onClick={() => setLeagueId(leagueIdWrapper)}
-                        disabled={!leagueIdWrapper}
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}
                     >
-                        {'submit'}
-                    </Button>
-                    or
-                    <div>
-                        <PlayerSelectComponent
-                            playerIds={allPlayers}
-                            selectedPlayerIds={nonSleeperIds}
-                            onChange={setNonSleeperIds}
-                            multiple={true}
-                            label="Roster"
+                        <TextField
+                            value={leagueIdWrapper}
+                            onChange={e => setLeagueIdWrapper(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    setLeagueId(leagueIdWrapper);
+                                }
+                            }}
+                            label="Sleeper ID"
                         />
-                        {[QB, RB, WR, TE, FLEX, SUPER_FLEX].map(position => (
+                        <Button
+                            variant="outlined"
+                            onClick={() => setLeagueId(leagueIdWrapper)}
+                            disabled={!leagueIdWrapper}
+                        >
+                            {'submit'}
+                        </Button>
+                    </div>
+                    or
+                    <PlayerSelectComponent
+                        playerIds={allPlayers}
+                        selectedPlayerIds={nonSleeperIds}
+                        onChange={setNonSleeperIds}
+                        multiple={true}
+                        label="Non-Sleeper Roster"
+                        styles={{minWidth: '200px'}}
+                    />
+                    <TextField
+                        value={teamName}
+                        onChange={e => setTeamName(e.target.value)}
+                        label="Team Name"
+                    />
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}
+                    >
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '6px',
+                            }}
+                        >
+                            {[QB, RB, WR, TE, FLEX, SUPER_FLEX].map(
+                                position => (
+                                    <StyledNumberInput
+                                        key={position}
+                                        value={nonSleeperRosterSettings.get(
+                                            position
+                                        )}
+                                        onChange={(_, value) => {
+                                            const newMap = new Map(
+                                                nonSleeperRosterSettings
+                                            );
+                                            newMap.set(position, value || 0);
+                                            setNonSleeperRosterSettings(newMap);
+                                        }}
+                                        label={position}
+                                        min={0}
+                                        max={10}
+                                    />
+                                )
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '6px',
+                            }}
+                        >
                             <StyledNumberInput
-                                key={position}
-                                value={nonSleeperRosterSettings.get(position)}
+                                value={ppr}
                                 onChange={(_, value) => {
-                                    const newMap = new Map(
-                                        nonSleeperRosterSettings
-                                    );
-                                    newMap.set(position, value || 0);
-                                    setNonSleeperRosterSettings(newMap);
+                                    setPpr(value || 0);
                                 }}
-                                label={position}
+                                label="PPR"
                                 min={0}
                                 max={10}
                             />
-                        ))}
+                            <StyledNumberInput
+                                value={teBonus}
+                                onChange={(_, value) => {
+                                    setTeBonus(value || 0);
+                                }}
+                                label="TE Bonus"
+                                step={0.5}
+                                min={0}
+                                max={10}
+                            />
+                            <StyledNumberInput
+                                value={numRosters}
+                                onChange={(_, value) => {
+                                    setNumRosters(value || 0);
+                                }}
+                                label="League Size"
+                                step={1}
+                                min={2}
+                                max={100}
+                            />
+                            <StyledNumberInput
+                                value={taxiSlots}
+                                onChange={(_, value) => {
+                                    setTaxiSlots(value || 0);
+                                }}
+                                label="Taxi Slots"
+                                step={1}
+                                min={0}
+                                max={10}
+                            />
+                        </div>
                     </div>
                 </>
             )}
             {!!leagueId && (
-                <Button
-                    variant="outlined"
-                    onClick={() => {
-                        setSearchParams(searchParams => {
-                            searchParams.delete(LEAGUE_ID);
-                            return searchParams;
-                        });
-                        setLeagueIdWrapper('');
-                        setLeagueId('');
-                    }}
-                >
-                    {'New League'}
-                </Button>
+                <>
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            setSearchParams(searchParams => {
+                                searchParams.delete(LEAGUE_ID);
+                                return searchParams;
+                            });
+                            setLeagueIdWrapper('');
+                            setLeagueId('');
+                        }}
+                    >
+                        {'New League'}
+                    </Button>
+                    {teamSelectComponent(
+                        teamId,
+                        setTeamId,
+                        allUsers,
+                        specifiedUser,
+                        {
+                            margin: '4px',
+                        }
+                    )}
+                </>
             )}
-            {!!leagueId &&
-                teamSelectComponent(
-                    teamId,
-                    setTeamId,
-                    allUsers,
-                    specifiedUser,
-                    {
-                        margin: '4px',
-                    }
-                )}
-            {(hasTeamId() || nonSleeperIds.length > 0) &&
-                moduleSelectComponent()}
+            {moduleSelectComponent()}
             {module === Module.Roster && !!roster && (
                 <RosterModule
                     roster={roster}
-                    numRosters={rosters?.length}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
+                    numRosters={numRosters}
+                    teamName={teamName}
                 />
             )}
             {module === Module.Settings && (
                 <SettingsModule
                     leagueId={leagueId}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                    numRosters={rosters?.length}
+                    teamName={teamName}
+                    numRosters={numRosters}
                 />
             )}
             {module === Module.Cornerstones && (
-                <CornerstonesModule
-                    roster={roster}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <CornerstonesModule roster={roster} teamName={teamName} />
             )}
             {module === Module.Unified && (
                 <UnifiedModule
                     roster={roster}
-                    numRosters={rosters?.length}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
+                    numRosters={numRosters}
+                    teamName={teamName}
                 />
             )}
             {module === Module.SuggestedMoves && (
-                <SuggestedMovesModule
-                    roster={roster}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <SuggestedMovesModule roster={roster} teamName={teamName} />
             )}
             {module === Module.Holds && (
-                <HoldsModule
-                    roster={roster}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <HoldsModule roster={roster} teamName={teamName} />
             )}
             {module === Module.RisersFallers && (
-                <RisersFallersModule
-                    roster={roster}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <RisersFallersModule roster={roster} teamName={teamName} />
             )}
             {module === Module.PositionalGrades && (
-                <PositionalGrades
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <PositionalGrades teamName={teamName} />
             )}
             {module === Module.ThreeYearOutlook && (
-                <ThreeYearOutlook
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
-                />
+                <ThreeYearOutlook teamName={teamName} />
             )}
             {module === Module.BigBoy && (
                 <BigBoy
                     roster={roster}
-                    numRosters={rosters?.length}
-                    teamName={
-                        specifiedUser?.metadata?.team_name ??
-                        specifiedUser?.display_name
-                    }
+                    numRosters={numRosters}
+                    teamName={teamName}
                 />
             )}
         </div>

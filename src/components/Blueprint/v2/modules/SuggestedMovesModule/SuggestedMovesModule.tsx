@@ -139,7 +139,8 @@ export function SellHoldTile({
 }) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
-    let player = playerData?.[playerId] as miniPlayer;
+    if (!playerData) return <></>;
+    let player = playerData[playerId] as miniPlayer;
 
     if (!player) {
         console.warn(`Player ${playerId} not found in player data`);
@@ -200,8 +201,8 @@ export function SellHoldTile({
 function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
-
-    let player = playerData?.[playerId] as miniPlayer;
+    if (!playerData) return <></>;
+    let player = playerData[playerId] as miniPlayer;
 
     if (!player) {
         console.warn(`Player ${playerId} not found in player data`);

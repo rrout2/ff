@@ -17,6 +17,7 @@ export default function PlayerSelectComponent(props: {
     label?: string;
     multiple?: boolean;
     maxSelections?: number;
+    styles?: React.CSSProperties;
 }) {
     const {
         playerIds,
@@ -27,6 +28,7 @@ export default function PlayerSelectComponent(props: {
         label,
         multiple,
         maxSelections,
+        styles,
     } = props;
     const {sortByAdp} = useAdpData();
     const playerData = usePlayerData();
@@ -47,12 +49,7 @@ export default function PlayerSelectComponent(props: {
     if (!playerData) return <></>;
 
     return (
-        <FormControl
-            style={{
-                margin: '4px',
-                minWidth: '100px',
-            }}
-        >
+        <FormControl style={{margin: '4px', minWidth: '100px', ...styles}}>
             <InputLabel>{label ?? position ?? 'Player'}</InputLabel>
             <Select
                 value={selectedPlayerIds}

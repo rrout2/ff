@@ -18,11 +18,14 @@ import {useSearchParams} from 'react-router-dom';
 import {
     BENCH,
     FLEX,
+    PPR,
     QB,
     RB,
     SUPER_FLEX,
     SUPER_FLEX_SET,
+    TAXI_SLOTS,
     TE,
+    TE_BONUS,
     WR,
     WR_RB_FLEX,
     WR_TE_FLEX,
@@ -144,8 +147,21 @@ export function usePlayer(playerId: string) {
 
 export function useLeague(leagueId?: string) {
     const [league, setLeague] = useState<League>();
+    const [searchParams] = useSearchParams();
+
     useEffect(() => {
-        if (!leagueId) return;
+        if (!leagueId) {
+            setLeague({
+                settings: {
+                    taxi_slots: +searchParams.get(TAXI_SLOTS)!,
+                },
+                scoring_settings: {
+                    rec: +searchParams.get(PPR)!,
+                    bonus_rec_te: +searchParams.get(TE_BONUS)!,
+                },
+            } as League);
+            return;
+        }
         getLeague(leagueId).then(l => setLeague(l));
     }, [leagueId]);
     return league;
@@ -335,13 +351,15 @@ export function useRosterSettings(league?: League) {
             settings.set(TE, +searchParams.get(TE)!);
             settings.set(FLEX, +searchParams.get(FLEX)!);
             settings.set(SUPER_FLEX, +searchParams.get(SUPER_FLEX)!);
+        } else if (league?.roster_positions) {
+            league?.roster_positions.forEach(pos => {
+                if (!settings.has(pos)) {
+                    settings.set(pos, 0);
+                }
+                settings.set(pos, settings.get(pos)! + 1);
+            });
         }
-        league?.roster_positions.forEach(pos => {
-            if (!settings.has(pos)) {
-                settings.set(pos, 0);
-            }
-            settings.set(pos, settings.get(pos)! + 1);
-        });
+
         setRosterSettings(settings);
     }, [league, league?.roster_positions, searchParams]);
     return rosterSettings;
@@ -352,16 +370,26 @@ export function useRosterSettingsFromId(leagueId?: string) {
     const [rosterSettings, setRosterSettings] = useState(
         new Map<string, number>()
     );
+    const [searchParams] = useSearchParams();
     useEffect(() => {
         const settings = new Map<string, number>();
-        league?.roster_positions?.forEach(pos => {
-            if (!settings.has(pos)) {
-                settings.set(pos, 0);
-            }
-            settings.set(pos, settings.get(pos)! + 1);
-        });
+        if (!leagueId) {
+            settings.set(QB, +searchParams.get(QB)!);
+            settings.set(RB, +searchParams.get(RB)!);
+            settings.set(WR, +searchParams.get(WR)!);
+            settings.set(TE, +searchParams.get(TE)!);
+            settings.set(FLEX, +searchParams.get(FLEX)!);
+            settings.set(SUPER_FLEX, +searchParams.get(SUPER_FLEX)!);
+        } else if (league?.roster_positions) {
+            league?.roster_positions.forEach(pos => {
+                if (!settings.has(pos)) {
+                    settings.set(pos, 0);
+                }
+                settings.set(pos, settings.get(pos)! + 1);
+            });
+        }
         setRosterSettings(settings);
-    }, [league, league?.roster_positions]);
+    }, [leagueId, league, league?.roster_positions]);
     return rosterSettings;
 }
 
