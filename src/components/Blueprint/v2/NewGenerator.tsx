@@ -30,6 +30,7 @@ import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
 import PlayerSelectComponent from '../shared/PlayerSelectComponent';
 import {
+    BENCH,
     FLEX,
     PPR,
     QB,
@@ -122,6 +123,7 @@ export default function NewGenerator() {
             [TE, 1],
             [FLEX, 2],
             [SUPER_FLEX, 1],
+            [BENCH, 6],
         ])
     );
     const [ppr, setPpr] = useState(1);
@@ -161,6 +163,7 @@ export default function NewGenerator() {
                 searchParams.delete(TE);
                 searchParams.delete(FLEX);
                 searchParams.delete(SUPER_FLEX);
+                searchParams.delete(BENCH);
                 return searchParams;
             });
         } else {
@@ -173,6 +176,10 @@ export default function NewGenerator() {
                 searchParams.set(
                     SUPER_FLEX,
                     '' + nonSleeperRosterSettings.get(SUPER_FLEX)
+                );
+                searchParams.set(
+                    BENCH,
+                    '' + nonSleeperRosterSettings.get(BENCH)
                 );
                 return searchParams;
             });
@@ -316,7 +323,7 @@ export default function NewGenerator() {
                                 gap: '6px',
                             }}
                         >
-                            {[QB, RB, WR, TE, FLEX, SUPER_FLEX].map(
+                            {[QB, RB, WR, TE, FLEX, SUPER_FLEX, BENCH].map(
                                 position => (
                                     <StyledNumberInput
                                         key={position}
@@ -332,7 +339,7 @@ export default function NewGenerator() {
                                         }}
                                         label={position}
                                         min={0}
-                                        max={10}
+                                        max={100}
                                     />
                                 )
                             )}

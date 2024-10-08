@@ -351,6 +351,7 @@ export function useRosterSettings(league?: League) {
             settings.set(TE, +searchParams.get(TE)!);
             settings.set(FLEX, +searchParams.get(FLEX)!);
             settings.set(SUPER_FLEX, +searchParams.get(SUPER_FLEX)!);
+            settings.set(BENCH, +searchParams.get(BENCH)!);
         } else if (league?.roster_positions) {
             league?.roster_positions.forEach(pos => {
                 if (!settings.has(pos)) {
@@ -380,6 +381,7 @@ export function useRosterSettingsFromId(leagueId?: string) {
             settings.set(TE, +searchParams.get(TE)!);
             settings.set(FLEX, +searchParams.get(FLEX)!);
             settings.set(SUPER_FLEX, +searchParams.get(SUPER_FLEX)!);
+            settings.set(BENCH, +searchParams.get(BENCH)!);
         } else if (league?.roster_positions) {
             league?.roster_positions.forEach(pos => {
                 if (!settings.has(pos)) {
