@@ -391,7 +391,7 @@ export function useRosterSettingsFromId(leagueId?: string) {
             });
         }
         setRosterSettings(settings);
-    }, [leagueId, league, league?.roster_positions]);
+    }, [leagueId, league, league?.roster_positions, searchParams]);
     return rosterSettings;
 }
 
@@ -474,6 +474,124 @@ export function useTitle(title: string) {
             document.title = oldTitle;
         };
     }, [title]);
+}
+
+export function useAllPlayers() {
+    const playerData = usePlayerData();
+    const [allPlayers, setAllPlayers] = useState<string[]>([]);
+    useEffect(() => {
+        const players: string[] = [];
+        for (const playerId in playerData) {
+            players.push(playerId);
+        }
+        setAllPlayers(players);
+    }, [playerData]);
+
+    return allPlayers;
+}
+
+export function useNonSleeper(
+    rosters?: Roster[],
+    specifiedUser?: User,
+    setRoster?: (roster: Roster) => void
+) {
+    const [leagueId] = useLeagueIdFromUrl();
+    const [nonSleeperIds, setNonSleeperIds] = useState<string[]>([]);
+    const [nonSleeperRosterSettings, setNonSleeperRosterSettings] = useState(
+        new Map([
+            [QB, 1],
+            [RB, 2],
+            [WR, 2],
+            [TE, 1],
+            [FLEX, 2],
+            [SUPER_FLEX, 1],
+            [BENCH, 6],
+        ])
+    );
+    const [ppr, setPpr] = useState(1);
+    const [teBonus, setTeBonus] = useState(0.5);
+    const [numRosters, setNumRosters] = useState(rosters?.length ?? 12);
+    const [taxiSlots, setTaxiSlots] = useState(0);
+    const [teamName, setTeamName] = useState(
+        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name ?? ''
+    );
+    const [_searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(PPR);
+                searchParams.delete(TE_BONUS);
+                searchParams.delete(TAXI_SLOTS);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(PPR, '' + ppr);
+                searchParams.set(TE_BONUS, '' + teBonus);
+                searchParams.set(TAXI_SLOTS, '' + taxiSlots);
+                return searchParams;
+            });
+        }
+    }, [ppr, teBonus, taxiSlots, leagueId]);
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(QB);
+                searchParams.delete(RB);
+                searchParams.delete(WR);
+                searchParams.delete(TE);
+                searchParams.delete(FLEX);
+                searchParams.delete(SUPER_FLEX);
+                searchParams.delete(BENCH);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(QB, '' + nonSleeperRosterSettings.get(QB));
+                searchParams.set(RB, '' + nonSleeperRosterSettings.get(RB));
+                searchParams.set(WR, '' + nonSleeperRosterSettings.get(WR));
+                searchParams.set(TE, '' + nonSleeperRosterSettings.get(TE));
+                searchParams.set(FLEX, '' + nonSleeperRosterSettings.get(FLEX));
+                searchParams.set(
+                    SUPER_FLEX,
+                    '' + nonSleeperRosterSettings.get(SUPER_FLEX)
+                );
+                searchParams.set(
+                    BENCH,
+                    '' + nonSleeperRosterSettings.get(BENCH)
+                );
+                return searchParams;
+            });
+        }
+    }, [nonSleeperRosterSettings, leagueId]);
+
+    useEffect(() => {
+        if (!setRoster) return;
+
+        setRoster({
+            players: nonSleeperIds,
+        } as Roster);
+    }, [nonSleeperIds, setRoster]);
+
+    return {
+        nonSleeperIds,
+        setNonSleeperIds,
+        nonSleeperRosterSettings,
+        setNonSleeperRosterSettings,
+        ppr,
+        setPpr,
+        teBonus,
+        setTeBonus,
+        numRosters,
+        setNumRosters,
+        taxiSlots,
+        setTaxiSlots,
+        teamName,
+        setTeamName,
+        setSearchParams,
+    };
 }
 
 function getBestNAtPosition(

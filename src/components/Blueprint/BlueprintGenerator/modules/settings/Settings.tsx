@@ -4,6 +4,7 @@ import {
     usePlayerData,
     useProjectedLineup,
     useRosterSettings,
+    useRosterSettingsFromId,
     useTitle,
 } from '../../../../../hooks/hooks';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
@@ -220,7 +221,7 @@ function GraphicComponent({
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const playerData = usePlayerData();
-    const rosterSettings = useRosterSettings(league);
+    const rosterSettings = useRosterSettingsFromId(leagueId);
     function graphicComponent() {
         if (!playerData) return <></>;
         const scoringSettings = league?.scoring_settings;

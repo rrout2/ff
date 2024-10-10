@@ -5,6 +5,7 @@ import {
     useLeague,
     useLeagueIdFromUrl,
     useModuleFromUrl,
+    useNonSleeper,
     usePlayerData,
     useProjectedLineup,
     useRosterSettings,
@@ -14,7 +15,7 @@ import {
 import {Roster, User, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import styles from './BlueprintGenerator.module.css';
 import {teamSelectComponent} from '../../Team/TeamPage/TeamPage';
-import {NONE_TEAM_ID} from '../../../consts/urlParams';
+import {LEAGUE_ID, NONE_TEAM_ID} from '../../../consts/urlParams';
 import {
     CornerstoneModule,
     GraphicComponent as CornerstoneGraphic,
@@ -27,6 +28,8 @@ import {
     MenuItem,
     Select,
     Grid,
+    Button,
+    TextField,
 } from '@mui/material';
 import {
     PlayersToTargetModule,
@@ -68,6 +71,7 @@ import {
     InputComponent as LookToTradeInput,
 } from './modules/looktotrade/LookToTradeModule';
 import WaiverTargets from './modules/WaiverTargets/WaiverTargets';
+import {NonSleeperInput} from '../shared/NonSleeperInput';
 export enum Module {
     Unspecified = '',
     Cornerstone = 'cornerstones',
@@ -83,7 +87,8 @@ export enum Module {
 }
 
 export default function BlueprintGenerator() {
-    const [leagueId] = useLeagueIdFromUrl();
+    const [leagueId, setLeagueId] = useLeagueIdFromUrl();
+    const [inputValue, setInputValue] = useState(leagueId);
     const [teamId, setTeamId] = useTeamIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -162,6 +167,24 @@ export default function BlueprintGenerator() {
     ]);
 
     useTitle('Blueprint Generator');
+
+    const {
+        nonSleeperIds,
+        setNonSleeperIds,
+        nonSleeperRosterSettings,
+        setNonSleeperRosterSettings,
+        ppr,
+        setPpr,
+        teBonus,
+        setTeBonus,
+        numRosters,
+        setNumRosters,
+        taxiSlots,
+        setTaxiSlots,
+        teamName,
+        setTeamName,
+        setSearchParams,
+    } = useNonSleeper(rosters, specifiedUser, setRoster);
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
@@ -266,9 +289,6 @@ export default function BlueprintGenerator() {
             </div>
         );
     }
-
-    const teamName =
-        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
 
     function unifiedView() {
         const hasId = hasTeamId();
@@ -380,11 +400,82 @@ export default function BlueprintGenerator() {
 
     return (
         <div className={styles.blueprintPage}>
-            {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
-                margin: '4px',
-                maxWidth: '800px',
-            })}
-            {hasTeamId() && moduleSelectComponent()}
+            {!leagueId && (
+                <>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <TextField
+                            value={inputValue}
+                            onChange={e => setInputValue(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    setLeagueId(inputValue);
+                                }
+                            }}
+                            label="Sleeper ID"
+                        />
+                        <Button
+                            variant="outlined"
+                            onClick={() => setLeagueId(inputValue)}
+                            disabled={!inputValue}
+                        >
+                            {'submit'}
+                        </Button>
+                    </div>
+                    or
+                    <NonSleeperInput
+                        nonSleeperIds={nonSleeperIds}
+                        setNonSleeperIds={setNonSleeperIds}
+                        teamName={teamName}
+                        setTeamName={setTeamName}
+                        nonSleeperRosterSettings={nonSleeperRosterSettings}
+                        setNonSleeperRosterSettings={
+                            setNonSleeperRosterSettings
+                        }
+                        ppr={ppr}
+                        setPpr={setPpr}
+                        teBonus={teBonus}
+                        setTeBonus={setTeBonus}
+                        numRosters={numRosters}
+                        setNumRosters={setNumRosters}
+                        taxiSlots={taxiSlots}
+                        setTaxiSlots={setTaxiSlots}
+                    />
+                </>
+            )}
+            {!!leagueId && (
+                <>
+                    <Button
+                        variant="outlined"
+                        onClick={() => {
+                            setSearchParams(searchParams => {
+                                searchParams.delete(LEAGUE_ID);
+                                return searchParams;
+                            });
+                            setInputValue('');
+                            setLeagueId('');
+                        }}
+                    >
+                        {'New League'}
+                    </Button>
+                    {teamSelectComponent(
+                        teamId,
+                        setTeamId,
+                        allUsers,
+                        specifiedUser,
+                        {
+                            margin: '4px',
+                            maxWidth: '800px',
+                        }
+                    )}
+                </>
+            )}
+            {moduleSelectComponent()}
             {module === Module.Unified && (
                 <ExportButton
                     className={[
@@ -426,7 +517,9 @@ export default function BlueprintGenerator() {
             {hasTeamId() && module === Module.DepthScore && (
                 <DepthScore roster={roster} teamName={teamName} />
             )}
-            {hasTeamId() && module === Module.BigBoy && <BigBoy />}
+            {module === Module.BigBoy && (
+                <BigBoy roster={roster} teamName={teamName} />
+            )}
             {hasTeamId() && module === Module.WaiverTargets && (
                 <WaiverTargets />
             )}

@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {
     useFetchRosters,
     useLeagueIdFromUrl,
+    useNonSleeper,
     useParamFromUrl,
     usePlayerData,
     useTeamIdFromUrl,
@@ -28,21 +29,7 @@ import RisersFallersModule from './modules/RisersFallersModule/RisersFallersModu
 import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
-import PlayerSelectComponent from '../shared/PlayerSelectComponent';
-import {
-    BENCH,
-    FLEX,
-    PPR,
-    QB,
-    RB,
-    SUPER_FLEX,
-    TAXI_SLOTS,
-    TE,
-    TE_BONUS,
-    WR,
-} from '../../../consts/fantasy';
-import StyledNumberInput from '../shared/StyledNumberInput';
-import {useSearchParams} from 'react-router-dom';
+import {NonSleeperInput} from '../shared/NonSleeperInput';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -105,93 +92,23 @@ export default function NewGenerator() {
         setRoster(newRoster);
     }, [rosters, teamId, playerData, allUsers]);
 
-    const [allPlayers, setAllPlayers] = useState<string[]>([]);
-    useEffect(() => {
-        const players: string[] = [];
-        for (const playerId in playerData) {
-            players.push(playerId);
-        }
-        setAllPlayers(players);
-    }, [playerData]);
-
-    const [nonSleeperIds, setNonSleeperIds] = useState<string[]>([]);
-    const [nonSleeperRosterSettings, setNonSleeperRosterSettings] = useState(
-        new Map([
-            [QB, 1],
-            [RB, 2],
-            [WR, 2],
-            [TE, 1],
-            [FLEX, 2],
-            [SUPER_FLEX, 1],
-            [BENCH, 6],
-        ])
-    );
-    const [ppr, setPpr] = useState(1);
-    const [teBonus, setTeBonus] = useState(0.5);
-    const [numRosters, setNumRosters] = useState(rosters?.length ?? 12);
-    const [taxiSlots, setTaxiSlots] = useState(0);
-    const [teamName, setTeamName] = useState(
-        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name ?? ''
-    );
-
-    const [_searchParams, setSearchParams] = useSearchParams();
-
-    useEffect(() => {
-        if (leagueId) {
-            setSearchParams(searchParams => {
-                searchParams.delete(PPR);
-                searchParams.delete(TE_BONUS);
-                searchParams.delete(TAXI_SLOTS);
-                return searchParams;
-            });
-        } else {
-            setSearchParams(searchParams => {
-                searchParams.set(PPR, '' + ppr);
-                searchParams.set(TE_BONUS, '' + teBonus);
-                searchParams.set(TAXI_SLOTS, '' + taxiSlots);
-                return searchParams;
-            });
-        }
-    }, [ppr, teBonus, taxiSlots, leagueId]);
-
-    useEffect(() => {
-        if (leagueId) {
-            setSearchParams(searchParams => {
-                searchParams.delete(QB);
-                searchParams.delete(RB);
-                searchParams.delete(WR);
-                searchParams.delete(TE);
-                searchParams.delete(FLEX);
-                searchParams.delete(SUPER_FLEX);
-                searchParams.delete(BENCH);
-                return searchParams;
-            });
-        } else {
-            setSearchParams(searchParams => {
-                searchParams.set(QB, '' + nonSleeperRosterSettings.get(QB));
-                searchParams.set(RB, '' + nonSleeperRosterSettings.get(RB));
-                searchParams.set(WR, '' + nonSleeperRosterSettings.get(WR));
-                searchParams.set(TE, '' + nonSleeperRosterSettings.get(TE));
-                searchParams.set(FLEX, '' + nonSleeperRosterSettings.get(FLEX));
-                searchParams.set(
-                    SUPER_FLEX,
-                    '' + nonSleeperRosterSettings.get(SUPER_FLEX)
-                );
-                searchParams.set(
-                    BENCH,
-                    '' + nonSleeperRosterSettings.get(BENCH)
-                );
-                return searchParams;
-            });
-        }
-    }, [nonSleeperRosterSettings, leagueId]);
-
-    useEffect(() => {
-        const customRoster = {
-            players: nonSleeperIds,
-        } as Roster;
-        setRoster(customRoster);
-    }, [nonSleeperIds]);
+    const {
+        nonSleeperIds,
+        setNonSleeperIds,
+        nonSleeperRosterSettings,
+        setNonSleeperRosterSettings,
+        ppr,
+        setPpr,
+        teBonus,
+        setTeBonus,
+        numRosters,
+        setNumRosters,
+        taxiSlots,
+        setTaxiSlots,
+        teamName,
+        setTeamName,
+        setSearchParams,
+    } = useNonSleeper(rosters, specifiedUser, setRoster);
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
@@ -297,102 +214,24 @@ export default function NewGenerator() {
                         </Button>
                     </div>
                     or
-                    <PlayerSelectComponent
-                        playerIds={allPlayers}
-                        selectedPlayerIds={nonSleeperIds}
-                        onChange={setNonSleeperIds}
-                        multiple={true}
-                        label="Non-Sleeper Roster"
-                        styles={{minWidth: '200px'}}
+                    <NonSleeperInput
+                        nonSleeperIds={nonSleeperIds}
+                        setNonSleeperIds={setNonSleeperIds}
+                        teamName={teamName}
+                        setTeamName={setTeamName}
+                        nonSleeperRosterSettings={nonSleeperRosterSettings}
+                        setNonSleeperRosterSettings={
+                            setNonSleeperRosterSettings
+                        }
+                        ppr={ppr}
+                        setPpr={setPpr}
+                        teBonus={teBonus}
+                        setTeBonus={setTeBonus}
+                        numRosters={numRosters}
+                        setNumRosters={setNumRosters}
+                        taxiSlots={taxiSlots}
+                        setTaxiSlots={setTaxiSlots}
                     />
-                    <TextField
-                        value={teamName}
-                        onChange={e => setTeamName(e.target.value)}
-                        label="Team Name"
-                    />
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                        }}
-                    >
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '6px',
-                            }}
-                        >
-                            {[QB, RB, WR, TE, FLEX, SUPER_FLEX, BENCH].map(
-                                position => (
-                                    <StyledNumberInput
-                                        key={position}
-                                        value={nonSleeperRosterSettings.get(
-                                            position
-                                        )}
-                                        onChange={(_, value) => {
-                                            const newMap = new Map(
-                                                nonSleeperRosterSettings
-                                            );
-                                            newMap.set(position, value || 0);
-                                            setNonSleeperRosterSettings(newMap);
-                                        }}
-                                        label={position}
-                                        min={0}
-                                        max={100}
-                                    />
-                                )
-                            )}
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '6px',
-                            }}
-                        >
-                            <StyledNumberInput
-                                value={ppr}
-                                onChange={(_, value) => {
-                                    setPpr(value || 0);
-                                }}
-                                label="PPR"
-                                step={0.5}
-                                min={0}
-                                max={10}
-                            />
-                            <StyledNumberInput
-                                value={teBonus}
-                                onChange={(_, value) => {
-                                    setTeBonus(value || 0);
-                                }}
-                                label="TE Bonus"
-                                step={0.5}
-                                min={0}
-                                max={10}
-                            />
-                            <StyledNumberInput
-                                value={numRosters}
-                                onChange={(_, value) => {
-                                    setNumRosters(value || 0);
-                                }}
-                                label="League Size"
-                                step={1}
-                                min={2}
-                                max={100}
-                            />
-                            <StyledNumberInput
-                                value={taxiSlots}
-                                onChange={(_, value) => {
-                                    setTaxiSlots(value || 0);
-                                }}
-                                label="Taxi Slots"
-                                step={1}
-                                min={0}
-                                max={10}
-                            />
-                        </div>
-                    </div>
                 </>
             )}
             {!!leagueId && (

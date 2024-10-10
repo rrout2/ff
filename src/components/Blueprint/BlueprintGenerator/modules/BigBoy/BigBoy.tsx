@@ -16,21 +16,14 @@ import {
     useLeagueIdFromUrl,
     useFetchRosters,
     usePlayerData,
-    useTeamIdFromUrl,
     useAdpData,
     useLeague,
-    useRosterSettings,
     useProjectedLineup,
+    useRosterSettingsFromId,
 } from '../../../../../hooks/hooks';
-import {
-    Player,
-    Roster,
-    User,
-    getAllUsers,
-} from '../../../../../sleeper-api/sleeper-api';
+import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../../shared/ExportButton';
 import styles from './BigBoy.module.css';
-import {NONE_TEAM_ID} from '../../../../../consts/urlParams';
 import {
     FormControl,
     FormControlLabel,
@@ -126,19 +119,22 @@ const ArchetypeDetails = {
 
 const ALL_ARCHETYPES = Object.values(Archetype);
 
-export default function BigBoy() {
+interface BigBoyProps {
+    roster?: Roster;
+    teamName?: string;
+}
+
+export default function BigBoy({roster, teamName}: BigBoyProps) {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
-    const rosterSettings = useRosterSettings(league);
+    const rosterSettings = useRosterSettingsFromId(leagueId);
+    console.log(rosterSettings);
     const {sortByAdp, getAdp, getPositionalAdp} = useAdpData();
-    const [teamId] = useTeamIdFromUrl();
     const {data: rosters} = useFetchRosters(leagueId);
     const playerData = usePlayerData();
-    const [allUsers, setAllUsers] = useState<User[]>([]);
-    const [roster, setRoster] = useState<Roster>();
-    const [specifiedUser, setSpecifiedUser] = useState<User>();
     const {startingLineup, setStartingLineup, bench, benchString} =
         useProjectedLineup(rosterSettings, roster?.players);
+    console.log(startingLineup);
     const [showPreview, setShowPreview] = useState(false);
     const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
@@ -210,48 +206,6 @@ export default function BigBoy() {
 
     const [otherSettings, setOtherSettings] = useState('');
     const [waiverTarget, setWaiverTarget] = useState<string>('');
-
-    const teamName =
-        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name;
-
-    useEffect(() => {
-        if (
-            !rosters ||
-            rosters.length === 0 ||
-            !hasTeamId() ||
-            !playerData ||
-            allUsers.length === 0
-        ) {
-            return;
-        }
-        function getRosterFromTeamIdx(idx: number) {
-            if (allUsers.length === 0 || !rosters) return;
-            const ownerId = allUsers[idx].user_id;
-            return rosters.find(r => r.owner_id === ownerId);
-        }
-        const newRoster = getRosterFromTeamIdx(+teamId);
-        if (!newRoster) throw new Error('roster not found');
-
-        setRoster(newRoster);
-    }, [rosters, teamId, playerData, allUsers]);
-
-    useEffect(() => {
-        if (!leagueId || !rosters) return;
-        const ownerIds = new Set(rosters.map(r => r.owner_id));
-        getAllUsers(leagueId).then(users =>
-            // filter to users included in owners.
-            // some leagues have users with no associated owner I think.
-            setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
-        );
-    }, [leagueId, rosters]);
-    useEffect(() => {
-        if (!allUsers.length || !hasTeamId()) return;
-        setSpecifiedUser(allUsers?.[+teamId]);
-    }, [allUsers, teamId]);
-
-    function hasTeamId() {
-        return teamId !== '' && teamId !== NONE_TEAM_ID;
-    }
 
     function fullBlueprint() {
         return (
