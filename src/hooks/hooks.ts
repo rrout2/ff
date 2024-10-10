@@ -513,7 +513,7 @@ export function useNonSleeper(
     const [numRosters, setNumRosters] = useState(rosters?.length ?? 12);
     const [taxiSlots, setTaxiSlots] = useState(0);
     const [teamName, setTeamName] = useState(
-        specifiedUser?.metadata?.team_name ?? specifiedUser?.display_name ?? ''
+        specifiedUser?.metadata?.team_name || specifiedUser?.display_name || ''
     );
     const [_searchParams, setSearchParams] = useSearchParams();
 
