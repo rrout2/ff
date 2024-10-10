@@ -128,13 +128,11 @@ export default function BigBoy({roster, teamName}: BigBoyProps) {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettingsFromId(leagueId);
-    console.log(rosterSettings);
     const {sortByAdp, getAdp, getPositionalAdp} = useAdpData();
     const {data: rosters} = useFetchRosters(leagueId);
     const playerData = usePlayerData();
     const {startingLineup, setStartingLineup, bench, benchString} =
         useProjectedLineup(rosterSettings, roster?.players);
-    console.log(startingLineup);
     const [showPreview, setShowPreview] = useState(false);
     const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
