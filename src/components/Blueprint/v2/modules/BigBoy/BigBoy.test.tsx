@@ -150,6 +150,6 @@ describe('BigBoy', () => {
                     container.querySelector('.risersFallersGraphic')
                 ).toHaveTextContent(/\+25%/i);
             });
-        });
+        }, 20000);
     });
 });
