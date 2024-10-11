@@ -30,8 +30,8 @@ import {
     WR_RB_FLEX,
     WR_TE_FLEX,
 } from '../consts/fantasy';
-import {Module} from '../components/Blueprint/BlueprintGenerator/BlueprintGenerator';
-import {Lineup} from '../components/Blueprint/BlueprintGenerator/modules/Starters/Starters';
+import {Module} from '../components/Blueprint/v1/BlueprintGenerator';
+import {Lineup} from '../components/Blueprint/v1/modules/Starters/Starters';
 
 type TeamSchedule = {
     [week: string]: string;

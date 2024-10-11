@@ -12,7 +12,7 @@ import {
     Switch,
     Tooltip,
 } from '@mui/material';
-import {InputComponent as SearchablePlayerInput} from '../Blueprint/BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
+import {InputComponent as SearchablePlayerInput} from '../Blueprint/v1/modules/playerstotarget/PlayersToTargetModule';
 import {useAdpData, useNflSchedule, usePlayerData} from '../../hooks/hooks';
 import {ArrowDropDown, ArrowDropUp, Delete} from '@mui/icons-material';
 import {Player} from '../../sleeper-api/sleeper-api';

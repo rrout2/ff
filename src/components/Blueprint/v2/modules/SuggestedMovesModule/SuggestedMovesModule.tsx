@@ -7,7 +7,7 @@ import {
     InputComponent as PlayersToTargetInput,
     isRookiePickId,
     rookiePickIdToString,
-} from '../../../BlueprintGenerator/modules/playerstotarget/PlayersToTargetModule';
+} from '../../../v1/modules/playerstotarget/PlayersToTargetModule';
 import {positionToColor} from '../../consts/colors';
 import {mapToFullTeamName} from '../../consts/nflTeamNames';
 import ExportButton from '../../../shared/ExportButton';

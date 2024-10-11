@@ -4,7 +4,7 @@ import {Layer, RegularPolygon, Shape, Stage, Text} from 'react-konva';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
 import ExportButton from '../../../shared/ExportButton';
 import {COLORS} from '../../../../../consts/colors';
-import {gradeByPosition} from '../../../BlueprintGenerator/modules/PositionalGrades/PositionalGrades';
+import {gradeByPosition} from '../../../v1/modules/PositionalGrades/PositionalGrades';
 import {QB, RB, TE, WR} from '../../../../../consts/fantasy';
 import {
     useLeague,
@@ -15,7 +15,7 @@ import {
     useRosterSettings,
 } from '../../../../../hooks/hooks';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
-import {calculateDepthScore} from '../../../BlueprintGenerator/modules/DepthScore/DepthScore';
+import {calculateDepthScore} from '../../../v1/modules/DepthScore/DepthScore';
 
 export function usePositionalGrades(roster?: Roster) {
     const playerData = usePlayerData();

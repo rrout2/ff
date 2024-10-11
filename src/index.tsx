@@ -11,7 +11,7 @@ import PlayerPage from './components/Player/PlayerPage/PlayerPage';
 import PlayerSearch from './components/Player/Search/PlayerSearch';
 import NflTeam from './components/NflTeam/NflTeam';
 import AllTransactions from './components/Transactions/AllTransactions';
-import BlueprintGenerator from './components/Blueprint/BlueprintGenerator/BlueprintGenerator';
+import BlueprintGenerator from './components/Blueprint/v1/BlueprintGenerator';
 import NewGenerator from './components/Blueprint/v2/NewGenerator';
 import Rankings from './components/Rankings/Rankings';
 
