@@ -111,7 +111,7 @@ export function GraphicComponent({
 
     function maybeShortenedName(player: Player) {
         const fullName = `${player.first_name} ${player.last_name}`;
-        if (fullName.length >= 16) {
+        if (fullName.length >= 15) {
             return `${player.first_name[0]}. ${player.last_name}`;
         }
         return fullName;
@@ -221,7 +221,6 @@ export function InputComponent({
                                 setRiserValues(newRiserValues);
                             }}
                             min={0}
-                            max={100}
                             step={0.1}
                         />
                         <PlayerSelectComponent
@@ -248,7 +247,6 @@ export function InputComponent({
                                 newFallerValues[idx] = value || 0;
                                 setFallerValues(newFallerValues);
                             }}
-                            min={-100}
                             max={0}
                             step={0.1}
                         />
