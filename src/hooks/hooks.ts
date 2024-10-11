@@ -527,6 +527,8 @@ export function useNonSleeper(
         [specifiedUser]
     );
 
+    useEffect(() => setNumRosters(rosters?.length ?? 12), [rosters?.length]);
+
     useEffect(() => {
         if (leagueId) {
             setSearchParams(searchParams => {
