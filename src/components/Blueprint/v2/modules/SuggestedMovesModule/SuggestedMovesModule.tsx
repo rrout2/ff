@@ -220,12 +220,25 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
         }
     }
 
-    function getImageSrc(player: miniPlayer) {
+    function getImageSrc() {
         if (isRookiePickId(player.player_id)) {
             return nflLogo;
         }
         return `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
     }
+
+    function getDisplayName() {
+        const longName = `${player.first_name} ${player.last_name}${
+            plus ? ' (+)' : ''
+        }`;
+
+        const shortName = `${player.first_name[0]}. ${player.last_name}${
+            plus ? ' (+)' : ''
+        }`;
+
+        return longName.length >= 20 ? shortName : longName;
+    }
+
     return (
         <div className={styles.buyTileContainer}>
             <div className={styles.buyTileColumn}>
@@ -243,16 +256,13 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
                             )}
                         </div>
                     )}
-                    <div className={styles.playerName}>
-                        {player.first_name} {player.last_name}
-                        {plus && ' (+)'}
-                    </div>
+                    <div className={styles.playerName}>{getDisplayName()}</div>
                     <div className={styles.teamName}>
                         {mapToFullTeamName.get(player.team)}
                     </div>
                 </div>
             </div>
-            <img className={styles.playerImg} src={getImageSrc(player)} />
+            <img className={styles.playerImg} src={getImageSrc()} />
             <div className={styles.buyLabel}>
                 BUY&nbsp;
                 <img src={buyIcon} className={styles.sellIcon} />
