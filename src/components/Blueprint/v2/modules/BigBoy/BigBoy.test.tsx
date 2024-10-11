@@ -1,5 +1,5 @@
 import {act} from 'react';
-import {fireEvent, render} from '@testing-library/react';
+import {fireEvent, render, waitFor} from '@testing-library/react';
 import BigBoy from './BigBoy';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {HashRouter, Route, Routes} from 'react-router-dom';
@@ -61,37 +61,39 @@ describe('BigBoy', () => {
         expect(getAllByText(TEAM_NAME)).toHaveLength(2);
     });
 
-    it('renders settings', async () => {
-        const {container} = await wrappedRender(
-            <BigBoy
-                roster={ROSTER}
-                numRosters={NUM_ROSTERS}
-                teamName={TEAM_NAME}
-            />
-        );
-        const settingTiles = container.querySelectorAll('.settingTile');
+    describe('Settings', () => {
+        it('renders settings', async () => {
+            const {container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+            const settingTiles = container.querySelectorAll('.settingTile');
 
-        expect(settingTiles).toHaveLength(9);
-        expect(settingTiles[0]).toHaveTextContent(`${NUM_ROSTERS}`);
-    });
-
-    it('can add other settings', async () => {
-        const {getByLabelText, container} = await wrappedRender(
-            <BigBoy
-                roster={ROSTER}
-                numRosters={NUM_ROSTERS}
-                teamName={TEAM_NAME}
-            />
-        );
-        const otherSettingsInput = getByLabelText('Other Settings');
-        expect(otherSettingsInput).toHaveValue('');
-        fireEvent.input(otherSettingsInput, {
-            target: {value: 'test settings content'},
+            expect(settingTiles).toHaveLength(9);
+            expect(settingTiles[0]).toHaveTextContent(`${NUM_ROSTERS}`);
         });
-        expect(otherSettingsInput).toHaveValue('test settings content');
-        expect(
-            container.querySelectorAll('.otherSettings')[0]
-        ).toHaveTextContent('test settings content');
+
+        it('can add other settings', async () => {
+            const {getByLabelText, container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+            const otherSettingsInput = getByLabelText('Other Settings');
+            expect(otherSettingsInput).toHaveValue('');
+            fireEvent.input(otherSettingsInput, {
+                target: {value: 'test settings content'},
+            });
+            expect(otherSettingsInput).toHaveValue('test settings content');
+            expect(
+                container.querySelectorAll('.otherSettings')[0]
+            ).toHaveTextContent('test settings content');
+        });
     });
 
     it('renders RosterGraphic', async () => {
@@ -109,5 +111,45 @@ describe('BigBoy', () => {
         expect(rosterGraphic).toHaveTextContent(/joe burrow/i);
         expect(rosterGraphic).toHaveTextContent(/zack moss/i);
         expect(rosterGraphic).toHaveTextContent(/trey mcbride/i);
+    });
+
+    describe('RisersFallers', () => {
+        it('renders', async () => {
+            const {container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+            const risersFallersGraphic = container.querySelector(
+                '.risersFallersGraphic'
+            );
+
+            expect(risersFallersGraphic).toBeInTheDocument();
+            expect(risersFallersGraphic).toHaveTextContent(/\+30%/i);
+        });
+
+        it('can be edited', async () => {
+            const {container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+
+            const inputRows = container.querySelectorAll('.inputRow');
+            expect(inputRows).toHaveLength(6);
+
+            for (let i = 0; i < 50; i++) {
+                fireEvent.click(inputRows[0].querySelector('button')!);
+            }
+            await waitFor(() => {
+                expect(
+                    container.querySelector('.risersFallersGraphic')
+                ).toHaveTextContent(/\+25%/i);
+            });
+        });
     });
 });
