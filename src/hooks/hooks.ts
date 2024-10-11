@@ -517,6 +517,16 @@ export function useNonSleeper(
     );
     const [_searchParams, setSearchParams] = useSearchParams();
 
+    useEffect(
+        () =>
+            setTeamName(
+                specifiedUser?.metadata?.team_name ||
+                    specifiedUser?.display_name ||
+                    ''
+            ),
+        [specifiedUser]
+    );
+
     useEffect(() => {
         if (leagueId) {
             setSearchParams(searchParams => {
