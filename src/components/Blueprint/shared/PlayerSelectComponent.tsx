@@ -46,7 +46,7 @@ export default function PlayerSelectComponent(props: {
         }
         setAllPlayerOptions(playerOpts);
     }, [playerIds, playerData, nonIdPlayerOptions]);
-    if (!playerData) return <></>;
+    if (!playerData || allPlayerOptions.length === 0) return <></>;
 
     return (
         <FormControl style={{margin: '4px', minWidth: '100px', ...styles}}>

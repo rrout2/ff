@@ -102,7 +102,10 @@ export function GraphicComponent({
                             const fullName = `${player.first_name} ${player.last_name}`;
                             const positionalAdp = getPositionalAdp(fullName);
                             return (
-                                <div className={styles.rosterPlayer}>
+                                <div
+                                    className={styles.rosterPlayer}
+                                    key={player.player_id}
+                                >
                                     <div>{fullName.toUpperCase()}</div>
                                     <div
                                         style={{

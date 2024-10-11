@@ -127,7 +127,9 @@ export function GraphicComponent({
                     className={`${styles.columnSection} ${styles.nameColumn} ${styles.alignFlexEnd}`}
                 >
                     {risers.map(playerId => (
-                        <div>{maybeShortenedName(playerData[playerId])}</div>
+                        <div key={playerId}>
+                            {maybeShortenedName(playerData[playerId])}
+                        </div>
                     ))}
                 </div>
                 <div
@@ -172,7 +174,9 @@ export function GraphicComponent({
                 </div>
                 <div className={`${styles.columnSection} ${styles.nameColumn}`}>
                     {fallers.map(playerId => (
-                        <div>{maybeShortenedName(playerData[playerId])}</div>
+                        <div key={playerId}>
+                            {maybeShortenedName(playerData[playerId])}
+                        </div>
                     ))}
                 </div>
             </div>
@@ -207,7 +211,7 @@ export function InputComponent({
         <>
             {risers.map((riser, idx) => {
                 return (
-                    <div className={styles.inputRow}>
+                    <div className={styles.inputRow} key={idx}>
                         <StyledNumberInput
                             key={idx}
                             value={riserValues[idx]}
@@ -221,7 +225,6 @@ export function InputComponent({
                             step={0.1}
                         />
                         <PlayerSelectComponent
-                            key={riser}
                             label={`Riser ${idx + 1}`}
                             playerIds={playerIds}
                             selectedPlayerIds={[riser]}
@@ -237,9 +240,8 @@ export function InputComponent({
             })}
             {fallers.map((faller, idx) => {
                 return (
-                    <div className={styles.inputRow}>
+                    <div className={styles.inputRow} key={idx}>
                         <StyledNumberInput
-                            key={idx}
                             value={fallerValues[idx]}
                             onChange={(_, value) => {
                                 const newFallerValues = [...fallerValues];
@@ -251,7 +253,6 @@ export function InputComponent({
                             step={0.1}
                         />
                         <PlayerSelectComponent
-                            key={faller}
                             label={`Faller ${idx + 1}`}
                             playerIds={playerIds}
                             selectedPlayerIds={[faller]}
