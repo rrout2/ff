@@ -2,7 +2,7 @@ import styles from './LookToTradeModule.module.css';
 import ExportButton from '../../../shared/ExportButton';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {usePlayerData} from '../../../../../hooks/hooks';
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, Fragment, SetStateAction, useState} from 'react';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {Autocomplete, FormControl, TextField} from '@mui/material';
 
@@ -95,9 +95,14 @@ function GraphicComponent({
     const playerData = usePlayerData();
     if (!playerData) return <></>;
 
-    function tradeSuggestion(send: string, receive: string, color: string) {
+    function tradeSuggestion(
+        send: string,
+        receive: string,
+        color: string,
+        idx: number
+    ) {
         return (
-            <div className={styles.suggestion}>
+            <div className={styles.suggestion} key={idx}>
                 <div className={styles.send}>
                     <span className={styles.whiteBullet}>◦</span>
                     {send}
@@ -164,7 +169,8 @@ function GraphicComponent({
                         ? tradeAwayString
                         : shortenedTradeAwayString,
                     inReturn[idx].toLocaleUpperCase(),
-                    COLORS[idx]
+                    COLORS[idx],
+                    idx
                 );
             })}
         </div>
@@ -220,7 +226,7 @@ function InputComponent({
         return (
             <>
                 {playersToTrade.map((_, idx) => (
-                    <>
+                    <Fragment key={idx}>
                         <PlayerSelectComponent
                             playerIds={roster?.players ?? []}
                             selectedPlayerIds={playersToTrade[idx]}
@@ -232,7 +238,7 @@ function InputComponent({
                             nonIdPlayerOptions={nonIdPlayerOptions}
                         />
                         {inReturnComponent(idx)}
-                    </>
+                    </Fragment>
                 ))}
             </>
         );

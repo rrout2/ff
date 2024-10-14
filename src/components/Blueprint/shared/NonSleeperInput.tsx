@@ -1,8 +1,9 @@
-import {TextField} from '@mui/material';
+import {Autocomplete, Button, FormControl, TextField} from '@mui/material';
 import {QB, RB, WR, TE, FLEX, SUPER_FLEX, BENCH} from '../../../consts/fantasy';
-import {useAllPlayers} from '../../../hooks/hooks';
+import {useAllPlayers, usePlayerData} from '../../../hooks/hooks';
 import PlayerSelectComponent from './PlayerSelectComponent';
 import StyledNumberInput from './StyledNumberInput';
+import {useEffect, useState} from 'react';
 
 interface NonSleeperInputProps {
     nonSleeperIds: string[];
@@ -38,9 +39,48 @@ export function NonSleeperInput({
     setTaxiSlots,
 }: NonSleeperInputProps) {
     const allPlayers = useAllPlayers();
+    const [player, setPlayer] = useState<string>('');
+    const [playerAdded, setPlayerAdded] = useState(false);
+    useEffect(() => {
+        setPlayerAdded(nonSleeperIds.includes(player));
+    }, [nonSleeperIds, player]);
     return (
         <>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+            >
+                <PlayerSearchInput player={player} setPlayer={setPlayer} />
+                <Button
+                    disabled={!player}
+                    onClick={() => {
+                        if (playerAdded) {
+                            setNonSleeperIds(
+                                nonSleeperIds.filter(id => id !== player)
+                            );
+                        } else {
+                            setNonSleeperIds([...nonSleeperIds, player]);
+                        }
+                    }}
+                >
+                    {playerAdded ? 'Remove' : 'Add'}
+                </Button>
+            </div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                }}
+            >
+                <TextField
+                    value={teamName}
+                    onChange={e => setTeamName(e.target.value)}
+                    label="Team Name"
+                />
                 <PlayerSelectComponent
                     playerIds={allPlayers}
                     selectedPlayerIds={nonSleeperIds}
@@ -48,11 +88,6 @@ export function NonSleeperInput({
                     multiple={true}
                     label="Non-Sleeper Roster"
                     styles={{minWidth: '200px'}}
-                />
-                <TextField
-                    value={teamName}
-                    onChange={e => setTeamName(e.target.value)}
-                    label="Team Name"
                 />
             </div>
             <div
@@ -135,5 +170,48 @@ export function NonSleeperInput({
                 </div>
             </div>
         </>
+    );
+}
+
+function PlayerSearchInput({
+    player,
+    setPlayer,
+}: {
+    player: string;
+    setPlayer: (player: string) => void;
+}) {
+    const allPlayers = useAllPlayers();
+    const playerData = usePlayerData();
+    const [inputValue, setInputValue] = useState('');
+
+    if (!playerData) return <></>;
+    return (
+        <FormControl
+            style={{margin: '4px', minWidth: '200px', width: 'fit-content'}}
+        >
+            <Autocomplete
+                options={allPlayers}
+                getOptionLabel={option => {
+                    const p = playerData[option];
+                    if (!p) return '';
+                    return `${p.first_name} ${p.last_name}`;
+                }}
+                autoHighlight
+                value={player}
+                onChange={(_event, newInputValue, reason) => {
+                    if (reason === 'clear' || newInputValue === null) {
+                        return;
+                    }
+                    setPlayer(newInputValue);
+                }}
+                inputValue={inputValue}
+                onInputChange={(_event, value, _reason) => {
+                    setInputValue(value);
+                }}
+                renderInput={params => (
+                    <TextField {...params} label={'Search for Player'} />
+                )}
+            />
+        </FormControl>
     );
 }

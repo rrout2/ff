@@ -260,8 +260,8 @@ export default function BigBoy({roster, teamName}: BigBoyProps) {
     function commentsComponent() {
         return (
             <ul className={styles.commentsGraphic}>
-                {comments.map(c => {
-                    return <li>{c}</li>;
+                {comments.map((c, idx) => {
+                    return <li key={idx}>{c}</li>;
                 })}
             </ul>
         );
@@ -523,7 +523,7 @@ export default function BigBoy({roster, teamName}: BigBoyProps) {
         return (
             <div className={styles.fullRoster}>
                 {FANTASY_POSITIONS.map(pos => (
-                    <div className={styles.positionColumn}>
+                    <div className={styles.positionColumn} key={pos}>
                         <b>{pos}</b>
                         {allPlayers
                             .filter(
@@ -695,7 +695,7 @@ export default function BigBoy({roster, teamName}: BigBoyProps) {
                 </FormControl>
                 {!isRedraft &&
                     [0, 1, 2].map(idx => (
-                        <FormControl style={{margin: '4px'}}>
+                        <FormControl style={{margin: '4px'}} key={idx}>
                             <InputLabel>Year {idx + 1}</InputLabel>
                             <Select
                                 label={`Year ${idx + 1}`}

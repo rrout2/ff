@@ -460,6 +460,7 @@ export default function BlueprintGenerator() {
                             setInputValue('');
                             setLeagueId('');
                         }}
+                        style={{width: '180px'}}
                     >
                         {'New League'}
                     </Button>

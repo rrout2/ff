@@ -89,7 +89,7 @@ function GraphicComponent({
         >
             <div className={styles.positions}>
                 {FANTASY_POSITIONS.map(pos => (
-                    <div className={styles.column}>
+                    <div className={styles.column} key={pos}>
                         <div
                             className={`${styles.positionChip} ${styles[pos]}`}
                         >
@@ -129,6 +129,7 @@ function AllPositionalSelectors({
         <>
             {FANTASY_POSITIONS.map(pos => (
                 <PlayerSelectComponent
+                    key={pos}
                     playerIds={roster?.players ?? []}
                     selectedPlayerIds={cornerstones.get(pos) ?? []}
                     position={pos}

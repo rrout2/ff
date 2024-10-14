@@ -57,7 +57,11 @@ export function usePlayerData() {
     const preprocess = (pd: PlayerData) => {
         for (const playerId in pd) {
             const player = pd[playerId];
-            if (!SUPER_FLEX_SET.has(player.position)) {
+            if (
+                !SUPER_FLEX_SET.has(player.position) ||
+                player.last_name === 'Invalid' ||
+                player.first_name === 'Duplicate'
+            ) {
                 delete pd[playerId];
             }
         }
@@ -479,7 +483,10 @@ export function useTitle(title: string) {
 export function useAllPlayers() {
     const playerData = usePlayerData();
     const [allPlayers, setAllPlayers] = useState<string[]>([]);
+    const [allPlayersSorted, setAllPlayersSorted] = useState<string[]>([]);
+    const {sortByAdp} = useAdpData();
     useEffect(() => {
+        if (!playerData) return;
         const players: string[] = [];
         for (const playerId in playerData) {
             players.push(playerId);
@@ -487,7 +494,17 @@ export function useAllPlayers() {
         setAllPlayers(players);
     }, [playerData]);
 
-    return allPlayers;
+    useEffect(() => {
+        if (!playerData || !allPlayers) return;
+        setAllPlayersSorted(
+            allPlayers
+                .map(p => playerData[p])
+                .sort(sortByAdp)
+                .map(p => p.player_id)
+        );
+    }, [allPlayers, playerData]);
+
+    return allPlayersSorted;
 }
 
 export function useNonSleeper(
@@ -515,7 +532,7 @@ export function useNonSleeper(
     const [teamName, setTeamName] = useState(
         specifiedUser?.metadata?.team_name || specifiedUser?.display_name || ''
     );
-    const [_searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(
         () =>
