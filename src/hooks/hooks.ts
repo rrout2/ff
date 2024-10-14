@@ -532,7 +532,7 @@ export function useNonSleeper(
     const [teamName, setTeamName] = useState(
         specifiedUser?.metadata?.team_name || specifiedUser?.display_name || ''
     );
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [_searchParams, setSearchParams] = useSearchParams();
 
     useEffect(
         () =>
