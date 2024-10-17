@@ -519,7 +519,11 @@ export default function BlueprintGenerator() {
                 <DepthScore roster={roster} teamName={teamName} />
             )}
             {module === Module.BigBoy && (
-                <BigBoy roster={roster} teamName={teamName} />
+                <BigBoy
+                    roster={roster}
+                    teamName={teamName}
+                    numRosters={numRosters}
+                />
             )}
             {hasTeamId() && module === Module.WaiverTargets && (
                 <WaiverTargets />

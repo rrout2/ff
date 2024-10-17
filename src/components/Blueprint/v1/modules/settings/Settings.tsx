@@ -260,7 +260,11 @@ function GraphicComponent({
                         TEAMS: {numRosters}
                     </div>
                     <div className={`${styles.chip} ${styles.blue}`}>
-                        SF: {rosterSettings.has(SUPER_FLEX) ? 'YES' : 'NO'}
+                        SF:{' '}
+                        {rosterSettings.has(SUPER_FLEX) &&
+                        rosterSettings.get(SUPER_FLEX)! > 0
+                            ? 'YES'
+                            : 'NO'}
                     </div>
                     <div className={`${styles.chip} ${styles.blue}`}>
                         PPR: {scoringSettings.rec ?? 0}

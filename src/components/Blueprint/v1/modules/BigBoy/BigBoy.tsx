@@ -122,9 +122,10 @@ const ALL_ARCHETYPES = Object.values(Archetype);
 interface BigBoyProps {
     roster?: Roster;
     teamName?: string;
+    numRosters?: number;
 }
 
-export default function BigBoy({roster, teamName}: BigBoyProps) {
+export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettingsFromId(leagueId);
@@ -379,7 +380,7 @@ export default function BigBoy({roster, teamName}: BigBoyProps) {
         return (
             <div className={styles.settingsGraphic}>
                 <SettingsGraphic
-                    numRosters={rosters?.length ?? 0}
+                    numRosters={numRosters ?? 0}
                     otherSettings={otherSettings}
                     transparent={true}
                 />
