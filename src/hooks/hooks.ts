@@ -435,7 +435,7 @@ export function useProjectedLineup(
             });
 
         setStartingLineup(starters);
-    }, [playerData, playerIds, rosterSettings]);
+    }, [!!playerData, !!playerIds, rosterSettings.size]);
 
     useEffect(() => {
         if (!playerData || !playerIds) return;

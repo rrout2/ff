@@ -25,6 +25,7 @@ import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../../shared/ExportButton';
 import styles from './BigBoy.module.css';
 import {
+    Button,
     FormControl,
     FormControlLabel,
     FormGroup,
@@ -35,6 +36,7 @@ import {
     SelectChangeEvent,
     Switch,
     TextField,
+    Tooltip,
 } from '@mui/material';
 import {
     FLEX,
@@ -81,6 +83,24 @@ import {
     InputComponent as PlayersToTargetInput,
 } from '../playerstotarget/PlayersToTargetModule';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
+import {useSearchParams} from 'react-router-dom';
+import {
+    ARCHETYPE,
+    COMMENTS,
+    CORNERSTONES,
+    DEPTH_SCORE_OVERRIDE,
+    DRAFT_CAPITAL_NOTES,
+    DRAFT_CAPITAL_VALUE,
+    IN_RETURN,
+    OTHER_SETTINGS,
+    OUTLOOK,
+    PLAYERS_TO_TARGET,
+    PLAYERS_TO_TRADE,
+    POSITIONAL_GRADE_OVERRIDES,
+    REBUILD_CONTEND_VALUE,
+    STARTING_LINEUP,
+    WAIVER_TARGETS,
+} from '../../../../../consts/urlParams';
 enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -205,6 +225,127 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
 
     const [otherSettings, setOtherSettings] = useState('');
     const [waiverTarget, setWaiverTarget] = useState<string>('');
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        if (!playerData || !searchParams.get(STARTING_LINEUP)) return;
+        // not sure why this is necessary
+        setTimeout(load, 200);
+    }, [playerData, searchParams]);
+
+    function save() {
+        setSearchParams(searchParams => {
+            searchParams.set(OTHER_SETTINGS, otherSettings);
+            searchParams.set(PLAYERS_TO_TARGET, playerSuggestions.join(','));
+            searchParams.set(ARCHETYPE, archetype);
+            searchParams.set(OUTLOOK, outlooks.join(','));
+            searchParams.set(
+                DEPTH_SCORE_OVERRIDE,
+                depthScoreOverride.toString()
+            );
+            searchParams.set(
+                CORNERSTONES,
+                JSON.stringify(Array.from(cornerstones.entries()))
+            );
+            searchParams.set(PLAYERS_TO_TRADE, JSON.stringify(playersToTrade));
+            searchParams.set(IN_RETURN, inReturn.join(','));
+            searchParams.set(DRAFT_CAPITAL_NOTES, draftCapitalNotes);
+            searchParams.set(DRAFT_CAPITAL_VALUE, draftCapitalValue.toString());
+            searchParams.set(
+                REBUILD_CONTEND_VALUE,
+                rebuildContendValue.toString()
+            );
+            searchParams.set(
+                POSITIONAL_GRADE_OVERRIDES,
+                JSON.stringify(Array.from(positionalGradeOverrides.entries()))
+            );
+            searchParams.set(
+                STARTING_LINEUP,
+                JSON.stringify(
+                    startingLineup.map(p => {
+                        return {id: p.player.player_id, pos: p.position};
+                    })
+                )
+            );
+
+            searchParams.set(WAIVER_TARGETS, waiverTarget);
+
+            searchParams.set(COMMENTS, comments.join(','));
+
+            return searchParams;
+        });
+    }
+
+    function clearUrlSave() {
+        setSearchParams(searchParams => {
+            searchParams.delete(OTHER_SETTINGS);
+            searchParams.delete(PLAYERS_TO_TARGET);
+            searchParams.delete(ARCHETYPE);
+            searchParams.delete(OUTLOOK);
+            searchParams.delete(DEPTH_SCORE_OVERRIDE);
+            searchParams.delete(CORNERSTONES);
+            searchParams.delete(PLAYERS_TO_TRADE);
+            searchParams.delete(IN_RETURN);
+            searchParams.delete(DRAFT_CAPITAL_NOTES);
+            searchParams.delete(DRAFT_CAPITAL_VALUE);
+            searchParams.delete(REBUILD_CONTEND_VALUE);
+            searchParams.delete(POSITIONAL_GRADE_OVERRIDES);
+            searchParams.delete(STARTING_LINEUP);
+            searchParams.delete(WAIVER_TARGETS);
+            searchParams.delete(COMMENTS);
+            return searchParams;
+        });
+    }
+
+    function load() {
+        setOtherSettings(searchParams.get(OTHER_SETTINGS) || '');
+        setPlayerSuggestions(
+            (searchParams.get(PLAYERS_TO_TARGET) || '').split(',')
+        );
+        setArchetype(
+            (searchParams.get(ARCHETYPE) as Archetype) || Archetype.HardRebuild
+        );
+        setOutlooks((searchParams.get(OUTLOOK) || '').split(','));
+        setDepthScoreOverride(
+            parseInt(searchParams.get(DEPTH_SCORE_OVERRIDE) || '0')
+        );
+        const cornerstonesEntries = JSON.parse(
+            searchParams.get(CORNERSTONES) || '{}'
+        );
+        setCornerstones(new Map(cornerstonesEntries));
+        setPlayersToTrade(
+            JSON.parse(searchParams.get(PLAYERS_TO_TRADE) || '{}')
+        );
+        setInReturn((searchParams.get(IN_RETURN) || '').split(','));
+        setDraftCapitalNotes(searchParams.get(DRAFT_CAPITAL_NOTES) || '');
+        setDraftCapitalValue(
+            parseInt(searchParams.get(DRAFT_CAPITAL_VALUE) || '0')
+        );
+        setRebuildContendValue(
+            parseInt(searchParams.get(REBUILD_CONTEND_VALUE) || '0')
+        );
+        const positionalGradeOverridesEntries = JSON.parse(
+            searchParams.get(POSITIONAL_GRADE_OVERRIDES) || '{}'
+        );
+        setPositionalGradeOverrides(new Map(positionalGradeOverridesEntries));
+        const startingLineup = JSON.parse(
+            searchParams.get(STARTING_LINEUP) || '[]'
+        ) as {id: string; pos: string}[];
+        if (startingLineup.length > 0) {
+            setStartingLineup(
+                startingLineup.map(p => {
+                    return {
+                        player: playerData![p.id],
+                        position: p.pos,
+                    };
+                })
+            );
+        }
+
+        setWaiverTarget(searchParams.get(WAIVER_TARGETS) || '');
+        setComments((searchParams.get(COMMENTS) || '').split(','));
+    }
 
     function fullBlueprint() {
         return (
@@ -737,6 +878,20 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
             />
+            <Tooltip title="Save to URL">
+                <Button variant={'outlined'} onClick={save}>
+                    {'Save'}
+                </Button>
+            </Tooltip>
+            <Tooltip title="Clear Save from URL">
+                <Button
+                    variant={'outlined'}
+                    onClick={clearUrlSave}
+                    disabled={!searchParams.get(STARTING_LINEUP)}
+                >
+                    {'Clear'}
+                </Button>
+            </Tooltip>
             {togglePreview()}
             {toggleRedraft()}
             <div className={styles.inputsAndPreview}>
