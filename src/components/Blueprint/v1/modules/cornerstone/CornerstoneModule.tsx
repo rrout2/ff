@@ -101,7 +101,7 @@ function GraphicComponent({
                                 .map(playerId => playerData[playerId])
                                 .map(player => {
                                     return (
-                                        <div>
+                                        <div key={player.player_id}>
                                             {`${player.first_name} ${player.last_name}`.toLocaleUpperCase()}
                                         </div>
                                     );

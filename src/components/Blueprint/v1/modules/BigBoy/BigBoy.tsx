@@ -231,25 +231,60 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
     useEffect(() => {
         if (!playerData || !searchParams.get(STARTING_LINEUP)) return;
         // not sure why this is necessary
-        setTimeout(load, 200);
+        setTimeout(loadFromUrl, 200);
     }, [playerData, searchParams]);
 
-    function save() {
+    function shortenOutlook(outlook: string) {
+        switch (outlook) {
+            case 'REBUILD':
+                return 'R';
+            case 'CONTEND':
+                return 'C';
+            case 'RELOAD':
+                return 'O';
+            default:
+                return '?';
+        }
+    }
+
+    function expandOutlook(outlook: string) {
+        switch (outlook) {
+            case 'R':
+                return 'REBUILD';
+            case 'C':
+                return 'CONTEND';
+            case 'O':
+                return 'RELOAD';
+            default:
+                return '';
+        }
+    }
+
+    function saveToUrl() {
         setSearchParams(searchParams => {
             searchParams.set(OTHER_SETTINGS, otherSettings);
-            searchParams.set(PLAYERS_TO_TARGET, playerSuggestions.join(','));
+            searchParams.set(PLAYERS_TO_TARGET, playerSuggestions.join('-'));
             searchParams.set(ARCHETYPE, archetype);
-            searchParams.set(OUTLOOK, outlooks.join(','));
-            searchParams.set(
-                DEPTH_SCORE_OVERRIDE,
-                depthScoreOverride.toString()
-            );
-            searchParams.set(
-                CORNERSTONES,
-                JSON.stringify(Array.from(cornerstones.entries()))
-            );
-            searchParams.set(PLAYERS_TO_TRADE, JSON.stringify(playersToTrade));
-            searchParams.set(IN_RETURN, inReturn.join(','));
+            searchParams.set(OUTLOOK, outlooks.map(shortenOutlook).join('-'));
+            if (depthScoreOverride > 0) {
+                searchParams.set(
+                    DEPTH_SCORE_OVERRIDE,
+                    depthScoreOverride.toString()
+                );
+            }
+            const cornerstoneList: string[] = [];
+            for (const [pos, starters] of Array.from(cornerstones.entries())) {
+                cornerstoneList.push(pos);
+                cornerstoneList.push(...starters);
+            }
+            searchParams.set(CORNERSTONES, cornerstoneList.join('-'));
+            playersToTrade.forEach((players, idx) => {
+                searchParams.set(
+                    `${PLAYERS_TO_TRADE}_${idx}`,
+                    players.join('-')
+                );
+            });
+            searchParams.set(IN_RETURN, inReturn.join('-'));
             searchParams.set(DRAFT_CAPITAL_NOTES, draftCapitalNotes);
             searchParams.set(DRAFT_CAPITAL_VALUE, draftCapitalValue.toString());
             searchParams.set(
@@ -258,20 +293,22 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             );
             searchParams.set(
                 POSITIONAL_GRADE_OVERRIDES,
-                JSON.stringify(Array.from(positionalGradeOverrides.entries()))
+                Array.from(positionalGradeOverrides.entries()).flat().join('-')
             );
             searchParams.set(
                 STARTING_LINEUP,
-                JSON.stringify(
-                    startingLineup.map(p => {
-                        return {id: p.player.player_id, pos: p.position};
-                    })
-                )
+                startingLineup
+                    .reduce((acc: string[], curr) => {
+                        acc.push(curr.player.player_id);
+                        acc.push(curr.position);
+                        return acc;
+                    }, [])
+                    .join('-')
             );
 
             searchParams.set(WAIVER_TARGETS, waiverTarget);
 
-            searchParams.set(COMMENTS, comments.join(','));
+            searchParams.set(COMMENTS, comments.join('-'));
 
             return searchParams;
         });
@@ -285,7 +322,9 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             searchParams.delete(OUTLOOK);
             searchParams.delete(DEPTH_SCORE_OVERRIDE);
             searchParams.delete(CORNERSTONES);
-            searchParams.delete(PLAYERS_TO_TRADE);
+            for (let i = 0; i < 3; i++) {
+                searchParams.delete(`${PLAYERS_TO_TRADE}_${i}`);
+            }
             searchParams.delete(IN_RETURN);
             searchParams.delete(DRAFT_CAPITAL_NOTES);
             searchParams.delete(DRAFT_CAPITAL_VALUE);
@@ -298,53 +337,99 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         });
     }
 
-    function load() {
+    function loadFromUrl() {
         setOtherSettings(searchParams.get(OTHER_SETTINGS) || '');
         setPlayerSuggestions(
-            (searchParams.get(PLAYERS_TO_TARGET) || '').split(',')
+            (searchParams.get(PLAYERS_TO_TARGET) || '').split('-')
         );
         setArchetype(
             (searchParams.get(ARCHETYPE) as Archetype) || Archetype.HardRebuild
         );
-        setOutlooks((searchParams.get(OUTLOOK) || '').split(','));
-        setDepthScoreOverride(
-            parseInt(searchParams.get(DEPTH_SCORE_OVERRIDE) || '0')
+        setOutlooks(
+            (searchParams.get(OUTLOOK) || '').split('-').map(expandOutlook)
         );
-        const cornerstonesEntries = JSON.parse(
-            searchParams.get(CORNERSTONES) || '{}'
-        );
-        setCornerstones(new Map(cornerstonesEntries));
-        setPlayersToTrade(
-            JSON.parse(searchParams.get(PLAYERS_TO_TRADE) || '{}')
-        );
-        setInReturn((searchParams.get(IN_RETURN) || '').split(','));
-        setDraftCapitalNotes(searchParams.get(DRAFT_CAPITAL_NOTES) || '');
-        setDraftCapitalValue(
-            parseInt(searchParams.get(DRAFT_CAPITAL_VALUE) || '0')
-        );
-        setRebuildContendValue(
-            parseInt(searchParams.get(REBUILD_CONTEND_VALUE) || '0')
-        );
-        const positionalGradeOverridesEntries = JSON.parse(
-            searchParams.get(POSITIONAL_GRADE_OVERRIDES) || '{}'
-        );
-        setPositionalGradeOverrides(new Map(positionalGradeOverridesEntries));
-        const startingLineup = JSON.parse(
-            searchParams.get(STARTING_LINEUP) || '[]'
-        ) as {id: string; pos: string}[];
-        if (startingLineup.length > 0) {
-            setStartingLineup(
-                startingLineup.map(p => {
-                    return {
-                        player: playerData![p.id],
-                        position: p.pos,
-                    };
-                })
-            );
+
+        const depthScoreOverride = searchParams.get(DEPTH_SCORE_OVERRIDE);
+        if (depthScoreOverride) {
+            setDepthScoreOverride(+depthScoreOverride);
         }
 
+        loadCornerstones();
+
+        playersToTrade.forEach((_, idx) => {
+            setPlayersToTrade(prev => {
+                prev[idx] = (
+                    searchParams.get(`${PLAYERS_TO_TRADE}_${idx}`) || ''
+                ).split('-');
+                return prev;
+            });
+        });
+        setInReturn((searchParams.get(IN_RETURN) || '').split('-'));
+        setDraftCapitalNotes(searchParams.get(DRAFT_CAPITAL_NOTES) || '');
+        setDraftCapitalValue(+(searchParams.get(DRAFT_CAPITAL_VALUE) || '0'));
+        setRebuildContendValue(
+            +(searchParams.get(REBUILD_CONTEND_VALUE) || '0')
+        );
+
+        loadPosGrades();
+        loadStartingLineup();
+
         setWaiverTarget(searchParams.get(WAIVER_TARGETS) || '');
-        setComments((searchParams.get(COMMENTS) || '').split(','));
+        setComments((searchParams.get(COMMENTS) || '').split('-'));
+    }
+    function loadCornerstones() {
+        const hyphenSeparatedCornerstones = (
+            searchParams.get(CORNERSTONES) || ''
+        ).split('-');
+        const loadedCornerstones = new Map<string, string[]>();
+        let mostRecentVal = '';
+        for (const val of hyphenSeparatedCornerstones) {
+            if (FANTASY_POSITIONS.includes(val)) {
+                loadedCornerstones.set(val, []);
+                mostRecentVal = val;
+            } else {
+                loadedCornerstones.get(mostRecentVal)!.push(val);
+            }
+        }
+        setCornerstones(loadedCornerstones);
+    }
+
+    function loadPosGrades() {
+        const loadedPositionalGrades: Map<string, number> = new Map();
+        const hyphenSeparatedPosGrades = (
+            searchParams.get(POSITIONAL_GRADE_OVERRIDES) || ''
+        ).split('-');
+        hyphenSeparatedPosGrades.forEach((str, idx) => {
+            if (!FANTASY_POSITIONS.includes(str)) return;
+
+            let override = 0;
+            if (hyphenSeparatedPosGrades[idx + 1] === '') {
+                // means that the value is negative, since we separate by hyphen
+                override = -hyphenSeparatedPosGrades[idx + 2];
+            } else {
+                override = +hyphenSeparatedPosGrades[idx + 1];
+            }
+            loadedPositionalGrades.set(
+                str,
+                override || positionalGradeOverrides.get(str)!
+            );
+        });
+        setPositionalGradeOverrides(loadedPositionalGrades);
+    }
+
+    function loadStartingLineup() {
+        const loadedStartingLineup: {player: Player; position: string}[] = [];
+        const hyphenSeparatedStartingLineup = (
+            searchParams.get(STARTING_LINEUP) || ''
+        ).split('-');
+        for (let i = 0; i < hyphenSeparatedStartingLineup.length; i += 2) {
+            loadedStartingLineup.push({
+                player: playerData![hyphenSeparatedStartingLineup[i]],
+                position: hyphenSeparatedStartingLineup[i + 1],
+            });
+        }
+
+        setStartingLineup(loadedStartingLineup);
     }
 
     function fullBlueprint() {
@@ -671,12 +756,15 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             .filter(
                                 player => !!player && player.position === pos
                             )
-                            .map(player => {
+                            .map((player, idx) => {
                                 const fullName = `${player.first_name} ${player.last_name}`;
                                 const positionalAdp =
                                     getPositionalAdp(fullName);
                                 return (
-                                    <div className={styles.rosterPlayer}>
+                                    <div
+                                        className={styles.rosterPlayer}
+                                        key={idx}
+                                    >
                                         <div>{fullName}</div>
                                         <div>
                                             {positionalAdp === Infinity
@@ -879,7 +967,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                 label="Download Blueprint"
             />
             <Tooltip title="Save to URL">
-                <Button variant={'outlined'} onClick={save}>
+                <Button variant={'outlined'} onClick={saveToUrl}>
                     {'Save'}
                 </Button>
             </Tooltip>

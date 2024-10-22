@@ -144,7 +144,7 @@ function StartersGraphic(props: {
         const team = player.team ?? 'FA';
 
         return (
-            <div className={styles.playerTargetBody}>
+            <div className={styles.playerTargetBody} key={player.player_id}>
                 <div
                     className={`${styles.positionChip} ${styles[diplayPosition]}`}
                 >
