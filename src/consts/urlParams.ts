@@ -19,3 +19,5 @@ export const POSITIONAL_GRADE_OVERRIDES = 'positionalGradeOverrides';
 export const STARTING_LINEUP = 'startingLineup';
 export const WAIVER_TARGETS = 'waiverTargets';
 export const COMMENTS = 'comments';
+export const NON_SLEEPER_IDS = 'nonSleeperIds';
+export const LEAGUE_SIZE = 'leagueSize';

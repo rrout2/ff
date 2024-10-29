@@ -13,7 +13,14 @@ import {
     getUser,
 } from '../sleeper-api/sleeper-api';
 import {useQuery} from '@tanstack/react-query';
-import {LEAGUE_ID, MODULE, NONE_TEAM_ID, TEAM_ID} from '../consts/urlParams';
+import {
+    LEAGUE_ID,
+    LEAGUE_SIZE,
+    MODULE,
+    NON_SLEEPER_IDS,
+    NONE_TEAM_ID,
+    TEAM_ID,
+} from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {
     BENCH,
@@ -513,26 +520,32 @@ export function useNonSleeper(
     setRoster?: (roster: Roster) => void
 ) {
     const [leagueId] = useLeagueIdFromUrl();
-    const [nonSleeperIds, setNonSleeperIds] = useState<string[]>([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [nonSleeperIds, setNonSleeperIds] = useState<string[]>(
+        (searchParams.get(NON_SLEEPER_IDS) || '').split('-')
+    );
     const [nonSleeperRosterSettings, setNonSleeperRosterSettings] = useState(
         new Map([
-            [QB, 1],
-            [RB, 2],
-            [WR, 2],
-            [TE, 1],
-            [FLEX, 2],
-            [SUPER_FLEX, 1],
-            [BENCH, 6],
+            [QB, +(searchParams.get(QB) || 1)],
+            [RB, +(searchParams.get(RB) || 2)],
+            [WR, +(searchParams.get(WR) || 3)],
+            [TE, +(searchParams.get(TE) || 1)],
+            [FLEX, +(searchParams.get(FLEX) || 2)],
+            [SUPER_FLEX, +(searchParams.get(SUPER_FLEX) || 1)],
+            [BENCH, +(searchParams.get(BENCH) || 6)],
         ])
     );
-    const [ppr, setPpr] = useState(1);
-    const [teBonus, setTeBonus] = useState(0.5);
-    const [numRosters, setNumRosters] = useState(rosters?.length ?? 12);
-    const [taxiSlots, setTaxiSlots] = useState(0);
+    const [ppr, setPpr] = useState(+(searchParams.get(PPR) || 1));
+    const [teBonus, setTeBonus] = useState(+(searchParams.get(TE_BONUS) || 1));
+    const [numRosters, setNumRosters] = useState(
+        +(searchParams.get(LEAGUE_SIZE) ?? rosters?.length ?? 12)
+    );
+    const [taxiSlots, setTaxiSlots] = useState(
+        +(searchParams.get(TAXI_SLOTS) || 0)
+    );
     const [teamName, setTeamName] = useState(
         specifiedUser?.metadata?.team_name || specifiedUser?.display_name || ''
     );
-    const [_searchParams, setSearchParams] = useSearchParams();
 
     useEffect(
         () =>
@@ -544,7 +557,20 @@ export function useNonSleeper(
         [specifiedUser]
     );
 
-    useEffect(() => setNumRosters(rosters?.length ?? 12), [rosters?.length]);
+    useEffect(
+        () =>
+            setNumRosters(
+                +(searchParams.get(LEAGUE_SIZE) ?? rosters?.length ?? 12)
+            ),
+        [rosters?.length]
+    );
+
+    useEffect(() => {
+        setSearchParams(searchParams => {
+            searchParams.set(LEAGUE_SIZE, '' + numRosters);
+            return searchParams;
+        });
+    }, [numRosters]);
 
     useEffect(() => {
         if (leagueId) {
@@ -603,6 +629,20 @@ export function useNonSleeper(
             players: nonSleeperIds,
         } as Roster);
     }, [nonSleeperIds, setRoster]);
+
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(NON_SLEEPER_IDS);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(NON_SLEEPER_IDS, '' + nonSleeperIds.join('-'));
+                return searchParams;
+            });
+        }
+    }, [nonSleeperIds]);
 
     return {
         nonSleeperIds,
