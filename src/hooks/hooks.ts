@@ -20,6 +20,7 @@ import {
     NON_SLEEPER_IDS,
     NONE_TEAM_ID,
     TEAM_ID,
+    TEAM_NAME,
 } from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {
@@ -544,18 +545,33 @@ export function useNonSleeper(
         +(searchParams.get(TAXI_SLOTS) || 0)
     );
     const [teamName, setTeamName] = useState(
-        specifiedUser?.metadata?.team_name || specifiedUser?.display_name || ''
+        searchParams.get(TEAM_NAME) ||
+            specifiedUser?.metadata?.team_name ||
+            specifiedUser?.display_name ||
+            ''
     );
 
-    useEffect(
-        () =>
-            setTeamName(
-                specifiedUser?.metadata?.team_name ||
-                    specifiedUser?.display_name ||
-                    ''
-            ),
-        [specifiedUser]
-    );
+    useEffect(() => {
+        if (!leagueId) return;
+        setTeamName(
+            specifiedUser?.metadata?.team_name ||
+                specifiedUser?.display_name ||
+                ''
+        );
+    }, [specifiedUser, leagueId]);
+    useEffect(() => {
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(TEAM_NAME);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(TEAM_NAME, teamName);
+                return searchParams;
+            });
+        }
+    }, [teamName, leagueId]);
 
     useEffect(
         () =>

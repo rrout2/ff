@@ -21,3 +21,4 @@ export const WAIVER_TARGETS = 'waiverTargets';
 export const COMMENTS = 'comments';
 export const NON_SLEEPER_IDS = 'nonSleeperIds';
 export const LEAGUE_SIZE = 'leagueSize';
+export const TEAM_NAME = 'teamName';
