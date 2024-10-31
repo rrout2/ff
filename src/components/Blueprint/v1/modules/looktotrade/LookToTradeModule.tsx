@@ -25,7 +25,7 @@ const SUGGESTIONS = [
     'QB',
     'RB',
     'Rushing QB',
-    'Safer Long-Term Asset',
+    'Safer Long Term Asset',
     'Safer Situation',
     'Starting Asset',
     'WR',

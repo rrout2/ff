@@ -337,10 +337,32 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         });
     }
 
+    /**
+     * Combines "RP" with the following player ID in the array. This is necessary
+     * because the URL params are split by "-" and "RP-2025" is a valid player ID.
+     *
+     * @param splitTargets The array of strings to combine
+     * @returns The modified array
+     */
+    function combineHangingRp(splitTargets: string[]) {
+        const newSplit = [];
+        for (let i = 0; i < splitTargets.length; i++) {
+            if (splitTargets[i] === 'RP') {
+                newSplit.push(`RP-${splitTargets[i + 1]}`);
+                i++;
+            } else {
+                newSplit.push(splitTargets[i]);
+            }
+        }
+        return newSplit;
+    }
+
     function loadFromUrl() {
         setOtherSettings(searchParams.get(OTHER_SETTINGS) || '');
         setPlayerSuggestions(
-            (searchParams.get(PLAYERS_TO_TARGET) || '').split('-')
+            combineHangingRp(
+                (searchParams.get(PLAYERS_TO_TARGET) || '').split('-')
+            )
         );
         setArchetype(
             (searchParams.get(ARCHETYPE) as Archetype) || Archetype.HardRebuild
