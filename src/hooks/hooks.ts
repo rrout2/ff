@@ -559,6 +559,7 @@ export function useNonSleeper(
                 ''
         );
     }, [specifiedUser, leagueId]);
+
     useEffect(() => {
         if (leagueId) {
             setSearchParams(searchParams => {
@@ -573,20 +574,25 @@ export function useNonSleeper(
         }
     }, [teamName, leagueId]);
 
-    useEffect(
-        () =>
-            setNumRosters(
-                +(searchParams.get(LEAGUE_SIZE) ?? rosters?.length ?? 12)
-            ),
-        [rosters?.length]
-    );
+    useEffect(() => {
+        setNumRosters(
+            +(searchParams.get(LEAGUE_SIZE) ?? rosters?.length ?? 12)
+        );
+    }, [rosters]);
 
     useEffect(() => {
-        setSearchParams(searchParams => {
-            searchParams.set(LEAGUE_SIZE, '' + numRosters);
-            return searchParams;
-        });
-    }, [numRosters]);
+        if (leagueId) {
+            setSearchParams(searchParams => {
+                searchParams.delete(LEAGUE_SIZE);
+                return searchParams;
+            });
+        } else {
+            setSearchParams(searchParams => {
+                searchParams.set(LEAGUE_SIZE, '' + numRosters);
+                return searchParams;
+            });
+        }
+    }, [numRosters, leagueId]);
 
     useEffect(() => {
         if (leagueId) {
@@ -658,7 +664,7 @@ export function useNonSleeper(
                 return searchParams;
             });
         }
-    }, [nonSleeperIds]);
+    }, [nonSleeperIds, leagueId]);
 
     return {
         nonSleeperIds,
