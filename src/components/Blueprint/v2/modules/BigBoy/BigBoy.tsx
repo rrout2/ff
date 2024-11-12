@@ -15,7 +15,14 @@ import {
 } from '../CornerstonesModule/CornerstonesModule';
 import {GraphicComponent as RosterGraphic} from '../RosterModule/RosterModule';
 import {GraphicComponent as SettingsGraphic} from '../SettingsModule/SettingsModule';
-import {FANTASY_POSITIONS, SUPER_FLEX} from '../../../../../consts/fantasy';
+import {
+    FANTASY_POSITIONS,
+    QB,
+    RB,
+    SUPER_FLEX,
+    TE,
+    WR,
+} from '../../../../../consts/fantasy';
 import ExportButton from '../../../shared/ExportButton';
 import {
     GraphicComponent as SuggestedMovesGraphic,
@@ -34,7 +41,13 @@ import {
     usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
 import {UnifiedInputs} from '../UnifiedModule/UnifiedModule';
-import {FormGroup, FormControlLabel, Switch} from '@mui/material';
+import {
+    FormGroup,
+    FormControlLabel,
+    Switch,
+    Button,
+    Tooltip,
+} from '@mui/material';
 import {
     Archetype,
     getStartOfCode,
@@ -43,6 +56,28 @@ import {
     getLabelFromArchetype,
     getDvmFromArchetype,
 } from '../../consts/archetypes';
+import {
+    ARCHETYPE,
+    BUYS,
+    CORNERSTONES,
+    FALLER_VALUES,
+    FALLERS,
+    HOLD_COMMENTS,
+    HOLDS,
+    OTHER_SETTINGS,
+    PLUS_MAP,
+    POSITIONAL_GRADES,
+    QB_RANK,
+    RB_RANK,
+    RISER_VALUES,
+    RISERS,
+    ROOKIE_PICK_COMMENTS,
+    SELLS,
+    SUGGESTIONS_AND_COMMENTS,
+    TE_RANK,
+    WR_RANK,
+} from '../../../../../consts/urlParams';
+import {useSearchParams} from 'react-router-dom';
 
 interface BigBoyProps {
     roster?: Roster;
@@ -105,6 +140,16 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
 
     const [showPreview, setShowPreview] = useState(false);
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const playerData = usePlayerData();
+
+    useEffect(() => {
+        if (!playerData || !searchParams.get(CORNERSTONES)) return;
+        // not sure why this is necessary
+        setTimeout(loadFromUrl, 200);
+    }, [playerData, searchParams]);
+
     const PreviewToggle = () => {
         return (
             <FormGroup>
@@ -152,6 +197,136 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         />
     );
 
+    function saveToUrl() {
+        setSearchParams(searchParams => {
+            searchParams.set(CORNERSTONES, cornerstones.join('-'));
+            searchParams.set(SELLS, sells.join('-'));
+            searchParams.set(BUYS, buys.join('-'));
+            searchParams.set(
+                PLUS_MAP,
+                buys.map(buy => (plusMap.get(buy) ? 'T' : 'F')).join('-')
+            );
+            searchParams.set(HOLDS, holds.join('-'));
+            searchParams.set(HOLD_COMMENTS, comments.join('-'));
+            searchParams.set(RISERS, risers.join('-'));
+            searchParams.set(FALLERS, fallers.join('-'));
+            searchParams.set(RISER_VALUES, riserValues.join('-'));
+            searchParams.set(
+                FALLER_VALUES,
+                fallerValues.map(val => Math.abs(val)).join('-')
+            );
+            searchParams.set(
+                POSITIONAL_GRADES,
+                [overall, qb, rb, wr, te, depth].join('-')
+            );
+            searchParams.set(QB_RANK, rankStateMap.get(QB)![0]);
+            searchParams.set(RB_RANK, rankStateMap.get(RB)![0]);
+            searchParams.set(WR_RANK, rankStateMap.get(WR)![0]);
+            searchParams.set(TE_RANK, rankStateMap.get(TE)![0]);
+            searchParams.set(ARCHETYPE, archetype);
+            searchParams.set(OTHER_SETTINGS, otherSettings);
+            searchParams.set(
+                ROOKIE_PICK_COMMENTS,
+                rookiePickComments.join('-')
+            );
+            searchParams.set(
+                SUGGESTIONS_AND_COMMENTS,
+                suggestionsAndComments.join('-')
+            );
+            return searchParams;
+        });
+    }
+
+    function loadFromUrl() {
+        setCornerstones((searchParams.get(CORNERSTONES) || '').split('-'));
+        setSells((searchParams.get(SELLS) || '').split('-'));
+
+        const newBuys = (searchParams.get(BUYS) || '').split('-');
+        setBuys(newBuys);
+
+        const plusList = (searchParams.get(PLUS_MAP) || '')
+            .split('-')
+            .map(val => (val === 'T' ? true : false));
+        const newPlusMap = new Map<string, boolean>();
+        newBuys.forEach((buy, idx) => {
+            newPlusMap.set(buy, plusList[idx]);
+        });
+        setPlusMap(newPlusMap);
+
+        setHolds((searchParams.get(HOLDS) || '').split('-'));
+        setComments((searchParams.get(HOLD_COMMENTS) || '').split('-'));
+        setRisers((searchParams.get(RISERS) || '').split('-'));
+        setFallers((searchParams.get(FALLERS) || '').split('-'));
+
+        setRiserValues(
+            (searchParams.get(RISER_VALUES) || '')
+                .split('-')
+                .map(val => Math.round(+val * 10) / 10)
+        );
+
+        setFallerValues(
+            (searchParams.get(FALLER_VALUES) || '')
+                .split('-')
+                .map(val => Math.round(-val * 10) / 10)
+        );
+
+        const posGrades = (searchParams.get(POSITIONAL_GRADES) || '').split(
+            '-'
+        );
+        setOverall(+posGrades[0]);
+        setQb(+posGrades[1]);
+        setRb(+posGrades[2]);
+        setWr(+posGrades[3]);
+        setTe(+posGrades[4]);
+        setDepth(+posGrades[5]);
+
+        rankStateMap.get(QB)![1](searchParams.get(QB_RANK) || '4th');
+        rankStateMap.get(RB)![1](searchParams.get(RB_RANK) || '4th');
+        rankStateMap.get(WR)![1](searchParams.get(WR_RANK) || '4th');
+        rankStateMap.get(TE)![1](searchParams.get(TE_RANK) || '4th');
+
+        setArchetype(searchParams.get(ARCHETYPE) as Archetype);
+
+        setOtherSettings(searchParams.get(OTHER_SETTINGS) || '');
+
+        const newRookiePickComments = searchParams.get(ROOKIE_PICK_COMMENTS);
+        if (newRookiePickComments) {
+            setRookiePickComments(newRookiePickComments.split('-'));
+        }
+
+        const newSuggestionsAndComments = searchParams.get(
+            SUGGESTIONS_AND_COMMENTS
+        );
+        if (newSuggestionsAndComments) {
+            setSuggestionsAndComments(newSuggestionsAndComments.split('-'));
+        }
+    }
+
+    function clearUrlSave() {
+        setSearchParams(searchParams => {
+            searchParams.delete(CORNERSTONES);
+            searchParams.delete(SELLS);
+            searchParams.delete(BUYS);
+            searchParams.delete(PLUS_MAP);
+            searchParams.delete(HOLDS);
+            searchParams.delete(HOLD_COMMENTS);
+            searchParams.delete(RISERS);
+            searchParams.delete(FALLERS);
+            searchParams.delete(RISER_VALUES);
+            searchParams.delete(FALLER_VALUES);
+            searchParams.delete(POSITIONAL_GRADES);
+            searchParams.delete(QB_RANK);
+            searchParams.delete(RB_RANK);
+            searchParams.delete(WR_RANK);
+            searchParams.delete(TE_RANK);
+            searchParams.delete(ARCHETYPE);
+            searchParams.delete(OTHER_SETTINGS);
+            searchParams.delete(ROOKIE_PICK_COMMENTS);
+            searchParams.delete(SUGGESTIONS_AND_COMMENTS);
+            return searchParams;
+        });
+    }
+
     return (
         <div>
             <ExportButton
@@ -159,6 +334,20 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
             />
+            <Tooltip title="Save to URL">
+                <Button variant={'outlined'} onClick={saveToUrl}>
+                    {'Save'}
+                </Button>
+            </Tooltip>
+            <Tooltip title="Clear Save from URL">
+                <Button
+                    variant={'outlined'}
+                    onClick={clearUrlSave}
+                    disabled={!searchParams.get(CORNERSTONES)}
+                >
+                    {'Clear'}
+                </Button>
+            </Tooltip>
             <PreviewToggle />
             <UnifiedInputs
                 roster={roster}

@@ -22,3 +22,21 @@ export const COMMENTS = 'comments';
 export const NON_SLEEPER_IDS = 'nonSleeperIds';
 export const LEAGUE_SIZE = 'leagueSize';
 export const TEAM_NAME = 'teamName';
+
+// v2 params
+export const SELLS = 'sells';
+export const BUYS = 'buys';
+export const PLUS_MAP = 'plusMap';
+export const HOLDS = 'holds';
+export const HOLD_COMMENTS = 'holdComments';
+export const RISERS = 'risers';
+export const FALLERS = 'fallers';
+export const RISER_VALUES = 'riserValues';
+export const FALLER_VALUES = 'fallerValues';
+export const POSITIONAL_GRADES = 'posGrades';
+export const QB_RANK = 'qbRank';
+export const RB_RANK = 'rbRank';
+export const WR_RANK = 'wrRank';
+export const TE_RANK = 'teRank';
+export const ROOKIE_PICK_COMMENTS = 'rookieComments';
+export const SUGGESTIONS_AND_COMMENTS = 'suggestions';
