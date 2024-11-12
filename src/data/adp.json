@@ -3,2703 +3,2829 @@
     "player_name": "Josh Allen",
     "Team": "BUF",
     "Position": "QB",
-    "Average Rank": 1.5,
+    "Average Rank": 1.6,
     "Community Rank": 22
   },
   {
-    "player_name": "Patrick Mahomes",
-    "Team": "KC",
+    "player_name": "Jayden Daniels",
+    "Team": "WAS",
     "Position": "QB",
-    "Average Rank": 2.75,
-    "Community Rank": 68
+    "Average Rank": 1.75,
+    "Community Rank": 109
+  },
+  {
+    "player_name": "Lamar Jackson",
+    "Team": "BAL",
+    "Position": "QB",
+    "Average Rank": 3.6,
+    "Community Rank": 32
   },
   {
     "player_name": "C.J. Stroud",
     "Team": "HOU",
     "Position": "QB",
-    "Average Rank": 3.5,
+    "Average Rank": 5.6,
     "Community Rank": 43
   },
   {
     "player_name": "Jalen Hurts",
     "Team": "PHI",
     "Position": "QB",
-    "Average Rank": 4.25,
+    "Average Rank": 7,
     "Community Rank": 38
-  },
-  {
-    "player_name": "Lamar Jackson",
-    "Team": "BAL",
-    "Position": "QB",
-    "Average Rank": 4.5,
-    "Community Rank": 33
-  },
-  {
-    "player_name": "Joe Burrow",
-    "Team": "CIN",
-    "Position": "QB",
-    "Average Rank": 7.25,
-    "Community Rank": 78
-  },
-  {
-    "player_name": "Jayden Daniels",
-    "Team": "WAS",
-    "Position": "QB",
-    "Average Rank": 7.75,
-    "Community Rank": 109
   },
   {
     "player_name": "Justin Jefferson",
     "Team": "MIN",
     "Position": "WR",
-    "Average Rank": 8,
+    "Average Rank": 7.2,
     "Community Rank": 3
+  },
+  {
+    "player_name": "Patrick Mahomes",
+    "Team": "KC",
+    "Position": "QB",
+    "Average Rank": 8.8,
+    "Community Rank": 70
+  },
+  {
+    "player_name": "Joe Burrow",
+    "Team": "CIN",
+    "Position": "QB",
+    "Average Rank": 9.4,
+    "Community Rank": 78
+  },
+  {
+    "player_name": "Ja'Marr Chase",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 10.2,
+    "Community Rank": 9
   },
   {
     "player_name": "CeeDee Lamb",
     "Team": "DAL",
     "Position": "WR",
-    "Average Rank": 8.75,
+    "Average Rank": 11,
     "Community Rank": 8
-  },
-  {
-    "player_name": "Kyler Murray",
-    "Team": "ARI",
-    "Position": "QB",
-    "Average Rank": 9,
-    "Community Rank": 95
   },
   {
     "player_name": "Jordan Love",
     "Team": "GB",
     "Position": "QB",
-    "Average Rank": 10.5,
+    "Average Rank": 11.4,
     "Community Rank": 88
   },
   {
     "player_name": "Caleb Williams",
     "Team": "CHI",
     "Position": "QB",
-    "Average Rank": 11.5,
+    "Average Rank": 12.4,
     "Community Rank": 123
   },
   {
-    "player_name": "2024 Rookie 1.01",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 12.33,
-    "Community Rank": ""
+    "player_name": "Kyler Murray",
+    "Team": "ARI",
+    "Position": "QB",
+    "Average Rank": 13.6,
+    "Community Rank": 95
   },
   {
-    "player_name": "Ja'Marr Chase",
-    "Team": "CIN",
+    "player_name": "Malik Nabers",
+    "Team": "NYG",
     "Position": "WR",
-    "Average Rank": 13.5,
-    "Community Rank": 9
+    "Average Rank": 13.8,
+    "Community Rank": 39
   },
   {
-    "player_name": "2024 Rookie 1.02",
+    "player_name": "Amon-Ra St. Brown",
+    "Team": "DET",
+    "Position": "WR",
+    "Average Rank": 14,
+    "Community Rank": 13
+  },
+  {
+    "player_name": "2025 Rookie 1.01",
     "Team": "",
     "Position": "",
-    "Average Rank": 16,
+    "Average Rank": 16.5,
     "Community Rank": ""
   },
   {
     "player_name": "Marvin Harrison",
     "Team": "ARI",
     "Position": "WR",
-    "Average Rank": 17,
+    "Average Rank": 19,
     "Community Rank": 15
-  },
-  {
-    "player_name": "Amon-Ra St. Brown",
-    "Team": "DET",
-    "Position": "WR",
-    "Average Rank": 17,
-    "Community Rank": 13
-  },
-  {
-    "player_name": "Brock Purdy",
-    "Team": "SF",
-    "Position": "QB",
-    "Average Rank": 19.5,
-    "Community Rank": 124
-  },
-  {
-    "player_name": "Anthony Richardson",
-    "Team": "IND",
-    "Position": "QB",
-    "Average Rank": 19.75,
-    "Community Rank": 58
-  },
-  {
-    "player_name": "2024 Rookie 1.03",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 20,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Malik Nabers",
-    "Team": "NYG",
-    "Position": "WR",
-    "Average Rank": 20.25,
-    "Community Rank": 39
-  },
-  {
-    "player_name": "Bijan Robinson",
-    "Team": "ATL",
-    "Position": "RB",
-    "Average Rank": 21,
-    "Community Rank": 2
-  },
-  {
-    "player_name": "Justin Herbert",
-    "Team": "LAC",
-    "Position": "QB",
-    "Average Rank": 22.75,
-    "Community Rank": 116
-  },
-  {
-    "player_name": "Nico Collins",
-    "Team": "HOU",
-    "Position": "WR",
-    "Average Rank": 23.75,
-    "Community Rank": 27
-  },
-  {
-    "player_name": "Drake Maye",
-    "Team": "NE",
-    "Position": "QB",
-    "Average Rank": 24.25,
-    "Community Rank": 187
-  },
-  {
-    "player_name": "Jahmyr Gibbs",
-    "Team": "DET",
-    "Position": "RB",
-    "Average Rank": 24.75,
-    "Community Rank": 5
   },
   {
     "player_name": "Puka Nacua",
     "Team": "LAR",
     "Position": "WR",
-    "Average Rank": 25,
+    "Average Rank": 21.6,
     "Community Rank": 4
   },
   {
-    "player_name": "Garrett Wilson",
-    "Team": "NYJ",
-    "Position": "WR",
-    "Average Rank": 25,
-    "Community Rank": 10
-  },
-  {
-    "player_name": "Breece Hall",
-    "Team": "NYJ",
+    "player_name": "Jahmyr Gibbs",
+    "Team": "DET",
     "Position": "RB",
-    "Average Rank": 26.25,
-    "Community Rank": 6
+    "Average Rank": 22,
+    "Community Rank": 5
   },
   {
-    "player_name": "Trevor Lawrence",
-    "Team": "JAX",
-    "Position": "QB",
-    "Average Rank": 28.25,
-    "Community Rank": 149
-  },
-  {
-    "player_name": "2024 Rookie 1.04",
+    "player_name": "2025 Rookie 1.02",
     "Team": "",
     "Position": "",
-    "Average Rank": 29.33,
+    "Average Rank": 22,
     "Community Rank": ""
   },
   {
-    "player_name": "A.J. Brown",
-    "Team": "PHI",
-    "Position": "WR",
-    "Average Rank": 31.25,
-    "Community Rank": 11
-  },
-  {
-    "player_name": "2024 Rookie 1.05",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 34,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Dak Prescott",
-    "Team": "DAL",
-    "Position": "QB",
-    "Average Rank": 34.5,
-    "Community Rank": 98
-  },
-  {
-    "player_name": "Devon Achane",
-    "Team": "MIA",
+    "player_name": "Bijan Robinson",
+    "Team": "ATL",
     "Position": "RB",
-    "Average Rank": 35.5,
-    "Community Rank": 23
-  },
-  {
-    "player_name": "Tua Tagovailoa",
-    "Team": "MIA",
-    "Position": "QB",
-    "Average Rank": 36.5,
-    "Community Rank": 103
+    "Average Rank": 22.2,
+    "Community Rank": 2
   },
   {
     "player_name": "Drake London",
     "Team": "ATL",
     "Position": "WR",
-    "Average Rank": 36.75,
+    "Average Rank": 23,
     "Community Rank": 21
   },
   {
-    "player_name": "Rome Odunze",
-    "Team": "CHI",
-    "Position": "WR",
-    "Average Rank": 39.75,
-    "Community Rank": 66
-  },
-  {
-    "player_name": "Tyreek Hill",
-    "Team": "MIA",
-    "Position": "WR",
-    "Average Rank": 40.5,
-    "Community Rank": 7
-  },
-  {
-    "player_name": "Rashee Rice",
-    "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 42,
-    "Community Rank": 70
-  },
-  {
-    "player_name": "Chris Olave",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 42.25,
-    "Community Rank": 19
-  },
-  {
-    "player_name": "Jonathan Taylor",
-    "Team": "IND",
-    "Position": "RB",
-    "Average Rank": 42.5,
-    "Community Rank": 12
-  },
-  {
-    "player_name": "Brandon Aiyuk",
-    "Team": "SF",
-    "Position": "WR",
-    "Average Rank": 44.25,
-    "Community Rank": 24
-  },
-  {
-    "player_name": "2024 Rookie 1.06",
+    "player_name": "2025 EARLY 1st",
     "Team": "",
     "Position": "",
-    "Average Rank": 44.67,
+    "Average Rank": 23,
     "Community Rank": ""
   },
   {
-    "player_name": "Jaylen Waddle",
-    "Team": "MIA",
-    "Position": "WR",
-    "Average Rank": 45.5,
-    "Community Rank": 34
+    "player_name": "Drake Maye",
+    "Team": "NE",
+    "Position": "QB",
+    "Average Rank": 25,
+    "Community Rank": 188
   },
   {
-    "player_name": "DeVonta Smith",
+    "player_name": "Breece Hall",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 25.2,
+    "Community Rank": 6
+  },
+  {
+    "player_name": "Nico Collins",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 25.4,
+    "Community Rank": 27
+  },
+  {
+    "player_name": "A.J. Brown",
     "Team": "PHI",
     "Position": "WR",
-    "Average Rank": 46.75,
-    "Community Rank": 31
+    "Average Rank": 26.2,
+    "Community Rank": 11
   },
   {
-    "player_name": "Jared Goff",
-    "Team": "DET",
+    "player_name": "Brock Purdy",
+    "Team": "SF",
     "Position": "QB",
-    "Average Rank": 47,
-    "Community Rank": 106
+    "Average Rank": 26.4,
+    "Community Rank": 124
+  },
+  {
+    "player_name": "2025 Rookie 1.03",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 26.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Garrett Wilson",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 26.6,
+    "Community Rank": 10
   },
   {
     "player_name": "Brock Bowers",
     "Team": "LV",
     "Position": "TE",
-    "Average Rank": 47.75,
+    "Average Rank": 29,
     "Community Rank": 120
-  },
-  {
-    "player_name": "2024 Rookie 1.07",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 48,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Trey McBride",
-    "Team": "ARI",
-    "Position": "TE",
-    "Average Rank": 49,
-    "Community Rank": 60
-  },
-  {
-    "player_name": "Sam LaPorta",
-    "Team": "DET",
-    "Position": "TE",
-    "Average Rank": 50.25,
-    "Community Rank": 20
-  },
-  {
-    "player_name": "2025 EARLY-MID 1st",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 51.75,
-    "Community Rank": ""
   },
   {
     "player_name": "Brian Thomas",
     "Team": "JAX",
     "Position": "WR",
-    "Average Rank": 52.25,
-    "Community Rank": 86
+    "Average Rank": 32.2,
+    "Community Rank": 85
   },
   {
-    "player_name": "DK Metcalf",
-    "Team": "SEA",
-    "Position": "WR",
-    "Average Rank": 52.75,
-    "Community Rank": 65
-  },
-  {
-    "player_name": "Saquon Barkley",
-    "Team": "PHI",
-    "Position": "RB",
-    "Average Rank": 53.75,
-    "Community Rank": 14
-  },
-  {
-    "player_name": "Xavier Worthy",
-    "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 53.75,
-    "Community Rank": 96
-  },
-  {
-    "player_name": "Zay Flowers",
-    "Team": "BAL",
-    "Position": "WR",
-    "Average Rank": 54.75,
-    "Community Rank": 97
-  },
-  {
-    "player_name": "Kyren Williams",
-    "Team": "LAR",
-    "Position": "RB",
-    "Average Rank": 55.25,
-    "Community Rank": 16
-  },
-  {
-    "player_name": "DJ Moore",
-    "Team": "CHI",
-    "Position": "WR",
-    "Average Rank": 55.75,
-    "Community Rank": 26
+    "player_name": "Justin Herbert",
+    "Team": "LAC",
+    "Position": "QB",
+    "Average Rank": 33.4,
+    "Community Rank": 116
   },
   {
     "player_name": "Jayden Reed",
     "Team": "GB",
     "Position": "WR",
-    "Average Rank": 55.75,
+    "Average Rank": 36.6,
     "Community Rank": 59
   },
   {
-    "player_name": "Jaxon Smith-Njigba",
-    "Team": "SEA",
-    "Position": "WR",
-    "Average Rank": 56,
-    "Community Rank": 115
-  },
-  {
-    "player_name": "Christian McCaffrey",
-    "Team": "SF",
-    "Position": "RB",
-    "Average Rank": 59,
-    "Community Rank": 1
-  },
-  {
-    "player_name": "2026 EARLY-MID 1st",
+    "player_name": "2025 Rookie 1.04",
     "Team": "",
     "Position": "",
-    "Average Rank": 59.5,
+    "Average Rank": 37,
     "Community Rank": ""
   },
   {
-    "player_name": "Baker Mayfield",
-    "Team": "TB",
-    "Position": "QB",
-    "Average Rank": 61.25,
-    "Community Rank": 107
-  },
-  {
-    "player_name": "George Pickens",
-    "Team": "PIT",
-    "Position": "WR",
-    "Average Rank": 61.75,
-    "Community Rank": 52
-  },
-  {
-    "player_name": "Ladd McConkey",
-    "Team": "LAC",
-    "Position": "WR",
-    "Average Rank": 62.5,
-    "Community Rank": 110
-  },
-  {
-    "player_name": "James Cook",
-    "Team": "BUF",
+    "player_name": "Devon Achane",
+    "Team": "MIA",
     "Position": "RB",
-    "Average Rank": 62.75,
-    "Community Rank": 45
+    "Average Rank": 37.8,
+    "Community Rank": 23
   },
   {
-    "player_name": "Tee Higgins",
-    "Team": "CIN",
+    "player_name": "2025 MID 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 40,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Rome Odunze",
+    "Team": "CHI",
     "Position": "WR",
-    "Average Rank": 63.75,
-    "Community Rank": 47
+    "Average Rank": 40.4,
+    "Community Rank": 69
   },
   {
-    "player_name": "Travis Etienne",
+    "player_name": "Trevor Lawrence",
     "Team": "JAX",
-    "Position": "RB",
-    "Average Rank": 65,
-    "Community Rank": 37
-  },
-  {
-    "player_name": "J.J. McCarthy",
-    "Team": "MIN",
     "Position": "QB",
-    "Average Rank": 65.25,
-    "Community Rank": 813
+    "Average Rank": 40.8,
+    "Community Rank": 149
   },
   {
-    "player_name": "Jonathon Brooks",
-    "Team": "CAR",
-    "Position": "RB",
-    "Average Rank": 67.25,
-    "Community Rank": 55
+    "player_name": "2025 Rookie 1.05",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 42.5,
+    "Community Rank": ""
   },
   {
-    "player_name": "Jordan Addison",
-    "Team": "MIN",
+    "player_name": "Tyreek Hill",
+    "Team": "MIA",
     "Position": "WR",
-    "Average Rank": 68.25,
-    "Community Rank": 90
+    "Average Rank": 42.8,
+    "Community Rank": 7
+  },
+  {
+    "player_name": "Trey McBride",
+    "Team": "ARI",
+    "Position": "TE",
+    "Average Rank": 43,
+    "Community Rank": 57
+  },
+  {
+    "player_name": "Kyren Williams",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 43.2,
+    "Community Rank": 16
+  },
+  {
+    "player_name": "Saquon Barkley",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 44,
+    "Community Rank": 14
+  },
+  {
+    "player_name": "Rashee Rice",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 44,
+    "Community Rank": 68
+  },
+  {
+    "player_name": "Zay Flowers",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 44.6,
+    "Community Rank": 97
+  },
+  {
+    "player_name": "Jonathan Taylor",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 45,
+    "Community Rank": 12
+  },
+  {
+    "player_name": "Chris Olave",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 45.2,
+    "Community Rank": 19
+  },
+  {
+    "player_name": "DeVonta Smith",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 45.4,
+    "Community Rank": 31
+  },
+  {
+    "player_name": "Dak Prescott",
+    "Team": "DAL",
+    "Position": "QB",
+    "Average Rank": 46.2,
+    "Community Rank": 98
+  },
+  {
+    "player_name": "Tua Tagovailoa",
+    "Team": "MIA",
+    "Position": "QB",
+    "Average Rank": 47.4,
+    "Community Rank": 103
+  },
+  {
+    "player_name": "Jaylen Waddle",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 48.2,
+    "Community Rank": 34
+  },
+  {
+    "player_name": "DK Metcalf",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 48.2,
+    "Community Rank": 66
   },
   {
     "player_name": "Kenneth Walker",
     "Team": "SEA",
     "Position": "RB",
-    "Average Rank": 68.5,
+    "Average Rank": 48.6,
     "Community Rank": 72
   },
   {
-    "player_name": "2024 Rookie 1.08",
+    "player_name": "2026 EARLY-MID 1st",
     "Team": "",
     "Position": "",
-    "Average Rank": 68.67,
+    "Average Rank": 48.75,
     "Community Rank": ""
   },
   {
-    "player_name": "Deebo Samuel",
-    "Team": "SF",
-    "Position": "WR",
-    "Average Rank": 69.5,
-    "Community Rank": 29
+    "player_name": "Jared Goff",
+    "Team": "DET",
+    "Position": "QB",
+    "Average Rank": 49,
+    "Community Rank": 106
   },
   {
-    "player_name": "Dalton Kincaid",
-    "Team": "BUF",
-    "Position": "TE",
-    "Average Rank": 71.25,
-    "Community Rank": 81
-  },
-  {
-    "player_name": "Kyle Pitts",
-    "Team": "ATL",
-    "Position": "TE",
-    "Average Rank": 72,
-    "Community Rank": 40
-  },
-  {
-    "player_name": "2024 Rookie 1.09",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 73,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "T.J. Hockenson",
+    "player_name": "J.J. McCarthy",
     "Team": "MIN",
-    "Position": "TE",
-    "Average Rank": 76.5,
-    "Community Rank": 140
+    "Position": "QB",
+    "Average Rank": 51.8,
+    "Community Rank": 813
   },
   {
-    "player_name": "Nathaniel Dell",
-    "Team": "HOU",
-    "Position": "WR",
-    "Average Rank": 78.25,
-    "Community Rank": 48
-  },
-  {
-    "player_name": "Josh Jacobs",
-    "Team": "GB",
-    "Position": "RB",
-    "Average Rank": 78.75,
-    "Community Rank": 30
-  },
-  {
-    "player_name": "2024 Rookie 1.10",
+    "player_name": "2025 Rookie 1.06",
     "Team": "",
     "Position": "",
-    "Average Rank": 80,
+    "Average Rank": 53,
     "Community Rank": ""
+  },
+  {
+    "player_name": "Tee Higgins",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 53.2,
+    "Community Rank": 47
+  },
+  {
+    "player_name": "DJ Moore",
+    "Team": "CHI",
+    "Position": "WR",
+    "Average Rank": 53.8,
+    "Community Rank": 26
+  },
+  {
+    "player_name": "Sam LaPorta",
+    "Team": "DET",
+    "Position": "TE",
+    "Average Rank": 54.4,
+    "Community Rank": 20
   },
   {
     "player_name": "Bo Nix",
     "Team": "DEN",
     "Position": "QB",
-    "Average Rank": 80.5,
+    "Average Rank": 54.8,
     "Community Rank": 202
   },
   {
-    "player_name": "Michael Pittman",
-    "Team": "IND",
-    "Position": "WR",
-    "Average Rank": 81.75,
-    "Community Rank": 46
-  },
-  {
-    "player_name": "Isiah Pacheco",
-    "Team": "KC",
+    "player_name": "James Cook",
+    "Team": "BUF",
     "Position": "RB",
-    "Average Rank": 82.5,
-    "Community Rank": 17
-  },
-  {
-    "player_name": "2025 MID-LATE 1st",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 82.75,
-    "Community Rank": ""
+    "Average Rank": 55.8,
+    "Community Rank": 45
   },
   {
     "player_name": "2027 EARLY-MID 1st",
     "Team": "",
     "Position": "",
-    "Average Rank": 83,
+    "Average Rank": 56.33,
     "Community Rank": ""
   },
   {
-    "player_name": "Chris Godwin",
-    "Team": "TB",
-    "Position": "WR",
-    "Average Rank": 83.25,
-    "Community Rank": 53
+    "player_name": "2025 Rookie 1.07",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 57,
+    "Community Rank": ""
   },
   {
-    "player_name": "Jameson Williams",
-    "Team": "DET",
+    "player_name": "Christian McCaffrey",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 57.2,
+    "Community Rank": 1
+  },
+  {
+    "player_name": "Jaxon Smith-Njigba",
+    "Team": "SEA",
     "Position": "WR",
-    "Average Rank": 85,
-    "Community Rank": 54
+    "Average Rank": 60.2,
+    "Community Rank": 115
+  },
+  {
+    "player_name": "Anthony Richardson",
+    "Team": "IND",
+    "Position": "QB",
+    "Average Rank": 64,
+    "Community Rank": 58
+  },
+  {
+    "player_name": "Baker Mayfield",
+    "Team": "TB",
+    "Position": "QB",
+    "Average Rank": 65.4,
+    "Community Rank": 107
+  },
+  {
+    "player_name": "Ladd McConkey",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 65.4,
+    "Community Rank": 110
+  },
+  {
+    "player_name": "Brandon Aiyuk",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 66.6,
+    "Community Rank": 24
+  },
+  {
+    "player_name": "2025 LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Xavier Worthy",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 67.6,
+    "Community Rank": 96
+  },
+  {
+    "player_name": "Jordan Addison",
+    "Team": "MIN",
+    "Position": "WR",
+    "Average Rank": 68.4,
+    "Community Rank": 90
+  },
+  {
+    "player_name": "2025 Rookie 1.08",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 70.5,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Tank Dell",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 71,
+    "Community Rank": 48
+  },
+  {
+    "player_name": "Jonathon Brooks",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 72.2,
+    "Community Rank": 55
+  },
+  {
+    "player_name": "Dalton Kincaid",
+    "Team": "BUF",
+    "Position": "TE",
+    "Average Rank": 72.2,
+    "Community Rank": 80
+  },
+  {
+    "player_name": "George Pickens",
+    "Team": "PIT",
+    "Position": "WR",
+    "Average Rank": 74.8,
+    "Community Rank": 52
+  },
+  {
+    "player_name": "2028 EARLY-MID 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 76,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Josh Jacobs",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 76.4,
+    "Community Rank": 30
+  },
+  {
+    "player_name": "T.J. Hockenson",
+    "Team": "MIN",
+    "Position": "TE",
+    "Average Rank": 76.4,
+    "Community Rank": 140
+  },
+  {
+    "player_name": "Deebo Samuel",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 76.8,
+    "Community Rank": 29
+  },
+  {
+    "player_name": "2026 MID-LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 78.75,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Kyle Pitts",
+    "Team": "ATL",
+    "Position": "TE",
+    "Average Rank": 79.8,
+    "Community Rank": 40
+  },
+  {
+    "player_name": "2025 Rookie 1.09",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 81,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Isiah Pacheco",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 81.8,
+    "Community Rank": 17
+  },
+  {
+    "player_name": "Michael Pittman",
+    "Team": "IND",
+    "Position": "WR",
+    "Average Rank": 82.8,
+    "Community Rank": 46
+  },
+  {
+    "player_name": "David Montgomery",
+    "Team": "DET",
+    "Position": "RB",
+    "Average Rank": 84.8,
+    "Community Rank": 64
+  },
+  {
+    "player_name": "Terry McLaurin",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 87.4,
+    "Community Rank": 41
   },
   {
     "player_name": "George Kittle",
     "Team": "SF",
     "Position": "TE",
-    "Average Rank": 88.5,
+    "Average Rank": 87.6,
     "Community Rank": 89
   },
   {
-    "player_name": "Michael Penix",
-    "Team": "ATL",
-    "Position": "QB",
-    "Average Rank": 88.75,
-    "Community Rank": 222
-  },
-  {
-    "player_name": "Keon Coleman",
-    "Team": "BUF",
-    "Position": "WR",
-    "Average Rank": 90,
-    "Community Rank": 114
-  },
-  {
-    "player_name": "Rhamondre Stevenson",
-    "Team": "NE",
+    "player_name": "Brian Robinson",
+    "Team": "WAS",
     "Position": "RB",
-    "Average Rank": 90,
-    "Community Rank": 76
+    "Average Rank": 87.6,
+    "Community Rank": 105
   },
   {
-    "player_name": "2024 Rookie 1.11",
+    "player_name": "2027 MID-LATE 1st",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 88,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Derrick Henry",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 90.4,
+    "Community Rank": 74
+  },
+  {
+    "player_name": "2025 Rookie 1.10",
     "Team": "",
     "Position": "",
     "Average Rank": 92,
     "Community Rank": ""
   },
   {
-    "player_name": "Will Levis",
-    "Team": "TEN",
+    "player_name": "Michael Penix",
+    "Team": "ATL",
     "Position": "QB",
-    "Average Rank": 92.75,
-    "Community Rank": 93
-  },
-  {
-    "player_name": "Rachaad White",
-    "Team": "TB",
-    "Position": "RB",
-    "Average Rank": 94.5,
-    "Community Rank": 28
-  },
-  {
-    "player_name": "2026 MID-LATE 1st",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 95,
-    "Community Rank": ""
+    "Average Rank": 92.4,
+    "Community Rank": 222
   },
   {
     "player_name": "Alvin Kamara",
     "Team": "NO",
     "Position": "RB",
-    "Average Rank": 97.5,
-    "Community Rank": 69
+    "Average Rank": 94.4,
+    "Community Rank": 67
   },
   {
-    "player_name": "2024 Rookie 1.12",
+    "player_name": "Jameson Williams",
+    "Team": "DET",
+    "Position": "WR",
+    "Average Rank": 95.4,
+    "Community Rank": 54
+  },
+  {
+    "player_name": "2025 Rookie 1.11",
     "Team": "",
     "Position": "",
-    "Average Rank": 98,
+    "Average Rank": 95.5,
     "Community Rank": ""
-  },
-  {
-    "player_name": "Mike Evans",
-    "Team": "TB",
-    "Position": "WR",
-    "Average Rank": 98.75,
-    "Community Rank": 36
-  },
-  {
-    "player_name": "Justin Fields",
-    "Team": "PIT",
-    "Position": "QB",
-    "Average Rank": 100,
-    "Community Rank": 159
-  },
-  {
-    "player_name": "Mark Andrews",
-    "Team": "BAL",
-    "Position": "TE",
-    "Average Rank": 100,
-    "Community Rank": 80
-  },
-  {
-    "player_name": "Brian Robinson",
-    "Team": "WAS",
-    "Position": "RB",
-    "Average Rank": 100.5,
-    "Community Rank": 104
   },
   {
     "player_name": "Joe Mixon",
     "Team": "HOU",
     "Position": "RB",
-    "Average Rank": 100.75,
+    "Average Rank": 95.6,
     "Community Rank": 44
   },
   {
-    "player_name": "Trey Benson",
-    "Team": "ARI",
-    "Position": "RB",
-    "Average Rank": 102,
-    "Community Rank": 137
+    "player_name": "Davante Adams",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 95.8,
+    "Community Rank": 18
+  },
+  {
+    "player_name": "Mike Evans",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 97.2,
+    "Community Rank": 37
+  },
+  {
+    "player_name": "Jake Ferguson",
+    "Team": "DAL",
+    "Position": "TE",
+    "Average Rank": 97.4,
+    "Community Rank": 56
+  },
+  {
+    "player_name": "Cooper Kupp",
+    "Team": "LAR",
+    "Position": "WR",
+    "Average Rank": 97.6,
+    "Community Rank": 25
   },
   {
     "player_name": "Kirk Cousins",
     "Team": "ATL",
     "Position": "QB",
-    "Average Rank": 102,
+    "Average Rank": 97.8,
     "Community Rank": 83
   },
   {
-    "player_name": "David Montgomery",
-    "Team": "DET",
-    "Position": "RB",
-    "Average Rank": 103,
-    "Community Rank": 62
-  },
-  {
-    "player_name": "Davante Adams",
-    "Team": "LV",
+    "player_name": "Chris Godwin",
+    "Team": "TB",
     "Position": "WR",
-    "Average Rank": 103.25,
-    "Community Rank": 18
+    "Average Rank": 98.2,
+    "Community Rank": 53
   },
   {
-    "player_name": "Derrick Henry",
-    "Team": "BAL",
+    "player_name": "Travis Etienne",
+    "Team": "JAX",
     "Position": "RB",
-    "Average Rank": 104,
-    "Community Rank": 74
+    "Average Rank": 100.4,
+    "Community Rank": 36
   },
   {
-    "player_name": "Bryce Young",
-    "Team": "CAR",
-    "Position": "QB",
-    "Average Rank": 104.25,
-    "Community Rank": 188
-  },
-  {
-    "player_name": "Matthew Stafford",
-    "Team": "LAR",
-    "Position": "QB",
-    "Average Rank": 104.25,
-    "Community Rank": 79
-  },
-  {
-    "player_name": "Deshaun Watson",
+    "player_name": "David Njoku",
     "Team": "CLE",
-    "Position": "QB",
-    "Average Rank": 105.5,
-    "Community Rank": 150
+    "Position": "TE",
+    "Average Rank": 101.6,
+    "Community Rank": 158
   },
   {
-    "player_name": "2027 MID-LATE 1st",
+    "player_name": "Chase Brown",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 101.75,
+    "Community Rank": 104
+  },
+  {
+    "player_name": "Trey Benson",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 102.6,
+    "Community Rank": 137
+  },
+  {
+    "player_name": "2028 MID-LATE 1st",
     "Team": "",
     "Position": "",
-    "Average Rank": 108.5,
+    "Average Rank": 103.33,
     "Community Rank": ""
   },
   {
     "player_name": "Stefon Diggs",
     "Team": "HOU",
     "Position": "WR",
-    "Average Rank": 109.25,
-    "Community Rank": 32
-  },
-  {
-    "player_name": "Geno Smith",
-    "Team": "SEA",
-    "Position": "QB",
-    "Average Rank": 110.75,
-    "Community Rank": 126
-  },
-  {
-    "player_name": "J.K. Dobbins",
-    "Team": "LAC",
-    "Position": "RB",
-    "Average Rank": 111,
-    "Community Rank": 131
-  },
-  {
-    "player_name": "Jake Ferguson",
-    "Team": "DAL",
-    "Position": "TE",
-    "Average Rank": 111.5,
-    "Community Rank": 56
-  },
-  {
-    "player_name": "Terry McLaurin",
-    "Team": "WAS",
-    "Position": "WR",
-    "Average Rank": 113.25,
-    "Community Rank": 41
-  },
-  {
-    "player_name": "Travis Kelce",
-    "Team": "KC",
-    "Position": "TE",
-    "Average Rank": 113.25,
-    "Community Rank": 67
-  },
-  {
-    "player_name": "Derek Carr",
-    "Team": "NO",
-    "Position": "QB",
-    "Average Rank": 114.25,
-    "Community Rank": 196
-  },
-  {
-    "player_name": "Xavier Legette",
-    "Team": "CAR",
-    "Position": "WR",
-    "Average Rank": 114.5,
-    "Community Rank": 151
-  },
-  {
-    "player_name": "Amari Cooper",
-    "Team": "CLE",
-    "Position": "WR",
-    "Average Rank": 115,
-    "Community Rank": 87
-  },
-  {
-    "player_name": "Tony Pollard",
-    "Team": "TEN",
-    "Position": "RB",
-    "Average Rank": 115.5,
-    "Community Rank": 57
-  },
-  {
-    "player_name": "Daniel Jones",
-    "Team": "NYG",
-    "Position": "QB",
-    "Average Rank": 115.5,
-    "Community Rank": 148
-  },
-  {
-    "player_name": "Sam Darnold",
-    "Team": "MIN",
-    "Position": "QB",
-    "Average Rank": 116.25,
-    "Community Rank": 495
-  },
-  {
-    "player_name": "Jordan Mason",
-    "Team": "SF",
-    "Position": "RB",
-    "Average Rank": 116.75,
-    "Community Rank": 395
-  },
-  {
-    "player_name": "Calvin Ridley",
-    "Team": "TEN",
-    "Position": "WR",
-    "Average Rank": 117.75,
-    "Community Rank": 50
-  },
-  {
-    "player_name": "Cooper Kupp",
-    "Team": "LAR",
-    "Position": "WR",
-    "Average Rank": 117.75,
-    "Community Rank": 25
-  },
-  {
-    "player_name": "Christian Kirk",
-    "Team": "JAX",
-    "Position": "WR",
-    "Average Rank": 118.25,
-    "Community Rank": 51
-  },
-  {
-    "player_name": "2024 EARLY 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 119.25,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Diontae Johnson",
-    "Team": "CAR",
-    "Position": "WR",
-    "Average Rank": 121,
-    "Community Rank": 102
-  },
-  {
-    "player_name": "Najee Harris",
-    "Team": "PIT",
-    "Position": "RB",
-    "Average Rank": 123.5,
-    "Community Rank": 42
-  },
-  {
-    "player_name": "Ja'Lynn Polk",
-    "Team": "NE",
-    "Position": "WR",
-    "Average Rank": 125.25,
-    "Community Rank": 163
-  },
-  {
-    "player_name": "David Njoku",
-    "Team": "CLE",
-    "Position": "TE",
-    "Average Rank": 126.5,
-    "Community Rank": 158
-  },
-  {
-    "player_name": "Aaron Jones",
-    "Team": "MIN",
-    "Position": "RB",
-    "Average Rank": 128,
-    "Community Rank": 75
-  },
-  {
-    "player_name": "Tyjae Spears",
-    "Team": "TEN",
-    "Position": "RB",
-    "Average Rank": 128.25,
-    "Community Rank": 94
-  },
-  {
-    "player_name": "Aaron Rodgers",
-    "Team": "NYJ",
-    "Position": "QB",
-    "Average Rank": 129.5,
-    "Community Rank": 92
-  },
-  {
-    "player_name": "James Conner",
-    "Team": "ARI",
-    "Position": "RB",
-    "Average Rank": 130.5,
-    "Community Rank": 35
-  },
-  {
-    "player_name": "Javonte Williams",
-    "Team": "DEN",
-    "Position": "RB",
-    "Average Rank": 131.25,
-    "Community Rank": 77
-  },
-  {
-    "player_name": "Braelon Allen",
-    "Team": "NYJ",
-    "Position": "RB",
-    "Average Rank": 131.5,
-    "Community Rank": 161
-  },
-  {
-    "player_name": "Zach Charbonnet",
-    "Team": "SEA",
-    "Position": "RB",
-    "Average Rank": 132,
-    "Community Rank": 162
-  },
-  {
-    "player_name": "Evan Engram",
-    "Team": "JAX",
-    "Position": "TE",
-    "Average Rank": 132.25,
-    "Community Rank": 99
-  },
-  {
-    "player_name": "Dallas Goedert",
-    "Team": "PHI",
-    "Position": "TE",
-    "Average Rank": 133,
-    "Community Rank": 85
-  },
-  {
-    "player_name": "Christian Watson",
-    "Team": "GB",
-    "Position": "WR",
-    "Average Rank": 133.5,
-    "Community Rank": 61
-  },
-  {
-    "player_name": "Jaylen Warren",
-    "Team": "PIT",
-    "Position": "RB",
-    "Average Rank": 137.75,
-    "Community Rank": 49
-  },
-  {
-    "player_name": "Bucky Irving",
-    "Team": "TB",
-    "Position": "RB",
-    "Average Rank": 137.75,
-    "Community Rank": 198
-  },
-  {
-    "player_name": "Ricky Pearsall",
-    "Team": "SF",
-    "Position": "WR",
-    "Average Rank": 138,
-    "Community Rank": 166
-  },
-  {
-    "player_name": "Zack Moss",
-    "Team": "CIN",
-    "Position": "RB",
-    "Average Rank": 139.5,
-    "Community Rank": 138
-  },
-  {
-    "player_name": "D'Andre Swift",
-    "Team": "CHI",
-    "Position": "RB",
-    "Average Rank": 141,
-    "Community Rank": 63
-  },
-  {
-    "player_name": "2024 MID 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 141.25,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Isaiah Likely",
-    "Team": "BAL",
-    "Position": "TE",
-    "Average Rank": 141.5,
-    "Community Rank": 160
+    "Average Rank": 103.4,
+    "Community Rank": 33
   },
   {
     "player_name": "Josh Downs",
     "Team": "IND",
     "Position": "WR",
-    "Average Rank": 141.5,
+    "Average Rank": 103.4,
     "Community Rank": 117
   },
   {
-    "player_name": "Adonai Mitchell",
-    "Team": "IND",
+    "player_name": "Travis Kelce",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 103.6,
+    "Community Rank": 65
+  },
+  {
+    "player_name": "Sam Darnold",
+    "Team": "MIN",
+    "Position": "QB",
+    "Average Rank": 105.25,
+    "Community Rank": 495
+  },
+  {
+    "player_name": "D'Andre Swift",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 106,
+    "Community Rank": 62
+  },
+  {
+    "player_name": "Keon Coleman",
+    "Team": "BUF",
     "Position": "WR",
-    "Average Rank": 141.5,
+    "Average Rank": 107.2,
+    "Community Rank": 114
+  },
+  {
+    "player_name": "Ricky Pearsall",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 109,
     "Community Rank": 165
   },
   {
-    "player_name": "Devin Singletary",
-    "Team": "NYG",
-    "Position": "RB",
-    "Average Rank": 142,
-    "Community Rank": 146
-  },
-  {
-    "player_name": "2025 EARLY-MID 2nd",
+    "player_name": "2025 Rookie 1.12",
     "Team": "",
     "Position": "",
-    "Average Rank": 146.75,
+    "Average Rank": 109,
     "Community Rank": ""
   },
   {
-    "player_name": "Keenan Allen",
-    "Team": "CHI",
+    "player_name": "Xavier Legette",
+    "Team": "CAR",
     "Position": "WR",
-    "Average Rank": 147.75,
-    "Community Rank": 73
+    "Average Rank": 109.2,
+    "Community Rank": 151
   },
   {
-    "player_name": "Russell Wilson",
-    "Team": "PIT",
+    "player_name": "Geno Smith",
+    "Team": "SEA",
     "Position": "QB",
-    "Average Rank": 149.25,
-    "Community Rank": 184
+    "Average Rank": 109.4,
+    "Community Rank": 125
   },
   {
-    "player_name": "Khalil Shakir",
+    "player_name": "Amari Cooper",
     "Team": "BUF",
     "Position": "WR",
-    "Average Rank": 149.25,
-    "Community Rank": 119
+    "Average Rank": 110.6,
+    "Community Rank": 87
   },
   {
-    "player_name": "Dontayvion Wicks",
-    "Team": "GB",
-    "Position": "WR",
-    "Average Rank": 151.5,
-    "Community Rank": 111
-  },
-  {
-    "player_name": "Andy Dalton",
+    "player_name": "Diontae Johnson",
     "Team": "CAR",
-    "Position": "QB",
-    "Average Rank": 152,
-    "Community Rank": 578
-  },
-  {
-    "player_name": "Nick Chubb",
-    "Team": "CLE",
-    "Position": "RB",
-    "Average Rank": 153.5,
-    "Community Rank": 64
-  },
-  {
-    "player_name": "Blake Corum",
-    "Team": "LAR",
-    "Position": "RB",
-    "Average Rank": 153.75,
-    "Community Rank": 136
-  },
-  {
-    "player_name": "Quentin Johnston",
-    "Team": "LAC",
     "Position": "WR",
-    "Average Rank": 155.5,
-    "Community Rank": 174
+    "Average Rank": 112.4,
+    "Community Rank": 102
   },
   {
-    "player_name": "Chase Brown",
-    "Team": "CIN",
-    "Position": "RB",
-    "Average Rank": 156,
-    "Community Rank": 105
-  },
-  {
-    "player_name": "2026 EARLY-MID 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 158,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Romeo Doubs",
-    "Team": "GB",
-    "Position": "WR",
-    "Average Rank": 160.25,
-    "Community Rank": 121
-  },
-  {
-    "player_name": "Zamir White",
-    "Team": "LV",
-    "Position": "RB",
-    "Average Rank": 160.5,
-    "Community Rank": 101
-  },
-  {
-    "player_name": "Jakobi Meyers",
-    "Team": "LV",
-    "Position": "WR",
-    "Average Rank": 162.25,
-    "Community Rank": 153
-  },
-  {
-    "player_name": "Rashid Shaheed",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 162.5,
-    "Community Rank": 185
-  },
-  {
-    "player_name": "Jalen McMillan",
+    "player_name": "Rachaad White",
     "Team": "TB",
-    "Position": "WR",
-    "Average Rank": 164.75,
-    "Community Rank": 205
-  },
-  {
-    "player_name": "Courtland Sutton",
-    "Team": "DEN",
-    "Position": "WR",
-    "Average Rank": 165.5,
-    "Community Rank": 118
-  },
-  {
-    "player_name": "Jaylen Wright",
-    "Team": "MIA",
     "Position": "RB",
-    "Average Rank": 166,
-    "Community Rank": 172
+    "Average Rank": 112.6,
+    "Community Rank": 28
   },
   {
-    "player_name": "Jerome Ford",
-    "Team": "CLE",
+    "player_name": "Tony Pollard",
+    "Team": "TEN",
     "Position": "RB",
-    "Average Rank": 166,
-    "Community Rank": 147
+    "Average Rank": 112.8,
+    "Community Rank": 60
   },
   {
-    "player_name": "Jerry Jeudy",
-    "Team": "CLE",
-    "Position": "WR",
-    "Average Rank": 169,
-    "Community Rank": 145
-  },
-  {
-    "player_name": "Marquise Brown",
-    "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 170.5,
-    "Community Rank": 112
-  },
-  {
-    "player_name": "2027 EARLY-MID 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 170.5,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Pat Freiermuth",
-    "Team": "PIT",
+    "player_name": "Evan Engram",
+    "Team": "JAX",
     "Position": "TE",
-    "Average Rank": 171.25,
-    "Community Rank": 91
-  },
-  {
-    "player_name": "Austin Ekeler",
-    "Team": "WAS",
-    "Position": "RB",
-    "Average Rank": 172.5,
-    "Community Rank": 154
-  },
-  {
-    "player_name": "Ben Sinnott",
-    "Team": "WAS",
-    "Position": "TE",
-    "Average Rank": 173.25,
-    "Community Rank": 206
-  },
-  {
-    "player_name": "2024 LATE 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 173.33,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "MarShawn Lloyd",
-    "Team": "GB",
-    "Position": "RB",
-    "Average Rank": 173.75,
-    "Community Rank": 181
-  },
-  {
-    "player_name": "Tucker Kraft",
-    "Team": "GB",
-    "Position": "TE",
-    "Average Rank": 174.75,
-    "Community Rank": 239
-  },
-  {
-    "player_name": "Jermaine Burton",
-    "Team": "CIN",
-    "Position": "WR",
-    "Average Rank": 175.5,
-    "Community Rank": 169
-  },
-  {
-    "player_name": "Gardner Minshew",
-    "Team": "LV",
-    "Position": "QB",
-    "Average Rank": 177.25,
-    "Community Rank": 212
-  },
-  {
-    "player_name": "Michael Wilson",
-    "Team": "ARI",
-    "Position": "WR",
-    "Average Rank": 180,
-    "Community Rank": 176
+    "Average Rank": 112.8,
+    "Community Rank": 100
   },
   {
     "player_name": "Cole Kmet",
     "Team": "CHI",
     "Position": "TE",
-    "Average Rank": 180.5,
+    "Average Rank": 113.8,
     "Community Rank": 84
   },
   {
-    "player_name": "Dalton Schultz",
-    "Team": "HOU",
+    "player_name": "Rhamondre Stevenson",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 118.4,
+    "Community Rank": 76
+  },
+  {
+    "player_name": "Mark Andrews",
+    "Team": "BAL",
     "Position": "TE",
-    "Average Rank": 180.75,
-    "Community Rank": 100
+    "Average Rank": 118.8,
+    "Community Rank": 81
   },
   {
-    "player_name": "2025 MID-LATE 2nd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 181.5,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Tank Bigsby",
-    "Team": "JAX",
+    "player_name": "Aaron Jones",
+    "Team": "MIN",
     "Position": "RB",
-    "Average Rank": 182.5,
-    "Community Rank": 125
+    "Average Rank": 122.4,
+    "Community Rank": 75
   },
   {
-    "player_name": "DeAndre Hopkins",
-    "Team": "TEN",
-    "Position": "WR",
-    "Average Rank": 183.25,
-    "Community Rank": 144
+    "player_name": "Tucker Kraft",
+    "Team": "GB",
+    "Position": "TE",
+    "Average Rank": 123.6,
+    "Community Rank": 239
   },
   {
-    "player_name": "Ray Davis",
-    "Team": "BUF",
-    "Position": "RB",
-    "Average Rank": 183.25,
-    "Community Rank": 167
-  },
-  {
-    "player_name": "Roschon Johnson",
-    "Team": "CHI",
-    "Position": "RB",
-    "Average Rank": 183.25,
-    "Community Rank": 142
-  },
-  {
-    "player_name": "Wan'Dale Robinson",
+    "player_name": "Tyrone Tracy",
     "Team": "NYG",
-    "Position": "WR",
-    "Average Rank": 184,
-    "Community Rank": 193
-  },
-  {
-    "player_name": "Rico Dowdle",
-    "Team": "DAL",
     "Position": "RB",
-    "Average Rank": 184.5,
-    "Community Rank": 130
+    "Average Rank": 125.6,
+    "Community Rank": 276
   },
   {
-    "player_name": "Darnell Mooney",
-    "Team": "ATL",
-    "Position": "WR",
-    "Average Rank": 184.75,
-    "Community Rank": 134
+    "player_name": "Bryce Young",
+    "Team": "CAR",
+    "Position": "QB",
+    "Average Rank": 126.4,
+    "Community Rank": 187
   },
   {
-    "player_name": "2026 MID-LATE 2nd",
+    "player_name": "Dallas Goedert",
+    "Team": "PHI",
+    "Position": "TE",
+    "Average Rank": 126.8,
+    "Community Rank": 86
+  },
+  {
+    "player_name": "Javonte Williams",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 127.4,
+    "Community Rank": 77
+  },
+  {
+    "player_name": "James Conner",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 127.8,
+    "Community Rank": 35
+  },
+  {
+    "player_name": "Matthew Stafford",
+    "Team": "LAR",
+    "Position": "QB",
+    "Average Rank": 130.2,
+    "Community Rank": 79
+  },
+  {
+    "player_name": "2025 EARLY 2nd",
     "Team": "",
     "Position": "",
-    "Average Rank": 185,
+    "Average Rank": 130.33,
     "Community Rank": ""
   },
   {
-    "player_name": "Carson Steele",
-    "Team": "KC",
-    "Position": "RB",
-    "Average Rank": 185.33,
-    "Community Rank": 186
-  },
-  {
-    "player_name": "Tyler Allgeier",
-    "Team": "ATL",
-    "Position": "RB",
-    "Average Rank": 186,
-    "Community Rank": 82
-  },
-  {
-    "player_name": "Gabe Davis",
+    "player_name": "Christian Kirk",
     "Team": "JAX",
     "Position": "WR",
-    "Average Rank": 186.5,
-    "Community Rank": 152
+    "Average Rank": 130.6,
+    "Community Rank": 51
   },
   {
-    "player_name": "Malachi Corley",
-    "Team": "NYJ",
-    "Position": "WR",
-    "Average Rank": 187.25,
-    "Community Rank": 175
-  },
-  {
-    "player_name": "Noah Fant",
-    "Team": "SEA",
-    "Position": "TE",
-    "Average Rank": 187.5,
-    "Community Rank": 168
-  },
-  {
-    "player_name": "Roman Wilson",
+    "player_name": "Pat Freiermuth",
     "Team": "PIT",
+    "Position": "TE",
+    "Average Rank": 131.4,
+    "Community Rank": 91
+  },
+  {
+    "player_name": "J.K. Dobbins",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 132,
+    "Community Rank": 131
+  },
+  {
+    "player_name": "Najee Harris",
+    "Team": "PIT",
+    "Position": "RB",
+    "Average Rank": 135.6,
+    "Community Rank": 42
+  },
+  {
+    "player_name": "Justin Fields",
+    "Team": "PIT",
+    "Position": "QB",
+    "Average Rank": 136,
+    "Community Rank": 159
+  },
+  {
+    "player_name": "Bucky Irving",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 137.8,
+    "Community Rank": 198
+  },
+  {
+    "player_name": "2026 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 141,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Khalil Shakir",
+    "Team": "BUF",
     "Position": "WR",
-    "Average Rank": 188,
-    "Community Rank": 197
+    "Average Rank": 142,
+    "Community Rank": 119
+  },
+  {
+    "player_name": "Braelon Allen",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 142,
+    "Community Rank": 161
+  },
+  {
+    "player_name": "2025 MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 142.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Zach Charbonnet",
+    "Team": "SEA",
+    "Position": "RB",
+    "Average Rank": 143.2,
+    "Community Rank": 162
+  },
+  {
+    "player_name": "Daniel Jones",
+    "Team": "NYG",
+    "Position": "QB",
+    "Average Rank": 143.6,
+    "Community Rank": 148
+  },
+  {
+    "player_name": "Nick Chubb",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 143.8,
+    "Community Rank": 63
+  },
+  {
+    "player_name": "Tyjae Spears",
+    "Team": "TEN",
+    "Position": "RB",
+    "Average Rank": 144.6,
+    "Community Rank": 94
   },
   {
     "player_name": "Chuba Hubbard",
     "Team": "CAR",
     "Position": "RB",
-    "Average Rank": 188.25,
+    "Average Rank": 145,
     "Community Rank": 132
   },
   {
-    "player_name": "Troy Franklin",
-    "Team": "DEN",
+    "player_name": "Adonai Mitchell",
+    "Team": "IND",
     "Position": "WR",
-    "Average Rank": 188.25,
-    "Community Rank": 189
+    "Average Rank": 145.4,
+    "Community Rank": 166
   },
   {
-    "player_name": "Andrei Iosivas",
-    "Team": "CIN",
+    "player_name": "Christian Watson",
+    "Team": "GB",
     "Position": "WR",
-    "Average Rank": 190,
-    "Community Rank": 244
+    "Average Rank": 145.6,
+    "Community Rank": 61
   },
   {
-    "player_name": "Kendre Miller",
-    "Team": "NO",
+    "player_name": "Blake Corum",
+    "Team": "LAR",
     "Position": "RB",
-    "Average Rank": 193,
-    "Community Rank": 129
+    "Average Rank": 145.6,
+    "Community Rank": 136
   },
   {
-    "player_name": "DeMario Douglas",
+    "player_name": "Jalen McMillan",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 147,
+    "Community Rank": 205
+  },
+  {
+    "player_name": "Tank Bigsby",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 147.6,
+    "Community Rank": 126
+  },
+  {
+    "player_name": "2027 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 148.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Will Levis",
+    "Team": "TEN",
+    "Position": "QB",
+    "Average Rank": 149,
+    "Community Rank": 92
+  },
+  {
+    "player_name": "Dontayvion Wicks",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 149.2,
+    "Community Rank": 111
+  },
+  {
+    "player_name": "Jaylen Wright",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 149.8,
+    "Community Rank": 172
+  },
+  {
+    "player_name": "Wan'Dale Robinson",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 149.8,
+    "Community Rank": 193
+  },
+  {
+    "player_name": "Calvin Ridley",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 150.8,
+    "Community Rank": 50
+  },
+  {
+    "player_name": "Russell Wilson",
+    "Team": "PIT",
+    "Position": "QB",
+    "Average Rank": 151.5,
+    "Community Rank": 183
+  },
+  {
+    "player_name": "Darnell Mooney",
+    "Team": "ATL",
+    "Position": "WR",
+    "Average Rank": 152,
+    "Community Rank": 133
+  },
+  {
+    "player_name": "Derek Carr",
+    "Team": "NO",
+    "Position": "QB",
+    "Average Rank": 152.2,
+    "Community Rank": 195
+  },
+  {
+    "player_name": "2025 LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 153,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Ben Sinnott",
+    "Team": "WAS",
+    "Position": "TE",
+    "Average Rank": 154.8,
+    "Community Rank": 206
+  },
+  {
+    "player_name": "Aaron Rodgers",
+    "Team": "NYJ",
+    "Position": "QB",
+    "Average Rank": 155.6,
+    "Community Rank": 93
+  },
+  {
+    "player_name": "Ja'Lynn Polk",
     "Team": "NE",
     "Position": "WR",
-    "Average Rank": 194.25,
-    "Community Rank": 135
+    "Average Rank": 155.8,
+    "Community Rank": 163
   },
   {
-    "player_name": "Luke Musgrave",
+    "player_name": "Keenan Allen",
+    "Team": "CHI",
+    "Position": "WR",
+    "Average Rank": 156.8,
+    "Community Rank": 73
+  },
+  {
+    "player_name": "Jaylen Warren",
+    "Team": "PIT",
+    "Position": "RB",
+    "Average Rank": 157.6,
+    "Community Rank": 49
+  },
+  {
+    "player_name": "Deshaun Watson",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 157.75,
+    "Community Rank": 150
+  },
+  {
+    "player_name": "Romeo Doubs",
     "Team": "GB",
-    "Position": "TE",
-    "Average Rank": 195.5,
-    "Community Rank": 127
-  },
-  {
-    "player_name": "Tyler Lockett",
-    "Team": "SEA",
     "Position": "WR",
-    "Average Rank": 197.25,
-    "Community Rank": 128
-  },
-  {
-    "player_name": "Curtis Samuel",
-    "Team": "BUF",
-    "Position": "WR",
-    "Average Rank": 198.25,
-    "Community Rank": 71
-  },
-  {
-    "player_name": "Jahan Dotson",
-    "Team": "WAS",
-    "Position": "WR",
-    "Average Rank": 199,
-    "Community Rank": 156
-  },
-  {
-    "player_name": "Michael Mayer",
-    "Team": "LV",
-    "Position": "TE",
-    "Average Rank": 199.5,
-    "Community Rank": 248
+    "Average Rank": 159,
+    "Community Rank": 121
   },
   {
     "player_name": "2027 MID-LATE 2nd",
     "Team": "",
     "Position": "",
-    "Average Rank": 201,
+    "Average Rank": 160,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Rashid Shaheed",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 160.2,
+    "Community Rank": 186
+  },
+  {
+    "player_name": "2028 EARLY-MID 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 161.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Jordan Mason",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 162,
+    "Community Rank": 395
+  },
+  {
+    "player_name": "DeMario Douglas",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 162.6,
+    "Community Rank": 135
+  },
+  {
+    "player_name": "2026 MID-LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 164.75,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Troy Franklin",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 164.8,
+    "Community Rank": 189
+  },
+  {
+    "player_name": "Jakobi Meyers",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 165,
+    "Community Rank": 153
+  },
+  {
+    "player_name": "Marquise Brown",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 165.4,
+    "Community Rank": 112
+  },
+  {
+    "player_name": "Quentin Johnston",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 167.4,
+    "Community Rank": 174
+  },
+  {
+    "player_name": "MarShawn Lloyd",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 167.8,
+    "Community Rank": 181
+  },
+  {
+    "player_name": "Jerry Jeudy",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 171.2,
+    "Community Rank": 145
+  },
+  {
+    "player_name": "Roschon Johnson",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 171.6,
+    "Community Rank": 142
+  },
+  {
+    "player_name": "2028 MID-LATE 2nd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 172,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Courtland Sutton",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 172.6,
+    "Community Rank": 118
+  },
+  {
+    "player_name": "Tyler Allgeier",
+    "Team": "ATL",
+    "Position": "RB",
+    "Average Rank": 173,
+    "Community Rank": 82
+  },
+  {
+    "player_name": "Isaiah Likely",
+    "Team": "BAL",
+    "Position": "TE",
+    "Average Rank": 173.8,
+    "Community Rank": 160
+  },
+  {
+    "player_name": "Rico Dowdle",
+    "Team": "DAL",
+    "Position": "RB",
+    "Average Rank": 175.2,
+    "Community Rank": 130
+  },
+  {
+    "player_name": "Ray Davis",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 175.4,
+    "Community Rank": 167
+  },
+  {
+    "player_name": "Erick All",
+    "Team": "CIN",
+    "Position": "TE",
+    "Average Rank": 176.25,
+    "Community Rank": 280
+  },
+  {
+    "player_name": "Dalton Schultz",
+    "Team": "HOU",
+    "Position": "TE",
+    "Average Rank": 178.2,
+    "Community Rank": 101
+  },
+  {
+    "player_name": "Cade Otton",
+    "Team": "TB",
+    "Position": "TE",
+    "Average Rank": 180.25,
+    "Community Rank": 180
+  },
+  {
+    "player_name": "Zack Moss",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 180.6,
+    "Community Rank": 139
+  },
+  {
+    "player_name": "Michael Wilson",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 181.4,
+    "Community Rank": 176
+  },
+  {
+    "player_name": "Devin Singletary",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 181.6,
+    "Community Rank": 146
+  },
+  {
+    "player_name": "Cedric Tillman",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 181.8,
+    "Community Rank": 509
+  },
+  {
+    "player_name": "Jermaine Burton",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 182.6,
+    "Community Rank": 169
+  },
+  {
+    "player_name": "Malachi Corley",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 183,
+    "Community Rank": 175
+  },
+  {
+    "player_name": "Austin Ekeler",
+    "Team": "WAS",
+    "Position": "RB",
+    "Average Rank": 184.4,
+    "Community Rank": 155
+  },
+  {
+    "player_name": "Audric Estime",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 185.6,
+    "Community Rank": 177
+  },
+  {
+    "player_name": "Gardner Minshew",
+    "Team": "LV",
+    "Position": "QB",
+    "Average Rank": 186.25,
+    "Community Rank": 212
+  },
+  {
+    "player_name": "DeAndre Hopkins",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 188.4,
+    "Community Rank": 144
+  },
+  {
+    "player_name": "Luke McCaffrey",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 189,
+    "Community Rank": 217
+  },
+  {
+    "player_name": "Jahan Dotson",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 190.67,
+    "Community Rank": 156
+  },
+  {
+    "player_name": "Tyler Lockett",
+    "Team": "SEA",
+    "Position": "WR",
+    "Average Rank": 191.6,
+    "Community Rank": 128
+  },
+  {
+    "player_name": "Jerome Ford",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 192,
+    "Community Rank": 147
+  },
+  {
+    "player_name": "2025 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 192,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Jalen Coker",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 192,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Kimani Vidal",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 192.2,
+    "Community Rank": 221
+  },
+  {
+    "player_name": "Noah Fant",
+    "Team": "SEA",
+    "Position": "TE",
+    "Average Rank": 192.5,
+    "Community Rank": 168
+  },
+  {
+    "player_name": "Kendre Miller",
+    "Team": "NO",
+    "Position": "RB",
+    "Average Rank": 192.6,
+    "Community Rank": 129
+  },
+  {
+    "player_name": "Luke Musgrave",
+    "Team": "GB",
+    "Position": "TE",
+    "Average Rank": 192.75,
+    "Community Rank": 127
+  },
+  {
+    "player_name": "Andy Dalton",
+    "Team": "CAR",
+    "Position": "QB",
+    "Average Rank": 193,
+    "Community Rank": 578
+  },
+  {
+    "player_name": "Alexander Mattison",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 195.6,
+    "Community Rank": 219
+  },
+  {
+    "player_name": "Gabe Davis",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 196,
+    "Community Rank": 152
+  },
+  {
+    "player_name": "Keaton Mitchell",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 197,
+    "Community Rank": 143
+  },
+  {
+    "player_name": "Roman Wilson",
+    "Team": "PIT",
+    "Position": "WR",
+    "Average Rank": 197.8,
+    "Community Rank": 197
+  },
+  {
+    "player_name": "Javon Baker",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 199.8,
+    "Community Rank": 207
+  },
+  {
+    "player_name": "2027 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 200.33,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Michael Mayer",
+    "Team": "LV",
+    "Position": "TE",
+    "Average Rank": 201.5,
+    "Community Rank": 249
+  },
+  {
+    "player_name": "Ja'Tavion Sanders",
+    "Team": "CAR",
+    "Position": "TE",
+    "Average Rank": 203,
+    "Community Rank": 211
+  },
+  {
+    "player_name": "2028 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 205.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Hunter Henry",
+    "Team": "NE",
+    "Position": "TE",
+    "Average Rank": 206.25,
+    "Community Rank": 191
+  },
+  {
+    "player_name": "2026 3rd",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 206.5,
     "Community Rank": ""
   },
   {
     "player_name": "Joshua Palmer",
     "Team": "LAC",
     "Position": "WR",
-    "Average Rank": 201.25,
+    "Average Rank": 207.25,
     "Community Rank": 141
-  },
-  {
-    "player_name": "Colby Parkinson",
-    "Team": "LAR",
-    "Position": "TE",
-    "Average Rank": 201.5,
-    "Community Rank": 313
-  },
-  {
-    "player_name": "Javon Baker",
-    "Team": "NE",
-    "Position": "WR",
-    "Average Rank": 202.25,
-    "Community Rank": 207
-  },
-  {
-    "player_name": "Raheem Mostert",
-    "Team": "MIA",
-    "Position": "RB",
-    "Average Rank": 202.67,
-    "Community Rank": 155
-  },
-  {
-    "player_name": "Hunter Henry",
-    "Team": "NE",
-    "Position": "TE",
-    "Average Rank": 204.5,
-    "Community Rank": 191
-  },
-  {
-    "player_name": "Gus Edwards",
-    "Team": "LAC",
-    "Position": "RB",
-    "Average Rank": 205.5,
-    "Community Rank": 157
-  },
-  {
-    "player_name": "Keaton Mitchell",
-    "Team": "BAL",
-    "Position": "RB",
-    "Average Rank": 207,
-    "Community Rank": 143
-  },
-  {
-    "player_name": "Antonio Gibson",
-    "Team": "NE",
-    "Position": "RB",
-    "Average Rank": 208,
-    "Community Rank": 178
-  },
-  {
-    "player_name": "Audric Estime",
-    "Team": "DEN",
-    "Position": "RB",
-    "Average Rank": 210,
-    "Community Rank": 177
-  },
-  {
-    "player_name": "Luke McCaffrey",
-    "Team": "WAS",
-    "Position": "WR",
-    "Average Rank": 210.67,
-    "Community Rank": 217
-  },
-  {
-    "player_name": "Greg Dulcich",
-    "Team": "DEN",
-    "Position": "TE",
-    "Average Rank": 210.75,
-    "Community Rank": 246
-  },
-  {
-    "player_name": "Cade Otton",
-    "Team": "TB",
-    "Position": "TE",
-    "Average Rank": 214.67,
-    "Community Rank": 180
   },
   {
     "player_name": "Rashod Bateman",
     "Team": "BAL",
     "Position": "WR",
-    "Average Rank": 215,
+    "Average Rank": 208.6,
     "Community Rank": 199
-  },
-  {
-    "player_name": "Tyrone Tracy",
-    "Team": "NYG",
-    "Position": "RB",
-    "Average Rank": 215,
-    "Community Rank": 277
-  },
-  {
-    "player_name": "Sam Howell",
-    "Team": "SEA",
-    "Position": "QB",
-    "Average Rank": 217.5,
-    "Community Rank": 224
-  },
-  {
-    "player_name": "Ezekiel Elliott",
-    "Team": "DAL",
-    "Position": "RB",
-    "Average Rank": 217.75,
-    "Community Rank": 113
-  },
-  {
-    "player_name": "Kimani Vidal",
-    "Team": "LAC",
-    "Position": "RB",
-    "Average Rank": 219,
-    "Community Rank": 220
-  },
-  {
-    "player_name": "Jauan Jennings",
-    "Team": "SF",
-    "Position": "WR",
-    "Average Rank": 219.67,
-    "Community Rank": 297
-  },
-  {
-    "player_name": "Khalil Herbert",
-    "Team": "CHI",
-    "Position": "RB",
-    "Average Rank": 220,
-    "Community Rank": 173
-  },
-  {
-    "player_name": "Elijah Moore",
-    "Team": "CLE",
-    "Position": "WR",
-    "Average Rank": 220.75,
-    "Community Rank": 216
-  },
-  {
-    "player_name": "Alec Pierce",
-    "Team": "IND",
-    "Position": "WR",
-    "Average Rank": 222,
-    "Community Rank": 283
-  },
-  {
-    "player_name": "Ja'Tavion Sanders",
-    "Team": "CAR",
-    "Position": "TE",
-    "Average Rank": 222.5,
-    "Community Rank": 211
-  },
-  {
-    "player_name": "Chigoziem Okonkwo",
-    "Team": "TEN",
-    "Position": "TE",
-    "Average Rank": 224.75,
-    "Community Rank": 226
-  },
-  {
-    "player_name": "2024 3rd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 225,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Mike Williams",
-    "Team": "NYJ",
-    "Position": "WR",
-    "Average Rank": 225.25,
-    "Community Rank": 133
-  },
-  {
-    "player_name": "Mike Gesicki",
-    "Team": "CIN",
-    "Position": "TE",
-    "Average Rank": 225.5,
-    "Community Rank": 242
-  },
-  {
-    "player_name": "Brandin Cooks",
-    "Team": "DAL",
-    "Position": "WR",
-    "Average Rank": 226,
-    "Community Rank": 164
-  },
-  {
-    "player_name": "Elijah Mitchell",
-    "Team": "SF",
-    "Position": "RB",
-    "Average Rank": 226.33,
-    "Community Rank": 523
-  },
-  {
-    "player_name": "2025 3rd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 226.75,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Marvin Mims",
-    "Team": "DEN",
-    "Position": "WR",
-    "Average Rank": 227.25,
-    "Community Rank": 179
   },
   {
     "player_name": "Jordan Whittington",
     "Team": "LAR",
     "Position": "WR",
-    "Average Rank": 228.33,
-    "Community Rank": 254
+    "Average Rank": 208.67,
+    "Community Rank": 257
   },
   {
-    "player_name": "Jacoby Brissett",
-    "Team": "NE",
-    "Position": "QB",
-    "Average Rank": 228.5,
-    "Community Rank": 438
-  },
-  {
-    "player_name": "Devaughn Vele",
-    "Team": "DEN",
-    "Position": "WR",
-    "Average Rank": 229,
-    "Community Rank": 252
-  },
-  {
-    "player_name": "Erick All",
+    "player_name": "Andrei Iosivas",
     "Team": "CIN",
-    "Position": "TE",
-    "Average Rank": 229,
-    "Community Rank": 286
-  },
-  {
-    "player_name": "Jaleel McLaughlin",
-    "Team": "DEN",
-    "Position": "RB",
-    "Average Rank": 229.67,
-    "Community Rank": 170
-  },
-  {
-    "player_name": "Ty Chandler",
-    "Team": "MIN",
-    "Position": "RB",
-    "Average Rank": 231,
-    "Community Rank": 171
-  },
-  {
-    "player_name": "Jalen Tolbert",
-    "Team": "DAL",
     "Position": "WR",
-    "Average Rank": 231.75,
-    "Community Rank": 529
+    "Average Rank": 211,
+    "Community Rank": 244
   },
   {
-    "player_name": "2026 3rd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 232.5,
-    "Community Rank": ""
+    "player_name": "Mike Williams",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 211.67,
+    "Community Rank": 134
   },
   {
-    "player_name": "Dameon Pierce",
-    "Team": "HOU",
-    "Position": "RB",
-    "Average Rank": 233,
-    "Community Rank": 108
+    "player_name": "Alec Pierce",
+    "Team": "IND",
+    "Position": "WR",
+    "Average Rank": 213.25,
+    "Community Rank": 285
   },
   {
-    "player_name": "Trey Lance",
-    "Team": "DAL",
+    "player_name": "Sam Howell",
+    "Team": "SEA",
     "Position": "QB",
-    "Average Rank": 233.5,
-    "Community Rank": 214
+    "Average Rank": 215,
+    "Community Rank": 224
   },
   {
-    "player_name": "Jalin Hyatt",
-    "Team": "NYG",
+    "player_name": "Raheem Mostert",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 215.5,
+    "Community Rank": 154
+  },
+  {
+    "player_name": "Colby Parkinson",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 217.5,
+    "Community Rank": 311
+  },
+  {
+    "player_name": "Curtis Samuel",
+    "Team": "BUF",
     "Position": "WR",
-    "Average Rank": 233.5,
-    "Community Rank": 210
-  },
-  {
-    "player_name": "2027 3rd",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 234,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Jonathan Mingo",
-    "Team": "CAR",
-    "Position": "WR",
-    "Average Rank": 235.75,
-    "Community Rank": 259
-  },
-  {
-    "player_name": "Parker Washington",
-    "Team": "JAX",
-    "Position": "WR",
-    "Average Rank": 236,
-    "Community Rank": 686
+    "Average Rank": 217.75,
+    "Community Rank": 71
   },
   {
     "player_name": "Aidan O'Connell",
     "Team": "LV",
     "Position": "QB",
-    "Average Rank": 236.25,
-    "Community Rank": 270
-  },
-  {
-    "player_name": "Devontez Walker",
-    "Team": "BAL",
-    "Position": "WR",
-    "Average Rank": 237,
-    "Community Rank": 194
-  },
-  {
-    "player_name": "Cam Akers",
-    "Team": "MIN",
-    "Position": "RB",
-    "Average Rank": 237.25,
-    "Community Rank": 213
-  },
-  {
-    "player_name": "Justice Hill",
-    "Team": "BAL",
-    "Position": "RB",
-    "Average Rank": 239,
-    "Community Rank": 241
-  },
-  {
-    "player_name": "Hendon Hooker",
-    "Team": "DET",
-    "Position": "QB",
-    "Average Rank": 239.5,
-    "Community Rank": 235
-  },
-  {
-    "player_name": "Drew Lock",
-    "Team": "NYG",
-    "Position": "QB",
-    "Average Rank": 240,
-    "Community Rank": 762
-  },
-  {
-    "player_name": "Samaje Perine",
-    "Team": "DEN",
-    "Position": "RB",
-    "Average Rank": 243.25,
-    "Community Rank": 574
-  },
-  {
-    "player_name": "Kenny Pickett",
-    "Team": "PHI",
-    "Position": "QB",
-    "Average Rank": 243.5,
-    "Community Rank": 559
-  },
-  {
-    "player_name": "Isaac Guerendo",
-    "Team": "SF",
-    "Position": "RB",
-    "Average Rank": 245.33,
-    "Community Rank": 272
-  },
-  {
-    "player_name": "Theo Johnson",
-    "Team": "NYG",
-    "Position": "TE",
-    "Average Rank": 246.67,
-    "Community Rank": 284
-  },
-  {
-    "player_name": "Dalvin Cook",
-    "Team": "BAL",
-    "Position": "RB",
-    "Average Rank": 246.67,
-    "Community Rank": 749
-  },
-  {
-    "player_name": "Will Shipley",
-    "Team": "PHI",
-    "Position": "RB",
-    "Average Rank": 247,
-    "Community Rank": 208
-  },
-  {
-    "player_name": "Juwan Johnson",
-    "Team": "NO",
-    "Position": "TE",
-    "Average Rank": 247.75,
-    "Community Rank": 233
-  },
-  {
-    "player_name": "Kareem Hunt",
-    "Team": "CLE",
-    "Position": "RB",
-    "Average Rank": 249.33,
-    "Community Rank": 228
-  },
-  {
-    "player_name": "Cedric Tillman",
-    "Team": "CLE",
-    "Position": "WR",
-    "Average Rank": 250.25,
-    "Community Rank": 509
-  },
-  {
-    "player_name": "Malik Washington",
-    "Team": "MIA",
-    "Position": "WR",
-    "Average Rank": 251.67,
-    "Community Rank": 232
-  },
-  {
-    "player_name": "Isaiah Davis",
-    "Team": "NYJ",
-    "Position": "RB",
-    "Average Rank": 252,
-    "Community Rank": 289
-  },
-  {
-    "player_name": "Treylon Burks",
-    "Team": "TEN",
-    "Position": "WR",
-    "Average Rank": 253.5,
-    "Community Rank": 230
-  },
-  {
-    "player_name": "Spencer Rattler",
-    "Team": "NO",
-    "Position": "QB",
-    "Average Rank": 253.75,
-    "Community Rank": 296
-  },
-  {
-    "player_name": "Kenneth Gainwell",
-    "Team": "PHI",
-    "Position": "RB",
-    "Average Rank": 258.25,
-    "Community Rank": 517
-  },
-  {
-    "player_name": "Ryan Tannehill",
-    "Team": "TEN",
-    "Position": "QB",
-    "Average Rank": 259,
-    "Community Rank": 497
-  },
-  {
-    "player_name": "2026 4th",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 259.5,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Zach Wilson",
-    "Team": "DEN",
-    "Position": "QB",
-    "Average Rank": 260,
-    "Community Rank": 553
-  },
-  {
-    "player_name": "Johnny Wilson",
-    "Team": "PHI",
-    "Position": "WR",
-    "Average Rank": 260,
-    "Community Rank": 279
-  },
-  {
-    "player_name": "Adam Thielen",
-    "Team": "CAR",
-    "Position": "WR",
-    "Average Rank": 261.25,
-    "Community Rank": 122
-  },
-  {
-    "player_name": "2024 4th",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 262,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Jamaal Williams",
-    "Team": "NO",
-    "Position": "RB",
-    "Average Rank": 262.33,
-    "Community Rank": 471
-  },
-  {
-    "player_name": "AJ Dillon",
-    "Team": "GB",
-    "Position": "RB",
-    "Average Rank": 262.67,
-    "Community Rank": 201
-  },
-  {
-    "player_name": "Miles Sanders",
-    "Team": "CAR",
-    "Position": "RB",
-    "Average Rank": 263.25,
-    "Community Rank": 293
-  },
-  {
-    "player_name": "D'Onta Foreman",
-    "Team": "CLE",
-    "Position": "RB",
-    "Average Rank": 263.5,
-    "Community Rank": 190
-  },
-  {
-    "player_name": "Tyler Boyd",
-    "Team": "TEN",
-    "Position": "WR",
-    "Average Rank": 263.67,
-    "Community Rank": 200
-  },
-  {
-    "player_name": "Clyde Edwards-Helaire",
-    "Team": "KC",
-    "Position": "RB",
-    "Average Rank": 264,
-    "Community Rank": 238
-  },
-  {
-    "player_name": "Brenden Rice",
-    "Team": "LAC",
-    "Position": "WR",
-    "Average Rank": 264,
-    "Community Rank": 218
-  },
-  {
-    "player_name": "Alexander Mattison",
-    "Team": "LV",
-    "Position": "RB",
-    "Average Rank": 264,
-    "Community Rank": 219
-  },
-  {
-    "player_name": "Rondale Moore",
-    "Team": "ATL",
-    "Position": "WR",
-    "Average Rank": 264.33,
-    "Community Rank": 223
-  },
-  {
-    "player_name": "Noah Brown",
-    "Team": "HOU",
-    "Position": "WR",
-    "Average Rank": 265.33,
-    "Community Rank": 564
-  },
-  {
-    "player_name": "Zay Jones",
-    "Team": "",
-    "Position": "WR",
-    "Average Rank": 266.67,
-    "Community Rank": 227
-  },
-  {
-    "player_name": "2025 4th",
-    "Team": "",
-    "Position": "",
-    "Average Rank": 267,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "DJ Chark",
-    "Team": "LAC",
-    "Position": "WR",
-    "Average Rank": 267,
-    "Community Rank": 678
-  },
-  {
-    "player_name": "John Metchie",
-    "Team": "HOU",
-    "Position": "WR",
-    "Average Rank": 268,
-    "Community Rank": 613
-  },
-  {
-    "player_name": "Kendrick Bourne",
-    "Team": "NE",
-    "Position": "WR",
-    "Average Rank": 268.25,
+    "Average Rank": 217.75,
     "Community Rank": 287
   },
   {
-    "player_name": "Israel Abanikanda",
-    "Team": "NYJ",
+    "player_name": "Antonio Gibson",
+    "Team": "NE",
     "Position": "RB",
-    "Average Rank": 268.33,
-    "Community Rank": 449
+    "Average Rank": 218.25,
+    "Community Rank": 179
   },
   {
-    "player_name": "Jonnu Smith",
-    "Team": "MIA",
-    "Position": "TE",
-    "Average Rank": 268.5,
-    "Community Rank": 225
-  },
-  {
-    "player_name": "Jalen Coker",
-    "Team": "CAR",
-    "Position": "WR",
-    "Average Rank": 268.5,
-    "Community Rank": ""
-  },
-  {
-    "player_name": "Dylan Laube",
-    "Team": "LV",
+    "player_name": "Gus Edwards",
+    "Team": "LAC",
     "Position": "RB",
-    "Average Rank": 268.67,
-    "Community Rank": 182
+    "Average Rank": 219.5,
+    "Community Rank": 157
   },
   {
-    "player_name": "Tutu Atwell",
-    "Team": "LAR",
-    "Position": "WR",
-    "Average Rank": 268.67,
-    "Community Rank": 651
-  },
-  {
-    "player_name": "Jacob Cowing",
-    "Team": "SF",
-    "Position": "WR",
-    "Average Rank": 269.33,
-    "Community Rank": 273
-  },
-  {
-    "player_name": "Taysom Hill",
-    "Team": "NO",
-    "Position": "TE",
-    "Average Rank": 270.67,
-    "Community Rank": 215
-  },
-  {
-    "player_name": "A.T. Perry",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 270.67,
-    "Community Rank": 510
-  },
-  {
-    "player_name": "Greg Dortch",
-    "Team": "ARI",
-    "Position": "WR",
-    "Average Rank": 270.75,
-    "Community Rank": 589
-  },
-  {
-    "player_name": "Daniel Bellinger",
-    "Team": "NYG",
-    "Position": "TE",
-    "Average Rank": 270.75,
-    "Community Rank": 526
-  },
-  {
-    "player_name": "Jordan Travis",
-    "Team": "NYJ",
-    "Position": "QB",
-    "Average Rank": 271,
-    "Community Rank": 229
-  },
-  {
-    "player_name": "Jarrett Stidham",
+    "player_name": "Marvin Mims",
     "Team": "DEN",
-    "Position": "QB",
-    "Average Rank": 271.5,
-    "Community Rank": 785
+    "Position": "WR",
+    "Average Rank": 219.67,
+    "Community Rank": 178
   },
   {
-    "player_name": "Deuce Vaughn",
+    "player_name": "Elijah Moore",
+    "Team": "CLE",
+    "Position": "WR",
+    "Average Rank": 220,
+    "Community Rank": 216
+  },
+  {
+    "player_name": "Jalin Hyatt",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 224.67,
+    "Community Rank": 210
+  },
+  {
+    "player_name": "Khalil Herbert",
+    "Team": "CHI",
+    "Position": "RB",
+    "Average Rank": 224.75,
+    "Community Rank": 173
+  },
+  {
+    "player_name": "Ezekiel Elliott",
     "Team": "DAL",
     "Position": "RB",
-    "Average Rank": 272.33,
-    "Community Rank": 204
+    "Average Rank": 225.5,
+    "Community Rank": 113
   },
   {
-    "player_name": "K.J. Osborn",
-    "Team": "NE",
+    "player_name": "Jonathan Mingo",
+    "Team": "CAR",
     "Position": "WR",
-    "Average Rank": 273,
-    "Community Rank": 231
+    "Average Rank": 226,
+    "Community Rank": 283
   },
   {
-    "player_name": "Tyquan Thornton",
-    "Team": "NE",
-    "Position": "WR",
-    "Average Rank": 273.33,
-    "Community Rank": 609
-  },
-  {
-    "player_name": "Odell Beckham",
-    "Team": "MIA",
-    "Position": "WR",
-    "Average Rank": 273.67,
-    "Community Rank": 203
-  },
-  {
-    "player_name": "Michael Gallup",
-    "Team": "LV",
-    "Position": "WR",
-    "Average Rank": 274,
-    "Community Rank": 304
-  },
-  {
-    "player_name": "Jameis Winston",
-    "Team": "CLE",
-    "Position": "QB",
-    "Average Rank": 276,
-    "Community Rank": 555
-  },
-  {
-    "player_name": "Trey Palmer",
-    "Team": "TB",
-    "Position": "WR",
-    "Average Rank": 276.5,
-    "Community Rank": 221
-  },
-  {
-    "player_name": "Chris Rodriguez",
-    "Team": "WAS",
-    "Position": "RB",
-    "Average Rank": 277,
-    "Community Rank": 695
-  },
-  {
-    "player_name": "Darius Slayton",
-    "Team": "NYG",
-    "Position": "WR",
-    "Average Rank": 278,
-    "Community Rank": 237
-  },
-  {
-    "player_name": "Skyy Moore",
+    "player_name": "Kareem Hunt",
     "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 278,
-    "Community Rank": 554
+    "Position": "RB",
+    "Average Rank": 226.25,
+    "Community Rank": 228
   },
   {
-    "player_name": "Dawson Knox",
-    "Team": "BUF",
-    "Position": "TE",
-    "Average Rank": 279,
-    "Community Rank": 139
-  },
-  {
-    "player_name": "Anthony Gould",
-    "Team": "IND",
+    "player_name": "Jalen Tolbert",
+    "Team": "DAL",
     "Position": "WR",
-    "Average Rank": 280,
-    "Community Rank": 265
-  },
-  {
-    "player_name": "Ainias Smith",
-    "Team": "PHI",
-    "Position": "WR",
-    "Average Rank": 281,
-    "Community Rank": 260
-  },
-  {
-    "player_name": "Josh Reynolds",
-    "Team": "DEN",
-    "Position": "WR",
-    "Average Rank": 281.25,
-    "Community Rank": 234
-  },
-  {
-    "player_name": "Donovan Peoples-Jones",
-    "Team": "DET",
-    "Position": "WR",
-    "Average Rank": 281.33,
-    "Community Rank": 419
+    "Average Rank": 227,
+    "Community Rank": 528
   },
   {
     "player_name": "2027 4th",
     "Team": "",
     "Position": "",
-    "Average Rank": 281.5,
+    "Average Rank": 227,
     "Community Rank": ""
+  },
+  {
+    "player_name": "2025 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 228,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Elijah Mitchell",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 229.33,
+    "Community Rank": 523
+  },
+  {
+    "player_name": "Ty Chandler",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 229.67,
+    "Community Rank": 171
+  },
+  {
+    "player_name": "Justice Hill",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 230.8,
+    "Community Rank": 240
+  },
+  {
+    "player_name": "2028 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 231,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Jaleel McLaughlin",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 231.25,
+    "Community Rank": 170
+  },
+  {
+    "player_name": "Zamir White",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 232.67,
+    "Community Rank": 99
+  },
+  {
+    "player_name": "Chigoziem Okonkwo",
+    "Team": "TEN",
+    "Position": "TE",
+    "Average Rank": 233.75,
+    "Community Rank": 226
+  },
+  {
+    "player_name": "Jauan Jennings",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 234,
+    "Community Rank": 291
+  },
+  {
+    "player_name": "Greg Dulcich",
+    "Team": "DEN",
+    "Position": "TE",
+    "Average Rank": 234.67,
+    "Community Rank": 247
+  },
+  {
+    "player_name": "Devaughn Vele",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 236,
+    "Community Rank": 253
+  },
+  {
+    "player_name": "Brandin Cooks",
+    "Team": "DAL",
+    "Position": "WR",
+    "Average Rank": 238.67,
+    "Community Rank": 164
+  },
+  {
+    "player_name": "Isaac Guerendo",
+    "Team": "SF",
+    "Position": "RB",
+    "Average Rank": 239,
+    "Community Rank": 271
+  },
+  {
+    "player_name": "Dameon Pierce",
+    "Team": "HOU",
+    "Position": "RB",
+    "Average Rank": 239.75,
+    "Community Rank": 108
+  },
+  {
+    "player_name": "Parker Washington",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 242,
+    "Community Rank": 687
+  },
+  {
+    "player_name": "Sean Tucker",
+    "Team": "TB",
+    "Position": "RB",
+    "Average Rank": 243,
+    "Community Rank": 540
+  },
+  {
+    "player_name": "Treylon Burks",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 244,
+    "Community Rank": 230
+  },
+  {
+    "player_name": "Theo Johnson",
+    "Team": "NYG",
+    "Position": "TE",
+    "Average Rank": 244,
+    "Community Rank": 250
+  },
+  {
+    "player_name": "Drew Lock",
+    "Team": "NYG",
+    "Position": "QB",
+    "Average Rank": 246,
+    "Community Rank": 763
+  },
+  {
+    "player_name": "Tre Tucker",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 248,
+    "Community Rank": 304
+  },
+  {
+    "player_name": "Hendon Hooker",
+    "Team": "DET",
+    "Position": "QB",
+    "Average Rank": 248.5,
+    "Community Rank": 235
+  },
+  {
+    "player_name": "Devontez Walker",
+    "Team": "BAL",
+    "Position": "WR",
+    "Average Rank": 249,
+    "Community Rank": 194
+  },
+  {
+    "player_name": "Kenneth Gainwell",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 250.33,
+    "Community Rank": 517
+  },
+  {
+    "player_name": "2026 4th",
+    "Team": "",
+    "Position": "",
+    "Average Rank": 252.67,
+    "Community Rank": ""
+  },
+  {
+    "player_name": "Kenny Pickett",
+    "Team": "PHI",
+    "Position": "QB",
+    "Average Rank": 253.5,
+    "Community Rank": 559
+  },
+  {
+    "player_name": "Spencer Rattler",
+    "Team": "NO",
+    "Position": "QB",
+    "Average Rank": 254.8,
+    "Community Rank": 258
+  },
+  {
+    "player_name": "Carson Steele",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 255,
+    "Community Rank": 185
+  },
+  {
+    "player_name": "Adam Thielen",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 255.33,
+    "Community Rank": 122
+  },
+  {
+    "player_name": "Will Shipley",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 255.33,
+    "Community Rank": 208
+  },
+  {
+    "player_name": "Trey Lance",
+    "Team": "DAL",
+    "Position": "QB",
+    "Average Rank": 255.33,
+    "Community Rank": 214
+  },
+  {
+    "player_name": "DJ Chark",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 255.67,
+    "Community Rank": 678
+  },
+  {
+    "player_name": "JuJu Smith-Schuster",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 256.25,
+    "Community Rank": 265
+  },
+  {
+    "player_name": "John Metchie",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 259.67,
+    "Community Rank": 613
+  },
+  {
+    "player_name": "Juwan Johnson",
+    "Team": "NO",
+    "Position": "TE",
+    "Average Rank": 259.75,
+    "Community Rank": 233
+  },
+  {
+    "player_name": "Rondale Moore",
+    "Team": "ATL",
+    "Position": "WR",
+    "Average Rank": 260.33,
+    "Community Rank": 223
+  },
+  {
+    "player_name": "AJ Dillon",
+    "Team": "GB",
+    "Position": "RB",
+    "Average Rank": 260.67,
+    "Community Rank": 201
+  },
+  {
+    "player_name": "Clyde Edwards-Helaire",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 262.33,
+    "Community Rank": 238
+  },
+  {
+    "player_name": "Isaiah Davis",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 262.5,
+    "Community Rank": 293
+  },
+  {
+    "player_name": "Malik Washington",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 262.67,
+    "Community Rank": 232
+  },
+  {
+    "player_name": "Miles Sanders",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 262.75,
+    "Community Rank": 297
+  },
+  {
+    "player_name": "Jarrett Stidham",
+    "Team": "DEN",
+    "Position": "QB",
+    "Average Rank": 263,
+    "Community Rank": 786
+  },
+  {
+    "player_name": "Noah Brown",
+    "Team": "HOU",
+    "Position": "WR",
+    "Average Rank": 263.67,
+    "Community Rank": 566
+  },
+  {
+    "player_name": "Mike Gesicki",
+    "Team": "CIN",
+    "Position": "TE",
+    "Average Rank": 264,
+    "Community Rank": 242
+  },
+  {
+    "player_name": "Taysom Hill",
+    "Team": "NO",
+    "Position": "TE",
+    "Average Rank": 265,
+    "Community Rank": 215
+  },
+  {
+    "player_name": "Brenden Rice",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 265,
+    "Community Rank": 218
+  },
+  {
+    "player_name": "Jacoby Brissett",
+    "Team": "NE",
+    "Position": "QB",
+    "Average Rank": 265,
+    "Community Rank": 438
+  },
+  {
+    "player_name": "Israel Abanikanda",
+    "Team": "NYJ",
+    "Position": "RB",
+    "Average Rank": 265.33,
+    "Community Rank": 448
+  },
+  {
+    "player_name": "D'Onta Foreman",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 266,
+    "Community Rank": 190
   },
   {
     "player_name": "Tyler Conklin",
     "Team": "NYJ",
     "Position": "TE",
-    "Average Rank": 282.33,
+    "Average Rank": 266.5,
     "Community Rank": 597
+  },
+  {
+    "player_name": "Tyquan Thornton",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 266.67,
+    "Community Rank": 609
+  },
+  {
+    "player_name": "Ryan Tannehill",
+    "Team": "TEN",
+    "Position": "QB",
+    "Average Rank": 267,
+    "Community Rank": 497
+  },
+  {
+    "player_name": "Tyler Boyd",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 267.33,
+    "Community Rank": 200
+  },
+  {
+    "player_name": "Michael Gallup",
+    "Team": "LV",
+    "Position": "WR",
+    "Average Rank": 268,
+    "Community Rank": 303
+  },
+  {
+    "player_name": "Tutu Atwell",
+    "Team": "LAR",
+    "Position": "WR",
+    "Average Rank": 268,
+    "Community Rank": 651
+  },
+  {
+    "player_name": "Zach Wilson",
+    "Team": "DEN",
+    "Position": "QB",
+    "Average Rank": 270,
+    "Community Rank": 554
+  },
+  {
+    "player_name": "Greg Dortch",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 270.33,
+    "Community Rank": 589
+  },
+  {
+    "player_name": "Zay Jones",
+    "Team": "",
+    "Position": "WR",
+    "Average Rank": 271.33,
+    "Community Rank": 227
+  },
+  {
+    "player_name": "Deuce Vaughn",
+    "Team": "DAL",
+    "Position": "RB",
+    "Average Rank": 271.67,
+    "Community Rank": 204
+  },
+  {
+    "player_name": "Allen Lazard",
+    "Team": "NYJ",
+    "Position": "WR",
+    "Average Rank": 273.25,
+    "Community Rank": 596
+  },
+  {
+    "player_name": "Skyy Moore",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 273.33,
+    "Community Rank": 553
+  },
+  {
+    "player_name": "Daniel Bellinger",
+    "Team": "NYG",
+    "Position": "TE",
+    "Average Rank": 273.67,
+    "Community Rank": 526
+  },
+  {
+    "player_name": "Chris Rodriguez",
+    "Team": "WAS",
+    "Position": "RB",
+    "Average Rank": 273.67,
+    "Community Rank": 696
+  },
+  {
+    "player_name": "Samaje Perine",
+    "Team": "DEN",
+    "Position": "RB",
+    "Average Rank": 273.75,
+    "Community Rank": 574
+  },
+  {
+    "player_name": "Odell Beckham",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 274.67,
+    "Community Rank": 203
+  },
+  {
+    "player_name": "Dylan Laube",
+    "Team": "LV",
+    "Position": "RB",
+    "Average Rank": 275,
+    "Community Rank": 182
+  },
+  {
+    "player_name": "Cam Akers",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 275.33,
+    "Community Rank": 213
+  },
+  {
+    "player_name": "Kendrick Bourne",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 276,
+    "Community Rank": 290
+  },
+  {
+    "player_name": "Jordan Travis",
+    "Team": "NYJ",
+    "Position": "QB",
+    "Average Rank": 277,
+    "Community Rank": 229
+  },
+  {
+    "player_name": "Johnny Wilson",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 277,
+    "Community Rank": 284
+  },
+  {
+    "player_name": "K.J. Osborn",
+    "Team": "NE",
+    "Position": "WR",
+    "Average Rank": 277.33,
+    "Community Rank": 231
+  },
+  {
+    "player_name": "Jonnu Smith",
+    "Team": "MIA",
+    "Position": "TE",
+    "Average Rank": 278.25,
+    "Community Rank": 225
+  },
+  {
+    "player_name": "Michael Thomas",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 278.33,
+    "Community Rank": 260
+  },
+  {
+    "player_name": "A.T. Perry",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 280,
+    "Community Rank": 510
+  },
+  {
+    "player_name": "Trey Palmer",
+    "Team": "TB",
+    "Position": "WR",
+    "Average Rank": 282,
+    "Community Rank": 220
+  },
+  {
+    "player_name": "Jameis Winston",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 282,
+    "Community Rank": 557
+  },
+  {
+    "player_name": "Dawson Knox",
+    "Team": "BUF",
+    "Position": "TE",
+    "Average Rank": 282.67,
+    "Community Rank": 138
+  },
+  {
+    "player_name": "Jacob Cowing",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 285,
+    "Community Rank": 275
+  },
+  {
+    "player_name": "Brevin Jordan",
+    "Team": "HOU",
+    "Position": "TE",
+    "Average Rank": 285,
+    "Community Rank": 649
+  },
+  {
+    "player_name": "Anthony Gould",
+    "Team": "IND",
+    "Position": "WR",
+    "Average Rank": 286,
+    "Community Rank": 266
+  },
+  {
+    "player_name": "Deneric Prince",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 286.67,
+    "Community Rank": 236
+  },
+  {
+    "player_name": "Ainias Smith",
+    "Team": "PHI",
+    "Position": "WR",
+    "Average Rank": 287,
+    "Community Rank": 263
   },
   {
     "player_name": "Calvin Austin",
     "Team": "PIT",
     "Position": "WR",
-    "Average Rank": 283.67,
+    "Average Rank": 289,
     "Community Rank": 527
   },
   {
     "player_name": "Jamari Thrash",
     "Team": "CLE",
     "Position": "WR",
-    "Average Rank": 284,
-    "Community Rank": 183
-  },
-  {
-    "player_name": "Darren Waller",
-    "Team": "NYG",
-    "Position": "TE",
-    "Average Rank": 284,
-    "Community Rank": 560
-  },
-  {
-    "player_name": "Michael Thomas",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 284,
-    "Community Rank": 294
+    "Average Rank": 289.5,
+    "Community Rank": 184
   },
   {
     "player_name": "Cade Stover",
     "Team": "HOU",
     "Position": "TE",
-    "Average Rank": 285.5,
+    "Average Rank": 291,
     "Community Rank": 269
   },
   {
-    "player_name": "JuJu Smith-Schuster",
-    "Team": "NE",
+    "player_name": "Darius Slayton",
+    "Team": "NYG",
     "Position": "WR",
-    "Average Rank": 287,
-    "Community Rank": 263
-  },
-  {
-    "player_name": "Jared Wiley",
-    "Team": "KC",
-    "Position": "TE",
-    "Average Rank": 287.5,
-    "Community Rank": 245
-  },
-  {
-    "player_name": "Brevin Jordan",
-    "Team": "HOU",
-    "Position": "TE",
-    "Average Rank": 288,
-    "Community Rank": 649
+    "Average Rank": 293.33,
+    "Community Rank": 237
   },
   {
     "player_name": "Luke Schoonmaker",
     "Team": "DAL",
     "Position": "TE",
-    "Average Rank": 289.33,
-    "Community Rank": 565
-  },
-  {
-    "player_name": "Deneric Prince",
-    "Team": "KC",
-    "Position": "RB",
-    "Average Rank": 290.5,
-    "Community Rank": 236
-  },
-  {
-    "player_name": "Tre Tucker",
-    "Team": "LV",
-    "Position": "WR",
-    "Average Rank": 291.5,
-    "Community Rank": 303
-  },
-  {
-    "player_name": "Jelani Woods",
-    "Team": "IND",
-    "Position": "TE",
-    "Average Rank": 291.5,
-    "Community Rank": 195
-  },
-  {
-    "player_name": "Casey Washington",
-    "Team": "ATL",
-    "Position": "WR",
-    "Average Rank": 292,
-    "Community Rank": 278
-  },
-  {
-    "player_name": "Kadarius Toney",
-    "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 292.5,
-    "Community Rank": 288
-  },
-  {
-    "player_name": "Tejhaun Palmer",
-    "Team": "ARI",
-    "Position": "WR",
-    "Average Rank": 293,
-    "Community Rank": 275
-  },
-  {
-    "player_name": "Allen Lazard",
-    "Team": "NYJ",
-    "Position": "WR",
-    "Average Rank": 293,
-    "Community Rank": 596
-  },
-  {
-    "player_name": "Desmond Ridder",
-    "Team": "ARI",
-    "Position": "QB",
-    "Average Rank": 293.5,
-    "Community Rank": 563
-  },
-  {
-    "player_name": "Mac Jones",
-    "Team": "JAX",
-    "Position": "QB",
-    "Average Rank": 295,
-    "Community Rank": 679
-  },
-  {
-    "player_name": "Michael Carter",
-    "Team": "ARI",
-    "Position": "RB",
-    "Average Rank": 302.33,
-    "Community Rank": 705
-  },
-  {
-    "player_name": "Tyrell Shavers",
-    "Team": "BUF",
-    "Position": "WR",
-    "Average Rank": 304,
-    "Community Rank": 417
-  },
-  {
-    "player_name": "Jerick McKinnon",
-    "Team": "KC",
-    "Position": "RB",
-    "Average Rank": 306,
-    "Community Rank": 561
-  },
-  {
-    "player_name": "Noah Gray",
-    "Team": "KC",
-    "Position": "TE",
-    "Average Rank": 306.33,
-    "Community Rank": 617
-  },
-  {
-    "player_name": "Sean Tucker",
-    "Team": "TB",
-    "Position": "RB",
-    "Average Rank": 307,
-    "Community Rank": 541
-  },
-  {
-    "player_name": "Rashaad Penny",
-    "Team": "CAR",
-    "Position": "RB",
-    "Average Rank": 308,
-    "Community Rank": 312
-  },
-  {
-    "player_name": "Jaheim Bell",
-    "Team": "NE",
-    "Position": "TE",
-    "Average Rank": 309,
-    "Community Rank": 264
-  },
-  {
-    "player_name": "Zach Evans",
-    "Team": "LAR",
-    "Position": "RB",
-    "Average Rank": 309.5,
-    "Community Rank": 731
-  },
-  {
-    "player_name": "Tyler Higbee",
-    "Team": "LAR",
-    "Position": "TE",
-    "Average Rank": 311,
-    "Community Rank": 292
-  },
-  {
-    "player_name": "Damien Harris",
-    "Team": "",
-    "Position": "RB",
-    "Average Rank": 311.33,
-    "Community Rank": 321
-  },
-  {
-    "player_name": "Malik Willis",
-    "Team": "TEN",
-    "Position": "QB",
-    "Average Rank": 313,
-    "Community Rank": 607
-  },
-  {
-    "player_name": "Ronnie Rivers",
-    "Team": "LAR",
-    "Position": "RB",
-    "Average Rank": 313,
-    "Community Rank": 621
-  },
-  {
-    "player_name": "Evan Hull",
-    "Team": "IND",
-    "Position": "RB",
-    "Average Rank": 315.33,
-    "Community Rank": 532
-  },
-  {
-    "player_name": "Davis Allen",
-    "Team": "LAR",
-    "Position": "TE",
-    "Average Rank": 316,
-    "Community Rank": 710
-  },
-  {
-    "player_name": "Jake Bobo",
-    "Team": "SEA",
-    "Position": "WR",
-    "Average Rank": 316.5,
-    "Community Rank": 450
-  },
-  {
-    "player_name": "Jeff Wilson",
-    "Team": "MIA",
-    "Position": "RB",
-    "Average Rank": 317.33,
-    "Community Rank": 769
-  },
-  {
-    "player_name": "Jimmy Garoppolo",
-    "Team": "LAR",
-    "Position": "QB",
-    "Average Rank": 319,
-    "Community Rank": 767
-  },
-  {
-    "player_name": "Bub Means",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 319,
-    "Community Rank": 295
-  },
-  {
-    "player_name": "Will Dissly",
-    "Team": "LAC",
-    "Position": "TE",
-    "Average Rank": 319,
-    "Community Rank": 774
-  },
-  {
-    "player_name": "Justyn Ross",
-    "Team": "KC",
-    "Position": "WR",
-    "Average Rank": 320,
-    "Community Rank": 416
+    "Average Rank": 294,
+    "Community Rank": 568
   },
   {
     "player_name": "Xavier Hutchinson",
     "Team": "HOU",
     "Position": "WR",
-    "Average Rank": 320.5,
+    "Average Rank": 294.33,
     "Community Rank": 551
   },
   {
-    "player_name": "Dyami Brown",
-    "Team": "WAS",
-    "Position": "WR",
-    "Average Rank": 320.67,
-    "Community Rank": 654
+    "player_name": "Zach Evans",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 296.33,
+    "Community Rank": 734
   },
   {
-    "player_name": "Kayshon Boutte",
-    "Team": "NE",
+    "player_name": "Jake Bobo",
+    "Team": "SEA",
     "Position": "WR",
-    "Average Rank": 323.33,
-    "Community Rank": 441
+    "Average Rank": 296.67,
+    "Community Rank": 449
   },
   {
-    "player_name": "Charlie Jones",
-    "Team": "CIN",
-    "Position": "WR",
-    "Average Rank": 323.33,
-    "Community Rank": 458
+    "player_name": "Michael Carter",
+    "Team": "ARI",
+    "Position": "RB",
+    "Average Rank": 296.67,
+    "Community Rank": 705
   },
   {
-    "player_name": "Tyler Scott",
-    "Team": "CHI",
+    "player_name": "Casey Washington",
+    "Team": "ATL",
     "Position": "WR",
-    "Average Rank": 325,
-    "Community Rank": 557
+    "Average Rank": 297,
+    "Community Rank": 279
   },
   {
-    "player_name": "Tommy DeVito",
-    "Team": "NYG",
+    "player_name": "Tejhaun Palmer",
+    "Team": "ARI",
+    "Position": "WR",
+    "Average Rank": 298,
+    "Community Rank": 277
+  },
+  {
+    "player_name": "Kadarius Toney",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 298,
+    "Community Rank": 292
+  },
+  {
+    "player_name": "Jerick McKinnon",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 298,
+    "Community Rank": 561
+  },
+  {
+    "player_name": "Desmond Ridder",
+    "Team": "ARI",
     "Position": "QB",
-    "Average Rank": 326,
-    "Community Rank": 562
+    "Average Rank": 298,
+    "Community Rank": 565
   },
   {
     "player_name": "Xavier Gipson",
     "Team": "NYJ",
     "Position": "WR",
-    "Average Rank": 326,
+    "Average Rank": 299.33,
     "Community Rank": 548
   },
   {
-    "player_name": "Hunter Renfrow",
-    "Team": "",
+    "player_name": "Mac Jones",
+    "Team": "JAX",
+    "Position": "QB",
+    "Average Rank": 299.5,
+    "Community Rank": 681
+  },
+  {
+    "player_name": "Rashaad Penny",
+    "Team": "CAR",
+    "Position": "RB",
+    "Average Rank": 300,
+    "Community Rank": 320
+  },
+  {
+    "player_name": "Jamaal Williams",
+    "Team": "NO",
+    "Position": "RB",
+    "Average Rank": 300.5,
+    "Community Rank": 471
+  },
+  {
+    "player_name": "Dalvin Cook",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 301,
+    "Community Rank": 749
+  },
+  {
+    "player_name": "Tyler Scott",
+    "Team": "CHI",
     "Position": "WR",
-    "Average Rank": 326.33,
-    "Community Rank": 492
+    "Average Rank": 303.67,
+    "Community Rank": 555
+  },
+  {
+    "player_name": "Damien Harris",
+    "Team": "",
+    "Position": "RB",
+    "Average Rank": 304.67,
+    "Community Rank": 332
+  },
+  {
+    "player_name": "Tyrell Shavers",
+    "Team": "BUF",
+    "Position": "WR",
+    "Average Rank": 307,
+    "Community Rank": 417
+  },
+  {
+    "player_name": "Josh Reynolds",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 307.33,
+    "Community Rank": 234
+  },
+  {
+    "player_name": "Darren Waller",
+    "Team": "NYG",
+    "Position": "TE",
+    "Average Rank": 308,
+    "Community Rank": 560
+  },
+  {
+    "player_name": "Noah Gray",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 310,
+    "Community Rank": 617
+  },
+  {
+    "player_name": "Jared Wiley",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 311,
+    "Community Rank": 245
+  },
+  {
+    "player_name": "Evan Hull",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 311.33,
+    "Community Rank": 531
+  },
+  {
+    "player_name": "Jeff Wilson",
+    "Team": "MIA",
+    "Position": "RB",
+    "Average Rank": 312,
+    "Community Rank": 770
+  },
+  {
+    "player_name": "Jelani Woods",
+    "Team": "IND",
+    "Position": "TE",
+    "Average Rank": 313.33,
+    "Community Rank": 196
+  },
+  {
+    "player_name": "Tyler Higbee",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 314,
+    "Community Rank": 296
+  },
+  {
+    "player_name": "Ronnie Rivers",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 316,
+    "Community Rank": 621
+  },
+  {
+    "player_name": "Bo Melton",
+    "Team": "GB",
+    "Position": "WR",
+    "Average Rank": 316.67,
+    "Community Rank": 567
+  },
+  {
+    "player_name": "Trey Sermon",
+    "Team": "IND",
+    "Position": "RB",
+    "Average Rank": 317.33,
+    "Community Rank": 787
+  },
+  {
+    "player_name": "Davis Allen",
+    "Team": "LAR",
+    "Position": "TE",
+    "Average Rank": 318,
+    "Community Rank": 711
+  },
+  {
+    "player_name": "Justyn Ross",
+    "Team": "KC",
+    "Position": "WR",
+    "Average Rank": 320.33,
+    "Community Rank": 416
+  },
+  {
+    "player_name": "Jimmy Garoppolo",
+    "Team": "LAR",
+    "Position": "QB",
+    "Average Rank": 321,
+    "Community Rank": 768
+  },
+  {
+    "player_name": "Will Dissly",
+    "Team": "LAC",
+    "Position": "TE",
+    "Average Rank": 321,
+    "Community Rank": 775
+  },
+  {
+    "player_name": "Bub Means",
+    "Team": "NO",
+    "Position": "WR",
+    "Average Rank": 321.5,
+    "Community Rank": 295
+  },
+  {
+    "player_name": "Donovan Peoples-Jones",
+    "Team": "DET",
+    "Position": "WR",
+    "Average Rank": 322.5,
+    "Community Rank": 424
   },
   {
     "player_name": "Emari Demercado",
     "Team": "ARI",
     "Position": "RB",
-    "Average Rank": 326.33,
-    "Community Rank": 693
+    "Average Rank": 322.67,
+    "Community Rank": 695
   },
   {
-    "player_name": "Isaiah Hodgins",
-    "Team": "NYG",
+    "player_name": "Kayshon Boutte",
+    "Team": "NE",
     "Position": "WR",
-    "Average Rank": 326.67,
-    "Community Rank": 379
+    "Average Rank": 323.67,
+    "Community Rank": 440
+  },
+  {
+    "player_name": "Logan Thomas",
+    "Team": "",
+    "Position": "TE",
+    "Average Rank": 324,
+    "Community Rank": 298
+  },
+  {
+    "player_name": "Jake Browning",
+    "Team": "CIN",
+    "Position": "QB",
+    "Average Rank": 324.5,
+    "Community Rank": 776
   },
   {
     "player_name": "Keilan Robinson",
     "Team": "JAX",
     "Position": "RB",
     "Average Rank": 327,
-    "Community Rank": 276
+    "Community Rank": 281
   },
   {
-    "player_name": "Dorian Thompson-Robinson",
-    "Team": "CLE",
+    "player_name": "Isaiah Hodgins",
+    "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 327,
+    "Community Rank": 379
+  },
+  {
+    "player_name": "Tommy DeVito",
+    "Team": "NYG",
     "Position": "QB",
     "Average Rank": 327,
-    "Community Rank": 451
+    "Community Rank": 569
   },
   {
-    "player_name": "Terrace Marshall",
-    "Team": "CAR",
-    "Position": "WR",
+    "player_name": "Cordarrelle Patterson",
+    "Team": "PIT",
+    "Position": "RB",
     "Average Rank": 327.67,
-    "Community Rank": 439
+    "Community Rank": 467
   },
   {
     "player_name": "Isaiah Spiller",
     "Team": "LAC",
     "Position": "RB",
-    "Average Rank": 330.33,
-    "Community Rank": 360
+    "Average Rank": 328,
+    "Community Rank": 359
   },
   {
-    "player_name": "Rasheen Ali",
-    "Team": "BAL",
-    "Position": "RB",
-    "Average Rank": 330.5,
-    "Community Rank": 255
+    "player_name": "Terrace Marshall",
+    "Team": "CAR",
+    "Position": "WR",
+    "Average Rank": 328,
+    "Community Rank": 441
+  },
+  {
+    "player_name": "Dorian Thompson-Robinson",
+    "Team": "CLE",
+    "Position": "QB",
+    "Average Rank": 328,
+    "Community Rank": 450
   },
   {
     "player_name": "Kenny McIntosh",
     "Team": "SEA",
     "Position": "RB",
-    "Average Rank": 331,
+    "Average Rank": 328,
     "Community Rank": 626
+  },
+  {
+    "player_name": "Keaontay Ingram",
+    "Team": "KC",
+    "Position": "RB",
+    "Average Rank": 329,
+    "Community Rank": 721
+  },
+  {
+    "player_name": "Dyami Brown",
+    "Team": "WAS",
+    "Position": "WR",
+    "Average Rank": 330,
+    "Community Rank": 654
+  },
+  {
+    "player_name": "Pierre Strong",
+    "Team": "CLE",
+    "Position": "RB",
+    "Average Rank": 330,
+    "Community Rank": 727
+  },
+  {
+    "player_name": "Hunter Renfrow",
+    "Team": "",
+    "Position": "WR",
+    "Average Rank": 330.67,
+    "Community Rank": 492
+  },
+  {
+    "player_name": "Rasheen Ali",
+    "Team": "BAL",
+    "Position": "RB",
+    "Average Rank": 331,
+    "Community Rank": 256
   },
   {
     "player_name": "Jase McClellan",
     "Team": "ATL",
     "Position": "RB",
     "Average Rank": 332,
-    "Community Rank": 291
+    "Community Rank": 259
+  },
+  {
+    "player_name": "Joshua Kelley",
+    "Team": "LAC",
+    "Position": "RB",
+    "Average Rank": 332.33,
+    "Community Rank": 459
   },
   {
     "player_name": "Jawhar Jordan",
     "Team": "HOU",
     "Position": "RB",
     "Average Rank": 333.5,
-    "Community Rank": 282
+    "Community Rank": 262
+  },
+  {
+    "player_name": "Deon Jackson",
+    "Team": "NYG",
+    "Position": "RB",
+    "Average Rank": 337.33,
+    "Community Rank": 330
+  },
+  {
+    "player_name": "Charlie Jones",
+    "Team": "CIN",
+    "Position": "WR",
+    "Average Rank": 338,
+    "Community Rank": 457
   },
   {
     "player_name": "David Bell",
     "Team": "CLE",
     "Position": "WR",
-    "Average Rank": 334.67,
-    "Community Rank": 727
+    "Average Rank": 339.33,
+    "Community Rank": 728
   },
   {
-    "player_name": "Joshua Kelley",
-    "Team": "LAC",
+    "player_name": "Chase Edmonds",
+    "Team": "TB",
     "Position": "RB",
-    "Average Rank": 335.33,
-    "Community Rank": 459
+    "Average Rank": 340.33,
+    "Community Rank": 310
   },
   {
-    "player_name": "Cordarrelle Patterson",
-    "Team": "PIT",
+    "player_name": "Eric Gray",
+    "Team": "NYG",
     "Position": "RB",
-    "Average Rank": 346.5,
-    "Community Rank": 467
+    "Average Rank": 341,
+    "Community Rank": 646
+  },
+  {
+    "player_name": "Hassan Haskins",
+    "Team": "TEN",
+    "Position": "RB",
+    "Average Rank": 342.33,
+    "Community Rank": 387
+  },
+  {
+    "player_name": "Boston Scott",
+    "Team": "LAR",
+    "Position": "RB",
+    "Average Rank": 343.33,
+    "Community Rank": 795
+  },
+  {
+    "player_name": "Tyrion Davis-Price",
+    "Team": "PHI",
+    "Position": "RB",
+    "Average Rank": 344.33,
+    "Community Rank": 372
+  },
+  {
+    "player_name": "Ronnie Bell",
+    "Team": "SF",
+    "Position": "WR",
+    "Average Rank": 345,
+    "Community Rank": 453
+  },
+  {
+    "player_name": "DeWayne McBride",
+    "Team": "MIN",
+    "Position": "RB",
+    "Average Rank": 345.33,
+    "Community Rank": 564
+  },
+  {
+    "player_name": "Chris Evans",
+    "Team": "CIN",
+    "Position": "RB",
+    "Average Rank": 346.33,
+    "Community Rank": 375
+  },
+  {
+    "player_name": "Gerald Everett",
+    "Team": "CHI",
+    "Position": "TE",
+    "Average Rank": 348,
+    "Community Rank": 294
+  },
+  {
+    "player_name": "Kevin Harris",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 348,
+    "Community Rank": 392
   },
   {
     "player_name": "Joshua Dobbs",
@@ -2709,67 +2835,123 @@
     "Community Rank": 558
   },
   {
-    "player_name": "Bo Melton",
-    "Team": "GB",
+    "player_name": "D'Ernest Johnson",
+    "Team": "JAX",
+    "Position": "RB",
+    "Average Rank": 349,
+    "Community Rank": 680
+  },
+  {
+    "player_name": "Parris Campbell",
+    "Team": "PHI",
     "Position": "WR",
     "Average Rank": 350,
-    "Community Rank": 567
+    "Community Rank": 313
   },
   {
-    "player_name": "Trey Sermon",
-    "Team": "IND",
-    "Position": "RB",
-    "Average Rank": 351.5,
-    "Community Rank": 786
-  },
-  {
-    "player_name": "Kylen Granson",
-    "Team": "IND",
-    "Position": "TE",
-    "Average Rank": 353,
-    "Community Rank": 352
-  },
-  {
-    "player_name": "Logan Thomas",
+    "player_name": "Marquez Valdes-Scantling",
     "Team": "",
-    "Position": "TE",
-    "Average Rank": 356,
-    "Community Rank": 298
-  },
-  {
-    "player_name": "Ronnie Bell",
-    "Team": "SF",
     "Position": "WR",
-    "Average Rank": 356,
-    "Community Rank": 454
+    "Average Rank": 350.67,
+    "Community Rank": 556
   },
   {
-    "player_name": "Keaontay Ingram",
+    "player_name": "Mecole Hardman",
     "Team": "KC",
-    "Position": "RB",
-    "Average Rank": 357.5,
-    "Community Rank": 720
+    "Position": "WR",
+    "Average Rank": 351,
+    "Community Rank": 674
   },
   {
-    "player_name": "Chase Edmonds",
-    "Team": "TB",
-    "Position": "RB",
-    "Average Rank": 357.5,
-    "Community Rank": 308
+    "player_name": "Jaheim Bell",
+    "Team": "NE",
+    "Position": "TE",
+    "Average Rank": 352,
+    "Community Rank": 255
   },
   {
-    "player_name": "Pierre Strong",
-    "Team": "CLE",
-    "Position": "RB",
-    "Average Rank": 358.5,
-    "Community Rank": 726
+    "player_name": "Derius Davis",
+    "Team": "LAC",
+    "Position": "WR",
+    "Average Rank": 352,
+    "Community Rank": 520
   },
   {
-    "player_name": "Deon Jackson",
+    "player_name": "Kyle Philips",
+    "Team": "TEN",
+    "Position": "WR",
+    "Average Rank": 353,
+    "Community Rank": 380
+  },
+  {
+    "player_name": "Devin Duvernay",
+    "Team": "JAX",
+    "Position": "WR",
+    "Average Rank": 354,
+    "Community Rank": 518
+  },
+  {
+    "player_name": "Brenton Strange",
+    "Team": "JAX",
+    "Position": "TE",
+    "Average Rank": 354.67,
+    "Community Rank": 684
+  },
+  {
+    "player_name": "Braxton Berrios",
+    "Team": "MIA",
+    "Position": "WR",
+    "Average Rank": 355,
+    "Community Rank": 583
+  },
+  {
+    "player_name": "Darnell Washington",
+    "Team": "PIT",
+    "Position": "TE",
+    "Average Rank": 355.67,
+    "Community Rank": 679
+  },
+  {
+    "player_name": "JaMycal Hasty",
+    "Team": "NE",
+    "Position": "RB",
+    "Average Rank": 356,
+    "Community Rank": 490
+  },
+  {
+    "player_name": "Irv Smith",
+    "Team": "KC",
+    "Position": "TE",
+    "Average Rank": 357.33,
+    "Community Rank": 592
+  },
+  {
+    "player_name": "Allen Robinson",
     "Team": "NYG",
+    "Position": "WR",
+    "Average Rank": 358.33,
+    "Community Rank": 469
+  },
+  {
+    "player_name": "DeeJay Dallas",
+    "Team": "ARI",
     "Position": "RB",
+    "Average Rank": 362.67,
+    "Community Rank": 800
+  },
+  {
+    "player_name": "Latavius Murray",
+    "Team": "BUF",
+    "Position": "RB",
+    "Average Rank": 365,
+    "Community Rank": 652
+  },
+  {
+    "player_name": "Deonte Harty",
+    "Team": "BAL",
+    "Position": "WR",
     "Average Rank": 366,
-    "Community Rank": 332
+    "Community Rank": 545
   },
   {
     "player_name": "Leonard Fournette",
@@ -2779,158 +2961,74 @@
     "Community Rank": ""
   },
   {
-    "player_name": "Eric Gray",
-    "Team": "NYG",
+    "player_name": "Tim Patrick",
+    "Team": "DEN",
+    "Position": "WR",
+    "Average Rank": 369,
+    "Community Rank": 533
+  },
+  {
+    "player_name": "Craig Reynolds",
+    "Team": "DET",
     "Position": "RB",
     "Average Rank": 370,
-    "Community Rank": 646
+    "Community Rank": 461
   },
   {
-    "player_name": "Gerald Everett",
-    "Team": "CHI",
-    "Position": "TE",
-    "Average Rank": 370.5,
-    "Community Rank": 290
-  },
-  {
-    "player_name": "Hassan Haskins",
-    "Team": "TEN",
+    "player_name": "Ke'Shawn Vaughn",
+    "Team": "NE",
     "Position": "RB",
     "Average Rank": 371,
-    "Community Rank": 387
+    "Community Rank": 633
   },
   {
-    "player_name": "Boston Scott",
-    "Team": "LAR",
-    "Position": "RB",
-    "Average Rank": 372,
-    "Community Rank": 807
-  },
-  {
-    "player_name": "Tyrion Davis-Price",
-    "Team": "PHI",
-    "Position": "RB",
-    "Average Rank": 373,
-    "Community Rank": 372
-  },
-  {
-    "player_name": "Jake Browning",
-    "Team": "CIN",
-    "Position": "QB",
-    "Average Rank": 373,
-    "Community Rank": 775
-  },
-  {
-    "player_name": "Marquez Valdes-Scantling",
-    "Team": "",
+    "player_name": "Elijah Higgins",
+    "Team": "ARI",
     "Position": "WR",
-    "Average Rank": 373.5,
-    "Community Rank": 556
+    "Average Rank": 374.33,
+    "Community Rank": 547
   },
   {
-    "player_name": "DeWayne McBride",
-    "Team": "MIN",
-    "Position": "RB",
-    "Average Rank": 374,
-    "Community Rank": 568
-  },
-  {
-    "player_name": "Chris Evans",
-    "Team": "CIN",
-    "Position": "RB",
-    "Average Rank": 375,
-    "Community Rank": 375
-  },
-  {
-    "player_name": "Darnell Washington",
-    "Team": "PIT",
+    "player_name": "Harrison Bryant",
+    "Team": "LV",
     "Position": "TE",
-    "Average Rank": 375.5,
-    "Community Rank": 681
+    "Average Rank": 375.33,
+    "Community Rank": 757
   },
   {
-    "player_name": "Kevin Harris",
-    "Team": "NE",
-    "Position": "RB",
-    "Average Rank": 376.5,
-    "Community Rank": 392
-  },
-  {
-    "player_name": "Brenton Strange",
-    "Team": "JAX",
+    "player_name": "Kylen Granson",
+    "Team": "IND",
     "Position": "TE",
-    "Average Rank": 376.5,
-    "Community Rank": 683
+    "Average Rank": 377,
+    "Community Rank": 351
   },
   {
-    "player_name": "D'Ernest Johnson",
-    "Team": "JAX",
-    "Position": "RB",
-    "Average Rank": 377.5,
-    "Community Rank": 680
+    "player_name": "Jeremy Ruckert",
+    "Team": "NYJ",
+    "Position": "TE",
+    "Average Rank": 378,
+    "Community Rank": 388
   },
   {
-    "player_name": "Parris Campbell",
+    "player_name": "DeVante Parker",
     "Team": "PHI",
     "Position": "WR",
-    "Average Rank": 378.5,
-    "Community Rank": 309
+    "Average Rank": 379,
+    "Community Rank": 301
   },
   {
-    "player_name": "Mecole Hardman",
-    "Team": "KC",
+    "player_name": "Equanimeous St. Brown",
+    "Team": "NO",
     "Position": "WR",
-    "Average Rank": 379.5,
-    "Community Rank": 674
+    "Average Rank": 380,
+    "Community Rank": 669
   },
   {
-    "player_name": "Derius Davis",
-    "Team": "LAC",
-    "Position": "WR",
-    "Average Rank": 380.5,
-    "Community Rank": 520
-  },
-  {
-    "player_name": "Kyle Philips",
-    "Team": "TEN",
-    "Position": "WR",
-    "Average Rank": 381.5,
-    "Community Rank": 380
-  },
-  {
-    "player_name": "Devin Duvernay",
-    "Team": "JAX",
-    "Position": "WR",
-    "Average Rank": 382.5,
-    "Community Rank": 518
-  },
-  {
-    "player_name": "Braxton Berrios",
-    "Team": "MIA",
-    "Position": "WR",
-    "Average Rank": 383.5,
-    "Community Rank": 583
-  },
-  {
-    "player_name": "JaMycal Hasty",
-    "Team": "NE",
-    "Position": "RB",
-    "Average Rank": 384.5,
-    "Community Rank": 490
-  },
-  {
-    "player_name": "Irv Smith",
-    "Team": "KC",
+    "player_name": "Mo Alie-Cox",
+    "Team": "IND",
     "Position": "TE",
-    "Average Rank": 385.5,
-    "Community Rank": 592
-  },
-  {
-    "player_name": "Allen Robinson",
-    "Team": "NYG",
-    "Position": "WR",
-    "Average Rank": 386.5,
-    "Community Rank": 469
+    "Average Rank": 381.33,
+    "Community Rank": 580
   },
   {
     "player_name": "Eno Benjamin",
@@ -2938,13 +3036,6 @@
     "Position": "RB",
     "Average Rank": 389,
     "Community Rank": 639
-  },
-  {
-    "player_name": "DeeJay Dallas",
-    "Team": "ARI",
-    "Position": "RB",
-    "Average Rank": 390.5,
-    "Community Rank": 795
   },
   {
     "player_name": "Travis Homer",
@@ -2958,42 +3049,7 @@
     "Team": "NYG",
     "Position": "RB",
     "Average Rank": 392.5,
-    "Community Rank": 765
-  },
-  {
-    "player_name": "Latavius Murray",
-    "Team": "BUF",
-    "Position": "RB",
-    "Average Rank": 393.5,
-    "Community Rank": 652
-  },
-  {
-    "player_name": "Deonte Harty",
-    "Team": "BAL",
-    "Position": "WR",
-    "Average Rank": 394.5,
-    "Community Rank": 542
-  },
-  {
-    "player_name": "Tim Patrick",
-    "Team": "DEN",
-    "Position": "WR",
-    "Average Rank": 397,
-    "Community Rank": 528
-  },
-  {
-    "player_name": "Craig Reynolds",
-    "Team": "DET",
-    "Position": "RB",
-    "Average Rank": 398,
-    "Community Rank": 462
-  },
-  {
-    "player_name": "Ke'Shawn Vaughn",
-    "Team": "NE",
-    "Position": "RB",
-    "Average Rank": 399,
-    "Community Rank": 633
+    "Community Rank": 766
   },
   {
     "player_name": "Kene Nwangwu",
@@ -3010,80 +3066,45 @@
     "Community Rank": 483
   },
   {
-    "player_name": "Elijah Higgins",
-    "Team": "ARI",
-    "Position": "WR",
-    "Average Rank": 403,
-    "Community Rank": 547
-  },
-  {
-    "player_name": "Harrison Bryant",
-    "Team": "LV",
-    "Position": "TE",
-    "Average Rank": 404,
-    "Community Rank": 756
-  },
-  {
-    "player_name": "Jeremy Ruckert",
-    "Team": "NYJ",
-    "Position": "TE",
-    "Average Rank": 406.5,
-    "Community Rank": 388
-  },
-  {
-    "player_name": "DeVante Parker",
-    "Team": "PHI",
-    "Position": "WR",
-    "Average Rank": 407.5,
-    "Community Rank": 301
-  },
-  {
     "player_name": "Bailey Zappe",
     "Team": "NE",
     "Position": "QB",
-    "Average Rank": 408,
+    "Average Rank": 407,
     "Community Rank": 391
-  },
-  {
-    "player_name": "Equanimeous St. Brown",
-    "Team": "NO",
-    "Position": "WR",
-    "Average Rank": 408.5,
-    "Community Rank": 669
   },
   {
     "player_name": "Clayton Tune",
     "Team": "ARI",
     "Position": "QB",
-    "Average Rank": 409,
+    "Average Rank": 408,
     "Community Rank": 627
-  },
-  {
-    "player_name": "Mo Alie-Cox",
-    "Team": "IND",
-    "Position": "TE",
-    "Average Rank": 409.5,
-    "Community Rank": 580
   },
   {
     "player_name": "Taylor Heinicke",
     "Team": "ATL",
     "Position": "QB",
-    "Average Rank": 410,
+    "Average Rank": 409,
     "Community Rank": 478
   },
   {
     "player_name": "Tyler Huntley",
     "Team": "CLE",
     "Position": "QB",
-    "Average Rank": 411,
-    "Community Rank": 315
+    "Average Rank": 410,
+    "Community Rank": 314
   },
   {
     "player_name": "Mike White",
     "Team": "MIA",
     "Position": "QB",
-    "Average Rank": 412,
+    "Average Rank": 411,
     "Community Rank": 812
+  },
+  {
+    "player_name": "Malik Willis",
+    "Team": "TEN",
+    "Position": "QB",
+    "Average Rank": 412,
+    "Community Rank": 607
   }
 ]
