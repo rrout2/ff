@@ -281,7 +281,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             playersToTrade.forEach((players, idx) => {
                 searchParams.set(
                     `${PLAYERS_TO_TRADE}_${idx}`,
-                    players.join('-')
+                    players.filter(p => !!p).join('-')
                 );
             });
             searchParams.set(IN_RETURN, inReturn.join('-'));

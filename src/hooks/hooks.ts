@@ -660,7 +660,10 @@ export function useNonSleeper(
             });
         } else {
             setSearchParams(searchParams => {
-                searchParams.set(NON_SLEEPER_IDS, '' + nonSleeperIds.join('-'));
+                searchParams.set(
+                    NON_SLEEPER_IDS,
+                    nonSleeperIds.filter(id => !!id).join('-')
+                );
                 return searchParams;
             });
         }
