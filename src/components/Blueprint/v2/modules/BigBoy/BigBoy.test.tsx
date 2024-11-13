@@ -152,4 +152,49 @@ describe('BigBoy', () => {
             });
         }, 20000);
     });
+
+    describe('Saving', () => {
+        it('can save', async () => {
+            const {getByText} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+            expect(window.location.href).not.toContain('cornerstones');
+
+            const saveButton = getByText('Save');
+            expect(saveButton).toBeInTheDocument();
+            act(() => saveButton.click());
+
+            expect(window.location.href).toContain(
+                'cornerstones=6770-7547-11631-11620'
+            );
+            expect(window.location.href).toContain('sells=6770-7547-11631');
+            expect(window.location.href).toContain(
+                'buys=10229-5849-4866-10859-11565-11638'
+            );
+            expect(window.location.href).toContain('plusMap=F-F-F-F-F-F');
+            expect(window.location.href).toContain('holds=6770-7547');
+        });
+
+        it('can update and save', async () => {
+            const {getByText, getAllByLabelText} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+
+            const plusSwitch = getAllByLabelText('plus?')[0];
+            expect(plusSwitch).toBeInTheDocument();
+            act(() => plusSwitch.click());
+            const saveButton = getByText('Save');
+            act(() => saveButton.click());
+
+            expect(window.location.href).toContain('plusMap=T-F-F-F-F-F');
+        });
+    });
 });

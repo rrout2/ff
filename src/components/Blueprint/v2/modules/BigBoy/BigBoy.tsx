@@ -340,13 +340,15 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 </Button>
             </Tooltip>
             <Tooltip title="Clear Save from URL">
-                <Button
-                    variant={'outlined'}
-                    onClick={clearUrlSave}
-                    disabled={!searchParams.get(CORNERSTONES)}
-                >
-                    {'Clear'}
-                </Button>
+                <span>
+                    <Button
+                        variant={'outlined'}
+                        onClick={clearUrlSave}
+                        disabled={!searchParams.get(CORNERSTONES)}
+                    >
+                        {'Clear'}
+                    </Button>
+                </span>
             </Tooltip>
             <PreviewToggle />
             <UnifiedInputs
