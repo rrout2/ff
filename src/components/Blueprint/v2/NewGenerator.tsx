@@ -67,8 +67,18 @@ export default function NewGenerator() {
     }, [leagueId, rosters]);
 
     useEffect(() => {
-        if (!allUsers.length || !hasTeamId()) return;
+        if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
+            return;
+        }
         setSpecifiedUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
+
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId()) return;
+        if (+teamId >= allUsers.length) {
+            // if the teamId is out of bounds, reset it
+            setTeamId('0');
+        }
     }, [allUsers, teamId]);
 
     useEffect(() => {
@@ -86,6 +96,7 @@ export default function NewGenerator() {
             const ownerId = allUsers[idx].user_id;
             return rosters.find(r => r.owner_id === ownerId);
         }
+        if (+teamId >= allUsers.length) return;
         const newRoster = getRosterFromTeamIdx(+teamId);
         if (!newRoster) throw new Error('roster not found');
 

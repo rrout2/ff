@@ -122,8 +122,20 @@ export default function BlueprintGenerator() {
     const {sortByAdp} = useAdpData();
 
     useEffect(() => {
-        if (!allUsers.length || !hasTeamId()) return;
+        if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
+            return;
+        }
         setSpecifiedUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
+
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId()) {
+            return;
+        }
+        if (+teamId >= allUsers.length) {
+            // if the teamId is out of bounds, reset it
+            setTeamId('0');
+        }
     }, [allUsers, teamId]);
 
     function getRosterFromTeamIdx(idx: number) {
@@ -138,7 +150,8 @@ export default function BlueprintGenerator() {
             rosters.length === 0 ||
             !hasTeamId() ||
             !playerData ||
-            allUsers.length === 0
+            allUsers.length === 0 ||
+            +teamId >= allUsers.length
         ) {
             return;
         }
