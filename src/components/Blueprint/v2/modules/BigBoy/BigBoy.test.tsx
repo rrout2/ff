@@ -3,6 +3,13 @@ import {fireEvent, render, waitFor} from '@testing-library/react';
 import BigBoy from './BigBoy';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {HashRouter, Route, Routes} from 'react-router-dom';
+import {
+    BUYS,
+    CORNERSTONES,
+    HOLDS,
+    PLUS_MAP,
+    SELLS,
+} from '../../../../../consts/urlParams';
 const ROSTER = {
     players: [
         '10235',
@@ -45,7 +52,7 @@ function wrappedRender(component: JSX.Element) {
     );
 }
 
-describe('BigBoy', () => {
+describe('BigBoy v2', () => {
     it('can toggle preview', async () => {
         const {getByText, getByLabelText, getAllByText} = await wrappedRender(
             <BigBoy
@@ -54,6 +61,7 @@ describe('BigBoy', () => {
                 teamName={TEAM_NAME}
             />
         );
+        expect(getAllByText(TEAM_NAME)).toHaveLength(1);
         expect(getByLabelText('Show Preview')).not.toBeChecked();
         act(() => getByText('Show Preview').click());
 
@@ -153,7 +161,7 @@ describe('BigBoy', () => {
         }, 20000);
     });
 
-    describe('Saving', () => {
+    describe('Saving/Loading', () => {
         it('can save', async () => {
             const {getByText} = await wrappedRender(
                 <BigBoy
@@ -162,21 +170,21 @@ describe('BigBoy', () => {
                     teamName={TEAM_NAME}
                 />
             );
-            expect(window.location.href).not.toContain('cornerstones');
+            expect(window.location.href).not.toContain(CORNERSTONES);
 
             const saveButton = getByText('Save');
             expect(saveButton).toBeInTheDocument();
             act(() => saveButton.click());
 
             expect(window.location.href).toContain(
-                'cornerstones=6770-7547-11631-11620'
+                `${CORNERSTONES}=6770-7547-11631-11620`
             );
-            expect(window.location.href).toContain('sells=6770-7547-11631');
+            expect(window.location.href).toContain(`${SELLS}=6770-7547-11631`);
             expect(window.location.href).toContain(
-                'buys=10229-5849-4866-10859-11565-11638'
+                `${BUYS}=10229-5849-4866-10859-11565-11638`
             );
-            expect(window.location.href).toContain('plusMap=F-F-F-F-F-F');
-            expect(window.location.href).toContain('holds=6770-7547');
+            expect(window.location.href).toContain(`${PLUS_MAP}=F-F-F-F-F-F`);
+            expect(window.location.href).toContain(`${HOLDS}=6770-7547`);
         });
 
         it('can update and save', async () => {
@@ -188,13 +196,91 @@ describe('BigBoy', () => {
                 />
             );
 
+            // Find the first "plus?" switch and ensure it is present in the document
             const plusSwitch = getAllByLabelText('plus?')[0];
             expect(plusSwitch).toBeInTheDocument();
+
+            // Simulate a user clicking the "plus?" switch
             act(() => plusSwitch.click());
+
+            // Find the "Save" button and simulate a click to save changes
             const saveButton = getByText('Save');
             act(() => saveButton.click());
 
-            expect(window.location.href).toContain('plusMap=T-F-F-F-F-F');
+            expect(window.location.href).toContain(`${PLUS_MAP}=T-F-F-F-F-F`);
+        });
+
+        it('can load from url', async () => {
+            mockSearchParams();
+            const {container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+
+            await waitFor(() => {
+                const suggestedMovesGraphic = container.querySelector(
+                    '.suggestedMovesGraphic'
+                );
+                expect(suggestedMovesGraphic).toHaveTextContent(
+                    /Rashee Rice \(\+\)/gm
+                );
+            });
+
+            await waitFor(() => {
+                const rosterGraphic = container.querySelector('.rosterGraphic');
+                expect(rosterGraphic).toHaveTextContent(/9th \/ 10/gm);
+            });
+
+            await waitFor(() => {
+                expect(container).toHaveTextContent(/extra settings/gm);
+            });
+        });
+
+        it('can clear url saved data', async () => {
+            mockSearchParams();
+            const {getByText} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+
+            expect(window.location.href).toContain(CORNERSTONES);
+
+            const clearButton = getByText('Clear');
+            act(() => clearButton.click());
+
+            expect(window.location.href).not.toContain(CORNERSTONES);
         });
     });
 });
+
+export function mockSearchParams(
+    paramsString = 'cornerstones=6770-7547-11631-11620' +
+        '&sells=6770-7547-11631&' +
+        'buys=10229-5849-4866-10859-11565-11638' +
+        '&plusMap=T-F-F-F-F-F' +
+        '&holds=6770-7547' +
+        '&holdComments=comment+1-comment+2' +
+        '&risers=6770-7547-11631' +
+        '&fallers=11620-8130-6813' +
+        '&riserValues=30-20-10' +
+        '&fallerValues=10-20-30' +
+        '&posGrades=7-5-5-7-7-10' +
+        '&qbRank=9th' +
+        '&rbRank=4th' +
+        '&wrRank=4th' +
+        '&teRank=4th' +
+        '&archetype=FUTURE+VALUE' +
+        '&otherSettings=extra+settings' +
+        '&rookieComments=comment+1-comment+2' +
+        '&suggestions=suggestion+1-suggestion+2-suggestion+3-suggestion+4-suggestion+5-suggestion+6'
+) {
+    const {pathname} = window.location;
+    const url = paramsString ? `${pathname}#/?${paramsString}` : pathname;
+    window.history.pushState({}, '', url);
+}
