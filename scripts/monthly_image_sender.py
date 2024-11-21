@@ -37,10 +37,10 @@ class ImageEmailSender:
 
         # Add some random shapes
         for _ in range(5):
-            x1 = random.randint(0, width)
-            y1 = random.randint(0, height)
-            x2 = random.randint(0, width)
-            y2 = random.randint(0, height)
+            x1 = random.randint(0, width - 50)
+            y1 = random.randint(0, height - 50)
+            x2 = x1 + 50
+            y2 = y1 + 50
             draw.rectangle([x1, y1, x2, y2], fill=self._random_color())
 
         # Save the image
