@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Configs
+scripts/config.yaml
+scripts/images_to_send

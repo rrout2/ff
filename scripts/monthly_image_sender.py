@@ -32,7 +32,7 @@ class ImageEmailSender:
         self.sender_password = config['sender_password']
 
         self.website_url = 'https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId=1120542227933155328&teamId=9&module=bigboy'
-        self.download_button_selector = '#\:r2ou\:'
+        self.download_button_selector = '#\:rq\:'
 
 
         # Create output directory if it doesn't exist
@@ -65,6 +65,7 @@ class ImageEmailSender:
 
     def wait_for_download(self, timeout=60):
         """Wait for download to complete"""
+        time.sleep(5)
         seconds = 0
         dl_wait = True
         while dl_wait and seconds < timeout:
