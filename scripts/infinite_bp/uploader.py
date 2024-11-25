@@ -100,6 +100,30 @@ class GoogleDriveUploader:
         except Exception as e:
             print(f"Sharing error: {str(e)}")
 
+    def make_public(self, file_id):
+        """
+        Make file accessible to anyone with the link.
+
+        Args:
+            file_id (str): The ID of the file to share
+        """
+        try:
+            permission = {
+                'type': 'anyone',
+                'role': 'reader',
+            }
+
+            self.service.permissions().create(
+                fileId=file_id,
+                body=permission,
+                sendNotificationEmail=False
+            ).execute()
+
+            print(f"Successfully made file public")
+
+        except Exception as e:
+            print(f"Sharing error: {str(e)}")
+
 def main():
     # Path to your service account credentials JSON file
     credentials_path = 'service-account-credentials.json'

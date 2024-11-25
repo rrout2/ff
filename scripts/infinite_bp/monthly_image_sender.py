@@ -11,7 +11,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-import shutil
 from uploader import GoogleDriveUploader
 
 class ImageEmailSender:
@@ -31,15 +30,13 @@ class ImageEmailSender:
         self.sender_email = config['sender_email']
         self.sender_password = config['sender_password']
 
-        self.website_url = 'https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId=1120542227933155328&teamId=9&module=bigboy'
+        self.website_url = 'https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId=1120542227933155328&teamId=5&module=bigboy'
         self.download_button_selector = '#\:rq\:'
 
 
         # Create output directory if it doesn't exist
         self.download_dir = os.path.join(os.getcwd(), 'downloads')
-        self.output_dir = os.path.join(os.getcwd(), 'images_to_send')
         os.makedirs(self.download_dir, exist_ok=True)
-        os.makedirs(self.output_dir, exist_ok=True)
 
     def setup_driver(self):
         """Setup Chrome driver with custom download settings"""
@@ -84,6 +81,7 @@ class ImageEmailSender:
             # Navigate to the website
             driver.get(self.website_url)
 
+            # Wait for BP to load
             time.sleep(2)
 
             # Wait for and click the download button
@@ -109,28 +107,14 @@ class ImageEmailSender:
         finally:
             driver.quit()
 
-    def send_email_attachment(self, recipient_email, image_path):
-        """Send email with attached image"""
-        msg = MIMEMultipart()
-        msg['From'] = self.sender_email
-        msg['To'] = recipient_email
-        msg['Subject'] = f"Your Monthly Image - {datetime.now().strftime('%B %Y')}"
-
-        body = "Here's your unique monthly image!"
-        msg.attach(MIMEText(body, 'plain'))
-
-        with open(image_path, 'rb') as f:
-            img = MIMEImage(f.read())
-            img.add_header('Content-Disposition', 'attachment', filename=os.path.basename(image_path))
-            msg.attach(img)
-
-        with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-            server.starttls()
-            server.login(self.sender_email, self.sender_password)
-            server.send_message(msg)
-
     def send_email_link(self, recipient_email, drive_link):
-        """Send email with drive link"""
+        """
+        Send email with drive link
+
+        Args:
+            recipient_email (str): Email address of the recipient
+            drive_link (str): Google Drive link to the image
+        """
         msg = MIMEMultipart()
         msg['From'] = self.sender_email
         msg['To'] = recipient_email
@@ -143,42 +127,6 @@ class ImageEmailSender:
             server.starttls()
             server.login(self.sender_email, self.sender_password)
             server.send_message(msg)
-
-
-    def run(self):
-        """Main execution flow"""
-        print(f"Starting monthly task at {datetime.now()}")
-
-        try:
-            # Download the image
-            downloaded_file = self.download_image()
-
-            # Process each email
-            for email in self.email_list:
-                try:
-                    # Create a copy of the image for this email
-                    timestamp = datetime.now().strftime('%Y%m')
-                    image_filename = f"{email.split('@')[0]}_{timestamp}{os.path.splitext(downloaded_file)[1]}"
-                    image_path = os.path.join(self.output_dir, image_filename)
-
-                    # Copy the downloaded file
-                    shutil.copy2(downloaded_file, image_path)
-
-                    # Send the email
-                    self.send_email_attachment(email, image_path)
-                    print(f"Successfully sent image to {email}")
-
-                    # Add delay between emails
-                    time.sleep(1)
-
-                except Exception as e:
-                    print(f"Error processing {email}: {str(e)}")
-                    raise e
-
-        finally:
-            # Cleanup downloaded files
-            shutil.rmtree(self.download_dir, ignore_errors=True)
-            os.makedirs(self.download_dir, exist_ok=True)
 
 def main():
     sender = ImageEmailSender()
@@ -208,7 +156,8 @@ def main():
 
         # Optional: Share the file with someone
         if file:
-            uploader.share_file(file['id'], 'rout.rishav@gmail.com')
+            uploader.make_public(file['id'])
+            # uploader.share_file(file['id'], 'rout.rishav@gmail.com')
 
         sender.send_email_link('rout.rishav@gmail.com', file.get('webViewLink'))
         print(f"Successfully sent image to {'rout.rishav@gmail.com'}")
