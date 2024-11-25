@@ -15,28 +15,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 131
+          install-chromedriver: true
+          install-dependencies: true
 
-      - name: Install Chrome
-        run: |
-          sudo mkdir -p /etc/sources.list.d/
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/sources.list.d/google.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Install ChromeDriver
-        run: |
-          # Explicit URL construction
-          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chromedriver-linux64.zip"
-
-          echo "Downloading ChromeDriver from: $DOWNLOAD_URL"
-
-          curl -L -o chromedriver.zip "$DOWNLOAD_URL"
-
-          unzip chromedriver.zip -d chromedriver
-          chmod +x chromedriver
-          sudo mv chromedriver /usr/local/bin/
-          chromedriver --version
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
