@@ -54,4 +54,4 @@ jobs:
           echo "${SA_CREDENTIALS}" > service-account-credentials.json
 
       - name: Run image sender
-        run: python scripts/inifinite_bp/monthly_image_sender.py
+        run: python scripts/infinite_bp/monthly_image_sender.py
