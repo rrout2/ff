@@ -28,7 +28,20 @@ jobs:
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -d ' ' -f3 | cut -d '.' -f1)
           CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          curl -L -o chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+
+          # Add error checking and debugging
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            echo "Failed to fetch ChromeDriver version"
+            exit 1
+          fi
+
+          # Explicit URL construction
+          DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+
+          echo "Downloading ChromeDriver from: $DOWNLOAD_URL"
+
+          curl -L -o chromedriver.zip "$DOWNLOAD_URL"
+
           unzip chromedriver.zip
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
