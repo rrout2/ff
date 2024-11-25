@@ -25,6 +25,16 @@ class ImageEmailSender:
         else:
             self.email_list = config['email_list']
 
+        if isinstance(config['league_id_list'], str):
+            self.league_id_list = [email.strip() for email in config['league_id_list'].split(',')]
+        else:
+            self.league_id_list = config['league_id_list']
+        if isinstance(config['team_id_list'], str):
+            self.team_id_list = [email.strip() for email in config['team_id_list'].split(',')]
+        else:
+            self.team_id_list = config['team_id_list']
+
+
         self.smtp_server = config['smtp_server']
         self.smtp_port = int(config['smtp_port'])
         self.sender_email = config['sender_email']
@@ -74,12 +84,23 @@ class ImageEmailSender:
             seconds += 1
         return seconds < timeout
 
-    def download_image(self):
+    def construct_url(self, idx):
+        """
+        Construct the URL Certain League URL
+
+        Args:
+            idx (int): Index of blueprint
+        """
+        return f"https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}&module=bigboy"
+
+    def download_image(self, idx):
         """Navigate to website and click download button"""
         driver = self.setup_driver()
         try:
             # Navigate to the website
-            driver.get(self.website_url)
+            url = self.construct_url(idx)
+            print(f"Navigating to {url}")
+            driver.get(url)
 
             # Wait for BP to load
             time.sleep(2)
@@ -88,6 +109,7 @@ class ImageEmailSender:
             button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.download_button_selector))
             )
+            print("Clicking download button...")
             button.click()
 
             # Wait for download to complete
@@ -138,33 +160,23 @@ def main():
     uploader = GoogleDriveUploader(credentials_path)
 
     try:
-        # Download the image
-        downloaded_file = sender.download_image()
-
         # Authenticate
         uploader.authenticate()
 
-        # Folder where your images are stored
-        image_folder = "images"
+        for i in range(len(sender.email_list)):
+            print(f"{i + 1}/{len(sender.email_list)}")
+            downloaded_file = sender.download_image(i)
 
-        # Optional: Google Drive folder ID where you want to upload the images
-        folder_id = None  # Replace with your folder ID if needed
+            print(f"Uploading {downloaded_file}...")
+            file = uploader.upload_image(downloaded_file)
 
-        # image_path = os.path.join(image_folder, filename)
-        print(f"Uploading {downloaded_file}...")
-        file = uploader.upload_image(downloaded_file, folder_id)
+            if file:
+                uploader.make_public(file['id'])
 
-        # Optional: Share the file with someone
-        if file:
-            uploader.make_public(file['id'])
-            # uploader.share_file(file['id'], 'rout.rishav@gmail.com')
+            sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
+            print(f"Successfully sent image to {sender.email_list[i]}\n")
 
-        sender.send_email_link('rout.rishav@gmail.com', file.get('webViewLink'))
-        print(f"Successfully sent image to {'rout.rishav@gmail.com'}")
-
-        # Cleanup downloaded files
-        print(f"Deleting {downloaded_file} locally...")
-        os.remove(downloaded_file)
+            os.remove(downloaded_file)
 
         print("\nDone!")
 

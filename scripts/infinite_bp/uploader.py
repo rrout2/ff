@@ -26,7 +26,7 @@ class GoogleDriveUploader:
 
             # Build the service
             self.service = build('drive', 'v3', credentials=credentials)
-            print("Successfully authenticated with service account")
+            print("Successfully authenticated with service account\n")
 
         except Exception as e:
             print(f"Authentication error: {str(e)}")
@@ -65,7 +65,6 @@ class GoogleDriveUploader:
             ).execute()
 
             print(f"Successfully uploaded {file.get('name')}")
-            print(f"File ID: {file.get('id')}")
             print(f"Web View Link: {file.get('webViewLink')}")
 
             return file
