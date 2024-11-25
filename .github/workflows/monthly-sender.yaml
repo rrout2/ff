@@ -26,17 +26,8 @@ jobs:
 
       - name: Install ChromeDriver
         run: |
-          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-          echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
-
-          # Add error checking and debugging
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "Failed to fetch ChromeDriver version"
-            exit 1
-          fi
-
           # Explicit URL construction
-          DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chrome-linux64.zip"
 
           echo "Downloading ChromeDriver from: $DOWNLOAD_URL"
 
