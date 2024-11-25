@@ -27,7 +27,7 @@ jobs:
       - name: Install ChromeDriver
         run: |
           # Explicit URL construction
-          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chrome-linux64.zip"
+          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.85/linux64/chromedriver-linux64.zip"
 
           echo "Downloading ChromeDriver from: $DOWNLOAD_URL"
 
