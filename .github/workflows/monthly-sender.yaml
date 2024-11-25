@@ -34,12 +34,16 @@ jobs:
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
           SA_CREDENTIALS: ${{ secrets.SA_CREDENTIALS }}
+          LEAGUE_ID_LIST: ${{ secrets.LEAGUE_ID_LIST }}
+          TEAM_ID_LIST: ${{ secrets.TEAM_ID_LIST }}
         run: |
           echo "email_list: ${EMAIL_LIST}" > config.yaml
           echo "smtp_server: ${SMTP_SERVER}" >> config.yaml
           echo "smtp_port: ${SMTP_PORT}" >> config.yaml
           echo "sender_email: ${SENDER_EMAIL}" >> config.yaml
           echo "sender_password: ${SENDER_PASSWORD}" >> config.yaml
+          echo "league_id_list: ${LEAGUE_ID_LIST}" >> config.yaml
+          echo "team_id_list: ${TEAM_ID_LIST}" >> config.yaml
           echo "${SA_CREDENTIALS}" > service-account-credentials.json
 
       - name: Run image sender
