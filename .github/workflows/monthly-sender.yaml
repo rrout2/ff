@@ -33,7 +33,7 @@ jobs:
 
           curl -L -o chromedriver.zip "$DOWNLOAD_URL"
 
-          unzip chromedriver.zip
+          unzip chromedriver.zip -d chromedriver
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
           chromedriver --version
