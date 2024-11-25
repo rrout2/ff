@@ -44,12 +44,14 @@ jobs:
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+          SA_CREDENTIALS: ${{ secrets.SA_CREDENTIALS }}
         run: |
           echo "email_list: ${EMAIL_LIST}" > config.yaml
           echo "smtp_server: ${SMTP_SERVER}" >> config.yaml
           echo "smtp_port: ${SMTP_PORT}" >> config.yaml
           echo "sender_email: ${SENDER_EMAIL}" >> config.yaml
           echo "sender_password: ${SENDER_PASSWORD}" >> config.yaml
+          echo "${SA_CREDENTIALS}" > service-account-credentials.json
 
       - name: Run image sender
-        run: python scripts/monthly_image_sender.py
+        run: python scripts/inifinite_bp/monthly_image_sender.py

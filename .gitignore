@@ -17,11 +17,13 @@
 .env.development.local
 .env.test.local
 .env.production.local
+*.pyc
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Configs
-scripts/config.yaml
+scripts/infinite_bp/config.yaml
+scripts/infinite_bp/service-account-credentials.json
 scripts/images_to_send

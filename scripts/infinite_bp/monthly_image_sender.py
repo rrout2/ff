@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 import shutil
-
+from uploader import GoogleDriveUploader
 
 class ImageEmailSender:
     def __init__(self, config_path='config.yaml'):
@@ -84,6 +84,8 @@ class ImageEmailSender:
             # Navigate to the website
             driver.get(self.website_url)
 
+            time.sleep(2)
+
             # Wait for and click the download button
             button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.download_button_selector))
@@ -101,13 +103,13 @@ class ImageEmailSender:
 
             latest_file = max([os.path.join(self.download_dir, f) for f in downloaded_files],
                             key=os.path.getctime)
-
+            print(f"Downloaded file: {latest_file}")
             return latest_file
 
         finally:
             driver.quit()
 
-    def send_email(self, recipient_email, image_path):
+    def send_email_attachment(self, recipient_email, image_path):
         """Send email with attached image"""
         msg = MIMEMultipart()
         msg['From'] = self.sender_email
@@ -126,6 +128,22 @@ class ImageEmailSender:
             server.starttls()
             server.login(self.sender_email, self.sender_password)
             server.send_message(msg)
+
+    def send_email_link(self, recipient_email, drive_link):
+        """Send email with drive link"""
+        msg = MIMEMultipart()
+        msg['From'] = self.sender_email
+        msg['To'] = recipient_email
+        msg['Subject'] = f"Your Monthly Blueprint - {datetime.now().strftime('%B %Y')}"
+
+        body = "Here's your unique monthly image:\n\n" + drive_link
+        msg.attach(MIMEText(body, 'plain'))
+
+        with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+            server.starttls()
+            server.login(self.sender_email, self.sender_password)
+            server.send_message(msg)
+
 
     def run(self):
         """Main execution flow"""
@@ -147,7 +165,7 @@ class ImageEmailSender:
                     shutil.copy2(downloaded_file, image_path)
 
                     # Send the email
-                    self.send_email(email, image_path)
+                    self.send_email_attachment(email, image_path)
                     print(f"Successfully sent image to {email}")
 
                     # Add delay between emails
@@ -162,8 +180,52 @@ class ImageEmailSender:
             shutil.rmtree(self.download_dir, ignore_errors=True)
             os.makedirs(self.download_dir, exist_ok=True)
 
+def main():
+    sender = ImageEmailSender()
 
+    # Path to your service account credentials JSON file
+    credentials_path = 'service-account-credentials.json'
+
+    # Initialize uploader
+    uploader = GoogleDriveUploader(credentials_path)
+
+    try:
+        # Download the image
+        downloaded_file = sender.download_image()
+
+        # Authenticate
+        uploader.authenticate()
+
+        # Folder where your images are stored
+        image_folder = "images"
+
+        # Optional: Google Drive folder ID where you want to upload the images
+        folder_id = None  # Replace with your folder ID if needed
+
+        # image_path = os.path.join(image_folder, filename)
+        print(f"Uploading {downloaded_file}...")
+        file = uploader.upload_image(downloaded_file, folder_id)
+
+        # Optional: Share the file with someone
+        if file:
+            uploader.share_file(file['id'], 'rout.rishav@gmail.com')
+
+        sender.send_email_link('rout.rishav@gmail.com', file.get('webViewLink'))
+        print(f"Successfully sent image to {'rout.rishav@gmail.com'}")
+
+        # Cleanup downloaded files
+        print(f"Deleting {downloaded_file} locally...")
+        os.remove(downloaded_file)
+
+        print("\nDone!")
+
+    except Exception as e:
+        print(f"\nAn error occurred: {str(e)}")
+        print("\nPlease make sure you have:")
+        print("1. Created a service account and downloaded the credentials")
+        print("2. Placed the service account credentials JSON file in the correct location")
+        print("3. Enabled the Google Drive API in your project")
+        print("4. Placed your images in the 'images' folder")
 
 if __name__ == "__main__":
-    sender = ImageEmailSender()
-    sender.run()
+    main()
