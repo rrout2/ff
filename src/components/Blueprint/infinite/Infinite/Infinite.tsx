@@ -15,11 +15,12 @@ import {
     useCornerstones,
     GraphicComponent as CornerstonesGraphic,
 } from '../../v1/modules/cornerstone/CornerstoneModule';
-import {getTeamName} from '../../../../sleeper-api/sleeper-api';
+import {getTeamName, Roster} from '../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
 import RosterTierComponent, {
     calculateRosterTier,
 } from '../RosterTier/RosterTier';
+import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId] = useTeamIdFromUrl();
@@ -63,6 +64,7 @@ export default function Infinite() {
                 <div className={styles.rosterTierGraphic}>
                     <RosterTierComponent tier={calculateRosterTier(roster)} />
                 </div>
+                <BuySellHoldComponent roster={roster} />
                 <img src={blankInfinite} className={styles.blankBp} />
             </div>
         </>
@@ -81,5 +83,69 @@ const TeamNameComponent = ({teamName}: {teamName?: string}) => {
         >
             {teamName}
         </div>
+    );
+};
+
+const BuySellHoldComponent = ({roster}: {roster?: Roster}) => {
+    const {buys, sells, holds} = useBuySells(roster);
+
+    const column1 = '640px';
+    const column2 = '1002px';
+
+    const row1 = '1102px';
+    const row2 = '1246px';
+    const row3 = '1478px';
+    const row4 = '1715px';
+    return (
+        <>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column1, top: row1}}
+            >
+                <BuySellTile {...buys[0]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column1, top: row2}}
+            >
+                <BuySellTile {...buys[1]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column2, top: row1}}
+            >
+                <BuySellTile {...buys[2]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column2, top: row2}}
+            >
+                <BuySellTile {...buys[3]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column1, top: row3}}
+            >
+                <BuySellTile {...sells[0]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column2, top: row3}}
+            >
+                <BuySellTile {...sells[1]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column1, top: row4}}
+            >
+                <BuySellTile {...holds[0]} />
+            </div>
+            <div
+                className={styles.buySellHoldGraphic}
+                style={{left: column2, top: row4}}
+            >
+                <BuySellTile {...holds[1]} />
+            </div>
+        </>
     );
 };

@@ -169,6 +169,10 @@ import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
 
 // Infinite BP
 import blankInfinite from '../assets/infinite/Infinite_background.png';
+import hardBuy from '../assets/infinite/Hard_Buy.png';
+import hardSell from '../assets/infinite/Hard_sell.png';
+import softBuy from '../assets/infinite/Soft_buy.png';
+import softSell from '../assets/infinite/soft_sell.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -457,4 +461,8 @@ export {
     eliteQbTeDVMCCO,
     eliteQbTeDVMRCC,
     blankInfinite,
+    hardBuy,
+    hardSell,
+    softBuy,
+    softSell,
 };

@@ -39,6 +39,46 @@ function PlayersToTargetModule(props: {
     );
 }
 
+export function PlayerTarget({playerId}: {playerId: string}) {
+    const playerData = usePlayerData();
+    if (!playerData) {
+        return <></>;
+    }
+    const isRookiePick = isRookiePickId(playerId);
+    const player = playerData[playerId];
+    if (!player && !isRookiePick) {
+        throw new Error(`Unexpected player ID: '${playerId}'`);
+    }
+
+    const pos = isRookiePick ? 'RP' : player.position;
+
+    const fullName = isRookiePick
+        ? rookiePickIdToString(playerId)
+        : `${player.first_name} ${player.last_name}`;
+
+    const displayName =
+        !isRookiePick && fullName.length >= 15
+            ? `${player.first_name[0]}. ${player.last_name}`
+            : fullName;
+
+    return (
+        <div>
+            <div className={styles.playerTargetBody}>
+                <div className={`${styles.positionChip} ${styles[pos]}`}>
+                    {pos}
+                </div>
+                {logoImage(isRookiePick ? 'RP' : player?.team, styles.teamLogo)}
+                <div className={styles.targetName}>{displayName}</div>
+            </div>
+            <div className={styles.subtitle}>{`${pos} - ${
+                isRookiePick
+                    ? playerId.substring(playerId.length - 4) // pull year from ID
+                    : player.team
+            }`}</div>
+        </div>
+    );
+}
+
 interface graphicProps {
     playerSuggestions: string[];
     graphicComponentClass?: string;
@@ -51,48 +91,6 @@ function GraphicComponent({
 }: graphicProps) {
     const playerData = usePlayerData();
 
-    function playerTarget(playerId: string, idx: number) {
-        if (!playerData) {
-            return <></>;
-        }
-        const isRookiePick = isRookiePickId(playerId);
-        const player = playerData[playerId];
-        if (!player && !isRookiePick) {
-            throw new Error(`Unexpected player ID: '${playerId}'`);
-        }
-
-        const pos = isRookiePick ? 'RP' : player.position;
-
-        const fullName = isRookiePick
-            ? rookiePickIdToString(playerId)
-            : `${player.first_name} ${player.last_name}`;
-
-        const displayName =
-            !isRookiePick && fullName.length >= 15
-                ? `${player.first_name[0]}. ${player.last_name}`
-                : fullName;
-
-        return (
-            <div key={idx}>
-                <div className={styles.playerTargetBody}>
-                    <div className={`${styles.positionChip} ${styles[pos]}`}>
-                        {pos}
-                    </div>
-                    {logoImage(
-                        isRookiePick ? 'RP' : player?.team,
-                        styles.teamLogo
-                    )}
-                    <div className={styles.targetName}>{displayName}</div>
-                </div>
-                <div className={styles.subtitle}>{`${pos} - ${
-                    isRookiePick
-                        ? playerId.substring(playerId.length - 4) // pull year from ID
-                        : player.team
-                }`}</div>
-            </div>
-        );
-    }
-
     function graphicComponent() {
         if (!playerData) return <></>;
         return (
@@ -101,9 +99,11 @@ function GraphicComponent({
                     graphicComponentClass ?? ''
                 } ${transparent ? '' : styles.background}`}
             >
-                {playerSuggestions.map((playerId, idx) => {
-                    return playerTarget(playerId, idx);
-                })}
+                {playerSuggestions.map((playerId, idx) => (
+                    <div key={idx}>
+                        <PlayerTarget playerId={playerId} />
+                    </div>
+                ))}
             </div>
         );
     }

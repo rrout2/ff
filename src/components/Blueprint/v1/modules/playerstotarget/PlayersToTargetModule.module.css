@@ -21,9 +21,11 @@
     font-family: 'Acumin Pro Italic';
     margin-left: 150px;
     font-size: 22px;
+    color: white;
 }
 
 .targetName {
+    color: white;
     font-family: 'Prohibition Test', sans-serif;
     font-size: 45px;
     padding-bottom: 5px; /* bc font is uncentered */

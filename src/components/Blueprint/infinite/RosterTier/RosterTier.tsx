@@ -1,7 +1,10 @@
 import {Roster} from '../../../../sleeper-api/sleeper-api';
 import styles from './RosterTier.module.css';
 
-export function calculateRosterTier(_roster?: Roster): RosterTier {
+export function calculateRosterTier(roster?: Roster): RosterTier {
+    if (!roster) {
+        return RosterTier.Unknown;
+    }
     // TODO: Use algorithm to calculate tier
     return RosterTier.Championship;
 }
@@ -18,10 +21,13 @@ function getTierColor(tier: RosterTier) {
             return '#8dc63f';
         case RosterTier.Elite:
             return '#009444';
+        default:
+            return '#000000';
     }
 }
 
 enum RosterTier {
+    Unknown = 'UNKNOWN',
     Rebuild = 'REBUILD',
     Reload = 'RELOAD',
     Competitive = 'COMPETITIVE',
