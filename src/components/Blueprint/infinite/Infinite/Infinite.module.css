@@ -43,6 +43,13 @@
     transform-origin: top left;
 }
 
+.rosterTierGraphic {
+    position: absolute;
+
+    right: 390px;
+    top: 88px;
+}
+
 .teamNameGraphic {
     position: absolute;
     color: white;
@@ -59,4 +66,3 @@
 .smallestTeamName {
     font-size: 45px;
 }
-

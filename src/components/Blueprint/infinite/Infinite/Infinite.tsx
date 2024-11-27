@@ -17,6 +17,9 @@ import {
 } from '../../v1/modules/cornerstone/CornerstoneModule';
 import {getTeamName} from '../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
+import RosterTierComponent, {
+    calculateRosterTier,
+} from '../RosterTier/RosterTier';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId] = useTeamIdFromUrl();
@@ -56,6 +59,9 @@ export default function Infinite() {
                         transparent={true}
                         roster={roster}
                     />
+                </div>
+                <div className={styles.rosterTierGraphic}>
+                    <RosterTierComponent tier={calculateRosterTier(roster)} />
                 </div>
                 <img src={blankInfinite} className={styles.blankBp} />
             </div>
