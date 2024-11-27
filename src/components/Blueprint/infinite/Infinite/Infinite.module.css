@@ -54,6 +54,16 @@
     position: absolute;
 }
 
+.monthYear {
+    position: absolute;
+    right: 60px;
+    top: 220px;
+
+    font-family: 'Erbaum';
+    font-size: 30px;
+    color: white;
+}
+
 .teamNameGraphic {
     position: absolute;
     color: white;

@@ -33,7 +33,7 @@ export default function Infinite() {
         roster?.players
     );
     const {cornerstones} = useCornerstones(roster);
-
+    const date = new Date();
     return (
         <>
             <ExportButton
@@ -65,6 +65,12 @@ export default function Infinite() {
                     <RosterTierComponent tier={calculateRosterTier(roster)} />
                 </div>
                 <BuySellHoldComponent roster={roster} />
+                <div className={styles.monthYear}>
+                    {date.toLocaleDateString(undefined, {
+                        month: 'long',
+                        year: 'numeric',
+                    })}
+                </div>
                 <img src={blankInfinite} className={styles.blankBp} />
             </div>
         </>
