@@ -8,6 +8,7 @@ import {
     Player,
     Roster,
     User,
+    getAllUsers,
     getLeague,
     getRosters,
     getUser,
@@ -241,6 +242,65 @@ export function useFetchRosters(leagueIdNewName: string) {
         },
         staleTime: 10000,
     });
+}
+
+export function useRoster(
+    rosters?: Roster[],
+    teamId?: string,
+    leagueId?: string
+) {
+    function hasTeamId() {
+        return teamId !== '' && teamId !== NONE_TEAM_ID;
+    }
+    const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [user, setUser] = useState<User>();
+    const [roster, setRoster] = useState<Roster>();
+
+    useEffect(() => {
+        if (!leagueId || !rosters) return;
+        const ownerIds = new Set(rosters.map(r => r.owner_id));
+        getAllUsers(leagueId).then(users =>
+            // filter to users included in owners.
+            // some leagues have users with no associated owner I think.
+            setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
+        );
+    }, [leagueId, rosters]);
+
+    useEffect(() => {
+        if (
+            !rosters ||
+            rosters.length === 0 ||
+            !hasTeamId() ||
+            !teamId ||
+            allUsers.length === 0
+        ) {
+            return;
+        }
+        function getRosterFromTeamIdx(idx: number) {
+            if (allUsers.length === 0 || !rosters) return;
+            const ownerId = allUsers[idx].user_id;
+            return rosters.find(r => r.owner_id === ownerId);
+        }
+        if (+teamId >= allUsers.length) return;
+        const newRoster = getRosterFromTeamIdx(+teamId);
+        if (!newRoster) throw new Error('roster not found');
+
+        setRoster(newRoster);
+    }, [rosters, teamId, allUsers]);
+
+    useEffect(() => {
+        if (
+            !allUsers.length ||
+            !hasTeamId() ||
+            !teamId ||
+            +teamId >= allUsers.length
+        ) {
+            return;
+        }
+        setUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
+
+    return {roster, user};
 }
 
 export function useLeagueIdFromUrl(): [

@@ -67,7 +67,7 @@ function PositionalGrades({
 }
 
 interface graphicProps {
-    overrides: Map<string, number>;
+    overrides?: Map<string, number>;
     roster?: Roster;
     graphicComponentClass?: string;
     transparent?: boolean;
@@ -121,7 +121,7 @@ function GraphicComponent({
         >
             {FANTASY_POSITIONS.map(position => {
                 let grade = 0;
-                if (overrides.get(position)! >= 0) {
+                if (overrides && overrides.get(position)! >= 0) {
                     grade = overrides.get(position)!;
                 } else {
                     grade = gradeByPosition(

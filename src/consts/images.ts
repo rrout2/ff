@@ -166,6 +166,10 @@ import wellRoundedDVMCCR from '../assets/2.0/dvms/WR-CCR.png';
 import rbHeavyDVM from '../assets/2.0/dvms/RH-CCR.png';
 import eliteQbTeDVMCCO from '../assets/2.0/dvms/QT-CCO.png';
 import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
+
+// Infinite BP
+import blankInfinite from '../assets/infinite/Infinite_background.png';
+
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -452,4 +456,5 @@ export {
     rbHeavyDVM,
     eliteQbTeDVMCCO,
     eliteQbTeDVMRCC,
+    blankInfinite,
 };

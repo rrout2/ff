@@ -111,6 +111,7 @@ function GraphicComponent({
         </div>
     );
 }
+
 interface overrideProps {
     override: number;
     setOverride: Dispatch<SetStateAction<number>>;

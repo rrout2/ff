@@ -6,12 +6,7 @@ import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {SetStateAction, useEffect, useState} from 'react';
 
-function CornerstoneModule(props: {
-    roster?: Roster;
-    teamName?: string;
-    graphicComponentClass?: string;
-}) {
-    const {roster, teamName, graphicComponentClass} = props;
+export function useCornerstones(roster?: Roster) {
     const playerData = usePlayerData();
     const {getAdp, sortByAdp} = useAdpData();
     const [cornerstones, setCornerstones] = useState(
@@ -47,6 +42,16 @@ function CornerstoneModule(props: {
         );
     }, [roster, playerData]);
 
+    return {cornerstones, setCornerstones};
+}
+
+function CornerstoneModule(props: {
+    roster?: Roster;
+    teamName?: string;
+    graphicComponentClass?: string;
+}) {
+    const {roster, teamName, graphicComponentClass} = props;
+    const {cornerstones, setCornerstones} = useCornerstones(roster);
     return (
         <div style={{display: 'flex', flexDirection: 'column'}}>
             <GraphicComponent

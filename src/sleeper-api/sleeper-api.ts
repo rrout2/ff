@@ -181,6 +181,10 @@ export type User = {
     };
 };
 
+export function getTeamName(user?: User) {
+    return `${user?.metadata?.team_name || user?.display_name}`;
+}
+
 export type Player = {
     hashtag: string;
     depth_chart_position: number;

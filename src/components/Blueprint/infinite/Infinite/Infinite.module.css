@@ -1,0 +1,62 @@
+.fullBlueprint {
+    position: relative;
+    width: 1400px;
+}
+
+.blankBp {
+    width: inherit;
+}
+
+.startersGraphic {
+    position: absolute;
+    left: 50px;
+    top: 305px;
+    scale: 0.69;
+    transform-origin: top left;
+}
+
+.cornerstoneGraphic {
+    position: absolute;
+    left: 600px;
+    top: 320px;
+    scale: 0.97;
+    transform-origin: top left;
+}
+
+.benchStringGraphic {
+    position: absolute;
+    left: 60px;
+    top: 1110px;
+
+    color: white;
+    font-family: 'Acumin Pro ExtraCondensed';
+    font-size: 25px;
+    text-align: center;
+    width: 450px;
+}
+
+.positionalGradesGraphic {
+    position: absolute;
+    left: 720px;
+    top: 570px;
+    scale: 0.65;
+    transform-origin: top left;
+}
+
+.teamNameGraphic {
+    position: absolute;
+    color: white;
+    left: 65px;
+    top: 110px;
+    font-family: 'Cheddar Gothic Rough';
+    font-size: 75px;
+}
+
+.smallerTeamName {
+    font-size: 55px;
+}
+
+.smallestTeamName {
+    font-size: 45px;
+}
+
