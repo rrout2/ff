@@ -40,8 +40,7 @@ class ImageEmailSender:
         self.sender_email = config['sender_email']
         self.sender_password = config['sender_password']
 
-        self.website_url = 'https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId=1120542227933155328&teamId=5&module=bigboy'
-        self.download_button_selector = '#\:rq\:'
+        self.download_button_selector = '#root > button'
 
 
         # Create output directory if it doesn't exist
@@ -91,7 +90,7 @@ class ImageEmailSender:
         Args:
             idx (int): Index of blueprint
         """
-        return f"https://rrout2.github.io/dynasty-ff/#/blueprintv2?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}&module=bigboy"
+        return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}"
 
     def download_image(self, idx):
         """Navigate to website and click download button"""
