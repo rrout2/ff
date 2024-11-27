@@ -16,6 +16,7 @@ import {
     GraphicComponent as CornerstonesGraphic,
 } from '../../v1/modules/cornerstone/CornerstoneModule';
 import {getTeamName} from '../../../../sleeper-api/sleeper-api';
+import ExportButton from '../../shared/ExportButton';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId] = useTeamIdFromUrl();
@@ -30,26 +31,35 @@ export default function Infinite() {
     const {cornerstones} = useCornerstones(roster);
 
     return (
-        <div className={styles.fullBlueprint}>
-            <div className={styles.startersGraphic}>
-                <StartersGraphic
-                    startingLineup={startingLineup}
-                    transparent={true}
-                />
+        <>
+            <ExportButton
+                className={styles.fullBlueprint}
+                pngName={`${getTeamName(user)}_infinite.png`}
+            />
+            <div className={styles.fullBlueprint}>
+                <div className={styles.startersGraphic}>
+                    <StartersGraphic
+                        startingLineup={startingLineup}
+                        transparent={true}
+                    />
+                </div>
+                <div className={styles.cornerstoneGraphic}>
+                    <CornerstonesGraphic
+                        cornerstones={cornerstones}
+                        transparent={true}
+                    />
+                </div>
+                <div className={styles.benchStringGraphic}>{benchString}</div>
+                <TeamNameComponent teamName={getTeamName(user)} />
+                <div className={styles.positionalGradesGraphic}>
+                    <PositionalGradesGraphic
+                        transparent={true}
+                        roster={roster}
+                    />
+                </div>
+                <img src={blankInfinite} className={styles.blankBp} />
             </div>
-            <div className={styles.cornerstoneGraphic}>
-                <CornerstonesGraphic
-                    cornerstones={cornerstones}
-                    transparent={true}
-                />
-            </div>
-            <div className={styles.benchStringGraphic}>{benchString}</div>
-            <TeamNameComponent teamName={getTeamName(user)} />
-            <div className={styles.positionalGradesGraphic}>
-                <PositionalGradesGraphic transparent={true} roster={roster} />
-            </div>
-            <img src={blankInfinite} className={styles.blankBp} />
-        </div>
+        </>
     );
 }
 
