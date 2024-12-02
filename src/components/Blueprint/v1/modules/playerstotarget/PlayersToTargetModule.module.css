@@ -24,12 +24,27 @@
     color: white;
 }
 
+.subtitleSmaller {
+    font-family: 'Acumin Pro Italic';
+    margin-left: calc(150px * 0.75);
+    font-size: calc(22px * 0.75);
+    color: white;
+}
+
 .targetName {
     color: white;
-    font-family: 'Prohibition Test', sans-serif;
+    font-family: 'Prohibition';
     font-size: 45px;
     padding-bottom: 5px; /* bc font is uncentered */
     margin-left: 10px;
+}
+
+.targetNameSmaller {
+    color: white;
+    font-family: 'Prohibition';
+    font-size: calc(45px * 0.75);
+    padding-bottom: calc(5px * 0.75); /* bc font is uncentered */
+    margin-left: calc(10px * 0.75);
 }
 
 .positionChip {
@@ -40,6 +55,17 @@
     border-radius: 12px;
     box-shadow: -4px 4px #213965;
     width: 45px;
+    text-align: center;
+}
+
+.positionChipSmaller {
+    font-family: 'Antarctican Headline';
+    font-size: 30px;
+    color: white;
+    padding: /* top/bottom = */ 3px /* left/right  = */ 18px;
+    border-radius: 9px;
+    box-shadow: -3px 3px #213965;
+    width: calc(45px * 0.75);
     text-align: center;
 }
 
@@ -68,5 +94,13 @@
     background-color: white;
     border-radius: 50%;
     margin-left: -10px;
+    border: #103762 2px solid;
+}
+
+.teamLogoSmaller {
+    height: calc(50px * 0.75);
+    background-color: white;
+    border-radius: 50%;
+    margin-left: calc(-10px * 0.75);
     border: #103762 2px solid;
 }

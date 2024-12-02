@@ -91,9 +91,7 @@ export function BuySellTile({playerId, type, reason}: BuySellTileProps) {
             {type !== BuySellType.Hold && (
                 <img src={mapToImgSrc(type)} className={styles.buySellImage} />
             )}
-            <div className={styles.playerTarget}>
-                <PlayerTarget playerId={playerId} />
-            </div>
+            <PlayerTarget playerId={playerId} smaller />
             {!!reason && <div className={styles.reason}>{reason}</div>}
         </div>
     );

@@ -39,7 +39,13 @@ function PlayersToTargetModule(props: {
     );
 }
 
-export function PlayerTarget({playerId}: {playerId: string}) {
+export function PlayerTarget({
+    playerId,
+    smaller,
+}: {
+    playerId: string;
+    smaller?: boolean;
+}) {
     const playerData = usePlayerData();
     if (!playerData) {
         return <></>;
@@ -64,13 +70,30 @@ export function PlayerTarget({playerId}: {playerId: string}) {
     return (
         <div>
             <div className={styles.playerTargetBody}>
-                <div className={`${styles.positionChip} ${styles[pos]}`}>
+                <div
+                    className={`${
+                        smaller
+                            ? styles.positionChipSmaller
+                            : styles.positionChip
+                    } ${styles[pos]}`}
+                >
                     {pos}
                 </div>
-                {logoImage(isRookiePick ? 'RP' : player?.team, styles.teamLogo)}
-                <div className={styles.targetName}>{displayName}</div>
+                {logoImage(
+                    isRookiePick ? 'RP' : player?.team,
+                    smaller ? styles.teamLogoSmaller : styles.teamLogo
+                )}
+                <div
+                    className={
+                        smaller ? styles.targetNameSmaller : styles.targetName
+                    }
+                >
+                    {displayName}
+                </div>
             </div>
-            <div className={styles.subtitle}>{`${pos} - ${
+            <div
+                className={smaller ? styles.subtitleSmaller : styles.subtitle}
+            >{`${pos} - ${
                 isRookiePick
                     ? playerId.substring(playerId.length - 4) // pull year from ID
                     : player.team

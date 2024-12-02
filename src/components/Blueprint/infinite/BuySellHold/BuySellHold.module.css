@@ -3,15 +3,11 @@
     margin-bottom: 4px;
 }
 
-.playerTarget {
-    transform-origin: top left;
-    scale: 0.75;
-}
 
 .reason {
     font-family: 'Acumin Pro Condensed';
     color: white;
-    margin-top: -15px;
+    margin-top: 5px;
     width: 280px;
     text-align: center;
 }
