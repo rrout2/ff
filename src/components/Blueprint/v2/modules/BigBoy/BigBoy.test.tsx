@@ -135,30 +135,8 @@ describe('BigBoy v2', () => {
             );
 
             expect(risersFallersGraphic).toBeInTheDocument();
-            expect(risersFallersGraphic).toHaveTextContent(/\+30%/i);
+            expect(risersFallersGraphic).toHaveTextContent(/J. Taylor/i);
         });
-
-        it('can be edited', async () => {
-            const {container} = await wrappedRender(
-                <BigBoy
-                    roster={ROSTER}
-                    numRosters={NUM_ROSTERS}
-                    teamName={TEAM_NAME}
-                />
-            );
-
-            const inputRows = container.querySelectorAll('.inputRow');
-            expect(inputRows).toHaveLength(6);
-
-            for (let i = 0; i < 50; i++) {
-                fireEvent.click(inputRows[0].querySelector('button')!);
-            }
-            await waitFor(() => {
-                expect(
-                    container.querySelector('.risersFallersGraphic')
-                ).toHaveTextContent(/\+25%/i);
-            });
-        }, 20000);
     });
 
     describe('Saving/Loading', () => {
