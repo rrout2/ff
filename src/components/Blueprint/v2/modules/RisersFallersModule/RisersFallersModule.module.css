@@ -56,9 +56,3 @@
     flex-direction: column;
 }
 
-.value {
-    font-family: 'Acumin Pro Condensed';
-    font-weight: bold;
-    padding-top: 5px;
-    /* bc font is uncentered */
-}

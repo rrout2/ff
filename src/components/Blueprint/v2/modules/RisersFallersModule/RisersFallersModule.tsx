@@ -106,6 +106,12 @@ export function GraphicComponent({
     const playerData = usePlayerData();
     const reds = [shortRed, mediumRed, longRed];
     const greens = [shortGreen, mediumGreen, longGreen].reverse();
+    const greenWidths = [72, 60, 42];
+    const redWidths = [...greenWidths].reverse();
+    for (let i = 0; i < greenWidths.length; i++) {
+        greenWidths[i] = greenWidths[i] * 1.6;
+        redWidths[i] = redWidths[i] * 1.6;
+    }
 
     if (!playerData) return <></>;
 
@@ -141,13 +147,17 @@ export function GraphicComponent({
                     >
                         {fallerValues.map((value, idx) => (
                             <div key={idx} className={styles.valueAndArrow}>
-                                <div className={styles.value}>
-                                    {value.toFixed(0)}%
-                                </div>
+                                <div></div>
                                 <div
                                     className={`${styles.arrowImage} ${styles.alignFlexEnd}`}
                                 >
-                                    <img src={reds[idx]} />
+                                    <img
+                                        src={reds[idx]}
+                                        style={{
+                                            width: `${redWidths[idx]}px`,
+                                            height: '32px',
+                                        }}
+                                    />
                                 </div>
                             </div>
                         ))}
@@ -163,10 +173,13 @@ export function GraphicComponent({
                         {riserValues.map((value, idx) => (
                             <div key={idx} className={styles.valueAndArrow}>
                                 <div className={styles.arrowImage}>
-                                    <img src={greens[idx]} />
-                                </div>
-                                <div className={styles.value}>
-                                    +{value.toFixed(0)}%
+                                    <img
+                                        src={greens[idx]}
+                                        style={{
+                                            width: `${greenWidths[idx]}px`,
+                                            height: '29px',
+                                        }}
+                                    />
                                 </div>
                             </div>
                         ))}
