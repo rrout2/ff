@@ -155,7 +155,7 @@ describe('BigBoy v2', () => {
             act(() => saveButton.click());
 
             expect(window.location.href).toContain(
-                `${CORNERSTONES}=6770-7547-11631-11620`
+                `${CORNERSTONES}=6770-7547-11631-8130`
             );
             expect(window.location.href).toContain(`${SELLS}=6770-7547-11631`);
             expect(window.location.href).toContain(

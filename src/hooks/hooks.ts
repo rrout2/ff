@@ -115,7 +115,18 @@ type adpDatum = {
 
 export function useAdpData() {
     const [adpData] = useState(adp as adpDatum[]);
+    const checkForNickname = (playerName: string) => {
+        if (playerName === 'Tank Dell') {
+            playerName = 'Nathaniel Dell';
+        } else if (playerName === 'Chig Okonkwo') {
+            playerName = 'Chigoziem Okonkwo';
+        } else if (playerName === 'Hollywood Brown') {
+            playerName = 'Marquise Brown';
+        }
+        return playerName;
+    };
     const getAdp = (playerName: string): number => {
+        playerName = checkForNickname(playerName);
         const adp = adpData.findIndex(
             a =>
                 a.player_name.replace(/\W/g, '').toLowerCase() ===
@@ -126,6 +137,7 @@ export function useAdpData() {
         return adp + 1;
     };
     const getPositionalAdp = (playerName: string) => {
+        playerName = checkForNickname(playerName);
         const idx = getAdp(playerName) - 1;
         if (idx >= adpData.length) return Infinity;
 
