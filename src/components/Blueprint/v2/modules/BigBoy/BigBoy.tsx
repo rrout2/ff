@@ -241,7 +241,17 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         setCornerstones((searchParams.get(CORNERSTONES) || '').split('-'));
         setSells((searchParams.get(SELLS) || '').split('-'));
 
-        const newBuys = (searchParams.get(BUYS) || '').split('-');
+        const buysSplit = (searchParams.get(BUYS) || '').split('-');
+        const newBuys: string[] = [];
+        for (let i = 0; i < buysSplit.length; i++) {
+            // combine "RP" with the following player ID
+            if (buysSplit[i] === 'RP' && i + 1 < buysSplit.length) {
+                newBuys.push(`RP-${buysSplit[i + 1]}`);
+                i++;
+            } else {
+                newBuys.push(buysSplit[i]);
+            }
+        }
         setBuys(newBuys);
 
         const plusList = (searchParams.get(PLUS_MAP) || '')
