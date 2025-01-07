@@ -306,7 +306,11 @@ export default function NewGenerator() {
                 <RisersFallersModule roster={roster} teamName={teamName} />
             )}
             {module === Module.PositionalGrades && (
-                <PositionalGrades teamName={teamName} />
+                <PositionalGrades
+                    teamName={teamName}
+                    roster={roster}
+                    leagueSize={numRosters}
+                />
             )}
             {module === Module.ThreeYearOutlook && (
                 <ThreeYearOutlook teamName={teamName} />

@@ -21,6 +21,7 @@ import RosterTierComponent, {
     calculateRosterTier,
 } from '../RosterTier/RosterTier';
 import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
+import {SUPER_FLEX} from '../../../../consts/fantasy';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId] = useTeamIdFromUrl();
@@ -34,6 +35,7 @@ export default function Infinite() {
     );
     const {cornerstones} = useCornerstones(roster);
     const date = new Date();
+    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
     return (
         <>
             <ExportButton
@@ -59,6 +61,8 @@ export default function Infinite() {
                     <PositionalGradesGraphic
                         transparent={true}
                         roster={roster}
+                        isSuperFlex={isSuperFlex}
+                        leagueSize={rosters?.length ?? 0}
                     />
                 </div>
                 <div className={styles.rosterTierGraphic}>

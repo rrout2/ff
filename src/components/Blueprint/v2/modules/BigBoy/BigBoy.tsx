@@ -113,7 +113,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         setTe,
         depth,
         setDepth,
-    } = usePositionalGrades(roster);
+    } = usePositionalGrades(roster, numRosters);
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])

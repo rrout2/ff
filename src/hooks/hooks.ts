@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import adp from '../data/adp.json';
-import playerValuesJson from '../data/player_values.json';
+import playerValuesJson from '../data/player_values_01072025.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import {
     League,
@@ -85,12 +85,16 @@ export function usePlayerData() {
 }
 export type PlayerValue = {
     Player: string;
-    Value: string;
+    Value: number;
     Position: string;
+    oneQbBonus: number;
+    sfBonus: number;
 };
 
 export function usePlayerValues() {
-    const [playerValues] = useState<PlayerValue[]>(playerValuesJson.Sheet1);
+    const [playerValues] = useState<PlayerValue[]>(
+        playerValuesJson as unknown as PlayerValue[]
+    );
 
     const getPlayerValue = (playerName: string) => {
         const playerValue = playerValues.find(pv => pv.Player === playerName);
@@ -105,7 +109,22 @@ export function usePlayerValues() {
         return undefined;
     };
 
-    return {playerValues, getPlayerValue};
+    const getBump = (playerName: string, superFlex: boolean) => {
+        const playerValue = playerValues.find(pv => pv.Player === playerName);
+        if (playerValue) {
+            if (superFlex) {
+                return playerValue.sfBonus;
+            } else {
+                return playerValue.oneQbBonus;
+            }
+        }
+        console.warn(
+            `cannot find PlayerValue for player with name = '${playerName}'`
+        );
+        return 0;
+    };
+
+    return {playerValues, getPlayerValue, getBump};
 }
 
 type adpDatum = {

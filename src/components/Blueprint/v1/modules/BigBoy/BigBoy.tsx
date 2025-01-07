@@ -234,6 +234,8 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         setTimeout(loadFromUrl, 200);
     }, [playerData, searchParams]);
 
+    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
+
     function shortenOutlook(outlook: string) {
         switch (outlook) {
             case 'REBUILD':
@@ -689,6 +691,8 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                     overrides={positionalGradeOverrides}
                     roster={roster}
                     transparent={true}
+                    isSuperFlex={isSuperFlex}
+                    leagueSize={rosters?.length ?? 0}
                 />
             </div>
         );
@@ -844,6 +848,8 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                                 overrides={positionalGradeOverrides}
                                 setOverrides={setPositionalGradeOverrides}
                                 roster={roster}
+                                isSuperFlex={isSuperFlex}
+                                leagueSize={rosters?.length ?? 0}
                             />
                         </div>
                     </Grid2>

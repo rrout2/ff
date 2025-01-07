@@ -1,4 +1,3 @@
-import {act} from 'react';
 import {render, waitFor} from '@testing-library/react';
 import BigBoy from './BigBoy';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
@@ -63,14 +62,12 @@ const DEFAULT_URL_PARAMS =
     '&suggestions=suggestion+1-suggestion+2-suggestion+3-suggestion+4-suggestion+5-suggestion+6';
 
 function wrappedRender(component: JSX.Element) {
-    return act(() =>
-        render(
-            <HashRouter basename="/">
-                <Routes>
-                    <Route path="/" element={component} />
-                </Routes>
-            </HashRouter>
-        )
+    return render(
+        <HashRouter basename="/">
+            <Routes>
+                <Route path="/" element={component} />
+            </Routes>
+        </HashRouter>
     );
 }
 describe('BigBoy v2', () => {

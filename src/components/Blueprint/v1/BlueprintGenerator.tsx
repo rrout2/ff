@@ -180,6 +180,7 @@ export default function BlueprintGenerator() {
     ]);
 
     useTitle('Blueprint Generator');
+    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
 
     const {
         nonSleeperIds,
@@ -340,6 +341,8 @@ export default function BlueprintGenerator() {
                         roster={roster}
                         graphicComponentClass={'positionalGradesGraphic'}
                         transparent={false}
+                        isSuperFlex={isSuperFlex}
+                        leagueSize={rosters?.length ?? 0}
                     />
                     <DepthScoreGraphic
                         override={depthScoreOverride}
@@ -375,6 +378,9 @@ export default function BlueprintGenerator() {
                             <PositionalGradesOverride
                                 overrides={positionalGradeOverrides}
                                 setOverrides={setPositionalGradeOverrides}
+                                isSuperFlex={isSuperFlex}
+                                leagueSize={rosters?.length ?? 0}
+                                roster={roster}
                             />
                         </div>
                     </Grid>
@@ -526,7 +532,12 @@ export default function BlueprintGenerator() {
                 <StartersModule roster={roster} teamName={teamName} />
             )}
             {hasTeamId() && module === Module.PositionalGrades && (
-                <PositionalGrades roster={roster} teamName={teamName} />
+                <PositionalGrades
+                    roster={roster}
+                    teamName={teamName}
+                    isSuperFlex={isSuperFlex}
+                    leagueSize={rosters?.length ?? 0}
+                />
             )}
             {hasTeamId() && module === Module.DepthScore && (
                 <DepthScore roster={roster} teamName={teamName} />
