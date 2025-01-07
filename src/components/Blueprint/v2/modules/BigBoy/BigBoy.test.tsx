@@ -1,5 +1,5 @@
 import {act} from 'react';
-import {fireEvent, render, waitFor} from '@testing-library/react';
+import {render, waitFor} from '@testing-library/react';
 import BigBoy from './BigBoy';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {HashRouter, Route, Routes} from 'react-router-dom';
@@ -10,6 +10,7 @@ import {
     PLUS_MAP,
     SELLS,
 } from '../../../../../consts/urlParams';
+import userEvent from '@testing-library/user-event';
 const ROSTER = {
     players: [
         '10235',
@@ -40,6 +41,27 @@ const ROSTER = {
 const NUM_ROSTERS = 10;
 const TEAM_NAME = 'test Team Name';
 
+const DEFAULT_URL_PARAMS =
+    'cornerstones=6770-7547-11631-11620' +
+    '&sells=6770-7547-11631&' +
+    'buys=10229-5849-4866-10859-11565-11638' +
+    '&plusMap=T-F-F-F-F-F' +
+    '&holds=6770-7547' +
+    '&holdComments=comment+1-comment+2' +
+    '&risers=6770-7547-11631' +
+    '&fallers=11620-8130-6813' +
+    '&riserValues=30-20-10' +
+    '&fallerValues=10-20-30' +
+    '&posGrades=7-5-5-7-7-10' +
+    '&qbRank=9th' +
+    '&rbRank=4th' +
+    '&wrRank=4th' +
+    '&teRank=4th' +
+    '&archetype=FUTURE+VALUE' +
+    '&otherSettings=extra+settings' +
+    '&rookieComments=comment+1-comment+2' +
+    '&suggestions=suggestion+1-suggestion+2-suggestion+3-suggestion+4-suggestion+5-suggestion+6';
+
 function wrappedRender(component: JSX.Element) {
     return act(() =>
         render(
@@ -51,7 +73,6 @@ function wrappedRender(component: JSX.Element) {
         )
     );
 }
-
 describe('BigBoy v2', () => {
     it('can toggle preview', async () => {
         const {getByText, getByLabelText, getAllByText} = await wrappedRender(
@@ -63,7 +84,7 @@ describe('BigBoy v2', () => {
         );
         expect(getAllByText(TEAM_NAME)).toHaveLength(1);
         expect(getByLabelText('Show Preview')).not.toBeChecked();
-        act(() => getByText('Show Preview').click());
+        await userEvent.click(getByText('Show Preview'));
 
         expect(getByLabelText('Show Preview')).toBeChecked();
         expect(getAllByText(TEAM_NAME)).toHaveLength(2);
@@ -94,9 +115,7 @@ describe('BigBoy v2', () => {
             );
             const otherSettingsInput = getByLabelText('Other Settings');
             expect(otherSettingsInput).toHaveValue('');
-            fireEvent.input(otherSettingsInput, {
-                target: {value: 'test settings content'},
-            });
+            await userEvent.type(otherSettingsInput, 'test settings content');
             expect(otherSettingsInput).toHaveValue('test settings content');
             expect(
                 container.querySelectorAll('.otherSettings')[0]
@@ -152,7 +171,7 @@ describe('BigBoy v2', () => {
 
             const saveButton = getByText('Save');
             expect(saveButton).toBeInTheDocument();
-            act(() => saveButton.click());
+            await userEvent.click(saveButton);
 
             expect(window.location.href).toContain(
                 `${CORNERSTONES}=6770-7547-11631-8130`
@@ -179,11 +198,11 @@ describe('BigBoy v2', () => {
             expect(plusSwitch).toBeInTheDocument();
 
             // Simulate a user clicking the "plus?" switch
-            act(() => plusSwitch.click());
+            await userEvent.click(plusSwitch);
 
             // Find the "Save" button and simulate a click to save changes
             const saveButton = getByText('Save');
-            act(() => saveButton.click());
+            await userEvent.click(saveButton);
 
             expect(window.location.href).toContain(`${PLUS_MAP}=T-F-F-F-F-F`);
         });
@@ -230,34 +249,67 @@ describe('BigBoy v2', () => {
             expect(window.location.href).toContain(CORNERSTONES);
 
             const clearButton = getByText('Clear');
-            act(() => clearButton.click());
+            await userEvent.click(clearButton);
 
             expect(window.location.href).not.toContain(CORNERSTONES);
+        });
+
+        it('can save rookie pick buys', async () => {
+            const YEAR = '2025';
+            const {getAllByLabelText, getByText, findByText} =
+                await wrappedRender(
+                    <BigBoy
+                        roster={ROSTER}
+                        numRosters={NUM_ROSTERS}
+                        teamName={TEAM_NAME}
+                    />
+                );
+
+            const buyInputs = getAllByLabelText('Buy');
+            expect(buyInputs).toHaveLength(6);
+            await selectAutocompleteOption(
+                buyInputs[0],
+                `${YEAR} Rookie Picks`
+            );
+
+            expect(
+                await findByText(`${YEAR} Rookie Picks`)
+            ).toBeInTheDocument();
+
+            const saveButton = getByText('Save');
+            await userEvent.click(saveButton);
+            expect(window.location.href).toContain(`${BUYS}=RP-${YEAR}`);
+        });
+
+        it('can load rookie pick buys', async () => {
+            const YEAR = '2025';
+            mockSearchParams(DEFAULT_URL_PARAMS.replace('11565', `RP-${YEAR}`));
+            const {container} = await wrappedRender(
+                <BigBoy
+                    roster={ROSTER}
+                    numRosters={NUM_ROSTERS}
+                    teamName={TEAM_NAME}
+                />
+            );
+            await waitFor(() => {
+                expect(container).toHaveTextContent(`${YEAR} Rookie Picks`);
+            });
         });
     });
 });
 
-export function mockSearchParams(
-    paramsString = 'cornerstones=6770-7547-11631-11620' +
-        '&sells=6770-7547-11631&' +
-        'buys=10229-5849-4866-10859-11565-11638' +
-        '&plusMap=T-F-F-F-F-F' +
-        '&holds=6770-7547' +
-        '&holdComments=comment+1-comment+2' +
-        '&risers=6770-7547-11631' +
-        '&fallers=11620-8130-6813' +
-        '&riserValues=30-20-10' +
-        '&fallerValues=10-20-30' +
-        '&posGrades=7-5-5-7-7-10' +
-        '&qbRank=9th' +
-        '&rbRank=4th' +
-        '&wrRank=4th' +
-        '&teRank=4th' +
-        '&archetype=FUTURE+VALUE' +
-        '&otherSettings=extra+settings' +
-        '&rookieComments=comment+1-comment+2' +
-        '&suggestions=suggestion+1-suggestion+2-suggestion+3-suggestion+4-suggestion+5-suggestion+6'
-) {
+const selectAutocompleteOption = async (
+    inputElement: HTMLElement,
+    optionText: string
+) => {
+    // Open dropdown
+    await userEvent.click(inputElement);
+    await userEvent.clear(inputElement);
+    await userEvent.type(inputElement, optionText);
+    await userEvent.keyboard('{Enter}');
+};
+
+export function mockSearchParams(paramsString = DEFAULT_URL_PARAMS) {
     const {pathname} = window.location;
     const url = paramsString ? `${pathname}#/?${paramsString}` : pathname;
     window.history.pushState({}, '', url);
