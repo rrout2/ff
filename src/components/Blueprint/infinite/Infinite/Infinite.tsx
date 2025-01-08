@@ -4,8 +4,6 @@ import {
     useFetchRosters,
     useLeague,
     useLeagueIdFromUrl,
-    usePlayerData,
-    usePlayerValues,
     useProjectedLineup,
     useRoster,
     useRosterSettings,
@@ -19,9 +17,7 @@ import {
 } from '../../v1/modules/cornerstone/CornerstoneModule';
 import {getTeamName, Roster} from '../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
-import RosterTierComponent, {
-    calculateRosterTier,
-} from '../RosterTier/RosterTier';
+import RosterTierComponent from '../RosterTier/RosterTier';
 import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
 import {SUPER_FLEX} from '../../../../consts/fantasy';
 export default function Infinite() {
@@ -36,8 +32,6 @@ export default function Infinite() {
         roster?.players
     );
     const {cornerstones} = useCornerstones(roster);
-    const {getPlayerValue} = usePlayerValues();
-    const playerData = usePlayerData();
     const date = new Date();
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
     return (
@@ -71,13 +65,9 @@ export default function Infinite() {
                 </div>
                 <div className={styles.rosterTierGraphic}>
                     <RosterTierComponent
-                        tier={calculateRosterTier(
-                            isSuperFlex,
-                            rosters?.length ?? 0,
-                            getPlayerValue,
-                            playerData,
-                            roster
-                        )}
+                        isSuperFlex={isSuperFlex}
+                        leagueSize={rosters?.length ?? 0}
+                        roster={roster}
                     />
                 </div>
                 <BuySellHoldComponent roster={roster} />
