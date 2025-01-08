@@ -4,6 +4,8 @@ import {
     useFetchRosters,
     useLeague,
     useLeagueIdFromUrl,
+    usePlayerData,
+    usePlayerValues,
     useProjectedLineup,
     useRoster,
     useRosterSettings,
@@ -34,6 +36,8 @@ export default function Infinite() {
         roster?.players
     );
     const {cornerstones} = useCornerstones(roster);
+    const {getPlayerValue} = usePlayerValues();
+    const playerData = usePlayerData();
     const date = new Date();
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
     return (
@@ -66,7 +70,15 @@ export default function Infinite() {
                     />
                 </div>
                 <div className={styles.rosterTierGraphic}>
-                    <RosterTierComponent tier={calculateRosterTier(roster)} />
+                    <RosterTierComponent
+                        tier={calculateRosterTier(
+                            isSuperFlex,
+                            rosters?.length ?? 0,
+                            getPlayerValue,
+                            playerData,
+                            roster
+                        )}
+                    />
                 </div>
                 <BuySellHoldComponent roster={roster} />
                 <div className={styles.monthYear}>

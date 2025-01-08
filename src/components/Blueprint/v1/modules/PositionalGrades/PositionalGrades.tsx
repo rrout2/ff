@@ -384,15 +384,12 @@ export function gradeByPosition(
 
     const rawGrade = (10 * score) / threshold;
     let unbumpedLimit = 10;
-    switch (pos) {
-        case QB:
-            if (!isSuperFlex) {
-                unbumpedLimit = 8;
-            }
-            break;
-        case TE:
+    if (pos === QB) {
+        if (!isSuperFlex) {
             unbumpedLimit = 8;
-            break;
+        }
+    } else if (pos === TE) {
+        unbumpedLimit = 8;
     }
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
 
