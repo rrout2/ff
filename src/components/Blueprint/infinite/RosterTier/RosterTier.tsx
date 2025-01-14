@@ -82,20 +82,18 @@ const RosterTierComponent = ({
             playerData,
             roster
         );
-        // Weighted average
-        const rosterGrade = isSuperFlex
-            ? (qbGrade + teGrade * 0.5 + wrGrade + rbGrade) / 3.5
-            : (qbGrade * 0.5 + teGrade * 0.5 + wrGrade + rbGrade) / 3;
-        if (rosterGrade <= 4) {
+
+        const rosterGrade = (qbGrade + teGrade + wrGrade + rbGrade) / 4;
+        if (rosterGrade < 4) {
             return RosterTier.Rebuild;
         }
-        if (rosterGrade <= 5) {
+        if (rosterGrade < 5) {
             return RosterTier.Reload;
         }
-        if (rosterGrade <= 7) {
+        if (rosterGrade < 6.5) {
             return RosterTier.Competitive;
         }
-        if (rosterGrade <= 8.5) {
+        if (rosterGrade < 8.5) {
             return RosterTier.Championship;
         }
         return RosterTier.Elite;
