@@ -178,16 +178,25 @@ export function usePlayerValues() {
     );
 
     const getPlayerValue = (playerName: string) => {
-        const playerValue = playerValues.find(pv => pv.Player === playerName);
+        let playerValue = playerValues.find(pv => pv.Player === playerName);
         if (playerValue) return playerValue;
 
-        if (playerName.includes("'")) {
-            return playerValues.find(
-                pv => pv.Player === playerName.replaceAll("'", '')
-            );
-        }
+        const playerNickname = checkForNickname(playerName);
+        playerValue = playerValues.find(pv => pv.Player === playerNickname);
+        if (playerValue) return playerValue;
 
-        return undefined;
+        playerValue = playerValues.find(
+            pv =>
+                pv.Player.replace(/\W/g, '').toLowerCase() ===
+                playerName.replace(/\W/g, '').toLowerCase()
+        );
+        if (playerValue) return playerValue;
+
+        return playerValues.find(
+            pv =>
+                pv.Player.replace(/\W/g, '').toLowerCase() ===
+                playerNickname.replace(/\W/g, '').toLowerCase()
+        );
     };
 
     const getBump = (playerName: string, superFlex: boolean) => {
@@ -215,41 +224,52 @@ type adpDatum = {
 
 export function useAdpData() {
     const [adpData] = useState(adp as adpDatum[]);
-    const checkForNickname = (playerName: string) => {
-        if (playerName === 'Tank Dell') {
-            playerName = 'Nathaniel Dell';
-        } else if (playerName === 'Chig Okonkwo') {
-            playerName = 'Chigoziem Okonkwo';
-        } else if (playerName === 'Hollywood Brown') {
-            playerName = 'Marquise Brown';
-        }
-        return playerName;
-    };
     const getAdp = (playerName: string): number => {
-        playerName = checkForNickname(playerName);
-        const adp = adpData.findIndex(
+        const playerNickname = checkForNickname(playerName);
+        let adp = adpData.findIndex(
             a =>
                 a.player_name.replace(/\W/g, '').toLowerCase() ===
                 playerName.replace(/\W/g, '').toLowerCase()
         );
-        if (adp < 0) return Infinity;
-
-        return adp + 1;
+        if (adp >= 0) {
+            return adp + 1;
+        }
+        adp = adpData.findIndex(
+            a =>
+                a.player_name.replace(/\W/g, '').toLowerCase() ===
+                playerNickname.replace(/\W/g, '').toLowerCase()
+        );
+        if (adp >= 0) {
+            return adp + 1;
+        }
+        return Infinity;
     };
     const getPositionalAdp = (playerName: string) => {
-        playerName = checkForNickname(playerName);
+        const playerNickname = checkForNickname(playerName);
         const idx = getAdp(playerName) - 1;
         if (idx >= adpData.length) return Infinity;
 
-        const adp = adpData
+        let adp = adpData
             .filter(player => player.Position === adpData[idx].Position)
             .findIndex(
                 a =>
                     a.player_name.replace(/\W/g, '').toLowerCase() ===
                     playerName.replace(/\W/g, '').toLowerCase()
             );
-        if (adp < 0) return Infinity;
-        return adp + 1;
+        if (adp >= 0) {
+            return adp + 1;
+        }
+        adp = adpData
+            .filter(player => player.Position === adpData[idx].Position)
+            .findIndex(
+                a =>
+                    a.player_name.replace(/\W/g, '').toLowerCase() ===
+                    playerNickname.replace(/\W/g, '').toLowerCase()
+            );
+        if (adp >= 0) {
+            return adp + 1;
+        }
+        return Infinity;
     };
     const sortByAdp = (a: Player, b: Player): number =>
         getAdp(`${a.first_name} ${a.last_name}`) -
@@ -257,6 +277,21 @@ export function useAdpData() {
 
     return {adpData, getAdp, sortByAdp, getPositionalAdp};
 }
+
+const checkForNickname = (playerName: string) => {
+    switch (playerName) {
+        case 'Tank Dell':
+            return 'Nathaniel Dell';
+        case 'Chig Okonkwo':
+            return 'Chigoziem Okonkwo';
+        case 'Hollywood Brown':
+            return 'Marquise Brown';
+        case 'Tyrone Tracy':
+            return 'Tyrone Tracy Jr';
+        default:
+            return playerName;
+    }
+};
 
 export function usePlayer(playerId: string) {
     const playerData = usePlayerData();
