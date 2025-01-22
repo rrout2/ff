@@ -2,6 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import adp from '../data/adp.json';
 import playerValuesJson from '../data/player_values_01072025.json';
+import buySellsData from '../data/buys_sells_with_ids_01212025.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import {
     League,
@@ -54,6 +55,58 @@ export function useNflSchedule() {
     const [nflSchedule] = useState<NFLSeasonSchedule>(nflScheduleJson);
 
     return nflSchedule;
+}
+
+type BuySellVerdict = {
+    name: string;
+    alt_name: string;
+    position: string;
+    team: string;
+    adp: number;
+    domain_rank: number;
+    difference: number;
+    verdict: string;
+    explanation: string;
+    player_id: string;
+};
+
+export function useBuySellData() {
+    const [buySells] = useState(buySellsData as unknown as BuySellVerdict[]);
+    const [qbBuys, setQbBuys] = useState<BuySellVerdict[]>([]);
+    const [rbBuys, setRbBuys] = useState<BuySellVerdict[]>([]);
+    const [wrBuys, setWrBuys] = useState<BuySellVerdict[]>([]);
+    const [teBuys, setTeBuys] = useState<BuySellVerdict[]>([]);
+    useEffect(() => {
+        const qbBuys = buySells.filter(
+            b =>
+                b.position === QB &&
+                (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
+        );
+        setQbBuys(qbBuys);
+
+        const rbBuys = buySells.filter(
+            b =>
+                b.position === RB &&
+                (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
+        );
+        setRbBuys(rbBuys);
+
+        const wrBuys = buySells.filter(
+            b =>
+                b.position === WR &&
+                (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
+        );
+        setWrBuys(wrBuys);
+
+        const teBuys = buySells.filter(
+            b =>
+                b.position === TE &&
+                (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
+        );
+        setTeBuys(teBuys);
+    }, [buySells]);
+
+    return {buySells, qbBuys, rbBuys, wrBuys, teBuys};
 }
 
 export interface PlayerData {

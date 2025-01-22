@@ -70,7 +70,11 @@ export default function Infinite() {
                         roster={roster}
                     />
                 </div>
-                <BuySellHoldComponent roster={roster} />
+                <BuySellHoldComponent
+                    isSuperFlex={isSuperFlex}
+                    leagueSize={rosters?.length ?? 0}
+                    roster={roster}
+                />
                 <div className={styles.monthYear}>
                     {date.toLocaleDateString(undefined, {
                         month: 'long',
@@ -98,8 +102,16 @@ const TeamNameComponent = ({teamName}: {teamName?: string}) => {
     );
 };
 
-const BuySellHoldComponent = ({roster}: {roster?: Roster}) => {
-    const {buys, sells, holds} = useBuySells(roster);
+const BuySellHoldComponent = ({
+    isSuperFlex,
+    leagueSize,
+    roster,
+}: {
+    isSuperFlex: boolean;
+    leagueSize: number;
+    roster?: Roster;
+}) => {
+    const {buys, sells, holds} = useBuySells(isSuperFlex, leagueSize, roster);
 
     const column1 = '640px';
     const column2 = '1002px';
