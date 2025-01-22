@@ -74,7 +74,12 @@ export function usePositionalGrades(roster?: Roster, leagueSize?: number) {
         setWr(newWr);
         setTe(newTe);
         setDepth(newDepth);
-        setOverall(Math.round((newQb + newRb + newWr + newTe + newDepth) / 5));
+        setOverall(
+            Math.min(
+                10,
+                Math.round((newQb + newRb + newWr + newTe + newDepth) / 5) + 1
+            )
+        );
     }, [playerData, roster, bench, getPlayerValue]);
     return {
         overall,
