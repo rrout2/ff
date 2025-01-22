@@ -122,11 +122,21 @@ function GraphicComponent({
         idx: number,
         arr: string[]
     ) => {
-        const player = playerData![currPlayerId];
-        const displayValue = !player
-            ? currPlayerId
-            : `${player.first_name} ${player.last_name}`;
+        let displayValue;
+        if (
+            idx > 0 &&
+            currPlayerId.startsWith('Rookie Pick ') &&
+            arr[idx - 1].startsWith('Rookie Pick ')
+        ) {
+            displayValue = currPlayerId.substring('Rookie Pick '.length);
+        } else {
+            const player = playerData![currPlayerId];
+            displayValue = !player
+                ? currPlayerId
+                : `${player.first_name} ${player.last_name}`;
+        }
         if (idx + 1 !== arr.length) {
+            // don't add a slash at the end
             return `${acc}${displayValue}/`;
         }
         return `${acc}${displayValue}`;
@@ -138,11 +148,21 @@ function GraphicComponent({
         idx: number,
         arr: string[]
     ) => {
-        const player = playerData![currPlayerId];
-        const displayValue = !player
-            ? currPlayerId
-            : `${player.first_name[0]}. ${player.last_name}`;
+        let displayValue;
+        if (
+            idx > 0 &&
+            currPlayerId.startsWith('Rookie Pick ') &&
+            arr[idx - 1].startsWith('Rookie Pick ')
+        ) {
+            displayValue = currPlayerId.substring('Rookie Pick '.length);
+        } else {
+            const player = playerData![currPlayerId];
+            displayValue = !player
+                ? currPlayerId
+                : `${player.first_name[0]}. ${player.last_name}`;
+        }
         if (idx + 1 !== arr.length) {
+            // don't add a slash at the end
             return `${acc}${displayValue}/`;
         }
         return `${acc}${displayValue}`;
