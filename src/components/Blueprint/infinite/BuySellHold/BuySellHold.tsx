@@ -7,6 +7,14 @@ import {RosterTier, useRosterTierAndPosGrades} from '../RosterTier/RosterTier';
 import {QB, RB, TE, WR} from '../../../../consts/fantasy';
 import {useBuySellData} from '../../../../hooks/hooks';
 
+const ONE_QB_ALLOWSET = new Set<string>([
+    'Josh Allen',
+    'Jayden Daniels',
+    'Lamar Jackson',
+    'Drake Maye',
+    'Kyler Murray',
+]);
+
 enum BuySellType {
     SoftBuy,
     HardBuy,
@@ -31,13 +39,32 @@ export function useBuySells(
     const [buys, setBuys] = useState<BuySellTileProps[]>([]);
     const [sells, setSells] = useState<BuySellTileProps[]>([]);
     const [holds, setHolds] = useState<BuySellTileProps[]>([]);
-    const {qbBuys, rbBuys, wrBuys, teBuys} = useBuySellData();
+    const {
+        qbBuys,
+        rbBuys,
+        wrBuys,
+        teBuys,
+        sells: allSells,
+        holds: allHolds,
+    } = useBuySellData();
     useEffect(() => {
-        if (!roster) return;
+        if (!roster || tier === RosterTier.Unknown) return;
         setBuys(calculateBuys());
-        setSells(calculateSells(roster));
-        setHolds(calculateHolds(roster));
-    }, [qbBuys, rbBuys, wrBuys, teBuys, qbGrade, rbGrade, wrGrade, teGrade]);
+        setSells(calculateSells());
+        setHolds(calculateHolds());
+    }, [
+        qbBuys,
+        rbBuys,
+        wrBuys,
+        teBuys,
+        qbGrade,
+        rbGrade,
+        wrGrade,
+        teGrade,
+        allSells,
+        allHolds,
+        tier,
+    ]);
 
     /**
      * Sorts the positions (QB, RB, WR, TE) in order of best grade to worst.
@@ -68,22 +95,92 @@ export function useBuySells(
             });
     }
 
-    function numToTarget(grade: number) {
-        if (grade >= 8) {
-            return 1;
+    interface PositionalScores {
+        [position: string]: number;
+    }
+
+    interface TradeTargets {
+        [position: string]: number;
+    }
+
+    /**
+     * Given a set of position scores and a roster tier, this function will calculate the number of targets to assign to each position.
+     * The number of targets is based on the criteria below, and is assigned to the positions in order of highest need (lowest score).
+     * - If the score is 8 or higher, assign 0 or 1 target.
+     * - If the score is 6 or higher, assign 1 or 2 targets.
+     * - If the score is below 6, assign 2 or 3 targets.
+     * - Ensure that no more than 1 target is assigned to QB or TE.
+     * - If there are remaining targets, assign them to WR.
+     * @param scores an object with keys for each position and values of the scores for that position
+     * @param tier the tier of the roster
+     * @returns an object with the number of targets for each position
+     */
+    function calculateNumTradeTargets(
+        scores: PositionalScores,
+        tier: RosterTier
+    ): TradeTargets {
+        const tradeTargets: TradeTargets = {QB: 0, RB: 0, WR: 0, TE: 0};
+        let remainingTargets = 4;
+
+        // Helper function to assign targets to a position
+        const assignTargets = (position: string, min: number, max: number) => {
+            const maxAssignable = Math.min(max, remainingTargets);
+            tradeTargets[position] = maxAssignable;
+            remainingTargets -= maxAssignable;
+        };
+
+        // Sort positions by scores in ascending order of need (lower score = higher need)
+        const sortedPositions = Object.entries(scores)
+            .sort((a, b) => a[1] - b[1])
+            .map(([position]) => position);
+
+        // Assign targets based on the criteria
+        for (const position of sortedPositions) {
+            const score = scores[position];
+            if (remainingTargets === 0) break;
+            if (
+                position === RB &&
+                (tier === RosterTier.Rebuild || tier === RosterTier.Reload)
+            ) {
+                assignTargets(position, 0, 0);
+                continue;
+            }
+
+            if (score >= 8) {
+                assignTargets(position, 0, 1);
+            } else if (score >= 6) {
+                assignTargets(position, 1, 2);
+            } else {
+                assignTargets(position, 2, 3);
+            }
+
+            // Ensure no more than 1 QB or TE target
+            if (
+                (position === QB || position === TE) &&
+                tradeTargets[position] > 1
+            ) {
+                remainingTargets += tradeTargets[position] - 1;
+                tradeTargets[position] = 1;
+            }
         }
-        if (grade >= 6) {
-            return 2;
+        if (remainingTargets > 0) {
+            tradeTargets.WR += remainingTargets;
         }
-        return 3;
+
+        return tradeTargets;
     }
 
     function calculateBuys(): BuySellTileProps[] {
         const buys: BuySellTileProps[] = [];
-        const rbTargets = numToTarget(rbGrade);
-        const qbTargets = numToTarget(qbGrade);
-        const wrTargets = numToTarget(wrGrade);
-        const teTargets = numToTarget(teGrade);
+        const {
+            QB: qbTargets,
+            RB: rbTargets,
+            WR: wrTargets,
+            TE: teTargets,
+        } = calculateNumTradeTargets(
+            {QB: qbGrade, RB: rbGrade, WR: wrGrade, TE: teGrade},
+            tier
+        );
         const gradeOrder = getPositionalOrder({
             qbGrade,
             rbGrade,
@@ -91,86 +188,18 @@ export function useBuySells(
             teGrade,
         });
         for (const pos of gradeOrder) {
-            let numAdded = 0;
-            let i = 0;
             switch (pos) {
                 case QB:
-                    while (numAdded < qbTargets) {
-                        if (roster?.players.includes(qbBuys[i].player_id)) {
-                            i++;
-                            continue;
-                        }
-                        buys.push({
-                            playerId: qbBuys[i].player_id,
-                            type:
-                                qbBuys[i].verdict === 'Soft Buy'
-                                    ? BuySellType.SoftBuy
-                                    : BuySellType.HardBuy,
-                            reason: qbBuys[i].explanation,
-                        });
-                        numAdded++;
-                        i++;
-                    }
+                    buys.push(...calcQbBuys(qbTargets));
                     break;
                 case RB:
-                    if (
-                        tier === RosterTier.Rebuild ||
-                        tier === RosterTier.Reload
-                    ) {
-                        continue;
-                    }
-                    while (numAdded < rbTargets) {
-                        if (roster?.players.includes(rbBuys[i].player_id)) {
-                            i++;
-                            continue;
-                        }
-                        buys.push({
-                            playerId: rbBuys[i].player_id,
-                            type:
-                                rbBuys[i].verdict === 'Soft Buy'
-                                    ? BuySellType.SoftBuy
-                                    : BuySellType.HardBuy,
-                            reason: rbBuys[i].explanation,
-                        });
-                        numAdded++;
-                        i++;
-                    }
+                    buys.push(...calcRbBuys(rbTargets));
                     break;
                 case WR:
-                    while (numAdded < wrTargets) {
-                        if (roster?.players.includes(wrBuys[i].player_id)) {
-                            i++;
-                            continue;
-                        }
-                        buys.push({
-                            playerId: wrBuys[i].player_id,
-                            type:
-                                wrBuys[i].verdict === 'Soft Buy'
-                                    ? BuySellType.SoftBuy
-                                    : BuySellType.HardBuy,
-                            reason: wrBuys[i].explanation,
-                        });
-                        numAdded++;
-                        i++;
-                    }
+                    buys.push(...calcWrBuys(wrTargets));
                     break;
                 case TE:
-                    while (numAdded < teTargets) {
-                        if (roster?.players.includes(teBuys[i].player_id)) {
-                            i++;
-                            continue;
-                        }
-                        buys.push({
-                            playerId: teBuys[i].player_id,
-                            type:
-                                teBuys[i].verdict === 'Soft Buy'
-                                    ? BuySellType.SoftBuy
-                                    : BuySellType.HardBuy,
-                            reason: teBuys[i].explanation,
-                        });
-                        numAdded++;
-                        i++;
-                    }
+                    buys.push(...calcTeBuys(teTargets));
                     break;
                 default:
                     throw new Error('Unknown position ' + pos);
@@ -179,30 +208,148 @@ export function useBuySells(
         return buys;
     }
 
-    return {buys, sells, holds};
-}
-function calculateSells(roster?: Roster): BuySellTileProps[] {
-    if (!roster) return [];
-    return [
-        {
-            playerId: roster.players[0],
-            type: BuySellType.SoftSell,
-            reason: 'a reason',
-        },
-        {
-            playerId: roster.players[1],
-            type: BuySellType.HardSell,
-            reason: 'another reason',
-        },
-    ];
-}
+    function calcQbBuys(numToBuy: number): BuySellTileProps[] {
+        if (
+            // Only buy QBs if competitive in 1QB leagues
+            tier !== RosterTier.Competitive &&
+            tier !== RosterTier.Championship &&
+            tier !== RosterTier.Elite &&
+            !isSuperFlex
+        ) {
+            return [];
+        }
+        const toBuy: BuySellTileProps[] = [];
+        for (const qbBuy of qbBuys) {
+            if (toBuy.length >= numToBuy) {
+                break;
+            }
+            if (roster?.players.includes(qbBuy.player_id)) {
+                continue;
+            }
+            if (!isSuperFlex && !ONE_QB_ALLOWSET.has(qbBuy.name)) {
+                continue;
+            }
+            if (tier === RosterTier.Rebuild || tier === RosterTier.Reload) {
+                if (qbBuy.age >= 26) {
+                    continue;
+                }
+            }
+            toBuy.push({
+                playerId: qbBuy.player_id,
+                type:
+                    qbBuy.verdict === 'Soft Buy'
+                        ? BuySellType.SoftBuy
+                        : BuySellType.HardBuy,
+                reason: qbBuy.explanation,
+            });
+        }
+        return toBuy;
+    }
 
-function calculateHolds(roster?: Roster): BuySellTileProps[] {
-    if (!roster) return [];
-    return roster.players.slice(2, 4).map(p => ({
-        playerId: p,
-        type: BuySellType.Hold,
-    }));
+    function calcRbBuys(numToBuy: number): BuySellTileProps[] {
+        if (tier === RosterTier.Rebuild || tier === RosterTier.Reload) {
+            return [];
+        }
+        const toBuy: BuySellTileProps[] = [];
+        for (const rbBuy of rbBuys) {
+            if (toBuy.length >= numToBuy) {
+                break;
+            }
+            if (roster?.players.includes(rbBuy.player_id)) {
+                continue;
+            }
+            toBuy.push({
+                playerId: rbBuy.player_id,
+                type:
+                    rbBuy.verdict === 'Soft Buy'
+                        ? BuySellType.SoftBuy
+                        : BuySellType.HardBuy,
+                reason: rbBuy.explanation,
+            });
+        }
+        return toBuy;
+    }
+
+    function calcWrBuys(numToBuy: number): BuySellTileProps[] {
+        const toBuy: BuySellTileProps[] = [];
+        for (const wrBuy of wrBuys) {
+            if (toBuy.length >= numToBuy) {
+                break;
+            }
+            if (roster?.players.includes(wrBuy.player_id)) {
+                continue;
+            }
+            if (tier === RosterTier.Rebuild || tier === RosterTier.Reload) {
+                if (wrBuy.age >= 26) {
+                    continue;
+                }
+            }
+            toBuy.push({
+                playerId: wrBuy.player_id,
+                type:
+                    wrBuy.verdict === 'Soft Buy'
+                        ? BuySellType.SoftBuy
+                        : BuySellType.HardBuy,
+                reason: wrBuy.explanation,
+            });
+        }
+        return toBuy;
+    }
+
+    function calcTeBuys(numToBuy: number): BuySellTileProps[] {
+        const toBuy: BuySellTileProps[] = [];
+        for (const teBuy of teBuys) {
+            if (toBuy.length >= numToBuy) {
+                break;
+            }
+            if (roster?.players.includes(teBuy.player_id)) {
+                continue;
+            }
+            if (tier === RosterTier.Rebuild || tier === RosterTier.Reload) {
+                if (teBuy.age >= 26) {
+                    continue;
+                }
+            }
+            toBuy.push({
+                playerId: teBuy.player_id,
+                type:
+                    teBuy.verdict === 'Soft Buy'
+                        ? BuySellType.SoftBuy
+                        : BuySellType.HardBuy,
+                reason: teBuy.explanation,
+            });
+        }
+        return toBuy;
+    }
+
+    function calculateSells(): BuySellTileProps[] {
+        if (!roster) return [];
+        return allSells
+            .filter(sell => roster.players.includes(sell.player_id))
+            .slice(0, 2)
+            .map(sell => ({
+                playerId: sell.player_id,
+                type:
+                    sell.verdict === 'Soft Sell'
+                        ? BuySellType.SoftSell
+                        : BuySellType.HardSell,
+                reason: sell.explanation,
+            }));
+    }
+
+    function calculateHolds(): BuySellTileProps[] {
+        if (!roster) return [];
+        return allHolds
+            .filter(hold => roster.players.includes(hold.player_id))
+            .slice(0, 2)
+            .map(hold => ({
+                playerId: hold.player_id,
+                type: BuySellType.Hold,
+                reason: hold.explanation,
+            }));
+    }
+
+    return {buys, sells, holds};
 }
 
 function mapToImgSrc(type: BuySellType) {

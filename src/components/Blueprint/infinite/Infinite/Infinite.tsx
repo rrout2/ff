@@ -15,14 +15,22 @@ import {
     useCornerstones,
     GraphicComponent as CornerstonesGraphic,
 } from '../../v1/modules/cornerstone/CornerstoneModule';
-import {getTeamName, Roster} from '../../../../sleeper-api/sleeper-api';
+import {
+    getAllUsers,
+    getTeamName,
+    Roster,
+    User,
+} from '../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
 import RosterTierComponent from '../RosterTier/RosterTier';
 import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
 import {SUPER_FLEX} from '../../../../consts/fantasy';
+import {teamSelectComponent} from '../../../Team/TeamPage/TeamPage';
+import {useEffect, useState} from 'react';
+import {NONE_TEAM_ID} from '../../../../consts/urlParams';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
-    const [teamId] = useTeamIdFromUrl();
+    const [teamId, setTeamId] = useTeamIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
     const {data: rosters} = useFetchRosters(leagueId);
@@ -32,14 +40,49 @@ export default function Infinite() {
         roster?.players
     );
     const {cornerstones} = useCornerstones(roster);
+    const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [specifiedUser, setSpecifiedUser] = useState<User>();
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
+            return;
+        }
+        setSpecifiedUser(allUsers?.[+teamId]);
+    }, [allUsers, teamId]);
+
+    useEffect(() => {
+        if (!allUsers.length || !hasTeamId()) {
+            return;
+        }
+        if (+teamId >= allUsers.length) {
+            // if the teamId is out of bounds, reset it
+            setTeamId('0');
+        }
+    }, [allUsers, teamId]);
+
+    useEffect(() => {
+        if (!leagueId || !rosters) return;
+        const ownerIds = new Set(rosters.map(r => r.owner_id));
+        getAllUsers(leagueId).then(users =>
+            // filter to users included in owners.
+            // some leagues have users with no associated owner I think.
+            setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
+        );
+    }, [leagueId, rosters]);
     const date = new Date();
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
+    function hasTeamId() {
+        return teamId !== '' && teamId !== NONE_TEAM_ID;
+    }
     return (
         <>
             <ExportButton
                 className={styles.fullBlueprint}
                 pngName={`${getTeamName(user)}_infinite.png`}
             />
+            {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
+                margin: '4px',
+                maxWidth: '800px',
+            })}
             <div className={styles.fullBlueprint}>
                 <div className={styles.startersGraphic}>
                     <StartersGraphic
@@ -53,7 +96,15 @@ export default function Infinite() {
                         transparent={true}
                     />
                 </div>
-                <div className={styles.benchStringGraphic}>{benchString}</div>
+                <div
+                    className={
+                        benchString.length < 321
+                            ? styles.benchStringGraphic
+                            : styles.benchStringGraphicSmaller
+                    }
+                >
+                    {benchString}
+                </div>
                 <TeamNameComponent teamName={getTeamName(user)} />
                 <div className={styles.positionalGradesGraphic}>
                     <PositionalGradesGraphic

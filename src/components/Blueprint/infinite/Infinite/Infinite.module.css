@@ -35,6 +35,18 @@
     width: 450px;
 }
 
+.benchStringGraphicSmaller {
+    position: absolute;
+    left: 60px;
+    top: 1100px;
+
+    color: white;
+    font-family: 'Acumin Pro ExtraCondensed';
+    font-size: 23px;
+    text-align: center;
+    width: 450px;
+}
+
 .positionalGradesGraphic {
     position: absolute;
     left: 720px;

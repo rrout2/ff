@@ -39,13 +39,12 @@ function PlayersToTargetModule(props: {
     );
 }
 
-export function PlayerTarget({
-    playerId,
-    smaller,
-}: {
+interface PlayerTargetProps {
     playerId: string;
     smaller?: boolean;
-}) {
+}
+
+export function PlayerTarget({playerId, smaller}: PlayerTargetProps) {
     const playerData = usePlayerData();
     if (!playerData) {
         return <></>;
@@ -62,8 +61,10 @@ export function PlayerTarget({
         ? rookiePickIdToString(playerId)
         : `${player.first_name} ${player.last_name}`;
 
+    const longNameLimit = smaller ? 14 : 15;
+
     const displayName =
-        !isRookiePick && fullName.length >= 15
+        !isRookiePick && fullName.length >= longNameLimit
             ? `${player.first_name[0]}. ${player.last_name}`
             : fullName;
 

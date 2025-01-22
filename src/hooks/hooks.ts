@@ -68,6 +68,7 @@ type BuySellVerdict = {
     verdict: string;
     explanation: string;
     player_id: string;
+    age: number;
 };
 
 export function useBuySellData() {
@@ -76,37 +77,64 @@ export function useBuySellData() {
     const [rbBuys, setRbBuys] = useState<BuySellVerdict[]>([]);
     const [wrBuys, setWrBuys] = useState<BuySellVerdict[]>([]);
     const [teBuys, setTeBuys] = useState<BuySellVerdict[]>([]);
+    const [sells, setSells] = useState<BuySellVerdict[]>([]);
+    const [holds, setHolds] = useState<BuySellVerdict[]>([]);
     useEffect(() => {
         const qbBuys = buySells.filter(
             b =>
                 b.position === QB &&
                 (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
         );
-        setQbBuys(qbBuys);
 
         const rbBuys = buySells.filter(
             b =>
                 b.position === RB &&
                 (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
         );
-        setRbBuys(rbBuys);
 
         const wrBuys = buySells.filter(
             b =>
                 b.position === WR &&
                 (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
         );
-        setWrBuys(wrBuys);
 
         const teBuys = buySells.filter(
             b =>
                 b.position === TE &&
                 (b.verdict === 'Soft Buy' || b.verdict === 'Hard Buy')
         );
+        const sells = buySells
+            .filter(b => b.verdict === 'Soft Sell' || b.verdict === 'Hard Sell')
+            .sort((a, b) => a.difference - b.difference);
+
+        const holds = buySells
+            .filter(
+                b =>
+                    b.verdict === 'Hold' ||
+                    b.verdict === 'Hard Buy' ||
+                    b.verdict === 'Soft Buy'
+            )
+            .sort((a, b) => b.difference - a.difference);
+        shuffle(qbBuys);
+        shuffle(rbBuys);
+        shuffle(wrBuys);
+        shuffle(teBuys);
+        setQbBuys(qbBuys);
+        setRbBuys(rbBuys);
+        setWrBuys(wrBuys);
         setTeBuys(teBuys);
+        setSells(sells);
+        setHolds(holds);
     }, [buySells]);
 
-    return {buySells, qbBuys, rbBuys, wrBuys, teBuys};
+    function shuffle(array: BuySellVerdict[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    return {buySells, qbBuys, rbBuys, wrBuys, teBuys, sells, holds};
 }
 
 export interface PlayerData {
