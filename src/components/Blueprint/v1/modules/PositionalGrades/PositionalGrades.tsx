@@ -332,6 +332,9 @@ function scoreAndBumpByPosition(
         pos,
         isSuperFlex
     );
+    if (pos === QB) {
+        console.log({pos, multiplier});
+    }
 
     return {
         score:
@@ -355,6 +358,10 @@ function scoreAndBumpByPosition(
                     } else {
                         totalBump += +playerValue.oneQbBonus;
                     }
+                    console.log({
+                        fullName,
+                        value: playerValue.Value,
+                    });
                     return acc + +playerValue.Value;
                 }, 0),
         bump: totalBump,
@@ -409,6 +416,7 @@ export function gradeByPosition(
         // may be able to remove this check
         unbumpedLimit = 8;
     }
+    console.log({pos, score, threshold, rawGrade, bump});
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
     return Math.min(cappedGrade + bump, 10);
 }
