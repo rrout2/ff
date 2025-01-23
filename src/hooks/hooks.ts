@@ -288,14 +288,28 @@ const checkForNickname = (playerName: string) => {
     switch (playerName) {
         case 'Tank Dell':
             return 'Nathaniel Dell';
+        case 'Nathaniel Dell':
+            return 'Tank Dell';
         case 'Chig Okonkwo':
             return 'Chigoziem Okonkwo';
+        case 'Chigoziem Okonkwo':
+            return 'Chig Okonkwo';
         case 'Hollywood Brown':
             return 'Marquise Brown';
+        case 'Marquise Brown':
+            return 'Hollywood Brown';
         case 'Tyrone Tracy':
             return 'Tyrone Tracy Jr';
+        case 'Tyrone Tracy Jr':
+            return 'Tyrone Tracy';
         case 'Kenneth Walker':
             return 'Kenneth Walker III';
+        case 'Kenneth Walker III':
+            return 'Kenneth Walker';
+        case 'Michael Penix':
+            return 'Michael Penix Jr.';
+        case 'Michael Penix Jr.':
+            return 'Michael Penix';
         default:
             return playerName;
     }
