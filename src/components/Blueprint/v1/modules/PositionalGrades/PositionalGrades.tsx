@@ -332,9 +332,7 @@ function scoreAndBumpByPosition(
         pos,
         isSuperFlex
     );
-    if (pos === QB) {
-        console.log({pos, multiplier});
-    }
+    console.log({pos, multiplier});
 
     return {
         score:
