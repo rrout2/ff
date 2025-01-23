@@ -14,7 +14,6 @@ export function useCornerstones(roster?: Roster) {
     );
     function isCornerstone(player?: Player) {
         if (!player) return false;
-        // this is probably pretty brittle
         const adp = getAdp(`${player.first_name} ${player.last_name}`);
         switch (player.position) {
             case QB:

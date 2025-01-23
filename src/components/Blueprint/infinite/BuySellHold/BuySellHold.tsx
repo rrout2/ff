@@ -5,14 +5,28 @@ import styles from './BuySellHold.module.css';
 import {hardBuy, hardSell, softBuy, softSell} from '../../../../consts/images';
 import {RosterTier, useRosterTierAndPosGrades} from '../RosterTier/RosterTier';
 import {QB, RB, TE, WR} from '../../../../consts/fantasy';
-import {useAdpData, useBuySellData} from '../../../../hooks/hooks';
+import {
+    useAdpData,
+    useBuySellData,
+    usePlayerData,
+} from '../../../../hooks/hooks';
 
+// Only QB buys allowed in 1QB leagues.
 const ONE_QB_ALLOWSET = new Set<string>([
     'Josh Allen',
     'Jayden Daniels',
     'Lamar Jackson',
     'Drake Maye',
     'Kyler Murray',
+]);
+
+// No TE buys if team has one of these players.
+const TE_DISALLOWSET = new Set<string>([
+    'Brock Bowers',
+    'George Kittle',
+    'Trey McBride',
+    'TJ Hockenson',
+    'Sam LaPorta',
 ]);
 
 enum BuySellType {
@@ -47,8 +61,9 @@ export function useBuySells(
         sells: allSells,
         holds: allHolds,
     } = useBuySellData();
+    const playerData = usePlayerData();
     useEffect(() => {
-        if (!roster || tier === RosterTier.Unknown) return;
+        if (!roster || tier === RosterTier.Unknown || !playerData) return;
         setBuys(calculateBuys());
         setSells(calculateSells());
         setHolds(calculateHolds());
@@ -64,6 +79,7 @@ export function useBuySells(
         allSells,
         allHolds,
         tier,
+        playerData,
     ]);
     const {getAdp} = useAdpData();
     let addedBelow100 = false;
@@ -125,7 +141,7 @@ export function useBuySells(
         let remainingTargets = 4;
 
         // Helper function to assign targets to a position
-        const assignTargets = (position: string, min: number, max: number) => {
+        const assignTargets = (position: string, max: number) => {
             const maxAssignable = Math.min(max, remainingTargets);
             tradeTargets[position] = maxAssignable;
             remainingTargets -= maxAssignable;
@@ -144,16 +160,28 @@ export function useBuySells(
                 position === RB &&
                 (tier === RosterTier.Rebuild || tier === RosterTier.Reload)
             ) {
-                assignTargets(position, 0, 0);
+                assignTargets(position, 0);
                 continue;
             }
 
+            if (position === TE) {
+                const hasEliteTe = roster?.players
+                    .map(p => playerData![p])
+                    .find(p =>
+                        TE_DISALLOWSET.has(`${p.first_name} ${p.last_name}`)
+                    );
+                if (hasEliteTe) {
+                    assignTargets(position, 0);
+                    continue;
+                }
+            }
+
             if (score >= 8) {
-                assignTargets(position, 0, 1);
+                assignTargets(position, 1);
             } else if (score >= 6) {
-                assignTargets(position, 1, 2);
+                assignTargets(position, 2);
             } else {
-                assignTargets(position, 2, 3);
+                assignTargets(position, 3);
             }
 
             // Ensure no more than 1 QB or TE target

@@ -182,7 +182,6 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
     );
     function isCornerstone(player?: Player) {
         if (!player) return false;
-        // this is probably pretty brittle
         const adp = getAdp(`${player.first_name} ${player.last_name}`);
         return adp <= 75 && adp >= 0;
     }
