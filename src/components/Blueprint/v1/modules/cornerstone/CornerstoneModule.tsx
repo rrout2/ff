@@ -1,7 +1,7 @@
 import styles from './CornerstoneModule.module.css';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../../shared/ExportButton';
-import {FANTASY_POSITIONS} from '../../../../../consts/fantasy';
+import {FANTASY_POSITIONS, QB, RB, TE, WR} from '../../../../../consts/fantasy';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {SetStateAction, useEffect, useState} from 'react';
@@ -16,7 +16,18 @@ export function useCornerstones(roster?: Roster) {
         if (!player) return false;
         // this is probably pretty brittle
         const adp = getAdp(`${player.first_name} ${player.last_name}`);
-        return adp <= 75 && adp >= 0;
+        switch (player.position) {
+            case QB:
+                return adp <= 75;
+            case RB:
+                return adp <= 75 && player.age < 27;
+            case WR:
+                return adp <= 75 && player.age < 28;
+            case TE:
+                return adp <= 75 && player.age < 29;
+            default:
+                return false;
+        }
     }
 
     useEffect(() => {
