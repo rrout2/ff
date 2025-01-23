@@ -289,6 +289,8 @@ const checkForNickname = (playerName: string) => {
             return 'Marquise Brown';
         case 'Tyrone Tracy':
             return 'Tyrone Tracy Jr';
+        case 'Kenneth Walker':
+            return 'Kenneth Walker III';
         default:
             return playerName;
     }
