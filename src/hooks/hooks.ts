@@ -79,6 +79,7 @@ export function useBuySellData() {
     const [teBuys, setTeBuys] = useState<BuySellVerdict[]>([]);
     const [sells, setSells] = useState<BuySellVerdict[]>([]);
     const [holds, setHolds] = useState<BuySellVerdict[]>([]);
+    const {sortNamesByAdp} = useAdpData();
     useEffect(() => {
         const qbBuys = buySells.filter(
             b =>
@@ -105,7 +106,7 @@ export function useBuySellData() {
         );
         const sells = buySells
             .filter(b => b.verdict === 'Soft Sell' || b.verdict === 'Hard Sell')
-            .sort((a, b) => a.difference - b.difference);
+            .sort((a, b) => sortNamesByAdp(a.name, b.name));
 
         const holds = buySells
             .filter(
@@ -273,10 +274,14 @@ export function useAdpData() {
         return Infinity;
     };
     const sortByAdp = (a: Player, b: Player): number =>
-        getAdp(`${a.first_name} ${a.last_name}`) -
-        getAdp(`${b.first_name} ${b.last_name}`);
+        sortNamesByAdp(
+            `${a.first_name} ${a.last_name}`,
+            `${b.first_name} ${b.last_name}`
+        );
+    const sortNamesByAdp = (a: string, b: string): number =>
+        getAdp(a) - getAdp(b);
 
-    return {adpData, getAdp, sortByAdp, getPositionalAdp};
+    return {adpData, getAdp, sortByAdp, getPositionalAdp, sortNamesByAdp};
 }
 
 const checkForNickname = (playerName: string) => {
