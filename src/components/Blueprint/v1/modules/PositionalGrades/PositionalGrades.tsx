@@ -43,13 +43,13 @@ const THRESHOLDS: Thresholds = {
     SF: new Map<string, number>([
         [QB, 200],
         [TE, 35],
-        [RB, 110],
+        [RB, 134],
         [WR, 225],
     ]),
     ONE_QB: new Map<string, number>([
         [QB, 156.25],
         [TE, 35],
-        [RB, 120],
+        [RB, 134],
         [WR, 225],
     ]),
 };
@@ -320,6 +320,9 @@ function scoreAndBumpByPosition(
     if (!SUPER_FLEX_SET.has(pos)) {
         throw new Error(`Unknown position '${pos}'`);
     }
+    if (pos === TE) {
+        throw new Error('Should use manual TE calculation');
+    }
     if (!playerData || !roster || !roster.starters) return {score: 0, bump: 0};
     let totalBump = 0;
 
@@ -366,6 +369,20 @@ export function gradeByPosition(
     playerData?: PlayerData,
     roster?: Roster
 ) {
+    if (!playerData || !roster || !roster.starters) return 0;
+    if (pos === TE) {
+        return Math.max(
+            ...roster.players
+                .map(playerId => playerData[playerId])
+                .filter(player => !!player)
+                .map(
+                    player =>
+                        getPlayerValue(
+                            `${player.first_name} ${player.last_name}`
+                        )?.teValue || 0
+                )
+        );
+    }
     const {score, bump} = scoreAndBumpByPosition(
         pos,
         getPlayerValue,
