@@ -5,7 +5,7 @@ import styles from './BuySellHold.module.css';
 import {hardBuy, hardSell, softBuy, softSell} from '../../../../consts/images';
 import {RosterTier, useRosterTierAndPosGrades} from '../RosterTier/RosterTier';
 import {QB, RB, TE, WR} from '../../../../consts/fantasy';
-import {useBuySellData} from '../../../../hooks/hooks';
+import {useAdpData, useBuySellData} from '../../../../hooks/hooks';
 
 const ONE_QB_ALLOWSET = new Set<string>([
     'Josh Allen',
@@ -65,6 +65,8 @@ export function useBuySells(
         allHolds,
         tier,
     ]);
+    const {getAdp} = useAdpData();
+    let addedBelow100 = false;
 
     /**
      * Sorts the positions (QB, RB, WR, TE) in order of best grade to worst.
@@ -234,6 +236,11 @@ export function useBuySells(
                     continue;
                 }
             }
+            const adp = getAdp(qbBuy.name);
+            if (adp > 100) {
+                if (addedBelow100) continue;
+                addedBelow100 = true;
+            }
             toBuy.push({
                 playerId: qbBuy.player_id,
                 type:
@@ -257,6 +264,11 @@ export function useBuySells(
             }
             if (roster?.players.includes(rbBuy.player_id)) {
                 continue;
+            }
+            const adp = getAdp(rbBuy.name);
+            if (adp > 100) {
+                if (addedBelow100) continue;
+                addedBelow100 = true;
             }
             toBuy.push({
                 playerId: rbBuy.player_id,
@@ -284,6 +296,11 @@ export function useBuySells(
                     continue;
                 }
             }
+            const adp = getAdp(wrBuy.name);
+            if (adp > 100) {
+                if (addedBelow100) continue;
+                addedBelow100 = true;
+            }
             toBuy.push({
                 playerId: wrBuy.player_id,
                 type:
@@ -309,6 +326,11 @@ export function useBuySells(
                 if (teBuy.age >= 26) {
                     continue;
                 }
+            }
+            const adp = getAdp(teBuy.name);
+            if (adp > 100) {
+                if (addedBelow100) continue;
+                addedBelow100 = true;
             }
             toBuy.push({
                 playerId: teBuy.player_id,

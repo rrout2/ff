@@ -1,4 +1,5 @@
 import json
+import os
 
 def process_json_files(players_file, ids_file, output_file):
     """
@@ -10,11 +11,12 @@ def process_json_files(players_file, ids_file, output_file):
         output_file (str): Path where the updated JSON will be saved
     """
     # Read the JSON files
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     try:
-        with open(players_file, 'r') as f:
+        with open(os.path.join(script_dir, players_file), 'r') as f:
             players = json.load(f)
         
-        with open(ids_file, 'r') as f:
+        with open(os.path.join(script_dir, ids_file), 'r') as f:
             id_mappings = json.load(f)
     except FileNotFoundError as e:
         print(f"Error: Could not find file - {e}")
@@ -50,6 +52,9 @@ def process_json_files(players_file, ids_file, output_file):
         elif player['name'].lower() == 'marquise brown':
             player['player_id'] = name_to_id['hollywood brown']
             matches_found += 1
+        elif player['name'].lower() == 'chigoziem okonkwo':
+            player['player_id'] = name_to_id['chig okonkwo']
+            matches_found += 1
         else:
             print(f"Warning: No ID found for player: {player['name']}")
 
@@ -59,12 +64,15 @@ def process_json_files(players_file, ids_file, output_file):
             player['age'] = name_to_age[player['alt_name'].lower()]
         elif player['name'].lower() == 'marquise brown':
             player['age'] = name_to_age['hollywood brown']
+        elif player['name'].lower() == 'chigoziem okonkwo':
+            player['player_id'] = name_to_age['chig okonkwo']
+            matches_found += 1
         else:
             print(f"Warning: No age found for player: {player['name']}")
 
     # Save the updated data
     try:
-        with open(output_file, 'w') as f:
+        with open(os.path.join(script_dir, output_file), 'w') as f:
             json.dump(players, f, indent=2)
         print(f"Successfully processed {matches_found} players")
         print(f"Updated data saved to {output_file}")
@@ -74,7 +82,7 @@ def process_json_files(players_file, ids_file, output_file):
 # Example usage
 if __name__ == "__main__":
     process_json_files(
-        '../src/data/buys_sells_01212025.json',  # First JSON file with player objects
+        '../src/data/buys_sells_01232025.json',  # First JSON file with player objects
         '../src/data/players.json',  # Second JSON file with ID mappings
-        '../src/data/buys_sells_with_ids_01212025.json'  # Output file
+        '../src/data/buys_sells_with_ids_01232025.json'  # Output file
     )
