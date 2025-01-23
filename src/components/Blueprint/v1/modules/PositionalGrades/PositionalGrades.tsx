@@ -43,13 +43,13 @@ const THRESHOLDS: Thresholds = {
     SF: new Map<string, number>([
         [QB, 200],
         [TE, 35],
-        [RB, 134],
+        [RB, 144],
         [WR, 225],
     ]),
     ONE_QB: new Map<string, number>([
-        [QB, 156.25],
+        [QB, 115 * 1.25], // 115 : 8 :: 115 * 1.25 : 10
         [TE, 35],
-        [RB, 134],
+        [RB, 144],
         [WR, 225],
     ]),
 };
