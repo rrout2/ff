@@ -351,9 +351,9 @@ function scoreAndBumpByPosition(
                         return acc;
                     }
                     if (isSuperFlex) {
-                        totalBump += playerValue.sfBonus;
+                        totalBump += +playerValue.sfBonus;
                     } else {
-                        totalBump += playerValue.oneQbBonus;
+                        totalBump += +playerValue.oneQbBonus;
                     }
                     return acc + +playerValue.Value;
                 }, 0),
@@ -406,10 +406,10 @@ export function gradeByPosition(
             unbumpedLimit = 8;
         }
     } else if (pos === TE) {
+        // may be able to remove this check
         unbumpedLimit = 8;
     }
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
-
     return Math.min(cappedGrade + bump, 10);
 }
 
