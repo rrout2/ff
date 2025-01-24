@@ -83,6 +83,9 @@
     top: 110px;
     font-family: 'Cheddar Gothic Rough';
     font-size: 75px;
+    max-width: 440px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .smallerTeamName {

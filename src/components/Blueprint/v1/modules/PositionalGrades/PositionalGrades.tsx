@@ -332,7 +332,7 @@ function scoreAndBumpByPosition(
         pos,
         isSuperFlex
     );
-    console.log({pos, multiplier});
+    debugLog({pos, multiplier});
 
     return {
         score:
@@ -346,9 +346,9 @@ function scoreAndBumpByPosition(
                     const fullName = `${player.first_name} ${player.last_name}`;
                     const playerValue = getPlayerValue(fullName);
                     if (!playerValue) {
-                        console.warn(
-                            `cannot find PlayerValue for player with name = '${fullName}'`
-                        );
+                        // console.warn(
+                        //     `cannot find PlayerValue for player with name = '${fullName}'`
+                        // );
                         return acc;
                     }
                     if (isSuperFlex) {
@@ -356,7 +356,7 @@ function scoreAndBumpByPosition(
                     } else {
                         totalBump += +playerValue.oneQbBonus;
                     }
-                    console.log({
+                    debugLog({
                         fullName,
                         value: playerValue.Value,
                     });
@@ -414,9 +414,28 @@ export function gradeByPosition(
         // may be able to remove this check
         unbumpedLimit = 8;
     }
-    console.log({pos, score, threshold, rawGrade, bump});
+    debugLog({pos, score, threshold, rawGrade, bump});
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
     return Math.min(cappedGrade + bump, 10);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function debugLog(
+    message?:
+        | string
+        | {
+              pos: string;
+              score: number;
+              threshold: number;
+              rawGrade: number;
+              bump: number;
+          }
+        | {fullName: string; value: number}
+        | {pos: string; multiplier: number}
+) {
+    if (!window.location.href.includes('debug=false')) {
+        console.log(message);
+    }
 }
 
 export {PositionalGrades, GraphicComponent, OverrideComponent};

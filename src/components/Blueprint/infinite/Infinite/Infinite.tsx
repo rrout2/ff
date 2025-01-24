@@ -68,7 +68,7 @@ export default function Infinite() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
-    const date = new Date();
+    const currentDate = new Date();
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
@@ -127,7 +127,7 @@ export default function Infinite() {
                     roster={roster}
                 />
                 <div className={styles.monthYear}>
-                    {date.toLocaleDateString(undefined, {
+                    {currentDate.toLocaleDateString(undefined, {
                         month: 'long',
                         year: 'numeric',
                     })}
