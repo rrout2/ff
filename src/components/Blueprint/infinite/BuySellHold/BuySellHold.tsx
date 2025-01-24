@@ -235,6 +235,9 @@ export function useBuySells(
                     throw new Error('Unknown position ' + pos);
             }
         }
+        if (buys.length < 4) {
+            buys.push(...calcWrBuys(4 - buys.length, buys));
+        }
         return buys;
     }
 
@@ -259,15 +262,20 @@ export function useBuySells(
             if (!isSuperFlex && !ONE_QB_ALLOWSET.has(qbBuy.name)) {
                 continue;
             }
-            if (tier === RosterTier.Rebuild || tier === RosterTier.Reload) {
-                if (qbBuy.age >= 26) {
-                    continue;
-                }
-            }
             const adp = getAdp(qbBuy.name);
-            if (adp > 100) {
+            if (
+                adp > 100 &&
+                tier !== RosterTier.Rebuild &&
+                tier !== RosterTier.Reload
+            ) {
                 if (addedBelow100) continue;
                 addedBelow100 = true;
+            }
+            if (tier === RosterTier.Rebuild && adp < 48) {
+                continue;
+            }
+            if (tier === RosterTier.Reload && adp < 36) {
+                continue;
             }
             toBuy.push({
                 playerId: qbBuy.player_id,
@@ -310,7 +318,11 @@ export function useBuySells(
         return toBuy;
     }
 
-    function calcWrBuys(numToBuy: number): BuySellTileProps[] {
+    function calcWrBuys(
+        numToBuy: number,
+        existingWrBuys?: BuySellTileProps[]
+    ): BuySellTileProps[] {
+        const secondPass = !!existingWrBuys;
         const toBuy: BuySellTileProps[] = [];
         for (const wrBuy of wrBuys) {
             if (toBuy.length >= numToBuy) {
@@ -325,9 +337,25 @@ export function useBuySells(
                 }
             }
             const adp = getAdp(wrBuy.name);
-            if (adp > 100) {
+            if (
+                adp > 100 &&
+                tier !== RosterTier.Rebuild &&
+                tier !== RosterTier.Reload
+            ) {
                 if (addedBelow100) continue;
                 addedBelow100 = true;
+            }
+            if (tier === RosterTier.Rebuild && adp < 48 && !secondPass) {
+                continue;
+            }
+            if (tier === RosterTier.Reload && adp < 36 && !secondPass) {
+                continue;
+            }
+            if (
+                secondPass &&
+                !!existingWrBuys.find(b => b.playerId === wrBuy.player_id)
+            ) {
+                continue;
             }
             toBuy.push({
                 playerId: wrBuy.player_id,
@@ -356,9 +384,19 @@ export function useBuySells(
                 }
             }
             const adp = getAdp(teBuy.name);
-            if (adp > 100) {
+            if (
+                adp > 100 &&
+                tier !== RosterTier.Rebuild &&
+                tier !== RosterTier.Reload
+            ) {
                 if (addedBelow100) continue;
                 addedBelow100 = true;
+            }
+            if (tier === RosterTier.Rebuild && adp < 48) {
+                continue;
+            }
+            if (tier === RosterTier.Reload && adp < 36) {
+                continue;
             }
             toBuy.push({
                 playerId: teBuy.player_id,
