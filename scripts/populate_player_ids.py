@@ -39,9 +39,29 @@ def process_json_files(players_file, ids_file, output_file):
     # Update player objects with corresponding IDs
     matches_found = 0
     for player in players:
-        if 'name' not in player:
+        if 'Player (ADP)' not in player:
             print(f"Warning: Player object missing 'name' field: {player}")
             continue
+
+        player['name'] = player['Player (ADP)']
+        player['alt_name'] = player['Player (Domain)']
+        player['difference'] = player['Difference']
+        player['team'] = player['Team']
+        player['position'] = player['Position']
+        player['verdict'] = player['REAL VERDICT']
+        player['reason'] = player['Explanation']
+        player['domain_rank'] = player['Domain Rank']
+        player['pos_adp'] = player['Market ADP ']
+
+        del player['Player (ADP)']
+        del player['Player (Domain)']
+        del player['Difference']
+        del player['Team']
+        del player['Position']
+        del player['REAL VERDICT']
+        del player['Explanation']
+        del player['Domain Rank']
+        del player['Market ADP ']
             
         if player['name'].lower() in name_to_id:
             player['player_id'] = name_to_id[player['name'].lower()]
@@ -82,7 +102,7 @@ def process_json_files(players_file, ids_file, output_file):
 # Example usage
 if __name__ == "__main__":
     process_json_files(
-        '../src/data/buys_sells_01232025.json',  # First JSON file with player objects
+        '../src/data/verdicts2.json',  # First JSON file with player objects
         '../src/data/players.json',  # Second JSON file with ID mappings
-        '../src/data/buys_sells_with_ids_01232025.json'  # Output file
+        '../src/data/verdicts2_w_ids.json'  # Output file
     )

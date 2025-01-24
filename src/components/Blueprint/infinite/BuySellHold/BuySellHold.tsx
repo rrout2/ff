@@ -420,7 +420,7 @@ export function useBuySells(
             .filter(s => {
                 if (isSuperFlex || s.position !== QB) return true;
                 // No QB sells lower than QB12 in 1QB formats
-                return s.adp <= 12;
+                return s.pos_adp <= 12;
             })
             .slice(0, 2)
             .map(sell => ({
