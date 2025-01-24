@@ -171,9 +171,9 @@ describe('BigBoy v2', () => {
             await userEvent.click(saveButton);
 
             expect(window.location.href).toContain(
-                `${CORNERSTONES}=6770-7547-11631-8130`
+                `${CORNERSTONES}=6770-7547-8130-6813`
             );
-            expect(window.location.href).toContain(`${SELLS}=6770-7547-11631`);
+            expect(window.location.href).toContain(`${SELLS}=6770-7547-8130`);
             expect(window.location.href).toContain(
                 `${BUYS}=10229-5849-4866-10859-11565-11638`
             );
