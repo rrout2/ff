@@ -419,20 +419,19 @@ export function gradeByPosition(
     return Math.min(cappedGrade + bump, 10);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function debugLog(
-    message?:
-        | string
-        | {
-              pos: string;
-              score: number;
-              threshold: number;
-              rawGrade: number;
-              bump: number;
-          }
-        | {fullName: string; value: number}
-        | {pos: string; multiplier: number}
-) {
+type Message =
+    | string
+    | {
+          pos: string;
+          score: number;
+          threshold: number;
+          rawGrade: number;
+          bump: number;
+      }
+    | {fullName: string; value: number}
+    | {pos: string; multiplier: number};
+
+function debugLog(message?: Message) {
     if (!window.location.href.includes('debug=false')) {
         console.log(message);
     }
