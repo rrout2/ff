@@ -265,6 +265,7 @@ export function useBuySells(
             const adp = getAdp(qbBuy.name);
             if (
                 adp > 100 &&
+                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
@@ -302,7 +303,7 @@ export function useBuySells(
                 continue;
             }
             const adp = getAdp(rbBuy.name);
-            if (adp > 100) {
+            if (adp > 100 && adp <= 140) {
                 if (addedBelow100) continue;
                 addedBelow100 = true;
             }
@@ -339,6 +340,7 @@ export function useBuySells(
             const adp = getAdp(wrBuy.name);
             if (
                 adp > 100 &&
+                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
@@ -386,6 +388,7 @@ export function useBuySells(
             const adp = getAdp(teBuy.name);
             if (
                 adp > 100 &&
+                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
@@ -414,6 +417,11 @@ export function useBuySells(
         if (!roster) return [];
         return allSells
             .filter(sell => roster.players.includes(sell.player_id))
+            .filter(s => {
+                if (isSuperFlex || s.position !== QB) return true;
+                // No QB sells lower than QB12 in 1QB formats
+                return s.adp <= 12;
+            })
             .slice(0, 2)
             .map(sell => ({
                 playerId: sell.player_id,
@@ -428,7 +436,11 @@ export function useBuySells(
     function calculateHolds(): BuySellTileProps[] {
         if (!roster) return [];
         return allHolds
-            .filter(hold => roster.players.includes(hold.player_id))
+            .filter(
+                hold =>
+                    roster.players.includes(hold.player_id) &&
+                    getAdp(hold.name) < 140
+            )
             .slice(0, 2)
             .map(hold => ({
                 playerId: hold.player_id,
