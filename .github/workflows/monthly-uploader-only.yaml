@@ -1,9 +1,9 @@
-name: Monthly Upload to Drive FOlder
+name: Manual Upload to Drive Folder
 on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  send-images:
+  upload-images:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4

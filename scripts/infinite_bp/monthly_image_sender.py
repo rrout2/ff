@@ -196,7 +196,7 @@ def main():
 
             if send_email:
                 sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
-            print(f"Successfully sent image to {sender.email_list[i]}\n")
+                print(f"Successfully sent image to {sender.email_list[i]}\n")
 
             os.remove(downloaded_file)
 
