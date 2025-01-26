@@ -12,8 +12,9 @@ class GoogleDriveUploader:
             credentials_path (str): Path to the service account JSON file
         """
         # Define the scopes
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         self.SCOPES = ['https://www.googleapis.com/auth/drive.file']
-        self.credentials_path = credentials_path
+        self.credentials_path = os.path.join(script_dir, credentials_path)
         self.service = None
 
     def authenticate(self):
@@ -122,13 +123,45 @@ class GoogleDriveUploader:
 
         except Exception as e:
             print(f"Sharing error: {str(e)}")
+    
+    def create_or_get_folder(self, folder_name):
+        """Create or retrieve a folder in Google Drive"""
+        # Check if folder already exists
+        results = self.service.files().list(
+            q=f"name='{folder_name}' and mimeType='application/vnd.google-apps.folder'",
+            spaces='drive'
+        ).execute()
+        
+        if results['files']:
+            # Folder exists, return its ID
+            return results['files'][0]['id']
+        
+        # Create new folder
+        folder_metadata = {
+            'name': folder_name,
+            'mimeType': 'application/vnd.google-apps.folder'
+        }
+        folder = self.service.files().create(
+            body=folder_metadata,
+            fields='id'
+        ).execute()
+        
+        # Set folder to be accessible via link
+        self.service.permissions().create(
+            fileId=folder['id'],
+            body={'type': 'anyone', 'role': 'reader'},
+            fields='id'
+        ).execute()
+        
+        return folder['id']
 
 def main():
     # Path to your service account credentials JSON file
     credentials_path = 'service-account-credentials.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Initialize uploader
-    uploader = GoogleDriveUploader(credentials_path)
+    uploader = GoogleDriveUploader(os.path.join(script_dir, credentials_path))
 
     try:
         # Authenticate
@@ -138,7 +171,7 @@ def main():
         image_folder = "images"
 
         # Optional: Google Drive folder ID where you want to upload the images
-        folder_id = None  # Replace with your folder ID if needed
+        # folder_id = None  # Replace with your folder ID if needed
 
         # Check if images folder exists
         if not os.path.exists(image_folder):
@@ -155,17 +188,15 @@ def main():
             print("No images found in the images folder.")
             print("Supported formats: PNG, JPG, JPEG, GIF, BMP")
             return
+        
+        folder_id = uploader.create_or_get_folder("Infinite BP test")
 
         # Upload each image
         print(f"Found {len(images)} images to upload.")
         for filename in images:
             image_path = os.path.join(image_folder, filename)
             print(f"\nUploading {filename}...")
-            file = uploader.upload_image(image_path, folder_id)
-
-            # Optional: Share the file with someone
-            if file:
-                uploader.share_file(file['id'], 'rout.rishav@gmail.com')
+            uploader.upload_image(image_path, folder_id)
 
     except Exception as e:
         print(f"\nAn error occurred: {str(e)}")

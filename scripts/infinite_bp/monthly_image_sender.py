@@ -12,11 +12,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from uploader import GoogleDriveUploader
+import argparse
 
 class ImageEmailSender:
     def __init__(self, config_path='config.yaml'):
+        # Example config
+        # email_list: user1@example.com,user2@example.com
+        # league_id_list: 1180303064879046656,1180303064879046656
+        # team_id_list: 4,5
+        # smtp_server: smtp.gmail.com
+        # smtp_port: 587
+        # sender_email: your-email@gmail.com
+        # sender_password: your-app-password
         # Load configuration
-        with open(config_path, 'r') as file:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(script_dir, config_path), 'r') as file:
             config = yaml.safe_load(file)
 
         # Parse email list from string to list if needed
@@ -150,6 +160,14 @@ class ImageEmailSender:
             server.send_message(msg)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--send_email', type=int, default=0)
+    parser.add_argument('-f', '--folder_name', type=str, default="Infinite BP test")
+    args = parser.parse_args()
+    if int(args.send_email) != 1 and int(args.send_email) != 0:
+        print("--send_email must be 0 or 1")
+        return
+    send_email = bool(int(args.send_email))
     sender = ImageEmailSender()
 
     # Path to your service account credentials JSON file
@@ -161,23 +179,25 @@ def main():
     try:
         # Authenticate
         uploader.authenticate()
-
+        folder_id = uploader.create_or_get_folder(args.folder_name)
         for i in range(len(sender.email_list)):
             print(f"{i + 1}/{len(sender.email_list)}")
             downloaded_file = sender.download_image(i)
 
             print(f"Uploading {downloaded_file}...")
-            file = uploader.upload_image(downloaded_file)
+            file = uploader.upload_image(downloaded_file, folder_id)
 
             if file:
                 uploader.make_public(file['id'])
 
-            sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
+            if send_email:
+                sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
             print(f"Successfully sent image to {sender.email_list[i]}\n")
 
             os.remove(downloaded_file)
 
         print("\nDone!")
+        print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
 
     except Exception as e:
         print(f"\nAn error occurred: {str(e)}")
