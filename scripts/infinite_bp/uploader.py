@@ -12,18 +12,24 @@ class GoogleDriveUploader:
             credentials_path (str): Path to the service account JSON file
         """
         # Define the scopes
-        script_dir = os.path.dirname(os.path.abspath(__file__))
         self.SCOPES = ['https://www.googleapis.com/auth/drive.file']
-        self.credentials_path = os.path.join(script_dir, credentials_path)
+        self.credentials_path = credentials_path
         self.service = None
 
     def authenticate(self):
         """Authenticate using service account credentials."""
         try:
-            credentials = service_account.Credentials.from_service_account_file(
-                self.credentials_path,
-                scopes=self.SCOPES
-            )
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            try:
+                credentials = service_account.Credentials.from_service_account_file(
+                    self.credentials_path,
+                    scopes=self.SCOPES
+                )
+            except FileNotFoundError:
+                credentials = service_account.Credentials.from_service_account_file(
+                    os.path.join(script_dir, self.credentials_path),
+                    scopes=self.SCOPES
+                )
 
             # Build the service
             self.service = build('drive', 'v3', credentials=credentials)

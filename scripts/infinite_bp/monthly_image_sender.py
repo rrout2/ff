@@ -26,8 +26,12 @@ class ImageEmailSender:
         # sender_password: your-app-password
         # Load configuration
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(script_dir, config_path), 'r') as file:
-            config = yaml.safe_load(file)
+        try:
+            with open(os.path.join(script_dir, config_path), 'r') as file:
+                config = yaml.safe_load(file)
+        except FileNotFoundError:
+            with open(config_path, 'r') as file:
+                config = yaml.safe_load(file)
 
         # Parse email list from string to list if needed
         if isinstance(config['email_list'], str):
