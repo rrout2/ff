@@ -15,7 +15,7 @@ from uploader import GoogleDriveUploader
 import argparse
 
 class ImageEmailSender:
-    def __init__(self, config_path='config.yaml'):
+    def __init__(self, send_email=False, config_path='config.yaml'):
         # Example config
         # email_list: user1@example.com,user2@example.com
         # league_id_list: 1180303064879046656,1180303064879046656
@@ -34,10 +34,11 @@ class ImageEmailSender:
                 config = yaml.safe_load(file)
 
         # Parse email list from string to list if needed
-        if isinstance(config['email_list'], str):
-            self.email_list = [email.strip() for email in config['email_list'].split(',')]
-        else:
-            self.email_list = config['email_list']
+        if send_email:
+            if isinstance(config['email_list'], str):
+                self.email_list = [email.strip() for email in config['email_list'].split(',')]
+            else:
+                self.email_list = config['email_list']
 
         if isinstance(config['league_id_list'], str):
             self.league_id_list = [email.strip() for email in config['league_id_list'].split(',')]
@@ -51,8 +52,9 @@ class ImageEmailSender:
 
         self.smtp_server = config['smtp_server']
         self.smtp_port = int(config['smtp_port'])
-        self.sender_email = config['sender_email']
-        self.sender_password = config['sender_password']
+        if send_email:
+            self.sender_email = config['sender_email']
+            self.sender_password = config['sender_password']
 
         self.download_button_selector = '#root > button'
 
@@ -165,8 +167,8 @@ class ImageEmailSender:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--send_email', type=int, default=0)
-    parser.add_argument('-f', '--folder_name', type=str, default="Infinite BP test")
+    parser.add_argument('-s', '--send_email', type=int, default=0, help="Whether or not to send emails (0 or 1)")
+    parser.add_argument('-f', '--folder_name', type=str, default="Infinite BP test", help="Name of Google Drive folder to upload to")
     args = parser.parse_args()
     if int(args.send_email) != 1 and int(args.send_email) != 0:
         print("--send_email must be 0 or 1")
@@ -184,8 +186,8 @@ def main():
         # Authenticate
         uploader.authenticate()
         folder_id = uploader.create_or_get_folder(args.folder_name)
-        for i in range(len(sender.email_list)):
-            print(f"{i + 1}/{len(sender.email_list)}")
+        for i in range(len(sender.league_id_list)):
+            print(f"{i + 1}/{len(sender.league_id_list)}")
             downloaded_file = sender.download_image(i)
 
             print(f"Uploading {downloaded_file}...")
