@@ -491,10 +491,13 @@ export function gradeByPosition(
     }
 
     let rawGrade = 0;
+    let minDiff = Infinity;
+    // Choose the closest grade
     for (let i = 10; i > 0; i--) {
-        if (score >= thresholdByGrade.get(i as grade)!) {
+        const diff = Math.abs(score - thresholdByGrade.get(i as grade)!);
+        if (diff < minDiff) {
             rawGrade = i;
-            break;
+            minDiff = diff;
         }
     }
 
