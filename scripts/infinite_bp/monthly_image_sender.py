@@ -175,7 +175,8 @@ def main():
         print("--send_email must be 0 or 1")
         return
     send_email = bool(int(args.send_email))
-    sender = ImageEmailSender()
+    print(f"Sending emails: {send_email}")
+    sender = ImageEmailSender(send_email)
 
     # Path to your service account credentials JSON file
     credentials_path = 'service-account-credentials.json'
