@@ -15,6 +15,7 @@ import BlueprintGenerator from './components/Blueprint/v1/BlueprintGenerator';
 import NewGenerator from './components/Blueprint/v2/NewGenerator';
 import Rankings from './components/Rankings/Rankings';
 import Infinite from './components/Blueprint/infinite/Infinite/Infinite';
+import FindTeamId from './components/FindTeamId/FindTeamId';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -42,6 +43,7 @@ root.render(
                     <Route path="/blueprintv2" element={<NewGenerator />} />
                     <Route path="/rankings" element={<Rankings />} />
                     <Route path="/infinite" element={<Infinite />} />
+                    <Route path="/findteamid" element={<FindTeamId />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>
