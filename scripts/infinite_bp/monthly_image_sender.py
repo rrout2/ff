@@ -158,7 +158,7 @@ class ImageEmailSender:
         msg['To'] = recipient_email
         msg['Subject'] = f"Your Monthly Blueprint - {datetime.now().strftime('%B %Y')}"
 
-        body = "Here's your unique monthly blueprint:\n\n" + drive_link
+        body = f"Attached is your Infinite Blueprint for {datetime.now().strftime('%B')}. Feel free to ask any questions in the Domain discord. Enjoy!\n\n" + drive_link
         msg.attach(MIMEText(body, 'plain'))
 
         with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
