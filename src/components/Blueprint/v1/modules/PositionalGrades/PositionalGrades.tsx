@@ -429,9 +429,10 @@ type Message =
           bump: number;
       }
     | {fullName: string; value: number}
-    | {pos: string; multiplier: number};
+    | {pos: string; multiplier: number}
+    | {rbBuy: string; adp: number};
 
-function debugLog(message?: Message) {
+export function debugLog(message?: Message) {
     if (!window.location.href.includes('debug=false')) {
         console.log(message);
     }

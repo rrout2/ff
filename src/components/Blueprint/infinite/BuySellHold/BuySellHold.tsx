@@ -263,9 +263,9 @@ export function useBuySells(
                 continue;
             }
             const adp = getAdp(qbBuy.name);
+            if (adp > 140) continue;
             if (
                 adp > 100 &&
-                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
@@ -303,7 +303,8 @@ export function useBuySells(
                 continue;
             }
             const adp = getAdp(rbBuy.name);
-            if (adp > 100 && adp <= 140) {
+            if (adp > 140) continue;
+            if (adp > 100) {
                 if (addedBelow100) continue;
                 addedBelow100 = true;
             }
@@ -338,9 +339,9 @@ export function useBuySells(
                 }
             }
             const adp = getAdp(wrBuy.name);
+            if (adp > 140) continue;
             if (
                 adp > 100 &&
-                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
@@ -386,9 +387,9 @@ export function useBuySells(
                 }
             }
             const adp = getAdp(teBuy.name);
+            if (adp > 140) continue;
             if (
                 adp > 100 &&
-                adp <= 140 &&
                 tier !== RosterTier.Rebuild &&
                 tier !== RosterTier.Reload
             ) {
