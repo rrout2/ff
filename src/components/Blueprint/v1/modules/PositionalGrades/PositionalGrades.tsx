@@ -34,23 +34,106 @@ interface PositionalGradesProps {
     isSuperFlex: boolean;
 }
 
+type grade = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 type Thresholds = {
-    SF: Map<string, number>;
-    ONE_QB: Map<string, number>;
+    SF: Map<string, Map<grade, number>>;
+    ONE_QB: Map<string, Map<grade, number>>;
 };
 // from google spreadsheet
 const THRESHOLDS: Thresholds = {
-    SF: new Map<string, number>([
-        [QB, 200],
-        [TE, 35],
-        [RB, 144],
-        [WR, 225],
+    SF: new Map<string, Map<grade, number>>([
+        [
+            QB,
+            new Map<grade, number>([
+                [1, 20],
+                [2, 35],
+                [3, 55],
+                [4, 70],
+                [5, 85],
+                [6, 100],
+                [7, 120],
+                [8, 145],
+                [9, 170],
+                [10, 200],
+            ]),
+        ],
+        [
+            RB,
+            new Map<grade, number>([
+                [1, 1],
+                [2, 15],
+                [3, 33],
+                [4, 45],
+                [5, 58],
+                [6, 72],
+                [7, 90],
+                [8, 108],
+                [9, 126],
+                [10, 144],
+            ]),
+        ],
+        [
+            WR,
+            new Map<grade, number>([
+                [1, 0],
+                [2, 30],
+                [3, 50],
+                [4, 70],
+                [5, 90],
+                [6, 110],
+                [7, 130],
+                [8, 155],
+                [9, 185],
+                [10, 225],
+            ]),
+        ],
     ]),
-    ONE_QB: new Map<string, number>([
-        [QB, 115 * 1.25], // 115 : 8 :: 115 * 1.25 : 10
-        [TE, 35],
-        [RB, 144],
-        [WR, 225],
+    ONE_QB: new Map<string, Map<grade, number>>([
+        [
+            QB,
+            new Map<grade, number>([
+                [1, 14.275],
+                [2, 28.75],
+                [3, 43.125],
+                [4, 57.5],
+                [5, 71.875],
+                [6, 86.25],
+                [7, 100.625],
+                [8, 115],
+                [9, 129.375],
+                [10, 143.75],
+            ]),
+        ],
+        [
+            RB,
+            new Map<grade, number>([
+                [1, 1],
+                [2, 15],
+                [3, 33],
+                [4, 45],
+                [5, 58],
+                [6, 72],
+                [7, 90],
+                [8, 108],
+                [9, 126],
+                [10, 144],
+            ]),
+        ],
+        [
+            WR,
+            new Map<grade, number>([
+                [1, 0],
+                [2, 30],
+                [3, 50],
+                [4, 70],
+                [5, 90],
+                [6, 110],
+                [7, 130],
+                [8, 155],
+                [9, 185],
+                [10, 225],
+            ]),
+        ],
     ]),
 };
 
@@ -400,21 +483,26 @@ export function gradeByPosition(
         throw new Error(`Unknown position '${pos}'`);
     }
 
-    const threshold = isSuperFlex
+    const thresholdByGrade = isSuperFlex
         ? THRESHOLDS.SF.get(pos)!
         : THRESHOLDS.ONE_QB.get(pos)!;
+    if (!thresholdByGrade) {
+        throw new Error(`Unknown position '${pos}'`);
+    }
 
-    const rawGrade = (10 * score) / threshold;
-    let unbumpedLimit = 10;
-    if (pos === QB) {
-        if (!isSuperFlex) {
-            unbumpedLimit = 8;
+    let rawGrade = 0;
+    for (let i = 10; i > 0; i--) {
+        if (score >= thresholdByGrade.get(i as grade)!) {
+            rawGrade = i;
+            break;
         }
-    } else if (pos === TE) {
-        // may be able to remove this check
+    }
+
+    let unbumpedLimit = 10;
+    if (pos === QB && !isSuperFlex) {
         unbumpedLimit = 8;
     }
-    debugLog({pos, score, threshold, rawGrade, bump});
+    debugLog({pos, score, thresholdByGrade, rawGrade, bump});
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
     return Math.min(cappedGrade + bump, 10);
 }
@@ -424,7 +512,7 @@ type Message =
     | {
           pos: string;
           score: number;
-          threshold: number;
+          thresholdByGrade: Map<grade, number>;
           rawGrade: number;
           bump: number;
       }
