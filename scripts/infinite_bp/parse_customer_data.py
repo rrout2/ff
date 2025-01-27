@@ -1,0 +1,30 @@
+import json
+import os
+
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Specify the JSON file name
+json_file_name = 'domain_customer_info-beta.json'
+
+# Construct the full path to the JSON file
+json_file_path = os.path.join(script_dir, json_file_name)
+
+league_id_key = 'What is the Sleeper League ID for this team? (the number in the URL)'
+team_id_key = 'Team ID\r'
+
+# Open and read the JSON file
+try:
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+        league_ids = [item[league_id_key] for item in data]
+        print('League IDs:')
+        print(','.join(league_ids))
+        print('\nTeam IDs:')
+        team_ids = [str(item[team_id_key]) for item in data]
+        print(','.join(team_ids))
+except FileNotFoundError:
+    print(f"Error: {json_file_name} not found in the directory {script_dir}")
+except json.JSONDecodeError as e:
+    print(f"Error: Failed to decode JSON - {e}")
+

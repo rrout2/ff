@@ -44,4 +44,4 @@ jobs:
           echo "${SA_CREDENTIALS}" > service-account-credentials.json
 
       - name: Run image sender
-        run: python scripts/infinite_bp/monthly_image_sender.py -s=0 -f=test-gh-actions-upload
+        run: python scripts/infinite_bp/monthly_image_sender.py -s=0 -f="Jan 27 Dry Run Beta"
