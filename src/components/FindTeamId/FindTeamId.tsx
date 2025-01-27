@@ -31,11 +31,18 @@ export default function FindTeamId() {
             alert(`No users found for league ID '${leagueId}'`);
             return;
         }
-        const newTeamId = users.findIndex(
-            u => getDisplayName(u).toLowerCase() === teamName.toLowerCase()
+        const usernames = users.map(getDisplayName);
+        const newTeamId = usernames.findIndex(
+            u => u.toLowerCase().trim() === teamName.toLowerCase().trim()
         );
         if (newTeamId === -1) {
-            alert(`Team not found for '${teamName}'`);
+            setTeamId(-1);
+            alert(
+                `Team not found for '${teamName}'.\nAllowed names: ${usernames.reduce(
+                    (prev, curr) => `${prev}\n'${curr}'`,
+                    ''
+                )}`
+            );
             return;
         }
         setTeamId(newTeamId);
