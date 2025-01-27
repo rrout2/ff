@@ -13,6 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from uploader import GoogleDriveUploader
 import argparse
+import uuid
 
 class ImageEmailSender:
     def __init__(self, send_email=False, config_path='config.yaml'):
@@ -157,7 +158,7 @@ class ImageEmailSender:
         msg['To'] = recipient_email
         msg['Subject'] = f"Your Monthly Blueprint - {datetime.now().strftime('%B %Y')}"
 
-        body = "Here's your unique monthly image:\n\n" + drive_link
+        body = "Here's your unique monthly blueprint:\n\n" + drive_link
         msg.attach(MIMEText(body, 'plain'))
 
         with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
@@ -168,7 +169,7 @@ class ImageEmailSender:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--send_email', type=int, default=0, help="Whether or not to send emails (0 or 1)")
-    parser.add_argument('-f', '--folder_name', type=str, default="Infinite BP test", help="Name of Google Drive folder to upload to")
+    parser.add_argument('-f', '--folder_name', type=str, default=uuid.uuid4(), help="Name of Google Drive folder to upload to")
     args = parser.parse_args()
     if int(args.send_email) != 1 and int(args.send_email) != 0:
         print("--send_email must be 0 or 1")
