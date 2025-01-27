@@ -169,7 +169,7 @@ class ImageEmailSender:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--send_email', type=int, default=0, help="Whether or not to send emails (0 or 1)")
-    parser.add_argument('-f', '--folder_name', type=str, default=uuid.uuid4(), help="Name of Google Drive folder to upload to")
+    parser.add_argument('-f', '--folder_name', type=str, default=str(uuid.uuid4()), help="Name of Google Drive folder to upload to")
     args = parser.parse_args()
     if int(args.send_email) != 1 and int(args.send_email) != 0:
         print("--send_email must be 0 or 1")
