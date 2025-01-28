@@ -167,6 +167,7 @@ export function useBuySells(
             if (position === TE) {
                 const hasEliteTe = roster?.players
                     .map(p => playerData![p])
+                    .filter(p => !!p)
                     .find(p =>
                         TE_DISALLOWSET.has(`${p.first_name} ${p.last_name}`)
                     );
