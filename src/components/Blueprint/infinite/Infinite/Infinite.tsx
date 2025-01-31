@@ -138,10 +138,22 @@ export default function Infinite() {
     );
 }
 
+const countEmojis = (str: string): number => {
+    // This regex matches most emoji patterns including:
+    // - Single unicode emojis
+    // - Compound emojis (e.g. family combinations)
+    // - Emojis with skin tone modifiers
+    const emojiRegex = /\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu;
+
+    return (str.match(emojiRegex) || []).length;
+};
+
 const TeamNameComponent = ({teamName}: {teamName?: string}) => {
     if (!teamName) return <></>;
-    const longName = teamName.length >= 16 && teamName.length < 24;
-    const veryLongName = teamName.length >= 24;
+    // Emojis count as 2 characters since they are wider.
+    const teamNameSize = teamName.length + countEmojis(teamName);
+    const longName = teamNameSize >= 14 && teamNameSize < 24;
+    const veryLongName = teamNameSize >= 24;
     return (
         <div
             className={`${styles.teamNameGraphic} ${
