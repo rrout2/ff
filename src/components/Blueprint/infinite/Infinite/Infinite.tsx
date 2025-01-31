@@ -35,7 +35,7 @@ export default function Infinite() {
     const rosterSettings = useRosterSettings(league);
     const {data: rosters} = useFetchRosters(leagueId);
     const {roster, user} = useRoster(rosters, teamId, leagueId);
-    const {startingLineup, benchString} = useProjectedLineup(
+    const {startingLineup, benchString, setStartingLineup} = useProjectedLineup(
         rosterSettings,
         roster?.players
     );
@@ -68,6 +68,9 @@ export default function Infinite() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
+    useEffect(() => {
+        setStartingLineup(startingLineup.slice(0, 14));
+    }, [startingLineup.length]);
     const currentDate = new Date();
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
     function hasTeamId() {
