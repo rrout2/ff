@@ -49,7 +49,7 @@ def process_json_files(players_file, ids_file, output_file):
         player['team'] = player['Team']
         player['position'] = player['Position']
         player['verdict'] = player['REAL VERDICT']
-        player['reason'] = player['Explanation']
+        # player['reason'] = player['Explanation']
         player['domain_rank'] = player['Domain Rank']
         player['pos_adp'] = player['Market ADP ']
 
@@ -59,7 +59,7 @@ def process_json_files(players_file, ids_file, output_file):
         del player['Team']
         del player['Position']
         del player['REAL VERDICT']
-        del player['Explanation']
+        # del player['Explanation']
         del player['Domain Rank']
         del player['Market ADP ']
             
@@ -102,7 +102,7 @@ def process_json_files(players_file, ids_file, output_file):
 # Example usage
 if __name__ == "__main__":
     process_json_files(
-        '../src/data/verdicts2.json',  # First JSON file with player objects
+        '../src/data/buysellholds_013125.json',  # First JSON file with player objects
         '../src/data/players.json',  # Second JSON file with ID mappings
-        '../src/data/verdicts2_w_ids.json'  # Output file
+        '../src/data/buysellholds_with_ids_013125.json'  # Output file
     )
