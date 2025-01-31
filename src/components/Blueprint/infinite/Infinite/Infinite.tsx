@@ -73,6 +73,19 @@ export default function Infinite() {
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
+
+    function getBenchStringClass() {
+        const longBenchString = benchString.length >= 440;
+        const mediumBenchString = benchString.length >= 321;
+        return `${styles.benchStringGraphic} ${
+            longBenchString
+                ? styles.benchStringGraphicSmallest
+                : mediumBenchString
+                ? styles.benchStringGraphicSmaller
+                : ''
+        }`;
+    }
+
     return (
         <>
             <ExportButton
@@ -96,15 +109,7 @@ export default function Infinite() {
                         transparent={true}
                     />
                 </div>
-                <div
-                    className={
-                        benchString.length < 321
-                            ? styles.benchStringGraphic
-                            : styles.benchStringGraphicSmaller
-                    }
-                >
-                    {benchString}
-                </div>
+                <div className={getBenchStringClass()}>{benchString}</div>
                 <TeamNameComponent teamName={getTeamName(user)} />
                 <div className={styles.positionalGradesGraphic}>
                     <PositionalGradesGraphic
