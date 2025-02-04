@@ -5,15 +5,14 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the JSON file name
-json_file_name = 'domain_customer_info_feb.json'
+json_file_name = 'domain_customer_info_feb_v2.json'
 
 # Construct the full path to the JSON file
 json_file_path = os.path.join(script_dir, json_file_name)
 
-league_id_key = "What is the Sleeper League ID for this team? (the number in the URL, on MOBILE its in your league settings)"
-team_id_key = "What is your Sleeper TEAM ID? (follow the link to find your team ID, it should be a 1-12 (or however many teams are in your league) number"
-team_id_subkey = '\r\n\r\nFIND YOUR TEAM ID HERE\r\nTEAM ID FINDER'
-email_key = 'What is your email address? (We will send your Infinite Blueprint to this email each month)'
+league_id_key = "league_id"
+team_id_key = "team_id"
+email_key = 'email\r'
 verified_key = 'Column 1\r'
 # Open and read the JSON file
 try:
@@ -24,12 +23,12 @@ except FileNotFoundError:
 except json.JSONDecodeError as e:
     print(f"Error: Failed to decode JSON - {e}")
 
-league_ids = [item[league_id_key] for item in data if item[verified_key] == 'Verified\r']
+league_ids = [str(item[league_id_key]) for item in data]
 print('League IDs:')
 print(','.join(league_ids))
 print('\nTeam IDs:')
-team_ids = [str(item[team_id_key][team_id_subkey]) for item in data if item[verified_key] == 'Verified\r']
+team_ids = [str(item[team_id_key]) for item in data]
 print(','.join(team_ids))
 print('\nEmails:')
-emails = [item[email_key] for item in data if item[verified_key] == 'Verified\r']
+emails = [item[email_key].strip() for item in data]
 print(','.join(emails))
