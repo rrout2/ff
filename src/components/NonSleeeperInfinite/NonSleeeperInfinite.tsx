@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import styles from './NonSleeeperInfinite.module.css';
 import {Roster} from '../../sleeper-api/sleeper-api';
 import {useNonSleeper} from '../../hooks/hooks';
 import {NonSleeperInput} from '../Blueprint/shared/NonSleeperInput';
 export default function NonSleeeperInfinite() {
-    const [roster, setRoster] = useState<Roster>();
+    const [_roster, setRoster] = useState<Roster>();
 
     const {
         nonSleeperIds,
@@ -21,7 +20,6 @@ export default function NonSleeeperInfinite() {
         setTaxiSlots,
         teamName,
         setTeamName,
-        setSearchParams,
     } = useNonSleeper(undefined, undefined, setRoster);
 
     return (
