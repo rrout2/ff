@@ -189,6 +189,10 @@ def main():
         uploader.authenticate()
         folder_id = uploader.create_or_get_folder(args.folder_name)
         for i in range(len(sender.league_id_list)):
+            if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
+                continue
+            if sender.team_id_list[i] == '' or sender.team_id_list[i] == None:
+                continue
             print(f"{i + 1}/{len(sender.league_id_list)}")
             downloaded_file = sender.download_image(i)
 
