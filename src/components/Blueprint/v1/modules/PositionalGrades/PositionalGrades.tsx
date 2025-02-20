@@ -255,6 +255,7 @@ interface graphicProps {
     roster?: Roster;
     graphicComponentClass?: string;
     transparent?: boolean;
+    numStarters?: number;
     isSuperFlex: boolean;
     leagueSize: number;
 }
@@ -266,6 +267,7 @@ function GraphicComponent({
     transparent,
     isSuperFlex,
     leagueSize,
+    numStarters,
 }: graphicProps) {
     const playerData = usePlayerData();
     const {getPlayerValue} = usePlayerValues();
@@ -318,7 +320,8 @@ function GraphicComponent({
                         isSuperFlex,
                         leagueSize,
                         playerData,
-                        roster
+                        roster,
+                        numStarters
                     );
                 }
                 return scaleAndSliderColumn(grade, position);
@@ -398,7 +401,8 @@ function scoreAndBumpByPosition(
     isSuperFlex: boolean,
     leagueSize: number,
     playerData?: PlayerData,
-    roster?: Roster
+    roster?: Roster,
+    numStarters?: number
 ): scoreAndBump {
     if (!SUPER_FLEX_SET.has(pos)) {
         throw new Error(`Unknown position '${pos}'`);
@@ -406,12 +410,12 @@ function scoreAndBumpByPosition(
     if (pos === TE) {
         throw new Error('Should use manual TE calculation');
     }
-    if (!playerData || !roster || !roster.starters) return {score: 0, bump: 0};
+    if (!playerData || !roster || !roster.players) return {score: 0, bump: 0};
     let totalBump = 0;
 
     const multiplier = getStarterPoolSizeMultiplier(
         leagueSize,
-        roster.starters.length,
+        roster?.starters?.length ?? numStarters ?? 0,
         pos,
         isSuperFlex
     );
@@ -455,9 +459,10 @@ export function gradeByPosition(
     isSuperFlex: boolean,
     leagueSize: number,
     playerData?: PlayerData,
-    roster?: Roster
+    roster?: Roster,
+    numStarters?: number
 ) {
-    if (!playerData || !roster || !roster.starters) return 0;
+    if (!playerData || !roster || !roster.players) return 0;
     if (pos === TE) {
         return Math.max(
             ...roster.players
@@ -477,7 +482,8 @@ export function gradeByPosition(
         !!isSuperFlex,
         leagueSize,
         playerData,
-        roster
+        roster,
+        numStarters
     );
     if (!SUPER_FLEX_SET.has(pos)) {
         throw new Error(`Unknown position '${pos}'`);

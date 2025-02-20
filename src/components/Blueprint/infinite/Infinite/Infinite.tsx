@@ -4,6 +4,7 @@ import {
     useFetchRosters,
     useLeague,
     useLeagueIdFromUrl,
+    useNonSleeper,
     useProjectedLineup,
     useRoster,
     useRosterSettings,
@@ -34,14 +35,11 @@ export default function Infinite() {
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
     const {data: rosters} = useFetchRosters(leagueId);
-    const {roster, user} = useRoster(rosters, teamId, leagueId);
-    const {startingLineup, benchString, setStartingLineup} = useProjectedLineup(
-        rosterSettings,
-        roster?.players
-    );
+    const {roster, user, setRoster} = useRoster(rosters, teamId, leagueId);
     const {cornerstones} = useCornerstones(roster);
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
+    const [isNonSleeper, setIsNonSleeper] = useState(false);
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
             return;
@@ -68,11 +66,29 @@ export default function Infinite() {
             setAllUsers(users.filter(u => ownerIds.has(u.user_id)))
         );
     }, [leagueId, rosters]);
+
+    const {
+        nonSleeperRosterSettings,
+        numRosters,
+        teamName: nonSleeperTeamName,
+    } = useNonSleeper(rosters, specifiedUser, setRoster);
+
+    const {startingLineup, benchString, setStartingLineup} = useProjectedLineup(
+        isNonSleeper ? nonSleeperRosterSettings : rosterSettings,
+        roster?.players
+    );
     useEffect(() => {
         setStartingLineup(startingLineup.slice(0, 14));
     }, [startingLineup.length]);
+
+    useEffect(() => {
+        setIsNonSleeper(!leagueId);
+    }, [leagueId]);
+
     const currentDate = new Date();
-    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
+    const isSuperFlex = !isNonSleeper
+        ? rosterSettings.has(SUPER_FLEX)
+        : nonSleeperRosterSettings.has(SUPER_FLEX);
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
@@ -95,10 +111,17 @@ export default function Infinite() {
                 className={styles.fullBlueprint}
                 pngName={`${getTeamName(user)}_infinite.png`}
             />
-            {teamSelectComponent(teamId, setTeamId, allUsers, specifiedUser, {
-                margin: '4px',
-                maxWidth: '800px',
-            })}
+            {leagueId &&
+                teamSelectComponent(
+                    teamId,
+                    setTeamId,
+                    allUsers,
+                    specifiedUser,
+                    {
+                        margin: '4px',
+                        maxWidth: '800px',
+                    }
+                )}
             <div className={styles.fullBlueprint}>
                 <div className={styles.startersGraphic}>
                     <StartersGraphic
@@ -113,25 +136,30 @@ export default function Infinite() {
                     />
                 </div>
                 <div className={getBenchStringClass()}>{benchString}</div>
-                <TeamNameComponent teamName={getTeamName(user)} />
+                <TeamNameComponent
+                    teamName={
+                        isNonSleeper ? nonSleeperTeamName : getTeamName(user)
+                    }
+                />
                 <div className={styles.positionalGradesGraphic}>
                     <PositionalGradesGraphic
                         transparent={true}
                         roster={roster}
                         isSuperFlex={isSuperFlex}
-                        leagueSize={rosters?.length ?? 0}
+                        leagueSize={numRosters}
+                        numStarters={startingLineup.length}
                     />
                 </div>
                 <div className={styles.rosterTierGraphic}>
                     <RosterTierComponent
                         isSuperFlex={isSuperFlex}
-                        leagueSize={rosters?.length ?? 0}
+                        leagueSize={numRosters}
                         roster={roster}
                     />
                 </div>
                 <BuySellHoldComponent
                     isSuperFlex={isSuperFlex}
-                    leagueSize={rosters?.length ?? 0}
+                    leagueSize={numRosters}
                     roster={roster}
                 />
                 <div className={styles.monthYear}>

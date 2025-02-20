@@ -490,7 +490,7 @@ export function useRoster(
         setUser(allUsers?.[+teamId]);
     }, [allUsers, teamId]);
 
-    return {roster, user};
+    return {roster, user, setRoster};
 }
 
 export function useLeagueIdFromUrl(): [
