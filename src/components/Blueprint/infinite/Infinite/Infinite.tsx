@@ -127,6 +127,7 @@ export default function Infinite() {
                     <StartersGraphic
                         startingLineup={startingLineup}
                         transparent={true}
+                        infinite
                     />
                 </div>
                 <div className={styles.cornerstoneGraphic}>

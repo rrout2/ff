@@ -1,6 +1,7 @@
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Starters.module.css';
 import {
+    useBuySellData,
     useLeagueIdFromUrl,
     usePlayerData,
     useProjectedLineup,
@@ -124,8 +125,11 @@ function StartersGraphic(props: {
     startingLineup?: Lineup;
     transparent?: boolean;
     graphicComponentClass?: string;
+    infinite?: boolean;
 }) {
-    const {startingLineup, transparent, graphicComponentClass} = props;
+    const {startingLineup, transparent, graphicComponentClass, infinite} =
+        props;
+    const {getVerdict} = useBuySellData();
 
     function playerTarget(player: Player, position: string) {
         let diplayPosition = position;
@@ -152,9 +156,16 @@ function StartersGraphic(props: {
                 </div>
                 {logoImage(team, styles.teamLogo)}
                 <div className={styles.targetName}>{displayName}</div>
-                <div
-                    className={styles.subtitle}
-                >{`${player.position} - ${team}`}</div>
+                {!infinite && (
+                    <div
+                        className={styles.subtitle}
+                    >{`${player.position} - ${team}`}</div>
+                )}
+                {infinite && (
+                    <DifferenceChip
+                        difference={getVerdict(fullName)?.difference ?? 0}
+                    />
+                )}
             </div>
         );
     }
@@ -168,6 +179,26 @@ function StartersGraphic(props: {
             {startingLineup?.map(({player, position}) => {
                 return playerTarget(player, position);
             })}
+        </div>
+    );
+}
+
+function DifferenceChip({difference}: {difference: number}) {
+    let color = 'gray';
+    let displayDifference = '';
+    if (difference > 3) {
+        color = '#8DC63F';
+        displayDifference = ` + ${difference}`;
+    } else if (difference < -3) {
+        color = '#EF4136';
+        displayDifference = ` - ${Math.abs(difference)}`;
+    } else {
+        color = '#F3C01D';
+        displayDifference = '=';
+    }
+    return (
+        <div className={styles.differenceChip} style={{color: color}}>
+            <div className={styles.difference}>{displayDifference}</div>
         </div>
     );
 }

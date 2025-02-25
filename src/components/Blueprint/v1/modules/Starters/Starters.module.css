@@ -73,3 +73,19 @@
 .background {
     background-color: #005D91;
 }
+
+.differenceChip {
+    font-family: 'Antarctican Headline';
+    font-size: 40px;
+
+    width: 94px;
+
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 20px;
+}

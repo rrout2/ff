@@ -134,7 +134,30 @@ export function useBuySellData() {
         }
     }
 
-    return {buySells, qbBuys, rbBuys, wrBuys, teBuys, sells, holds};
+    function getVerdict(playerName: string) {
+        const playerNickname = checkForNickname(playerName);
+        const verdict = buySells.find(
+            b => b.name === playerName || b.alt_name === playerNickname
+        );
+        if (!verdict) {
+            console.warn(
+                `cannot find player with name = '${playerName}' or alt_name = '${playerNickname}'`
+            );
+            return null;
+        }
+        return verdict;
+    }
+
+    return {
+        buySells,
+        qbBuys,
+        rbBuys,
+        wrBuys,
+        teBuys,
+        sells,
+        holds,
+        getVerdict,
+    };
 }
 
 export interface PlayerData {
