@@ -174,6 +174,8 @@ import hardBuy from '../assets/infinite/Hard_Buy.png';
 import hardSell from '../assets/infinite/Hard_sell.png';
 import softBuy from '../assets/infinite/Soft_buy.png';
 import softSell from '../assets/infinite/soft_sell.png';
+import tradeMeterButton from '../assets/infinite/tradeMeter/Trade_meter_button.png';
+import tradeMeterNeedle from '../assets/infinite/tradeMeter/Trade_meter_needle.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -467,4 +469,6 @@ export {
     softBuy,
     softSell,
     blankInfiniteV2,
+    tradeMeterButton,
+    tradeMeterNeedle,
 };

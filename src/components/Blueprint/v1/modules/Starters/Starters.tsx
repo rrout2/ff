@@ -1,6 +1,7 @@
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './Starters.module.css';
 import {
+    BuySellVerdict,
     useBuySellData,
     useLeagueIdFromUrl,
     usePlayerData,
@@ -161,11 +162,7 @@ function StartersGraphic(props: {
                         className={styles.subtitle}
                     >{`${player.position} - ${team}`}</div>
                 )}
-                {infinite && (
-                    <DifferenceChip
-                        difference={getVerdict(fullName)?.difference ?? 0}
-                    />
-                )}
+                {infinite && <DifferenceChip verdict={getVerdict(fullName)} />}
             </div>
         );
     }
@@ -183,13 +180,14 @@ function StartersGraphic(props: {
     );
 }
 
-function DifferenceChip({difference}: {difference: number}) {
+function DifferenceChip({verdict}: {verdict?: BuySellVerdict}) {
+    const difference = verdict?.difference ?? 0;
     let color = 'gray';
     let displayDifference = '';
-    if (difference > 3) {
+    if (difference > 3 && verdict?.verdict.includes('Buy')) {
         color = '#8DC63F';
         displayDifference = ` + ${difference}`;
-    } else if (difference < -3) {
+    } else if (difference < -3 && verdict?.verdict.includes('Sell')) {
         color = '#EF4136';
         displayDifference = ` - ${Math.abs(difference)}`;
     } else {

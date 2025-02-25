@@ -91,3 +91,56 @@
 .smallestTeamName {
     font-size: 45px;
 }
+
+.marketValueAnalysis {
+    font-family: 'Acumin Pro Condensed';
+    font-size: 25px;
+    color: #013049;
+    width: 130px;
+    text-align: center;
+}
+
+.buys {
+    position: absolute;
+    top: 1390px;
+    left: 60px;
+}
+
+.sells {
+    position: absolute;
+    top: 1390px;
+    left: 212px;
+}
+
+.holds {
+    position: absolute;
+    top: 1390px;
+    left: 364px;
+}
+
+.tradeMeterGraphic {
+    position: absolute;
+    bottom: 80px;
+    left: 80px;
+}
+
+.tradeMeter {
+    position: relative;
+    width: 420px;
+    height: 250px;
+}
+
+.tradeMeterButton {
+    position: absolute;
+    bottom: 0px;
+    left: 160px;
+    width: 80px;
+}
+
+.tradeMeterNeedle {
+    position: absolute;
+    bottom: 40px;
+    left: 196px;
+    height: 130px;
+    transform-origin: bottom left;
+}

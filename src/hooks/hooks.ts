@@ -56,7 +56,7 @@ export function useNflSchedule() {
     return nflSchedule;
 }
 
-type BuySellVerdict = {
+export type BuySellVerdict = {
     name: string;
     alt_name: string;
     position: string;
@@ -143,7 +143,7 @@ export function useBuySellData() {
             console.warn(
                 `cannot find player with name = '${playerName}' or alt_name = '${playerNickname}'`
             );
-            return null;
+            return undefined;
         }
         return verdict;
     }

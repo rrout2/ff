@@ -1,10 +1,17 @@
 import styles from './Infinite.module.css';
-import {blankInfiniteV2} from '../../../../consts/images';
 import {
+    blankInfiniteV2,
+    tradeMeterButton,
+    tradeMeterNeedle,
+} from '../../../../consts/images';
+import {
+    useAdpData,
+    useBuySellData,
     useFetchRosters,
     useLeague,
     useLeagueIdFromUrl,
     useNonSleeper,
+    usePlayerData,
     useProjectedLineup,
     useRoster,
     useRosterSettings,
@@ -23,7 +30,10 @@ import {
     User,
 } from '../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../shared/ExportButton';
-import RosterTierComponent from '../RosterTier/RosterTier';
+import RosterTierComponent, {
+    RosterTier,
+    useRosterTierAndPosGrades,
+} from '../RosterTier/RosterTier';
 import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
 import {SUPER_FLEX} from '../../../../consts/fantasy';
 import {teamSelectComponent} from '../../../Team/TeamPage/TeamPage';
@@ -40,6 +50,7 @@ export default function Infinite() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [isNonSleeper, setIsNonSleeper] = useState(false);
+    const {getAdp} = useAdpData();
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
             return;
@@ -85,10 +96,49 @@ export default function Infinite() {
         setIsNonSleeper(!leagueId);
     }, [leagueId]);
 
+    const {getVerdict} = useBuySellData();
+    const [buyPercent, setBuyPercent] = useState(0);
+    const [sellPercent, setSellPercent] = useState(0);
+    const [holdPercent, setHoldPercent] = useState(0);
+    const playerData = usePlayerData();
+    useEffect(() => {
+        if (!roster?.players || !playerData) return;
+        const verdicts = roster.players
+            .map(playerId => playerData[playerId])
+            .filter(p => !!p && getAdp(`${p.first_name} ${p.last_name}`) <= 144)
+            .map(p => getVerdict(`${p.first_name} ${p.last_name}`))
+            .filter(v => !!v);
+        setBuyPercent(
+            Math.round(
+                (100 *
+                    verdicts.filter(v => v && v.verdict.includes('Buy'))
+                        .length) /
+                    verdicts.length
+            )
+        );
+        setSellPercent(
+            Math.round(
+                (100 *
+                    verdicts.filter(v => v && v.verdict.includes('Sell'))
+                        .length) /
+                    verdicts.length
+            )
+        );
+        setHoldPercent(
+            Math.round(
+                (100 *
+                    verdicts.filter(v => v && v.verdict.includes('Hold'))
+                        .length) /
+                    verdicts.length
+            )
+        );
+    }, [roster, playerData, getVerdict]);
+
     const currentDate = new Date();
     const isSuperFlex = !isNonSleeper
         ? rosterSettings.has(SUPER_FLEX)
         : nonSleeperRosterSettings.has(SUPER_FLEX);
+    const {tier} = useRosterTierAndPosGrades(isSuperFlex, numRosters, roster);
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
@@ -169,11 +219,122 @@ export default function Infinite() {
                         year: 'numeric',
                     })}
                 </div>
+                <div className={`${styles.buys} ${styles.marketValueAnalysis}`}>
+                    BUYS: {buyPercent}%
+                </div>
+                <div
+                    className={`${styles.sells} ${styles.marketValueAnalysis}`}
+                >
+                    SELLS: {sellPercent}%
+                </div>
+                <div
+                    className={`${styles.holds} ${styles.marketValueAnalysis}`}
+                >
+                    HOLDS: {holdPercent}%
+                </div>
+                <div className={styles.tradeMeterGraphic}>
+                    <TradeMeterComponent
+                        sellPercent={sellPercent}
+                        tier={tier}
+                    />
+                </div>
                 <img src={blankInfiniteV2} className={styles.blankBp} />
             </div>
         </>
     );
 }
+
+type TradeMeterComponentProps = {
+    sellPercent: number;
+    tier: RosterTier;
+};
+const TradeMeterComponent = ({sellPercent, tier}: TradeMeterComponentProps) => {
+    let activity: 'high' | 'midhigh' | 'mid' | 'lowmid' | 'low' = 'low';
+    let rotationDegrees = 0;
+    switch (tier) {
+        case RosterTier.Elite:
+            if (sellPercent > 79) {
+                activity = 'mid';
+            } else if (sellPercent > 39) {
+                activity = 'lowmid';
+            } else {
+                activity = 'low';
+            }
+            break;
+        case RosterTier.Championship:
+            if (sellPercent > 79) {
+                activity = 'midhigh';
+            } else if (sellPercent > 59) {
+                activity = 'mid';
+            } else if (sellPercent > 39) {
+                activity = 'lowmid';
+            } else {
+                activity = 'low';
+            }
+            break;
+        case RosterTier.Competitive:
+            if (sellPercent > 79) {
+                activity = 'high';
+            } else if (sellPercent > 59) {
+                activity = 'midhigh';
+            } else if (sellPercent > 39) {
+                activity = 'mid';
+            } else if (sellPercent > 19) {
+                activity = 'lowmid';
+            } else {
+                activity = 'low';
+            }
+            break;
+        case RosterTier.Reload:
+            if (sellPercent > 59) {
+                activity = 'high';
+            } else if (sellPercent > 39) {
+                activity = 'midhigh';
+            } else if (sellPercent > 19) {
+                activity = 'mid';
+            } else {
+                activity = 'lowmid';
+            }
+            break;
+        case RosterTier.Rebuild:
+            if (sellPercent > 39) {
+                activity = 'high';
+            } else if (sellPercent > 19) {
+                activity = 'midhigh';
+            } else {
+                activity = 'mid';
+            }
+            break;
+    }
+
+    switch (activity) {
+        case 'high':
+            rotationDegrees = 30;
+            break;
+        case 'midhigh':
+            rotationDegrees = 0;
+            break;
+        case 'mid':
+            rotationDegrees = -33;
+            break;
+        case 'lowmid':
+            rotationDegrees = -71;
+            break;
+        case 'low':
+            rotationDegrees = -100;
+            break;
+    }
+    return (
+        <div className={styles.tradeMeter}>
+            <img
+                src={tradeMeterNeedle}
+                className={styles.tradeMeterNeedle}
+                style={{transform: `rotate(${rotationDegrees}deg)`}}
+            />
+            <img src={tradeMeterButton} className={styles.tradeMeterButton} />
+        </div>
+    );
+};
 
 const countEmojis = (str: string): number => {
     // This regex matches most emoji patterns including:
