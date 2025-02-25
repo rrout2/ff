@@ -1,0 +1,81 @@
+.playerBar {
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+    width: 270px;
+
+    border: 6px solid white;
+    border-radius: 10px;
+}
+
+.headshot {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+
+.playerInfo {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 4px;
+}
+
+.name {
+    font-family: 'Prohibition';
+    font-size: 28px;
+    color: white;
+}
+
+.positionChip {
+    font-family: 'Acumin Pro Condensed';
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+    padding-top: 2px;
+    
+    border-radius: 8px;
+    width: 45px;
+    text-align: center;
+}
+
+.QB {
+    background-color: #EC336D;
+}
+
+.RB {
+    background-color: #3DBCB1;
+}
+
+.WR {
+    background-color: #3CB6E9;
+}
+
+.TE {
+    background-color: #FBAD5B;
+}
+
+.positionAndTeam {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.team {
+    font-family: 'Acumin Pro Condensed';
+    font-style: italic;
+    font-size: 19px;
+    color: white;
+    padding-top: 3px;
+}
+
+.teamLogo {
+    position: absolute;
+    width: 30px;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 100%;
+    left: -10px;
+    bottom: -10px;
+}

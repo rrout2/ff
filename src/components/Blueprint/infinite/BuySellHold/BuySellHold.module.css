@@ -4,10 +4,8 @@
 }
 
 
-.reason {
-    font-family: 'Acumin Pro Condensed';
-    color: white;
-    margin-top: 5px;
-    width: 280px;
-    text-align: center;
+.buySellTile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {Roster} from '../../../../sleeper-api/sleeper-api';
-import {PlayerTarget} from '../../v1/modules/playerstotarget/PlayersToTargetModule';
 import styles from './BuySellHold.module.css';
 import {hardBuy, hardSell, softBuy, softSell} from '../../../../consts/images';
 import {RosterTier, useRosterTierAndPosGrades} from '../RosterTier/RosterTier';
@@ -10,6 +9,7 @@ import {
     useBuySellData,
     usePlayerData,
 } from '../../../../hooks/hooks';
+import PlayerBar from '../PlayerBar/PlayerBar';
 
 // Only QB buys allowed in 1QB leagues.
 const ONE_QB_ALLOWSET = new Set<string>([
@@ -40,7 +40,6 @@ enum BuySellType {
 type BuySellTileProps = {
     playerId: string;
     type: BuySellType;
-    reason?: string;
 };
 
 export function useBuySells(
@@ -285,7 +284,6 @@ export function useBuySells(
                     qbBuy.verdict === 'Soft Buy'
                         ? BuySellType.SoftBuy
                         : BuySellType.HardBuy,
-                reason: qbBuy.explanation,
             });
         }
         return toBuy;
@@ -315,7 +313,6 @@ export function useBuySells(
                     rbBuy.verdict === 'Soft Buy'
                         ? BuySellType.SoftBuy
                         : BuySellType.HardBuy,
-                reason: rbBuy.explanation,
             });
         }
         return toBuy;
@@ -367,7 +364,6 @@ export function useBuySells(
                     wrBuy.verdict === 'Soft Buy'
                         ? BuySellType.SoftBuy
                         : BuySellType.HardBuy,
-                reason: wrBuy.explanation,
             });
         }
         return toBuy;
@@ -409,7 +405,6 @@ export function useBuySells(
                     teBuy.verdict === 'Soft Buy'
                         ? BuySellType.SoftBuy
                         : BuySellType.HardBuy,
-                reason: teBuy.explanation,
             });
         }
         return toBuy;
@@ -469,15 +464,14 @@ function mapToImgSrc(type: BuySellType) {
     }
 }
 
-export function BuySellTile({playerId, type, reason}: BuySellTileProps) {
+export function BuySellTile({playerId, type}: BuySellTileProps) {
     if (!playerId) return <></>;
     return (
-        <div>
+        <div className={styles.buySellTile}>
             {type !== BuySellType.Hold && (
                 <img src={mapToImgSrc(type)} className={styles.buySellImage} />
             )}
-            <PlayerTarget playerId={playerId} smaller />
-            {!!reason && <div className={styles.reason}>{reason}</div>}
+            <PlayerBar playerId={playerId} />
         </div>
     );
 }

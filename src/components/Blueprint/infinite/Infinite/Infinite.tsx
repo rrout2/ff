@@ -1,5 +1,5 @@
 import styles from './Infinite.module.css';
-import {blankInfinite} from '../../../../consts/images';
+import {blankInfiniteV2} from '../../../../consts/images';
 import {
     useFetchRosters,
     useLeague,
@@ -168,7 +168,7 @@ export default function Infinite() {
                         year: 'numeric',
                     })}
                 </div>
-                <img src={blankInfinite} className={styles.blankBp} />
+                <img src={blankInfiniteV2} className={styles.blankBp} />
             </div>
         </>
     );
@@ -210,7 +210,7 @@ const BuySellHoldComponent = ({
     leagueSize: number;
     roster?: Roster;
 }) => {
-    const {buys, sells, holds} = useBuySells(isSuperFlex, leagueSize, roster);
+    const {buys, sells} = useBuySells(isSuperFlex, leagueSize, roster);
 
     const column1 = '640px';
     const column2 = '1002px';
@@ -218,7 +218,6 @@ const BuySellHoldComponent = ({
     const row1 = '1102px';
     const row2 = '1246px';
     const row3 = '1478px';
-    const row4 = '1715px';
     return (
         <>
             <div
@@ -256,18 +255,6 @@ const BuySellHoldComponent = ({
                 style={{left: column2, top: row3}}
             >
                 <BuySellTile {...sells[1]} />
-            </div>
-            <div
-                className={styles.buySellHoldGraphic}
-                style={{left: column1, top: row4}}
-            >
-                <BuySellTile {...holds[0]} />
-            </div>
-            <div
-                className={styles.buySellHoldGraphic}
-                style={{left: column2, top: row4}}
-            >
-                <BuySellTile {...holds[1]} />
             </div>
         </>
     );

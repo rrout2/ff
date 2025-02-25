@@ -169,6 +169,7 @@ import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
 
 // Infinite BP
 import blankInfinite from '../assets/infinite/Infinite_background.png';
+import blankInfiniteV2 from '../assets/infinite/blankInfinite_v2.png';
 import hardBuy from '../assets/infinite/Hard_Buy.png';
 import hardSell from '../assets/infinite/Hard_sell.png';
 import softBuy from '../assets/infinite/Soft_buy.png';
@@ -465,4 +466,5 @@ export {
     hardSell,
     softBuy,
     softSell,
+    blankInfiniteV2,
 };
