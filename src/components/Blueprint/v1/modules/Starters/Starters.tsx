@@ -191,11 +191,11 @@ function DifferenceChip({verdict}: {verdict?: BuySellVerdict}) {
     let color = 'gray';
     let displayDifference = '';
     let plusMinus = '';
-    if (difference > 3 && verdict?.verdict.includes('Buy')) {
+    if (difference >= 3 && verdict?.verdict.includes('Buy')) {
         color = '#8DC63F';
         displayDifference = `${difference}`;
         plusMinus = '+';
-    } else if (difference < -3 && verdict?.verdict.includes('Sell')) {
+    } else if (difference <= -3 && verdict?.verdict.includes('Sell')) {
         color = '#EF4136';
         displayDifference = `${Math.abs(difference)}`;
         plusMinus = '-';
