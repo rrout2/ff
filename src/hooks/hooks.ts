@@ -26,7 +26,9 @@ import {
 import {useSearchParams} from 'react-router-dom';
 import {
     BENCH,
+    DEFENSE,
     FLEX,
+    KICKER,
     PPR,
     QB,
     RB,
@@ -704,7 +706,12 @@ export function useProjectedLineup(
         const remainingPlayers = new Set(playerIds);
         const starters: {player: Player; position: string}[] = [];
         Array.from(rosterSettings)
-            .filter(([position]) => position !== BENCH)
+            .filter(
+                ([position]) =>
+                    position !== BENCH &&
+                    position !== DEFENSE &&
+                    position !== KICKER
+            )
             .forEach(([position, count]) => {
                 const bestAtPosition = getBestNAtPosition(
                     position,
@@ -734,13 +741,6 @@ export function useProjectedLineup(
                         position: position,
                     });
                 }
-                // bestAtPosition.forEach(p => {
-                //     remainingPlayers.delete(p.player_id);
-                //     starters.push({
-                //         player: p,
-                //         position: position,
-                //     });
-                // });
             });
 
         setStartingLineup(starters);
