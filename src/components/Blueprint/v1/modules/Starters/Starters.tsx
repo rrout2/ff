@@ -133,7 +133,7 @@ function StartersGraphic(props: {
         props;
     const {getVerdict} = useBuySellData();
 
-    function playerTarget(player: Player, position: string) {
+    function playerTarget(player: Player, position: string, idx: number) {
         let diplayPosition = position;
         if (position === 'WRRB_FLEX' || position === 'REC_FLEX') {
             diplayPosition = 'FLEX';
@@ -150,20 +150,25 @@ function StartersGraphic(props: {
         const team = player.team ?? 'FA';
 
         return (
-            <div className={styles.playerTargetBody} key={player.player_id}>
+            <div
+                className={styles.playerTargetBody}
+                key={`${player.player_id} ${idx}`}
+            >
                 <div
                     className={`${styles.positionChip} ${styles[diplayPosition]}`}
                 >
                     {diplayPosition}
                 </div>
-                {logoImage(team, styles.teamLogo)}
+                {player.player_id && logoImage(team, styles.teamLogo)}
                 <div className={styles.targetName}>{displayName}</div>
                 {!infinite && (
                     <div
                         className={styles.subtitle}
                     >{`${player.position} - ${team}`}</div>
                 )}
-                {infinite && <DifferenceChip verdict={getVerdict(fullName)} />}
+                {infinite && player.player_id && (
+                    <DifferenceChip verdict={getVerdict(fullName)} />
+                )}
             </div>
         );
     }
@@ -174,8 +179,8 @@ function StartersGraphic(props: {
                 graphicComponentClass ?? ''
             } ${transparent ? '' : styles.background}`}
         >
-            {startingLineup?.map(({player, position}) => {
-                return playerTarget(player, position);
+            {startingLineup?.map(({player, position}, idx) => {
+                return playerTarget(player, position, idx);
             })}
         </div>
     );

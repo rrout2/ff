@@ -137,11 +137,19 @@ export function useBuySellData() {
     function getVerdict(playerName: string) {
         const playerNickname = checkForNickname(playerName);
         const verdict = buySells.find(
-            b => b.name === playerName || b.alt_name === playerNickname
+            b =>
+                b.name.replace(/\W/g, '').toLowerCase() ===
+                    playerName.replace(/\W/g, '').toLowerCase() ||
+                b.alt_name.replace(/\W/g, '').toLowerCase() ===
+                    playerNickname.replace(/\W/g, '').toLowerCase() ||
+                b.name.replace(/\W/g, '').toLowerCase() ===
+                    playerNickname.replace(/\W/g, '').toLowerCase() ||
+                b.alt_name.replace(/\W/g, '').toLowerCase() ===
+                    playerName.replace(/\W/g, '').toLowerCase()
         );
         if (!verdict) {
             console.warn(
-                `cannot find player with name = '${playerName}' or alt_name = '${playerNickname}'`
+                `cannot find verdict with name = '${playerName}' or alt_name = '${playerNickname}'`
             );
             return undefined;
         }
@@ -707,13 +715,32 @@ export function useProjectedLineup(
                     playerData,
                     playerIds
                 );
-                bestAtPosition.forEach(p => {
+                for (let i = 0; i < count; i++) {
+                    if (i >= bestAtPosition.length) {
+                        starters.push({
+                            player: {
+                                player_id: '',
+                                first_name: '',
+                                last_name: '',
+                            } as Player,
+                            position: position,
+                        });
+                        continue;
+                    }
+                    const p = bestAtPosition[i];
                     remainingPlayers.delete(p.player_id);
                     starters.push({
                         player: p,
                         position: position,
                     });
-                });
+                }
+                // bestAtPosition.forEach(p => {
+                //     remainingPlayers.delete(p.player_id);
+                //     starters.push({
+                //         player: p,
+                //         position: position,
+                //     });
+                // });
             });
 
         setStartingLineup(starters);
