@@ -23,6 +23,7 @@ import {
     FLEX_SET,
     SUPER_FLEX_SET,
 } from '../../../../../consts/fantasy';
+import {domainShield} from '../../../../../consts/images';
 
 function StartersModule(props: {
     roster?: Roster;
@@ -184,19 +185,24 @@ function DifferenceChip({verdict}: {verdict?: BuySellVerdict}) {
     const difference = verdict?.difference ?? 0;
     let color = 'gray';
     let displayDifference = '';
+    let plusMinus = '';
     if (difference > 3 && verdict?.verdict.includes('Buy')) {
         color = '#8DC63F';
-        displayDifference = ` + ${difference}`;
+        displayDifference = `${difference}`;
+        plusMinus = '+';
     } else if (difference < -3 && verdict?.verdict.includes('Sell')) {
         color = '#EF4136';
-        displayDifference = ` - ${Math.abs(difference)}`;
+        displayDifference = `${Math.abs(difference)}`;
+        plusMinus = '-';
     } else {
         color = '#F3C01D';
         displayDifference = '=';
     }
     return (
         <div className={styles.differenceChip} style={{color: color}}>
-            <div className={styles.difference}>{displayDifference}</div>
+            <img src={domainShield} className={styles.domainShield} />
+            {plusMinus && <div>{plusMinus}</div>}
+            <div>{displayDifference}</div>
         </div>
     );
 }

@@ -76,6 +76,7 @@
 
 .differenceChip {
     font-family: 'Antarctican Headline';
+    font-weight: bold;
     font-size: 40px;
 
     width: 94px;
@@ -87,5 +88,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     margin-left: 20px;
+}
+
+.domainShield {
+    height: 35px;
 }

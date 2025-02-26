@@ -170,12 +170,14 @@ import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
 // Infinite BP
 import blankInfinite from '../assets/infinite/Infinite_background.png';
 import blankInfiniteV2 from '../assets/infinite/blankInfinite_v2.png';
+import blankInfiniteV3 from '../assets/infinite/blankInfinite_v3.png';
 import hardBuy from '../assets/infinite/Hard_Buy.png';
 import hardSell from '../assets/infinite/Hard_sell.png';
 import softBuy from '../assets/infinite/Soft_buy.png';
 import softSell from '../assets/infinite/soft_sell.png';
 import tradeMeterButton from '../assets/infinite/tradeMeter/Trade_meter_button.png';
 import tradeMeterNeedle from '../assets/infinite/tradeMeter/Trade_meter_needle.png';
+import domainShield from '../assets/infinite/domain_shield.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -469,6 +471,8 @@ export {
     softBuy,
     softSell,
     blankInfiniteV2,
+    blankInfiniteV3,
     tradeMeterButton,
     tradeMeterNeedle,
+    domainShield,
 };

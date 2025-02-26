@@ -89,9 +89,9 @@ function mapCityAbbreviationToFullName(cityAbbreviation: string): string {
         case 'KC':
             return 'KANSAS CITY';
         case 'LAC':
-            return 'LOS ANGELES';
+            return 'LA CHARGERS';
         case 'LAR':
-            return 'LOS ANGELES';
+            return 'LA RAMS';
         case 'MIA':
             return 'MIAMI';
         case 'MIN':
@@ -101,9 +101,9 @@ function mapCityAbbreviationToFullName(cityAbbreviation: string): string {
         case 'NO':
             return 'NEW ORLEANS';
         case 'NYG':
-            return 'NEW YORK';
+            return 'NY GIANTS';
         case 'NYJ':
-            return 'NEW YORK';
+            return 'NY JETS';
         case 'PHI':
             return 'PHILADELPHIA';
         case 'PIT':
