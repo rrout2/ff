@@ -25,10 +25,9 @@ import {
 } from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {
+    ALLOWED_POSITIONS,
     BENCH,
-    DEFENSE,
     FLEX,
-    KICKER,
     PPR,
     QB,
     RB,
@@ -706,12 +705,7 @@ export function useProjectedLineup(
         const remainingPlayers = new Set(playerIds);
         const starters: {player: Player; position: string}[] = [];
         Array.from(rosterSettings)
-            .filter(
-                ([position]) =>
-                    position !== BENCH &&
-                    position !== DEFENSE &&
-                    position !== KICKER
-            )
+            .filter(([position]) => ALLOWED_POSITIONS.has(position))
             .forEach(([position, count]) => {
                 const bestAtPosition = getBestNAtPosition(
                     position,
