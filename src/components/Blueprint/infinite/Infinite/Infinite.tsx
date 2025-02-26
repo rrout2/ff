@@ -1,6 +1,7 @@
 import styles from './Infinite.module.css';
 import {
     blankInfiniteV3,
+    domainLogo,
     tradeMeterButton,
     tradeMeterNeedle,
 } from '../../../../consts/images';
@@ -238,6 +239,7 @@ export default function Infinite() {
                         tier={tier}
                     />
                 </div>
+                <img src={domainLogo} className={styles.domainLogo} />
                 <img src={blankInfiniteV3} className={styles.blankBp} />
             </div>
         </>

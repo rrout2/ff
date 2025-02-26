@@ -178,6 +178,7 @@ import softSell from '../assets/infinite/soft_sell.png';
 import tradeMeterButton from '../assets/infinite/tradeMeter/Trade_meter_button.png';
 import tradeMeterNeedle from '../assets/infinite/tradeMeter/Trade_meter_needle.png';
 import domainShield from '../assets/infinite/domain_shield.png';
+import domainLogo from '../assets/infinite/domain_logo.png';
 
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -475,4 +476,5 @@ export {
     tradeMeterButton,
     tradeMeterNeedle,
     domainShield,
+    domainLogo,
 };

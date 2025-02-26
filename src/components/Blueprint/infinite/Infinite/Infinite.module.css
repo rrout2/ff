@@ -144,3 +144,10 @@
     height: 130px;
     transform-origin: bottom left;
 }
+
+.domainLogo {
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+    width: 250px;
+}
