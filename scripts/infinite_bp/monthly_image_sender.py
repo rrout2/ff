@@ -117,7 +117,8 @@ class ImageEmailSender:
             url = self.construct_url(idx)
             print(f"Navigating to {url}")
             driver.get(url)
-
+            
+            time.sleep(2)
             # Wait for button to exist
             WebDriverWait(driver, 20).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, self.download_button_selector))
