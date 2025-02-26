@@ -36,7 +36,7 @@ import RosterTierComponent, {
     useRosterTierAndPosGrades,
 } from '../RosterTier/RosterTier';
 import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
-import {SUPER_FLEX} from '../../../../consts/fantasy';
+import {QB, SUPER_FLEX} from '../../../../consts/fantasy';
 import {teamSelectComponent} from '../../../Team/TeamPage/TeamPage';
 import {useEffect, useState} from 'react';
 import {NONE_TEAM_ID} from '../../../../consts/urlParams';
@@ -137,8 +137,9 @@ export default function Infinite() {
 
     const currentDate = new Date();
     const isSuperFlex = !isNonSleeper
-        ? rosterSettings.has(SUPER_FLEX)
-        : nonSleeperRosterSettings.has(SUPER_FLEX);
+        ? rosterSettings.has(SUPER_FLEX) || (rosterSettings.get(QB) ?? 0) > 1
+        : nonSleeperRosterSettings.has(SUPER_FLEX) ||
+          (nonSleeperRosterSettings.get(QB) ?? 0) > 1;
     const {tier} = useRosterTierAndPosGrades(isSuperFlex, numRosters, roster);
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
