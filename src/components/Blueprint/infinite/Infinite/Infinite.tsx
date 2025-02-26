@@ -162,6 +162,9 @@ export default function Infinite() {
             <ExportButton
                 className={styles.fullBlueprint}
                 pngName={`${getTeamName(user)}_infinite.png`}
+                disabled={startingLineup.every(
+                    ({player}) => player.first_name === ''
+                )}
             />
             {leagueId &&
                 teamSelectComponent(

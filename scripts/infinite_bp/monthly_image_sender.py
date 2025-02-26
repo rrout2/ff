@@ -118,13 +118,16 @@ class ImageEmailSender:
             print(f"Navigating to {url}")
             driver.get(url)
 
-            # Wait for BP to load
-            time.sleep(2)
+            # Wait for button to exist
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, self.download_button_selector))
+            )
 
             # Wait for and click the download button
             button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.download_button_selector))
             )
+            time.sleep(0.2)
             print("Clicking download button...")
             button.click()
 
