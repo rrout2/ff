@@ -1,3 +1,4 @@
+import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
@@ -58,11 +59,14 @@ class ImageEmailSender:
             self.sender_password = config['sender_password']
 
         self.download_button_selector = '#root > button'
+        self.buy_ids_selector = '#root > span'
 
 
         # Create output directory if it doesn't exist
         self.download_dir = os.path.join(os.getcwd(), 'downloads')
         os.makedirs(self.download_dir, exist_ok=True)
+
+        self.email_to_buys = {}
 
     def setup_driver(self):
         """Setup Chrome driver with custom download settings"""
@@ -144,10 +148,22 @@ class ImageEmailSender:
             latest_file = max([os.path.join(self.download_dir, f) for f in downloaded_files],
                             key=os.path.getctime)
             print(f"Downloaded file: {latest_file}")
+
+            self.store_buy_ids(driver, idx)
+            print(f"Buy IDs: {self.email_to_buys[self.email_list[idx]]}")
+
             return latest_file
 
         finally:
             driver.quit()
+
+    def store_buy_ids(self, driver, idx):
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, self.buy_ids_selector))
+        )
+
+        buy_ids = driver.find_element(By.CSS_SELECTOR, self.buy_ids_selector).text
+        self.email_to_buys[self.email_list[idx]] = buy_ids
 
     def send_email_link(self, recipient_email, drive_link):
         """
@@ -212,6 +228,9 @@ def main():
                 print(f"Successfully sent image to {sender.email_list[i]}\n")
 
             os.remove(downloaded_file)
+        
+        with open("email_to_buys.json", "w") as json_file:
+            json.dump(sender.email_to_buys, json_file, indent=4)
 
         print("\nDone!")
         print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
