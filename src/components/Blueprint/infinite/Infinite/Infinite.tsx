@@ -35,7 +35,11 @@ import RosterTierComponent, {
     RosterTier,
     useRosterTierAndPosGrades,
 } from '../RosterTier/RosterTier';
-import {BuySellTile, useBuySells} from '../BuySellHold/BuySellHold';
+import {
+    BuySellTile,
+    BuySellTileProps,
+    useBuySells,
+} from '../BuySellHold/BuySellHold';
 import {QB, SUPER_FLEX} from '../../../../consts/fantasy';
 import {teamSelectComponent} from '../../../Team/TeamPage/TeamPage';
 import {useEffect, useState} from 'react';
@@ -51,6 +55,7 @@ export default function Infinite() {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [isNonSleeper, setIsNonSleeper] = useState(false);
+    const [buys, setBuys] = useState<BuySellTileProps[]>([]);
     const {getAdp} = useAdpData();
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
@@ -177,6 +182,7 @@ export default function Infinite() {
                         maxWidth: '800px',
                     }
                 )}
+            <span>{buys.map(b => b.playerId).join(',')}</span>
             <div className={styles.fullBlueprint}>
                 <div className={styles.startersGraphic}>
                     <StartersGraphic
@@ -217,6 +223,7 @@ export default function Infinite() {
                     isSuperFlex={isSuperFlex}
                     leagueSize={numRosters}
                     roster={roster}
+                    setBuys={setBuys}
                 />
                 <div className={styles.monthYear}>
                     {currentDate.toLocaleDateString(undefined, {
@@ -382,12 +389,20 @@ const BuySellHoldComponent = ({
     isSuperFlex,
     leagueSize,
     roster,
+    setBuys,
 }: {
     isSuperFlex: boolean;
     leagueSize: number;
     roster?: Roster;
+    setBuys?: (buys: BuySellTileProps[]) => void;
 }) => {
     const {buys, sells} = useBuySells(isSuperFlex, leagueSize, roster);
+
+    useEffect(() => {
+        if (setBuys) {
+            setBuys(buys);
+        }
+    }, [setBuys, buys]);
 
     const column1 = '640px';
     const column2 = '1002px';

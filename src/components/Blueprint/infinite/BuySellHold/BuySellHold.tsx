@@ -37,7 +37,7 @@ enum BuySellType {
     Hold,
 }
 
-type BuySellTileProps = {
+export type BuySellTileProps = {
     playerId: string;
     type: BuySellType;
 };
