@@ -225,11 +225,12 @@ def main():
             if send_email:
                 sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
                 print(f"Successfully sent image to {sender.email_list[i]}\n")
+            
+            with open("email_to_buys.json", "w") as json_file:
+                json.dump(sender.email_to_buys, json_file, indent=4)
 
             os.remove(downloaded_file)
         
-        with open("email_to_buys.json", "w") as json_file:
-            json.dump(sender.email_to_buys, json_file, indent=4)
 
         print("\nDone!")
         print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
