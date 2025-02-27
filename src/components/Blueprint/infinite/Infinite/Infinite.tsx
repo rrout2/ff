@@ -237,6 +237,15 @@ export default function Infinite() {
                 >
                     HOLDS: {holdPercent}%
                 </div>
+                <div className={`${styles.buys} ${styles.bshComment}`}>
+                    Players domain has ranked higher than market
+                </div>
+                <div className={`${styles.sells} ${styles.bshComment}`}>
+                    Players domain has ranked lower than market
+                </div>
+                <div className={`${styles.holds} ${styles.bshComment}`}>
+                    Players domain has ranked equal to market
+                </div>
                 <div className={styles.tradeMeterGraphic}>
                     <TradeMeterComponent
                         sellPercent={sellPercent}

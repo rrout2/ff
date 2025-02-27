@@ -187,27 +187,22 @@ function StartersGraphic(props: {
 }
 
 function DifferenceChip({verdict}: {verdict?: BuySellVerdict}) {
-    const difference = verdict?.difference ?? 0;
     let color = 'gray';
-    let displayDifference = '';
     let plusMinus = '';
-    if (difference >= 3 && verdict?.verdict.includes('Buy')) {
+    if (verdict?.verdict.includes('Buy')) {
         color = '#8DC63F';
-        displayDifference = `${difference}`;
         plusMinus = '+';
-    } else if (difference <= -3 && verdict?.verdict.includes('Sell')) {
+    } else if (verdict?.verdict.includes('Sell')) {
         color = '#EF4136';
-        displayDifference = `${Math.abs(difference)}`;
         plusMinus = '-';
     } else {
         color = '#F3C01D';
-        displayDifference = '=';
+        plusMinus = '=';
     }
     return (
         <div className={styles.differenceChip} style={{color: color}}>
             <img src={domainShield} className={styles.domainShield} />
             {plusMinus && <div>{plusMinus}</div>}
-            <div>{displayDifference}</div>
         </div>
     );
 }
