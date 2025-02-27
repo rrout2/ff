@@ -259,53 +259,53 @@ const TradeMeterComponent = ({sellPercent, tier}: TradeMeterComponentProps) => {
     let rotationDegrees = 0;
     switch (tier) {
         case RosterTier.Elite:
-            if (sellPercent > 79) {
+            if (sellPercent > 49) {
                 activity = 'mid';
-            } else if (sellPercent > 39) {
+            } else if (sellPercent > 19) {
                 activity = 'lowmid';
             } else {
                 activity = 'low';
             }
             break;
         case RosterTier.Championship:
-            if (sellPercent > 79) {
+            if (sellPercent > 49) {
                 activity = 'midhigh';
-            } else if (sellPercent > 59) {
-                activity = 'mid';
             } else if (sellPercent > 39) {
+                activity = 'mid';
+            } else if (sellPercent > 19) {
                 activity = 'lowmid';
             } else {
                 activity = 'low';
             }
             break;
         case RosterTier.Competitive:
-            if (sellPercent > 79) {
+            if (sellPercent > 49) {
                 activity = 'high';
-            } else if (sellPercent > 59) {
-                activity = 'midhigh';
             } else if (sellPercent > 39) {
-                activity = 'mid';
+                activity = 'midhigh';
             } else if (sellPercent > 19) {
+                activity = 'mid';
+            } else if (sellPercent > 9) {
                 activity = 'lowmid';
             } else {
                 activity = 'low';
             }
             break;
         case RosterTier.Reload:
-            if (sellPercent > 59) {
+            if (sellPercent > 39) {
                 activity = 'high';
-            } else if (sellPercent > 39) {
-                activity = 'midhigh';
             } else if (sellPercent > 19) {
+                activity = 'midhigh';
+            } else if (sellPercent > 9) {
                 activity = 'mid';
             } else {
                 activity = 'lowmid';
             }
             break;
         case RosterTier.Rebuild:
-            if (sellPercent > 39) {
+            if (sellPercent > 19) {
                 activity = 'high';
-            } else if (sellPercent > 19) {
+            } else if (sellPercent > 9) {
                 activity = 'midhigh';
             } else {
                 activity = 'mid';
