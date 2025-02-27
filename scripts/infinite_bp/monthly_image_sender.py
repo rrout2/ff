@@ -36,11 +36,10 @@ class ImageEmailSender:
                 config = yaml.safe_load(file)
 
         # Parse email list from string to list if needed
-        if send_email:
-            if isinstance(config['email_list'], str):
-                self.email_list = [email.strip() for email in config['email_list'].split(',')]
-            else:
-                self.email_list = config['email_list']
+        if isinstance(config['email_list'], str):
+            self.email_list = [email.strip() for email in config['email_list'].split(',')]
+        else:
+            self.email_list = config['email_list']
 
         if isinstance(config['league_id_list'], str):
             self.league_id_list = [email.strip() for email in config['league_id_list'].split(',')]
