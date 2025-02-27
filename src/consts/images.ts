@@ -171,6 +171,7 @@ import eliteQbTeDVMRCC from '../assets/2.0/dvms/QT-RCC.png';
 import blankInfinite from '../assets/infinite/Infinite_background.png';
 import blankInfiniteV2 from '../assets/infinite/blankInfinite_v2.png';
 import blankInfiniteV3 from '../assets/infinite/blankInfinite_v3.png';
+import blankInfiniteV4 from '../assets/infinite/blankInfinite_v4.png';
 import hardBuy from '../assets/infinite/Hard_Buy.png';
 import hardSell from '../assets/infinite/Hard_sell.png';
 import softBuy from '../assets/infinite/Soft_buy.png';
@@ -473,6 +474,7 @@ export {
     softSell,
     blankInfiniteV2,
     blankInfiniteV3,
+    blankInfiniteV4,
     tradeMeterButton,
     tradeMeterNeedle,
     domainShield,
