@@ -1,4 +1,4 @@
-name: Monthly Image Sender
+name: Manual Image Sender
 on:
     workflow_dispatch: # Allows manual trigger
 
