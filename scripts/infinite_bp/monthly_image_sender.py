@@ -15,6 +15,7 @@ from selenium.common.exceptions import TimeoutException
 from uploader import GoogleDriveUploader
 import argparse
 import uuid
+import logging
 
 class ImageEmailSender:
     def __init__(self, send_email=False, config_path='config.yaml'):
@@ -237,6 +238,7 @@ def main():
 
     except Exception as e:
         print(f"\nAn error occurred: {str(e)}")
+        logging.exception("Exception occurred")
         print("\nPlease make sure you have:")
         print("1. Created a service account and downloaded the credentials")
         print("2. Placed the service account credentials JSON file in the correct location")
