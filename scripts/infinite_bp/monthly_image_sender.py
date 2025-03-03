@@ -129,7 +129,7 @@ class ImageEmailSender:
             )
 
             # Wait for and click the download button
-            button = WebDriverWait(driver, 20).until(
+            button = WebDriverWait(driver, 40).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.download_button_selector))
             )
             time.sleep(0.2)
@@ -153,6 +153,10 @@ class ImageEmailSender:
             print(f"Buy IDs: {self.email_to_buys[self.email_list[idx]]}")
 
             return latest_file
+        
+        except Exception as e:
+            print(f"\nAn error occurred: {str(e)}")
+            logging.exception("Exception occurred")
 
         finally:
             driver.quit()
