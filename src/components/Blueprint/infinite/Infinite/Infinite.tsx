@@ -372,8 +372,8 @@ const TeamNameComponent = ({teamName}: {teamName?: string}) => {
     if (!teamName) return <></>;
     // Emojis count as 2 characters since they are wider.
     const teamNameSize = teamName.length + countEmojis(teamName);
-    const longName = teamNameSize >= 14 && teamNameSize < 24;
-    const veryLongName = teamNameSize >= 24;
+    const longName = teamNameSize >= 14 && teamNameSize < 23;
+    const veryLongName = teamNameSize >= 23;
     return (
         <div
             className={`${styles.teamNameGraphic} ${
