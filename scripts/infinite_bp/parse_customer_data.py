@@ -5,15 +5,15 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the JSON file name
-json_file_name = 'domain_customer_info_feb26test.json'
+json_file_name = 'domain_customer_info_mar.json'
 
 # Construct the full path to the JSON file
 json_file_path = os.path.join(script_dir, json_file_name)
 
-league_id_key = "league_id"
-team_id_key = "team_id"
+league_id_key = "Sleeper ID"
+team_id_key = "Team ID"
 # sub_team_id_key = "\r\n\r\nFIND YOUR TEAM ID HERE\r\nTEAM ID FINDER"
-email_key = "email\r"
+email_key = "Email"
 # verified_key = 'Column 1\r'
 # Open and read the JSON file
 try:

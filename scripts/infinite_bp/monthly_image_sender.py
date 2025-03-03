@@ -186,6 +186,12 @@ class ImageEmailSender:
             server.login(self.sender_email, self.sender_password)
             server.send_message(msg)
 
+def censor_email(email):
+    parts = email.split('@')
+    local_part = parts[0]
+    local_part = local_part[:2] + '***' + local_part[-2:]
+    return f"{local_part}@{parts[1]}"
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--send_email', type=int, default=0, help="Whether or not to send emails (0 or 1)")
@@ -225,10 +231,11 @@ def main():
 
             if send_email:
                 sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
-                print(f"Successfully sent image to {sender.email_list[i]}\n")
+                print(f"Successfully sent image to {censor_email(sender.email_list[i])}\n")
             
             with open("email_to_buys.json", "w") as json_file:
                 json.dump(sender.email_to_buys, json_file, indent=4)
+
 
             os.remove(downloaded_file)
         
