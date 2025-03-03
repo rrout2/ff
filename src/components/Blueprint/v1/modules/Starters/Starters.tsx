@@ -144,7 +144,7 @@ function StartersGraphic(props: {
 
         const fullName = `${player.first_name} ${player.last_name}`;
         const displayName =
-            fullName.length >= 20
+            fullName.length >= 19
                 ? `${player.first_name[0]}. ${player.last_name}`
                 : fullName;
         const team = player.team ?? 'FA';
