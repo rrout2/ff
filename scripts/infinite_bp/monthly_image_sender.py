@@ -68,6 +68,8 @@ class ImageEmailSender:
 
         self.email_to_buys = {}
 
+        self.fails = []
+
     def setup_driver(self):
         """Setup Chrome driver with custom download settings"""
         chrome_options = webdriver.ChromeOptions()
@@ -157,6 +159,7 @@ class ImageEmailSender:
         except Exception as e:
             print(f"\nAn error occurred: {str(e)}")
             logging.exception("Exception occurred")
+            return None
 
         finally:
             driver.quit()
@@ -227,6 +230,11 @@ def main():
             print(f"{i + 1}/{len(sender.league_id_list)}")
             downloaded_file = sender.download_image(i)
 
+            if not downloaded_file:
+                print(f"Failed to download image {i + 1}/{len(sender.league_id_list)} for {sender.email_list[i]}")
+                sender.fails.append(sender.email_list[i])
+                continue
+
             print(f"Uploading {downloaded_file}...")
             file = uploader.upload_image(downloaded_file, folder_id)
 
@@ -246,6 +254,11 @@ def main():
 
         print("\nDone!")
         print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
+
+        if len(sender.fails) > 0:
+            print("\nFailed to download the following images:")
+            for fail in sender.fails:
+                print(fail)
 
     except Exception as e:
         print(f"\nAn error occurred: {str(e)}")
