@@ -131,7 +131,7 @@ class ImageEmailSender:
             )
 
             # Wait for and click the download button
-            button = WebDriverWait(driver, 40).until(
+            button = WebDriverWait(driver, 20).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, self.download_button_selector))
             )
             time.sleep(0.2)
