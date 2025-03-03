@@ -233,7 +233,6 @@ def main():
             if sender.team_id_list[i] == '' or sender.team_id_list[i] == None:
                 continue
             if sender.email_list[i] in sender.skip_list:
-                print(f"Skipping {sender.email_list[i]}")
                 continue
             print(f"{i + 1}/{len(sender.league_id_list)}")
             downloaded_file = sender.download_image(i)
