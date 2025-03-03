@@ -50,6 +50,11 @@ class ImageEmailSender:
             self.team_id_list = [email.strip() for email in config['team_id_list'].split(',')]
         else:
             self.team_id_list = config['team_id_list']
+        
+        if isinstance(config['skip_list'], str):
+            self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
+        else:
+            self.skip_list = set(config['skip_list'])
 
 
         self.smtp_server = config['smtp_server']
@@ -226,6 +231,9 @@ def main():
             if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
                 continue
             if sender.team_id_list[i] == '' or sender.team_id_list[i] == None:
+                continue
+            if sender.email_list[i] in sender.skip_list:
+                print(f"Skipping {sender.email_list[i]}")
                 continue
             print(f"{i + 1}/{len(sender.league_id_list)}")
             downloaded_file = sender.download_image(i)
