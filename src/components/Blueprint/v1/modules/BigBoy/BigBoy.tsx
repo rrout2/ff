@@ -113,7 +113,7 @@ export enum Archetype {
     RBHeavy = 'RB HEAVY',
 }
 
-const ArchetypeDetails = {
+export const ArchetypeDetails = {
     [Archetype.HardRebuild]: [['REBUILD', 'REBUILD', 'CONTEND']],
     [Archetype.FutureValue]: [['REBUILD', 'CONTEND', 'CONTEND']],
     [Archetype.WellRounded]: [['CONTEND', 'CONTEND', 'REBUILD']],

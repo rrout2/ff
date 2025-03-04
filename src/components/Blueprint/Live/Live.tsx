@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Live.module.css';
 import {
     blankLive,
@@ -12,7 +12,7 @@ import {
     wellRounded,
     wrFactory,
 } from '../../../consts/images';
-import {Archetype} from '../v1/modules/BigBoy/BigBoy';
+import {Archetype, ArchetypeDetails} from '../v1/modules/BigBoy/BigBoy';
 import {
     FormControl,
     InputLabel,
@@ -42,11 +42,10 @@ export default function Live() {
     const [rbGrade, setRbGrade] = useState(7);
     const [wrGrade, setWrGrade] = useState(7);
     const [teGrade, setTeGrade] = useState(7);
-    const [outlooks, setOutlooks] = useState<string[]>([
-        'CONTEND',
-        'CONTEND',
-        'CONTEND',
-    ]);
+    const [outlooks, setOutlooks] = useState<string[]>([]);
+    useEffect(() => {
+        setOutlooks(ArchetypeDetails[archetype][0]);
+    }, [archetype]);
     return (
         <div className={styles.container}>
             <LiveInputs
