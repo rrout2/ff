@@ -49,83 +49,20 @@ export default function Live() {
     ]);
     return (
         <div className={styles.container}>
-            <FormControl className={styles.inputs}>
-                <InputLabel>Archetype</InputLabel>
-                <Select
-                    value={archetype}
-                    label="Archetype"
-                    onChange={(event: SelectChangeEvent) => {
-                        setArchetype(event.target.value as Archetype);
-                    }}
-                >
-                    {Object.values(Archetype).map((arch, idx) => (
-                        <MenuItem value={arch} key={idx}>
-                            {arch}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <StyledNumberInput
-                    value={qbGrade}
-                    key="qb"
-                    onChange={(_, value) => setQbGrade(value || 0)}
-                    label="QB"
-                    step={1}
-                    min={0}
-                    max={10}
-                />
-                <StyledNumberInput
-                    value={rbGrade}
-                    key="rb"
-                    onChange={(_, value) => setRbGrade(value || 0)}
-                    label="RB"
-                    step={1}
-                    min={0}
-                    max={10}
-                />
-                <StyledNumberInput
-                    value={wrGrade}
-                    key="wr"
-                    onChange={(_, value) => setWrGrade(value || 0)}
-                    label="WR"
-                    step={1}
-                    min={0}
-                    max={10}
-                />
-                <StyledNumberInput
-                    value={teGrade}
-                    key="te"
-                    onChange={(_, value) => setTeGrade(value || 0)}
-                    label="TE"
-                    step={1}
-                    min={0}
-                    max={10}
-                />
-                {outlooks.map((_, idx) => (
-                    <FormControl key={idx}>
-                        <InputLabel>Year {idx + 1}</InputLabel>
-                        <Select
-                            label={`Year ${idx + 1}`}
-                            value={outlooks[idx]}
-                            onChange={(event: SelectChangeEvent) => {
-                                const newOutlooks = outlooks.slice();
-                                newOutlooks[idx] = event.target.value;
-                                setOutlooks(newOutlooks);
-                            }}
-                        >
-                            <MenuItem value={'CONTEND'} key={'CONTEND'}>
-                                {'CONTEND'}
-                            </MenuItem>
-                            <MenuItem value={'REBUILD'} key={'REBUILD'}>
-                                {'REBUILD'}
-                            </MenuItem>
-
-                            <MenuItem value={'RELOAD'} key={'RELOAD'}>
-                                {'RELOAD'}
-                            </MenuItem>
-                        </Select>
-                    </FormControl>
-                ))}
-            </FormControl>
+            <LiveInputs
+                archetype={archetype}
+                setArchetype={setArchetype}
+                qbGrade={qbGrade}
+                setQbGrade={setQbGrade}
+                rbGrade={rbGrade}
+                setRbGrade={setRbGrade}
+                wrGrade={wrGrade}
+                setWrGrade={setWrGrade}
+                teGrade={teGrade}
+                setTeGrade={setTeGrade}
+                outlooks={outlooks}
+                setOutlooks={setOutlooks}
+            />
             <div className={styles.liveBlueprint}>
                 <PositionalGrade
                     position={'QB'}
@@ -160,6 +97,118 @@ export default function Live() {
                 />
                 <img src={blankLive} />
             </div>
+        </div>
+    );
+}
+
+type LiveInputsProps = {
+    archetype: Archetype;
+    setArchetype: (archetype: Archetype) => void;
+    qbGrade: number;
+    setQbGrade: (qbGrade: number) => void;
+    rbGrade: number;
+    setRbGrade: (rbGrade: number) => void;
+    wrGrade: number;
+    setWrGrade: (wrGrade: number) => void;
+    teGrade: number;
+    setTeGrade: (teGrade: number) => void;
+    outlooks: string[];
+    setOutlooks: (outlooks: string[]) => void;
+};
+
+function LiveInputs({
+    archetype,
+    setArchetype,
+    qbGrade,
+    setQbGrade,
+    rbGrade,
+    setRbGrade,
+    wrGrade,
+    setWrGrade,
+    teGrade,
+    setTeGrade,
+    outlooks,
+    setOutlooks,
+}: LiveInputsProps) {
+    return (
+        <div className={styles.inputs}>
+            <FormControl>
+                <InputLabel>Archetype</InputLabel>
+                <Select
+                    value={archetype}
+                    label="Archetype"
+                    onChange={(event: SelectChangeEvent) => {
+                        setArchetype(event.target.value as Archetype);
+                    }}
+                >
+                    {Object.values(Archetype).map((arch, idx) => (
+                        <MenuItem value={arch} key={idx}>
+                            {arch}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <StyledNumberInput
+                value={qbGrade}
+                key="qb"
+                onChange={(_, value) => setQbGrade(value || 0)}
+                label="QB"
+                step={1}
+                min={0}
+                max={10}
+            />
+            <StyledNumberInput
+                value={rbGrade}
+                key="rb"
+                onChange={(_, value) => setRbGrade(value || 0)}
+                label="RB"
+                step={1}
+                min={0}
+                max={10}
+            />
+            <StyledNumberInput
+                value={wrGrade}
+                key="wr"
+                onChange={(_, value) => setWrGrade(value || 0)}
+                label="WR"
+                step={1}
+                min={0}
+                max={10}
+            />
+            <StyledNumberInput
+                value={teGrade}
+                key="te"
+                onChange={(_, value) => setTeGrade(value || 0)}
+                label="TE"
+                step={1}
+                min={0}
+                max={10}
+            />
+            {outlooks.map((_, idx) => (
+                <FormControl key={idx}>
+                    <InputLabel>Year {idx + 1}</InputLabel>
+                    <Select
+                        label={`Year ${idx + 1}`}
+                        value={outlooks[idx]}
+                        onChange={(event: SelectChangeEvent) => {
+                            const newOutlooks = outlooks.slice();
+                            newOutlooks[idx] = event.target.value;
+                            setOutlooks(newOutlooks);
+                        }}
+                    >
+                        <MenuItem value={'CONTEND'} key={'CONTEND'}>
+                            {'CONTEND'}
+                        </MenuItem>
+                        <MenuItem value={'REBUILD'} key={'REBUILD'}>
+                            {'REBUILD'}
+                        </MenuItem>
+
+                        <MenuItem value={'RELOAD'} key={'RELOAD'}>
+                            {'RELOAD'}
+                        </MenuItem>
+                    </Select>
+                </FormControl>
+            ))}
         </div>
     );
 }

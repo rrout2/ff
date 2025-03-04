@@ -7,15 +7,15 @@
 
 .liveBlueprint {
     position: relative;
-    width: 262.7px;;
+    width: 262.7px;
 }
 
 .inputs {
-    margin: 4px;
     display: flex;
+    align-items: center;
     gap: 6px;
     flex-direction: column;
-    width: fit-content;
+    width: 250px;
 }
 
 .archetype {
