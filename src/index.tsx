@@ -17,6 +17,7 @@ import Rankings from './components/Rankings/Rankings';
 import Infinite from './components/Blueprint/infinite/Infinite/Infinite';
 import FindTeamId from './components/FindTeamId/FindTeamId';
 import NonSleeeperInfinite from './components/NonSleeeperInfinite/NonSleeeperInfinite';
+import Live from './components/Blueprint/Live/Live';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -49,6 +50,7 @@ root.render(
                         path="/nonsleeperinfinite"
                         element={<NonSleeeperInfinite />}
                     />
+                    <Route path="live" element={<Live />} />
                 </Routes>
             </HashRouter>
         </QueryClientProvider>

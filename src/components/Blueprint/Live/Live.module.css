@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 800px;
+}
+
+.liveBlueprint {
+    position: relative;
+    width: 262.7px;;
+}
+
+.inputs {
+    margin: 4px;
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.archetype {
+    position: absolute;
+    width: 90%;
+    top: 15px;
+    left: 5%;
+}
+
+.positionalGrade {
+    font-family: 'Antarctican Headline';
+    color: white;
+    font-size: 38px;
+
+    display: flex;
+    justify-content: space-evenly;
+    width: 75%;
+}
+
+.qb {
+    position: absolute;
+
+    top: 272px;
+    left: 12.5%;
+}
+
+.rb {
+    position: absolute;
+
+    top: 360px;
+    left: 12.5%;
+}
+
+.wr {
+    position: absolute;
+
+    top: 447px;
+    left: 12.5%;
+}
+
+.te {
+    position: absolute;  
+
+    top: 532px;
+    left: 12.5%;
+}
+
+.outlook {
+    font-family: 'Acumin Pro ExtraCondensed';
+    color: white;
+    font-weight: bold;
+    font-size: 29px;
+
+    width: 65%;
+    text-align: center;
+}
+
+.year1 {
+    position: absolute;
+
+    top: 665px;
+    left: 22.5%;
+}
+
+.year2 {
+    position: absolute;
+
+    top: 723px;
+    left: 22.5%;
+}
+
+.year3 {
+    position: absolute;
+
+    top: 785px;
+    left: 22.5%;
+}

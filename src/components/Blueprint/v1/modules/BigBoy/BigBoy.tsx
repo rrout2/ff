@@ -101,7 +101,7 @@ import {
     STARTING_LINEUP,
     WAIVER_TARGETS,
 } from '../../../../../consts/urlParams';
-enum Archetype {
+export enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
     WellRounded = 'WELL ROUNDED',

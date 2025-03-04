@@ -181,6 +181,17 @@ import tradeMeterNeedle from '../assets/infinite/tradeMeter/Trade_meter_needle.p
 import domainShield from '../assets/infinite/domain_shield.png';
 import domainLogo from '../assets/infinite/domain_logo.png';
 
+// Live BP
+import blankLive from '../assets/live/Livestream_background.png';
+import dualEliteQb from '../assets/live/archetypes/Dual Elite QB.png';
+import eliteQbTe from '../assets/live/archetypes/Elite QB-TE.png';
+import eliteValue from '../assets/live/archetypes/Elite Value.png';
+import futureValue from '../assets/live/archetypes/Future Value.png';
+import hardRebuild from '../assets/live/archetypes/Hard Rebuild.png';
+import oneYearReload from '../assets/live/archetypes/One Year Reload.png';
+import wellRounded from '../assets/live/archetypes/Well Rounded.png';
+import wrFactory from '../assets/live/archetypes/WR Factory.png';
+import rbHeavy from '../assets/live/archetypes/RB Heavy.png';
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
     ['A', aTier],
@@ -479,4 +490,14 @@ export {
     tradeMeterNeedle,
     domainShield,
     domainLogo,
+    blankLive,
+    dualEliteQb,
+    eliteQbTe,
+    eliteValue,
+    futureValue,
+    hardRebuild,
+    wellRounded,
+    oneYearReload,
+    wrFactory,
+    rbHeavy,
 };
