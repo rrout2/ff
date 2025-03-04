@@ -7,6 +7,7 @@ import {QB, RB, TE, WR} from '../../../../consts/fantasy';
 import {
     useAdpData,
     useBuySellData,
+    useDisallowedBuysFromUrl,
     usePlayerData,
 } from '../../../../hooks/hooks';
 import PlayerBar from '../PlayerBar/PlayerBar';
@@ -52,6 +53,7 @@ export function useBuySells(
     const [buys, setBuys] = useState<BuySellTileProps[]>([]);
     const [sells, setSells] = useState<BuySellTileProps[]>([]);
     const [holds, setHolds] = useState<BuySellTileProps[]>([]);
+    const [disallowedBuys] = useDisallowedBuysFromUrl();
     const {
         qbBuys,
         rbBuys,
@@ -262,6 +264,9 @@ export function useBuySells(
             if (!isSuperFlex && !ONE_QB_ALLOWSET.has(qbBuy.name)) {
                 continue;
             }
+            if (disallowedBuys.includes(qbBuy.player_id)) {
+                continue;
+            }
             const adp = getAdp(qbBuy.name);
             if (adp > 140) continue;
             if (
@@ -301,6 +306,9 @@ export function useBuySells(
             if (roster?.players.includes(rbBuy.player_id)) {
                 continue;
             }
+            if (disallowedBuys.includes(rbBuy.player_id)) {
+                continue;
+            }
             const adp = getAdp(rbBuy.name);
             if (adp > 140) continue;
             if (adp > 100) {
@@ -335,6 +343,9 @@ export function useBuySells(
                 if (wrBuy.age >= 26) {
                     continue;
                 }
+            }
+            if (disallowedBuys.includes(wrBuy.player_id)) {
+                continue;
             }
             const adp = getAdp(wrBuy.name);
             if (adp > 140) continue;
@@ -382,6 +393,9 @@ export function useBuySells(
                 if (teBuy.age >= 26) {
                     continue;
                 }
+            }
+            if (disallowedBuys.includes(teBuy.player_id)) {
+                continue;
             }
             const adp = getAdp(teBuy.name);
             if (adp > 140) continue;

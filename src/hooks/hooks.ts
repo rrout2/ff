@@ -15,6 +15,7 @@ import {
 } from '../sleeper-api/sleeper-api';
 import {useQuery} from '@tanstack/react-query';
 import {
+    DISALLOWED_BUYS,
     LEAGUE_ID,
     LEAGUE_SIZE,
     MODULE,
@@ -549,6 +550,36 @@ export function useLeagueIdFromUrl(): [
     }, [leagueId]);
 
     return [leagueId, setLeagueId];
+}
+
+export function useDisallowedBuysFromUrl(): [
+    string[],
+    Dispatch<SetStateAction<string[]>>
+] {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [disallowedBuys, setDisallowedBuys] = useState<string[]>([]);
+
+    useEffect(() => {
+        const disallowedBuysFromUrl = searchParams.get(DISALLOWED_BUYS);
+        if (!disallowedBuysFromUrl) return;
+
+        setDisallowedBuys(disallowedBuysFromUrl.split(','));
+    }, [searchParams]);
+
+    useEffect(() => {
+        if (
+            disallowedBuys === searchParams.get(DISALLOWED_BUYS)?.split(',') ||
+            !disallowedBuys
+        ) {
+            return;
+        }
+        setSearchParams(searchParams => {
+            searchParams.set(DISALLOWED_BUYS, disallowedBuys.join(','));
+            return searchParams;
+        });
+    }, [disallowedBuys]);
+
+    return [disallowedBuys, setDisallowedBuys];
 }
 
 export function useParamFromUrl(
