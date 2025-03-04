@@ -29,4 +29,4 @@ scripts/infinite_bp/service-account-credentials.json
 scripts/images_to_send
 
 # Customer Data
-scripts/infinite_bp/*.json
+scripts/infinite_bp/**/*.json
