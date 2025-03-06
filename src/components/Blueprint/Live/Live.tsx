@@ -36,10 +36,10 @@ const ARCHETYPE_TO_IMAGE: Map<Archetype, string> = new Map([
 
 export default function Live() {
     const [archetype, setArchetype] = useState<Archetype | ''>('');
-    const [qbGrade, setQbGrade] = useState(-1);
-    const [rbGrade, setRbGrade] = useState(-1);
-    const [wrGrade, setWrGrade] = useState(-1);
-    const [teGrade, setTeGrade] = useState(-1);
+    const [qbGrade, setQbGrade] = useState(0);
+    const [rbGrade, setRbGrade] = useState(0);
+    const [wrGrade, setWrGrade] = useState(0);
+    const [teGrade, setTeGrade] = useState(0);
     const [outlooks, setOutlooks] = useState<string[]>(['', '', '']);
     return (
         <div className={styles.container}>
@@ -58,34 +58,26 @@ export default function Live() {
                 setOutlooks={setOutlooks}
             />
             <div className={styles.liveBlueprint}>
-                {qbGrade > -1 && (
-                    <PositionalGrade
-                        position={'QB'}
-                        grade={qbGrade}
-                        className={styles.qb}
-                    />
-                )}
-                {rbGrade > -1 && (
-                    <PositionalGrade
-                        position={'RB'}
-                        grade={rbGrade}
-                        className={styles.rb}
-                    />
-                )}
-                {wrGrade > -1 && (
-                    <PositionalGrade
-                        position={'WR'}
-                        grade={wrGrade}
-                        className={styles.wr}
-                    />
-                )}
-                {teGrade > -1 && (
-                    <PositionalGrade
-                        position={'TE'}
-                        grade={teGrade}
-                        className={styles.te}
-                    />
-                )}
+                <PositionalGrade
+                    position={'QB'}
+                    grade={qbGrade}
+                    className={styles.qb}
+                />
+                <PositionalGrade
+                    position={'RB'}
+                    grade={rbGrade}
+                    className={styles.rb}
+                />
+                <PositionalGrade
+                    position={'WR'}
+                    grade={wrGrade}
+                    className={styles.wr}
+                />
+                <PositionalGrade
+                    position={'TE'}
+                    grade={teGrade}
+                    className={styles.te}
+                />
                 {outlooks.map((outlook, idx) => (
                     <Outlook
                         key={idx}
@@ -161,10 +153,10 @@ function LiveInputs({
     setOutlooks,
 }: LiveInputsProps) {
     function reset() {
-        setQbGrade(-1);
-        setRbGrade(-1);
-        setWrGrade(-1);
-        setTeGrade(-1);
+        setQbGrade(0);
+        setRbGrade(0);
+        setWrGrade(0);
+        setTeGrade(0);
         setOutlooks(['', '', '']);
         setArchetype('');
     }
@@ -245,9 +237,6 @@ function GradeInput({position, grade, setGrade}: GradeInputProps) {
                     setGrade(event.target.value as unknown as number);
                 }}
             >
-                <MenuItem value={-1} key={-1}>
-                    {'Choose a grade:'}
-                </MenuItem>
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((grade, idx) => (
                     <MenuItem value={grade} key={idx}>
                         {grade}
