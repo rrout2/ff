@@ -176,7 +176,7 @@ function Settings({
 
 function copyWrapper(text: string, className?: string) {
     return (
-        <div className={styles.copyWrapper + (` ${className}` ?? '')}>
+        <div className={styles.copyWrapper + ' ' + (className ?? '')}>
             <IconButton
                 onClick={() => navigator.clipboard.writeText(text)}
                 size="small"
@@ -267,10 +267,10 @@ function GraphicComponent({
                             : 'NO'}
                     </div>
                     <div className={`${styles.chip} ${styles.blue}`}>
-                        PPR: {scoringSettings.rec ?? 0}
+                        PPR: {scoringSettings.rec.toFixed(1) ?? 0}
                     </div>
                     <div className={`${styles.chip} ${styles.blue}`}>
-                        TEP: {scoringSettings.bonus_rec_te ?? 0}
+                        TEP: {scoringSettings.bonus_rec_te.toFixed(1) ?? 0}
                     </div>
                     <div className={`${styles.chip} ${styles.blue}`}>
                         TAXI: {league.settings.taxi_slots}
