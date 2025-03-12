@@ -53,8 +53,8 @@ export default function PlayerBar({playerId}: PlayerTargetProps) {
     );
 }
 
-function mapCityAbbreviationToFullName(cityAbbreviation: string): string {
-    switch (cityAbbreviation.toUpperCase()) {
+function mapCityAbbreviationToFullName(cityAbbreviation?: string): string {
+    switch (cityAbbreviation?.toUpperCase()) {
         case 'ARI':
             return 'ARIZONA';
         case 'ATL':
@@ -122,6 +122,6 @@ function mapCityAbbreviationToFullName(cityAbbreviation: string): string {
         case 'WAS':
             return 'WASHINGTON';
         default:
-            return cityAbbreviation.toUpperCase();
+            return cityAbbreviation?.toUpperCase() || '';
     }
 }
