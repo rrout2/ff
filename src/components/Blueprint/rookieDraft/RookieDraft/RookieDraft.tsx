@@ -4,7 +4,7 @@ import {
     horizontalScale,
     rookieMap,
 } from '../../../../consts/images';
-import {Fragment, useEffect, useState} from 'react';
+import {Fragment, SetStateAction, useEffect, useState} from 'react';
 import {Archetype} from '../../v1/modules/BigBoy/BigBoy';
 import {
     FormControl,
@@ -48,7 +48,7 @@ type DraftStrategy = {
     body: string;
 }[];
 
-export default function RookieDraft() {
+export function useRookieDraft() {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
@@ -121,12 +121,144 @@ export default function RookieDraft() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
     }
 
-    const rounds = [...Array(5).keys()].map(x => x + 1);
-    const picks = [...Array(24).keys()].map(x => x + 1);
-    const rookieOptions = Array.from(rookieMap.keys());
+    return {
+        leagueId,
+        teamId,
+        setTeamId,
+        allUsers,
+        specifiedUser,
+        setSpecifiedUser,
+        rosters,
+        roster,
+        outlooks,
+        setOutlooks,
+        draftPicks,
+        setDraftPicks,
+        rookieTargets,
+        setRookieTargets,
+        draftStrategy,
+        setDraftStrategy,
+        draftCapitalScore,
+        setDraftCapitalScore,
+        qbGrade,
+        rbGrade,
+        wrGrade,
+        teGrade,
+        archetype,
+        setArchetype,
+        isSuperFlex,
+    };
+}
+
+export default function RookieDraft() {
+    const {
+        allUsers,
+        specifiedUser,
+        teamId,
+        setTeamId,
+        leagueId,
+        archetype,
+        setArchetype,
+        outlooks,
+        setOutlooks,
+        draftPicks,
+        setDraftPicks,
+        rookieTargets,
+        setRookieTargets,
+        draftStrategy,
+        setDraftStrategy,
+        draftCapitalScore,
+        setDraftCapitalScore,
+        qbGrade,
+        rbGrade,
+        wrGrade,
+        teGrade,
+    } = useRookieDraft();
 
     return (
         <div>
+            <RookieDraftInputs
+                allUsers={allUsers}
+                specifiedUser={specifiedUser}
+                teamId={teamId}
+                setTeamId={setTeamId}
+                leagueId={leagueId}
+                archetype={archetype}
+                setArchetype={setArchetype}
+                outlooks={outlooks}
+                setOutlooks={setOutlooks}
+                draftPicks={draftPicks}
+                setDraftPicks={setDraftPicks}
+                rookieTargets={rookieTargets}
+                setRookieTargets={setRookieTargets}
+                draftStrategy={draftStrategy}
+                setDraftStrategy={setDraftStrategy}
+                draftCapitalScore={draftCapitalScore}
+                setDraftCapitalScore={setDraftCapitalScore}
+            />
+            <RookieDraftGraphic
+                archetype={archetype}
+                teamName={getTeamName(specifiedUser)}
+                outlooks={outlooks}
+                teamNeeds={getPositionalOrder({
+                    qbGrade,
+                    rbGrade,
+                    wrGrade,
+                    teGrade,
+                })}
+                draftPicks={draftPicks}
+                rookieTargets={rookieTargets}
+                draftStrategy={draftStrategy}
+                draftCapitalScore={draftCapitalScore}
+            />
+        </div>
+    );
+}
+
+type RookieDraftInputsProps = {
+    allUsers: User[];
+    specifiedUser?: User;
+    teamId: string;
+    setTeamId: (value: SetStateAction<string>) => void;
+    leagueId: string;
+    archetype: Archetype | '';
+    setArchetype: (archetype: Archetype) => void;
+    outlooks: string[];
+    setOutlooks: (outlooks: string[]) => void;
+    draftPicks: DraftPick[];
+    setDraftPicks: (draftPicks: DraftPick[]) => void;
+    rookieTargets: string[][];
+    setRookieTargets: (rookieTargets: string[][]) => void;
+    draftStrategy: DraftStrategy;
+    setDraftStrategy: (draftStrategy: DraftStrategy) => void;
+    draftCapitalScore: number;
+    setDraftCapitalScore: (draftCapitalScore: number) => void;
+};
+
+function RookieDraftInputs({
+    allUsers,
+    specifiedUser,
+    teamId,
+    setTeamId,
+    leagueId,
+    archetype,
+    setArchetype,
+    outlooks,
+    setOutlooks,
+    draftPicks,
+    setDraftPicks,
+    rookieTargets,
+    setRookieTargets,
+    draftStrategy,
+    setDraftStrategy,
+    draftCapitalScore,
+    setDraftCapitalScore,
+}: RookieDraftInputsProps) {
+    const rounds = [...Array(5).keys()].map(x => x + 1);
+    const picks = [...Array(24).keys()].map(x => x + 1);
+    const rookieOptions = Array.from(rookieMap.keys());
+    return (
+        <>
             {leagueId && (
                 <TeamSelectComponent
                     teamId={teamId}
@@ -371,22 +503,7 @@ export default function RookieDraft() {
                     width={'140px'}
                 />
             </div>
-            <RookieDraftGraphic
-                archetype={archetype}
-                teamName={getTeamName(specifiedUser)}
-                outlooks={outlooks}
-                teamNeeds={getPositionalOrder({
-                    qbGrade,
-                    rbGrade,
-                    wrGrade,
-                    teGrade,
-                })}
-                draftPicks={draftPicks}
-                rookieTargets={rookieTargets}
-                draftStrategy={draftStrategy}
-                draftCapitalScore={draftCapitalScore}
-            />
-        </div>
+        </>
     );
 }
 
