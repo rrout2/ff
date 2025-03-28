@@ -348,3 +348,49 @@
 .draftStrategyBody2 {
     top: 1487px;
 }
+
+.draftCapitalScoreInput {
+    margin: 10px;
+}
+
+.draftCapitalScore {
+    position: absolute;
+    left: 2190px;
+    bottom: 222px;
+
+    font-family: 'Erbaum';
+    font-weight: bold;
+    font-size: 49px;
+    color: white;
+}
+
+.draftCapitalScale {
+    position: absolute;
+    left: 1680px;
+    bottom: 120px;
+
+    height: 90px;
+}
+
+.draftCapitalScaleBg {
+    position: absolute;
+    right: 80px;
+    bottom: 120px;
+
+    box-shadow: rgba(15, 19, 59, 0.5) -9px 9px 0px 0px;
+
+    background-color: gray;
+
+    height: 90px;
+    width: 650px;
+}
+
+.draftCapitalSlider {
+    position: absolute;
+    left: 1680px;
+    bottom: 110px;
+
+    border-right: white 6px solid;
+
+    height: 110px;
+}

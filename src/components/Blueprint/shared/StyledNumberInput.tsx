@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function StyledNumberInput(
-    props: NumberInputProps & {label?: string}
+    props: NumberInputProps & {label?: string; width?: string}
 ) {
     return (
         <Unstable_NumberInput
@@ -23,7 +23,7 @@ export default function StyledNumberInput(
                     style: {display: 'flex'},
                 },
                 input: {
-                    style: {width: '70px'},
+                    style: {width: props.width || '70px'},
                     label: props.label,
                 } as SlotComponentProps<
                     'input',

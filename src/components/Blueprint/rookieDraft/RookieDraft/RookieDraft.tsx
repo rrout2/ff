@@ -1,5 +1,9 @@
 import styles from './RookieDraft.module.css';
-import {blankRookie, rookieMap} from '../../../../consts/images';
+import {
+    blankRookie,
+    horizontalScale,
+    rookieMap,
+} from '../../../../consts/images';
 import {Fragment, useEffect, useState} from 'react';
 import {Archetype} from '../../v1/modules/BigBoy/BigBoy';
 import {
@@ -29,6 +33,7 @@ import {TeamSelectComponent} from '../../../Team/TeamPage/TeamPage';
 import {useRosterTierAndPosGrades} from '../../infinite/RosterTier/RosterTier';
 import {SUPER_FLEX, QB} from '../../../../consts/fantasy';
 import {getPositionalOrder} from '../../infinite/BuySellHold/BuySellHold';
+import StyledNumberInput from '../../shared/StyledNumberInput';
 
 type Verdict = 'downtier' | 'hold' | 'proven asset' | '';
 
@@ -83,6 +88,7 @@ export default function RookieDraft() {
             body: 'Draft Strategy Body',
         },
     ]);
+    const [draftCapitalScore, setDraftCapitalScore] = useState(0);
 
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
@@ -349,6 +355,22 @@ export default function RookieDraft() {
                     </div>
                 ))}
             </div>
+            <div className={styles.draftCapitalScoreInput}>
+                <StyledNumberInput
+                    value={draftCapitalScore}
+                    label="Draft Capital Score"
+                    min={0}
+                    max={10}
+                    step={1}
+                    onChange={(_, value) => {
+                        if (value === null) {
+                            return;
+                        }
+                        setDraftCapitalScore(value);
+                    }}
+                    width={'140px'}
+                />
+            </div>
             <RookieDraftGraphic
                 archetype={archetype}
                 teamName={getTeamName(specifiedUser)}
@@ -362,6 +384,7 @@ export default function RookieDraft() {
                 draftPicks={draftPicks}
                 rookieTargets={rookieTargets}
                 draftStrategy={draftStrategy}
+                draftCapitalScore={draftCapitalScore}
             />
         </div>
     );
@@ -375,6 +398,7 @@ type RookieDraftGraphicProps = {
     draftPicks: DraftPick[];
     rookieTargets: string[][];
     draftStrategy: DraftStrategy;
+    draftCapitalScore: number;
 };
 
 function RookieDraftGraphic({
@@ -385,6 +409,7 @@ function RookieDraftGraphic({
     draftPicks,
     rookieTargets,
     draftStrategy,
+    draftCapitalScore,
 }: RookieDraftGraphicProps) {
     return (
         <div className={styles.rookieDraftGraphic}>
@@ -500,6 +525,25 @@ function RookieDraftGraphic({
                     </div>
                 </>
             ))}
+            <div className={styles.draftCapitalScore}>
+                {draftCapitalScore}/10
+            </div>
+            <div>
+                <div className={styles.draftCapitalScaleBg} />
+                <img
+                    src={horizontalScale}
+                    className={styles.draftCapitalScale}
+                    style={{
+                        width: `${(650 * draftCapitalScore) / 10}px`,
+                    }}
+                />
+                <div
+                    className={styles.draftCapitalSlider}
+                    style={{
+                        width: `${(650 * draftCapitalScore) / 10}px`,
+                    }}
+                />
+            </div>
             <img src={blankRookie} />
         </div>
     );
