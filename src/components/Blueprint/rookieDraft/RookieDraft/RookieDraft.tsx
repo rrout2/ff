@@ -220,7 +220,7 @@ type RookieDraftInputsProps = {
     specifiedUser?: User;
     teamId?: string;
     setTeamId?: (value: SetStateAction<string>) => void;
-    leagueId: string;
+    leagueId?: string;
     archetype?: Archetype | '';
     setArchetype?: (archetype: Archetype) => void;
     outlooks?: string[];

@@ -29,6 +29,8 @@ import {
     eliteQbTeDVMRCC,
 } from '../../../../consts/images';
 
+import {Archetype as V1Archetype} from '../../v1/modules/BigBoy/BigBoy';
+
 export enum Archetype {
     UNSPECIFIED = 'UNSPECIFIED',
 
@@ -50,6 +52,39 @@ export enum Archetype {
 }
 
 export const ALL_ARCHETYPES = Object.values(Archetype);
+
+export function getV1ArchetypeFromArchetype(
+    archetype: Archetype
+): V1Archetype | '' {
+    switch (archetype) {
+        case Archetype.HardRebuild_RRC:
+        case Archetype.HardRebuild_RRR:
+            return V1Archetype.HardRebuild;
+        case Archetype.WellRounded_CCR:
+        case Archetype.WellRounded_CCO:
+            return V1Archetype.WellRounded;
+        case Archetype.DualEliteQB_CCO:
+        case Archetype.DualEliteQB_RCC:
+            return V1Archetype.DualEliteQB;
+        case Archetype.EliteQBTE_CCO:
+        case Archetype.EliteQBTE_RCC:
+            return V1Archetype.EliteQBTE;
+        case Archetype.EliteValue_CCC:
+        case Archetype.EliteValue_CCO:
+            return V1Archetype.EliteValue;
+        case Archetype.FutureValue:
+            return V1Archetype.FutureValue;
+        case Archetype.WRFactory_CCO:
+        case Archetype.WRFactory_CCR:
+            return V1Archetype.WRFactory;
+        case Archetype.OneYearReload:
+            return V1Archetype.OneYearReload;
+        case Archetype.RBHeavy:
+            return V1Archetype.RBHeavy;
+        default:
+            return '';
+    }
+}
 
 export function getGraphFromArchetype(archetype: Archetype) {
     switch (archetype) {

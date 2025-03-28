@@ -987,23 +987,12 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                     </Grid2>
                     <Grid2 size={12}>
                         <RookieDraftInputs
-                            // allUsers={allUsers}
-                            // specifiedUser={specifiedUser}
-                            // teamId={teamId}
-                            // setTeamId={setTeamId}
-                            leagueId={leagueId}
-                            // archetype={archetype}
-                            // setArchetype={setArchetype}
-                            // outlooks={outlooks}
-                            // setOutlooks={setOutlooks}
                             draftPicks={draftPicks}
                             setDraftPicks={setDraftPicks}
                             rookieTargets={rookieTargets}
                             setRookieTargets={setRookieTargets}
                             draftStrategy={draftStrategy}
                             setDraftStrategy={setDraftStrategy}
-                            // draftCapitalScore={draftCapitalScore}
-                            // setDraftCapitalScore={setDraftCapitalScore}
                         />
                     </Grid2>
                 </Grid2>

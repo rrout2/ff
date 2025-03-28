@@ -55,6 +55,7 @@ import {
     getColorFromArchetype,
     getLabelFromArchetype,
     getDvmFromArchetype,
+    getV1ArchetypeFromArchetype,
 } from '../../consts/archetypes';
 import {
     ARCHETYPE,
@@ -78,6 +79,13 @@ import {
     WR_RANK,
 } from '../../../../../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
+import {
+    RookieDraftGraphic,
+    RookieDraftInputs,
+    useRookieDraft,
+} from '../../../rookieDraft/RookieDraft/RookieDraft';
+import {getPositionalOrder} from '../../../infinite/BuySellHold/BuySellHold';
+import rookieDraftStyles from '../../../rookieDraft/RookieDraft/RookieDraft.module.css';
 
 interface BigBoyProps {
     roster?: Roster;
@@ -114,6 +122,19 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         depth,
         setDepth,
     } = usePositionalGrades(roster, numRosters);
+    const [showRookieBP, setShowRookieBP] = useState(false);
+    const {
+        draftPicks,
+        setDraftPicks,
+        rookieTargets,
+        setRookieTargets,
+        draftStrategy,
+        setDraftStrategy,
+        outlooks,
+        setOutlooks,
+        draftCapitalScore,
+        setDraftCapitalScore,
+    } = useRookieDraft();
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
@@ -166,6 +187,23 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
             </FormGroup>
         );
     };
+
+    function ToggleShowRookieBP() {
+        return (
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={showRookieBP}
+                            onChange={e => setShowRookieBP(e.target.checked)}
+                            inputProps={{'aria-label': 'controlled'}}
+                        />
+                    }
+                    label="Show Rookie BP?"
+                />
+            </FormGroup>
+        );
+    }
 
     const FullBlueprintWithProps = ({isPreview}: {isPreview: boolean}) => (
         <FullBlueprint
@@ -337,12 +375,38 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         });
     }
 
+    const rookieDraftGraphic = (
+        <RookieDraftGraphic
+            archetype={getV1ArchetypeFromArchetype(archetype)}
+            teamName={teamName || ''}
+            outlooks={outlooks}
+            teamNeeds={getPositionalOrder({
+                qbGrade: qb,
+                rbGrade: rb,
+                wrGrade: wr,
+                teGrade: te,
+            })}
+            draftPicks={draftPicks}
+            rookieTargets={rookieTargets}
+            draftStrategy={draftStrategy}
+            draftCapitalScore={draftCapitalScore}
+        />
+    );
+
     return (
         <div>
             <ExportButton
                 className={styles.exportableClass}
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
+            />
+            <ExportButton
+                className={[
+                    styles.fullBlueprint,
+                    rookieDraftStyles.rookieDraftGraphic,
+                ]}
+                zipName={`${teamName}_blueprint.zip`}
+                label="Download v2 BP & Rookie Draft BP"
             />
             <Tooltip title="Save to URL">
                 <Button variant={'outlined'} onClick={saveToUrl}>
@@ -361,6 +425,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 </span>
             </Tooltip>
             <PreviewToggle />
+            <ToggleShowRookieBP />
             <UnifiedInputs
                 roster={roster}
                 cornerstones={cornerstones}
@@ -405,9 +470,23 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 suggestionsAndComments={suggestionsAndComments}
                 setSuggestionsAndComments={setSuggestionsAndComments}
             />
+            <RookieDraftInputs
+                draftPicks={draftPicks}
+                setDraftPicks={setDraftPicks}
+                rookieTargets={rookieTargets}
+                setRookieTargets={setRookieTargets}
+                draftStrategy={draftStrategy}
+                setDraftStrategy={setDraftStrategy}
+                draftCapitalScore={draftCapitalScore}
+                setDraftCapitalScore={setDraftCapitalScore}
+                outlooks={outlooks}
+                setOutlooks={setOutlooks}
+            />
             {showPreview && <FullBlueprintWithProps isPreview={true} />}
+            {showRookieBP && rookieDraftGraphic}
             <div className={styles.offScreen}>
                 <FullBlueprintWithProps isPreview={false} />
+                {rookieDraftGraphic}
             </div>
         </div>
     );
