@@ -24,6 +24,7 @@ import {
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../../shared/ExportButton';
 import styles from './BigBoy.module.css';
+import rookieDraftStyles from '../../../rookieDraft/RookieDraft/RookieDraft.module.css';
 import {
     Button,
     FormControl,
@@ -101,6 +102,24 @@ import {
     STARTING_LINEUP,
     WAIVER_TARGETS,
 } from '../../../../../consts/urlParams';
+import {
+    RookieDraftGraphic,
+    RookieDraftInputs,
+    useRookieDraft,
+} from '../../../rookieDraft/RookieDraft/RookieDraft';
+import {getPositionalOrder} from '../../../infinite/BuySellHold/BuySellHold';
+import {
+    dualEliteQb,
+    eliteQbTe,
+    eliteValue,
+    futureValue,
+    hardRebuild,
+    oneYearReload,
+    rbHeavy,
+    wellRounded,
+    wrFactory,
+} from '../../../../../consts/images';
+
 export enum Archetype {
     HardRebuild = 'HARD REBUILD',
     FutureValue = 'FUTURE VALUE',
@@ -112,6 +131,18 @@ export enum Archetype {
     EliteQBTE = 'ELITE QB/TE',
     RBHeavy = 'RB HEAVY',
 }
+
+export const ARCHETYPE_TO_IMAGE: Map<Archetype, string> = new Map([
+    [Archetype.DualEliteQB, dualEliteQb],
+    [Archetype.EliteQBTE, eliteQbTe],
+    [Archetype.EliteValue, eliteValue],
+    [Archetype.FutureValue, futureValue],
+    [Archetype.HardRebuild, hardRebuild],
+    [Archetype.OneYearReload, oneYearReload],
+    [Archetype.RBHeavy, rbHeavy],
+    [Archetype.WellRounded, wellRounded],
+    [Archetype.WRFactory, wrFactory],
+]);
 
 export const ArchetypeDetails = {
     [Archetype.HardRebuild]: [['REBUILD', 'REBUILD', 'CONTEND']],
@@ -155,9 +186,10 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
     const {startingLineup, setStartingLineup, bench, benchString} =
         useProjectedLineup(rosterSettings, roster?.players);
     const [showPreview, setShowPreview] = useState(false);
+    const [showRookieBP, setShowRookieBP] = useState(false);
     const [isRedraft, setIsRedraft] = useState(false);
     const [rebuildContendValue, setRebuildContendValue] = useState(50);
-    const [draftCapitalValue, setDraftCapitalValue] = useState(50);
+    const [draftCapitalValue, setDraftCapitalValue] = useState(5);
     const [draftCapitalNotes, setDraftCapitalNotes] = useState('placeholder');
     const [comments, setComments] = useState<string[]>([
         'comment 1',
@@ -232,6 +264,19 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         // not sure why this is necessary
         setTimeout(loadFromUrl, 200);
     }, [playerData, searchParams]);
+
+    const {
+        draftPicks,
+        setDraftPicks,
+        rookieTargets,
+        setRookieTargets,
+        draftStrategy,
+        setDraftStrategy,
+        qbGrade,
+        rbGrade,
+        wrGrade,
+        teGrade,
+    } = useRookieDraft();
 
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
 
@@ -525,7 +570,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                     <img
                         src={circleSlider}
                         className={styles.otherSlider}
-                        style={{left: `${draftCapitalValue * 7.8}px`}}
+                        style={{left: `${draftCapitalValue * 78}px`}}
                     />
                 </div>
                 <div className={styles.draftCapitalBackground}>
@@ -546,7 +591,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                     setDraftCapitalValue(value || 0);
                 }}
                 min={0}
-                max={100}
+                max={10}
             />
         );
     }
@@ -608,7 +653,24 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             </FormGroup>
         );
     }
-    function toggleRedraft() {
+    function ToggleShowRookieBP() {
+        return (
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={showRookieBP}
+                            onChange={e => setShowRookieBP(e.target.checked)}
+                            inputProps={{'aria-label': 'controlled'}}
+                        />
+                    }
+                    label="Show Rookie BP?"
+                />
+            </FormGroup>
+        );
+    }
+
+    function ToggleRedraft() {
         return (
             <FormGroup>
                 <FormControlLabel
@@ -923,6 +985,27 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             />
                         </div>
                     </Grid2>
+                    <Grid2 size={12}>
+                        <RookieDraftInputs
+                            // allUsers={allUsers}
+                            // specifiedUser={specifiedUser}
+                            // teamId={teamId}
+                            // setTeamId={setTeamId}
+                            leagueId={leagueId}
+                            // archetype={archetype}
+                            // setArchetype={setArchetype}
+                            // outlooks={outlooks}
+                            // setOutlooks={setOutlooks}
+                            draftPicks={draftPicks}
+                            setDraftPicks={setDraftPicks}
+                            rookieTargets={rookieTargets}
+                            setRookieTargets={setRookieTargets}
+                            draftStrategy={draftStrategy}
+                            setDraftStrategy={setDraftStrategy}
+                            // draftCapitalScore={draftCapitalScore}
+                            // setDraftCapitalScore={setDraftCapitalScore}
+                        />
+                    </Grid2>
                 </Grid2>
             </>
         );
@@ -986,12 +1069,38 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         );
     }
 
+    const rookieDraftGraphic = (
+        <RookieDraftGraphic
+            archetype={archetype}
+            teamName={teamName || ''}
+            outlooks={outlooks}
+            teamNeeds={getPositionalOrder({
+                qbGrade,
+                rbGrade,
+                wrGrade,
+                teGrade,
+            })}
+            draftPicks={draftPicks}
+            rookieTargets={rookieTargets}
+            draftStrategy={draftStrategy}
+            draftCapitalScore={draftCapitalValue}
+        />
+    );
+
     return (
         <div className={styles.BigBoy}>
             <ExportButton
                 className={styles.fullBlueprint}
                 pngName={`${teamName}_blueprint.png`}
                 label="Download Blueprint"
+            />
+            <ExportButton
+                className={[
+                    styles.fullBlueprint,
+                    rookieDraftStyles.rookieDraftGraphic,
+                ]}
+                zipName={`${teamName}_blueprint.zip`}
+                label="Download v1 BP & Rookie Draft BP"
             />
             <Tooltip title="Save to URL">
                 <Button variant={'outlined'} onClick={saveToUrl}>
@@ -1008,14 +1117,19 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                 </Button>
             </Tooltip>
             {togglePreview()}
-            {toggleRedraft()}
+            <ToggleShowRookieBP />
+            <ToggleRedraft />
             <div className={styles.inputsAndPreview}>
                 {inputsComponent()}
-                {showPreview && (
-                    <div className={styles.smaller}>{fullBlueprint()}</div>
-                )}
+                {
+                    <div className={styles.smaller}>
+                        {showPreview && fullBlueprint()}
+                        {showRookieBP && rookieDraftGraphic}
+                    </div>
+                }
             </div>
             <div className={styles.offScreen}>{fullBlueprint()}</div>
+            <div className={styles.offScreen}>{rookieDraftGraphic}</div>
         </div>
     );
 }

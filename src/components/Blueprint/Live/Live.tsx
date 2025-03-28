@@ -1,18 +1,7 @@
 import {useState} from 'react';
 import styles from './Live.module.css';
-import {
-    blankLive,
-    dualEliteQb,
-    eliteQbTe,
-    eliteValue,
-    futureValue,
-    hardRebuild,
-    oneYearReload,
-    rbHeavy,
-    wellRounded,
-    wrFactory,
-} from '../../../consts/images';
-import {Archetype} from '../v1/modules/BigBoy/BigBoy';
+import {blankLive} from '../../../consts/images';
+import {Archetype, ARCHETYPE_TO_IMAGE} from '../v1/modules/BigBoy/BigBoy';
 import {
     FormControl,
     InputLabel,
@@ -21,18 +10,6 @@ import {
     MenuItem,
     Button,
 } from '@mui/material';
-
-export const ARCHETYPE_TO_IMAGE: Map<Archetype, string> = new Map([
-    [Archetype.DualEliteQB, dualEliteQb],
-    [Archetype.EliteQBTE, eliteQbTe],
-    [Archetype.EliteValue, eliteValue],
-    [Archetype.FutureValue, futureValue],
-    [Archetype.HardRebuild, hardRebuild],
-    [Archetype.OneYearReload, oneYearReload],
-    [Archetype.RBHeavy, rbHeavy],
-    [Archetype.WellRounded, wellRounded],
-    [Archetype.WRFactory, wrFactory],
-]);
 
 export default function Live() {
     const [archetype, setArchetype] = useState<Archetype | ''>('');

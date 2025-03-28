@@ -5,7 +5,7 @@ import {
     rookieMap,
 } from '../../../../consts/images';
 import {Fragment, SetStateAction, useEffect, useState} from 'react';
-import {Archetype} from '../../v1/modules/BigBoy/BigBoy';
+import {Archetype, ARCHETYPE_TO_IMAGE} from '../../v1/modules/BigBoy/BigBoy';
 import {
     FormControl,
     InputLabel,
@@ -14,7 +14,7 @@ import {
     MenuItem,
     TextField,
 } from '@mui/material';
-import {ARCHETYPE_TO_IMAGE, Outlook} from '../../Live/Live';
+import {Outlook} from '../../Live/Live';
 import {
     useFetchRosters,
     useLeague,
@@ -216,26 +216,26 @@ export default function RookieDraft() {
 }
 
 type RookieDraftInputsProps = {
-    allUsers: User[];
+    allUsers?: User[];
     specifiedUser?: User;
-    teamId: string;
-    setTeamId: (value: SetStateAction<string>) => void;
+    teamId?: string;
+    setTeamId?: (value: SetStateAction<string>) => void;
     leagueId: string;
-    archetype: Archetype | '';
-    setArchetype: (archetype: Archetype) => void;
-    outlooks: string[];
-    setOutlooks: (outlooks: string[]) => void;
+    archetype?: Archetype | '';
+    setArchetype?: (archetype: Archetype) => void;
+    outlooks?: string[];
+    setOutlooks?: (outlooks: string[]) => void;
     draftPicks: DraftPick[];
     setDraftPicks: (draftPicks: DraftPick[]) => void;
     rookieTargets: string[][];
     setRookieTargets: (rookieTargets: string[][]) => void;
     draftStrategy: DraftStrategy;
     setDraftStrategy: (draftStrategy: DraftStrategy) => void;
-    draftCapitalScore: number;
-    setDraftCapitalScore: (draftCapitalScore: number) => void;
+    draftCapitalScore?: number;
+    setDraftCapitalScore?: (draftCapitalScore: number) => void;
 };
 
-function RookieDraftInputs({
+export function RookieDraftInputs({
     allUsers,
     specifiedUser,
     teamId,
@@ -259,7 +259,7 @@ function RookieDraftInputs({
     const rookieOptions = Array.from(rookieMap.keys());
     return (
         <>
-            {leagueId && (
+            {leagueId && allUsers && setTeamId && teamId !== undefined && (
                 <TeamSelectComponent
                     teamId={teamId}
                     setTeamId={setTeamId}
@@ -271,53 +271,57 @@ function RookieDraftInputs({
                     }}
                 />
             )}
-            <FormControl className={styles.formControlInput}>
-                <InputLabel>Archetype</InputLabel>
-                <Select
-                    value={archetype}
-                    label="Archetype"
-                    onChange={(event: SelectChangeEvent) => {
-                        setArchetype(event.target.value as Archetype);
-                    }}
-                >
-                    <MenuItem value={''} key={''}>
-                        Choose an Archetype:
-                    </MenuItem>
-                    {Object.values(Archetype).map((arch, idx) => (
-                        <MenuItem value={arch} key={idx}>
-                            {arch}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-            {outlooks.map((_, idx) => (
-                <FormControl key={idx} className={styles.formControlInput}>
-                    <InputLabel>Year {idx + 1}</InputLabel>
+            {setArchetype && (
+                <FormControl className={styles.formControlInput}>
+                    <InputLabel>Archetype</InputLabel>
                     <Select
-                        label={`Year ${idx + 1}`}
-                        value={outlooks[idx]}
+                        value={archetype}
+                        label="Archetype"
                         onChange={(event: SelectChangeEvent) => {
-                            const newOutlooks = outlooks.slice();
-                            newOutlooks[idx] = event.target.value;
-                            setOutlooks(newOutlooks);
+                            setArchetype(event.target.value as Archetype);
                         }}
                     >
                         <MenuItem value={''} key={''}>
-                            Choose an outlook:
+                            Choose an Archetype:
                         </MenuItem>
-                        <MenuItem value={'CONTEND'} key={'CONTEND'}>
-                            {'CONTEND'}
-                        </MenuItem>
-                        <MenuItem value={'REBUILD'} key={'REBUILD'}>
-                            {'REBUILD'}
-                        </MenuItem>
-
-                        <MenuItem value={'RELOAD'} key={'RELOAD'}>
-                            {'RELOAD'}
-                        </MenuItem>
+                        {Object.values(Archetype).map((arch, idx) => (
+                            <MenuItem value={arch} key={idx}>
+                                {arch}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
-            ))}
+            )}
+            {outlooks &&
+                setOutlooks &&
+                outlooks.map((_, idx) => (
+                    <FormControl key={idx} className={styles.formControlInput}>
+                        <InputLabel>Year {idx + 1}</InputLabel>
+                        <Select
+                            label={`Year ${idx + 1}`}
+                            value={outlooks[idx]}
+                            onChange={(event: SelectChangeEvent) => {
+                                const newOutlooks = outlooks.slice();
+                                newOutlooks[idx] = event.target.value;
+                                setOutlooks(newOutlooks);
+                            }}
+                        >
+                            <MenuItem value={''} key={''}>
+                                Choose an outlook:
+                            </MenuItem>
+                            <MenuItem value={'CONTEND'} key={'CONTEND'}>
+                                {'CONTEND'}
+                            </MenuItem>
+                            <MenuItem value={'REBUILD'} key={'REBUILD'}>
+                                {'REBUILD'}
+                            </MenuItem>
+
+                            <MenuItem value={'RELOAD'} key={'RELOAD'}>
+                                {'RELOAD'}
+                            </MenuItem>
+                        </Select>
+                    </FormControl>
+                ))}
             <div className={styles.draftPickInputColumn}>
                 {draftPicks.map((_, idx) => (
                     <div key={idx} className={styles.draftPickInputRow}>
@@ -487,22 +491,24 @@ function RookieDraftInputs({
                     </div>
                 ))}
             </div>
-            <div className={styles.draftCapitalScoreInput}>
-                <StyledNumberInput
-                    value={draftCapitalScore}
-                    label="Draft Capital Score"
-                    min={0}
-                    max={10}
-                    step={1}
-                    onChange={(_, value) => {
-                        if (value === null) {
-                            return;
-                        }
-                        setDraftCapitalScore(value);
-                    }}
-                    width={'140px'}
-                />
-            </div>
+            {setDraftCapitalScore && (
+                <div className={styles.draftCapitalScoreInput}>
+                    <StyledNumberInput
+                        value={draftCapitalScore}
+                        label="Draft Capital Score"
+                        min={0}
+                        max={10}
+                        step={1}
+                        onChange={(_, value) => {
+                            if (value === null) {
+                                return;
+                            }
+                            setDraftCapitalScore(value);
+                        }}
+                        width={'140px'}
+                    />
+                </div>
+            )}
         </>
     );
 }
@@ -518,7 +524,7 @@ type RookieDraftGraphicProps = {
     draftCapitalScore: number;
 };
 
-function RookieDraftGraphic({
+export function RookieDraftGraphic({
     archetype,
     teamName,
     outlooks,
