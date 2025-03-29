@@ -333,7 +333,7 @@
     left: 1070px;
 
     font-family: 'Acumin Pro';
-    font-size: 22px;
+    font-size: 16px;
     color: white;
 
     height: 80px;
@@ -341,11 +341,11 @@
 }
 
 .draftStrategyBody1 {
-    top: 1297px;
+    top: 1295px;
 }
 
 .draftStrategyBody2 {
-    top: 1487px;
+    top: 1485px;
 }
 
 .draftCapitalScoreInput {

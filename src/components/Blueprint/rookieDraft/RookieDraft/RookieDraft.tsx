@@ -47,6 +47,20 @@ type DraftStrategy = {
     body: string;
 }[];
 
+const firstRoundDraftStrategy = {
+    header: '1st Round Picks',
+    body: 'Never let a value faller make it past you. If there are no fallers, plan to prioritize your team need within a value tier. Note that late 1sts don’t have a superior hit rate to the early 2nd range. ',
+};
+
+const secondRoundDraftStrategy = {
+    header: '2nd Round Picks',
+    body: 'Try taking mid 2nd round picks and either trading up into the early second or downtiering into the late 2nd. If there are high draft capital WRs, take them here. Don’t reach on day 3 RBs with enticing landing spots until later.',
+};
+const thirdRoundDraftStrategy = {
+    header: '3rd Round Picks',
+    body: 'Use these picks on RBs, we have found that the hit rates for RBs in the 3rd round is very comparable to that of the hit rates in the 2nd. Keep in mind WRs & TEs have very low hit rates in this range.',
+};
+
 export function useRookieDraft() {
     const [leagueId] = useLeagueIdFromUrl();
     const league = useLeague(leagueId);
@@ -77,6 +91,8 @@ export function useRookieDraft() {
         ['', '', ''],
         ['', '', ''],
     ]);
+    const [autoPopulatedDraftStrategy, setAutoPopulatedDraftStrategy] =
+        useState<number[]>([0, 1]); // 0 = 1st round, 1 = 2nd round, 2 = 3rd round
     const [draftStrategy, setDraftStrategy] = useState<DraftStrategy>([
         {
             header: '2nd Round Picks',
@@ -87,6 +103,29 @@ export function useRookieDraft() {
             body: 'Draft Strategy Body',
         },
     ]);
+
+    useEffect(() => {
+        if (autoPopulatedDraftStrategy.length !== 2) {
+            setDraftStrategy([
+                firstRoundDraftStrategy,
+                secondRoundDraftStrategy,
+            ]);
+            return;
+        }
+        const newDraftStrategy = autoPopulatedDraftStrategy.map(strategy => {
+            switch (strategy) {
+                case 0:
+                    return firstRoundDraftStrategy;
+                case 1:
+                    return secondRoundDraftStrategy;
+                case 2:
+                    return thirdRoundDraftStrategy;
+                default:
+                    return {header: '', body: ''};
+            }
+        });
+        setDraftStrategy(newDraftStrategy);
+    }, [autoPopulatedDraftStrategy]);
     const [draftCapitalScore, setDraftCapitalScore] = useState(0);
 
     useEffect(() => {
@@ -135,6 +174,8 @@ export function useRookieDraft() {
         setDraftPicks,
         rookieTargets,
         setRookieTargets,
+        autoPopulatedDraftStrategy,
+        setAutoPopulatedDraftStrategy,
         draftStrategy,
         setDraftStrategy,
         draftCapitalScore,
@@ -172,6 +213,8 @@ export default function RookieDraft() {
         rbGrade,
         wrGrade,
         teGrade,
+        autoPopulatedDraftStrategy,
+        setAutoPopulatedDraftStrategy,
     } = useRookieDraft();
 
     return (
@@ -194,6 +237,8 @@ export default function RookieDraft() {
                 setDraftStrategy={setDraftStrategy}
                 draftCapitalScore={draftCapitalScore}
                 setDraftCapitalScore={setDraftCapitalScore}
+                autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
+                setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
             />
             <RookieDraftGraphic
                 archetype={archetype}
@@ -232,6 +277,8 @@ type RookieDraftInputsProps = {
     setDraftStrategy: (draftStrategy: DraftStrategy) => void;
     draftCapitalScore?: number;
     setDraftCapitalScore?: (draftCapitalScore: number) => void;
+    autoPopulatedDraftStrategy: number[];
+    setAutoPopulatedDraftStrategy: (draftStrategy: number[]) => void;
 };
 
 export function RookieDraftInputs({
@@ -252,6 +299,8 @@ export function RookieDraftInputs({
     setDraftStrategy,
     draftCapitalScore,
     setDraftCapitalScore,
+    autoPopulatedDraftStrategy,
+    setAutoPopulatedDraftStrategy,
 }: RookieDraftInputsProps) {
     const rounds = [...Array(5).keys()].map(x => x + 1);
     const picks = [...Array(24).keys()].map(x => x + 1);
@@ -467,6 +516,41 @@ export function RookieDraftInputs({
             <div className={styles.draftStrategyInputs}>
                 {draftStrategy.map((strategy, idx) => (
                     <div key={idx} className={styles.draftStrategyInputColumn}>
+                        <FormControl key={`${idx} draft strategy Autofill`}>
+                            <InputLabel>
+                                Draft Strategy Autofill {idx + 1}
+                            </InputLabel>
+                            <Select
+                                label={`Draft Strategy Autofill ${idx + 1}`}
+                                value={`${autoPopulatedDraftStrategy[idx]}`}
+                                onChange={(event: SelectChangeEvent) => {
+                                    const newDraftStrategy =
+                                        autoPopulatedDraftStrategy.slice();
+                                    if (event.target.value === '') {
+                                        newDraftStrategy[idx] = -1;
+                                    } else {
+                                        newDraftStrategy[idx] =
+                                            +event.target.value;
+                                    }
+                                    setAutoPopulatedDraftStrategy(
+                                        newDraftStrategy
+                                    );
+                                }}
+                            >
+                                <MenuItem value={''} key={''}>
+                                    Choose a round draft strategy to autofill:
+                                </MenuItem>
+                                <MenuItem value={0} key={0}>
+                                    {'1st'}
+                                </MenuItem>
+                                <MenuItem value={1} key={1}>
+                                    {'2nd'}
+                                </MenuItem>
+                                <MenuItem value={2} key={2}>
+                                    {'3rd'}
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
                         <TextField
                             value={strategy.header}
                             onChange={e => {

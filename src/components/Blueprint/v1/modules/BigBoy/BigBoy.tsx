@@ -276,6 +276,8 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         rbGrade,
         wrGrade,
         teGrade,
+        autoPopulatedDraftStrategy,
+        setAutoPopulatedDraftStrategy,
     } = useRookieDraft();
 
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
@@ -993,6 +995,12 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             setRookieTargets={setRookieTargets}
                             draftStrategy={draftStrategy}
                             setDraftStrategy={setDraftStrategy}
+                            autoPopulatedDraftStrategy={
+                                autoPopulatedDraftStrategy
+                            }
+                            setAutoPopulatedDraftStrategy={
+                                setAutoPopulatedDraftStrategy
+                            }
                         />
                     </Grid2>
                 </Grid2>
@@ -1057,17 +1065,20 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             </div>
         );
     }
-
+    const qbOverride = positionalGradeOverrides.get(QB) || -1;
+    const rbOverride = positionalGradeOverrides.get(RB) || -1;
+    const wrOverride = positionalGradeOverrides.get(WR) || -1;
+    const teOverride = positionalGradeOverrides.get(TE) || -1;
     const rookieDraftGraphic = (
         <RookieDraftGraphic
             archetype={archetype}
             teamName={teamName || ''}
             outlooks={outlooks}
             teamNeeds={getPositionalOrder({
-                qbGrade,
-                rbGrade,
-                wrGrade,
-                teGrade,
+                qbGrade: qbOverride > -1 ? qbOverride : qbGrade,
+                rbGrade: rbOverride > -1 ? rbOverride : rbGrade,
+                wrGrade: wrOverride > -1 ? wrOverride : wrGrade,
+                teGrade: teOverride > -1 ? teOverride : teGrade,
             })}
             draftPicks={draftPicks}
             rookieTargets={rookieTargets}
