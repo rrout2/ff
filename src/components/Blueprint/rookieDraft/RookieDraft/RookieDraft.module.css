@@ -19,30 +19,29 @@
     font-size: 75px;
 }
 
-.year1 {
+.outlook {
     position: absolute;
-    font-size: 59px;
+    font-size: 58px;
     width: 198px;
 
     top: 1190px;
+
+
+    font-family: 'Acumin Pro ExtraCondensed';
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.year1 {
     left: 1660px;
 }
 
 .year2 {
-    position: absolute;
-    font-size: 59px;
-    width: 198px;
-
-    top: 1190px;
     left: 1890px;
 }
 
 .year3 {
-    position: absolute;
-    font-size: 59px;
-    width: 198px;
-
-    top: 1190px;
     left: 2120px;
 }
 

@@ -544,11 +544,12 @@ export function RookieDraftGraphic({
                 />
             )}
             {outlooks.map((outlook, idx) => (
-                <Outlook
+                <div
                     key={idx}
-                    outlook={outlook}
-                    className={styles[`year${idx + 1}`]}
-                />
+                    className={`${styles.outlook} ${styles[`year${idx + 1}`]}`}
+                >
+                    {outlook}
+                </div>
             ))}
             {teamNeeds.map((pos, idx) => (
                 <Fragment key={idx}>
