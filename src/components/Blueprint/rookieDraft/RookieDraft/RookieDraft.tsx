@@ -14,7 +14,6 @@ import {
     MenuItem,
     TextField,
 } from '@mui/material';
-import {Outlook} from '../../Live/Live';
 import {
     useFetchRosters,
     useLeague,
