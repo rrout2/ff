@@ -275,6 +275,14 @@
     border-left: #FFFFFF 3px solid;
 }
 
+.shorterLine {
+    height: 80px;
+}
+
+.shortestLine {
+    height: 0px;
+}
+
 .line1 {
     top: 550px;
     left: 286px;

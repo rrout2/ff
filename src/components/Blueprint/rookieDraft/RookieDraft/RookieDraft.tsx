@@ -19,6 +19,7 @@ import {
     useLeague,
     useLeagueIdFromUrl,
     usePickMoves,
+    useRookieRankings,
     useRoster,
     useRosterSettings,
     useTeamIdFromUrl,
@@ -134,6 +135,20 @@ export function useRookieDraft() {
         });
         setDraftStrategy(newDraftStrategy);
     }, [autoPopulatedDraftStrategy]);
+    const {getRookieTier} = useRookieRankings(isSuperFlex);
+    function resetRookieTargets(index: number) {
+        setRookieTargets(oldRookieTargets => {
+            const newRookieTargets = oldRookieTargets.slice();
+            const dp = draftPicks[index];
+            const pickNumber = getPickNumber(dp.round, dp.pick);
+            const tier = getRookieTier(pickNumber);
+            while (tier.length < 3) {
+                tier.push('');
+            }
+            newRookieTargets[index] = tier;
+            return newRookieTargets;
+        });
+    }
     const [draftCapitalScore, setDraftCapitalScore] = useState(0);
     const {pickMoves, getMove} = usePickMoves(isSuperFlex);
     function resetDraftPickVerdict(index: number) {
@@ -155,18 +170,22 @@ export function useRookieDraft() {
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(0);
+        resetRookieTargets(0);
     }, [draftPicks[0].round, draftPicks[0].pick, pickMoves, tier]);
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(1);
+        resetRookieTargets(1);
     }, [draftPicks[1].round, draftPicks[1].pick, pickMoves, tier]);
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(2);
+        resetRookieTargets(2);
     }, [draftPicks[2].round, draftPicks[2].pick, pickMoves, tier]);
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(3);
+        resetRookieTargets(3);
     }, [draftPicks[3].round, draftPicks[3].pick, pickMoves, tier]);
 
     function getPickNumber(round: number | '', pick: number | '') {
@@ -737,10 +756,21 @@ export function RookieDraftGraphic({
                 );
             })}
             {[0, 1, 2, 3].map(idx => {
+                const numTargets = rookieTargets[idx].filter(
+                    target => target !== ''
+                ).length;
                 return (
                     <div
                         key={`${idx} line`}
-                        className={`${styles.line} ${styles[`line${idx + 1}`]}`}
+                        className={`${styles.line} ${
+                            styles[`line${idx + 1}`]
+                        } ${
+                            numTargets === 2
+                                ? styles.shorterLine
+                                : numTargets === 1
+                                ? styles.shortestLine
+                                : ''
+                        }`}
                     />
                 );
             })}

@@ -5,6 +5,8 @@ import buySellsData from '../data/buyssellsholds_with_ids_030325.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import sfPickMovesJson from '../data/rookieBP/sf_pick_moves.json';
 import oneQbPickMovesJson from '../data/rookieBP/1qb_pick_moves.json';
+import sfRookieRankingsJson from '../data/rookieBP/sf_rookie_rankings_and_tiers.json';
+import oneQbRookieRankingsJson from '../data/rookieBP/1qb_rookie_rankings_and_tiers.json';
 import {
     League,
     Player,
@@ -46,6 +48,42 @@ import {
 import {Module} from '../components/Blueprint/v1/BlueprintGenerator';
 import {Lineup} from '../components/Blueprint/v1/modules/Starters/Starters';
 import {RosterTier} from '../components/Blueprint/infinite/RosterTier/RosterTier';
+import {rookieMap} from '../consts/images';
+
+export type RookieRank = {
+    Pick: number;
+    Name: string;
+    Position: string;
+    Tier: number;
+};
+
+export function useRookieRankings(isSuperFlex: boolean) {
+    const [sfRookieRankings] = useState<RookieRank[]>(
+        sfRookieRankingsJson as unknown as RookieRank[]
+    );
+    const [oneQbRookieRankings] = useState<RookieRank[]>(
+        oneQbRookieRankingsJson as unknown as RookieRank[]
+    );
+    const rookieRankings = isSuperFlex ? sfRookieRankings : oneQbRookieRankings;
+
+    function verifyRankings() {
+        rookieRankings.forEach(r => {
+            if (!rookieMap.has(r.Name)) {
+                console.warn('missing rookie card', r.Name);
+            }
+        });
+    }
+    useEffect(() => {
+        verifyRankings();
+    }, [rookieRankings]);
+
+    function getRookieTier(pick: number) {
+        const tier = rookieRankings[pick - 1].Tier;
+        return rookieRankings.filter(r => r.Tier === tier).map(r => r.Name);
+    }
+
+    return {rookieRankings, getRookieTier};
+}
 
 export type PickMove = {
     Pick: string;
