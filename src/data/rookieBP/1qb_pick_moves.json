@@ -1,0 +1,450 @@
+[
+  {
+    "Pick": 1,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 2,
+    "Elite": "Uptier",
+    "Championship": "Hold",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 3,
+    "Elite": "Uptier",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 4,
+    "Elite": "UptIier",
+    "Championship": "Proven Asset",
+    "Contender": "Hold",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 5,
+    "Elite": "Proven Vet",
+    "Championship": "Proven Asset",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 6,
+    "Elite": "Proven Vet",
+    "Championship": "Proven Asset",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 7,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 8,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 9,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 10,
+    "Elite": "Downtier",
+    "Championship": "Hold",
+    "Contender": "Downtier",
+    "Reload": "Hold",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 11,
+    "Elite": "Proven Vet",
+    "Championship": "Proven Vet",
+    "Contender": "Proven Vet",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 12,
+    "Elite": "Proven Vet",
+    "Championship": "Proven Vet",
+    "Contender": "Proven Vet",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 13,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 14,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 15,
+    "Elite": "Uptier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 16,
+    "Elite": "Uptier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 17,
+    "Elite": "Uptier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 18,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 19,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 20,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 21,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 22,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 23,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 24,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 25,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 26,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 27,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 28,
+    "Elite": "Downtier",
+    "Championship": "Downtier",
+    "Contender": "Downtier",
+    "Reload": "Downtier",
+    "Rebuild": "Downtier"
+  },
+  {
+    "Pick": 29,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 30,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 31,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 32,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 33,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 34,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 35,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 36,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 37,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 38,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 39,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 40,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 41,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 42,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 43,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 44,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 45,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 46,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 47,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 48,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 49,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 50,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 51,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 52,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 53,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 54,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 55,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  },
+  {
+    "Pick": 56,
+    "Elite": "Hold",
+    "Championship": "Hold",
+    "Contender": "Hold",
+    "Reload": "Hold",
+    "Rebuild": "Hold"
+  }
+]

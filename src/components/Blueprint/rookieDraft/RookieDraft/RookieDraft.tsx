@@ -18,6 +18,7 @@ import {
     useFetchRosters,
     useLeague,
     useLeagueIdFromUrl,
+    usePickMoves,
     useRoster,
     useRosterSettings,
     useTeamIdFromUrl,
@@ -29,13 +30,23 @@ import {
 } from '../../../../sleeper-api/sleeper-api';
 import {NONE_TEAM_ID} from '../../../../consts/urlParams';
 import {TeamSelectComponent} from '../../../Team/TeamPage/TeamPage';
-import {useRosterTierAndPosGrades} from '../../infinite/RosterTier/RosterTier';
+import {
+    RosterTier,
+    useRosterTierAndPosGrades,
+} from '../../infinite/RosterTier/RosterTier';
 import {SUPER_FLEX, QB} from '../../../../consts/fantasy';
 import {getPositionalOrder} from '../../infinite/BuySellHold/BuySellHold';
 import StyledNumberInput from '../../shared/StyledNumberInput';
 
-type Verdict = 'downtier' | 'hold' | 'proven asset' | '';
-
+enum Verdict {
+    Downtier = 'Downtier',
+    Hold = 'Hold',
+    ProvenAsset = 'Proven Asset',
+    ProvenVet = 'Proven Vet',
+    Uptier = 'Uptier',
+    None = '',
+}
+const VERDICT_OPTIONS = Object.values(Verdict);
 type DraftPick = {
     round: number | '';
     pick: number | '';
@@ -72,18 +83,15 @@ export function useRookieDraft() {
     const {roster} = useRoster(rosters, teamId, leagueId);
     const [outlooks, setOutlooks] = useState<string[]>(['', '', '']);
     const [draftPicks, setDraftPicks] = useState<DraftPick[]>([
-        {round: 1, pick: 1, verdict: ''},
-        {round: 2, pick: 2, verdict: ''},
-        {round: 3, pick: 3, verdict: ''},
-        {round: 4, pick: 4, verdict: ''},
+        {round: 1, pick: 1, verdict: Verdict.None},
+        {round: 2, pick: 2, verdict: Verdict.None},
+        {round: 3, pick: 3, verdict: Verdict.None},
+        {round: 4, pick: 4, verdict: Verdict.None},
     ]);
     const isSuperFlex =
         rosterSettings.has(SUPER_FLEX) || (rosterSettings.get(QB) ?? 0) > 1;
-    const {qbGrade, rbGrade, wrGrade, teGrade} = useRosterTierAndPosGrades(
-        isSuperFlex,
-        rosters?.length ?? 0,
-        roster
-    );
+    const {qbGrade, rbGrade, wrGrade, teGrade, tier} =
+        useRosterTierAndPosGrades(isSuperFlex, rosters?.length ?? 0, roster);
     // 4 picks, 3 targets per pick
     const [rookieTargets, setRookieTargets] = useState<string[][]>([
         ['', '', ''],
@@ -127,7 +135,47 @@ export function useRookieDraft() {
         setDraftStrategy(newDraftStrategy);
     }, [autoPopulatedDraftStrategy]);
     const [draftCapitalScore, setDraftCapitalScore] = useState(0);
+    const {pickMoves, getMove} = usePickMoves(isSuperFlex);
+    function resetDraftPickVerdict(index: number) {
+        if (index < 0 || index >= draftPicks.length) {
+            return;
+        }
+        setDraftPicks(oldDraftPicks => {
+            const newDraftPicks = oldDraftPicks.slice();
+            const dp = draftPicks[index];
+            const pickNumber = getPickNumber(dp.round, dp.pick);
+            const verdict = getMove(pickNumber, tier);
+            newDraftPicks[index] = {
+                ...dp,
+                verdict: verdict as Verdict,
+            };
+            return newDraftPicks;
+        });
+    }
+    useEffect(() => {
+        if (tier === RosterTier.Unknown) return;
+        resetDraftPickVerdict(0);
+    }, [draftPicks[0].round, draftPicks[0].pick, pickMoves, tier]);
+    useEffect(() => {
+        if (tier === RosterTier.Unknown) return;
+        resetDraftPickVerdict(1);
+    }, [draftPicks[1].round, draftPicks[1].pick, pickMoves, tier]);
+    useEffect(() => {
+        if (tier === RosterTier.Unknown) return;
+        resetDraftPickVerdict(2);
+    }, [draftPicks[2].round, draftPicks[2].pick, pickMoves, tier]);
+    useEffect(() => {
+        if (tier === RosterTier.Unknown) return;
+        resetDraftPickVerdict(3);
+    }, [draftPicks[3].round, draftPicks[3].pick, pickMoves, tier]);
 
+    function getPickNumber(round: number | '', pick: number | '') {
+        if (round === '' || pick === '') {
+            return -1;
+        }
+        const leagueSize = rosters?.length ?? 0;
+        return (round - 1) * leagueSize + pick;
+    }
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
             return;
@@ -303,7 +351,7 @@ export function RookieDraftInputs({
     setAutoPopulatedDraftStrategy,
 }: RookieDraftInputsProps) {
     const rounds = [...Array(5).keys()].map(x => x + 1);
-    const picks = [...Array(24).keys()].map(x => x + 1);
+    const picks = [...Array(allUsers?.length || 24).keys()].map(x => x + 1);
     const rookieOptions = Array.from(rookieMap.keys());
     return (
         <>
@@ -443,11 +491,14 @@ export function RookieDraftInputs({
                                     const newDraftPicks = draftPicks.slice();
                                     const newVerdict = event.target.value;
                                     if (
-                                        newVerdict !== 'downtier' &&
-                                        newVerdict !== 'hold' &&
-                                        newVerdict !== 'proven asset'
+                                        newVerdict !== Verdict.Downtier &&
+                                        newVerdict !== Verdict.Hold &&
+                                        newVerdict !== Verdict.ProvenAsset &&
+                                        newVerdict !== Verdict.ProvenVet &&
+                                        newVerdict !== Verdict.Uptier
                                     ) {
-                                        newDraftPicks[idx].verdict = '';
+                                        newDraftPicks[idx].verdict =
+                                            Verdict.None;
                                     } else {
                                         newDraftPicks[idx].verdict = newVerdict;
                                     }
@@ -457,18 +508,13 @@ export function RookieDraftInputs({
                                 <MenuItem value={''} key={''}>
                                     Choose a verdict:
                                 </MenuItem>
-                                <MenuItem value={'downtier'} key={'downtier'}>
-                                    {'downtier'}
-                                </MenuItem>
-                                <MenuItem value={'hold'} key={'hold'}>
-                                    {'hold'}
-                                </MenuItem>
-                                <MenuItem
-                                    value={'proven asset'}
-                                    key={'proven asset'}
-                                >
-                                    {'proven asset'}
-                                </MenuItem>
+                                {VERDICT_OPTIONS.filter(
+                                    verdict => verdict !== Verdict.None
+                                ).map(verdict => (
+                                    <MenuItem value={verdict} key={verdict}>
+                                        {verdict}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
                         {[0, 1, 2].map(targetIdx => {
@@ -558,7 +604,7 @@ export function RookieDraftInputs({
                                 newDraftStrategy[idx].header = e.target.value;
                                 setDraftStrategy(newDraftStrategy);
                             }}
-                            key={idx}
+                            key={`${idx} header`}
                             label={`Draft Strategy Header ${idx + 1}`}
                         />
                         <TextField
@@ -568,7 +614,7 @@ export function RookieDraftInputs({
                                 newDraftStrategy[idx].body = e.target.value;
                                 setDraftStrategy(newDraftStrategy);
                             }}
-                            key={idx}
+                            key={`${idx} body`}
                             label={`Draft Strategy Body ${idx + 1}`}
                         />
                     </div>
@@ -668,7 +714,13 @@ export function RookieDraftGraphic({
                         <div
                             className={`${styles.verdict} ${
                                 styles[`verdict${idx + 1}`]
-                            } ${styles[draftPick.verdict.replace(' ', '')]}`}
+                            } ${
+                                styles[
+                                    draftPick.verdict
+                                        .toLowerCase()
+                                        .replace(' ', '')
+                                ]
+                            }`}
                         >
                             {draftPick.verdict.toUpperCase()}
                         </div>
@@ -687,7 +739,7 @@ export function RookieDraftGraphic({
             {[0, 1, 2, 3].map(idx => {
                 return (
                     <div
-                        key={idx}
+                        key={`${idx} line`}
                         className={`${styles.line} ${styles[`line${idx + 1}`]}`}
                     />
                 );
@@ -715,7 +767,7 @@ export function RookieDraftGraphic({
                 )
             )}
             {draftStrategy.map((strategy, idx) => (
-                <>
+                <Fragment key={`${idx} draft strategy`}>
                     <div
                         className={`${styles.draftStrategyHeader} ${
                             styles[`draftStrategyHeader${idx + 1}`]
@@ -730,7 +782,7 @@ export function RookieDraftGraphic({
                     >
                         {strategy.body}
                     </div>
-                </>
+                </Fragment>
             ))}
             <div className={styles.draftCapitalScore}>
                 {draftCapitalScore}/10

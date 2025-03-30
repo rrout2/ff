@@ -3,6 +3,8 @@ import playersJson from '../data/players.json';
 import playerValuesJson from '../data/player_values_030325.json';
 import buySellsData from '../data/buyssellsholds_with_ids_030325.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
+import sfPickMovesJson from '../data/rookieBP/sf_pick_moves.json';
+import oneQbPickMovesJson from '../data/rookieBP/1qb_pick_moves.json';
 import {
     League,
     Player,
@@ -43,6 +45,50 @@ import {
 } from '../consts/fantasy';
 import {Module} from '../components/Blueprint/v1/BlueprintGenerator';
 import {Lineup} from '../components/Blueprint/v1/modules/Starters/Starters';
+import {RosterTier} from '../components/Blueprint/infinite/RosterTier/RosterTier';
+
+export type PickMove = {
+    Pick: string;
+    Elite: string;
+    Championship: string;
+    Contender: string;
+    Reload: string;
+    Rebuild: string;
+};
+
+export function usePickMoves(isSuperFlex: boolean) {
+    const [sfPickMoves] = useState<PickMove[]>(
+        sfPickMovesJson as unknown as PickMove[]
+    );
+    const [oneQbPickMoves] = useState<PickMove[]>(
+        oneQbPickMovesJson as unknown as PickMove[]
+    );
+    function getMove(pick: number, tier: RosterTier) {
+        const pickMoves = isSuperFlex ? sfPickMoves : oneQbPickMoves;
+        if (pick < 1 || pick > pickMoves.length) {
+            console.warn('invalid pick', pick);
+            return '';
+        }
+        const pickMove = pickMoves[pick - 1];
+        switch (tier.toLowerCase()) {
+            case 'elite':
+                return pickMove.Elite;
+            case 'championship':
+                return pickMove.Championship;
+            case 'contender':
+            case 'competitive':
+                return pickMove.Contender;
+            case 'reload':
+                return pickMove.Reload;
+            case 'rebuild':
+                return pickMove.Rebuild;
+            default:
+                console.warn('unknown tier', tier);
+                return '';
+        }
+    }
+    return {pickMoves: isSuperFlex ? sfPickMoves : oneQbPickMoves, getMove};
+}
 
 type TeamSchedule = {
     [week: string]: string;
