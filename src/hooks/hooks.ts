@@ -81,7 +81,6 @@ export function useRookieRankings(isSuperFlex: boolean) {
                 name.replace(/\W/g, '').toLowerCase()
         );
         if (!rookieRank) {
-            console.warn('missing rookie rank', name);
             return Infinity;
         }
         return rookieRank.Pick;

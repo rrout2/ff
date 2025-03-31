@@ -223,6 +223,7 @@ import jarquezHunter from '../assets/rookieDraft/rookieCards/jarquezHunter.png';
 import jaxsonDart from '../assets/rookieDraft/rookieCards/jaxsonDart.png';
 import jaydenHiggins from '../assets/rookieDraft/rookieCards/jaydenHiggins.png';
 import jaydnOtt from '../assets/rookieDraft/rookieCards/jaydnOtt.png';
+import jaydonBlue from '../assets/rookieDraft/rookieCards/jaydonBlue.png';
 import jaylinNoel from '../assets/rookieDraft/rookieCards/jaylinNoel.png';
 import jordanJames from '../assets/rookieDraft/rookieCards/jordanJames.png';
 import kalebJohnson from '../assets/rookieDraft/rookieCards/kalebJohnson.png';
@@ -230,6 +231,7 @@ import kalelMullings from '../assets/rookieDraft/rookieCards/kalelMullings.png';
 import kurtisRourke from '../assets/rookieDraft/rookieCards/kurtisRourke.png';
 import kyleMccord from '../assets/rookieDraft/rookieCards/kyleMccord.png';
 import kyleMonangai from '../assets/rookieDraft/rookieCards/kyleMonangai.png';
+import kyleWilliams from '../assets/rookieDraft/rookieCards/kyleWilliams.png';
 import kyrenLacy from '../assets/rookieDraft/rookieCards/kyrenLacy.png';
 import lequintAllen from '../assets/rookieDraft/rookieCards/lequintAllen.png';
 import leVeonMoss from '../assets/rookieDraft/rookieCards/leVeonMoss.png';
@@ -241,8 +243,10 @@ import nicSingleton from '../assets/rookieDraft/rookieCards/nicSingleton.png';
 import ollieGordon from '../assets/rookieDraft/rookieCards/ollieGordon.png';
 import omarionHampton from '../assets/rookieDraft/rookieCards/omarionHampton.png';
 import orondeGadsden from '../assets/rookieDraft/rookieCards/orondeGadsden.png';
+import patBryant from '../assets/rookieDraft/rookieCards/patBryant.png';
 import quinnEwers from '../assets/rookieDraft/rookieCards/quinnEwers.png';
 import quinshonJudkins from '../assets/rookieDraft/rookieCards/quinshonJudkins.png';
+import raheimSanders from '../assets/rookieDraft/rookieCards/raheimSanders.png';
 import rickyWhite from '../assets/rookieDraft/rookieCards/rickyWhite.png';
 import rjHarvey from '../assets/rookieDraft/rookieCards/rjHarvey.png';
 import savionWilliams from '../assets/rookieDraft/rookieCards/savionWilliams.png';
@@ -557,6 +561,10 @@ const rookieMap: Map<string, string> = new Map([
     ['Bhayshul Tuten', bhayshulTuten],
     ['Elijah Arroyo', elijahArroyo],
     ['Tyler Shough', tylerShough],
+    ['Jaydon Blue', jaydonBlue],
+    ['Kyle Williams', kyleWilliams],
+    ['Pat Bryant', patBryant],
+    ['Raheim Sanders', raheimSanders],
 ]);
 
 export {
