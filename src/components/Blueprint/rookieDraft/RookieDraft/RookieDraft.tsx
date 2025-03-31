@@ -653,6 +653,8 @@ export function RookieDraftInputs({
                             }}
                             key={`${idx} body`}
                             label={`Draft Strategy Body ${idx + 1}`}
+                            multiline
+                            style={{width: '400px'}}
                         />
                     </div>
                 ))}
