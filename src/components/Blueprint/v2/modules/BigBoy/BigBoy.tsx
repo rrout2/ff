@@ -136,6 +136,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
         setDraftCapitalScore,
         autoPopulatedDraftStrategy,
         setAutoPopulatedDraftStrategy,
+        sortByRookieRank,
     } = useRookieDraft();
 
     const rankStateMap = new Map(
@@ -485,6 +486,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setOutlooks={setOutlooks}
                 autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
                 setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
+                sortByRookieRank={sortByRookieRank}
             />
             {showPreview && <FullBlueprintWithProps isPreview={true} />}
             {showRookieBP && rookieDraftGraphic}

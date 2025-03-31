@@ -73,6 +73,24 @@ export function useRookieRankings(isSuperFlex: boolean) {
             }
         });
     }
+
+    function getRookieRank(name: string) {
+        const rookieRank = rookieRankings.find(
+            r =>
+                r.Name.replace(/\W/g, '').toLowerCase() ===
+                name.replace(/\W/g, '').toLowerCase()
+        );
+        if (!rookieRank) {
+            console.warn('missing rookie rank', name);
+            return Infinity;
+        }
+        return rookieRank.Pick;
+    }
+
+    function sortByRookieRank(a: string, b: string): number {
+        return getRookieRank(a) - getRookieRank(b);
+    }
+
     useEffect(() => {
         verifyRankings();
     }, [rookieRankings]);
@@ -86,7 +104,7 @@ export function useRookieRankings(isSuperFlex: boolean) {
         return rookieRankings.filter(r => r.Tier === tier).map(r => r.Name);
     }
 
-    return {rookieRankings, getRookieTier};
+    return {rookieRankings, getRookieTier, getRookieRank, sortByRookieRank};
 }
 
 export type PickMove = {

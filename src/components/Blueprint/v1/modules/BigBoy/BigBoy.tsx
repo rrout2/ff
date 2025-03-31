@@ -278,6 +278,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         teGrade,
         autoPopulatedDraftStrategy,
         setAutoPopulatedDraftStrategy,
+        sortByRookieRank,
     } = useRookieDraft();
 
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
@@ -1001,6 +1002,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             setAutoPopulatedDraftStrategy={
                                 setAutoPopulatedDraftStrategy
                             }
+                            sortByRookieRank={sortByRookieRank}
                         />
                     </Grid2>
                 </Grid2>

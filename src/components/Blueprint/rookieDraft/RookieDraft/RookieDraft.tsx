@@ -138,7 +138,7 @@ export function useRookieDraft() {
         });
         setDraftStrategy(newDraftStrategy);
     }, [autoPopulatedDraftStrategy]);
-    const {getRookieTier} = useRookieRankings(isSuperFlex);
+    const {getRookieTier, sortByRookieRank} = useRookieRankings(isSuperFlex);
     function resetRookieTargets(index: number) {
         setRookieTargets(oldRookieTargets => {
             const newRookieTargets = oldRookieTargets.slice();
@@ -257,6 +257,7 @@ export function useRookieDraft() {
         archetype,
         setArchetype,
         isSuperFlex,
+        sortByRookieRank,
     };
 }
 
@@ -285,6 +286,7 @@ export default function RookieDraft() {
         teGrade,
         autoPopulatedDraftStrategy,
         setAutoPopulatedDraftStrategy,
+        sortByRookieRank,
     } = useRookieDraft();
 
     return (
@@ -309,6 +311,7 @@ export default function RookieDraft() {
                 setDraftCapitalScore={setDraftCapitalScore}
                 autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
                 setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
+                sortByRookieRank={sortByRookieRank}
             />
             <RookieDraftGraphic
                 archetype={archetype}
@@ -349,6 +352,7 @@ type RookieDraftInputsProps = {
     setDraftCapitalScore?: (draftCapitalScore: number) => void;
     autoPopulatedDraftStrategy: number[];
     setAutoPopulatedDraftStrategy: (draftStrategy: number[]) => void;
+    sortByRookieRank: (a: string, b: string) => number;
 };
 
 export function RookieDraftInputs({
@@ -371,10 +375,11 @@ export function RookieDraftInputs({
     setDraftCapitalScore,
     autoPopulatedDraftStrategy,
     setAutoPopulatedDraftStrategy,
+    sortByRookieRank,
 }: RookieDraftInputsProps) {
     const rounds = [...Array(5).keys()].map(x => x + 1);
     const picks = [...Array(allUsers?.length || 24).keys()].map(x => x + 1);
-    const rookieOptions = Array.from(rookieMap.keys());
+    const rookieOptions = Array.from(rookieMap.keys()).sort(sortByRookieRank);
     return (
         <>
             {leagueId && allUsers && setTeamId && teamId !== undefined && (
@@ -554,45 +559,40 @@ export function RookieDraftInputs({
                                 ))}
                             </Select>
                         </FormControl>
-                        {[0, 1, 2].map(targetIdx => {
-                            return (
-                                <FormControl
-                                    key={`${idx} rookie ${targetIdx}`}
-                                    style={{width: '150px'}}
+                        {[0, 1, 2].map(targetIdx => (
+                            <FormControl
+                                key={`${idx} rookie ${targetIdx}`}
+                                style={{width: '150px'}}
+                            >
+                                <InputLabel>
+                                    Pick {idx + 1} Target {targetIdx + 1}
+                                </InputLabel>
+                                <Select
+                                    label={`Rookie ${idx + 1} Target ${
+                                        targetIdx + 1
+                                    }`}
+                                    value={rookieTargets[idx][targetIdx]}
+                                    onChange={(event: SelectChangeEvent) => {
+                                        const newRookieTargets =
+                                            rookieTargets.slice();
+                                        const newTarget = event.target.value;
+                                        newRookieTargets[idx][targetIdx] =
+                                            newTarget;
+                                        setRookieTargets(newRookieTargets);
+                                    }}
                                 >
-                                    <InputLabel>
-                                        Pick {idx + 1} Target {targetIdx + 1}
-                                    </InputLabel>
-                                    <Select
-                                        label={`Rookie ${idx + 1} Target ${
-                                            targetIdx + 1
-                                        }`}
-                                        value={rookieTargets[idx][targetIdx]}
-                                        onChange={(
-                                            event: SelectChangeEvent
-                                        ) => {
-                                            const newRookieTargets =
-                                                rookieTargets.slice();
-                                            const newTarget =
-                                                event.target.value;
-                                            newRookieTargets[idx][targetIdx] =
-                                                newTarget;
-                                            setRookieTargets(newRookieTargets);
-                                        }}
-                                    >
-                                        <MenuItem value={''} key={''}>
-                                            Choose a target:
-                                        </MenuItem>
-                                        {rookieOptions.map(rookie => (
-                                            <MenuItem
-                                                value={rookie}
-                                                key={rookie}
-                                            >{`${rookie}`}</MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            );
-                        })}
+                                    <MenuItem value={''} key={''}>
+                                        Choose a target:
+                                    </MenuItem>
+                                    {rookieOptions.map(rookie => (
+                                        <MenuItem
+                                            value={rookie}
+                                            key={rookie}
+                                        >{`${rookie}`}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        ))}
                     </div>
                 ))}
             </div>
