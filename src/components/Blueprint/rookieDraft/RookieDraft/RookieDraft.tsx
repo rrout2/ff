@@ -13,7 +13,10 @@ import {
     SelectChangeEvent,
     MenuItem,
     TextField,
+    IconButton,
+    Tooltip,
 } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 import {
     useFetchRosters,
     useLeague,
@@ -440,6 +443,21 @@ export function RookieDraftInputs({
             <div className={styles.draftPickInputColumn}>
                 {draftPicks.map((_, idx) => (
                     <div key={idx} className={styles.draftPickInputRow}>
+                        <Tooltip title="Clear Pick">
+                            <IconButton
+                                onClick={() => {
+                                    const newDraftPicks = draftPicks.slice();
+                                    newDraftPicks[idx] = {
+                                        round: '',
+                                        pick: '',
+                                        verdict: Verdict.None,
+                                    };
+                                    setDraftPicks(newDraftPicks);
+                                }}
+                            >
+                                <ClearIcon />
+                            </IconButton>
+                        </Tooltip>
                         <FormControl
                             key={`${idx} round`}
                             style={{width: '120px'}}
@@ -716,9 +734,13 @@ export function RookieDraftGraphic({
                 </Fragment>
             ))}
             {draftPicks.map((draftPick, idx) => {
-                if (!draftPick.round || !draftPick.pick || !draftPick.verdict) {
-                    return null;
-                }
+                const noPick =
+                    !draftPick.round || !draftPick.pick || !draftPick.verdict;
+                const pickDisplay = noPick
+                    ? 'N/A'
+                    : `${draftPick.round}.${
+                          draftPick.pick && draftPick.pick < 10 ? '0' : ''
+                      }${draftPick.pick}`;
                 return (
                     <Fragment key={idx}>
                         <div
@@ -726,31 +748,29 @@ export function RookieDraftGraphic({
                                 styles[`draftPick${idx + 1}`]
                             }`}
                         >
-                            {draftPick.round}.
-                            {draftPick.pick && draftPick.pick < 10 ? '0' : ''}
-                            {draftPick.pick}
+                            {pickDisplay}
                         </div>
-                        <div
-                            className={`${styles.verdict} ${
-                                styles[`verdict${idx + 1}`]
-                            } ${
-                                styles[
-                                    draftPick.verdict
-                                        .toLowerCase()
-                                        .replace(' ', '')
-                                ]
-                            }`}
-                        >
-                            {draftPick.verdict.toUpperCase()}
-                        </div>
+                        {!noPick && (
+                            <div
+                                className={`${styles.verdict} ${
+                                    styles[`verdict${idx + 1}`]
+                                } ${
+                                    styles[
+                                        draftPick.verdict
+                                            .toLowerCase()
+                                            .replace(' ', '')
+                                    ]
+                                }`}
+                            >
+                                {draftPick.verdict.toUpperCase()}
+                            </div>
+                        )}
                         <div
                             className={`${styles.target} ${
                                 styles[`target${idx + 1}`]
                             }`}
                         >
-                            {draftPick.round}.
-                            {draftPick.pick && draftPick.pick < 10 ? '0' : ''}
-                            {draftPick.pick}
+                            {pickDisplay}
                         </div>
                     </Fragment>
                 );
@@ -767,7 +787,7 @@ export function RookieDraftGraphic({
                         } ${
                             numTargets === 2
                                 ? styles.shorterLine
-                                : numTargets === 1
+                                : numTargets <= 1
                                 ? styles.shortestLine
                                 : ''
                         }`}

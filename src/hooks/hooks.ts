@@ -78,6 +78,10 @@ export function useRookieRankings(isSuperFlex: boolean) {
     }, [rookieRankings]);
 
     function getRookieTier(pick: number) {
+        if (pick < 1 || pick > rookieRankings.length) {
+            console.warn('invalid pick', pick);
+            return ['', '', ''];
+        }
         const tier = rookieRankings[pick - 1].Tier;
         return rookieRankings.filter(r => r.Tier === tier).map(r => r.Name);
     }
