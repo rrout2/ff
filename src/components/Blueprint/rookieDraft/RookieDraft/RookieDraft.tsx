@@ -87,10 +87,10 @@ export function useRookieDraft() {
     const {roster} = useRoster(rosters, teamId, leagueId);
     const [outlooks, setOutlooks] = useState<string[]>(['', '', '']);
     const [draftPicks, setDraftPicks] = useState<DraftPick[]>([
-        {round: 1, pick: 1, verdict: Verdict.None},
-        {round: 2, pick: 2, verdict: Verdict.None},
-        {round: 3, pick: 3, verdict: Verdict.None},
-        {round: 4, pick: 4, verdict: Verdict.None},
+        {round: '', pick: '', verdict: Verdict.None},
+        {round: '', pick: '', verdict: Verdict.None},
+        {round: '', pick: '', verdict: Verdict.None},
+        {round: '', pick: '', verdict: Verdict.None},
     ]);
     const isSuperFlex =
         rosterSettings.has(SUPER_FLEX) || (rosterSettings.get(QB) ?? 0) > 1;
@@ -139,37 +139,8 @@ export function useRookieDraft() {
         setDraftStrategy(newDraftStrategy);
     }, [autoPopulatedDraftStrategy]);
     const {getRookieTier, sortByRookieRank} = useRookieRankings(isSuperFlex);
-    function resetRookieTargets(index: number) {
-        setRookieTargets(oldRookieTargets => {
-            const newRookieTargets = oldRookieTargets.slice();
-            const dp = draftPicks[index];
-            const pickNumber = getPickNumber(dp.round, dp.pick);
-            const tier = getRookieTier(pickNumber);
-            while (tier.length < 3) {
-                tier.push('');
-            }
-            newRookieTargets[index] = tier;
-            return newRookieTargets;
-        });
-    }
     const [draftCapitalScore, setDraftCapitalScore] = useState(0);
     const {pickMoves, getMove} = usePickMoves(isSuperFlex);
-    function resetDraftPickVerdict(index: number) {
-        if (index < 0 || index >= draftPicks.length) {
-            return;
-        }
-        setDraftPicks(oldDraftPicks => {
-            const newDraftPicks = oldDraftPicks.slice();
-            const dp = draftPicks[index];
-            const pickNumber = getPickNumber(dp.round, dp.pick);
-            const verdict = getMove(pickNumber, tier);
-            newDraftPicks[index] = {
-                ...dp,
-                verdict: verdict as Verdict,
-            };
-            return newDraftPicks;
-        });
-    }
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(0);
@@ -227,6 +198,37 @@ export function useRookieDraft() {
 
     function hasTeamId() {
         return teamId !== '' && teamId !== NONE_TEAM_ID;
+    }
+
+    function resetRookieTargets(index: number) {
+        setRookieTargets(oldRookieTargets => {
+            const newRookieTargets = oldRookieTargets.slice();
+            const dp = draftPicks[index];
+            const pickNumber = getPickNumber(dp.round, dp.pick);
+            const tier = getRookieTier(pickNumber);
+            while (tier.length < 3) {
+                tier.push('');
+            }
+            newRookieTargets[index] = tier;
+            return newRookieTargets;
+        });
+    }
+
+    function resetDraftPickVerdict(index: number) {
+        if (index < 0 || index >= draftPicks.length) {
+            return;
+        }
+        setDraftPicks(oldDraftPicks => {
+            const newDraftPicks = oldDraftPicks.slice();
+            const dp = draftPicks[index];
+            const pickNumber = getPickNumber(dp.round, dp.pick);
+            const verdict = getMove(pickNumber, tier);
+            newDraftPicks[index] = {
+                ...dp,
+                verdict: verdict as Verdict,
+            };
+            return newDraftPicks;
+        });
     }
 
     return {
