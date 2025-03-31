@@ -225,6 +225,8 @@
 .rookieTarget {
     position: absolute;
     box-shadow: rgba(15, 19, 59, 0.5) -9px 9px 0px 0px;
+
+    height: 69px;
 }
 
 .rookieTarget1 {

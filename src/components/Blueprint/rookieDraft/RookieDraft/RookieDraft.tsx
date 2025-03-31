@@ -777,7 +777,8 @@ export function RookieDraftGraphic({
             {rookieTargets.map((pick, pickIdx) =>
                 pick.map(
                     (target, targetIdx) =>
-                        target && (
+                        target &&
+                        rookieMap.get(target) && (
                             <img
                                 key={`${pickIdx} ${targetIdx}`}
                                 className={`${styles.rookieTarget} ${

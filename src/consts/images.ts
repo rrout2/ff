@@ -197,6 +197,7 @@ import rbHeavy from '../assets/live/archetypes/RB Heavy.png';
 import blankRookie from '../assets/rookieDraft/rookie_bp_blank.png';
 import ashtonJeanty from '../assets/rookieDraft/rookieCards/ashtonJeanty.png';
 import brashardSmith from '../assets/rookieDraft/rookieCards/brashardSmith.png';
+import bhayshulTuten from '../assets/rookieDraft/rookieCards/bhayshulTuten.png';
 import cadeKlubnik from '../assets/rookieDraft/rookieCards/cadeKlubnik.png';
 import camSkattebo from '../assets/rookieDraft/rookieCards/camSkattebo.png';
 import camWard from '../assets/rookieDraft/rookieCards/camWard.png';
@@ -209,6 +210,7 @@ import djGiddens from '../assets/rookieDraft/rookieCards/djGiddens.png';
 import dontEThornton from '../assets/rookieDraft/rookieCards/dontEThornton.png';
 import dylanSampson from '../assets/rookieDraft/rookieCards/dylanSampson.png';
 import elicAyomanor from '../assets/rookieDraft/rookieCards/elicAyomanor.png';
+import elijahArroyo from '../assets/rookieDraft/rookieCards/elijahArroyo.png';
 import emekaEgbuka from '../assets/rookieDraft/rookieCards/emekaEgbuka.png';
 import evanStewart from '../assets/rookieDraft/rookieCards/evanStewart.png';
 import gunnarHelm from '../assets/rookieDraft/rookieCards/gunnarHelm.png';
@@ -226,11 +228,15 @@ import jordanJames from '../assets/rookieDraft/rookieCards/jordanJames.png';
 import kalebJohnson from '../assets/rookieDraft/rookieCards/kalebJohnson.png';
 import kalelMullings from '../assets/rookieDraft/rookieCards/kalelMullings.png';
 import kurtisRourke from '../assets/rookieDraft/rookieCards/kurtisRourke.png';
+import kyleMccord from '../assets/rookieDraft/rookieCards/kyleMccord.png';
 import kyleMonangai from '../assets/rookieDraft/rookieCards/kyleMonangai.png';
 import kyrenLacy from '../assets/rookieDraft/rookieCards/kyrenLacy.png';
+import lequintAllen from '../assets/rookieDraft/rookieCards/lequintAllen.png';
 import leVeonMoss from '../assets/rookieDraft/rookieCards/leVeonMoss.png';
 import lukeLachey from '../assets/rookieDraft/rookieCards/lukeLachey.png';
 import lutherBurden from '../assets/rookieDraft/rookieCards/lutherBurden.png';
+import masonTaylor from '../assets/rookieDraft/rookieCards/masonTaylor.png';
+import matthewGolden from '../assets/rookieDraft/rookieCards/matthewGolden.png';
 import nicSingleton from '../assets/rookieDraft/rookieCards/nicSingleton.png';
 import ollieGordon from '../assets/rookieDraft/rookieCards/ollieGordon.png';
 import omarionHampton from '../assets/rookieDraft/rookieCards/omarionHampton.png';
@@ -239,6 +245,7 @@ import quinnEwers from '../assets/rookieDraft/rookieCards/quinnEwers.png';
 import quinshonJudkins from '../assets/rookieDraft/rookieCards/quinshonJudkins.png';
 import rickyWhite from '../assets/rookieDraft/rookieCards/rickyWhite.png';
 import rjHarvey from '../assets/rookieDraft/rookieCards/rjHarvey.png';
+import savionWilliams from '../assets/rookieDraft/rookieCards/savionWilliams.png';
 import shedeurSanders from '../assets/rookieDraft/rookieCards/shedeurSanders.png';
 import tahjBrooks from '../assets/rookieDraft/rookieCards/tahjBrooks.png';
 import taiFelton from '../assets/rookieDraft/rookieCards/taiFelton.png';
@@ -250,7 +257,9 @@ import travisHunter from '../assets/rookieDraft/rookieCards/travisHunter.png';
 import treHarris from '../assets/rookieDraft/rookieCards/treHarris.png';
 import treveyonHenderson from '../assets/rookieDraft/rookieCards/treveyonHenderson.png';
 import trevorEtienne from '../assets/rookieDraft/rookieCards/trevorEtienne.png';
+import tylerShough from '../assets/rookieDraft/rookieCards/tylerShough.png';
 import tylerWarren from '../assets/rookieDraft/rookieCards/tylerWarren.png';
+import willHoward from '../assets/rookieDraft/rookieCards/willHoward.png';
 import woodyMarks from '../assets/rookieDraft/rookieCards/woodyMarks.png';
 import xavierRestrepo from '../assets/rookieDraft/rookieCards/xavierRestrepo.png';
 import horizontalScale from '../assets/horizontalScale.png';
@@ -539,6 +548,15 @@ const rookieMap: Map<string, string> = new Map([
     ['Tyler Warren', tylerWarren],
     ['Woody Marks', woodyMarks],
     ['Xavier Restrepo', xavierRestrepo],
+    ['Kyle McCord', kyleMccord],
+    ['LeQuint Allen', lequintAllen],
+    ['Mason Taylor', masonTaylor],
+    ['Matthew Golden', matthewGolden],
+    ['Savion Williams', savionWilliams],
+    ['Will Howard', willHoward],
+    ['Bhayshul Tuten', bhayshulTuten],
+    ['Elijah Arroyo', elijahArroyo],
+    ['Tyler Shough', tylerShough],
 ]);
 
 export {

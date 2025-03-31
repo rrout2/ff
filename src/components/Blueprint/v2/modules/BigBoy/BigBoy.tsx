@@ -404,7 +404,7 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
             />
             <ExportButton
                 className={[
-                    styles.fullBlueprint,
+                    styles.exportableClass,
                     rookieDraftStyles.rookieDraftGraphic,
                 ]}
                 zipName={`${teamName}_blueprint.zip`}
