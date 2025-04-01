@@ -278,3 +278,10 @@
     flex-direction: row;
     gap: 20px;
 }
+
+.addRemovePickButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}

@@ -42,7 +42,7 @@ import {SUPER_FLEX, QB} from '../../../../consts/fantasy';
 import {getPositionalOrder} from '../../infinite/BuySellHold/BuySellHold';
 import StyledNumberInput from '../../shared/StyledNumberInput';
 
-enum Verdict {
+export enum Verdict {
     Downtier = 'Downtier',
     Hold = 'Hold',
     ProvenAsset = 'Proven Asset',
@@ -51,11 +51,33 @@ enum Verdict {
     None = '',
 }
 const VERDICT_OPTIONS = Object.values(Verdict);
-type DraftPick = {
+export type DraftPick = {
     round: number | '';
     pick: number | '';
     verdict: Verdict;
 };
+
+export function sortDraftPicks(a: DraftPick, b: DraftPick) {
+    if (a.round === '' || b.round === '') {
+        if (a.round === '' && b.round !== '') {
+            return 1;
+        }
+        if (a.round !== '' && b.round === '') {
+            return -1;
+        }
+        return 0;
+    }
+    if (a.pick === '' || b.pick === '') {
+        if (a.pick === '' && b.pick !== '') {
+            return 1;
+        }
+        if (a.pick !== '' && b.pick === '') {
+            return -1;
+        }
+        return 0;
+    }
+    return a.round - b.round || a.pick - b.pick;
+}
 
 type DraftStrategy = {
     header: string;
@@ -227,7 +249,7 @@ export function useRookieDraft() {
                 ...dp,
                 verdict: verdict as Verdict,
             };
-            return newDraftPicks;
+            return newDraftPicks.sort(sortDraftPicks);
         });
     }
 
@@ -448,7 +470,7 @@ export function RookieDraftInputs({
                     </FormControl>
                 ))}
             <div className={styles.draftPickInputColumn}>
-                {draftPicks.map((_, idx) => (
+                {draftPicks.slice(0, 4).map((_, idx) => (
                     <div key={idx} className={styles.draftPickInputRow}>
                         <Tooltip title="Clear Pick">
                             <IconButton
@@ -737,7 +759,7 @@ export function RookieDraftGraphic({
                     />
                 </Fragment>
             ))}
-            {draftPicks.map((draftPick, idx) => {
+            {draftPicks.slice(0, 4).map((draftPick, idx) => {
                 const noPick =
                     !draftPick.round || !draftPick.pick || !draftPick.verdict;
                 const pickDisplay = noPick
