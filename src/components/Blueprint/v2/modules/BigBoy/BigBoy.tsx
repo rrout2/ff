@@ -56,6 +56,7 @@ import {
     getLabelFromArchetype,
     getDvmFromArchetype,
     getV1ArchetypeFromArchetype,
+    getOutlookFromArchetype,
 } from '../../consts/archetypes';
 import {
     ARCHETYPE,
@@ -146,6 +147,10 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
     const [archetype, setArchetype] = useState<Archetype>(
         Archetype.FutureValue
     );
+
+    useEffect(() => {
+        setOutlooks(getOutlookFromArchetype(archetype));
+    }, [archetype]);
 
     const [otherSettings, setOtherSettings] = useState<string>('');
     const [rookiePickComments, setRookiePickComments] = useState([
@@ -482,8 +487,6 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
                 setDraftStrategy={setDraftStrategy}
                 draftCapitalScore={draftCapitalScore}
                 setDraftCapitalScore={setDraftCapitalScore}
-                outlooks={outlooks}
-                setOutlooks={setOutlooks}
                 autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
                 setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
                 sortByRookieRank={sortByRookieRank}

@@ -249,3 +249,24 @@ export function getColorFromArchetype(archetype: Archetype) {
             return 'white';
     }
 }
+
+export function getOutlookFromArchetype(archetype: Archetype) {
+    const code = getStartOfCode(archetype).slice(3);
+    const outlooks: ('REBUILD' | 'CONTEND' | 'RELOAD' | '')[] = [];
+    for (let i = 0; i < code.length; i++) {
+        switch (code[i]) {
+            case 'R':
+                outlooks.push('REBUILD');
+                break;
+            case 'C':
+                outlooks.push('CONTEND');
+                break;
+            case 'O':
+                outlooks.push('RELOAD');
+                break;
+            default:
+                outlooks.push('');
+        }
+    }
+    return outlooks;
+}
