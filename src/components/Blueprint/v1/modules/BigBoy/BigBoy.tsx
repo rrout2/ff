@@ -300,6 +300,8 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         setDraftCapitalNotes(
             `${thisYearInfo}${
                 thisYearInfo.length && additionalDraftNotes.length ? '; ' : ''
+            }${
+                additionalDraftNotes.length ? '2026: ' : ''
             }${additionalDraftNotes}`
         );
     }, [draftPicks, additionalDraftNotes]);
