@@ -285,21 +285,24 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         setAutoPopulatedDraftStrategy,
         sortByRookieRank,
     } = useRookieDraft();
-
+    const [additionalDraftNotes, setAdditionalDraftNotes] = useState('');
     useEffect(() => {
+        const thisYearInfo = draftPicks
+            .filter(
+                draftPick => draftPick.round !== '' && draftPick.pick !== ''
+            )
+            .map(draftPick => {
+                return `${draftPick.round}.${
+                    draftPick.pick && draftPick.pick < 10 ? '0' : ''
+                }${draftPick.pick}`;
+            })
+            .join(', ');
         setDraftCapitalNotes(
-            draftPicks
-                .filter(
-                    draftPick => draftPick.round !== '' && draftPick.pick !== ''
-                )
-                .map(draftPick => {
-                    return `${draftPick.round}.${
-                        draftPick.pick && draftPick.pick < 10 ? '0' : ''
-                    }${draftPick.pick}`;
-                })
-                .join(', ')
+            `${thisYearInfo}${
+                thisYearInfo.length && additionalDraftNotes.length ? '; ' : ''
+            }${additionalDraftNotes}`
         );
-    }, [draftPicks]);
+    }, [draftPicks, additionalDraftNotes]);
 
     const isSuperFlex = rosterSettings.has(SUPER_FLEX);
 
@@ -633,7 +636,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         );
     }
 
-    function DraftCapitalInput() {
+    function draftCapitalInput() {
         return (
             <div className={styles.addRemovePickButtons}>
                 <Button
@@ -735,6 +738,12 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                         </FormControl>
                     </div>
                 ))}
+                <TextField
+                    style={{margin: '4px'}}
+                    label={'Additional Draft Info'}
+                    value={additionalDraftNotes}
+                    onChange={e => setAdditionalDraftNotes(e.target.value)}
+                />
             </div>
         );
     }
@@ -1104,7 +1113,7 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             ? 'Overall Team Grade'
                             : 'Draft Capital Grade'}
                         <div>{draftCapitalGradeInput()}</div>
-                        {!isRedraft && <DraftCapitalInput />}
+                        {!isRedraft && draftCapitalInput()}
                         {isRedraft && teamGradeNotesInput()}
                         {commentsInput()}
                     </Grid2>
