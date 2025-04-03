@@ -379,6 +379,8 @@
     bottom: 120px;
 
     height: 90px;
+    object-fit: cover;
+    object-position: left;
 }
 
 .draftCapitalScaleBg {
