@@ -5,6 +5,7 @@ import {
     useAdpData,
     useLeagueIdFromUrl,
     usePlayerData,
+    usePositionalGrades,
 } from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
@@ -43,7 +44,6 @@ import {
 import {
     GraphicComponent as PositionalGradesGraphic,
     InputComponent as PositionalGradesInput,
-    usePositionalGrades,
 } from '../PositionalGrades/PositionalGrades';
 import {
     Outlook,

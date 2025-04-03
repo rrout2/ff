@@ -8,6 +8,7 @@ import {
     useAdpData,
     useLeague,
     useRosterSettings,
+    usePositionalGrades,
 } from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
@@ -36,10 +37,7 @@ import {
     GraphicComponent as RisersFallersGraphic,
     useRisersFallers,
 } from '../RisersFallersModule/RisersFallersModule';
-import {
-    GraphicComponent as PositionalGradesGraphic,
-    usePositionalGrades,
-} from '../PositionalGrades/PositionalGrades';
+import {GraphicComponent as PositionalGradesGraphic} from '../PositionalGrades/PositionalGrades';
 import {UnifiedInputs} from '../UnifiedModule/UnifiedModule';
 import {
     FormGroup,
@@ -92,9 +90,21 @@ interface BigBoyProps {
     roster?: Roster;
     numRosters?: number;
     teamName?: string;
+    qbRank: number;
+    rbRank: number;
+    wrRank: number;
+    teRank: number;
 }
 
-export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
+export default function BigBoy({
+    roster,
+    numRosters,
+    teamName,
+    qbRank,
+    rbRank,
+    wrRank,
+    teRank,
+}: BigBoyProps) {
     const {cornerstones, setCornerstones} = useCornerstones(roster);
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
@@ -143,6 +153,23 @@ export default function BigBoy({roster, numRosters, teamName}: BigBoyProps) {
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
     );
+
+    useEffect(() => {
+        if (qbRank === -1) return;
+        rankStateMap.get(QB)![1](rankToString(qbRank));
+    }, [qbRank]);
+    useEffect(() => {
+        if (rbRank === -1) return;
+        rankStateMap.get(RB)![1](rankToString(rbRank));
+    }, [rbRank]);
+    useEffect(() => {
+        if (wrRank === -1) return;
+        rankStateMap.get(WR)![1](rankToString(wrRank));
+    }, [wrRank]);
+    useEffect(() => {
+        if (teRank === -1) return;
+        rankStateMap.get(TE)![1](rankToString(teRank));
+    }, [teRank]);
 
     const [archetype, setArchetype] = useState<Archetype>(
         Archetype.FutureValue
@@ -691,3 +718,46 @@ function FullBlueprint({
         </div>
     );
 }
+
+export const rankToString = (rank: number) => {
+    switch (rank) {
+        case -1:
+            throw new Error('Rank cannot be -1');
+        case 0:
+            return '1st';
+        case 1:
+            return '2nd';
+        case 2:
+            return '3rd';
+        case 3:
+            return '4th';
+        case 4:
+            return '5th';
+        case 5:
+            return '6th';
+        case 6:
+            return '7th';
+        case 7:
+            return '8th';
+        case 8:
+            return '9th';
+        case 9:
+            return '10th';
+        case 10:
+            return '11th';
+        case 11:
+            return '12th';
+        case 12:
+            return '13th';
+        case 13:
+            return '14th';
+        case 14:
+            return '15th';
+        case 15:
+            return '16th';
+        default:
+            return `${rank + 1}${
+                rank % 10 === 0 ? 'st' : rank % 10 === 1 ? 'nd' : 'th'
+            }`;
+    }
+};

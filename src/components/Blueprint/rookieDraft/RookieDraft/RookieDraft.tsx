@@ -184,6 +184,13 @@ export function useRookieDraft() {
         resetRookieTargets(3);
     }, [draftPicks[3].round, draftPicks[3].pick, pickMoves, tier]);
 
+    /**
+     * Calculates the pick number based on the round and pick within that round.
+     *
+     * @param round - The draft round, which can be a number or an empty string.
+     * @param pick - The pick position within the round, which can be a number or an empty string.
+     * @returns The calculated pick number (1-indexed), or -1 if the round or pick is not specified.
+     */
     function getPickNumber(round: number | '', pick: number | '') {
         if (round === '' || pick === '') {
             return -1;
@@ -191,6 +198,7 @@ export function useRookieDraft() {
         const leagueSize = rosters?.length ?? 0;
         return (round - 1) * leagueSize + pick;
     }
+
     useEffect(() => {
         if (!allUsers.length || !hasTeamId() || +teamId >= allUsers.length) {
             return;
@@ -227,7 +235,7 @@ export function useRookieDraft() {
             const newRookieTargets = oldRookieTargets.slice();
             const dp = draftPicks[index];
             const pickNumber = getPickNumber(dp.round, dp.pick);
-            const tier = getRookieTier(pickNumber);
+            const tier = pickNumber > 0 ? getRookieTier(pickNumber) : [];
             while (tier.length < 3) {
                 tier.push('');
             }
@@ -244,7 +252,7 @@ export function useRookieDraft() {
             const newDraftPicks = oldDraftPicks.slice();
             const dp = draftPicks[index];
             const pickNumber = getPickNumber(dp.round, dp.pick);
-            const verdict = getMove(pickNumber, tier);
+            const verdict = pickNumber > 0 ? getMove(pickNumber, tier) : '';
             newDraftPicks[index] = {
                 ...dp,
                 verdict: verdict as Verdict,

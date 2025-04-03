@@ -419,7 +419,6 @@ function scoreAndBumpByPosition(
         pos,
         isSuperFlex
     );
-    debugLog({pos, multiplier});
 
     return {
         score:
@@ -443,10 +442,6 @@ function scoreAndBumpByPosition(
                     } else {
                         totalBump += +playerValue.oneQbBonus;
                     }
-                    debugLog({
-                        fullName,
-                        value: playerValue.Value,
-                    });
                     return acc + +playerValue.Value;
                 }, 0),
         bump: totalBump,
@@ -511,28 +506,8 @@ export function gradeByPosition(
     if (pos === QB && !isSuperFlex) {
         unbumpedLimit = 8;
     }
-    debugLog({pos, score, thresholdByGrade, rawGrade, bump});
     const cappedGrade = Math.round(Math.min(rawGrade, unbumpedLimit));
     return Math.min(cappedGrade + bump, 10);
-}
-
-type Message =
-    | string
-    | {
-          pos: string;
-          score: number;
-          thresholdByGrade: Map<grade, number>;
-          rawGrade: number;
-          bump: number;
-      }
-    | {fullName: string; value: number}
-    | {pos: string; multiplier: number}
-    | {rbBuy: string; adp: number};
-
-export function debugLog(message?: Message) {
-    if (!window.location.href.includes('debug=false')) {
-        console.log(message);
-    }
 }
 
 export {PositionalGrades, GraphicComponent, OverrideComponent};

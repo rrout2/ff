@@ -5,6 +5,7 @@ import {
     useNonSleeper,
     useParamFromUrl,
     usePlayerData,
+    usePositionalRanks,
     useTeamIdFromUrl,
 } from '../../../hooks/hooks';
 import {User, Roster, getAllUsers} from '../../../sleeper-api/sleeper-api';
@@ -102,6 +103,10 @@ export default function NewGenerator() {
 
         setRoster(newRoster);
     }, [rosters, teamId, playerData, allUsers]);
+    const {qbRank, rbRank, wrRank, teRank} = usePositionalRanks(
+        rosters,
+        roster
+    );
 
     const {
         nonSleeperIds,
@@ -322,6 +327,10 @@ export default function NewGenerator() {
                     roster={roster}
                     numRosters={numRosters}
                     teamName={teamName}
+                    qbRank={qbRank}
+                    rbRank={rbRank}
+                    wrRank={wrRank}
+                    teRank={teRank}
                 />
             )}
         </div>

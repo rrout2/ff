@@ -49,6 +49,211 @@ import {Module} from '../components/Blueprint/v1/BlueprintGenerator';
 import {Lineup} from '../components/Blueprint/v1/modules/Starters/Starters';
 import {RosterTier} from '../components/Blueprint/infinite/RosterTier/RosterTier';
 import {rookieMap} from '../consts/images';
+import {gradeByPosition} from '../components/Blueprint/v1/modules/PositionalGrades/PositionalGrades';
+import {calculateDepthScore} from '../components/Blueprint/v1/modules/DepthScore/DepthScore';
+
+/**
+ * Calculates and returns the ranks of positional grades for a given roster
+ * within a league. It computes grades for each position (QB, RB, WR, TE)
+ * across all rosters and determines the rank of the specified roster's
+ * grades among them.
+ *
+ * @param rosters - The list of all rosters in the league.
+ * @param roster - The specific roster to calculate ranks for.
+ * @returns An object containing the ranks for QB, RB, WR, and TE
+ * positions.
+ */
+export function usePositionalRanks(rosters?: Roster[], roster?: Roster) {
+    const playerData = usePlayerData();
+    const {getPlayerValue} = usePlayerValues();
+    const [leagueId] = useLeagueIdFromUrl();
+    const league = useLeague(leagueId);
+    const rosterSettings = useRosterSettings(league);
+    const leagueSize = rosters?.length ?? 0;
+    const [allQbGrades, setAllQbGrades] = useState<number[]>([]);
+    const [qbRank, setQbRank] = useState(-1);
+    const [allRbGrades, setAllRbGrades] = useState<number[]>([]);
+    const [rbRank, setRbRank] = useState(-1);
+    const [allWrGrades, setAllWrGrades] = useState<number[]>([]);
+    const [wrRank, setWrRank] = useState(-1);
+    const [allTeGrades, setAllTeGrades] = useState<number[]>([]);
+    const [teRank, setTeRank] = useState(-1);
+    const isSuperFlex =
+        rosterSettings.has(SUPER_FLEX) || (rosterSettings.get(QB) ?? 0) > 1;
+    const {
+        qb: qbGrade,
+        rb: rbGrade,
+        wr: wrGrade,
+        te: teGrade,
+    } = usePositionalGrades(roster, leagueSize);
+
+    useEffect(() => {
+        if (!playerData || !rosters?.length) return;
+        // Needed to force re-render to center grade values.
+        const newQbList: number[] = [];
+        const newRbList: number[] = [];
+        const newWrList: number[] = [];
+        const newTeList: number[] = [];
+        rosters.forEach(r => {
+            newQbList.push(
+                gradeByPosition(
+                    QB,
+                    getPlayerValue,
+                    isSuperFlex,
+                    leagueSize ?? 0,
+                    playerData,
+                    r
+                )
+            );
+            newRbList.push(
+                gradeByPosition(
+                    RB,
+                    getPlayerValue,
+                    isSuperFlex,
+                    leagueSize ?? 0,
+                    playerData,
+                    r
+                )
+            );
+            newWrList.push(
+                gradeByPosition(
+                    WR,
+                    getPlayerValue,
+                    isSuperFlex,
+                    leagueSize ?? 0,
+                    playerData,
+                    r
+                )
+            );
+            newTeList.push(
+                gradeByPosition(
+                    TE,
+                    getPlayerValue,
+                    isSuperFlex,
+                    leagueSize ?? 0,
+                    playerData,
+                    r
+                )
+            );
+        });
+
+        setAllQbGrades(newQbList);
+        setAllRbGrades(newRbList);
+        setAllWrGrades(newWrList);
+        setAllTeGrades(newTeList);
+    }, [playerData, rosters, isSuperFlex]);
+
+    useEffect(() => {
+        if (allQbGrades.length === 0 || qbGrade === -1) return;
+        const qbGradesCopy = [...allQbGrades];
+        qbGradesCopy.sort((a, b) => b - a);
+        const newQbRank = qbGradesCopy.indexOf(qbGrade);
+        setQbRank(newQbRank);
+    }, [allQbGrades, qbGrade]);
+    useEffect(() => {
+        if (allRbGrades.length === 0 || rbGrade === -1) return;
+        const rbGradesCopy = [...allRbGrades];
+        rbGradesCopy.sort((a, b) => b - a);
+        const newRbRank = rbGradesCopy.indexOf(rbGrade);
+        setRbRank(newRbRank);
+    }, [allRbGrades, rbGrade]);
+    useEffect(() => {
+        if (allWrGrades.length === 0 || wrGrade === -1) return;
+        const wrGradesCopy = [...allWrGrades];
+        wrGradesCopy.sort((a, b) => b - a);
+        const newWrRank = wrGradesCopy.indexOf(wrGrade);
+        setWrRank(newWrRank);
+    }, [allWrGrades, wrGrade]);
+    useEffect(() => {
+        if (allTeGrades.length === 0 || teGrade === -1) return;
+        const teGradesCopy = [...allTeGrades];
+        teGradesCopy.sort((a, b) => b - a);
+        const newTeRank = teGradesCopy.indexOf(teGrade);
+        setTeRank(newTeRank);
+    }, [allTeGrades, teGrade]);
+    return {qbRank, rbRank, wrRank, teRank};
+}
+
+export function usePositionalGrades(roster?: Roster, leagueSize?: number) {
+    const playerData = usePlayerData();
+    const {getPlayerValue} = usePlayerValues();
+    const [leagueId] = useLeagueIdFromUrl();
+    const league = useLeague(leagueId);
+    const rosterSettings = useRosterSettings(league);
+    const {bench} = useProjectedLineup(rosterSettings, roster?.players);
+
+    const [overall, setOverall] = useState(-1);
+    const [qb, setQb] = useState(-1);
+    const [rb, setRb] = useState(-1);
+    const [wr, setWr] = useState(-1);
+    const [te, setTe] = useState(-1);
+    const [depth, setDepth] = useState(-1);
+    const isSuperFlex =
+        rosterSettings.has(SUPER_FLEX) || (rosterSettings.get(QB) ?? 0) > 1;
+    useEffect(() => {
+        if (!playerData || !roster || bench.length === 0) return;
+        // Needed to force re-render to center grade values.
+        const newQb = gradeByPosition(
+            QB,
+            getPlayerValue,
+            isSuperFlex,
+            leagueSize ?? 0,
+            playerData,
+            roster
+        );
+        const newRb = gradeByPosition(
+            RB,
+            getPlayerValue,
+            isSuperFlex,
+            leagueSize ?? 0,
+            playerData,
+            roster
+        );
+        const newWr = gradeByPosition(
+            WR,
+            getPlayerValue,
+            isSuperFlex,
+            leagueSize ?? 0,
+            playerData,
+            roster
+        );
+        const newTe = gradeByPosition(
+            TE,
+            getPlayerValue,
+            isSuperFlex,
+            leagueSize ?? 0,
+            playerData,
+            roster
+        );
+        const newDepth = calculateDepthScore(bench, getPlayerValue);
+
+        setQb(newQb);
+        setRb(newRb);
+        setWr(newWr);
+        setTe(newTe);
+        setDepth(newDepth);
+        setOverall(
+            Math.min(
+                10,
+                Math.round((newQb + newRb + newWr + newTe + newDepth) / 5) + 1
+            )
+        );
+    }, [playerData, roster, bench, getPlayerValue]);
+    return {
+        overall,
+        setOverall,
+        qb,
+        setQb,
+        rb,
+        setRb,
+        wr,
+        setWr,
+        te,
+        setTe,
+        depth,
+        setDepth,
+    };
+}
 
 export type RookieRank = {
     Pick: number;

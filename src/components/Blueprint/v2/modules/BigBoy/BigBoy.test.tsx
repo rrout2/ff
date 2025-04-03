@@ -77,6 +77,10 @@ describe('BigBoy v2', () => {
                 roster={ROSTER}
                 numRosters={NUM_ROSTERS}
                 teamName={TEAM_NAME}
+                qbRank={0}
+                rbRank={0}
+                wrRank={0}
+                teRank={0}
             />
         );
         expect(getAllByText(TEAM_NAME)).toHaveLength(1);
@@ -94,6 +98,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
             const settingTiles = container.querySelectorAll('.settingTile');
@@ -108,6 +116,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
             const otherSettingsInput = getByLabelText('Other Settings');
@@ -126,6 +138,10 @@ describe('BigBoy v2', () => {
                 roster={ROSTER}
                 numRosters={NUM_ROSTERS}
                 teamName={TEAM_NAME}
+                qbRank={0}
+                rbRank={0}
+                wrRank={0}
+                teRank={0}
             />
         );
         const rosterGraphic = container.querySelector('.rosterGraphic');
@@ -144,6 +160,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
             const risersFallersGraphic = container.querySelector(
@@ -162,6 +182,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
             expect(window.location.href).not.toContain(CORNERSTONES);
@@ -187,6 +211,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
 
@@ -211,6 +239,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
 
@@ -240,6 +272,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
 
@@ -259,6 +295,10 @@ describe('BigBoy v2', () => {
                         roster={ROSTER}
                         numRosters={NUM_ROSTERS}
                         teamName={TEAM_NAME}
+                        qbRank={0}
+                        rbRank={0}
+                        wrRank={0}
+                        teRank={0}
                     />
                 );
 
@@ -286,6 +326,10 @@ describe('BigBoy v2', () => {
                     roster={ROSTER}
                     numRosters={NUM_ROSTERS}
                     teamName={TEAM_NAME}
+                    qbRank={0}
+                    rbRank={0}
+                    wrRank={0}
+                    teRank={0}
                 />
             );
             await waitFor(() => {

@@ -1,101 +1,10 @@
-import React, {useEffect, useState} from 'react';
 import styles from './PositionalGrades.module.css';
 import {Layer, RegularPolygon, Shape, Stage, Text} from 'react-konva';
 import StyledNumberInput from '../../../shared/StyledNumberInput';
 import ExportButton from '../../../shared/ExportButton';
 import {COLORS} from '../../../../../consts/colors';
-import {gradeByPosition} from '../../../v1/modules/PositionalGrades/PositionalGrades';
-import {QB, RB, SUPER_FLEX, TE, WR} from '../../../../../consts/fantasy';
-import {
-    useLeague,
-    useLeagueIdFromUrl,
-    usePlayerData,
-    usePlayerValues,
-    useProjectedLineup,
-    useRosterSettings,
-} from '../../../../../hooks/hooks';
+import {usePositionalGrades} from '../../../../../hooks/hooks';
 import {Roster} from '../../../../../sleeper-api/sleeper-api';
-import {calculateDepthScore} from '../../../v1/modules/DepthScore/DepthScore';
-
-export function usePositionalGrades(roster?: Roster, leagueSize?: number) {
-    const playerData = usePlayerData();
-    const {getPlayerValue} = usePlayerValues();
-    const [leagueId] = useLeagueIdFromUrl();
-    const league = useLeague(leagueId);
-    const rosterSettings = useRosterSettings(league);
-    const {bench} = useProjectedLineup(rosterSettings, roster?.players);
-
-    const [overall, setOverall] = useState(-1);
-    const [qb, setQb] = useState(-1);
-    const [rb, setRb] = useState(-1);
-    const [wr, setWr] = useState(-1);
-    const [te, setTe] = useState(-1);
-    const [depth, setDepth] = useState(-1);
-    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
-    useEffect(() => {
-        if (!playerData || !roster || bench.length === 0 || qb !== -1) return;
-        // Needed to force re-render to center grade values.
-        const newQb = gradeByPosition(
-            QB,
-            getPlayerValue,
-            isSuperFlex,
-            leagueSize ?? 0,
-            playerData,
-            roster
-        );
-        const newRb = gradeByPosition(
-            RB,
-            getPlayerValue,
-            isSuperFlex,
-            leagueSize ?? 0,
-            playerData,
-            roster
-        );
-        const newWr = gradeByPosition(
-            WR,
-            getPlayerValue,
-            isSuperFlex,
-            leagueSize ?? 0,
-            playerData,
-            roster
-        );
-        const newTe = gradeByPosition(
-            TE,
-            getPlayerValue,
-            isSuperFlex,
-            leagueSize ?? 0,
-            playerData,
-            roster
-        );
-        const newDepth = calculateDepthScore(bench, getPlayerValue);
-
-        setQb(newQb);
-        setRb(newRb);
-        setWr(newWr);
-        setTe(newTe);
-        setDepth(newDepth);
-        setOverall(
-            Math.min(
-                10,
-                Math.round((newQb + newRb + newWr + newTe + newDepth) / 5) + 1
-            )
-        );
-    }, [playerData, roster, bench, getPlayerValue]);
-    return {
-        overall,
-        setOverall,
-        qb,
-        setQb,
-        rb,
-        setRb,
-        wr,
-        setWr,
-        te,
-        setTe,
-        depth,
-        setDepth,
-    };
-}
 
 const CENTER = [300, 300];
 export type PositionalGradesProps = {
