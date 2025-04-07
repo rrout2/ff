@@ -432,9 +432,9 @@ function scoreAndBumpByPosition(
                     const fullName = `${player.first_name} ${player.last_name}`;
                     const playerValue = getPlayerValue(fullName);
                     if (!playerValue) {
-                        // console.warn(
-                        //     `cannot find PlayerValue for player with name = '${fullName}'`
-                        // );
+                        console.warn(
+                            `cannot find PlayerValue for player with name = '${fullName}'`
+                        );
                         return acc;
                     }
                     if (isSuperFlex) {
@@ -442,6 +442,7 @@ function scoreAndBumpByPosition(
                     } else {
                         totalBump += +playerValue.oneQbBonus;
                     }
+                    console.log('adding', playerValue.Value);
                     return acc + +playerValue.Value;
                 }, 0),
         bump: totalBump,
@@ -480,6 +481,8 @@ export function gradeByPosition(
         roster,
         numStarters
     );
+    console.log('score', score);
+    console.log('bump', bump);
     if (!SUPER_FLEX_SET.has(pos)) {
         throw new Error(`Unknown position '${pos}'`);
     }
