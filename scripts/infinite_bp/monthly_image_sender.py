@@ -253,31 +253,28 @@ def main():
                 print(f"Failed to download image {i + 1}/{len(sender.league_id_list)} for {sender.email_list[i]}")
                 sender.fails.append(sender.email_list[i])
                 continue
+            try:
+                print(f"Uploading {downloaded_file}...")
+                file = uploader.upload_image(downloaded_file, folder_id)
 
-            print(f"Uploading {downloaded_file}...")
-            file = uploader.upload_image(downloaded_file, folder_id)
+                if file:
+                    uploader.make_public(file['id'])
 
-            if file:
-                uploader.make_public(file['id'])
-
-            if send_email:
-                sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
-                print(f"Successfully sent image to {censor_email(sender.email_list[i])}\n")
-            
-            with open("email_to_buys.json", "w") as json_file:
-                json.dump(sender.email_to_buys, json_file, indent=4)
-
-
-            os.remove(downloaded_file)
+                if send_email:
+                    sender.send_email_link(sender.email_list[i], file.get('webViewLink'))
+                    print(f"Successfully sent image to {censor_email(sender.email_list[i])}\n")
+                
+                with open("email_to_buys.json", "w") as json_file:
+                    json.dump(sender.email_to_buys, json_file, indent=4)
+                os.remove(downloaded_file)
+            except Exception as e:
+                print(f"\nAn upload/email error occurred: {str(e)}")
+                logging.exception("Exception occurred")
+                sender.fails.append(sender.email_list[i])
         
 
         print("\nDone!")
         print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
-
-        if len(sender.fails) > 0:
-            print("\nFailed to download the following images:")
-            for fail in sender.fails:
-                print(fail)
 
     except Exception as e:
         print(f"\nAn error occurred: {str(e)}")
@@ -287,6 +284,11 @@ def main():
         print("2. Placed the service account credentials JSON file in the correct location")
         print("3. Enabled the Google Drive API in your project")
         print("4. Placed your images in the 'images' folder")
+    finally:
+        if len(sender.fails) > 0:
+            print("\nFailed to download the following images:")
+            for fail in sender.fails:
+                print(fail)
 
 if __name__ == "__main__":
     main()
