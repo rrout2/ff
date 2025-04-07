@@ -34,6 +34,7 @@ jobs:
                   LEAGUE_ID_LIST: ${{ secrets.LEAGUE_ID_LIST }}
                   TEAM_ID_LIST: ${{ secrets.TEAM_ID_LIST }}
                   SKIP_LIST: ${{ secrets.SKIP_LIST }}
+                  DISALLOWED_BUYS: ${{ secrets.DISALLOWED_BUYS }}
               run: |
                   echo "email_list: ${EMAIL_LIST}" > config.yaml
                   echo "smtp_server: ${SMTP_SERVER}" >> config.yaml
@@ -43,6 +44,7 @@ jobs:
                   echo "league_id_list: ${LEAGUE_ID_LIST}" >> config.yaml
                   echo "team_id_list: ${TEAM_ID_LIST}" >> config.yaml
                   echo "skip_list: ${SKIP_LIST}" >> config.yaml
+                  echo "disallowed_buys: ${DISALLOWED_BUYS}" >> config.yaml
                   echo "${SA_CREDENTIALS}" > service-account-credentials.json
 
             - name: Run image sender
