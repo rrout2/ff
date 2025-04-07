@@ -5,10 +5,11 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the JSON file name
-json_file_name = 'domain_customer_info_mar.json'
+json_file_name = 'domain_customer_info_apr07.json'
 
 # Construct the full path to the JSON file
 json_file_path = os.path.join(script_dir, json_file_name)
+disallowed_buys_path = os.path.join(script_dir, 'email_to_buys/march2025/march_customer_info_disallowed.json')
 
 league_id_key = "Sleeper ID"
 team_id_key = "Team ID"
@@ -24,16 +25,47 @@ except FileNotFoundError:
 except json.JSONDecodeError as e:
     print(f"Error: Failed to decode JSON - {e}")
 
+try:
+    with open(disallowed_buys_path, 'r') as file:
+        disallowed_data = json.load(file)
+except FileNotFoundError:
+    print(f"Error: {json_file_name} not found in the directory {script_dir}")
+except json.JSONDecodeError as e:
+    print(f"Error: Failed to decode JSON - {e}")
+
+
+
 # verified_data = [item for item in data if item[verified_key] == 'Verified\r']
 verified_data = data
 
+disallowed_buys = []
+
+for item in verified_data:
+    league_id = item[league_id_key]
+    team_id = item[team_id_key]
+    found_disallowed = False
+    for disallowed_item in disallowed_data:
+        if league_id == disallowed_item["Sleeper ID"] and team_id == disallowed_item["Team ID"] and disallowed_item['disallowed']:
+            disallowed_buys.append('-'.join(disallowed_item['disallowed']))
+            found_disallowed = True
+            break
+    if not found_disallowed:
+        disallowed_buys.append('None')
+
+print(len(disallowed_buys))
+print(len(verified_data))
+
 league_ids = [str(item[league_id_key]) for item in verified_data]
-print('League IDs:')
+print(f'League IDs: ({len(league_ids)})')
 print(','.join(league_ids))
-print('\nTeam IDs:')
+
 # team_ids = [str(item[team_id_key][sub_team_id_key]) for item in verified_data]
 team_ids = [str(item[team_id_key]) for item in verified_data]
+print(f'\nTeam IDs: ({len(team_ids)})')
 print(','.join(team_ids))
-print('\nEmails:')
+
 emails = [item[email_key].strip() for item in verified_data]
+print(f'\nEmails: ({len(emails)})')
 print(','.join(emails))
+print(f'\nDisallowed Buys: ({len(disallowed_buys)})')
+print(','.join(disallowed_buys))

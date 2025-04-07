@@ -27,6 +27,7 @@ class ImageEmailSender:
         # smtp_port: 587
         # sender_email: your-email@gmail.com
         # sender_password: your-app-password
+        # disallowed_buys: 1-2-3-4,7-4-5-6
         # Load configuration
         script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
@@ -55,7 +56,11 @@ class ImageEmailSender:
             self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
         else:
             self.skip_list = set(config['skip_list'])
-
+            
+        if isinstance(config['disallowed_buys'], str):
+            self.disallowed_buys = [email.strip() for email in config['disallowed_buys'].split(',')]
+        else:
+            self.disallowed_buys = config['disallowed_buys']
 
         self.smtp_server = config['smtp_server']
         self.smtp_port = int(config['smtp_port'])
@@ -118,7 +123,12 @@ class ImageEmailSender:
         Args:
             idx (int): Index of blueprint
         """
-        return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}"
+        disallowed_buys = str(self.disallowed_buys[idx])
+        if disallowed_buys == 'None':
+            disallowed_buys = ''
+        else:
+            disallowed_buys = disallowed_buys.replace('-', ',')
+        return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}&disallowedBuys={disallowed_buys}"
 
     def download_image(self, idx):
         """Navigate to website and click download button"""
