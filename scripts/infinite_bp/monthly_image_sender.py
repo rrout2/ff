@@ -54,8 +54,10 @@ class ImageEmailSender:
         
         if isinstance(config['skip_list'], str):
             self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
-        else:
+        elif config['skip_list'] != None:
             self.skip_list = set(config['skip_list'])
+        else:
+            self.skip_list = set()
             
         if isinstance(config['disallowed_buys'], str):
             self.disallowed_buys = [email.strip() for email in config['disallowed_buys'].split(',')]
