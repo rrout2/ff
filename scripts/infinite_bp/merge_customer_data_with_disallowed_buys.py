@@ -2,16 +2,19 @@ import json
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-with open(os.path.join(script_dir, 'email_to_buys', 'march2025', 'email_to_buys.json'), 'r') as file:
+
+month = 'april2025'
+
+with open(os.path.join(script_dir, 'email_to_buys', month, 'email_to_buys.json'), 'r') as file:
     email_to_buys = json.load(file)
 
-with open(os.path.join(script_dir, 'email_to_buys', 'march2025', 'email_to_buys 2.json'), 'r') as file:
+with open(os.path.join(script_dir, 'email_to_buys', month, 'email_to_buys 5.json'), 'r') as file:
     email_to_buys2 = json.load(file)
 
-with open(os.path.join(script_dir, 'email_to_buys', 'march2025', 'email_to_buys 3.json'), 'r') as file:
-    email_to_buys3 = json.load(file)
+# with open(os.path.join(script_dir, 'email_to_buys', month, 'email_to_buys 3.json'), 'r') as file:
+#     email_to_buys3 = json.load(file)
 
-with open(os.path.join(script_dir, 'domain_customer_info_mar.json'), 'r') as file:
+with open(os.path.join(script_dir, 'domain_customer_info_apr07.json'), 'r') as file:
     customer_info = json.load(file)
 
 for customer in customer_info:
@@ -20,10 +23,10 @@ for customer in customer_info:
         customer['disallowed'] = email_to_buys[stripped_email].split(',')
     elif stripped_email in email_to_buys2:
         customer['disallowed'] = email_to_buys2[stripped_email].split(',')
-    elif stripped_email in email_to_buys3:
-        customer['disallowed'] = email_to_buys3[stripped_email].split(',')
+    # elif stripped_email in email_to_buys3:
+    #     customer['disallowed'] = email_to_buys3[stripped_email].split(',')
     else:
         customer['disallowed'] = None
 
-with open(os.path.join(script_dir, 'email_to_buys', 'march2025', 'march_customer_info_disallowed.json'), 'w') as file:
+with open(os.path.join(script_dir, 'email_to_buys', month, f'{month}_customer_info_disallowed.json'), 'w') as file:
     json.dump(customer_info, file, indent=4)
