@@ -226,7 +226,6 @@ export function usePositionalGrades(roster?: Roster, leagueSize?: number) {
             roster
         );
         const newDepth = calculateDepthScore(bench, getPlayerValue);
-
         setQb(newQb);
         setRb(newRb);
         setWr(newWr);
@@ -238,7 +237,7 @@ export function usePositionalGrades(roster?: Roster, leagueSize?: number) {
                 Math.round((newQb + newRb + newWr + newTe + newDepth) / 5) + 1
             )
         );
-    }, [playerData, roster, bench, getPlayerValue]);
+    }, [playerData, roster, bench]);
     return {
         overall,
         setOverall,

@@ -442,7 +442,6 @@ function scoreAndBumpByPosition(
                     } else {
                         totalBump += +playerValue.oneQbBonus;
                     }
-                    console.log('adding', playerValue.Value);
                     return acc + +playerValue.Value;
                 }, 0),
         bump: totalBump,
@@ -481,8 +480,8 @@ export function gradeByPosition(
         roster,
         numStarters
     );
-    console.log('score', score);
-    console.log('bump', bump);
+    // console.log('score', score);
+    // console.log('bump', bump);
     if (!SUPER_FLEX_SET.has(pos)) {
         throw new Error(`Unknown position '${pos}'`);
     }
