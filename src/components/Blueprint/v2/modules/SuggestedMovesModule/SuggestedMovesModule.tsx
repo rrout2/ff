@@ -103,7 +103,7 @@ export function GraphicComponent({
             {sells.length > 0 &&
                 sells.map((s, idx) => (
                     <div key={idx} className={styles.buySellColumn}>
-                        <SellHoldTile playerId={s} />
+                        <SellTile playerId={s} />
                         {idx * 2 < buys.length && (
                             <BuyTile
                                 playerId={buys[idx * 2]}
@@ -130,13 +130,7 @@ type miniPlayer = {
     player_id: string;
     espn_id?: string;
 };
-export function SellHoldTile({
-    playerId,
-    isHold,
-}: {
-    playerId: string;
-    isHold?: boolean;
-}) {
+export function SellTile({playerId}: {playerId: string}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
     if (!playerData) return <></>;
@@ -158,28 +152,18 @@ export function SellHoldTile({
         }
     }
 
-    if (isHold) {
-        return <HoldTile player={player} />;
-    }
-
     return (
         <div
             className={styles.sellHoldTile}
             style={{background: positionToColor[player.position]}}
         >
             <div className={styles.sellLabelCol}>
-                {!isHold && (
+                {
                     <div className={styles.sellLabel}>
                         <img src={sellIcon} className={styles.sellIcon} />
                         &nbsp;SELL
                     </div>
-                )}
-                {isHold && (
-                    <div className={styles.sellLabel}>
-                        <img src={holdIcon} className={styles.sellIcon} />
-                        &nbsp;HOLD
-                    </div>
-                )}
+                }
             </div>
             <div className={styles.sellTileText}>
                 {FANTASY_POSITIONS.includes(player.position) && (
@@ -202,8 +186,26 @@ export function SellHoldTile({
     );
 }
 
-export function HoldTile({player}: {player: miniPlayer}) {
+export function HoldTile({playerId}: {playerId: string}) {
+    const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
+    if (!playerData) return <></>;
+    let player = playerData[playerId] as miniPlayer;
+    if (!player) {
+        console.warn(`Player ${playerId} not found in player data`);
+        if (isRookiePickId(playerId)) {
+            player = {
+                first_name: '',
+                last_name: playerId,
+                position: 'none',
+                sport: 'nfl',
+                team: 'TBD',
+                player_id: playerId,
+            };
+        } else {
+            return <></>;
+        }
+    }
     return (
         <div
             className={styles.sellHoldTile}

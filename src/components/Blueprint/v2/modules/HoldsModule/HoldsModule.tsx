@@ -4,7 +4,7 @@ import {Roster} from '../../../../../sleeper-api/sleeper-api';
 import {useAdpData, usePlayerData} from '../../../../../hooks/hooks';
 import PlayerSelectComponent from '../../../shared/PlayerSelectComponent';
 import {TextField} from '@mui/material';
-import {SellHoldTile} from '../SuggestedMovesModule/SuggestedMovesModule';
+import {HoldTile} from '../SuggestedMovesModule/SuggestedMovesModule';
 import ExportButton from '../../../shared/ExportButton';
 
 export type HoldsModuleProps = {
@@ -67,9 +67,9 @@ export function GraphicComponent({
 }: GraphicComponentProps) {
     return (
         <div className={`${styles.graphicComponent} ${graphicClassName ?? ''}`}>
-            {holds.map((h, idx) => (
+            {holds.map((holdId, idx) => (
                 <div key={idx} className={styles.holdColumn}>
-                    <SellHoldTile playerId={h} isHold={true} />
+                    <HoldTile playerId={holdId} />
                     <div className={styles.comment}>{comments[idx]}</div>
                 </div>
             ))}
