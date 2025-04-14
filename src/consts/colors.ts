@@ -4,6 +4,7 @@ export const WR = '#AF76B3';
 export const TE = '#D7DF21';
 export const OVERALL = 'white';
 export const DEPTH = '#D55455';
+export const DRAFT_CAPITAL = '#D55455';
 export const COLORS = new Map([
     ['QB', QB],
     ['RB', RB],
@@ -17,4 +18,6 @@ export const COLORS = new Map([
     ['depth', DEPTH],
     ['OVERALL', OVERALL],
     ['DEPTH', DEPTH],
+    ['draftCapital', DRAFT_CAPITAL],
+    ['DRAFT_CAPITAL', DRAFT_CAPITAL],
 ]);

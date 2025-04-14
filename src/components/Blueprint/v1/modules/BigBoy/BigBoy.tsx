@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {SetStateAction, useEffect, useState} from 'react';
 import {
     blankRedraftBp,
     blankblueprint,
@@ -621,10 +621,6 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             />
         );
     }
-
-    const rounds = [...Array(5).keys()].map(x => x + 1);
-    const picks = [...Array(numRosters || 24).keys()].map(x => x + 1);
-
     function teamGradeNotesInput() {
         return (
             <TextField
@@ -635,119 +631,6 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             />
         );
     }
-
-    function draftCapitalInput() {
-        return (
-            <div className={styles.addRemovePickButtons}>
-                <Button
-                    variant="outlined"
-                    onClick={() => {
-                        setDraftPicks((oldDraftPicks: DraftPick[]) => {
-                            return [
-                                ...oldDraftPicks,
-                                {
-                                    round: '',
-                                    pick: '',
-                                    verdict: Verdict.None,
-                                } as DraftPick,
-                            ].sort(sortDraftPicks);
-                        });
-                    }}
-                    endIcon={<Add />}
-                >
-                    Add Pick
-                </Button>
-                <Button
-                    variant="outlined"
-                    onClick={() => {
-                        setDraftPicks((oldDraftPicks: DraftPick[]) => {
-                            return oldDraftPicks
-                                .slice(0, -1)
-                                .sort(sortDraftPicks);
-                        });
-                    }}
-                    disabled={draftPicks.length <= 4}
-                    endIcon={<Remove />}
-                >
-                    Remove Pick
-                </Button>
-
-                {draftPicks.map((draftPick, idx) => (
-                    <div
-                        key={idx}
-                        style={{
-                            display: 'flex',
-                            gap: '4px',
-                        }}
-                    >
-                        <FormControl key={`${idx} round`} style={{flex: '1'}}>
-                            <InputLabel>Rnd {idx + 1}</InputLabel>
-                            <Select
-                                label={`Rnd ${idx + 1}`}
-                                value={draftPick.round.toString()}
-                                onChange={(event: SelectChangeEvent) => {
-                                    const newDraftPicks = draftPicks.slice();
-                                    if (event.target.value === '') {
-                                        newDraftPicks[idx].round = '';
-                                    } else {
-                                        newDraftPicks[idx].round =
-                                            +event.target.value;
-                                    }
-                                    setDraftPicks(
-                                        newDraftPicks.sort(sortDraftPicks)
-                                    );
-                                }}
-                            >
-                                <MenuItem value={''} key={''}>
-                                    Choose a round:
-                                </MenuItem>
-                                {rounds.map(round => (
-                                    <MenuItem value={round} key={round}>
-                                        {round}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <FormControl key={`${idx} pick`} style={{flex: '1'}}>
-                            <InputLabel>Pk {idx + 1}</InputLabel>
-                            <Select
-                                label={`Pk ${idx + 1}`}
-                                value={draftPick.pick.toString()}
-                                onChange={(event: SelectChangeEvent) => {
-                                    const newDraftPicks = draftPicks.slice();
-                                    if (event.target.value === '') {
-                                        newDraftPicks[idx].pick = '';
-                                    } else {
-                                        newDraftPicks[idx].pick =
-                                            +event.target.value;
-                                    }
-                                    setDraftPicks(
-                                        newDraftPicks.sort(sortDraftPicks)
-                                    );
-                                }}
-                            >
-                                <MenuItem value={''} key={''}>
-                                    Choose a pick:
-                                </MenuItem>
-                                {picks.map(pick => (
-                                    <MenuItem value={pick} key={pick}>
-                                        {pick}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div>
-                ))}
-                <TextField
-                    style={{margin: '4px'}}
-                    label={'Additional Draft Info'}
-                    value={additionalDraftNotes}
-                    onChange={e => setAdditionalDraftNotes(e.target.value)}
-                />
-            </div>
-        );
-    }
-
     function contendRebuildScaleComponent() {
         return (
             <div className={styles.rebuildContendScaleGraphic}>
@@ -1113,7 +996,16 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
                             ? 'Overall Team Grade'
                             : 'Draft Capital Grade'}
                         <div>{draftCapitalGradeInput()}</div>
-                        {!isRedraft && draftCapitalInput()}
+                        {!isRedraft && (
+                            <DraftCapitalInput
+                                draftPicks={draftPicks}
+                                setDraftPicks={setDraftPicks}
+                                additionalDraftNotes={additionalDraftNotes}
+                                setAdditionalDraftNotes={
+                                    setAdditionalDraftNotes
+                                }
+                            />
+                        )}
                         {isRedraft && teamGradeNotesInput()}
                         {commentsInput()}
                     </Grid2>
@@ -1271,6 +1163,132 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             </div>
             <div className={styles.offScreen}>{fullBlueprint()}</div>
             <div className={styles.offScreen}>{rookieDraftGraphic}</div>
+        </div>
+    );
+}
+
+type DraftCapitalInputProps = {
+    draftPicks: DraftPick[];
+    setDraftPicks: (value: SetStateAction<DraftPick[]>) => void;
+    additionalDraftNotes?: string;
+    setAdditionalDraftNotes?: (value: SetStateAction<string>) => void;
+};
+
+export function DraftCapitalInput({
+    draftPicks,
+    setDraftPicks,
+    additionalDraftNotes,
+    setAdditionalDraftNotes,
+}: DraftCapitalInputProps) {
+    const rounds = [...Array(5).keys()].map(x => x + 1);
+    const picks = [...Array(24).keys()].map(x => x + 1);
+    return (
+        <div className={styles.addRemovePickButtons}>
+            <Button
+                variant="outlined"
+                onClick={() => {
+                    setDraftPicks((oldDraftPicks: DraftPick[]) => {
+                        return [
+                            ...oldDraftPicks,
+                            {
+                                round: '',
+                                pick: '',
+                                verdict: Verdict.None,
+                            } as DraftPick,
+                        ].sort(sortDraftPicks);
+                    });
+                }}
+                endIcon={<Add />}
+            >
+                Add Pick
+            </Button>
+            <Button
+                variant="outlined"
+                onClick={() => {
+                    setDraftPicks((oldDraftPicks: DraftPick[]) => {
+                        return oldDraftPicks.slice(0, -1).sort(sortDraftPicks);
+                    });
+                }}
+                disabled={draftPicks.length <= 4}
+                endIcon={<Remove />}
+            >
+                Remove Pick
+            </Button>
+
+            {draftPicks.map((draftPick, idx) => (
+                <div
+                    key={idx}
+                    style={{
+                        display: 'flex',
+                        gap: '4px',
+                    }}
+                >
+                    <FormControl key={`${idx} round`} style={{flex: '1'}}>
+                        <InputLabel>Rnd {idx + 1}</InputLabel>
+                        <Select
+                            label={`Rnd ${idx + 1}`}
+                            value={draftPick.round.toString()}
+                            onChange={(event: SelectChangeEvent) => {
+                                const newDraftPicks = draftPicks.slice();
+                                if (event.target.value === '') {
+                                    newDraftPicks[idx].round = '';
+                                } else {
+                                    newDraftPicks[idx].round =
+                                        +event.target.value;
+                                }
+                                setDraftPicks(
+                                    newDraftPicks.sort(sortDraftPicks)
+                                );
+                            }}
+                        >
+                            <MenuItem value={''} key={''}>
+                                Choose a round:
+                            </MenuItem>
+                            {rounds.map(round => (
+                                <MenuItem value={round} key={round}>
+                                    {round}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <FormControl key={`${idx} pick`} style={{flex: '1'}}>
+                        <InputLabel>Pk {idx + 1}</InputLabel>
+                        <Select
+                            label={`Pk ${idx + 1}`}
+                            value={draftPick.pick.toString()}
+                            onChange={(event: SelectChangeEvent) => {
+                                const newDraftPicks = draftPicks.slice();
+                                if (event.target.value === '') {
+                                    newDraftPicks[idx].pick = '';
+                                } else {
+                                    newDraftPicks[idx].pick =
+                                        +event.target.value;
+                                }
+                                setDraftPicks(
+                                    newDraftPicks.sort(sortDraftPicks)
+                                );
+                            }}
+                        >
+                            <MenuItem value={''} key={''}>
+                                Choose a pick:
+                            </MenuItem>
+                            {picks.map(pick => (
+                                <MenuItem value={pick} key={pick}>
+                                    {pick}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </div>
+            ))}
+            {setAdditionalDraftNotes && (
+                <TextField
+                    style={{margin: '4px'}}
+                    label={'Additional Draft Info'}
+                    value={additionalDraftNotes}
+                    onChange={e => setAdditionalDraftNotes(e.target.value)}
+                />
+            )}
         </div>
     );
 }

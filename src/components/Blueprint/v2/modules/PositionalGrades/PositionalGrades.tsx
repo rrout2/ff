@@ -50,8 +50,8 @@ export default function PositionalGrades({
                     setWr={setWr}
                     te={te}
                     setTe={setTe}
-                    depth={depth}
-                    setDepth={setDepth}
+                    draftCapitalScore={depth}
+                    setDraftCapitalScore={setDepth}
                 />
             </div>
             <GraphicComponent
@@ -60,7 +60,7 @@ export default function PositionalGrades({
                 rb={rb}
                 wr={wr}
                 te={te}
-                depth={depth}
+                draftCapitalScore={depth}
             />
         </>
     );
@@ -77,8 +77,8 @@ interface InputComponentProps {
     setWr: (value: number) => void;
     te: number;
     setTe: (value: number) => void;
-    depth: number;
-    setDepth: (value: number) => void;
+    draftCapitalScore: number;
+    setDraftCapitalScore: (value: number) => void;
 }
 
 export function InputComponent({
@@ -92,8 +92,8 @@ export function InputComponent({
     setWr,
     te,
     setTe,
-    depth,
-    setDepth,
+    draftCapitalScore,
+    setDraftCapitalScore,
 }: InputComponentProps) {
     return (
         <>
@@ -133,9 +133,9 @@ export function InputComponent({
                 max={10}
             />
             <StyledNumberInput
-                value={depth}
-                onChange={(_, value) => setDepth(value || 0)}
-                label="Depth"
+                value={draftCapitalScore}
+                onChange={(_, value) => setDraftCapitalScore(value || 0)}
+                label="DC"
                 min={0}
                 max={10}
             />
@@ -149,7 +149,7 @@ type GraphicComponentProps = {
     rb: number;
     wr: number;
     te: number;
-    depth: number;
+    draftCapitalScore: number;
     graphicClassName?: string;
     transparent?: boolean;
 };
@@ -159,7 +159,7 @@ export function GraphicComponent({
     rb,
     wr,
     te,
-    depth,
+    draftCapitalScore,
     graphicClassName,
     transparent = false,
 }: GraphicComponentProps) {
@@ -201,10 +201,14 @@ export function GraphicComponent({
             position: 'TE',
         },
         {
-            x: CENTER[0] - hexRadius * Math.cos(Math.PI / 6) * (depth / 10),
-            y: CENTER[1] - hexRadius * Math.sin(Math.PI / 6) * (depth / 10),
-            grade: depth,
-            position: 'depth',
+            x:
+                CENTER[0] -
+                hexRadius * Math.cos(Math.PI / 6) * (draftCapitalScore / 10),
+            y:
+                CENTER[1] -
+                hexRadius * Math.sin(Math.PI / 6) * (draftCapitalScore / 10),
+            grade: draftCapitalScore,
+            position: 'draftCapital',
         },
     ];
     return (

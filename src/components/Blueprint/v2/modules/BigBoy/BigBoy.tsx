@@ -79,7 +79,6 @@ import {
 import {useSearchParams} from 'react-router-dom';
 import {
     RookieDraftGraphic,
-    RookieDraftInputs,
     useRookieDraft,
 } from '../../../rookieDraft/RookieDraft/RookieDraft';
 import {getPositionalOrder} from '../../../infinite/BuySellHold/BuySellHold';
@@ -118,20 +117,8 @@ export default function BigBoy({
         fallerValues,
         setFallerValues,
     } = useRisersFallers(roster);
-    const {
-        overall,
-        setOverall,
-        qb,
-        setQb,
-        rb,
-        setRb,
-        wr,
-        setWr,
-        te,
-        setTe,
-        depth,
-        setDepth,
-    } = usePositionalGrades(roster, numRosters);
+    const {overall, setOverall, qb, setQb, rb, setRb, wr, setWr, te, setTe} =
+        usePositionalGrades(roster, numRosters);
     const [showRookieBP, setShowRookieBP] = useState(false);
     const {
         draftPicks,
@@ -257,7 +244,7 @@ export default function BigBoy({
             rb={rb}
             wr={wr}
             te={te}
-            depth={depth}
+            draftCapitalScore={draftCapitalScore}
             numRosters={numRosters}
             teamName={teamName}
             archetype={archetype}
@@ -287,7 +274,7 @@ export default function BigBoy({
             );
             searchParams.set(
                 POSITIONAL_GRADES,
-                [overall, qb, rb, wr, te, depth].join('-')
+                [overall, qb, rb, wr, te, draftCapitalScore].join('-')
             );
             searchParams.set(QB_RANK, rankStateMap.get(QB)![0]);
             searchParams.set(RB_RANK, rankStateMap.get(RB)![0]);
@@ -357,7 +344,7 @@ export default function BigBoy({
         setRb(+posGrades[2]);
         setWr(+posGrades[3]);
         setTe(+posGrades[4]);
-        setDepth(+posGrades[5]);
+        setDraftCapitalScore(+posGrades[5]);
 
         rankStateMap.get(QB)![1](searchParams.get(QB_RANK) || '4th');
         rankStateMap.get(RB)![1](searchParams.get(RB_RANK) || '4th');
@@ -487,18 +474,6 @@ export default function BigBoy({
                 setWr={setWr}
                 te={te}
                 setTe={setTe}
-                depth={depth}
-                setDepth={setDepth}
-                archetype={archetype}
-                setArchetype={setArchetype}
-                otherSettings={otherSettings}
-                setOtherSettings={setOtherSettings}
-                rookiePickComments={rookiePickComments}
-                setRookiePickComments={setRookiePickComments}
-                suggestionsAndComments={suggestionsAndComments}
-                setSuggestionsAndComments={setSuggestionsAndComments}
-            />
-            <RookieDraftInputs
                 draftPicks={draftPicks}
                 setDraftPicks={setDraftPicks}
                 rookieTargets={rookieTargets}
@@ -510,6 +485,14 @@ export default function BigBoy({
                 autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
                 setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
                 sortByRookieRank={sortByRookieRank}
+                archetype={archetype}
+                setArchetype={setArchetype}
+                otherSettings={otherSettings}
+                setOtherSettings={setOtherSettings}
+                rookiePickComments={rookiePickComments}
+                setRookiePickComments={setRookiePickComments}
+                suggestionsAndComments={suggestionsAndComments}
+                setSuggestionsAndComments={setSuggestionsAndComments}
             />
             {showPreview && <FullBlueprintWithProps isPreview={true} />}
             {showRookieBP && rookieDraftGraphic}
@@ -541,7 +524,7 @@ interface FullBlueprintProps {
     rb: number;
     wr: number;
     te: number;
-    depth: number;
+    draftCapitalScore: number;
     archetype: Archetype;
     numRosters?: number;
     teamName?: string;
@@ -569,7 +552,7 @@ function FullBlueprint({
     rb,
     wr,
     te,
-    depth,
+    draftCapitalScore,
     teamName,
     archetype,
     otherSettings,
@@ -680,7 +663,7 @@ function FullBlueprint({
                         rb={rb}
                         wr={wr}
                         te={te}
-                        depth={depth}
+                        draftCapitalScore={draftCapitalScore}
                         transparent={true}
                     />
                 </div>

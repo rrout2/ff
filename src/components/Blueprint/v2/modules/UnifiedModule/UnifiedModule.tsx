@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from 'react';
+import {ChangeEvent, SetStateAction, useEffect, useState} from 'react';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import styles from './UnifiedModule.module.css';
 import {
@@ -52,6 +52,13 @@ import {
     GraphicComponent as ThreeYearOutlookGraphic,
 } from '../ThreeYearOutlook/ThreeYearOutlook';
 import {ALL_ARCHETYPES, Archetype} from '../../consts/archetypes';
+import {
+    DraftPick,
+    DraftStrategy,
+    RookieDraftInputs,
+    useRookieDraft,
+} from '../../../rookieDraft/RookieDraft/RookieDraft';
+import {DraftCapitalInput} from '../../../v1/modules/BigBoy/BigBoy';
 export type UnifiedModuleProps = {
     roster?: Roster;
     numRosters?: number;
@@ -79,20 +86,8 @@ export default function UnifiedModule({
         fallerValues,
         setFallerValues,
     } = useRisersFallers(roster);
-    const {
-        overall,
-        setOverall,
-        qb,
-        setQb,
-        rb,
-        setRb,
-        wr,
-        setWr,
-        te,
-        setTe,
-        depth,
-        setDepth,
-    } = usePositionalGrades();
+    const {overall, setOverall, qb, setQb, rb, setRb, wr, setWr, te, setTe} =
+        usePositionalGrades();
     const {
         values: outlookValues,
         setValues: setOutlookValues,
@@ -110,6 +105,20 @@ export default function UnifiedModule({
                 .sort(sortByAdp)
         );
     }, [roster, playerData]);
+
+    const {
+        draftPicks,
+        setDraftPicks,
+        rookieTargets,
+        setRookieTargets,
+        draftStrategy,
+        setDraftStrategy,
+        draftCapitalScore,
+        setDraftCapitalScore,
+        autoPopulatedDraftStrategy,
+        setAutoPopulatedDraftStrategy,
+        sortByRookieRank,
+    } = useRookieDraft();
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
@@ -161,8 +170,17 @@ export default function UnifiedModule({
                 setWr={setWr}
                 te={te}
                 setTe={setTe}
-                depth={depth}
-                setDepth={setDepth}
+                draftPicks={draftPicks}
+                setDraftPicks={setDraftPicks}
+                rookieTargets={rookieTargets}
+                setRookieTargets={setRookieTargets}
+                draftStrategy={draftStrategy}
+                setDraftStrategy={setDraftStrategy}
+                draftCapitalScore={draftCapitalScore}
+                setDraftCapitalScore={setDraftCapitalScore}
+                autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
+                setAutoPopulatedDraftStrategy={setAutoPopulatedDraftStrategy}
+                sortByRookieRank={sortByRookieRank}
                 outlookValues={outlookValues}
                 setOutlookValues={setOutlookValues}
                 outlook={outlook}
@@ -203,7 +221,7 @@ export default function UnifiedModule({
                 rb={rb}
                 wr={wr}
                 te={te}
-                depth={depth}
+                draftCapitalScore={draftCapitalScore}
                 graphicClassName="positionalGradesGraphic"
             />
             <ThreeYearOutlookGraphic
@@ -249,8 +267,17 @@ export type UnifiedInputsProps = {
     setWr: (value: number) => void;
     te: number;
     setTe: (value: number) => void;
-    depth: number;
-    setDepth: (value: number) => void;
+    draftPicks: DraftPick[];
+    setDraftPicks: (value: SetStateAction<DraftPick[]>) => void;
+    rookieTargets: string[][];
+    setRookieTargets: (value: SetStateAction<string[][]>) => void;
+    draftStrategy: DraftStrategy;
+    setDraftStrategy: (draftStrategy: DraftStrategy) => void;
+    draftCapitalScore: number;
+    setDraftCapitalScore: (draftCapitalScore: number) => void;
+    autoPopulatedDraftStrategy: number[];
+    setAutoPopulatedDraftStrategy: (draftStrategy: number[]) => void;
+    sortByRookieRank: (a: string, b: string) => number;
     outlookValues?: number[];
     setOutlookValues?: (values: number[]) => void;
     outlook?: Outlook;
@@ -260,7 +287,7 @@ export type UnifiedInputsProps = {
     otherSettings?: string;
     setOtherSettings?: (otherSettings: string) => void;
     rookiePickComments?: string[];
-    setRookiePickComments?: (comments: string[]) => void;
+    setRookiePickComments?: (value: SetStateAction<string[]>) => void;
     suggestionsAndComments?: string[];
     setSuggestionsAndComments?: (suggestionsAndComments: string[]) => void;
 };
@@ -296,8 +323,17 @@ export function UnifiedInputs({
     setWr,
     te,
     setTe,
-    depth,
-    setDepth,
+    draftCapitalScore,
+    setDraftCapitalScore,
+    draftPicks,
+    setDraftPicks,
+    rookieTargets,
+    setRookieTargets,
+    draftStrategy,
+    setDraftStrategy,
+    autoPopulatedDraftStrategy,
+    setAutoPopulatedDraftStrategy,
+    sortByRookieRank,
     outlookValues,
     setOutlookValues,
     outlook,
@@ -311,6 +347,24 @@ export function UnifiedInputs({
     suggestionsAndComments,
     setSuggestionsAndComments,
 }: UnifiedInputsProps) {
+    useEffect(() => {
+        if (!draftPicks || !setRookiePickComments) return;
+        const thisYearInfo = draftPicks
+            .filter(
+                draftPick => draftPick.round !== '' && draftPick.pick !== ''
+            )
+            .map(
+                draftPick =>
+                    `${draftPick.round}.${
+                        draftPick.pick && draftPick.pick < 10 ? '0' : ''
+                    }${draftPick.pick}`
+            )
+            .join(', ');
+        setRookiePickComments((oldRookiePickComments: string[]) => {
+            return [thisYearInfo, oldRookiePickComments[1]];
+        });
+    }, [draftPicks]);
+
     return (
         <Grid2
             container
@@ -370,8 +424,8 @@ export function UnifiedInputs({
                     setWr={setWr}
                     te={te}
                     setTe={setTe}
-                    depth={depth}
-                    setDepth={setDepth}
+                    draftCapitalScore={draftCapitalScore}
+                    setDraftCapitalScore={setDraftCapitalScore}
                 />
             </Grid2>
             <Grid2 size={4} className={styles.gridItem}>
@@ -380,6 +434,10 @@ export function UnifiedInputs({
                     playerIds={roster?.players ?? []}
                     holds={holds}
                     setHolds={setHolds}
+                />
+                <DraftCapitalInput
+                    draftPicks={draftPicks}
+                    setDraftPicks={setDraftPicks}
                 />
             </Grid2>
             {!archetype &&
@@ -457,7 +515,7 @@ export function UnifiedInputs({
                                         )
                                     );
                                 }}
-                                label={`${idx + 2024} Comments`}
+                                label={`${idx + 2025} Comments`}
                             />
                         ))}
                     </div>
@@ -490,6 +548,21 @@ export function UnifiedInputs({
                     ))}
                 </Grid2>
             )}
+            <Grid2 size={12} className={styles.gridItem}>
+                <RookieDraftInputs
+                    draftPicks={draftPicks}
+                    setDraftPicks={setDraftPicks}
+                    rookieTargets={rookieTargets}
+                    setRookieTargets={setRookieTargets}
+                    draftStrategy={draftStrategy}
+                    setDraftStrategy={setDraftStrategy}
+                    autoPopulatedDraftStrategy={autoPopulatedDraftStrategy}
+                    setAutoPopulatedDraftStrategy={
+                        setAutoPopulatedDraftStrategy
+                    }
+                    sortByRookieRank={sortByRookieRank}
+                />
+            </Grid2>
         </Grid2>
     );
 }

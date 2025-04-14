@@ -79,7 +79,7 @@ export function sortDraftPicks(a: DraftPick, b: DraftPick) {
     return a.round - b.round || a.pick - b.pick;
 }
 
-type DraftStrategy = {
+export type DraftStrategy = {
     header: string;
     body: string;
 }[];
