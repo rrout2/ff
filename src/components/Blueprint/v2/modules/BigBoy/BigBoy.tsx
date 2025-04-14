@@ -135,6 +135,14 @@ export default function BigBoy({
         setAutoPopulatedDraftStrategy,
         sortByRookieRank,
     } = useRookieDraft();
+    useEffect(() => {
+        setOverall(
+            Math.min(
+                10,
+                Math.round((qb + rb + wr + te + draftCapitalScore) / 5) + 1
+            )
+        );
+    }, [qb, rb, wr, te, draftCapitalScore]);
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
