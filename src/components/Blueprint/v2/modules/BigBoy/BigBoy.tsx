@@ -108,7 +108,7 @@ export default function BigBoy({
     const {cornerstones, setCornerstones} = useCornerstones(roster);
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
-    const {holds, setHolds, comments, setComments} = useHolds(roster);
+    const {holds, setHolds} = useHolds(roster);
     const {
         risers,
         setRisers,
@@ -248,7 +248,6 @@ export default function BigBoy({
             buys={buys}
             plusMap={plusMap}
             holds={holds}
-            comments={comments}
             risers={risers}
             riserValues={riserValues}
             fallers={fallers}
@@ -280,7 +279,6 @@ export default function BigBoy({
                 buys.map(buy => (plusMap.get(buy) ? 'T' : 'F')).join('-')
             );
             searchParams.set(HOLDS, holds.join('-'));
-            searchParams.set(HOLD_COMMENTS, comments.join('-'));
             searchParams.set(RISERS, risers.join('-'));
             searchParams.set(FALLERS, fallers.join('-'));
             searchParams.set(RISER_VALUES, riserValues.join('-'));
@@ -337,7 +335,6 @@ export default function BigBoy({
         setPlusMap(newPlusMap);
 
         setHolds((searchParams.get(HOLDS) || '').split('-'));
-        setComments((searchParams.get(HOLD_COMMENTS) || '').split('-'));
         setRisers((searchParams.get(RISERS) || '').split('-'));
         setFallers((searchParams.get(FALLERS) || '').split('-'));
 
@@ -473,8 +470,6 @@ export default function BigBoy({
                 setPlusMap={setPlusMap}
                 holds={holds}
                 setHolds={setHolds}
-                comments={comments}
-                setComments={setComments}
                 risers={risers}
                 setRisers={setRisers}
                 riserValues={riserValues}
@@ -535,7 +530,6 @@ interface FullBlueprintProps {
     buys: string[];
     plusMap: Map<string, boolean>;
     holds: string[];
-    comments: string[];
     risers: string[];
     riserValues: number[];
     fallers: string[];
@@ -572,7 +566,6 @@ function FullBlueprint({
     buys,
     plusMap,
     holds,
-    comments,
     overall,
     qb,
     rb,
@@ -680,7 +673,7 @@ function FullBlueprint({
                     />
                 </div>
                 <div className={styles.holdsGraphic}>
-                    <HoldsGraphic holds={holds} comments={comments} />
+                    <HoldsGraphic holds={holds} />
                 </div>
                 <div className={styles.positionalGradesGraphic}>
                     <PositionalGradesGraphic

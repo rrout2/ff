@@ -68,7 +68,7 @@ export default function UnifiedModule({
     const [leagueId] = useLeagueIdFromUrl();
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
         useBuySells(roster);
-    const {holds, setHolds, comments, setComments} = useHolds(roster);
+    const {holds, setHolds} = useHolds(roster);
     const {
         risers,
         setRisers,
@@ -142,8 +142,6 @@ export default function UnifiedModule({
                 setPlusMap={setPlusMap}
                 holds={holds}
                 setHolds={setHolds}
-                comments={comments}
-                setComments={setComments}
                 risers={risers}
                 setRisers={setRisers}
                 riserValues={riserValues}
@@ -191,11 +189,7 @@ export default function UnifiedModule({
                 graphicClassName="suggestedMovesGraphic"
                 plusMap={plusMap}
             />
-            <HoldsGraphic
-                holds={holds}
-                comments={comments}
-                graphicClassName="holdsGraphic"
-            />
+            <HoldsGraphic holds={holds} graphicClassName="holdsGraphic" />
             <RisersFallersGraphic
                 risers={risers}
                 fallers={fallers}
@@ -233,8 +227,6 @@ export type UnifiedInputsProps = {
     setPlusMap: (plusMap: Map<string, boolean>) => void;
     holds: string[];
     setHolds: (holds: string[]) => void;
-    comments: string[];
-    setComments: (comments: string[]) => void;
     risers: string[];
     setRisers: (risers: string[]) => void;
     riserValues: number[];
@@ -285,8 +277,6 @@ export function UnifiedInputs({
     setPlusMap,
     holds,
     setHolds,
-    comments,
-    setComments,
     risers,
     setRisers,
     riserValues,
@@ -390,8 +380,6 @@ export function UnifiedInputs({
                     playerIds={roster?.players ?? []}
                     holds={holds}
                     setHolds={setHolds}
-                    comments={comments}
-                    setComments={setComments}
                 />
             </Grid2>
             {!archetype &&
