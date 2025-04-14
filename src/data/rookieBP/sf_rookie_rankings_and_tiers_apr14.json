@@ -1,0 +1,642 @@
+[
+  {
+    "Pick": 1,
+    "Name": "Ashton Jeanty",
+    "Position": "RB",
+    "Tier": 1,
+    "8 Team": 1.01,
+    "10 Team": 1.01,
+    "12 Team": 1.01,
+    "14 Team": 1.01
+  },
+  {
+    "Pick": 2,
+    "Name": "Omarion Hampton",
+    "Position": "RB",
+    "Tier": 2,
+    "8 Team": 1.02,
+    "10 Team": 1.02,
+    "12 Team": 1.02,
+    "14 Team": 1.02
+  },
+  {
+    "Pick": 3,
+    "Name": "Tetairoa McMillan",
+    "Position": "WR",
+    "Tier": 2,
+    "8 Team": 1.03,
+    "10 Team": 1.03,
+    "12 Team": 1.03,
+    "14 Team": 1.03
+  },
+  {
+    "Pick": 4,
+    "Name": "Cameron Ward",
+    "Position": "QB",
+    "Tier": 2,
+    "8 Team": 1.04,
+    "10 Team": 1.04,
+    "12 Team": 1.04,
+    "14 Team": 1.04
+  },
+  {
+    "Pick": 5,
+    "Name": "TreVeyon Henderson",
+    "Position": "WR",
+    "Tier": 3,
+    "8 Team": 1.05,
+    "10 Team": 1.05,
+    "12 Team": 1.05,
+    "14 Team": 1.05
+  },
+  {
+    "Pick": 6,
+    "Name": "Travis Hunter",
+    "Position": "RB",
+    "Tier": 3,
+    "8 Team": 1.06,
+    "10 Team": 1.06,
+    "12 Team": 1.06,
+    "14 Team": 1.06
+  },
+  {
+    "Pick": 7,
+    "Name": "Luther Burden",
+    "Position": "RB",
+    "Tier": 3,
+    "8 Team": 1.07,
+    "10 Team": 1.07,
+    "12 Team": 1.07,
+    "14 Team": 1.07
+  },
+  {
+    "Pick": 8,
+    "Name": "Kaleb Johnson",
+    "Position": "RB",
+    "Tier": 4,
+    "8 Team": 1.08,
+    "10 Team": 1.08,
+    "12 Team": 1.08,
+    "14 Team": 1.08
+  },
+  {
+    "Pick": 9,
+    "Name": "Quinshon Judkins",
+    "Position": "TE",
+    "Tier": 4,
+    "8 Team": 2.01,
+    "10 Team": 1.09,
+    "12 Team": 1.09,
+    "14 Team": 1.09
+  },
+  {
+    "Pick": 10,
+    "Name": "Tyler Warren",
+    "Position": "WR",
+    "Tier": 4,
+    "8 Team": 2.02,
+    "10 Team": 1.1,
+    "12 Team": 1.1,
+    "14 Team": 1.1
+  },
+  {
+    "Pick": 11,
+    "Name": "Matthew Golden",
+    "Position": "WR",
+    "Tier": 5,
+    "8 Team": 2.03,
+    "10 Team": 2.01,
+    "12 Team": 1.11,
+    "14 Team": 1.11
+  },
+  {
+    "Pick": 12,
+    "Name": "Emeka Egbuka",
+    "Position": "TE",
+    "Tier": 5,
+    "8 Team": 2.04,
+    "10 Team": 2.02,
+    "12 Team": 1.12,
+    "14 Team": 1.12
+  },
+  {
+    "Pick": 13,
+    "Name": "Colston Loveland",
+    "Position": "QB",
+    "Tier": 5,
+    "8 Team": 2.05,
+    "10 Team": 2.03,
+    "12 Team": 2.01,
+    "14 Team": 1.13
+  },
+  {
+    "Pick": 14,
+    "Name": "Shedeur Sanders",
+    "Position": "WR",
+    "Tier": 6,
+    "8 Team": 2.06,
+    "10 Team": 2.04,
+    "12 Team": 2.02,
+    "14 Team": 1.14
+  },
+  {
+    "Pick": 15,
+    "Name": "Cam Skattebo",
+    "Position": "RB",
+    "Tier": 6,
+    "8 Team": 2.07,
+    "10 Team": 2.05,
+    "12 Team": 2.03,
+    "14 Team": 2.01
+  },
+  {
+    "Pick": 16,
+    "Name": "DJ Giddens",
+    "Position": "RB",
+    "Tier": 6,
+    "8 Team": 2.08,
+    "10 Team": 2.06,
+    "12 Team": 2.04,
+    "14 Team": 2.02
+  },
+  {
+    "Pick": 17,
+    "Name": "Jaxson Dart",
+    "Position": "WR",
+    "Tier": 7,
+    "8 Team": 3.01,
+    "10 Team": 2.07,
+    "12 Team": 2.05,
+    "14 Team": 2.03
+  },
+  {
+    "Pick": 18,
+    "Name": "Jayden Higgins",
+    "Position": "QB",
+    "Tier": 7,
+    "8 Team": 3.02,
+    "10 Team": 2.08,
+    "12 Team": 2.06,
+    "14 Team": 2.04
+  },
+  {
+    "Pick": 19,
+    "Name": "Tre Harris",
+    "Position": "WR",
+    "Tier": 7,
+    "8 Team": 3.03,
+    "10 Team": 2.09,
+    "12 Team": 2.07,
+    "14 Team": 2.05
+  },
+  {
+    "Pick": 20,
+    "Name": "Damien Martinez",
+    "Position": "WR",
+    "Tier": 8,
+    "8 Team": 3.04,
+    "10 Team": 2.1,
+    "12 Team": 2.08,
+    "14 Team": 2.06
+  },
+  {
+    "Pick": 21,
+    "Name": "Elic Ayomanor",
+    "Position": "RB",
+    "Tier": 8,
+    "8 Team": 3.05,
+    "10 Team": 3.01,
+    "12 Team": 2.09,
+    "14 Team": 2.07
+  },
+  {
+    "Pick": 22,
+    "Name": "Dylan Sampson",
+    "Position": "RB",
+    "Tier": 8,
+    "8 Team": 3.06,
+    "10 Team": 3.02,
+    "12 Team": 2.1,
+    "14 Team": 2.08
+  },
+  {
+    "Pick": 23,
+    "Name": "Bhayshul Tuten",
+    "Position": "RB",
+    "Tier": 9,
+    "8 Team": 3.07,
+    "10 Team": 3.03,
+    "12 Team": 2.11,
+    "14 Team": 2.09
+  },
+  {
+    "Pick": 24,
+    "Name": "Jalen Royals",
+    "Position": "WR",
+    "Tier": 9,
+    "8 Team": 3.08,
+    "10 Team": 3.04,
+    "12 Team": 2.12,
+    "14 Team": 2.1
+  },
+  {
+    "Pick": 25,
+    "Name": "Harold Fannin",
+    "Position": "RB",
+    "Tier": 9,
+    "8 Team": 4.01,
+    "10 Team": 3.05,
+    "12 Team": 3.01,
+    "14 Team": 2.11
+  },
+  {
+    "Pick": 26,
+    "Name": "Devin Neal",
+    "Position": "TE",
+    "Tier": 10,
+    "8 Team": 4.02,
+    "10 Team": 3.06,
+    "12 Team": 3.02,
+    "14 Team": 2.12
+  },
+  {
+    "Pick": 27,
+    "Name": "Jack Bech",
+    "Position": "WR",
+    "Tier": 10,
+    "8 Team": 4.03,
+    "10 Team": 3.07,
+    "12 Team": 3.03,
+    "14 Team": 2.13
+  },
+  {
+    "Pick": 28,
+    "Name": "Jaylin Noel",
+    "Position": "WR",
+    "Tier": 10,
+    "8 Team": 4.04,
+    "10 Team": 3.08,
+    "12 Team": 3.04,
+    "14 Team": 2.14
+  },
+  {
+    "Pick": 29,
+    "Name": "Trevor Etienne",
+    "Position": "RB",
+    "Tier": 11,
+    "8 Team": 4.05,
+    "10 Team": 3.09,
+    "12 Team": 3.05,
+    "14 Team": 3.01
+  },
+  {
+    "Pick": 30,
+    "Name": "Mason Taylor",
+    "Position": "TE",
+    "Tier": 11,
+    "8 Team": 4.06,
+    "10 Team": 3.1,
+    "12 Team": 3.06,
+    "14 Team": 3.02
+  },
+  {
+    "Pick": 31,
+    "Name": "Dont'e Thornton",
+    "Position": "TE",
+    "Tier": 11,
+    "8 Team": 4.07,
+    "10 Team": 4.01,
+    "12 Team": 3.07,
+    "14 Team": 3.03
+  },
+  {
+    "Pick": 32,
+    "Name": "Oronde Gadsden",
+    "Position": "RB",
+    "Tier": 12,
+    "8 Team": 4.08,
+    "10 Team": 4.02,
+    "12 Team": 3.08,
+    "14 Team": 3.04
+  },
+  {
+    "Pick": 33,
+    "Name": "Jordan James",
+    "Position": "QB",
+    "Tier": 12,
+    "8 Team": "",
+    "10 Team": 4.03,
+    "12 Team": 3.09,
+    "14 Team": 3.05
+  },
+  {
+    "Pick": 34,
+    "Name": "Jalen Milroe",
+    "Position": "RB",
+    "Tier": 12,
+    "8 Team": "",
+    "10 Team": 4.04,
+    "12 Team": 3.1,
+    "14 Team": 3.06
+  },
+  {
+    "Pick": 35,
+    "Name": "Ollie Gordon II",
+    "Position": "WR",
+    "Tier": 13,
+    "8 Team": "",
+    "10 Team": 4.05,
+    "12 Team": 3.11,
+    "14 Team": 3.07
+  },
+  {
+    "Pick": 36,
+    "Name": "Kyle Williams",
+    "Position": "WR",
+    "Tier": 13,
+    "8 Team": "",
+    "10 Team": 4.06,
+    "12 Team": 3.12,
+    "14 Team": 3.08
+  },
+  {
+    "Pick": 37,
+    "Name": "Jarquez Hunter",
+    "Position": "WR",
+    "Tier": 13,
+    "8 Team": "",
+    "10 Team": 4.07,
+    "12 Team": 4.01,
+    "14 Team": 3.09
+  },
+  {
+    "Pick": 38,
+    "Name": "Brashard Smith",
+    "Position": "RB",
+    "Tier": 14,
+    "8 Team": "",
+    "10 Team": 4.08,
+    "12 Team": 4.02,
+    "14 Team": 3.1
+  },
+  {
+    "Pick": 39,
+    "Name": "RJ Harvey",
+    "Position": "RB",
+    "Tier": 14,
+    "8 Team": "",
+    "10 Team": 4.09,
+    "12 Team": 4.03,
+    "14 Team": 3.11
+  },
+  {
+    "Pick": 40,
+    "Name": "Tai Felton",
+    "Position": "RB",
+    "Tier": 14,
+    "8 Team": "",
+    "10 Team": 4.1,
+    "12 Team": 4.04,
+    "14 Team": 3.12
+  },
+  {
+    "Pick": 41,
+    "Name": "LeQuint Allen",
+    "Position": "WR",
+    "Tier": 15,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.05,
+    "14 Team": 3.13
+  },
+  {
+    "Pick": 42,
+    "Name": "Isaiah Bond",
+    "Position": "RB",
+    "Tier": 15,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.06,
+    "14 Team": 3.14
+  },
+  {
+    "Pick": 43,
+    "Name": "Woody Marks",
+    "Position": "RB",
+    "Tier": 15,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.07,
+    "14 Team": 4.01
+  },
+  {
+    "Pick": 44,
+    "Name": "Jaydon Blue",
+    "Position": "RB",
+    "Tier": 16,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.08,
+    "14 Team": 4.02
+  },
+  {
+    "Pick": 45,
+    "Name": "Terrance Ferguson",
+    "Position": "TE",
+    "Tier": 16,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.09,
+    "14 Team": 4.03
+  },
+  {
+    "Pick": 46,
+    "Name": "Tahj Brooks",
+    "Position": "TE",
+    "Tier": 16,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.1,
+    "14 Team": 4.04
+  },
+  {
+    "Pick": 47,
+    "Name": "Kyle Monangai",
+    "Position": "RB",
+    "Tier": 17,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.11,
+    "14 Team": 4.05
+  },
+  {
+    "Pick": 48,
+    "Name": "Kalel Mullings",
+    "Position": "RB",
+    "Tier": 17,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": 4.12,
+    "14 Team": 4.06
+  },
+  {
+    "Pick": 49,
+    "Name": "Raheim Sanders",
+    "Position": "RB",
+    "Tier": 17,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.07
+  },
+  {
+    "Pick": 50,
+    "Name": "Will Howard",
+    "Position": "QB",
+    "Tier": 18,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.08
+  },
+  {
+    "Pick": 51,
+    "Name": "Tory Horton",
+    "Position": "RB",
+    "Tier": 18,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.09
+  },
+  {
+    "Pick": 52,
+    "Name": "Tyler Shough",
+    "Position": "WR",
+    "Tier": 18,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.1
+  },
+  {
+    "Pick": 53,
+    "Name": "Dillon Gabriel",
+    "Position": "WR",
+    "Tier": 19,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.11
+  },
+  {
+    "Pick": 54,
+    "Name": "Elijah Arroyo",
+    "Position": "QB",
+    "Tier": 19,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.12
+  },
+  {
+    "Pick": 55,
+    "Name": "Savion Williams",
+    "Position": "QB",
+    "Tier": 19,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.13
+  },
+  {
+    "Pick": 56,
+    "Name": "Tez Johnson",
+    "Position": "TE",
+    "Tier": 20,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": 4.14
+  },
+  {
+    "Pick": 57,
+    "Name": "Xavier Restrepo",
+    "Position": "WR",
+    "Tier": 20,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 58,
+    "Name": "Pat Bryant",
+    "Position": "WR",
+    "Tier": 20,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 59,
+    "Name": "Gunnar Helm",
+    "Position": "WR",
+    "Tier": 21,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 60,
+    "Name": "Ricky White",
+    "Position": "WR",
+    "Tier": 21,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 61,
+    "Name": "Luke Lachey",
+    "Position": "TE",
+    "Tier": 21,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 62,
+    "Name": "Kyle McCord",
+    "Position": "QB",
+    "Tier": 22,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 63,
+    "Name": "Quinn Ewers",
+    "Position": "QB",
+    "Tier": 22,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  },
+  {
+    "Pick": 64,
+    "Name": "Kurtis Rourke",
+    "Position": "QB",
+    "Tier": 22,
+    "8 Team": "",
+    "10 Team": "",
+    "12 Team": "",
+    "14 Team": ""
+  }
+]
