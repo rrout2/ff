@@ -158,9 +158,13 @@ export function SellHoldTile({
         }
     }
 
+    if (isHold) {
+        return <HoldTile player={player} />;
+    }
+
     return (
         <div
-            className={styles.sellTile}
+            className={styles.sellHoldTile}
             style={{background: positionToColor[player.position]}}
         >
             <div className={styles.sellLabelCol}>
@@ -198,6 +202,52 @@ export function SellHoldTile({
     );
 }
 
+export function HoldTile({player}: {player: miniPlayer}) {
+    const {getPositionalAdp} = useAdpData();
+    return (
+        <div
+            className={styles.sellHoldTile}
+            style={{background: positionToColor[player.position]}}
+        >
+            <div className={styles.holdTileTextAndHeadshot}>
+                <img
+                    className={styles.holdPlayerImg}
+                    src={getImageSrc(player)}
+                />
+                <div className={styles.holdTileText}>
+                    <div className={styles.holdLabel}>
+                        <img src={holdIcon} className={styles.sellIcon} />
+                        &nbsp;HOLD
+                    </div>
+                    <div className={styles.playerName}>
+                        {player.first_name} {player.last_name}
+                    </div>
+                    <div className={styles.teamName}>
+                        {mapToFullTeamName.get(player.team)}
+                    </div>
+                </div>
+            </div>
+            <div className={styles.holdPositionalAdpColumn}>
+                {FANTASY_POSITIONS.includes(player.position) && (
+                    <div className={styles.positionalAdp}>
+                        {player.position}&nbsp;
+                        {getPositionalAdp(
+                            `${player.first_name} ${player.last_name}`
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function getImageSrc(player: miniPlayer) {
+    if (isRookiePickId(player.player_id)) {
+        return nflLogo;
+    }
+    return `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
+}
+
 function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
     const playerData = usePlayerData();
     const {getPositionalAdp} = useAdpData();
@@ -218,13 +268,6 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
         } else {
             return null;
         }
-    }
-
-    function getImageSrc() {
-        if (isRookiePickId(player.player_id)) {
-            return nflLogo;
-        }
-        return `https://sleepercdn.com/content/nfl/players/${player.player_id}.jpg`;
     }
 
     function getDisplayName() {
@@ -262,7 +305,7 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
                     </div>
                 </div>
             </div>
-            <img className={styles.playerImg} src={getImageSrc()} />
+            <img className={styles.playerImg} src={getImageSrc(player)} />
             <div className={styles.buyLabel}>
                 BUY&nbsp;
                 <img src={buyIcon} className={styles.sellIcon} />

@@ -11,7 +11,7 @@
     flex-direction: column;
     gap: 45px;
 }
-.sellTile {
+.sellHoldTile {
     width: 622px;
     height: 140px;
 
@@ -49,6 +49,14 @@
     color: #09153A;
 }
 
+.holdTileText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: #09153A;
+}
+
 .sellLabelCol {
     font-family: 'Erbaum Medium';
     font-size: 24px;
@@ -63,11 +71,36 @@
 }
 
 .sellLabel {
-    padding-left: 5px;
-    padding-top: 5px;
+    padding-left: 8px;
+    padding-top: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.holdLabel {
+    font-family: 'Erbaum Medium';
+    font-size: 24px;
+    line-height: 0.9;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.holdPositionalAdpColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+
+    .positionalAdp {
+        font-family: 'Prohibition';
+        font-size: 24px;
+        line-height: 0.9;
+        padding-right: 8px;
+        padding-top: 8px;
+    }
 }
 
 .sellIcon {
@@ -134,6 +167,19 @@
     aspect-ratio: 1 / 1;
 
     border-radius: 50%;
+}
+
+.holdTileTextAndHeadshot {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.holdPlayerImg {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    margin: 0 8px;
 }
 
 .buyLabel {
