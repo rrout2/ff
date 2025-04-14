@@ -62,7 +62,6 @@ import {
     CORNERSTONES,
     FALLER_VALUES,
     FALLERS,
-    HOLD_COMMENTS,
     HOLDS,
     OTHER_SETTINGS,
     PLUS_MAP,
@@ -389,7 +388,6 @@ export default function BigBoy({
             searchParams.delete(BUYS);
             searchParams.delete(PLUS_MAP);
             searchParams.delete(HOLDS);
-            searchParams.delete(HOLD_COMMENTS);
             searchParams.delete(RISERS);
             searchParams.delete(FALLERS);
             searchParams.delete(RISER_VALUES);
