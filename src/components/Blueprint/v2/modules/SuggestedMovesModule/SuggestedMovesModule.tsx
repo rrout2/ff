@@ -128,6 +128,7 @@ type miniPlayer = {
     sport: string;
     team: string;
     player_id: string;
+    number?: number;
     espn_id?: string;
 };
 export function SellTile({playerId}: {playerId: string}) {
@@ -178,7 +179,7 @@ export function SellTile({playerId}: {playerId: string}) {
                     {player.first_name} {player.last_name}
                 </div>
                 <div className={styles.teamName}>
-                    {mapToFullTeamName.get(player.team)}
+                    {getTeamDisplayName(player)}
                 </div>
             </div>
             <div style={{width: '70px', height: '100%'}} />
@@ -225,7 +226,7 @@ export function HoldTile({playerId}: {playerId: string}) {
                         {player.first_name} {player.last_name}
                     </div>
                     <div className={styles.teamName}>
-                        {mapToFullTeamName.get(player.team)}
+                        {getTeamDisplayName(player)}
                     </div>
                 </div>
             </div>
@@ -303,7 +304,7 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
                     )}
                     <div className={styles.playerName}>{getDisplayName()}</div>
                     <div className={styles.teamName}>
-                        {mapToFullTeamName.get(player.team)}
+                        {getTeamDisplayName(player)}
                     </div>
                 </div>
             </div>
@@ -384,4 +385,11 @@ export function InputComponent(props: InputComponentProps) {
             </div>
         </div>
     );
+}
+
+function getTeamDisplayName(player: miniPlayer) {
+    if (player.number === undefined) {
+        return '';
+    }
+    return `#${player.number} ${mapToFullTeamName.get(player.team)}`;
 }
