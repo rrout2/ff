@@ -136,7 +136,7 @@ import mediumGreen from '../assets/2.0/arrows/medium_green.png';
 import longRed from '../assets/2.0/arrows/long_red.png';
 import longGreen from '../assets/2.0/arrows/long_green.png';
 
-import blankBlueprintV2 from '../assets/2.0/blankblueprint.png';
+import blankBlueprintV2 from '../assets/2.0/2.0_background_update.png';
 import oneYearReloadGraph from '../assets/2.0/outlook_graphs/1R-OCC.png';
 import dualEliteGraphCCO from '../assets/2.0/outlook_graphs/DQ & QT-CCO.png';
 import dualEliteGraphRCC from '../assets/2.0/outlook_graphs/DQ & QT-RCC.png';

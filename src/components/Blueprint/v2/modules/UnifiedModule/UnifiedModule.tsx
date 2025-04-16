@@ -119,6 +119,10 @@ export default function UnifiedModule({
         setAutoPopulatedDraftStrategy,
         sortByRookieRank,
     } = useRookieDraft();
+    const [rookiePickHeaders, setRookiePickHeaders] = useState([
+        '2025 Rookie Picks',
+        '2026 Rookie Picks',
+    ]);
 
     const rankStateMap = new Map(
         FANTASY_POSITIONS.map(pos => [pos, useState('4th')])
@@ -185,6 +189,8 @@ export default function UnifiedModule({
                 setOutlookValues={setOutlookValues}
                 outlook={outlook}
                 setOutlook={setOutlook}
+                rookiePickHeaders={rookiePickHeaders}
+                setRookiePickHeaders={setRookiePickHeaders}
             />
             <CornerstonesGraphic
                 cornerstones={cornerstones}
@@ -288,6 +294,8 @@ export type UnifiedInputsProps = {
     setOtherSettings?: (otherSettings: string) => void;
     rookiePickComments?: string[];
     setRookiePickComments?: (value: SetStateAction<string[]>) => void;
+    rookiePickHeaders: string[];
+    setRookiePickHeaders: (value: SetStateAction<string[]>) => void;
     suggestionsAndComments?: string[];
     setSuggestionsAndComments?: (suggestionsAndComments: string[]) => void;
 };
@@ -344,6 +352,8 @@ export function UnifiedInputs({
     setOtherSettings,
     rookiePickComments,
     setRookiePickComments,
+    rookiePickHeaders,
+    setRookiePickHeaders,
     suggestionsAndComments,
     setSuggestionsAndComments,
 }: UnifiedInputsProps) {
@@ -490,6 +500,33 @@ export function UnifiedInputs({
                         />
                     </>
                 )}
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '6px',
+                    }}
+                >
+                    Rookie Pick Comment Header
+                    {rookiePickHeaders.map((comment, idx) => (
+                        <TextField
+                            key={idx}
+                            value={comment}
+                            onChange={(
+                                event: ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setRookiePickHeaders(
+                                    rookiePickHeaders.map((currHeader, i) =>
+                                        i === idx
+                                            ? event.target.value
+                                            : currHeader
+                                    )
+                                );
+                            }}
+                            label={`Header ${idx + 1}`}
+                        />
+                    ))}
+                </div>
                 {!!setRookiePickComments && !!rookiePickComments && (
                     <div
                         style={{
@@ -515,7 +552,7 @@ export function UnifiedInputs({
                                         )
                                     );
                                 }}
-                                label={`${idx + 2025} Comments`}
+                                label={rookiePickHeaders[idx]}
                             />
                         ))}
                     </div>

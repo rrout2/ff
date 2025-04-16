@@ -138,6 +138,24 @@
     left: 150px;
 }
 
+.rookiePickHeader1, 
+.rookiePickHeader2 {
+    position: absolute;
+    color: white;
+    font-family: 'Erbaum Black';
+    width: 350px;
+    height: 50px;
+    text-align: center;
+    left: 1790px;
+}
+
+.rookiePickHeader1 {
+    top: 645px;
+}
+.rookiePickHeader2 {
+    top: 760px;
+}
+
 .rookiePickComment1,
 .rookiePickComment2 {
     position: absolute;

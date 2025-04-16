@@ -178,6 +178,10 @@ export default function BigBoy({
         'comment 1',
         'comment 2',
     ]);
+    const [rookiePickHeaders, setRookiePickHeaders] = useState([
+        '2025 Rookie Picks',
+        '2026 Rookie Picks',
+    ]);
 
     const [suggestionsAndComments, setSuggestionsAndComments] = useState([
         'suggestion 1',
@@ -258,6 +262,7 @@ export default function BigBoy({
             archetype={archetype}
             otherSettings={otherSettings}
             rookiePickComments={rookiePickComments}
+            rookiePickHeaders={rookiePickHeaders}
             suggestionsAndComments={suggestionsAndComments}
             isPreview={isPreview}
         />
@@ -499,6 +504,8 @@ export default function BigBoy({
                 setOtherSettings={setOtherSettings}
                 rookiePickComments={rookiePickComments}
                 setRookiePickComments={setRookiePickComments}
+                rookiePickHeaders={rookiePickHeaders}
+                setRookiePickHeaders={setRookiePickHeaders}
                 suggestionsAndComments={suggestionsAndComments}
                 setSuggestionsAndComments={setSuggestionsAndComments}
             />
@@ -538,6 +545,7 @@ interface FullBlueprintProps {
     teamName?: string;
     otherSettings: string;
     rookiePickComments: string[];
+    rookiePickHeaders: string[];
     suggestionsAndComments: string[];
     isPreview: boolean;
 }
@@ -565,6 +573,7 @@ function FullBlueprint({
     archetype,
     otherSettings,
     rookiePickComments,
+    rookiePickHeaders,
     suggestionsAndComments,
     isPreview,
 }: FullBlueprintProps) {
@@ -600,6 +609,9 @@ function FullBlueprint({
             >
                 <div className={styles.teamName}>{teamName}</div>
                 <div className={styles.otherSettings}>{otherSettings}</div>
+                <div className={styles.rookiePickHeader1}>
+                    {rookiePickHeaders[0]}
+                </div>
                 <div
                     className={styles.rookiePickComment1}
                     style={{
@@ -609,11 +621,14 @@ function FullBlueprint({
                 >
                     {rookiePickComments[0]}
                 </div>
+                <div className={styles.rookiePickHeader2}>
+                    {rookiePickHeaders[1]}
+                </div>
                 <div
                     className={styles.rookiePickComment2}
                     style={{
                         fontSize:
-                            rookiePickComments[0].length > 60 ? '12px' : '16px',
+                            rookiePickComments[1].length > 60 ? '12px' : '16px',
                     }}
                 >
                     {rookiePickComments[1]}
