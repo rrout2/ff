@@ -5,8 +5,8 @@ import buySellsData from '../data/buyssellsholds_with_ids_040725.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import sfPickMovesJson from '../data/rookieBP/sf_pick_moves.json';
 import oneQbPickMovesJson from '../data/rookieBP/1qb_pick_moves.json';
-import sfRookieRankingsJson from '../data/rookieBP/sf_rookie_rankings_and_tiers_apr14.json';
-import oneQbRookieRankingsJson from '../data/rookieBP/1qb_rookie_rankings_and_tiers_apr14.json';
+import sfRookieRankingsJson from '../data/rookieBP/sf_rookie_rankings_and_tiers_apr16.json';
+import oneQbRookieRankingsJson from '../data/rookieBP/1qb_rookie_rankings_and_tiers_apr16.json';
 import {
     League,
     Player,
