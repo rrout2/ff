@@ -207,6 +207,13 @@ export function HoldTile({playerId}: {playerId: string}) {
             return <></>;
         }
     }
+    function getDisplayName() {
+        const longName = `${player.first_name} ${player.last_name}`;
+
+        const shortName = `${player.first_name[0]}. ${player.last_name}`;
+
+        return longName.length >= 17 ? shortName : longName;
+    }
     return (
         <div
             className={styles.sellHoldTile}
@@ -222,9 +229,7 @@ export function HoldTile({playerId}: {playerId: string}) {
                         <img src={holdIcon} className={styles.sellIcon} />
                         &nbsp;HOLD
                     </div>
-                    <div className={styles.playerName}>
-                        {player.first_name} {player.last_name}
-                    </div>
+                    <div className={styles.playerName}>{getDisplayName()}</div>
                     <div className={styles.teamName}>
                         {getTeamDisplayName(player)}
                     </div>
