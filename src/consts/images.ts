@@ -272,6 +272,10 @@ import antwaneWells from '../assets/rookieDraft/rookieCards/antwaneWells.png';
 import donovanEdwards from '../assets/rookieDraft/rookieCards/donovanEdwards.png';
 import marcusYarns from '../assets/rookieDraft/rookieCards/marcusYarns.png';
 import coreyKiner from '../assets/rookieDraft/rookieCards/coreyKiner.png';
+import arianSmith from '../assets/rookieDraft/rookieCards/arianSmith.png';
+import chimereDike from '../assets/rookieDraft/rookieCards/chimereDike.png';
+import jaylinLane from '../assets/rookieDraft/rookieCards/jaylinLane.png';
+import isaacTeslaa from '../assets/rookieDraft/rookieCards/isaacTeslaa.png';
 import horizontalScale from '../assets/horizontalScale.png';
 const tierLogos: Map<string, string> = new Map([
     ['S', sTier],
@@ -505,6 +509,7 @@ const rookieMap: Map<string, string> = new Map([
     ['Cade Klubnik', cadeKlubnik],
     ['Cam Skattebo', camSkattebo],
     ['Cameron Ward', camWard],
+    ['Cam Ward', camWard],
     ['Carson Beck', carsonBeck],
     ['Colston Loveland', colstonLoveland],
     ['Damien Martinez', damienMartinez],
@@ -554,6 +559,7 @@ const rookieMap: Map<string, string> = new Map([
     ['Travis Hunter', travisHunter],
     ['Tre Harris', treHarris],
     ['TreVeyon Henderson', treveyonHenderson],
+    ['TreyVeon Henderson', treveyonHenderson],
     ['Trevor Etienne', trevorEtienne],
     ['Tyler Warren', tylerWarren],
     ['Woody Marks', woodyMarks],
@@ -577,6 +583,10 @@ const rookieMap: Map<string, string> = new Map([
     ['Nick Nash', nickNash],
     ['Marcus Yarns', marcusYarns],
     ["Ja'Corey Brooks", jacoreyBrooks],
+    ['Arian Smith', arianSmith],
+    ['Chimere Dike', chimereDike],
+    ['Jaylin Lane', jaylinLane],
+    ['Isaac Teslaa', isaacTeslaa],
 ]);
 
 export {
