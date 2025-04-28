@@ -91,11 +91,11 @@ const firstRoundDraftStrategy = {
 
 const secondRoundDraftStrategy = {
     header: '2nd Round Picks',
-    body: 'Try taking mid 2nd round picks and either trading up into the early second or downtiering into the late 2nd. If there are high draft capital WRs, take them here. Don’t reach on day 3 RBs with enticing landing spots until later.',
+    body: "Do not reach on 3rd round WRs in this range. If 1st or early 2nd round WRs lie in this range, take them. Prioritize day 2 RBs over everything. Don't pass up on Skattebo/Tuten in the mid to late 2nd.",
 };
 const thirdRoundDraftStrategy = {
     header: '3rd Round Picks',
-    body: 'Use these picks on RBs, we have found that the hit rates for RBs in the 3rd round is very comparable to that of the hit rates in the 2nd. Keep in mind WRs & TEs have very low hit rates in this range.',
+    body: 'Use these picks on RBs, we have found that the hit rates for RBs in the 3rd round is very comparable to that of the hit rates in the 2nd. Keep in mind WRs have very low hit rates in this range.',
 };
 
 export function useRookieDraft() {
