@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
-import playerValuesJson from '../data/player_values_040725.json';
+import rankingsJson from '../data/rankings_04292025.json';
 import buySellsData from '../data/buyssellsholds_with_ids_040725.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import sfPickMovesJson from '../data/rookieBP/sf_pick_moves.json';
@@ -515,35 +515,48 @@ export type PlayerValue = {
     teValue?: number;
 };
 
+// This is a set of players that get a bump in one QB leagues
+const oneQbBump = new Set(
+    ['Josh Allen', 'Jayden Daniels', 'Jalen Hurts', 'Lamar Jackson'].map(n =>
+        n.toLowerCase()
+    )
+);
+
+// Uses adp data to calculate player values
 export function usePlayerValues() {
-    const [playerValues] = useState<PlayerValue[]>(
-        playerValuesJson as unknown as PlayerValue[]
-    );
+    const {adpData, getAdp, getPositionalAdp} = useAdpData();
 
     const getPlayerValue = (playerName: string) => {
-        let playerValue = playerValues.find(pv => pv.Player === playerName);
-        if (playerValue) return playerValue;
-
-        const playerNickname = checkForNickname(playerName);
-        playerValue = playerValues.find(pv => pv.Player === playerNickname);
-        if (playerValue) return playerValue;
-
-        playerValue = playerValues.find(
-            pv =>
-                pv.Player.replace(/\W/g, '').toLowerCase() ===
-                playerName.replace(/\W/g, '').toLowerCase()
-        );
-        if (playerValue) return playerValue;
-
-        return playerValues.find(
-            pv =>
-                pv.Player.replace(/\W/g, '').toLowerCase() ===
-                playerNickname.replace(/\W/g, '').toLowerCase()
-        );
+        const rank = getAdp(playerName);
+        const datum = adpData[rank - 1];
+        if (!datum) {
+            console.warn(
+                `cannot find player with name = '${playerName}' in adpData`
+            );
+            return {
+                Player: playerName,
+                Value: 0,
+                Position: '',
+                oneQbBonus: 0,
+                sfBonus: 0,
+            };
+        }
+        const positionalRank = getPositionalAdp(playerName);
+        return {
+            Player: datum.player_name,
+            Position: datum.Position,
+            Value: 1.0808218554 * Math.pow(0.97230651306, rank) * 100,
+            oneQbBonus: oneQbBump.has(playerName) ? 1 : 0,
+            sfBonus: 0,
+            teValue:
+                datum.Position === TE
+                    ? Math.max(10 - positionalRank + 1, 1)
+                    : undefined,
+        };
     };
 
     const getBump = (playerName: string, superFlex: boolean) => {
-        const playerValue = playerValues.find(pv => pv.Player === playerName);
+        const playerValue = getPlayerValue(playerName);
         if (playerValue) {
             if (superFlex) {
                 return playerValue.sfBonus;
@@ -557,7 +570,7 @@ export function usePlayerValues() {
         return 0;
     };
 
-    return {playerValues, getPlayerValue, getBump};
+    return {getPlayerValue, getBump};
 }
 
 type adpDatum = {
@@ -565,21 +578,26 @@ type adpDatum = {
     Position: string;
 };
 
+type Rank = {
+    Name: string;
+    Team: string;
+    Position: string;
+    Average: number;
+};
+
 export function useAdpData() {
     const [adpData, setAdpData] = useState<adpDatum[]>([]);
 
     useEffect(() => {
         setAdpData(
-            (playerValuesJson as unknown as PlayerValue[]).map(
-                (p: PlayerValue) => {
-                    return {
-                        player_name: p.Player,
-                        Position: p.Position,
-                    };
-                }
-            )
+            (rankingsJson as unknown as Rank[]).map((p: Rank) => {
+                return {
+                    player_name: p.Name,
+                    Position: p.Position,
+                };
+            })
         );
-    }, [playerValuesJson]);
+    }, [rankingsJson]);
 
     const getAdp = (playerName: string): number => {
         const playerNickname = checkForNickname(playerName);
