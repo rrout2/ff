@@ -61,7 +61,6 @@ export function GraphicComponent({
             {holds.map((holdId, idx) => (
                 <div key={idx} className={styles.holdColumn}>
                     <HoldTile playerId={holdId} />
-                    {/* <div className={styles.comment}>{comments[idx]}</div> */}
                 </div>
             ))}
         </div>

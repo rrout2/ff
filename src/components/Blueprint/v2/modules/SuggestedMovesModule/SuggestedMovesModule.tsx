@@ -393,7 +393,9 @@ export function InputComponent(props: InputComponentProps) {
 }
 
 function getTeamDisplayName(player: miniPlayer) {
-    if (player.number === undefined) {
+    const fullTeamName = mapToFullTeamName.get(player.team);
+    if (!player.number) {
+        if (fullTeamName) return fullTeamName;
         return '';
     }
     return `#${player.number} ${mapToFullTeamName.get(player.team)}`;
