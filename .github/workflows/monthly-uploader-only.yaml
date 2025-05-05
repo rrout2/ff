@@ -14,7 +14,6 @@ jobs:
                   python-version: '3.11'
             - uses: browser-actions/setup-chrome@v1
               with:
-                  chrome-version: 133
                   install-chromedriver: true
                   install-dependencies: true
             - name: Update PATH for chrome
