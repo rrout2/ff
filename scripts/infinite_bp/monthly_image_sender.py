@@ -258,7 +258,7 @@ def main():
         for i in range(len(sender.league_id_list)):
             if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
                 continue
-            if (sender.team_id_list[i] == '' or sender.team_id_list[i] == None) and (sender.user_id_list[i] == '' or sender.user_id_list[i] == None):
+            if (i >= len(sender.team_id_list) or i >= len(sender.user_id_list)) and (sender.team_id_list[i] == '' or sender.team_id_list[i] == None) and (sender.user_id_list[i] == '' or sender.user_id_list[i] == None):
                 continue
             if sender.email_list[i] in sender.skip_list:
                 continue
