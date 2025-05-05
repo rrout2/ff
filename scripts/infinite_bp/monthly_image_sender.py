@@ -61,6 +61,7 @@ class ImageEmailSender:
             self.user_id_list = config['user_id_list']
         else:
             self.user_id_list = []
+        print(f"User IDs: {self.user_id_list}")
         
         if isinstance(config['skip_list'], str):
             self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
@@ -261,6 +262,7 @@ def main():
             has_invalid_team_id = i >= len(sender.team_id_list) or sender.team_id_list[i] == '' or sender.team_id_list[i] == None
             has_invalid_user_id = i >= len(sender.user_id_list) or sender.user_id_list[i] == '' or sender.user_id_list[i] == None
             if has_invalid_team_id and has_invalid_user_id:
+                print(f"Skipping {i + 1}/{len(sender.league_id_list)}: No team or user ID")
                 continue
             if sender.email_list[i] in sender.skip_list:
                 continue
