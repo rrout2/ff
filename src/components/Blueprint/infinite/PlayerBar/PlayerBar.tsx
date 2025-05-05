@@ -14,7 +14,11 @@ export default function PlayerBar({playerId}: PlayerTargetProps) {
         return <></>;
     }
     const player = playerData[playerId];
-    const pos = player.position;
+    if (!player) {
+        console.warn(`Unexpected player ID: '${playerId}'`);
+        return <></>;
+    }
+    const pos = player?.position;
     const fullName = `${player.first_name} ${player.last_name}`;
     const longNameLimit = 15;
 
