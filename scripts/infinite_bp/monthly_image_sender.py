@@ -258,7 +258,9 @@ def main():
         for i in range(len(sender.league_id_list)):
             if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
                 continue
-            if (i >= len(sender.team_id_list) or i >= len(sender.user_id_list)) and (sender.team_id_list[i] == '' or sender.team_id_list[i] == None) and (sender.user_id_list[i] == '' or sender.user_id_list[i] == None):
+            has_invalid_team_id = i >= len(sender.team_id_list) or sender.team_id_list[i] == '' or sender.team_id_list[i] == None
+            has_invalid_user_id = i >= len(sender.user_id_list) or sender.user_id_list[i] == '' or sender.user_id_list[i] == None
+            if has_invalid_team_id and has_invalid_user_id:
                 continue
             if sender.email_list[i] in sender.skip_list:
                 continue
