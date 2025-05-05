@@ -5,14 +5,15 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the JSON file name
-json_file_name = 'domain_customer_info_may.json'
+json_file_name = 'domain_customer_info_may_userids.json'
 
 # Construct the full path to the JSON file
 json_file_path = os.path.join(script_dir, json_file_name)
 disallowed_buys_path = os.path.join(script_dir, 'email_to_buys/april2025/april2025_customer_info_disallowed.json')
 
-league_id_key = "Sleeper ID"
-team_id_key = "Team ID"
+league_id_key = "League ID"
+# team_id_key = "Team ID"
+user_id_key = "Sleeper ID"
 # sub_team_id_key = "\r\n\r\nFIND YOUR TEAM ID HERE\r\nTEAM ID FINDER"
 email_key = "Email"
 # verified_key = 'Column 1\r'
@@ -46,10 +47,11 @@ disallowed_buys = []
 
 for item in verified_data:
     league_id = item[league_id_key]
-    team_id = item[team_id_key]
+    # team_id = item[team_id_key]
+    user_id = item[user_id_key]
     found_disallowed = False
     for disallowed_item in disallowed_data:
-        if league_id == disallowed_item["Sleeper ID"] and team_id == disallowed_item["Team ID"] and disallowed_item['disallowed']:
+        if league_id == disallowed_item["Sleeper ID"] and disallowed_item['disallowed']:
             disallowed_buys.append('-'.join(disallowed_item['disallowed']))
             found_disallowed = True
             break
@@ -64,9 +66,13 @@ print(f'League IDs: ({len(league_ids)})')
 print(','.join(league_ids))
 
 # team_ids = [str(item[team_id_key][sub_team_id_key]) for item in verified_data]
-team_ids = [str(item[team_id_key]) for item in verified_data]
-print(f'\nTeam IDs: ({len(team_ids)})')
-print(','.join(team_ids))
+# team_ids = [str(item[team_id_key]) for item in verified_data]
+# print(f'\nTeam IDs: ({len(team_ids)})')
+# print(','.join(team_ids))
+
+user_ids = [str(item[user_id_key]) for item in verified_data]
+print(f'\nUser IDs: ({len(user_ids)})')
+print(','.join(user_ids))
 
 emails = [item[email_key].strip() for item in verified_data]
 print(f'\nEmails: ({len(emails)})')
