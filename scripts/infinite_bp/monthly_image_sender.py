@@ -54,7 +54,7 @@ class ImageEmailSender:
             self.team_id_list = config['team_id_list']
         else:
             self.team_id_list = []
-        
+        print(config['user_id_list'])
         if isinstance(config['user_id_list'], str):
             self.user_id_list = [email.strip() for email in config['user_id_list'].split(',')]
         elif config['user_id_list'] != None:
