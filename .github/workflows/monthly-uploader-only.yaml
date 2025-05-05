@@ -35,6 +35,7 @@ jobs:
                   SA_CREDENTIALS: ${{ secrets.SA_CREDENTIALS }}
                   LEAGUE_ID_LIST: ${{ secrets.LEAGUE_ID_LIST }}
                   TEAM_ID_LIST: ${{ secrets.TEAM_ID_LIST }}
+                  USER_ID_LIST: ${{ secrets.USER_ID_LIST }}
                   SKIP_LIST: ${{ secrets.SKIP_LIST }}
                   DISALLOWED_BUYS: ${{ secrets.DISALLOWED_BUYS }}
               run: |
