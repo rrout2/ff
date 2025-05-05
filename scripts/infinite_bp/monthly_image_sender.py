@@ -79,6 +79,7 @@ class ImageEmailSender:
         os.makedirs(self.download_dir, exist_ok=True)
 
         self.email_to_buys = {}
+        self.league_id_to_buys = {}
 
         self.fails = []
 
@@ -188,6 +189,7 @@ class ImageEmailSender:
 
         buy_ids = driver.find_element(By.CSS_SELECTOR, self.buy_ids_selector).text
         self.email_to_buys[self.email_list[idx]] = buy_ids
+        self.league_id_to_buys[self.league_id_list[idx]] = buy_ids
 
     def send_email_link(self, recipient_email, drive_link):
         """
@@ -266,6 +268,8 @@ def main():
                 
                 with open("email_to_buys.json", "w") as json_file:
                     json.dump(sender.email_to_buys, json_file, indent=4)
+                with open("league_id_to_buys.json", "w") as json_file:
+                    json.dump(sender.league_id_to_buys, json_file, indent=4)
                 os.remove(downloaded_file)
             except Exception as e:
                 print(f"\nAn upload/email error occurred: {str(e)}")

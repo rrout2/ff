@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import playersJson from '../data/players.json';
 import rankingsJson from '../data/rankings_04292025.json';
-import buySellsData from '../data/buyssellsholds_with_ids_040725.json';
+import buySellsData from '../data/buyssellsholds_with_ids_050525.json';
 import nflScheduleJson from '../data/nfl_schedule.json';
 import sfPickMovesJson from '../data/rookieBP/sf_pick_moves.json';
 import oneQbPickMovesJson from '../data/rookieBP/1qb_pick_moves.json';

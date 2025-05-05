@@ -5,11 +5,11 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Specify the JSON file name
-json_file_name = 'domain_customer_info_apr07.json'
+json_file_name = 'domain_customer_info_may.json'
 
 # Construct the full path to the JSON file
 json_file_path = os.path.join(script_dir, json_file_name)
-disallowed_buys_path = os.path.join(script_dir, 'email_to_buys/march2025/march_customer_info_disallowed.json')
+disallowed_buys_path = os.path.join(script_dir, 'email_to_buys/april2025/april2025_customer_info_disallowed.json')
 
 league_id_key = "Sleeper ID"
 team_id_key = "Team ID"
@@ -22,16 +22,20 @@ try:
         data = json.load(file)
 except FileNotFoundError:
     print(f"Error: {json_file_name} not found in the directory {script_dir}")
+    exit(1)
 except json.JSONDecodeError as e:
     print(f"Error: Failed to decode JSON - {e}")
+    exit(1)
 
 try:
     with open(disallowed_buys_path, 'r') as file:
         disallowed_data = json.load(file)
 except FileNotFoundError:
-    print(f"Error: {json_file_name} not found in the directory {script_dir}")
+    print(f"Error: Unabled to find {disallowed_buys_path}")
+    exit(1)
 except json.JSONDecodeError as e:
     print(f"Error: Failed to decode JSON - {e}")
+    exit(1)
 
 
 
