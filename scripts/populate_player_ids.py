@@ -30,6 +30,8 @@ def process_json_files(players_file, ids_file, output_file):
     name_to_age = {}
     for player_id, info in id_mappings.items():
         full_name = f"{info['first_name']} {info['last_name']}".lower()
+        if full_name in name_to_id:
+            continue
         name_to_id[full_name] = player_id
         if 'age' not in info:
             print(f"Warning: player mapping missing 'age' field: {full_name}")
