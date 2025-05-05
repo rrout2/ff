@@ -144,7 +144,7 @@ class ImageEmailSender:
             
             time.sleep(2)
             # Wait for button to exist
-            WebDriverWait(driver, 20).until(
+            WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, self.download_button_selector))
             )
 
