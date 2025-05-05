@@ -82,6 +82,7 @@ class ImageEmailSender:
         self.league_id_to_buys = {}
 
         self.fails = []
+        self.fail_indices = []
 
     def setup_driver(self):
         """Setup Chrome driver with custom download settings"""
@@ -254,6 +255,8 @@ def main():
             if not downloaded_file:
                 print(f"Failed to download image {i + 1}/{len(sender.league_id_list)} for {sender.email_list[i]}")
                 sender.fails.append(sender.email_list[i])
+                sender.fail_indices.append(i)
+                print(f"failed indices: {sender.fail_indices}")
                 continue
             try:
                 print(f"Uploading {downloaded_file}...")
