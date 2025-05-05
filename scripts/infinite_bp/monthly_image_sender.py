@@ -60,7 +60,6 @@ class ImageEmailSender:
             self.user_id_list = config['user_id_list']
         else:
             self.user_id_list = []
-        print(f"User IDs: {self.user_id_list}")
         
         if isinstance(config['skip_list'], str):
             self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
@@ -253,7 +252,7 @@ def main():
     try:
         # Authenticate
         uploader.authenticate()
-        folder_id = uploader.create_or_get_folder(args.folder_name)
+        folder_id = '1PpUkZBKFN1-rkjjRrpqcIyUqkuxr5Ehg' #uploader.create_or_get_folder(args.folder_name)
         print(f"Folder link: https://drive.google.com/drive/folders/{folder_id}")
         for i in range(len(sender.league_id_list)):
             if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
@@ -294,6 +293,7 @@ def main():
                 print(f"\nAn upload/email error occurred: {str(e)}")
                 logging.exception("Exception occurred")
                 sender.fails.append(sender.email_list[i])
+                sender.fail_indices.append(i)
         
 
         print("\nDone!")
