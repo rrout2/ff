@@ -47,10 +47,20 @@ class ImageEmailSender:
             self.league_id_list = [email.strip() for email in config['league_id_list'].split(',')]
         else:
             self.league_id_list = config['league_id_list']
+
         if isinstance(config['team_id_list'], str):
             self.team_id_list = [email.strip() for email in config['team_id_list'].split(',')]
-        else:
+        elif config['team_id_list'] != None:
             self.team_id_list = config['team_id_list']
+        else:
+            self.team_id_list = []
+        
+        if isinstance(config['user_id_list'], str):
+            self.user_id_list = [email.strip() for email in config['user_id_list'].split(',')]
+        elif config['user_id_list'] != None:
+            self.user_id_list = config['user_id_list']
+        else:
+            self.user_id_list = []
         
         if isinstance(config['skip_list'], str):
             self.skip_list = set([email.strip() for email in config['skip_list'].split(',')])
@@ -132,7 +142,10 @@ class ImageEmailSender:
             disallowed_buys = ''
         else:
             disallowed_buys = disallowed_buys.replace('-', ',')
-        return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}&disallowedBuys={disallowed_buys}"
+        if len(self.team_id_list) > 0:
+            return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&teamId={self.team_id_list[idx]}&disallowedBuys={disallowed_buys}"
+        else:
+            return f"https://rrout2.github.io/dynasty-ff/#/infinite?leagueId={self.league_id_list[idx]}&userId={self.user_id_list[idx]}&disallowedBuys={disallowed_buys}"
 
     def download_image(self, idx):
         """Navigate to website and click download button"""
@@ -245,7 +258,7 @@ def main():
         for i in range(len(sender.league_id_list)):
             if sender.league_id_list[i] == '' or sender.league_id_list[i] == None:
                 continue
-            if sender.team_id_list[i] == '' or sender.team_id_list[i] == None:
+            if (sender.team_id_list[i] == '' or sender.team_id_list[i] == None) and (sender.user_id_list[i] == '' or sender.user_id_list[i] == None):
                 continue
             if sender.email_list[i] in sender.skip_list:
                 continue
