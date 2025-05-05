@@ -27,6 +27,7 @@ import {
     NONE_TEAM_ID,
     TEAM_ID,
     TEAM_NAME,
+    USER_ID,
 } from '../consts/urlParams';
 import {useSearchParams} from 'react-router-dom';
 import {
@@ -963,6 +964,32 @@ export function useTeamIdFromUrl(): [string, Dispatch<SetStateAction<string>>] {
     }, [teamId, setSearchParams]);
 
     return [teamId, setTeamId];
+}
+
+export function useUserIdFromUrl(): [string, Dispatch<SetStateAction<string>>] {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [userId, setUserId] = useState('');
+
+    useEffect(() => {
+        const userIdFromUrl = searchParams.get(USER_ID);
+        if (userIdFromUrl === userId) return;
+        if (!userIdFromUrl) {
+            return;
+        }
+
+        setUserId(userIdFromUrl);
+    }, [searchParams, setUserId]);
+
+    useEffect(() => {
+        if (userId === searchParams.get(USER_ID) || userId === '') return;
+
+        setSearchParams(searchParams => {
+            searchParams.set(USER_ID, userId);
+            return searchParams;
+        });
+    }, [userId, setSearchParams]);
+
+    return [userId, setUserId];
 }
 
 export function useModuleFromUrl(): [Module, Dispatch<SetStateAction<Module>>] {

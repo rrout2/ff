@@ -17,6 +17,7 @@ import {
     useRoster,
     useRosterSettings,
     useTeamIdFromUrl,
+    useUserIdFromUrl,
 } from '../../../../hooks/hooks';
 import {StartersGraphic} from '../../v1/modules/Starters/Starters';
 import {GraphicComponent as PositionalGradesGraphic} from '../../v1/modules/PositionalGrades/PositionalGrades';
@@ -47,6 +48,7 @@ import {NONE_TEAM_ID} from '../../../../consts/urlParams';
 export default function Infinite() {
     const [leagueId] = useLeagueIdFromUrl();
     const [teamId, setTeamId] = useTeamIdFromUrl();
+    const [userId] = useUserIdFromUrl();
     const league = useLeague(leagueId);
     const rosterSettings = useRosterSettings(league);
     const {data: rosters} = useFetchRosters(leagueId);
@@ -73,6 +75,15 @@ export default function Infinite() {
             setTeamId('0');
         }
     }, [allUsers, teamId]);
+
+    useEffect(() => {
+        if (!allUsers.length || !userId) {
+            return;
+        }
+        const userIndex = allUsers.findIndex(u => u.user_id === userId);
+        setTeamId('' + userIndex);
+        setSpecifiedUser(allUsers[userIndex]);
+    }, [allUsers, userId]);
 
     useEffect(() => {
         if (!leagueId || !rosters) return;
