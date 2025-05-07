@@ -223,6 +223,11 @@ export function HoldTile({playerId}: {playerId: string}) {
                 <img
                     className={styles.holdPlayerImg}
                     src={getImageSrc(player)}
+                    onError={({currentTarget}) => {
+                        currentTarget.onerror = null;
+                        currentTarget.src =
+                            'https://sleepercdn.com/images/v2/icons/player_default.webp';
+                    }}
                 />
                 <div className={styles.holdTileText}>
                     <div className={styles.holdLabel}>
@@ -313,7 +318,15 @@ function BuyTile({playerId, plus}: {playerId: string; plus: boolean}) {
                     </div>
                 </div>
             </div>
-            <img className={styles.playerImg} src={getImageSrc(player)} />
+            <img
+                className={styles.playerImg}
+                src={getImageSrc(player)}
+                onError={({currentTarget}) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src =
+                        'https://sleepercdn.com/images/v2/icons/player_default.webp';
+                }}
+            />
             <div className={styles.buyLabel}>
                 BUY&nbsp;
                 <img src={buyIcon} className={styles.sellIcon} />
