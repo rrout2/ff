@@ -162,7 +162,7 @@ export function useRookieDraft() {
     }, [autoPopulatedDraftStrategy]);
     const {getRookieTier, sortByRookieRank} = useRookieRankings(isSuperFlex);
     const [draftCapitalScore, setDraftCapitalScore] = useState(0);
-    const {pickMoves, getMove} = usePickMoves(isSuperFlex);
+    const {pickMoves} = usePickMoves(isSuperFlex);
     useEffect(() => {
         if (tier === RosterTier.Unknown) return;
         resetDraftPickVerdict(0);
@@ -251,11 +251,9 @@ export function useRookieDraft() {
         setDraftPicks(oldDraftPicks => {
             const newDraftPicks = oldDraftPicks.slice();
             const dp = draftPicks[index];
-            const pickNumber = getPickNumber(dp.round, dp.pick);
-            const verdict = pickNumber > 0 ? getMove(pickNumber, tier) : '';
             newDraftPicks[index] = {
                 ...dp,
-                verdict: verdict as Verdict,
+                verdict: Verdict.Hold,
             };
             return newDraftPicks.sort(sortDraftPicks);
         });
