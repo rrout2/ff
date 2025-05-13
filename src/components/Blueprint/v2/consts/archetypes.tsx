@@ -86,6 +86,31 @@ export function getV1ArchetypeFromArchetype(
     }
 }
 
+export function getArchetypeFromV1Archetype(archetype: V1Archetype) {
+    switch (archetype) {
+        case V1Archetype.HardRebuild:
+            return Archetype.HardRebuild_RRC;
+        case V1Archetype.WellRounded:
+            return Archetype.WellRounded_CCR;
+        case V1Archetype.DualEliteQB:
+            return Archetype.DualEliteQB_CCO;
+        case V1Archetype.EliteQBTE:
+            return Archetype.EliteQBTE_CCO;
+        case V1Archetype.EliteValue:
+            return Archetype.EliteValue_CCC;
+        case V1Archetype.FutureValue:
+            return Archetype.FutureValue;
+        case V1Archetype.WRFactory:
+            return Archetype.WRFactory_CCR;
+        case V1Archetype.OneYearReload:
+            return Archetype.OneYearReload;
+        case V1Archetype.RBHeavy:
+            return Archetype.RBHeavy;
+        default:
+            return Archetype.UNSPECIFIED;
+    }
+}
+
 export function getGraphFromArchetype(archetype: Archetype) {
     switch (archetype) {
         case Archetype.HardRebuild_RRC:

@@ -20,6 +20,7 @@ import {
     useLeague,
     useProjectedLineup,
     useRosterSettingsFromId,
+    useArchetype,
 } from '../../../../../hooks/hooks';
 import {Player, Roster} from '../../../../../sleeper-api/sleeper-api';
 import ExportButton from '../../../shared/ExportButton';
@@ -248,10 +249,6 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
     const [depthScoreOverride, setDepthScoreOverride] = useState(-1);
 
     const [outlooks, setOutlooks] = useState<string[]>([]);
-    const [archetype, setArchetype] = useState(Archetype.HardRebuild);
-    useEffect(() => {
-        setOutlooks(ArchetypeDetails[archetype][0]);
-    }, [archetype]);
     const [playerSuggestions, setPlayerSuggestions] = useState<string[]>([
         '10229',
         '5849',
@@ -285,6 +282,17 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
         setAutoPopulatedDraftStrategy,
         sortByRookieRank,
     } = useRookieDraft();
+    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
+    const {archetype, setArchetype} = useArchetype(
+        qbGrade,
+        rbGrade,
+        wrGrade,
+        teGrade,
+        isSuperFlex
+    );
+    useEffect(() => {
+        setOutlooks(ArchetypeDetails[archetype][0]);
+    }, [archetype]);
     const [additionalDraftNotes, setAdditionalDraftNotes] = useState('');
     useEffect(() => {
         const thisYearInfo = draftPicks
@@ -303,8 +311,6 @@ export default function BigBoy({roster, teamName, numRosters}: BigBoyProps) {
             }${additionalDraftNotes}`
         );
     }, [draftPicks, additionalDraftNotes]);
-
-    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
 
     function shortenOutlook(outlook: string) {
         switch (outlook) {

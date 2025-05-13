@@ -9,6 +9,7 @@ import {
     useLeague,
     useRosterSettings,
     usePositionalGrades,
+    useArchetype,
 } from '../../../../../hooks/hooks';
 import {
     GraphicComponent as CornerstonesGraphic,
@@ -55,6 +56,7 @@ import {
     getDvmFromArchetype,
     getV1ArchetypeFromArchetype,
     getOutlookFromArchetype,
+    getArchetypeFromV1Archetype,
 } from '../../consts/archetypes';
 import {
     ARCHETYPE,
@@ -83,7 +85,6 @@ import {
 } from '../../../rookieDraft/RookieDraft/RookieDraft';
 import {getPositionalOrder} from '../../../infinite/BuySellHold/BuySellHold';
 import rookieDraftStyles from '../../../rookieDraft/RookieDraft/RookieDraft.module.css';
-
 interface BigBoyProps {
     roster?: Roster;
     numRosters?: number;
@@ -92,6 +93,7 @@ interface BigBoyProps {
     rbRank: number;
     wrRank: number;
     teRank: number;
+    isSuperFlex: boolean;
 }
 
 export default function BigBoy({
@@ -102,6 +104,7 @@ export default function BigBoy({
     rbRank,
     wrRank,
     teRank,
+    isSuperFlex,
 }: BigBoyProps) {
     const {cornerstones, setCornerstones} = useCornerstones(roster);
     const {sells, setSells, buys, setBuys, plusMap, setPlusMap} =
@@ -165,9 +168,15 @@ export default function BigBoy({
         rankStateMap.get(TE)![1](rankToString(teRank));
     }, [teRank]);
 
+    const {archetype: archetypev1} = useArchetype(qb, rb, wr, te, isSuperFlex);
+
     const [archetype, setArchetype] = useState<Archetype>(
         Archetype.FutureValue
     );
+
+    useEffect(() => {
+        setArchetype(getArchetypeFromV1Archetype(archetypev1));
+    }, [archetypev1]);
 
     useEffect(() => {
         setOutlooks(getOutlookFromArchetype(archetype));

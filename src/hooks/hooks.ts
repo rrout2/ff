@@ -1,4 +1,10 @@
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useState,
+} from 'react';
 import playersJson from '../data/players.json';
 import rankingsJson from '../data/rankings_04292025.json';
 import buySellsData from '../data/buyssellsholds_with_ids_050525.json';
@@ -52,6 +58,123 @@ import {RosterTier} from '../components/Blueprint/infinite/RosterTier/RosterTier
 import {rookieMap} from '../consts/images';
 import {gradeByPosition} from '../components/Blueprint/v1/modules/PositionalGrades/PositionalGrades';
 import {calculateDepthScore} from '../components/Blueprint/v1/modules/DepthScore/DepthScore';
+
+import {Archetype} from '../components/Blueprint/v1/modules/BigBoy/BigBoy';
+
+export function useArchetype(
+    qbScore: number,
+    rbScore: number,
+    wrScore: number,
+    teScore: number,
+    isSuperFlex: boolean
+) {
+    const [archetype, setArchetype] = useState<Archetype>(
+        Archetype.HardRebuild
+    );
+    const calculateSuperflexArchetype = useCallback(() => {
+        const totalScore = qbScore + rbScore + wrScore + teScore;
+        if (qbScore >= 8 && rbScore >= 8 && wrScore >= 8 && teScore >= 8) {
+            setArchetype(Archetype.EliteValue);
+            return;
+        }
+        if (
+            totalScore >= 26 &&
+            qbScore >= 6 &&
+            rbScore >= 6 &&
+            wrScore >= 6 &&
+            teScore >= 6
+        ) {
+            setArchetype(Archetype.WellRounded);
+            return;
+        }
+        if (totalScore >= 20 && qbScore >= 8) {
+            setArchetype(Archetype.DualEliteQB);
+            return;
+        }
+        if (totalScore >= 20 && wrScore >= 8) {
+            setArchetype(Archetype.WRFactory);
+            return;
+        }
+        if (totalScore >= 20 && rbScore >= 9) {
+            setArchetype(Archetype.RBHeavy);
+            return;
+        }
+        if (
+            totalScore >= 15 &&
+            qbScore >= 4 &&
+            rbScore < 9 &&
+            wrScore < 8 &&
+            wrScore >= 3 &&
+            teScore >= 3
+        ) {
+            setArchetype(Archetype.OneYearReload);
+            return;
+        }
+        if (totalScore >= 15) {
+            setArchetype(Archetype.FutureValue);
+            return;
+        }
+        setArchetype(Archetype.HardRebuild);
+    }, [qbScore, rbScore, wrScore, teScore, setArchetype]);
+
+    const calculateOneQbArchetype = useCallback(() => {
+        const totalScore = qbScore + rbScore + wrScore + teScore;
+        if (qbScore >= 8 && rbScore >= 8 && wrScore >= 8 && teScore >= 8) {
+            setArchetype(Archetype.EliteValue);
+            return;
+        }
+        if (
+            totalScore >= 26 &&
+            qbScore >= 6 &&
+            rbScore >= 6 &&
+            wrScore >= 6 &&
+            teScore >= 6
+        ) {
+            setArchetype(Archetype.WellRounded);
+            return;
+        }
+        if (totalScore >= 20 && wrScore >= 8) {
+            setArchetype(Archetype.WRFactory);
+            return;
+        }
+        if (totalScore >= 20 && qbScore >= 8 && teScore >= 8) {
+            setArchetype(Archetype.EliteQBTE);
+            return;
+        }
+        if (totalScore >= 20 && rbScore >= 9) {
+            setArchetype(Archetype.RBHeavy);
+            return;
+        }
+        if (
+            totalScore >= 15 &&
+            qbScore >= 4 &&
+            rbScore < 9 &&
+            wrScore < 8 &&
+            wrScore >= 3 &&
+            teScore >= 3
+        ) {
+            setArchetype(Archetype.OneYearReload);
+            return;
+        }
+        if (totalScore >= 15) {
+            setArchetype(Archetype.FutureValue);
+            return;
+        }
+        setArchetype(Archetype.HardRebuild);
+    }, [qbScore, rbScore, wrScore, teScore, setArchetype]);
+
+    useEffect(() => {
+        if (isSuperFlex) {
+            calculateSuperflexArchetype();
+        } else {
+            calculateOneQbArchetype();
+        }
+    }, [isSuperFlex, calculateSuperflexArchetype, calculateOneQbArchetype]);
+    return {
+        archetype,
+        setArchetype,
+    };
+}
 
 /**
  * Calculates and returns the ranks of positional grades for a given roster

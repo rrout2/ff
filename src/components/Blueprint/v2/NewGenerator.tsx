@@ -7,6 +7,8 @@ import {
     usePlayerData,
     usePositionalRanks,
     useTeamIdFromUrl,
+    useLeague,
+    useRosterSettings,
 } from '../../../hooks/hooks';
 import {User, Roster, getAllUsers} from '../../../sleeper-api/sleeper-api';
 import {TeamSelectComponent} from '../../Team/TeamPage/TeamPage';
@@ -31,6 +33,7 @@ import PositionalGrades from './modules/PositionalGrades/PositionalGrades';
 import ThreeYearOutlook from './modules/ThreeYearOutlook/ThreeYearOutlook';
 import BigBoy from './modules/BigBoy/BigBoy';
 import {NonSleeperInput} from '../shared/NonSleeperInput';
+import {SUPER_FLEX} from '../../../consts/fantasy';
 
 export enum Module {
     Unspecified = 'unspecified',
@@ -56,6 +59,9 @@ export default function NewGenerator() {
     const [specifiedUser, setSpecifiedUser] = useState<User>();
     const [roster, setRoster] = useState<Roster>();
     const playerData = usePlayerData();
+    const league = useLeague(leagueId);
+    const rosterSettings = useRosterSettings(league);
+    const isSuperFlex = rosterSettings.has(SUPER_FLEX);
 
     useEffect(() => {
         if (!leagueId || !rosters) return;
@@ -331,6 +337,7 @@ export default function NewGenerator() {
                     rbRank={rbRank}
                     wrRank={wrRank}
                     teRank={teRank}
+                    isSuperFlex={isSuperFlex}
                 />
             )}
         </div>

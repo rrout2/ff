@@ -81,6 +81,7 @@ describe('BigBoy v2', () => {
                 rbRank={0}
                 wrRank={0}
                 teRank={0}
+                isSuperFlex={true}
             />
         );
         expect(getAllByText(TEAM_NAME)).toHaveLength(1);
@@ -102,6 +103,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
             const settingTiles = container.querySelectorAll('.settingTile');
@@ -120,6 +122,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
             const otherSettingsInput = getByLabelText('Other Settings');
@@ -142,6 +145,7 @@ describe('BigBoy v2', () => {
                 rbRank={0}
                 wrRank={0}
                 teRank={0}
+                isSuperFlex={true}
             />
         );
         const rosterGraphic = container.querySelector('.rosterGraphic');
@@ -164,6 +168,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
             const risersFallersGraphic = container.querySelector(
@@ -186,6 +191,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
             expect(window.location.href).not.toContain(CORNERSTONES);
@@ -215,6 +221,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
 
@@ -243,6 +250,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
 
@@ -276,6 +284,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
 
@@ -299,6 +308,7 @@ describe('BigBoy v2', () => {
                         rbRank={0}
                         wrRank={0}
                         teRank={0}
+                        isSuperFlex={true}
                     />
                 );
 
@@ -330,6 +340,7 @@ describe('BigBoy v2', () => {
                     rbRank={0}
                     wrRank={0}
                     teRank={0}
+                    isSuperFlex={true}
                 />
             );
             await waitFor(() => {
