@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>League Settings Preview</title>
+  <link rel="stylesheet" href="league-settings.css">
+</head>
+<body>
+
+  <div class="settingsGraphic">
+    <div class="league-settings-container">
+
+      <div class="league-settings-title">
+        <span>LEAGUE & TEAM SETTINGS</span>
+        <img src="https://via.placeholder.com/32" alt="flask icon" class="settings-icon">
+        <img src="https://via.placeholder.com/32" alt="goal post icon" class="settings-icon">
+      </div>
+
+      <!-- Injected content -->
+      <div id="league-settings-container"></div>
+
+    </div>
+  </div>
+
+  <script>
+    fetch('league-settings-output.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('league-settings-container').innerHTML = html;
+      })
+      .catch(err => console.error('❌ Failed to load league settings'));
+  </script>
+
+</body>
+</html>

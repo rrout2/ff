@@ -1,0 +1,163 @@
+/* === MOVES TO MAKE WRAPPER === */
+.moves-to-make {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px;
+}
+
+/* === SECTION TITLE (optional) === */
+.moves-title {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #2D2D2C;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* === EACH MOVE COLUMN === */
+.move-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+  padding: 0 16px;
+  position: relative;
+}
+
+/* === VERTICAL DIVIDER BETWEEN COLUMNS === */
+.move-column:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -12px; /* shift into the gap between columns */
+  width: 2px;
+  height: 100%;
+  background-color: #2D2D2C;
+  opacity: 0.15;
+}
+
+
+/* === MOVE HEADER (#1 TRADE, etc.) === */
+.move-header {
+  background-color: #e6e6e6;
+  width: 100%;
+  padding: 12px 0;
+  text-align: center;
+  font-family: 'Prohibition', sans-serif;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.move-rank {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.move-label {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* === MAIN PLAYER CARD === */
+.player-card {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #2D2D2C;
+  margin-bottom: 16px;
+}
+
+/* === COLOR VARIATIONS FOR PLAYER CARD === */
+.player-card.teal { background-color: #5CD2DB; }
+.player-card.gold { background-color: #F2B94B; }
+.player-card.green { background-color: #60C08B; }
+
+.player-headshot {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.player-headshot.small {
+  width: 36px;
+  height: 36px;
+}
+
+/* === PLAYER INFO BLOCK === */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-name {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.player-team {
+  font-family: 'Erbaum Medium', sans-serif;
+  font-size: 14px;
+}
+
+/* === RECOMMENDED PLAYER SECTION === */
+.recommendations {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* === EACH RECOMMENDATION LINE === */
+.recommendation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+  padding-left: 12px;
+}
+
+/* === COLORED BAR ON LEFT OF EACH RECOMMENDATION === */
+.recommendation::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+}
+
+.teal-bar .recommendation::before {
+  background-color: #5CD2DB;
+}
+
+.gold-bar .recommendation::before {
+  background-color: #F2B94B;
+}
+
+.green-bar .recommendation::before {
+  background-color: #60C08B;
+}
+
+/* === OR LABEL BETWEEN RECOMMENDATIONS === */
+.or-label {
+  font-family: 'Erbaum Medium', sans-serif;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}

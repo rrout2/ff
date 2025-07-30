@@ -1,0 +1,17 @@
+.team-name-wrapper {
+  padding: 40px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.team-name {
+  font-family: 'Veneer', sans-serif;
+  font-size: 213px; /* 160pt ≈ 213px */
+  font-weight: normal;
+  color: #2D2D2C;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap; /* no wrapping */
+}

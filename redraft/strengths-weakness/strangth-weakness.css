@@ -1,0 +1,30 @@
+.roster-strengths {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  font-family: 'Erbaum', sans-serif;
+}
+
+.badge-box {
+  width: 240px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #2D2D2C;
+  box-shadow: 0 0 0 2px #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.strength {
+  background-color: #b9e5b3;
+}
+
+.weakness {
+  background-color: #c15252;
+}

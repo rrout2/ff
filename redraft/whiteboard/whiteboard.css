@@ -1,0 +1,11 @@
+.whiteboard {
+  background: url('WB-Base.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  z-index: 0;
+}
+.whiteboard {
+  border: 2px dashed red; /* remove after confirming */
+}
