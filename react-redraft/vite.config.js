@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // Pages URL will be: https://cjtags151508.github.io/ff/react-redraft/
+  // Final Pages URL: https://cjtags151508.github.io/ff/react-redraft/
   base: '/ff/react-redraft/',
-  build: { outDir: 'dist' } // default is fine; keep 'dist'
+  build: { outDir: 'dist' }
 })

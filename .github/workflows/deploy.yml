@@ -1,0 +1,57 @@
+name: Deploy Vite site (react-redraft) to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]           # change if your default branch is 'master'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: react-redraft/package-lock.json
+
+      # If you DO have react-redraft/package-lock.json, keep npm ci:
+      - name: Install
+        run: npm ci --legacy-peer-deps
+        working-directory: react-redraft
+
+      # If you DON'T have a lockfile, use this instead:
+      # - name: Install
+      #   run: npm install
+      #   working-directory: react-redraft
+
+      - name: Build
+        run: npm run build
+        working-directory: react-redraft
+
+      # Sanity: show the produced bundle
+      - name: Show dist
+        run: ls -lah
+        working-directory: react-redraft/dist
+
+      # Upload the subfolder build as the Pages artifact
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./react-redraft/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
