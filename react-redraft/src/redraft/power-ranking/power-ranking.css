@@ -1,0 +1,30 @@
+.power-rank {
+  --pr-size: 200px;          /* whole badge size */
+  --pr-text-scale: 0.16;     /* text size ratio (lower = smaller) */
+  --pr-text-dx: 0px;         /* horizontal nudge */
+  --pr-text-dy: 19px;         /* vertical nudge */
+  position: relative;
+  width: var(--pr-size);
+  height: var(--pr-size);
+}
+
+.power-rank img.power-rank-badge {
+  width: 100%;
+  height: 100%;
+}
+
+/* 4th+ ordinal overlay */
+.power-rank-ordinal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Prohibition', sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  font-size: calc(var(--pr-size) * var(--pr-text-scale));
+  color: #2D2D2C;
+  transform: translate(var(--pr-text-dx), var(--pr-text-dy));
+}

@@ -1,0 +1,235 @@
+/* === WRAPPER === */
+.moves-to-make {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 20px 40px;
+}
+
+/* === COLUMN + vertical split line === */
+.move-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+.move-column:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -16px;                 /* sits in the gap between columns */
+  bottom: 0;
+  width: 2px;
+  background: rgba(45,45,44,.16);
+  border-radius: 1px;
+}
+
+/* === HEADER === */
+.move-header {
+  background: #e6e6e6;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.move-rank {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  color: #2D2D2C;
+}
+
+.move-label {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #2D2D2C;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* === PRIMARY — full cell, background by position === */
+.player-card {
+  width: 100%;
+  padding: 10px 12px 10px 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  margin-bottom: 14px;
+  color: #2D2D2C;
+}
+
+/* Position background colors (same codes as Starters) */
+.player-card.pos-qb   { background: #D84343; } /* Red */
+.player-card.pos-rb   { background: #5CD2DB; } /* Teal */
+.player-card.pos-wr   { background: #60C08B; } /* Green */
+.player-card.pos-te   { background: #F2B94B; } /* Gold */
+.player-card.pos-flex { background: #F1996C; } /* Orange */
+.player-card.pos-bench{ background: #A6A6BD; } /* Gray */
+
+/* === MEDIA (logo + headshot) === */
+.player-media {
+  position: relative;
+  width: 78px;
+  height: 56px;
+  display: grid;
+  align-items: center;
+}
+
+.headshot-bg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #d9d9d9;         /* light gray ring */
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.10);
+  display: grid;
+  place-items: center;
+  margin-left: 16px;           /* leaves space for logo overlap */
+}
+
+.player-headshot {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-logo {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* === TEXT (Prohibition / Erbaum) === */
+.player-info { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+
+.player-name {
+  font-family: 'Prohibition', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-details {
+  font-family: 'Erbaum', 'Erbaum Medium', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  margin-top: 2px;
+  letter-spacing: .3px;
+}
+
+/* === RECOMMENDATIONS with bracket PNG === */
+.recommendations {
+  /* Geometry + easy knobs for perfect alignment */
+  --rec-row-h: 48px;           /* fixed row height so bracket spikes hit name lines */
+  --rec-gap: 12px;             /* vertical gap between the two rows */
+  --bracket-w: 20px;           /* visual width of the bracket image */
+  --rec-offset-y: 10px;        /* ⬅️ move BOTH rows + bracket DOWN to align with yellow bar */
+  --bracket-nudge-y: 0px;      /* fine vertical nudge just for the bracket */
+
+  position: relative;
+  width: 100%;
+  margin-top: var(--rec-offset-y);
+  padding-left: calc(var(--bracket-w) + 18px); /* room for bracket before content */
+}
+
+/* Bracket overlay spanning both rows */
+.rec-bracket-img {
+  position: absolute;
+  left: 6px;                                  /* nudge to align spikes with names */
+  top: 0;
+  transform: translateY(var(--bracket-nudge-y));
+  width: var(--bracket-w);
+  height: calc(var(--rec-row-h) * 2 + var(--rec-gap));
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Each rec row (fixed height, sits above bracket) */
+.rec-row {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 4px 64px 1fr;        /* color bar | media | text */
+  align-items: center;
+  column-gap: 10px;
+  height: var(--rec-row-h);
+}
+.rec-row + .rec-row { margin-top: var(--rec-gap); }
+
+/* OR centered exactly between the two rows, heavy weight */
+.or-abs {
+  position: absolute;
+  top: calc(var(--rec-row-h) + var(--rec-gap) / 2); /* dead center */
+  left: calc(var(--bracket-w) + 18px + 64px + 10px + 8px);
+  transform: translateY(-50%);
+  font-family: 'Prohibition', sans-serif;
+  font-weight: 900;           /* 900 as requested */
+  font-size: 12px;
+  letter-spacing: .6px;
+  color: #2D2D2C;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* media cluster inside rec rows */
+.rec-media { position: relative; width: 64px; height: 42px; display: grid; align-items: center; }
+.rec-headshot-bg {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: #d9d9d9;
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.08);
+  display: grid; place-items: center;
+  margin-left: 14px;
+}
+.rec-headshot { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+.rec-logo {
+  position: absolute; left: 2px; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 22px; object-fit: contain; 
+}
+
+/* colored bar per position for recs */
+.rec-bar { width: 4px; height: 100%; border-radius: 2px; background: #ddd; }
+.rec-row.pos-qb   .rec-bar { background: #D84343; }
+.rec-row.pos-rb   .rec-bar { background: #5CD2DB; }
+.rec-row.pos-wr   .rec-bar { background: #60C08B; }
+.rec-row.pos-te   .rec-bar { background: #F2B94B; }
+.rec-row.pos-flex .rec-bar { background: #F1996C; }
+.rec-row.pos-bench .rec-bar{ background: #A6A6BD; }
+
+/* text */
+.rec-info { min-width: 0; }
+.rec-name {
+  font-family: 'Prohibition', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2D2D2C;
+}
+.rec-details {
+  font-family: 'Erbaum', 'Erbaum Medium', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: .3px;
+  color: #2D2D2C;
+}

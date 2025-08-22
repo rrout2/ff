@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Starting Roster</title>
+  <link rel="stylesheet" href="starters.css">
+</head>
+<body>
+
+  <div id="dynamic-starters"></div>
+
+  <script>
+    fetch('starting-roster-output.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('dynamic-starters').innerHTML = html;
+      });
+  </script>
+
+</body>
+</html>

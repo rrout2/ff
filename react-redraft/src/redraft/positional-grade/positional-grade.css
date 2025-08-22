@@ -1,0 +1,64 @@
+.positional-grades {
+  width: 100%;
+  padding: 40px;
+  font-family: 'Acumin Variable Concept', sans-serif;
+  color: #2D2D2C;
+}
+
+/* Reduce vertical spacing between rows */
+.grade-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Pull label closer to bar */
+.grade-label {
+  width: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+/* ✅ Make bars longer */
+.grade-bar-wrapper {
+  width: 320px; /* increase from default */
+  height: 28px;
+  border: 2px solid #2D2D2C;
+  border-radius: 4px;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.grade-bar-fill {
+  height: 100%;
+  position: relative;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Add vertical marker at end of fill */
+.grade-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #2D2D2C;
+}
+
+.grade-score {
+  width: 50px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: -10px;
+}
+
+/* Fill colors */
+.qb-fill { background-color: #D84343; }
+.rb-fill { background-color: #5CD2DB; }
+.wr-fill { background-color: #60C08B; }
+.te-fill { background-color: #F2B94B; }

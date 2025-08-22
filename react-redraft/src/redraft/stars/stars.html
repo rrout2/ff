@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stars Display</title>
+  <link rel="stylesheet" href="stars.css">
+</head>
+<body>
+
+  <!-- Placeholder where dynamic star HTML will go -->
+  <div id="dynamic-stars"></div>
+
+  <script>
+    fetch('stars-output.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('dynamic-stars').innerHTML = html;
+      });
+  </script>
+
+</body>
+</html>

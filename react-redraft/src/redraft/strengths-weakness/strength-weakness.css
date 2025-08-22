@@ -1,0 +1,56 @@
+/* Layout */
+.roster-strengths {
+  /* change this to any size you want */
+  --rs-badge-w: 500px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Badge wrapper uses the shared width var */
+.rs-badge {
+  position: relative;
+  width: var(--rs-badge-w);
+}
+
+/* PNG background */
+.rs-badge-bg {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Label centered on top of PNG */
+.rs-badge-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;            /* keep text off rounded ends */
+  white-space: nowrap;        /* NEVER wrap */
+  overflow: hidden;           /* clip if too long */
+  text-overflow: ellipsis;    /* show … if clipped */
+
+  color: #2D2D2C;
+  font-family: 'Prohibition', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1;
+
+  /* scales with badge width; tweak the 0.12 or min/max if you want */
+  font-size: clamp(14px, calc(var(--rs-badge-w) * 0.16), 28px);
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/* tiny vertical nudge if needed */
+.rs-badge.strength .rs-badge-text { transform: translateY(-1px); }
+.rs-badge.weakness .rs-badge-text { transform: translateY(-1px); }

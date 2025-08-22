@@ -1,0 +1,106 @@
+/* /src/redraft/four-factors/four-factors.css */
+
+/* === FOUR FACTORS CONTAINER === */
+.four-factors {
+  padding: 40px;
+  color: #2D2D2C;
+  font-family: 'Acumin Variable Concept', sans-serif;
+}
+
+/* Optional title if you render one */
+.factors-title {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  color: #2D2D2C;
+  margin-bottom: 24px;
+}
+
+/* === CARD WRAPPER === */
+.factor-cards {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* === INDIVIDUAL FACTOR CARD ===
+   Background color comes from JSX (bg prop).
+   We remove solid borders and overlay a PNG frame instead. */
+.factor-card {
+  width: 200px;
+  height: 260px;
+  padding: 20px;
+
+  border: none;           /* old solid outline removed */
+  border-radius: 0;
+
+  position: relative;     /* required for ::after frame */
+  display: grid;
+  grid-template-rows: 150px 1fr;  /* reserve space for donut row */
+  align-items: center;
+  text-align: center;
+}
+
+/* Hand-drawn frame overlay */
+.factor-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./images/factors_border.png") center / 100% 100% no-repeat;
+  pointer-events: none;   /* do not block interactions */
+}
+
+/* === TOP ROW: DONUT + ICON === */
+.factor-top {
+  width: 100%;
+  height: 150px;
+  display: grid;
+  place-items: center;
+}
+
+/* Center icon inside donut */
+.factor-icon {
+  width: 56px;            /* tweak for your PNGs */
+  height: 56px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* === BOTTOM ROW: TEXT === */
+.factor-body {
+  width: 100%;
+}
+
+.factor-score {
+  font-family: 'Prohibition', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 4px;
+}
+
+.factor-sub {
+  font-family: 'Erbaum Medium', sans-serif;
+  font-style: italic;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.factor-desc {
+  font-family: 'Erbaum Medium', sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* === OPTIONAL: fallback background colors if you don't pass `bg` inline === */
+.upside      { background-color: #FBE0C3; }
+.reliability { background-color: #C1EBF5; }
+.depth       { background-color: #C6EDCD; }
+.risk        { background-color: #F9E0C6; }
+
+/* (Legacy helpers; safe to keep) */
+.factor-graphic { display: none; } /* superseded by .factor-top */
+.factor-donut { display: none; }   /* superseded by .factor-top */

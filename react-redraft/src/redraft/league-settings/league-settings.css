@@ -1,0 +1,94 @@
+/* === Container for the full row of settings === */
+.league-settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* === No title styling needed anymore (delete or leave empty) */
+.league-settings-title {
+  display: none;
+}
+
+.settings-icon {
+  width: 28px;
+  height: 28px;
+}
+
+
+/* === Row of setting boxes === */
+.league-settings {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;           /* tighter gap */
+  padding: 0;          /* no extra padding */
+  align-items: flex-start;
+}
+
+/* === Wrapper for each label + box combo === */
+.setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* === Label above each box === */
+.setting-label {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 11px;
+  color: #2D2D2C;
+  margin-bottom: 2px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+/* === Main colored stat box === */
+.setting-box {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 20px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  text-align: center;
+  min-width: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+/* === Background colors (unchanged) === */
+.teams,
+.scoring,
+.tep,
+.flex {
+  background-color: #F2725E;
+}
+
+.qb {
+  background-color: #D84343;
+}
+
+.rb {
+  background-color: #5CD2DB;
+}
+
+.wr {
+  background-color: #60C08B;
+}
+
+.te {
+  background-color: #F2B94B;
+}
+
+.def {
+  background-color: #5A67D8;
+  color: black;
+}
+
+.k {
+  background-color: #A060D1;
+  color: black;
+}
+
+.bench {
+  background-color: #A6A6BD;
+}

@@ -1,0 +1,36 @@
+/* Wrapper size (keep or override via props/parent) */
+.draft-value {
+  width: 640px;
+  height: 340px;
+}
+
+/* Axis typography knobs (overridden via inline style vars on <svg>) */
+.draft-value .dv-chart {
+  --dv-axis-font: 'Acumin Variable Concept','Acumin Pro', Arial, sans-serif;
+  --dv-axis-weight: 700;   /* 400–900 */
+  --dv-axis-wdth: 78;      /* optional, variable-font width axis */
+  --dv-axis-color: #2D2D2C;
+
+  --dv-tick-size: 12px;    /* tick labels */
+  --dv-title-size: 12px;   /* axis titles */
+}
+
+/* Apply to ALL axis text (ticks + titles) */
+.draft-value .dv-axis text,
+.draft-value .dv-axis-title {
+  font-family: var(--dv-axis-font);
+  font-weight: var(--dv-axis-weight);
+  /* If your font supports it, this mimics “weight 708 / width 78” feel */
+  font-variation-settings: 'wght' var(--dv-axis-weight), 'wdth' var(--dv-axis-wdth);
+  fill: var(--dv-axis-color);
+}
+
+/* Tick labels */
+.draft-value .dv-axis text {
+  font-size: var(--dv-tick-size);
+}
+
+/* Axis titles */
+.draft-value .dv-axis-title {
+  font-size: var(--dv-title-size);
+}
