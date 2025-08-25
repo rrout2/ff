@@ -2,7 +2,7 @@ name: Deploy Vite site (react-redraft) to GitHub Pages
 
 on:
   push:
-    branches: [ main ]           # change if your default branch is 'master'
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -20,15 +20,16 @@ jobs:
         with:
           node-version: 18
           cache: npm
+          # If you don't have react-redraft/package-lock.json,
+          # remove this and use npm install below.
           cache-dependency-path: react-redraft/package-lock.json
 
-      # If you DO have react-redraft/package-lock.json, keep npm ci:
-      - name: Install
+      # Use ONE of these install steps:
+      - name: Install (with lockfile)
         run: npm ci --legacy-peer-deps
         working-directory: react-redraft
 
-      # If you DON'T have a lockfile, use this instead:
-      # - name: Install
+      # - name: Install (no lockfile)
       #   run: npm install
       #   working-directory: react-redraft
 
@@ -36,15 +37,22 @@ jobs:
         run: npm run build
         working-directory: react-redraft
 
-      # Sanity: show the produced bundle
-      - name: Show dist
-        run: ls -lah
-        working-directory: react-redraft/dist
+      # Put the bundle under out/react-redraft so Pages serves it at /ff/react-redraft/
+      - name: Prepare artifact
+        run: |
+          rm -rf out
+          mkdir -p out/react-redraft
+          cp -r react-redraft/dist/. out/react-redraft/
 
-      # Upload the subfolder build as the Pages artifact
+      - name: Show artifact tree (debug)
+        run: |
+          echo "== top level ==" && ls -lah out
+          echo "== react-redraft ==" && ls -lah out/react-redraft
+          echo "== index head ==" && sed -n '1,40p' out/react-redraft/index.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./react-redraft/dist
+          path: ./out   # contains /react-redraft/index.html
 
   deploy:
     needs: build

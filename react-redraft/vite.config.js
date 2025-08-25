@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // Final Pages URL: https://cjtags151508.github.io/ff/react-redraft/
+  // We want assets under /ff/react-redraft/
   base: '/ff/react-redraft/',
   build: { outDir: 'dist' }
 })
