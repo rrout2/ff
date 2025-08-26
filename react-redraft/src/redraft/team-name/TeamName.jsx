@@ -1,24 +1,24 @@
 // /src/redraft/team-name/TeamName.jsx
 import React, { useRef, useLayoutEffect, useState } from 'react';
+import './team-name.css';
 
 /**
  * Auto-fits the team name into a fixed-width box.
- * - Grows from maxFont and shrinks (binary search) down to minFont to fit width.
- * - If still too wide at minFont, applies a final scale so it ALWAYS fits.
- * - Optional baseline alignment keeps the text sitting on a specific line
- *   regardless of font size.
+ * - Finds largest font size (<= maxFont) that fits maxWidth via binary search.
+ * - If still a hair wide, applies a final scale so it ALWAYS fits.
+ * - Optional baselineAlign keeps the text sitting on a consistent baseline.
  */
 export default function TeamName({
-  text = '',
-  maxWidth = 1180,   // pixels of space the name must fit into
-  maxFont = 120,     // starting font size
-  minFont = 36,      // smallest allowed font size
+  text = 'TEAM NAME GOES HERE',
+  maxWidth = 1180,   // px of space the name must fit into
+  maxFont = 213,     // start at your 160pt equivalent
+  minFont = 36,      // smallest allowed before scaling
   color = '#2D2D2C',
 
-  // Baseline anchoring (so different sizes sit on the same line)
+  // baseline anchoring
   baselineAlign = false,
-  baselineRatio = 0.78, // approx baseline from top for "Veneer" (tweak 0.74–0.82)
-  baselineNudge = 0,    // extra px to nudge up(+)/down(-) after ratio
+  baselineRatio = 0.78, // approx baseline from top for Veneer (tweak 0.74–0.82)
+  baselineNudge = 0,    // extra px up(+)/down(-)
 }) {
   const boxRef = useRef(null);
   const textRef = useRef(null);
@@ -37,14 +37,13 @@ export default function TeamName({
     el.style.fontSize = `${maxFont}px`;
     el.style.transform = 'scale(1) translateY(0)';
 
-    // If it already fits at maxFont
     if (el.scrollWidth <= boxW) {
       setFontPx(maxFont);
       setScale(1);
       return;
     }
 
-    // Binary search largest font size that fits
+    // binary search for largest font that fits
     let lo = minFont, hi = maxFont, best = minFont;
     while (lo <= hi) {
       const mid = Math.floor((lo + hi) / 2);
@@ -55,7 +54,7 @@ export default function TeamName({
     }
     setFontPx(best);
 
-    // Final exact scale if even best is a hair wide
+    // final exact scale if best is still a tad wide
     el.style.fontSize = `${best}px`;
     const finalW = el.scrollWidth || 1;
     setScale(finalW > boxW ? boxW / finalW : 1);
@@ -72,7 +71,6 @@ export default function TeamName({
     };
   }, [text, maxWidth, maxFont, minFont]);
 
-  // Move text up so its BASELINE sits on the wrapper's top edge.
   const baselineShift = baselineAlign
     ? -(fontPx * baselineRatio * scale) + baselineNudge
     : 0;
@@ -80,25 +78,23 @@ export default function TeamName({
   return (
     <div
       ref={boxRef}
-      // overflow must be visible because we translate the text upward for baseline
+      className="team-name-wrapper"
       style={{ width: `${maxWidth}px`, overflow: 'visible' }}
       title={text}
     >
-      <div
+      <h1
         ref={textRef}
+        className="team-name"
         style={{
-          fontFamily: 'Veneer, sans-serif',
-          fontWeight: 'bold',
-          lineHeight: 1,
+          fontWeight: 400,                           // match @font-face
           color,
-          whiteSpace: 'nowrap',
           fontSize: `${fontPx}px`,
           transform: `translateY(${baselineShift}px) scale(${scale})`,
           transformOrigin: 'left top',
         }}
       >
         {(text || '').toUpperCase()}
-      </div>
+      </h1>
     </div>
   );
 }

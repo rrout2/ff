@@ -1,6 +1,6 @@
 .power-rank {
   --pr-size: 200px;          /* whole badge size */
-  --pr-text-scale: 0.16;     /* text size ratio (lower = smaller) */
+  --pr-text-scale: 0.12;     /* text size ratio (lower = smaller) */
   --pr-text-dx: 0px;         /* horizontal nudge */
   --pr-text-dy: 19px;         /* vertical nudge */
   position: relative;

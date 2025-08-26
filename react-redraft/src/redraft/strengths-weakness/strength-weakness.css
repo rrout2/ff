@@ -3,6 +3,11 @@
   /* change this to any size you want */
   --rs-badge-w: 500px;
 
+  /* font knobs so you can tune quickly */
+  --rs-font-min: 14px;          /* smallest label */
+  --rs-font-k:   0.06;          /* scale vs width (500px * 0.06 ≈ 30px) */
+  --rs-font-max: 32px;          /* biggest label (bump to 34–36 if you want larger) */
+
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -32,10 +37,13 @@
   align-items: center;
   justify-content: center;
 
-  padding: 0 18px;            /* keep text off rounded ends */
-  white-space: nowrap;        /* NEVER wrap */
-  overflow: hidden;           /* clip if too long */
-  text-overflow: ellipsis;    /* show … if clipped */
+  /* keep text off the rounded ends */
+  padding: 0 14px;
+
+  /* never wrap; clip if it truly can’t fit */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   color: #2D2D2C;
   font-family: 'Prohibition', sans-serif;
@@ -44,8 +52,10 @@
   text-transform: uppercase;
   line-height: 1;
 
-  /* scales with badge width; tweak the 0.12 or min/max if you want */
-  font-size: clamp(14px, calc(var(--rs-badge-w) * 0.16), 28px);
+  /* ✅ bigger cap, and width-based scaling that lands ~30px at 500px */
+  font-size: clamp(var(--rs-font-min),
+                   calc(var(--rs-badge-w) * var(--rs-font-k)),
+                   var(--rs-font-max));
 
   user-select: none;
   pointer-events: none;

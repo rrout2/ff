@@ -3,7 +3,7 @@ import './moves-to-make.css';
 import BracketPNG from './images/moves_to_make.png';
 
 export default function MovesToMake({ moves = [], playersById = {} }) {
-  // --- helpers ---------------------------------------------------------------
+  // --- helpers (unchanged) ---------------------------------------------------
   const _normalize = (p) => {
     if (!p) return null;
     const id   = String(p?.player_id || p?.id || '');
@@ -14,20 +14,18 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
   };
 
   const normTxt = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
-
   const getADP = (p = {}) => {
     const v = p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std;
     const n = Number(v);
-    return Number.isFinite(n) ? n : Infinity; // lower ADP = better
+    return Number.isFinite(n) ? n : Infinity;
   };
 
   const TEAM_RE = /^(ari|atl|bal|buf|car|chi|cin|cle|dal|den|det|gb|hou|ind|jax|kc|lv|lac|lar|mia|min|ne|no|nyg|nyj|phi|pit|sf|sea|tb|ten|wsh)$/;
   const POS_RE  = /^(qb|rb|wr|te)$/;
 
-  // Small lookup indexes for speed
   const indexes = useMemo(() => {
-    const byLast = new Map();   // last name -> [ids]
-    const byFull = new Map();   // full name -> [ids]
+    const byLast = new Map();
+    const byFull = new Map();
     for (const [id, p] of Object.entries(playersById || {})) {
       const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
       const last = (p.last_name || '').toLowerCase();
@@ -37,14 +35,9 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
     return { byFull, byLast };
   }, [playersById]);
 
-  // Resolver that handles:
-  //  - string id or object
-  //  - "first last", "last", "first last qb", "first last bal"
-  //  - tie-break by ADP (best/lowest ADP wins)
   const resolvePlayer = (maybe) => {
     if (!maybe) return null;
     if (typeof maybe === 'object') return _normalize(maybe);
-
     const raw = String(maybe);
     const direct = playersById?.[raw];
     if (direct) return _normalize(direct);
@@ -54,34 +47,25 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
 
     const tokens = q.split(' ');
     const hints  = { team: null, pos: null };
-    // allow trailing hints: "... qb" or "... bal"
     const lastTok = tokens[tokens.length - 1] || '';
     if (TEAM_RE.test(lastTok)) hints.team = lastTok.toUpperCase();
     if (POS_RE.test(lastTok))  hints.pos  = lastTok.toUpperCase();
     const baseName = (hints.team || hints.pos) ? tokens.slice(0, -1).join(' ') : q;
 
     const candidateIds = new Set();
-
-    // 1) exact full name match
     const exactFull = indexes.byFull.get(baseName);
     if (exactFull) exactFull.forEach(id => candidateIds.add(id));
-
-    // 2) last name match
     const baseLast = baseName.split(' ').pop() || baseName;
     const lastHits = indexes.byLast.get(baseLast);
     if (lastHits) lastHits.forEach(id => candidateIds.add(id));
-
-    // 3) substring scan (fallback)
     if (candidateIds.size === 0) {
       for (const [id, p] of Object.entries(playersById || {})) {
         const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
         if (full.includes(baseName)) candidateIds.add(id);
       }
     }
-
     if (candidateIds.size === 0) return null;
 
-    // Score candidates: name match + hint matches + inverse ADP bonus
     let best = null; let bestScore = -1e9;
     for (const id of candidateIds) {
       const p = playersById[id]; if (!p) continue;
@@ -94,8 +78,7 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
 
       const pos  = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
       const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
-
-      if (hints.pos && pos === hints.pos)   score += 500;
+      if (hints.pos  && pos  === hints.pos)  score += 500;
       if (hints.team && team === hints.team) score += 500;
 
       const adp = getADP(p);
@@ -103,14 +86,14 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
 
       if (score > bestScore) { bestScore = score; best = p; }
     }
-
     return _normalize(best);
   };
 
   const logoForTeam = (team) => {
     const code = String(team || '').toLowerCase();
     if (!code) return '';
-    try { return new URL(`../../assets/standard/${code}.png`, import.meta.url).href; } catch { return ''; }
+    try { return new URL(`../../assets/standard/${code}.png`, import.meta.url).href; }
+    catch { return ''; }
   };
 
   const toPosClass = (pos) => {
@@ -131,23 +114,15 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
         <div className="rec-bar" />
         <div className="rec-media">
           {p.team && (
-            <img
-              className="rec-logo"
-              src={logoForTeam(p.team)}
-              alt={p.team}
-              loading="lazy"
-              onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
-            />
+            <img className="rec-logo" src={logoForTeam(p.team)} alt={p.team}
+                 loading="lazy" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
           )}
           <div className="rec-headshot-bg">
             {!!p.id && (
-              <img
-                className="rec-headshot"
-                src={`https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`}
-                alt=""
-                loading="lazy"
-                onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
-              />
+              <img className="rec-headshot"
+                   src={`https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`}
+                   alt="" loading="lazy"
+                   onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
             )}
           </div>
         </div>
@@ -166,32 +141,27 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
 
     return (
       <div className="move-column">
+        {/* header chip: ONLY the number */}
         <div className="move-header">
           <div className="move-rank">#{index + 1}</div>
-          <div className="move-label">{(label || '').toUpperCase()}</div>
         </div>
+
+        {/* label UNDER the chip (still fed by overrides) */}
+        <div className="move-label">{(label || '').toUpperCase()}</div>
 
         {P && (
           <div className={`player-card ${posClass}`}>
             <div className="player-media">
               {P.team && (
-                <img
-                  className="team-logo"
-                  src={logoForTeam(P.team)}
-                  alt={P.team}
-                  loading="lazy"
-                  onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
-                />
+                <img className="team-logo" src={logoForTeam(P.team)} alt={P.team}
+                     loading="lazy" onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
               )}
               <div className="headshot-bg">
                 {!!P.id && (
-                  <img
-                    className="player-headshot"
-                    src={`https://sleepercdn.com/content/nfl/players/thumb/${P.id}.jpg`}
-                    alt=""
-                    loading="lazy"
-                    onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
-                  />
+                  <img className="player-headshot"
+                       src={`https://sleepercdn.com/content/nfl/players/thumb/${P.id}.jpg`}
+                       alt="" loading="lazy"
+                       onError={(e) => (e.currentTarget.style.visibility = 'hidden')} />
                 )}
               </div>
             </div>
@@ -226,7 +196,7 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
         <MoveColumn
           key={m.id || idx}
           index={idx}
-          label={m.label}
+          label={m.label}             // ← overrides still feed this
           primary={m.primary}
           recs={m.recs || []}
           note={m.note}

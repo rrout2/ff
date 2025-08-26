@@ -85,13 +85,12 @@ export default function FourFactors({
     risk:        Number.isFinite(forcedScores?.risk)        ? clamp10(Math.round(forcedScores.risk))        : autoGrades.risk,
   }), [forcedScores, autoGrades]);
 
-  // Notify parent so RosterTag stays in sync
   useEffect(() => {
     onScoresChange?.(grades);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grades.upside, grades.reliability, grades.depth, grades.risk]);
 
-  const Card = ({ cls, label, value, sub, desc, bg }) => (
+  const Card = ({ cls, label, value, sub, desc, bg, centerOffsetY = 0 }) => (
     <div className={`factor-card ${cls}`} style={{ background: bg }}>
       <div className="factor-top">
         <DonutProgress
@@ -100,7 +99,12 @@ export default function FourFactors({
           thickness={14}
           color={RING[cls]}
           trackColor="#e9e9e9"
-          showOutline={false}
+          cap="butt"                 // hard/flat edges
+          showOutlineRing            // black outline around ring edges
+          showInnerDisc              // white disc under the ring
+          innerDiscOpacity={0.2}     // ~20% as requested
+          innerDiscStroke="#2D2D2C"  // black outline around inner disc
+          centerOffsetY={centerOffsetY}
           center={
             <img
               src={ICON[cls]}
@@ -130,7 +134,7 @@ export default function FourFactors({
         />
         <Card
           cls="reliability" bg="#cfecee"
-          label="RELIABILITY SCORE" value={grades.reliability}
+          label="FLOOR SCORE" value={grades.reliability}
           sub="Can I count on this roster?"
           desc="Focuses on injury history, consistency, role security, and number of plug-and-play guys."
         />
@@ -145,6 +149,7 @@ export default function FourFactors({
           label="RISK PROFILE" value={grades.risk}
           sub="Will this roster implode?"
           desc="Accounts for volatility, construction flaws, overreliance on fragile players, or all-in builds."
+          centerOffsetY={-4}   // bump the risk icon up a touch
         />
       </div>
     </div>

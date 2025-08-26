@@ -1,3 +1,4 @@
+// /src/redraft/draft-value/DraftValueChart.jsx
 import React, { useMemo } from 'react';
 import './draft-value.css';
 
@@ -17,10 +18,10 @@ export default function DraftValueChart({
   width = 640,
   height = 340,
   firstRoundOffsetPx = 10,
-  labelFontSize = 9,
+  labelFontSize = 17,
   minLabelFontSize = 7,
 
-  // NEW: add headroom above the top of the chart (in ADP units)
+  // extra headroom above the top of the chart (in ADP units)
   yHeadroomADP = 12,
 
   /* Axis style controls (optional) */
@@ -28,8 +29,8 @@ export default function DraftValueChart({
   axisFontWeight = 700,
   axisFontWidth = 78,
   axisColor = '#2D2D2C',
-  axisTickSize = 12,
-  axisTitleSize = 12,
+  axisTickSize = 18,
+  axisTitleSize = 18,
 }) {
   const ROUNDS_TO_SHOW = 10;
 
@@ -58,7 +59,7 @@ export default function DraftValueChart({
       .map(d => {
         const diff = d.overall - d.adp;
         let color = COLORS.even;
-        if (diff > 3) color = COLORS.steal;     // flipped
+        if (diff > 3) color = COLORS.steal;
         else if (diff < -3) color = COLORS.reach;
         return { ...d, diff, color };
       })
@@ -69,7 +70,13 @@ export default function DraftValueChart({
   const svg = useMemo(() => {
     if (!pts.length) return null;
 
-    const pad = { l: 54, b: 38, r: 18, t: 12 };
+    // Bottom pad includes space for ticks + the "ROUND" title so it never clips
+    const pad = {
+      l: 54,
+      b: Math.max(38, axisTickSize + axisTitleSize + 22),
+      r: 18,
+      t: 12
+    };
     const W = width, H = height;
 
     // X-axis fixed to rounds 1..10
@@ -96,7 +103,7 @@ export default function DraftValueChart({
     ).filter(v => v <= yMax);
 
     return { W, H, pad, xScale, yScale, xTicks, yTicks, yMax, roundsShown };
-  }, [pts, width, height, teamsCount, firstRoundOffsetPx, yHeadroomADP]);
+  }, [pts, width, height, teamsCount, firstRoundOffsetPx, yHeadroomADP, axisTickSize, axisTitleSize]);
 
   if (!svg) {
     return <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: width }}>
@@ -106,7 +113,7 @@ export default function DraftValueChart({
 
   const { W, H, pad, xScale, yScale, xTicks, yTicks, roundsShown } = svg;
 
-  // --- simple vertical collision-avoidance for labels ---
+  // --- vertical collision-avoidance + edge-aware anchoring for labels ---
   const kChar = 0.62;
   const placed = [];
   const laidOut = pts.map((p) => {
@@ -121,7 +128,8 @@ export default function DraftValueChart({
     // Default: above the dot
     let yTop = cy - 18 - h;
 
-    const intersects = (a, b) => !(a.x > b.x + b.w || a.x + a.w < b.x || a.y > b.y + b.h || a.y + a.h < b.y);
+    const intersects = (a, b) =>
+      !(a.x > b.x + b.w || a.x + a.w < b.x || a.y > b.y + b.h || a.y + a.h < b.y);
 
     let attempts = 0;
     while (placed.some(b => intersects({ x: cx - w / 2, y: yTop, w, h }, b))) {
@@ -142,8 +150,14 @@ export default function DraftValueChart({
       yTop = cy + 18;
     }
 
+    // ⬇️ NEW: keep labels inside by shifting anchor near edges
+    let anchor = 'middle';
+    let labelX = cx;
+    if (cx + w / 2 > W - pad.r - 2) { anchor = 'end';   labelX = cx; }   // near right edge
+    if (cx - w / 2 < pad.l + 2)      { anchor = 'start'; labelX = cx; }   // near left edge
+
     placed.push({ x: cx - w / 2, y: yTop, w, h });
-    return { p, cx, cy, yTop, fs, lineH, lines };
+    return { p, cx, cy, yTop, fs, lineH, lines, anchor, labelX };
   });
 
   // CSS variables for axis styles (consumed in draft-value.css)
@@ -158,7 +172,7 @@ export default function DraftValueChart({
 
   return (
     <div className="draft-value">
-      <svg className="dv-chart" width={W} height={H} style={axisVars}>
+      <svg className="dv-chart" width={W} height={H} style={{ ...axisVars, overflow: 'visible' }}>
         {/* X axis 1..10 */}
         <g className="dv-axis dv-axis-x">
           <line x1={pad.l} y1={H - pad.b} x2={W - pad.r} y2={H - pad.b} stroke={axisColor} strokeWidth="2" />
@@ -168,7 +182,13 @@ export default function DraftValueChart({
               <text y="20" textAnchor="middle">{v}</text>
             </g>
           ))}
-          <text className="dv-axis-title" x={(W + pad.l) / 2} y={H - 6} textAnchor="middle">
+          {/* Title sits inside the reserved bottom pad so "ROUND" is always visible */}
+          <text
+            className="dv-axis-title"
+            x={(W + pad.l) / 2}
+            y={H - pad.b + axisTickSize + axisTitleSize}
+            textAnchor="middle"
+          >
             ROUND
           </text>
         </g>
@@ -204,21 +224,21 @@ export default function DraftValueChart({
         />
 
         {/* points + labels */}
-        {laidOut.map(({ p, cx, cy, yTop, fs, lineH, lines }) => (
+        {laidOut.map(({ p, cx, cy, yTop, fs, lineH, lines, anchor, labelX }) => (
           <g key={`${p.id}-${p.overall}`}>
             <line x1={cx} y1={H - pad.b} x2={cx} y2={cy} stroke={COLORS.line} strokeWidth="2" />
             <circle cx={cx} cy={cy} r="8" fill={p.color} stroke="#2D2D2C" strokeWidth="2" />
             <text
-              x={cx}
+              x={labelX}
               y={yTop + fs}
-              textAnchor="middle"
+              textAnchor={anchor}
               fontSize={fs}
               fontWeight="800"
               fill="#2D2D2C"
               style={{ fontFamily: 'Prohibition, sans-serif' }}
             >
-              <tspan x={cx}>{lines[0]}</tspan>
-              {lines[1] && <tspan x={cx} dy={lineH}>{lines[1]}</tspan>}
+              <tspan x={labelX}>{lines[0]}</tspan>
+              {lines[1] && <tspan x={labelX} dy={lineH}>{lines[1]}</tspan>}
             </text>
           </g>
         ))}

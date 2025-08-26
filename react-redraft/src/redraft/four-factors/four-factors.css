@@ -1,13 +1,25 @@
-/* /src/redraft/four-factors/four-factors.css */
+/* /src/redraft/four-factors/four-factors.css
+   Four Factors — cards with PNG border frame, donut area, and typography knobs.
+   Donut ring visuals are handled in DonutProgress.jsx.
 
-/* === FOUR FACTORS CONTAINER === */
+   KNOBS (tweak in one place):
+     --ff-head-size  → headline “UPSIDE SCORE: 7/10”
+     --ff-sub-size   → subline question “Can this team explode?”
+     --ff-desc-size  → paragraph copy
+*/
+
 .four-factors {
   padding: 40px;
   color: #2D2D2C;
   font-family: 'Acumin Variable Concept', sans-serif;
+
+  /* type size controls */
+  --ff-head-size: 24px;  /* try 30–32px if you want it bigger */
+  --ff-sub-size: 16px;
+  --ff-desc-size: 12px;
 }
 
-/* Optional title if you render one */
+/* Optional section title */
 .factors-title {
   font-family: 'Prohibition', sans-serif;
   font-size: 32px;
@@ -25,20 +37,19 @@
   justify-content: center;
 }
 
-/* === INDIVIDUAL FACTOR CARD ===
-   Background color comes from JSX (bg prop).
-   We remove solid borders and overlay a PNG frame instead. */
+/* === CARD ===
+   Background color is set from JSX via the `bg` prop. */
 .factor-card {
   width: 200px;
   height: 260px;
   padding: 20px;
 
-  border: none;           /* old solid outline removed */
+  border: none;
   border-radius: 0;
 
-  position: relative;     /* required for ::after frame */
+  position: relative;               /* for the overlay frame */
   display: grid;
-  grid-template-rows: 150px 1fr;  /* reserve space for donut row */
+  grid-template-rows: 150px auto 1fr;  /* donut | headline | body */
   align-items: center;
   text-align: center;
 }
@@ -49,10 +60,10 @@
   position: absolute;
   inset: 0;
   background: url("./images/factors_border.png") center / 100% 100% no-repeat;
-  pointer-events: none;   /* do not block interactions */
+  pointer-events: none;             /* keep the card interactive */
 }
 
-/* === TOP ROW: DONUT + ICON === */
+/* === DONUT + ICON ROW === */
 .factor-top {
   width: 100%;
   height: 150px;
@@ -60,47 +71,64 @@
   place-items: center;
 }
 
-/* Center icon inside donut */
+/* Icon centered inside the donut */
 .factor-icon {
-  width: 56px;            /* tweak for your PNGs */
+  width: 56px;                      /* tweak to fit your PNGs */
   height: 56px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
 
-/* === BOTTOM ROW: TEXT === */
+/* === TEXT AREA === */
 .factor-body {
   width: 100%;
 }
 
+/* Headline (e.g., UPSIDE SCORE: 7/10) */
 .factor-score {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 6px;
+
   font-family: 'Prohibition', sans-serif;
-  font-size: 14px;
+  font-size: var(--ff-head-size);
   font-weight: 800;
   line-height: 1.05;
-  margin-bottom: 4px;
+  letter-spacing: 0.3px;            /* subtle tracking; adjust or remove */
+  text-transform: uppercase;
+  color: #2D2D2C;
 }
 
+/* If you wrap the numeric value in <span class="factor-score__value">7/10</span>,
+   you can nudge it a bit larger than the label */
+.factor-score__value {
+  font-size: calc(var(--ff-head-size) + 2px);
+}
+
+/* Subline question */
 .factor-sub {
-  font-family: 'Erbaum Medium', sans-serif;
+  font-family: 'Erbaum', 'Erbaum Medium', sans-serif;
   font-style: italic;
-  font-size: 12px;
+  font-size: var(--ff-sub-size);
   margin-bottom: 10px;
+  color: #2D2D2C;
 }
 
+/* Paragraph copy */
 .factor-desc {
-  font-family: 'Erbaum Medium', sans-serif;
-  font-size: 13px;
+  font-family: 'Erbaum', 'Erbaum Medium', sans-serif;
+  font-size: var(--ff-desc-size);
   line-height: 1.4;
+  color: #2D2D2C;
 }
 
-/* === OPTIONAL: fallback background colors if you don't pass `bg` inline === */
+/* === Fallback background colors (if you don’t pass `bg` from JSX) === */
 .upside      { background-color: #FBE0C3; }
 .reliability { background-color: #C1EBF5; }
 .depth       { background-color: #C6EDCD; }
 .risk        { background-color: #F9E0C6; }
 
-/* (Legacy helpers; safe to keep) */
-.factor-graphic { display: none; } /* superseded by .factor-top */
-.factor-donut { display: none; }   /* superseded by .factor-top */
+/* Legacy helpers (not used with the current layout) */
+.factor-graphic { display: none; }
+.factor-donut   { display: none; }

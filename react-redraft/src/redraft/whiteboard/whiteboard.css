@@ -9,3 +9,15 @@
 .whiteboard {
   border: 2px dashed red; /* remove after confirming */
 }
+
+/* Alignment guide (hidden in exports via .no-export) */
+.wb-guide-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ff2b2b; /* red */
+  opacity: 0.9;
+  z-index: 9999;
+  pointer-events: none; /* don’t block clicks */
+}

@@ -33,9 +33,15 @@ function GradeRow({ label, grade, posClass }) {
   return (
     <div className="grade-row">
       <div className="grade-label">{label}</div>
-      <div className="grade-bar-wrapper">
-        <div className={`grade-bar-fill ${posClass}-fill`} style={{ width: `${percent}%` }} />
+
+      {/* ✅ add --pct so the overhanging tick knows where to go */}
+      <div className="grade-bar-wrapper" style={{ '--pct': grade / 10 }}>
+        <div
+          className={`grade-bar-fill ${posClass}-fill`}
+          style={{ width: `${percent}%` }}
+        />
       </div>
+
       <div className="grade-score">{grade}/10</div>
     </div>
   );

@@ -1,0 +1,38 @@
+/* Prohibition Regular */
+@font-face {
+  font-family: 'Prohibition';
+  src: url('./prohibition/Prohibition-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Erbaum Medium */
+@font-face {
+  font-family: 'Erbaum';
+  src: url('./erbaum/Erbaum-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Veneer Regular  (note your file name: Veneer-regular.woff2) */
+@font-face {
+  font-family: 'Veneer';
+  src: url('./veneer/Veneer-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AcuminVar';
+  src:
+    local('Acumin Variable Concept'),
+    local('AcuminVariableConcept'),
+    url('./acumin/AcuminVariableConcept.woff2') format('woff2');
+  font-weight: 100 900;
+  font-stretch: 50% 100%;
+  font-style: normal;
+  font-display: swap;
+}

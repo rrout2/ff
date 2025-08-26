@@ -1,6 +1,7 @@
+// /src/main.jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles/fonts.css';   // ← add this line
+import './assets/fonts/fonts.css';   // ✅ path matches your tree
 import './index.css';
 import App from './App.jsx';
 

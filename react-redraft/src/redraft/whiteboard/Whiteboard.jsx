@@ -412,31 +412,8 @@ export default function Whiteboard() {
         margin: '0 auto'
       }}
     >
-      {/* HUD */}
-      <div style={{
-        position: 'absolute', bottom: 8, left: 8, background: 'rgba(255,255,255,0.92)',
-        border: '1px solid #ddd', borderRadius: 8, padding: '8px 10px',
-        fontFamily: 'Arial, sans-serif', fontSize: 12, zIndex: 9999, maxWidth: 340
-      }}>
-        <div><b>leagueId</b>: {String(leagueId || '')}</div>
-        <div><b>teamName</b>: {String(teamName || '')}</div>
-        <div><b>loading</b>: {String(loading)}</div>
-        <div><b>error</b>: {error ? String(error) : '—'}</div>
-        <div><b>ownerId</b>: {String(ownerId || '—')}</div>
-        <div><b>roster players</b>: {rosterCount}</div>
-        <div><b>starters</b>: {starters.length}</div>
-        <div style={{ marginTop: 6, opacity: .8 }}><b>sample team names:</b></div>
-        <ul style={{ margin: 0, paddingLeft: 16 }}>
-          {teamSamples.map((t, i) => (
-            <li key={i} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              tn: {t.tn || '(none)'} | dn: {t.dn || '(none)'}
-            </li>
-          ))}
-        </ul>
-      </div>
-
       {/* TEAM NAME */}
-      <div style={{ position: 'absolute', top: 55, left: 80, zIndex: 3 }}>
+      <div style={{ position: 'absolute', top: 3, left: 40, zIndex: 3 }}>
         <TeamName
           text={effTeamName}
           maxWidth={900}
@@ -454,7 +431,7 @@ export default function Whiteboard() {
           position: 'absolute',
           top: '50px',
           left: '1655px',
-          transform: 'scale(2)',
+          transform: 'scale(1.8)',
           transformOrigin: 'top left',
           zIndex: 5,
         }}
@@ -498,7 +475,7 @@ export default function Whiteboard() {
         style={{
           position: 'absolute',
           top: '220px',
-          left: '78px',
+          left: '80px',
           transform: 'scale(0.70)',
           transformOrigin: 'top left'
         }}
@@ -561,7 +538,7 @@ export default function Whiteboard() {
         style={{
           position: 'absolute',
           top: '340px',
-          left: '78px',
+          left: '70px',
           transform: 'scale(0.8)',
           transformOrigin: 'top left'
         }}
@@ -582,8 +559,8 @@ export default function Whiteboard() {
         style={{
           position: 'absolute',
           top: '700px',
-          left: '20px',
-          transform: 'scale(1.4)',
+          left: '40px',
+          transform: 'scale(1.2)',
           transformOrigin: 'top left'
         }}
       >
@@ -660,7 +637,7 @@ export default function Whiteboard() {
       <div
         style={{
           position: 'absolute',
-          top: '550px',
+          top: '530px',
           left: '1100px',
           transform: 'scale(0.75)',
           transformOrigin: 'top left'

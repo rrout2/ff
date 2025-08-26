@@ -1,58 +1,74 @@
-/* /src/redraft/roster-tag/roster-tag.css
-   Roster Tag bubble with left icon inside, centered text, and auto-fit.
-   Knobs: --rt-width, --rt-font-size, --rt-inset-left, --rt-inset-right, --rt-scale,
-          --rt-icon-left, --rt-icon-w
-*/
-
-/* Outer container controls overall size */
+/* Roster Tag — pure CSS pill (no PNG bubble) */
 .roster-tag-wrap {
-  --rt-width: 650px;        /* bubble width (overridden by prop) */
-  --rt-font-size: 24px;     /* BOTH prefix & label text size */
-  --rt-inset-left: 100px;   /* left padding for text (must clear icon) */
-  --rt-inset-right: 170px;  /* right padding (used by JS for fit calc) */
-  --rt-scale: 1;            /* auto-fit scale set in JSX */
+  --rt-width: 720px;
+  --rt-height: 90px;
+  --rt-font-size: 68px;     /* base size; JS will scale up/down to fill */
 
-  /* icon knobs */
-  --rt-icon-left: 28px;     /* distance from bubble's left edge to icon */
-  --rt-icon-w: 40px;        /* icon width (auto height) */
+  --rt-inset-left: 72px;    /* leave room for arrow icon (no gray box) */
+  --rt-inset-right: 24px;
+  --rt-scale: 1;
+
+  --rt-radius: 28px;
+  --rt-bg: #badbb4;
+  --rt-text: #2D2D2C;
+  --rt-border-w: 0px;       /* set 2px to add a stroke */
+  --rt-border-color: #2D2D2C;
+
+  /* arrow icon knobs (no background box) */
+  --rt-arrow-left: 28px;
+  --rt-arrow-size: 28px;    /* icon size, not a box */
+  --rt-arrow-bg: transparent; /* << remove little gray box */
 
   position: relative;
   display: inline-block;
   width: var(--rt-width);
-  line-height: 0;           /* removes stray baseline space under the image */
+  height: var(--rt-height);
+  line-height: 0;
 }
 
-/* Bubble image defines natural height */
-.roster-tag-bg {
-  display: block;
-  width: 100%;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
+/* Green pill */
+.roster-tag-bubble {
+  position: absolute;
+  inset: 0;
+  background: var(--rt-bg);
+  border-radius: var(--rt-radius);
+  border: var(--rt-border-w) solid var(--rt-border-color);
   z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: none;
 }
 
-/* Full-size overlay so icon + text stay inside bubble */
+/* Overlay (arrow + text) */
 .roster-tag-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;               /* above the bubble PNG */
-  pointer-events: none;     /* bubble acts as background */
-}
-
-/* Left icon inside the bubble */
-.roster-tag-icon {
-  position: absolute;
-  left: var(--rt-icon-left);
-  top: 50%;
-  transform: translateY(-50%);
-  width: var(--rt-icon-w);
-  height: auto;
-  user-select: none;
+  z-index: 2;
   pointer-events: none;
 }
 
-/* Text overlay — never wraps; auto-scales down to fit the bubble */
+/* Left arrow ICON (no gray box) */
+.roster-tag-arrow {
+  position: absolute;
+  left: var(--rt-arrow-left);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--rt-arrow-size);
+  height: var(--rt-arrow-size);
+  background: var(--rt-arrow-bg); /* transparent */
+  display: grid;
+  place-items: center;
+}
+.roster-tag-arrow img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+  display: block;
+}
+
+/* Text (auto-fit scale via --rt-scale) — Prohibition Regular */
 .roster-tag-text {
   position: absolute;
   top: 50%;
@@ -60,20 +76,23 @@
   transform: translateY(-50%) scale(var(--rt-scale));
   transform-origin: left center;
 
-  white-space: nowrap;              /* never wrap */
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 10px;
 
-  color: #2D2D2C;                   /* your spec */
-  font-family: 'Prohibition', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0;                /* change to 1px if you prefer */
+  color: var(--rt-text);
+  font-family: 'Prohibition', Arial, sans-serif;
+  font-weight: 400;                 /* no synthetic bold */
+  font-synthesis: none;
+  letter-spacing: 0;
   line-height: 1;
   text-transform: uppercase;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
-/* Same size/style for prefix and label */
 .roster-tag-prefix,
 .roster-tag-label {
   font-size: var(--rt-font-size);

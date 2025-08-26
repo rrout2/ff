@@ -1,3 +1,13 @@
+/* /src/redraft/positional-grade/positional-grade.css
+   Pure-CSS bars with compatibility for BOTH:
+   - old classes: .grade-bar-wrapper / .grade-bar-fill (width set inline)
+   - new classes: .grade-bar / .grade-bar__fill (width via --pct)
+   KNOBS:
+     --bar-w   → bar width
+     --bar-h   → bar height
+     --tick-w  → width of the black tick at the end of the fill
+*/
+
 .positional-grades {
   width: 100%;
   padding: 40px;
@@ -5,14 +15,12 @@
   color: #2D2D2C;
 }
 
-/* Reduce vertical spacing between rows */
+/* Row + label */
 .grade-row {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
-
-/* Pull label closer to bar */
 .grade-label {
   width: 30px;
   font-weight: bold;
@@ -20,41 +28,56 @@
   margin-right: 6px;
 }
 
-/* ✅ Make bars longer */
-.grade-bar-wrapper {
-  width: 320px; /* increase from default */
-  height: 28px;
-  border: 2px solid #2D2D2C;
-  border-radius: 4px;
-  background-color: white;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
+/* ---- TRACK (no PNG), SQUARE CORNERS ---- */
+.grade-bar,
+.grade-bar-wrapper {            /* <- supports old & new */
+  /* KNOBS */
+  --bar-w: 350px;               /* adjust width */
+  --bar-h: 36px;                /* adjust height */
+  --tick-w: 2px;                /* black tick width */
 
-.grade-bar-fill {
-  height: 100%;
   position: relative;
-  border-radius: 2px 0 0 2px;
+  width: var(--bar-w);
+  height: var(--bar-h);
+  border: 2px solid #2D2D2C;
+  border-radius: 0;             /* square corners */
+  background: #fff;
+  overflow: hidden;             /* clip fill to the box */
 }
 
-/* Add vertical marker at end of fill */
+/* ---- FILL ----
+   For new JSX: width comes from CSS var --pct (0..1)
+   For old JSX: inline style width: "NN%" will override this rule automatically.
+*/
+.grade-bar__fill,
+.grade-bar-fill {               /* <- supports old & new */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% * var(--pct, 0));  /* ignored if inline width is present */
+  height: 100%;
+  border-radius: 0;             /* square corners */
+}
+
+/* Black tick at the end of the fill */
+.grade-bar__fill::after,
 .grade-bar-fill::after {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  width: 2px;
+  width: var(--tick-w);
   height: 100%;
-  background-color: #2D2D2C;
+  background: #2D2D2C;
 }
 
+/* Score */
 .grade-score {
   width: 50px;
   text-align: right;
   font-weight: bold;
   font-size: 18px;
-  margin-left: -10px;
+  margin-left: -2px;
 }
 
 /* Fill colors */
@@ -62,3 +85,27 @@
 .rb-fill { background-color: #5CD2DB; }
 .wr-fill { background-color: #60C08B; }
 .te-fill { background-color: #F2B94B; }
+
+/* --- hard resets so every fill renders identical --- */
+.positional-grades .grade-row,
+.positional-grades .grade-bar,
+.positional-grades .grade-bar-wrapper,
+.positional-grades .grade-bar__fill,
+.positional-grades .grade-bar-fill {
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  box-shadow: none !important;
+  isolation: isolate; /* prevent parent blend contexts affecting children */
+}
+
+/* Ensure the track itself is plain white behind the fill */
+.positional-grades .grade-bar,
+.positional-grades .grade-bar-wrapper {
+  background: #fff !important;
+}
+
+/* Lock the TE color explicitly (in case a global .te rule exists somewhere) */
+.positional-grades .te-fill {
+  background: #F2B94B !important;  /* your TE color */
+}

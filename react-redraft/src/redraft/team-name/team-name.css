@@ -4,14 +4,21 @@
   white-space: nowrap;
 }
 
+/* 160pt ≈ 213px @ 96dpi; Veneer is textured, keep weight 400 */
 .team-name {
-  font-family: 'Veneer', sans-serif;
-  font-size: 213px; /* 160pt ≈ 213px */
-  font-weight: normal;
+  font-family: 'Veneer', 'Prohibition', Impact, Arial, sans-serif;
+  font-weight: 400;                 /* use the weight we loaded */
+  font-synthesis: none;             /* don’t fake bold/italic */
+  font-size: 213px;                 /* auto-fit will override inline */
   color: #2D2D2C;
   text-transform: uppercase;
   letter-spacing: 2px;
+  line-height: 0.9;
   margin: 0;
-  line-height: 1;
-  white-space: nowrap; /* no wrapping */
+  white-space: nowrap;
+
+  /* rendering polish */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  font-kerning: normal;
 }

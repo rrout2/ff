@@ -13,14 +13,15 @@ import PreviewBoard from './components/PreviewBoard.jsx';
 import SleeperForm from './components/SleeperForm.jsx';
 import ManualBuilder from './components/ManualBuilder.jsx';
 import TweaksPanel from './components/TweaksPanel.jsx';
-import { exportNodeAsPdf } from './utils/exportPdf.js';
+import { exportNodeAsPng } from './utils/exportPng.js';
 import Whiteboard from '../redraft/whiteboard/Whiteboard.jsx';
 
 // ------------------------------------------------------------------
 // smart defaults (no moves default here)
 function makeSmartDefaults(settings, rosterIds, playersById, lineup) {
   const starters = (lineup || []).map(it => it?.player).filter(Boolean);
-  const posCount = sym => starters.filter(p => (Array.isArray(p?.fantasy_positions)?p.fantasy_positions[0]:p?.position||'').toUpperCase()===sym).length;
+  const posCount = sym =>
+    starters.filter(p => (Array.isArray(p?.fantasy_positions) ? p.fantasy_positions[0] : p?.position || '').toUpperCase() === sym).length;
   const rb = posCount('RB'), wr = posCount('WR'), te = posCount('TE'), qb = posCount('QB');
 
   const strengths = [], weaknesses = [];
@@ -37,23 +38,65 @@ function makeSmartDefaults(settings, rosterIds, playersById, lineup) {
 
 // ------------------------------------------------------------------
 // helpers for manual roster resolution
-const normTxt = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
+const normTxt = (s) =>
+  String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
+
 const TEAM_RE = /^(ari|atl|bal|buf|car|chi|cin|cle|dal|den|det|gb|hou|ind|jax|kc|lv|lac|lar|mia|min|ne|no|nyg|nyj|phi|pit|sf|sea|tb|ten|wsh)$/;
-const POS_RE  = /^(qb|rb|wr|te)$/;
+const POS_RE  = /^(qb|rb|wr|te|k|def|dst|ol|dl|lb|db|edge)$/; // broad for parsing hints
+const OFF_POS = new Set(['QB','RB','WR','TE']);
+
+/** Strip trailing POS/TEAM hints from a name string ("Josh Allen QB BUF" -> "Josh Allen"). */
+function stripHints(name) {
+  if (!name) return name;
+  const toks = normTxt(name).split(' ');
+  // keep a copy of original spacing/case for return
+  const origToks = String(name).split(/\s+/);
+  let n = toks.length;
+  while (n > 1) { // keep at least 1 token (the name itself)
+    const last = toks[n - 1];
+    if (TEAM_RE.test(last) || POS_RE.test(last)) n -= 1;
+    else break;
+  }
+  return origToks.slice(0, n).join(' ');
+}
+
+/** Return a deep-cloned overrides with move player strings sanitized to plain names. */
+function sanitizeOverridesForBoard(o) {
+  if (!o || typeof o !== 'object') return o;
+  const next = JSON.parse(JSON.stringify(o));
+  const fix = (obj) => {
+    if (!obj || typeof obj !== 'object') return;
+    if (typeof obj.primary === 'string') obj.primary = stripHints(obj.primary);
+    if (Array.isArray(obj.recs)) {
+      obj.recs = obj.recs.map(v => (typeof v === 'string' ? stripHints(v) : v)).filter(v => v !== undefined);
+    }
+  };
+  if (next.moves && typeof next.moves === 'object') {
+    fix(next.moves.trade);
+    fix(next.moves.uptier);
+    fix(next.moves.pivot);
+  }
+  return next;
+}
 
 function resolveIdByName(playersById, name) {
   if (!name) return null;
   const raw = String(name);
   if (playersById[raw]) return raw; // already an ID
+
   const q = normTxt(raw);
   if (!q) return null;
 
-  const tokens = q.split(' ');
+  // Pull off trailing POS/TEAM hints (can have both, any order)
+  const toks = q.split(' ');
   const hints = { team: null, pos: null };
-  const lastTok = tokens[tokens.length - 1] || '';
-  if (TEAM_RE.test(lastTok)) hints.team = lastTok.toUpperCase();
-  if (POS_RE.test(lastTok))  hints.pos  = lastTok.toUpperCase();
-  const baseName = (hints.team || hints.pos) ? tokens.slice(0, -1).join(' ') : q;
+  while (toks.length > 0) {
+    const last = toks[toks.length - 1];
+    if (TEAM_RE.test(last)) { hints.team = last.toUpperCase(); toks.pop(); continue; }
+    if (POS_RE.test(last))  { hints.pos  = last.toUpperCase();  toks.pop(); continue; }
+    break;
+  }
+  const baseName = toks.join(' ');
 
   let bestId = null, bestScore = -1e9;
   for (const [id, p] of Object.entries(playersById || {})) {
@@ -67,8 +110,11 @@ function resolveIdByName(playersById, name) {
 
     const pos  = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
     const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
-    if (hints.pos  && pos  === hints.pos)  score += 500;
-    if (hints.team && team === hints.team) score += 500;
+
+    if (hints.pos  && pos  === hints.pos)  score += 900;
+    if (hints.team && team === hints.team) score += 900;
+
+    if (OFF_POS.has(pos)) score += 250; else score -= 150;
 
     const adp = Number(p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std);
     if (isFinite(adp)) score += (10000 - adp * 100);
@@ -113,14 +159,13 @@ export default function WhiteboardSite() {
   const [lineup, setLineup] = useState([]);
   const [ownerId, setOwnerId] = useState('');
   const [teamName, setTeamName] = useState('');
-  const [leagueId, setLeagueId] = useState('');   // Sleeper mode when set
+  const [leagueId, setLeagueId] = useState('');
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
   const [overrides, setOverrides] = useState({});
   const [ovKey, setOvKey] = useState(0);
 
-  // builder lineup (for the manual builder UI only)
   useEffect(() => {
     if (!rosterIds.length) { setLineup([]); return; }
     try { setLineup(buildStartingLineup(settings.positions, rosterIds, playersById)); }
@@ -138,15 +183,21 @@ export default function WhiteboardSite() {
     // eslint-disable-next-line
   }, [settings, rosterIds, playersById, lineup, leagueId]);
 
-  // PDF export
-  const pdfRef = useRef(null);
-  const onExportPdf = async () => {
-    if (!pdfRef.current) return;
-    await exportNodeAsPdf(pdfRef.current, `whiteboard_${teamName || 'team'}.pdf`);
+  // Build a sanitized copy for the board + URL (?o=…)
+  const overridesForBoard = useMemo(
+    () => sanitizeOverridesForBoard(overrides),
+    [overrides]
+  );
+
+  // PNG export
+  const exportRef = useRef(null);
+  const onExportPng = async () => {
+    if (!exportRef.current) return;
+    await exportNodeAsPng(exportRef.current, `whiteboard_${teamName || 'team'}.png`);
   };
 
-  // Sleeper load
-  const onSleeperLoad = async ({ leagueId: id, teamNameInput }) => {
+  // Sleeper load (supports ownerId from form)
+  const onSleeperLoad = async ({ leagueId: id, teamNameInput, ownerId: selectedOwnerId }) => {
     try {
       setLoading(true); setErr('');
       const lid = id.trim();
@@ -157,18 +208,13 @@ export default function WhiteboardSite() {
         fetchPlayersMap(),
       ]);
 
-      let oid = findOwnerUserId(users, (teamNameInput || '').trim());
+      let oid = selectedOwnerId || findOwnerUserId(users, (teamNameInput || '').trim());
       if (!oid) oid = users[0]?.user_id;
       const myRoster = rosters.find(r => String(r.owner_id) === String(oid));
 
-      setTeamName(teamNameInput || users[0]?.metadata?.team_name || users[0]?.display_name || '');
+      const selUser = users.find(u => String(u.user_id) === String(oid)) || users[0];
+      setTeamName(teamNameInput || selUser?.metadata?.team_name || selUser?.display_name || '');
       setOwnerId(oid);
-
-      const sp = new URLSearchParams(window.location.search);
-      sp.set('site', '1'); sp.set('leagueId', lid); sp.set('teamName', teamNameInput || '');
-      const enc = LZString.compressToEncodedURIComponent(JSON.stringify(overrides || {}));
-      if (enc && enc !== 'eNortjI0MDCwMjQwAAADAA==') sp.set('o', enc); else sp.delete('o');
-      window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);
 
       setLeagueId(lid);
       setSettings(s);
@@ -242,18 +288,19 @@ export default function WhiteboardSite() {
     sp.set('site','1');
     if (leagueId) sp.set('leagueId', leagueId);
     if (teamName) sp.set('teamName', teamName);
-    const enc = LZString.compressToEncodedURIComponent(JSON.stringify(overrides || {}));
+    // IMPORTANT: write the SANITIZED overrides to the URL (?o=…)
+    const enc = LZString.compressToEncodedURIComponent(JSON.stringify(overridesForBoard || {}));
     if (enc && enc !== 'eNortjI0MDCwMjQwAAADAA==') sp.set('o', enc); else sp.delete('o');
     window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);
     setOvKey(k => k + 1);
-  }, [overrides, leagueId, teamName]);
+  }, [overridesForBoard, leagueId, teamName]);
 
   return (
     <div className="wb-site">
       <header className="wb-site__header">
         <div className="wb-title">Whiteboard — Website</div>
         <div className="wb-actions">
-          <button onClick={onExportPdf} disabled={loading}>Download PDF</button>
+          <button onClick={onExportPng} disabled={loading}>Download PNG</button>
         </div>
       </header>
 
@@ -266,51 +313,57 @@ export default function WhiteboardSite() {
           </section>
 
           {!isSleeperMode && (
-            <>
-              <section className="wb-card">
-                <div className="wb-card__title">Manual Builder</div>
-                <ManualBuilder
-                  playersById={playersById}
-                  rosterIds={rosterIds}
-                  onAdd={onAddPlayer}
-                  onRemove={onRemovePlayer}
-                  positions={settings.positions}
-                  onPositions={onUpdatePositions}
-                  teamName={teamName}
-                  onTeamName={setTeamName}
-                />
-              </section>
-            </>
+            <section className="wb-card">
+              <div className="wb-card__title">Manual Builder</div>
+              <ManualBuilder
+                playersById={playersById}
+                rosterIds={rosterIds}
+                onAdd={onAddPlayer}
+                onRemove={onRemovePlayer}
+                positions={settings.positions}
+                onPositions={onUpdatePositions}
+                teamName={teamName}
+                onTeamName={setTeamName}
+              />
+            </section>
           )}
 
-          {/* Sections & Overrides (includes Manual Roster & Picks) */}
+          {/* Sections & Overrides */}
           <section className="wb-card">
             <div className="wb-card__title">Sections & Overrides</div>
             <TweaksPanel
               hud={hud}
               overrides={overrides}
               onOverrides={setOverrides}
-              onExport={onExportPdf}
+              onExport={onExportPng}
+              exportLabel="Download PNG"
+              playersById={playersById}
+              rosterIds={effectiveManualIds}
             />
           </section>
         </aside>
 
         <section className="wb-right">
-          <div ref={pdfRef}>
+          <div ref={exportRef} data-export-root>
             {isSleeperMode ? (
-              <Whiteboard key={`${leagueId}:${teamName}:${ovKey}`} />
+              // pass sanitized overrides (board shows plain names)
+              <Whiteboard
+                key={`${leagueId}:${teamName}:${ovKey}`}
+                overrides={overridesForBoard}
+                playersById={playersById}
+                teamName={teamName}
+              />
             ) : (
               <PreviewBoard
-                leagueId={''}
+                leagueId=""
                 teamName={teamName}
                 settings={settings}
-                rosterIds={effectiveManualIds}         // from typed names
+                rosterIds={effectiveManualIds}
                 playersById={playersById}
-                lineup={effectiveManualLineup}         // built from typed names
+                lineup={effectiveManualLineup}
                 ownerId={ownerId}
-                draftPoints={manualResolved.points}    // from typed picks
-                moves={[]}                             
-                overrides={overrides}
+                draftPoints={manualResolved.points}
+                overrides={overridesForBoard}
                 show={{
                   settings:true, fourFactors:true, starters:true, grades:true,
                   draftChart:true, moves:true, strengths:true, powerRank:true
