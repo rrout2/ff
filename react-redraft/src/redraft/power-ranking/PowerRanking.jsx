@@ -1,3 +1,4 @@
+// /src/redraft/power-ranking/PowerRanking.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 import './power-ranking.css';
 
@@ -13,6 +14,14 @@ const POS = ['QB', 'RB', 'WR', 'TE'];
 const posOf = (p) => (p?.position || p?.pos || p?.fantasy_positions?.[0] || '').toUpperCase();
 const ordinal = (n) => { const s=['th','st','nd','rd']; const v=n%100; return n + (s[(v-20)%10] || s[v] || s[0]); };
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+
+/** Weighted contribution of each position to the overall power ranking */
+const WEIGHTS = {
+  QB: 0.125,   // 12.5%
+  TE: 0.125,   // 12.5%
+  RB: 0.375,   // 37.5%
+  WR: 0.375,   // 37.5%
+};
 
 function playerValue(pid, p) {
   const g = gradeData?.[pid] || {};
@@ -65,6 +74,7 @@ export default function PowerRanking({ leagueId, ownerId, settings, playersById,
           return { ownerId: r.owner_id, rosterId: r.roster_id, posSums };
         });
 
+        // Normalize each position's total for 1..10 scale within the league
         const mins = {}, maxs = {};
         for (const k of POS) {
           const vals = teamRows.map(t => t.posSums[k]);
@@ -79,8 +89,21 @@ export default function PowerRanking({ leagueId, ownerId, settings, playersById,
         };
 
         const ranked = teamRows.map((t) => {
-          const grades = { QB: toGrade(t.posSums.QB,'QB'), RB: toGrade(t.posSums.RB,'RB'), WR: toGrade(t.posSums.WR,'WR'), TE: toGrade(t.posSums.TE,'TE') };
-          const avg = Math.round(((grades.QB + grades.RB + grades.WR + grades.TE) / 4) * 100) / 100;
+          const grades = {
+            QB: toGrade(t.posSums.QB, 'QB'),
+            RB: toGrade(t.posSums.RB, 'RB'),
+            WR: toGrade(t.posSums.WR, 'WR'),
+            TE: toGrade(t.posSums.TE, 'TE'),
+          };
+
+          // WEIGHTED average: QB 12.5%, TE 12.5%, RB 37.5%, WR 37.5%
+          const avgRaw =
+            (grades.QB * WEIGHTS.QB) +
+            (grades.TE * WEIGHTS.TE) +
+            (grades.RB * WEIGHTS.RB) +
+            (grades.WR * WEIGHTS.WR);
+
+          const avg = Math.round(avgRaw * 100) / 100; // 2 decimals
           return { ...t, grades, avg };
         }).sort((a, b) => b.avg - a.avg);
 

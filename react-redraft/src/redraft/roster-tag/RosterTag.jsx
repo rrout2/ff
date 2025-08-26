@@ -1,9 +1,12 @@
+// /src/redraft/roster-tag/RosterTag.jsx
 import React, { useMemo, useLayoutEffect, useRef, useState } from 'react';
 import './roster-tag.css';
 import TagIcon from './roster-tag-images/tag.png';
 
 /* thresholds & rules */
 const DEFAULT_THRESHOLDS = { high: 7, low: 4 };
+
+/* Only the “perfect-combo” rules (no Balanced here) */
 const RULES = [
   { id: 'juggernaut', label: 'THE JUGGERNAUT',  wants: { upside: 'high', reliability: 'high', depth: 'high', risk: 'low' } },
   { id: 'riskit',     label: 'RISK IT FOR BISKIT', wants: { upside: 'high', risk: 'high' } },
@@ -12,6 +15,9 @@ const RULES = [
   { id: 'mariana',    label: 'MARIANA TRENCH',     wants: { depth: 'high', risk: '!high', upside: '!high' } },
   { id: 'witu',       label: 'WI TU LO',           wants: { upside: 'low', reliability: 'low', depth: 'low' } },
 ];
+
+/* Fallback tag used when no rule matches exactly */
+const FALLBACK = { id: 'balanced', label: 'BALANCED APPROACH' };
 
 function bucketize(scores, { high, low }) {
   const to = n => (n > high ? 'high' : n < low ? 'low' : 'mid');
@@ -22,31 +28,31 @@ function bucketize(scores, { high, low }) {
     risk: to(scores.risk),
   };
 }
-function scoreRule(levels, wants) {
-  let s = 0;
+
+/* Exact-match checker:
+   - 'high'/'mid'/'low'  => require equality
+   - '!high' / '!low'    => require inequality
+   If every key in wants passes, it’s a perfect combo. */
+function exactMatch(levels, wants = {}) {
   for (const [k, want] of Object.entries(wants)) {
     const have = levels[k];
     if (want === 'high' || want === 'mid' || want === 'low') {
-      if (have === want) s += 3;
-      else if (want !== 'mid' && have === 'mid') s += 1;
-      else s -= 2;
-    } else if (want === '!high') s += have !== 'high' ? 1 : -2;
-    else if (want === '!low')   s += have !== 'low'  ? 1 : -1;
+      if (have !== want) return false;
+    } else if (want === '!high') {
+      if (have === 'high') return false;
+    } else if (want === '!low') {
+      if (have === 'low') return false;
+    }
   }
-  if (wants.upside === 'high'      && levels.upside === 'high')      s += 1;
-  if (wants.reliability === 'high' && levels.reliability === 'high') s += 1;
-  if (wants.depth === 'high'       && levels.depth === 'high')       s += 1;
-  if (wants.risk === 'low'         && levels.risk === 'low')         s += 1;
-  return s;
+  return true;
 }
+
+/* Default to BALANCED APPROACH unless a rule matches perfectly */
 export function assignRosterTag(scores, thresholds = DEFAULT_THRESHOLDS, rules = RULES) {
   const levels = bucketize(scores, thresholds);
-  let best = rules[0], bestScore = -Infinity;
-  for (const r of rules) {
-    const s = scoreRule(levels, r.wants || {});
-    if (s > bestScore) { bestScore = s; best = r; }
-  }
-  return { id: best.id, label: best.label, levels };
+  const hit = rules.find(r => exactMatch(levels, r.wants));
+  const res = hit ? { id: hit.id, label: hit.label } : FALLBACK;
+  return { ...res, levels };
 }
 
 /**
@@ -97,9 +103,7 @@ export default function RosterTag({
 
     // reset to measure "natural" size at base font
     const prevTransform = txt.style.transform;
-    const prevSize = txt.style.setProperty('--rt-font-size', `${fontSize}px`);
     txt.style.transform = 'translateY(-50%) scale(1)';
-
     // measure
     const naturalW = txt.scrollWidth || 1;
     const naturalH = txt.getBoundingClientRect().height || 1;
@@ -110,8 +114,7 @@ export default function RosterTag({
     const next = Math.min(scaleW, scaleH);
 
     setScale(next);
-
-    // restore transform (actual transform uses CSS var below)
+    // restore (actual transform uses CSS var below)
     txt.style.transform = prevTransform;
   }, [label, width, insetLeft, insetRight, height, fontSize]);
 

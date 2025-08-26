@@ -87,12 +87,9 @@ export default function DraftValueChart({
       pad.l + firstRoundOffsetPx + ((round - 1) / denom) * usableW;
     const xTicks = Array.from({ length: roundsShown }, (_, i) => i + 1);
 
-    // Y-axis: base = ADP of your 10th-round pick; fallback = max ADP
-    const tenth = pts.find(p => p.round === ROUNDS_TO_SHOW);
-    const yBase = Number.isFinite(tenth?.adp)
-      ? Number(tenth.adp)
-      : Math.max(...pts.map(p => p.adp));
-    const yMax = Math.max(1, yBase + yHeadroomADP); // add headroom
+    // Y-axis: use the MAX ADP among players taken in rounds 1–10 (+ headroom)
+    const maxAdpFirstTen = Math.max(...pts.map(p => Number(p.adp)));
+    const yMax = Math.max(1, maxAdpFirstTen + yHeadroomADP);
 
     const yScale = (y) =>
       H - pad.b - (y / yMax) * (H - pad.t - pad.b);
@@ -119,11 +116,17 @@ export default function DraftValueChart({
   const laidOut = pts.map((p) => {
     const cx = xScale(p.round);
     const cy = yScale(p.adp);
+
+    // target sizes (last name bigger)
     let fs = labelFontSize;
-    let lineH = fs + 2;
+    const lastSize = fs;
+    const firstSize = Math.max(minLabelFontSize, Math.round(fs * 0.78));
+    let lineH = Math.max( firstSize + 2, Math.round(fs * 0.85) );
+
     const lines = [p.first, p.last].filter(Boolean);
-    let w = Math.max(...lines.map(s => s.length || 0)) * fs * kChar;
-    let h = lines.length * lineH;
+    // width estimate based on the largest line (for collision)
+    let w = Math.max(...lines.map(s => s.length || 0)) * lastSize * kChar;
+    let h = (lines.length === 2 ? firstSize + lineH : lastSize);
 
     // Default: above the dot
     let yTop = cy - 18 - h;
@@ -136,9 +139,15 @@ export default function DraftValueChart({
       yTop -= lineH;
       attempts++;
       if (attempts > 12 && fs > minLabelFontSize) {
-        fs -= 1; lineH = fs + 2;
-        w = Math.max(...lines.map(s => s.length || 0)) * fs * kChar;
-        h = lines.length * lineH;
+        fs -= 1;
+        // recompute sizes
+        const newLast = fs;
+        const newFirst = Math.max(minLabelFontSize, Math.round(fs * 0.78));
+        const newLineH = Math.max(newFirst + 2, Math.round(fs * 0.85));
+        // update estimates
+        lineH = newLineH;
+        w = Math.max(...lines.map(s => s.length || 0)) * newLast * kChar;
+        h = (lines.length === 2 ? newFirst + newLineH : newLast);
         attempts = 0;
       } else if (attempts > 24) {
         break;
@@ -150,17 +159,18 @@ export default function DraftValueChart({
       yTop = cy + 18;
     }
 
-    // ⬇️ NEW: keep labels inside by shifting anchor near edges
+    // keep labels inside by shifting anchor near edges + small horizontal offset from the stem
+    const offsetX = 8; // px
     let anchor = 'middle';
     let labelX = cx;
-    if (cx + w / 2 > W - pad.r - 2) { anchor = 'end';   labelX = cx; }   // near right edge
-    if (cx - w / 2 < pad.l + 2)      { anchor = 'start'; labelX = cx; }   // near left edge
+    let dx = 0;
+    if (cx + w / 2 > W - pad.r - 2) { anchor = 'end';   dx = -offsetX; }
+    if (cx - w / 2 < pad.l + 2)      { anchor = 'start'; dx =  offsetX; }
 
     placed.push({ x: cx - w / 2, y: yTop, w, h });
-    return { p, cx, cy, yTop, fs, lineH, lines, anchor, labelX };
+    return { p, cx, cy, yTop, fs, firstSize, lastSize, lineH, lines, anchor, labelX, dx };
   });
 
-  // CSS variables for axis styles (consumed in draft-value.css)
   const axisVars = {
     '--dv-axis-font': axisFontFamily,
     '--dv-axis-weight': axisFontWeight,
@@ -224,21 +234,49 @@ export default function DraftValueChart({
         />
 
         {/* points + labels */}
-        {laidOut.map(({ p, cx, cy, yTop, fs, lineH, lines, anchor, labelX }) => (
+        {laidOut.map(({ p, cx, cy, yTop, firstSize, lastSize, lineH, lines, anchor, labelX, dx }) => (
           <g key={`${p.id}-${p.overall}`}>
             <line x1={cx} y1={H - pad.b} x2={cx} y2={cy} stroke={COLORS.line} strokeWidth="2" />
             <circle cx={cx} cy={cy} r="8" fill={p.color} stroke="#2D2D2C" strokeWidth="2" />
+
+            {/* Pretty stacked label with white halo and subtle spacing */}
             <text
               x={labelX}
-              y={yTop + fs}
+              y={yTop + firstSize}
               textAnchor={anchor}
-              fontSize={fs}
-              fontWeight="800"
               fill="#2D2D2C"
-              style={{ fontFamily: 'Prohibition, sans-serif' }}
+              style={{
+                fontFamily: 'Prohibition, sans-serif',
+                paintOrder: 'stroke',
+                stroke: '#ffffff',
+                strokeWidth: 3,
+                strokeLinejoin: 'round',
+                letterSpacing: 0.3
+              }}
             >
-              <tspan x={labelX}>{lines[0]}</tspan>
-              {lines[1] && <tspan x={labelX} dy={lineH}>{lines[1]}</tspan>}
+              {/* first name smaller */}
+              {lines[0] && (
+                <tspan
+                  x={labelX}
+                  dx={dx}
+                  fontSize={firstSize}
+                  fontWeight={700}
+                >
+                  {lines[0]}
+                </tspan>
+              )}
+              {/* last name larger, below */}
+              {lines[1] && (
+                <tspan
+                  x={labelX}
+                  dx={dx}
+                  dy={lineH}
+                  fontSize={lastSize}
+                  fontWeight={900}
+                >
+                  {lines[1]}
+                </tspan>
+              )}
             </text>
           </g>
         ))}

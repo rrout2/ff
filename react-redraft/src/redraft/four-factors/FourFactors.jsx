@@ -104,6 +104,10 @@ export default function FourFactors({
           showInnerDisc              // white disc under the ring
           innerDiscOpacity={0.2}     // ~20% as requested
           innerDiscStroke="#2D2D2C"  // black outline around inner disc
+          innerEdgeOverlay
+          innerEdgeColor='#2D2D2C'
+          innerEdgeWidth={3}
+          innerEdgeOffset={0}
           centerOffsetY={centerOffsetY}
           center={
             <img

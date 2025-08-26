@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LZString from 'lz-string';
 import './site.css';
+import './print.css';
 
 import {
   getLeagueSettings, fetchLeagueUsers, fetchLeagueRosters,
@@ -14,6 +15,7 @@ import SleeperForm from './components/SleeperForm.jsx';
 import ManualBuilder from './components/ManualBuilder.jsx';
 import TweaksPanel from './components/TweaksPanel.jsx';
 import { exportNodeAsPng } from './utils/exportPng.js';
+import { printBoard } from './utils/printBoard.js';   // ⬅️ NEW
 import Whiteboard from '../redraft/whiteboard/Whiteboard.jsx';
 
 // ------------------------------------------------------------------
@@ -37,116 +39,15 @@ function makeSmartDefaults(settings, rosterIds, playersById, lineup) {
 }
 
 // ------------------------------------------------------------------
-// helpers for manual roster resolution
-const normTxt = (s) =>
-  String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
-
+// helpers (stripHints, sanitizeOverridesForBoard, resolveIdByName, parsePick) — unchanged
+const normTxt = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
 const TEAM_RE = /^(ari|atl|bal|buf|car|chi|cin|cle|dal|den|det|gb|hou|ind|jax|kc|lv|lac|lar|mia|min|ne|no|nyg|nyj|phi|pit|sf|sea|tb|ten|wsh)$/;
-const POS_RE  = /^(qb|rb|wr|te|k|def|dst|ol|dl|lb|db|edge)$/; // broad for parsing hints
+const POS_RE  = /^(qb|rb|wr|te|k|def|dst|ol|dl|lb|db|edge)$/;
 const OFF_POS = new Set(['QB','RB','WR','TE']);
-
-/** Strip trailing POS/TEAM hints from a name string ("Josh Allen QB BUF" -> "Josh Allen"). */
-function stripHints(name) {
-  if (!name) return name;
-  const toks = normTxt(name).split(' ');
-  // keep a copy of original spacing/case for return
-  const origToks = String(name).split(/\s+/);
-  let n = toks.length;
-  while (n > 1) { // keep at least 1 token (the name itself)
-    const last = toks[n - 1];
-    if (TEAM_RE.test(last) || POS_RE.test(last)) n -= 1;
-    else break;
-  }
-  return origToks.slice(0, n).join(' ');
-}
-
-/** Return a deep-cloned overrides with move player strings sanitized to plain names. */
-function sanitizeOverridesForBoard(o) {
-  if (!o || typeof o !== 'object') return o;
-  const next = JSON.parse(JSON.stringify(o));
-  const fix = (obj) => {
-    if (!obj || typeof obj !== 'object') return;
-    if (typeof obj.primary === 'string') obj.primary = stripHints(obj.primary);
-    if (Array.isArray(obj.recs)) {
-      obj.recs = obj.recs.map(v => (typeof v === 'string' ? stripHints(v) : v)).filter(v => v !== undefined);
-    }
-  };
-  if (next.moves && typeof next.moves === 'object') {
-    fix(next.moves.trade);
-    fix(next.moves.uptier);
-    fix(next.moves.pivot);
-  }
-  return next;
-}
-
-function resolveIdByName(playersById, name) {
-  if (!name) return null;
-  const raw = String(name);
-  if (playersById[raw]) return raw; // already an ID
-
-  const q = normTxt(raw);
-  if (!q) return null;
-
-  // Pull off trailing POS/TEAM hints (can have both, any order)
-  const toks = q.split(' ');
-  const hints = { team: null, pos: null };
-  while (toks.length > 0) {
-    const last = toks[toks.length - 1];
-    if (TEAM_RE.test(last)) { hints.team = last.toUpperCase(); toks.pop(); continue; }
-    if (POS_RE.test(last))  { hints.pos  = last.toUpperCase();  toks.pop(); continue; }
-    break;
-  }
-  const baseName = toks.join(' ');
-
-  let bestId = null, bestScore = -1e9;
-  for (const [id, p] of Object.entries(playersById || {})) {
-    const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
-    if (!full) continue;
-
-    let score = 0;
-    if (full === baseName) score += 2000;
-    else if (full.startsWith(baseName)) score += 1200;
-    else if (full.includes(baseName))  score += 800;
-
-    const pos  = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
-    const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
-
-    if (hints.pos  && pos  === hints.pos)  score += 900;
-    if (hints.team && team === hints.team) score += 900;
-
-    if (OFF_POS.has(pos)) score += 250; else score -= 150;
-
-    const adp = Number(p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std);
-    if (isFinite(adp)) score += (10000 - adp * 100);
-
-    if (score > bestScore) { bestScore = score; bestId = id; }
-  }
-  return bestId;
-}
-
-function parsePick(pickStr, teams) {
-  if (!pickStr) return null;
-  const s = String(pickStr).trim();
-  if (s.startsWith('#')) {
-    const ov = parseInt(s.slice(1), 10);
-    if (!isFinite(ov)) return null;
-    const round = Math.max(1, Math.ceil(ov / Math.max(1, teams || 12)));
-    return { overall: ov, round };
-  }
-  const sep = s.includes('.') ? '.' : (s.includes('-') ? '-' : null);
-  if (sep) {
-    const [r, p] = s.split(sep);
-    const rr = parseInt(r, 10);
-    const pp = parseInt(p, 10);
-    if (!isFinite(rr) || !isFinite(pp)) return null;
-    const ov = (rr - 1) * (teams || 12) + pp;
-    return { overall: ov, round: rr };
-  }
-  const ov = parseInt(s, 10);
-  if (!isFinite(ov)) return null;
-  const round = Math.max(1, Math.ceil(ov / Math.max(1, teams || 12)));
-  return { overall: ov, round };
-}
+function stripHints(name){ if(!name)return name; const t=normTxt(name).split(' '); const o=String(name).split(/\s+/); let n=t.length; while(n>1){const L=t[n-1]; if(TEAM_RE.test(L)||POS_RE.test(L)) n--; else break;} return o.slice(0,n).join(' ');}
+function sanitizeOverridesForBoard(o){ if(!o||typeof o!=='object') return o; const next=JSON.parse(JSON.stringify(o)); const fix=(x)=>{ if(!x||typeof x!=='object') return; if(typeof x.primary==='string') x.primary=stripHints(x.primary); if(Array.isArray(x.recs)) x.recs=x.recs.map(v=>typeof v==='string'?stripHints(v):v).filter(v=>v!==undefined); }; if(next.moves&&typeof next.moves==='object'){ fix(next.moves.trade); fix(next.moves.uptier); fix(next.moves.pivot);} return next;}
+function resolveIdByName(playersById, name){ if(!name) return null; const raw=String(name); if(playersById[raw]) return raw; const q=normTxt(raw); if(!q) return null; const toks=q.split(' '); const hints={team:null,pos:null}; while(toks.length>0){const last=toks[toks.length-1]; if(TEAM_RE.test(last)){hints.team=last.toUpperCase(); toks.pop(); continue;} if(POS_RE.test(last)){hints.pos=last.toUpperCase(); toks.pop(); continue;} break;} const baseName=toks.join(' '); let bestId=null,bestScore=-1e9; for(const [id,p] of Object.entries(playersById||{})){ const full=(p.full_name||`${p.first_name||''} ${p.last_name||''}`.trim()).toLowerCase(); if(!full) continue; let score=0; if(full===baseName) score+=2000; else if(full.startsWith(baseName)) score+=1200; else if(full.includes(baseName)) score+=800; const pos=(Array.isArray(p.fantasy_positions)?p.fantasy_positions[0]:p.position||'').toUpperCase(); const team=(p.team||p.pro_team||p.team_abbr||'').toUpperCase(); if(hints.pos&&pos===hints.pos) score+=900; if(hints.team&&team===hints.team) score+=900; if(OFF_POS.has(pos)) score+=250; else score-=150; const adp=Number(p.adp_half_ppr??p.adp_ppr??p.adp??p.adp_full_ppr??p.adp_std); if(isFinite(adp)) score+=(10000-adp*100); if(score>bestScore){bestScore=score; bestId=id;} } return bestId;}
+function parsePick(pickStr, teams){ if(!pickStr) return null; const s=String(pickStr).trim(); if(s.startsWith('#')){const ov=parseInt(s.slice(1),10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};} const sep=s.includes('.')?'.':(s.includes('-')?'-':null); if(sep){const [r,p]=s.split(sep); const rr=parseInt(r,10); const pp=parseInt(p,10); if(!isFinite(rr)||!isFinite(pp)) return null; const ov=(rr-1)* (teams||12)+pp; return {overall:ov,round:rr};} const ov=parseInt(s,10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};}
 
 // ------------------------------------------------------------------
 export default function WhiteboardSite() {
@@ -172,7 +73,7 @@ export default function WhiteboardSite() {
     catch (e) { console.error(e); }
   }, [settings, rosterIds, playersById]);
 
-  // defaults (no 'moves' here)
+  // defaults
   useEffect(() => {
     const hasAny =
       !!overrides.verdict ||
@@ -183,7 +84,6 @@ export default function WhiteboardSite() {
     // eslint-disable-next-line
   }, [settings, rosterIds, playersById, lineup, leagueId]);
 
-  // Build a sanitized copy for the board + URL (?o=…)
   const overridesForBoard = useMemo(
     () => sanitizeOverridesForBoard(overrides),
     [overrides]
@@ -196,7 +96,12 @@ export default function WhiteboardSite() {
     await exportNodeAsPng(exportRef.current, `whiteboard_${teamName || 'team'}.png`);
   };
 
-  // Sleeper load (supports ownerId from form)
+  // PDF export — temp window with ONLY the board, headshots inlined
+  const onExportPdf = () => {
+    if (!exportRef.current) return;
+    printBoard(exportRef.current, { page: 'letter-landscape', marginPx: 0 });
+  };
+
   const onSleeperLoad = async ({ leagueId: id, teamNameInput, ownerId: selectedOwnerId }) => {
     try {
       setLoading(true); setErr('');
@@ -227,7 +132,6 @@ export default function WhiteboardSite() {
     } finally { setLoading(false); }
   };
 
-  // Manual builder UI handlers
   const onAddPlayer = id => setRosterIds(prev => (prev.includes(id) ? prev : [...prev, id]));
   const onRemovePlayer = id => setRosterIds(prev => prev.filter(p => String(p)!==String(id)));
   const onUpdatePositions = p => setSettings(prev => ({ ...prev, positions: { ...prev.positions, ...p }}));
@@ -269,7 +173,6 @@ export default function WhiteboardSite() {
     return { ids, points };
   }, [manualRows, playersById, settings.teams]);
 
-  // Effective manual roster for preview (typed > builder IDs)
   const effectiveManualIds = manualResolved.ids.length ? manualResolved.ids : rosterIds;
   const effectiveManualLineup = useMemo(() => {
     try { return buildStartingLineup(settings.positions, effectiveManualIds, playersById); }
@@ -288,7 +191,6 @@ export default function WhiteboardSite() {
     sp.set('site','1');
     if (leagueId) sp.set('leagueId', leagueId);
     if (teamName) sp.set('teamName', teamName);
-    // IMPORTANT: write the SANITIZED overrides to the URL (?o=…)
     const enc = LZString.compressToEncodedURIComponent(JSON.stringify(overridesForBoard || {}));
     if (enc && enc !== 'eNortjI0MDCwMjQwAAADAA==') sp.set('o', enc); else sp.delete('o');
     window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);
@@ -300,6 +202,7 @@ export default function WhiteboardSite() {
       <header className="wb-site__header">
         <div className="wb-title">Whiteboard — Website</div>
         <div className="wb-actions">
+          <button onClick={onExportPdf} disabled={loading}>Download PDF</button>
           <button onClick={onExportPng} disabled={loading}>Download PNG</button>
         </div>
       </header>
@@ -337,6 +240,8 @@ export default function WhiteboardSite() {
               onOverrides={setOverrides}
               onExport={onExportPng}
               exportLabel="Download PNG"
+              onPrint={onExportPdf}
+              printLabel="Download PDF"
               playersById={playersById}
               rosterIds={effectiveManualIds}
             />
@@ -344,9 +249,9 @@ export default function WhiteboardSite() {
         </aside>
 
         <section className="wb-right">
+          {/* This is the element we clone/print; nothing else is in the print window */}
           <div ref={exportRef} data-export-root>
             {isSleeperMode ? (
-              // pass sanitized overrides (board shows plain names)
               <Whiteboard
                 key={`${leagueId}:${teamName}:${ovKey}`}
                 overrides={overridesForBoard}

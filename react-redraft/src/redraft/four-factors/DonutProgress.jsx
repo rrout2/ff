@@ -12,18 +12,24 @@ export default function DonutProgress({
   color = '#F28C2E',
   trackColor = '#e9e9e9',
 
-  // NEW: edge and outline controls
+  // edge and outline controls
   cap = 'butt',                 // 'butt' = hard/flat ends; 'round' if you ever want rounded
   showOutlineRing = true,       // black outlines around ring edges (outer & inner)
   outlineColor = '#2D2D2C',
   outlineWidth = 1,
 
-  // NEW: inner disc under the ring
+  // inner disc under the ring
   showInnerDisc = true,
   innerDiscOpacity = 0.2,       // ~20% opacity
   innerDiscFill = '#ffffff',
   innerDiscStroke = '#2D2D2C',
   innerDiscStrokeWidth = 1,
+
+  // NEW: overlay stroke on the inner edge of the donut (drawn last / on top)
+  innerEdgeOverlay = true,
+  innerEdgeColor = '#2D2D2C',
+  innerEdgeWidth = 3,           // ⬅️ make this bigger/smaller to match comp
+  innerEdgeOffset = 0,          // ⬅️ fine nudge (px): positive pushes outward, negative inward
 
   // center content
   center,
@@ -38,6 +44,9 @@ export default function DonutProgress({
 
   // inner disc radius (just inside the ring)
   const rInner = Math.max(0, r - thickness / 2 - 2);
+
+  // overlay stroke sits at the inner edge of the ring and is drawn last
+  const rInnerEdge = Math.max(0.01, r - thickness / 2 + innerEdgeOffset);
 
   return (
     <div style={{ position: 'relative', width: size, height: size }}>
@@ -89,6 +98,16 @@ export default function DonutProgress({
             fillOpacity={innerDiscOpacity}
             stroke={innerDiscStroke}
             strokeWidth={innerDiscStrokeWidth}
+          />
+        )}
+
+        {/* NEW: Inner edge overlay stroke – sits on top of progress ring */}
+        {innerEdgeOverlay && (
+          <circle
+            cx={size/2} cy={size/2} r={rInnerEdge}
+            fill="none"
+            stroke={innerEdgeColor}
+            strokeWidth={innerEdgeWidth}
           />
         )}
       </svg>

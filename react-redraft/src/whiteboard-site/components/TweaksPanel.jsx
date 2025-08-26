@@ -5,8 +5,10 @@ export default function TweaksPanel({
   overrides,
   onOverrides,
   onExport,
+  onPrint,                    // << optional: show a "Download PDF" button when provided
   hud,
   exportLabel = 'Download PNG',
+  printLabel = 'Download PDF',
   playersById = {},       // map of all players
   rosterIds = [],         // ids for the current roster (starters + bench)
 }) {
@@ -128,9 +130,8 @@ export default function TweaksPanel({
   );
 
   /* ============================= Player Autocomplete ============================== */
-  // Filter to fantasy-relevant offense positions; keep Travis Hunter explicitly
   const INCLUDE_POS = new Set(['QB', 'RB', 'WR', 'TE']);
-  const ALWAYS_KEEP = new Set(['TRAVIS HUNTER']); // plays both ways
+  const ALWAYS_KEEP = new Set(['TRAVIS HUNTER']);
 
   const allPlayerOptions = useMemo(() => {
     const arr = [];
@@ -635,6 +636,7 @@ export default function TweaksPanel({
 
         {/* Actions */}
         <div className="wb-actions-row" style={{ gridColumn:'1 / -1' }}>
+          {onPrint && <button onClick={onPrint}>{printLabel}</button>}
           <button onClick={onExport}>{exportLabel}</button>
           <button
             onClick={async () => {
