@@ -15,7 +15,7 @@ import SleeperForm from './components/SleeperForm.jsx';
 import ManualBuilder from './components/ManualBuilder.jsx';
 import TweaksPanel from './components/TweaksPanel.jsx';
 import { exportNodeAsPng } from './utils/exportPng.js';
-import { printBoard } from './utils/printBoard.js';   // ⬅️ NEW
+import { printBoard } from './utils/printBoard.js';
 import Whiteboard from '../redraft/whiteboard/Whiteboard.jsx';
 
 // ------------------------------------------------------------------
@@ -48,6 +48,27 @@ function stripHints(name){ if(!name)return name; const t=normTxt(name).split(' '
 function sanitizeOverridesForBoard(o){ if(!o||typeof o!=='object') return o; const next=JSON.parse(JSON.stringify(o)); const fix=(x)=>{ if(!x||typeof x!=='object') return; if(typeof x.primary==='string') x.primary=stripHints(x.primary); if(Array.isArray(x.recs)) x.recs=x.recs.map(v=>typeof v==='string'?stripHints(v):v).filter(v=>v!==undefined); }; if(next.moves&&typeof next.moves==='object'){ fix(next.moves.trade); fix(next.moves.uptier); fix(next.moves.pivot);} return next;}
 function resolveIdByName(playersById, name){ if(!name) return null; const raw=String(name); if(playersById[raw]) return raw; const q=normTxt(raw); if(!q) return null; const toks=q.split(' '); const hints={team:null,pos:null}; while(toks.length>0){const last=toks[toks.length-1]; if(TEAM_RE.test(last)){hints.team=last.toUpperCase(); toks.pop(); continue;} if(POS_RE.test(last)){hints.pos=last.toUpperCase(); toks.pop(); continue;} break;} const baseName=toks.join(' '); let bestId=null,bestScore=-1e9; for(const [id,p] of Object.entries(playersById||{})){ const full=(p.full_name||`${p.first_name||''} ${p.last_name||''}`.trim()).toLowerCase(); if(!full) continue; let score=0; if(full===baseName) score+=2000; else if(full.startsWith(baseName)) score+=1200; else if(full.includes(baseName)) score+=800; const pos=(Array.isArray(p.fantasy_positions)?p.fantasy_positions[0]:p.position||'').toUpperCase(); const team=(p.team||p.pro_team||p.team_abbr||'').toUpperCase(); if(hints.pos&&pos===hints.pos) score+=900; if(hints.team&&team===hints.team) score+=900; if(OFF_POS.has(pos)) score+=250; else score-=150; const adp=Number(p.adp_half_ppr??p.adp_ppr??p.adp??p.adp_full_ppr??p.adp_std); if(isFinite(adp)) score+=(10000-adp*100); if(score>bestScore){bestScore=score; bestId=id;} } return bestId;}
 function parsePick(pickStr, teams){ if(!pickStr) return null; const s=String(pickStr).trim(); if(s.startsWith('#')){const ov=parseInt(s.slice(1),10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};} const sep=s.includes('.')?'.':(s.includes('-')?'-':null); if(sep){const [r,p]=s.split(sep); const rr=parseInt(r,10); const pp=parseInt(p,10); if(!isFinite(rr)||!isFinite(pp)) return null; const ov=(rr-1)* (teams||12)+pp; return {overall:ov,round:rr};} const ov=parseInt(s,10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};}
+
+// NEW: pick user by team name OR username (display_name)
+const normSimple = (s) => String(s || '').trim().toLowerCase();
+function findUserByTeamOrUsername(users, input) {
+  const q = normSimple(input);
+  if (!q) return null;
+
+  let hit = users.find(u => normSimple(u?.metadata?.team_name) === q);
+  if (hit) return hit;
+
+  hit = users.find(u => normSimple(u?.display_name) === q);
+  if (hit) return hit;
+
+  hit = users.find(u => normSimple(u?.metadata?.team_name || '').includes(q));
+  if (hit) return hit;
+
+  hit = users.find(u => normSimple(u?.display_name || '').includes(q));
+  if (hit) return hit;
+
+  return null;
+}
 
 // ------------------------------------------------------------------
 export default function WhiteboardSite() {
@@ -102,6 +123,7 @@ export default function WhiteboardSite() {
     printBoard(exportRef.current, { page: 'letter-landscape', marginPx: 0 });
   };
 
+  // UPDATED: allow selecting team by username when team_name is missing, and display team_name or username
   const onSleeperLoad = async ({ leagueId: id, teamNameInput, ownerId: selectedOwnerId }) => {
     try {
       setLoading(true); setErr('');
@@ -113,15 +135,32 @@ export default function WhiteboardSite() {
         fetchPlayersMap(),
       ]);
 
-      let oid = selectedOwnerId || findOwnerUserId(users, (teamNameInput || '').trim());
-      if (!oid) oid = users[0]?.user_id;
+      const typed = (teamNameInput || '').trim();
+
+      // Owner selection priority:
+      // 1) explicit ownerId (from dropdown)
+      // 2) typed matches team_name OR username (exact/partial)
+      // 3) legacy team-name matcher (findOwnerUserId)
+      // 4) first user fallback
+      let selUser =
+        (selectedOwnerId && users.find(u => String(u.user_id) === String(selectedOwnerId))) ||
+        (typed && findUserByTeamOrUsername(users, typed)) ||
+        (typed && (() => { const id = findOwnerUserId(users, typed); return users.find(u => String(u.user_id) === String(id)); })()) ||
+        users[0];
+
+      const oid = selUser?.user_id || users[0]?.user_id;
       const myRoster = rosters.find(r => String(r.owner_id) === String(oid));
 
-      const selUser = users.find(u => String(u.user_id) === String(oid)) || users[0];
-      setTeamName(teamNameInput || selUser?.metadata?.team_name || selUser?.display_name || '');
-      setOwnerId(oid);
+      // Display label: prefer Sleeper team_name, else username
+      const displayLabel =
+        (selUser?.metadata?.team_name && selUser.metadata.team_name.trim()) ||
+        selUser?.display_name ||
+        '';
 
+      setTeamName(displayLabel);
+      setOwnerId(oid);
       setLeagueId(lid);
+
       setSettings(s);
       setRosterIds(myRoster?.players || []);
       setPlayersById(map);

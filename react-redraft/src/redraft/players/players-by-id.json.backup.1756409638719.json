@@ -76,8 +76,7 @@
     "four-factor-floor": 8,
     "four-factor-risk": 3,
     "four-factor-overall": 7.73,
-    "sleeperAdp": 98,
-    "qb-score": 3
+    "sleeperAdp": 98
   },
   "3198": {
     "name": "Derrick Henry",
@@ -103,8 +102,7 @@
     "four-factor-floor": 4,
     "four-factor-risk": 9,
     "four-factor-overall": 4.27,
-    "sleeperAdp": 121,
-    "qb-score": 2
+    "sleeperAdp": 121
   },
   "3321": {
     "name": "Tyreek Hill",
@@ -217,8 +215,7 @@
     "four-factor-floor": 8.6,
     "four-factor-risk": 2.75,
     "four-factor-overall": 8.28,
-    "sleeperAdp": 64,
-    "qb-score": 6
+    "sleeperAdp": 64
   },
   "4066": {
     "name": "Evan Engram",
@@ -330,8 +327,7 @@
     "four-factor-floor": 8.4,
     "four-factor-risk": 2.75,
     "four-factor-overall": 8.42,
-    "sleeperAdp": 74,
-    "qb-score": 6
+    "sleeperAdp": 74
   },
   "4981": {
     "name": "Calvin Ridley",
@@ -370,8 +366,7 @@
     "four-factor-floor": 10,
     "four-factor-risk": 2.75,
     "four-factor-overall": 9.42,
-    "sleeperAdp": 22,
-    "qb-score": 10
+    "sleeperAdp": 22
   },
   "5012": {
     "name": "Mark Andrews",
@@ -465,8 +460,7 @@
     "four-factor-floor": 6.4,
     "four-factor-risk": 8.25,
     "four-factor-overall": 5.72,
-    "sleeperAdp": 96,
-    "qb-score": 5
+    "sleeperAdp": 96
   },
   "5850": {
     "name": "Josh Jacobs",
@@ -586,8 +580,7 @@
     "four-factor-floor": 6.2,
     "four-factor-risk": 7.75,
     "four-factor-overall": 5.55,
-    "sleeperAdp": 43,
-    "qb-score": 7
+    "sleeperAdp": 43
   },
   "6783": {
     "name": "Jerry Jeudy",
@@ -652,8 +645,7 @@
     "four-factor-floor": 5.4,
     "four-factor-risk": 6.75,
     "four-factor-overall": 5.62,
-    "sleeperAdp": 109,
-    "qb-score": 1
+    "sleeperAdp": 109
   },
   "6801": {
     "name": "Tee Higgins",
@@ -692,8 +684,7 @@
     "four-factor-floor": 7.6,
     "four-factor-risk": 5.75,
     "four-factor-overall": 6.62,
-    "sleeperAdp": 123,
-    "qb-score": 2
+    "sleeperAdp": 123
   },
   "6806": {
     "name": "J.K. Dobbins",
@@ -745,8 +736,7 @@
     "four-factor-floor": 9,
     "four-factor-risk": 5.75,
     "four-factor-overall": 7.62,
-    "sleeperAdp": 40,
-    "qb-score": 8
+    "sleeperAdp": 40
   },
   "6994": {
     "name": "Lamar Jackson",
@@ -755,8 +745,7 @@
     "positionRank": 1,
     "value": 42.78184896,
     "team": "ATL",
-    "sleeperAdp": 25,
-    "qb-score": 10
+    "sleeperAdp": 25
   },
   "7049": {
     "name": "Jauan Jennings",
@@ -803,8 +792,7 @@
     "four-factor-floor": 4,
     "four-factor-risk": 7.75,
     "four-factor-overall": 3.62,
-    "sleeperAdp": 145,
-    "qb-score": 1
+    "sleeperAdp": 145
   },
   "7525": {
     "name": "DeVonta Smith",
@@ -952,8 +940,7 @@
     "four-factor-floor": 2,
     "four-factor-risk": 7.25,
     "four-factor-overall": 4.92,
-    "sleeperAdp": 124,
-    "qb-score": 3
+    "sleeperAdp": 124
   },
   "7594": {
     "name": "Chuba Hubbard",
@@ -1221,8 +1208,7 @@
     "four-factor-floor": 7,
     "four-factor-risk": 4.75,
     "four-factor-overall": 6.55,
-    "sleeperAdp": 111,
-    "qb-score": 4
+    "sleeperAdp": 111
   },
   "8204": {
     "name": "Bo Melton",
@@ -1456,8 +1442,7 @@
     "four-factor-floor": 6,
     "four-factor-risk": 5,
     "four-factor-overall": 6.33,
-    "sleeperAdp": 127,
-    "qb-score": 1
+    "sleeperAdp": 127
   },
   "9997": {
     "name": "Zay Flowers",
@@ -1553,8 +1538,7 @@
     "four-factor-floor": 4,
     "four-factor-risk": 1.25,
     "four-factor-overall": 7.25,
-    "sleeperAdp": 115,
-    "qb-score": 3
+    "sleeperAdp": 115
   },
   "11562": {
     "name": "Spencer Rattler",
@@ -1576,8 +1560,7 @@
     "four-factor-floor": 8.6,
     "four-factor-risk": 1.75,
     "four-factor-overall": 8.55,
-    "sleeperAdp": 85,
-    "qb-score": 5
+    "sleeperAdp": 85
   },
   "11564": {
     "name": "Drake Maye",
@@ -1590,8 +1573,7 @@
     "four-factor-floor": 5,
     "four-factor-risk": 4,
     "four-factor-overall": 7,
-    "sleeperAdp": 130,
-    "qb-score": 4
+    "sleeperAdp": 130
   },
   "11565": {
     "name": "J.J. McCarthy",
@@ -1604,8 +1586,7 @@
     "four-factor-floor": 1,
     "four-factor-risk": 7.75,
     "four-factor-overall": 3.75,
-    "sleeperAdp": 140,
-    "qb-score": 1
+    "sleeperAdp": 140
   },
   "11566": {
     "name": "Jayden Daniels",
@@ -1618,8 +1599,7 @@
     "four-factor-floor": 7.2,
     "four-factor-risk": 3,
     "four-factor-overall": 8.2,
-    "sleeperAdp": 30,
-    "qb-score": 9
+    "sleeperAdp": 30
   },
   "11584": {
     "name": "Bucky Irving",
