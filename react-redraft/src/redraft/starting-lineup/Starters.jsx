@@ -1,3 +1,4 @@
+// /src/redraft/starting-lineup/Starters.jsx
 import React, { useMemo } from 'react';
 import './starters.css';
 
@@ -12,13 +13,15 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
     const score = (p) =>
       (p?.adp_half_ppr || p?.adp || 9999) + (p?.search_rank ? p.search_rank / 10000 : 0);
 
+    // Players already used as starters (to exclude from bench pool)
     const usedIds = new Set(
-      lineup
+      (lineup || [])
         .map((it) => it?.player?.player_id || it?.player?.id)
         .filter(Boolean)
         .map(String)
     );
 
+    // All roster players sorted by rough value
     const allPlayers = (rosterIds || [])
       .map((id) => playersById[id])
       .filter(Boolean)
@@ -28,10 +31,11 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
         name: p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim(),
         position:
           (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) || p.position || '',
-        team: p.team || '',
+        team: p.team || p.pro_team || p.team_abbr || '',
       }))
       .sort((a, b) => score(a) - score(b));
 
+    // Normalize starters we received
     const startersNormalized = (lineup || []).map((it) => {
       const p = it.player || {};
       const id = p.player_id || p.id;
@@ -42,17 +46,32 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
           (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) ||
           p.position ||
           '',
-        team: p.team || '',
+        team: p.team || p.pro_team || p.team_abbr || '',
         slot: (it.slot || '').toLowerCase(),
       };
     });
 
-    // Ensure >= 10 rows and at least +2 beyond starters
-    const startersCount = startersNormalized.length;
-    const totalNeeded = Math.max(10, startersCount + 2);
-    const benchCount = Math.max(0, totalNeeded - startersCount);
+    // --- Only count core starters (QB/RB/WR/TE/FLEX) ---
+    const CORE = new Set(['qb', 'rb', 'wr', 'te', 'flex']);
+    const startersCore = startersNormalized.filter((p) => CORE.has(p.slot));
+    const startersCount = startersCore.length;
 
-    const benchPool = allPlayers.filter((p) => !usedIds.has(String(p.id))).slice(0, benchCount);
+    // --- Target rows ---
+    // 1) At least 10 total rows
+    // 2) At least +2 bench beyond *core* starters
+    // 3) Make it EVEN so columns are equal
+    const MIN_TOTAL = 10;
+    const MIN_BENCH = 2;
+
+    let totalNeeded = Math.max(MIN_TOTAL, startersCount + MIN_BENCH);
+    if (totalNeeded % 2 !== 0) totalNeeded += 1; // force even total for 50/50 split
+
+    // Build bench list to reach target
+    const benchNeeded = Math.max(0, totalNeeded - startersCount);
+    const benchPool = allPlayers
+      .filter((p) => !usedIds.has(String(p.id)))
+      .slice(0, benchNeeded);
+
     const bench = benchPool.map((p) => ({
       id: p.id,
       name: p.name,
@@ -61,16 +80,30 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       slot: 'bench',
     }));
 
+    // If not enough real bench, pad with placeholders to keep columns even
+    const placeholders = [];
+    for (let i = startersCount + bench.length; i < totalNeeded; i++) {
+      placeholders.push({
+        id: `placeholder-${i}`,
+        name: '—',
+        position: '',
+        team: '',
+        slot: 'bench',
+      });
+    }
+
+    // Order rows: QB → RB → WR → TE → FLEX → BENCH (DEF/K are never shown)
     const order = ['qb', 'rb', 'wr', 'te', 'flex', 'bench'];
     const ordered = order
-      .flatMap((slot) => startersNormalized.filter((p) => p.slot.toLowerCase() === slot))
-      .concat(bench);
+      .flatMap((slot) => startersCore.filter((p) => p.slot === slot))
+      .concat(bench, placeholders);
 
-    const mid = Math.ceil(ordered.length / 2);
+    // Split exactly in half (we guaranteed even length)
+    const mid = ordered.length / 2;
     return { leftCol: ordered.slice(0, mid), rightCol: ordered.slice(mid) };
   }, [lineup, rosterIds, playersById]);
 
-  // Resolve team logo from /src/assets/standard/<team>.png (e.g. 'ari.png')
+  // Resolve team logo from /src/assets/standard/<team>.png (e.g., 'ari.png')
   const logoForTeam = (team) => {
     const code = String(team || '').toLowerCase();
     if (!code) return '';
@@ -89,9 +122,10 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       p.slot === 'te' ? 'pos-te' :
       p.slot === 'flex' ? 'pos-flex' : 'pos-bench';
 
-    const headshot = p.id
-      ? `https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`
-      : '';
+    const headshot =
+      p.id && !String(p.id).startsWith('placeholder-')
+        ? `https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`
+        : '';
 
     const teamLogo = logoForTeam(p.team);
     const slotLabel = (p.slot || '').toUpperCase();
@@ -102,14 +136,13 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       : `${p.position || ''} – ${team}`;
 
     const displayName = (p.name || '—').toUpperCase();
-    let nameSize = 22; // tiny nudge for super-long names
+    let nameSize = 22;
     if (displayName.length > 22) nameSize = 20;
     if (displayName.length > 26) nameSize = 18;
 
     return (
       <div className={`player-row ${slotClass}`}>
         <div className="player-media">
-          {/* Logo overlaps into the headshot space from the left */}
           {teamLogo && (
             <img
               className="team-logo"
@@ -119,16 +152,16 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
               onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
             />
           )}
-
-          {/* Light grey circular background behind the headshot */}
           <div className="headshot-bg">
-            <img
-              className="player-headshot"
-              src={headshot}
-              alt=""
-              loading="lazy"
-              onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
-            />
+            {headshot && (
+              <img
+                className="player-headshot"
+                src={headshot}
+                alt=""
+                loading="lazy"
+                onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
+              />
+            )}
           </div>
         </div>
 
@@ -142,8 +175,25 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
     );
   };
 
+  /* ========= AUTO-SCALE to fit above Positional Grades ========= */
+  const ROW_H = 68;   // estimated from CSS
+  const GAP   = 16;   // .roster-column gap
+  const longest = Math.max(leftCol.length, rightCol.length);
+  const naturalHeight = longest > 0 ? (longest * ROW_H) + ((longest - 1) * GAP) : 0;
+
+  // Keep your chosen printed height
+  const MAX_H = 450;
+  const scale = naturalHeight > MAX_H ? (MAX_H / naturalHeight) : 1;
+
   return (
-    <div className="starting-roster">
+    <div
+      className="starting-roster"
+      style={{
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        height: scale < 1 ? `${MAX_H}px` : 'auto'
+      }}
+    >
       <div className="roster-column">
         {leftCol.map((p, i) => <PlayerRow key={`L-${i}-${p.id}`} p={p} />)}
       </div>

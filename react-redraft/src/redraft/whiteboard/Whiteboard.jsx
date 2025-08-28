@@ -512,7 +512,7 @@ export default function Whiteboard() {
           />
         )}
       </div>
-
+      
       {/* DRAFT VALUE CHART */}
       <div
         style={{

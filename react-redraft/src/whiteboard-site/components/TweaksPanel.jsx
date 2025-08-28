@@ -5,10 +5,8 @@ export default function TweaksPanel({
   overrides,
   onOverrides,
   onExport,
-  onPrint,                    // << optional: show a "Download PDF" button when provided
   hud,
   exportLabel = 'Download PNG',
-  printLabel = 'Download PDF',
   playersById = {},       // map of all players
   rosterIds = [],         // ids for the current roster (starters + bench)
 }) {
@@ -65,6 +63,24 @@ export default function TweaksPanel({
   const get = (path, fallback = '') => {
     try { return path.split('.').reduce((a, k) => (a && k in a ? a[k] : undefined), o) ?? fallback; }
     catch { return fallback; }
+  };
+
+  /* -------------------- TEAM CODE CANONICALIZATION (WAS/WASH -> WSH) -------------------- */
+  const TEAM_ALIASES = { WAS: 'WSH', WASH: 'WSH' };
+  const canonicalTeam = (t) => {
+    const key = (t || '').toUpperCase();
+    return TEAM_ALIASES[key] || key;
+  };
+  // For strings like "Player Name WR WAS" that may already be saved
+  const normalizeCommitStringTeam = (s) => {
+    if (!s) return s;
+    const parts = String(s).trim().split(/\s+/);
+    if (parts.length >= 3) {
+      const last = parts[parts.length - 1];
+      parts[parts.length - 1] = canonicalTeam(last);
+      return parts.join(' ');
+    }
+    return s;
   };
 
   /* --------------------------------- small inputs --------------------------------- */
@@ -130,8 +146,9 @@ export default function TweaksPanel({
   );
 
   /* ============================= Player Autocomplete ============================== */
+  // Filter to fantasy-relevant offense positions; keep Travis Hunter explicitly
   const INCLUDE_POS = new Set(['QB', 'RB', 'WR', 'TE']);
-  const ALWAYS_KEEP = new Set(['TRAVIS HUNTER']);
+  const ALWAYS_KEEP = new Set(['TRAVIS HUNTER']); // plays both ways
 
   const allPlayerOptions = useMemo(() => {
     const arr = [];
@@ -139,7 +156,8 @@ export default function TweaksPanel({
       const name = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).trim();
       if (!name) continue;
       const pos = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
-      const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
+      const teamRaw = (p.team || p.pro_team || p.team_abbr || '');
+      const team = canonicalTeam(teamRaw);
 
       const keep = INCLUDE_POS.has(pos) || ALWAYS_KEEP.has(name.toUpperCase());
       if (!keep) continue;
@@ -165,7 +183,8 @@ export default function TweaksPanel({
       if (!p) continue;
       const name = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).trim();
       const pos  = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
-      const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
+      const teamRaw = (p.team || p.pro_team || p.team_abbr || '');
+      const team = canonicalTeam(teamRaw);
       const keep = INCLUDE_POS.has(pos) || ALWAYS_KEEP.has(name.toUpperCase());
       if (!keep) continue;
 
@@ -375,8 +394,10 @@ export default function TweaksPanel({
 
     const primaryField = () => {
       if (rosterOptions.length > 0) {
-        const valueIsOption = rosterOptions.some(o => o.value === primary);
-        const selected = valueIsOption ? primary : '';
+        // Normalize saved value (e.g., "... WAS" -> "... WSH") so the select shows correctly
+        const normalizedPrimary = normalizeCommitStringTeam(primary || '');
+        const valueIsOption = rosterOptions.some(o => o.value === normalizedPrimary);
+        const selected = valueIsOption ? normalizedPrimary : '';
         return (
           <select
             value={selected}
@@ -636,7 +657,6 @@ export default function TweaksPanel({
 
         {/* Actions */}
         <div className="wb-actions-row" style={{ gridColumn:'1 / -1' }}>
-          {onPrint && <button onClick={onPrint}>{printLabel}</button>}
           <button onClick={onExport}>{exportLabel}</button>
           <button
             onClick={async () => {
