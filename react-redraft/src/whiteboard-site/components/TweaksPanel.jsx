@@ -191,7 +191,7 @@ export default function TweaksPanel({
       const commitStr = [name, pos, team].filter(Boolean).join(' ');
       const label     = team && pos ? `${name} — ${pos} • ${team}` : name;
       if (!opts.some(o => o.value === commitStr)) {
-        opts.push({ value: commitStr, label, name, pos, team });
+        opts.push({ value: commitStr, label, name, pos, team, id });
       }
     }
     opts.sort((a, b) => a.label.localeCompare(b.label));
@@ -346,6 +346,30 @@ export default function TweaksPanel({
     );
   }
 
+  /* ===== helper: map a commit string "Name POS TEAM" to an ID from allPlayerOptions ===== */
+  function resolveIdFromCommitString(commitStr) {
+    if (!commitStr) return undefined;
+    const parts = String(commitStr).trim().split(/\s+/);
+    if (!parts.length) return undefined;
+
+    // Try to parse "... NAME POS TEAM"
+    const maybeTeam = parts[parts.length - 1]?.toUpperCase();
+    const maybePos  = parts[parts.length - 2]?.toUpperCase();
+    const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
+    const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
+
+    // First pass: exact name (case-insensitive)
+    let cands = allPlayerOptions.filter(o => o.name.toLowerCase() === name.toLowerCase());
+    if (!cands.length) return undefined;
+
+    // Refine by pos if present
+    if (posIsKnown) cands = cands.filter(o => o.pos === maybePos);
+    // Refine by team if present (and we still have >1)
+    if (maybeTeam && cands.length > 1) cands = cands.filter(o => o.team === maybeTeam);
+
+    return cands[0]?.id;
+  }
+
   /* ========================= Label combo (datalist; also free-typing) ========================= */
   function LabelCombo({ value, onCommit, options, listId, placeholder = 'Select or type…', maxLength = 40 }) {
     const [local, setLocal] = useState(value ?? '');
@@ -388,6 +412,12 @@ export default function TweaksPanel({
       a[idx] = val;
       const clean = a.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
       set(`${base}.recs`, clean.length ? clean : undefined);
+
+      // also store recsIds[] so renderers can use a stable key
+      const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
+      ids[idx] = resolveIdFromCommitString(val);
+      const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+      set(`${base}.recsIds`, idClean.length ? idClean : undefined);
     };
 
     const defaultLabel = moveId === 'trade' ? 'TRADE' : moveId === 'uptier' ? 'UPTIER' : 'PIVOT';
@@ -401,7 +431,12 @@ export default function TweaksPanel({
         return (
           <select
             value={selected}
-            onChange={(e) => set(`${base}.primary`, e.target.value || undefined)}
+            onChange={(e) => {
+              const val = e.target.value || undefined;
+              set(`${base}.primary`, val);
+              const opt = rosterOptions.find(o => o.value === val);
+              set(`${base}.primaryId`, opt?.id || undefined);
+            }}
           >
             <option value="">— Select player from your roster —</option>
             {rosterOptions.map(opt => (
@@ -414,7 +449,10 @@ export default function TweaksPanel({
         <PlayerAutocomplete
           value={primary}
           placeholder="start typing a player…"
-          onCommit={(v) => set(`${base}.primary`, v)}
+          onCommit={(v) => {
+            set(`${base}.primary`, v);
+            set(`${base}.primaryId`, resolveIdFromCommitString(v));
+          }}
           maxResults={14}
         />
       );
@@ -453,7 +491,7 @@ export default function TweaksPanel({
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Primary (pick from your roster)</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
             {primaryField()}
-            <ClearBtn onClick={() => set(`${base}.primary`, undefined)} />
+            <ClearBtn onClick={() => { set(`${base}.primary`, undefined); set(`${base}.primaryId`, undefined); }} />
           </div>
         </div>
 

@@ -1,9 +1,10 @@
+// /src/redraft/whiteboard/moves-to-make/MovesToMake.jsx
 import React, { useMemo } from 'react';
 import './moves-to-make.css';
 import BracketPNG from './images/moves_to_make.png';
 
 export default function MovesToMake({ moves = [], playersById = {} }) {
-  // --- helpers (unchanged) ---------------------------------------------------
+  // --- helpers ---------------------------------------------------------------
   const _normalize = (p) => {
     if (!p) return null;
     const id   = String(p?.player_id || p?.id || '');
@@ -13,76 +14,140 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
     return { id, name: name || '—', pos, team };
   };
 
-  const normTxt = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
+  const normTxt = (s) => String(s || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s'.-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
   const getADP = (p = {}) => {
     const v = p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std;
     const n = Number(v);
     return Number.isFinite(n) ? n : Infinity;
   };
 
+  // canonical team/pos patterns (lowercase)
   const TEAM_RE = /^(ari|atl|bal|buf|car|chi|cin|cle|dal|den|det|gb|hou|ind|jax|kc|lv|lac|lar|mia|min|ne|no|nyg|nyj|phi|pit|sf|sea|tb|ten|wsh)$/;
   const POS_RE  = /^(qb|rb|wr|te)$/;
+  const OFF_POS = new Set(['QB','RB','WR','TE']);
 
+  // input aliases → canonical team codes (lowercase)
+  const TEAM_ALIAS_IN = {
+    was: 'wsh', wash: 'wsh',
+    pitt: 'pit', steelers: 'pit', pittsburgh: 'pit',
+    jac: 'jax', jax: 'jax',
+    oak: 'lv', stl: 'lar', sd: 'lac', sdc: 'lac',
+    buffalo: 'buf', bills: 'buf',
+    washington: 'wsh', commanders: 'wsh',
+    chargers: 'lac', rams: 'lar', raiders: 'lv', chiefs: 'kc',
+    niners: 'sf', '49ers': 'sf',
+  };
+  const aliasTeam = (t) => TEAM_ALIAS_IN[t] || t;
+
+  // quick indexes
   const indexes = useMemo(() => {
     const byLast = new Map();
     const byFull = new Map();
     for (const [id, p] of Object.entries(playersById || {})) {
       const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
       const last = (p.last_name || '').toLowerCase();
-      if (full) byFull.set(full, [...(byFull.get(full) || []), id]);
-      if (last) byLast.set(last, [...(byLast.get(last) || []), id]);
+      if (full) {
+        const arr = byFull.get(full) || [];
+        arr.push(id);
+        byFull.set(full, arr);
+      }
+      if (last) {
+        const arr = byLast.get(last) || [];
+        arr.push(id);
+        byLast.set(last, arr);
+      }
     }
     return { byFull, byLast };
   }, [playersById]);
 
+  // STRONGER resolver (keeps your API: accepts string, id string, or player object)
   const resolvePlayer = (maybe) => {
     if (!maybe) return null;
+
+    // already a player object
     if (typeof maybe === 'object') return _normalize(maybe);
-    const raw = String(maybe);
+
+    const raw = String(maybe).trim();
+
+    // direct id hit (string key in playersById)
     const direct = playersById?.[raw];
     if (direct) return _normalize(direct);
 
+    // parse "Name POS TEAM" (order of POS/TEAM doesn't matter)
     const q = normTxt(raw);
     if (!q) return null;
 
     const tokens = q.split(' ');
     const hints  = { team: null, pos: null };
-    const lastTok = tokens[tokens.length - 1] || '';
-    if (TEAM_RE.test(lastTok)) hints.team = lastTok.toUpperCase();
-    if (POS_RE.test(lastTok))  hints.pos  = lastTok.toUpperCase();
-    const baseName = (hints.team || hints.pos) ? tokens.slice(0, -1).join(' ') : q;
 
-    const candidateIds = new Set();
+    // peel BOTH hints from the end (e.g., "... qb buf" or "... buf qb")
+    while (tokens.length > 0) {
+      const last = tokens[tokens.length - 1];
+      const mayTeam = aliasTeam(last);
+      if (TEAM_RE.test(mayTeam)) { hints.team = mayTeam.toUpperCase(); tokens.pop(); continue; }
+      if (POS_RE.test(last))     { hints.pos  = last.toUpperCase();    tokens.pop(); continue; }
+      break;
+    }
+
+    const baseName = tokens.join(' ');
+    if (!baseName) return null;
+
+    const getFull = (p) => (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
+    const getPos  = (p) => (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
+    const getTeam = (p) => (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
+
+    // Phase 1: exact full-name matches, refine by hints
     const exactFull = indexes.byFull.get(baseName);
-    if (exactFull) exactFull.forEach(id => candidateIds.add(id));
+    if (exactFull && exactFull.length) {
+      let pool = exactFull.map(id => playersById[id]).filter(Boolean);
+      if (hints.team) pool = pool.filter(p => getTeam(p) === hints.team) || pool;
+      if (hints.pos)  pool = pool.filter(p => getPos(p)  === hints.pos)  || pool;
+
+      if (pool.length === 1) return _normalize(pool[0]);
+      if (pool.length > 1) {
+        const off = pool.find(p => OFF_POS.has(getPos(p)));
+        return _normalize(off || pool[0]);
+      }
+    }
+
+    // Phase 2: gather fuzzy candidates (keep your last-name/backfill behavior)
+    const candidateIds = new Set();
     const baseLast = baseName.split(' ').pop() || baseName;
     const lastHits = indexes.byLast.get(baseLast);
     if (lastHits) lastHits.forEach(id => candidateIds.add(id));
     if (candidateIds.size === 0) {
       for (const [id, p] of Object.entries(playersById || {})) {
-        const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
+        const full = getFull(p);
         if (full.includes(baseName)) candidateIds.add(id);
       }
     }
     if (candidateIds.size === 0) return null;
 
+    // Phase 3: score with heavier weights for correct team/pos + offense + better ADP
     let best = null; let bestScore = -1e9;
     for (const id of candidateIds) {
       const p = playersById[id]; if (!p) continue;
-      const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
+      const full = getFull(p);
 
       let score = 0;
       if (full === baseName) score += 2000;
       else if (full.startsWith(baseName)) score += 1200;
       else if (full.includes(baseName))  score += 800;
 
-      const pos  = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
-      const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
-      if (hints.pos  && pos  === hints.pos)  score += 500;
-      if (hints.team && team === hints.team) score += 500;
+      const pos  = getPos(p);
+      const team = getTeam(p);
+      if (hints.pos  && pos  === hints.pos)  score += 900;
+      if (hints.team && team === hints.team) score += 900;
+
+      if (OFF_POS.has(pos)) score += 250; else score -= 150;
 
       const adp = getADP(p);
-      score += (isFinite(adp) ? (10000 - adp * 100) : -100000);
+      if (isFinite(adp)) score += (10000 - adp * 100);
 
       if (score > bestScore) { bestScore = score; best = p; }
     }
@@ -196,7 +261,7 @@ export default function MovesToMake({ moves = [], playersById = {} }) {
         <MoveColumn
           key={m.id || idx}
           index={idx}
-          label={m.label}             // ← overrides still feed this
+          label={m.label}
           primary={m.primary}
           recs={m.recs || []}
           note={m.note}

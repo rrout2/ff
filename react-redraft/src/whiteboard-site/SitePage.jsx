@@ -39,15 +39,131 @@ function makeSmartDefaults(settings, rosterIds, playersById, lineup) {
 }
 
 // ------------------------------------------------------------------
-// helpers (stripHints, sanitizeOverridesForBoard, resolveIdByName, parsePick) — unchanged
+// helpers (stripHints, sanitizeOverridesForBoard, resolveIdByName, parsePick)
 const normTxt = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9\s'.-]/g, ' ').replace(/\s+/g, ' ').trim();
 const TEAM_RE = /^(ari|atl|bal|buf|car|chi|cin|cle|dal|den|det|gb|hou|ind|jax|kc|lv|lac|lar|mia|min|ne|no|nyg|nyj|phi|pit|sf|sea|tb|ten|wsh)$/;
 const POS_RE  = /^(qb|rb|wr|te|k|def|dst|ol|dl|lb|db|edge)$/;
 const OFF_POS = new Set(['QB','RB','WR','TE']);
 function stripHints(name){ if(!name)return name; const t=normTxt(name).split(' '); const o=String(name).split(/\s+/); let n=t.length; while(n>1){const L=t[n-1]; if(TEAM_RE.test(L)||POS_RE.test(L)) n--; else break;} return o.slice(0,n).join(' ');}
-function sanitizeOverridesForBoard(o){ if(!o||typeof o!=='object') return o; const next=JSON.parse(JSON.stringify(o)); const fix=(x)=>{ if(!x||typeof x!=='object') return; if(typeof x.primary==='string') x.primary=stripHints(x.primary); if(Array.isArray(x.recs)) x.recs=x.recs.map(v=>typeof v==='string'?stripHints(v):v).filter(v=>v!==undefined); }; if(next.moves&&typeof next.moves==='object'){ fix(next.moves.trade); fix(next.moves.uptier); fix(next.moves.pivot);} return next;}
-function resolveIdByName(playersById, name){ if(!name) return null; const raw=String(name); if(playersById[raw]) return raw; const q=normTxt(raw); if(!q) return null; const toks=q.split(' '); const hints={team:null,pos:null}; while(toks.length>0){const last=toks[toks.length-1]; if(TEAM_RE.test(last)){hints.team=last.toUpperCase(); toks.pop(); continue;} if(POS_RE.test(last)){hints.pos=last.toUpperCase(); toks.pop(); continue;} break;} const baseName=toks.join(' '); let bestId=null,bestScore=-1e9; for(const [id,p] of Object.entries(playersById||{})){ const full=(p.full_name||`${p.first_name||''} ${p.last_name||''}`.trim()).toLowerCase(); if(!full) continue; let score=0; if(full===baseName) score+=2000; else if(full.startsWith(baseName)) score+=1200; else if(full.includes(baseName)) score+=800; const pos=(Array.isArray(p.fantasy_positions)?p.fantasy_positions[0]:p.position||'').toUpperCase(); const team=(p.team||p.pro_team||p.team_abbr||'').toUpperCase(); if(hints.pos&&pos===hints.pos) score+=900; if(hints.team&&team===hints.team) score+=900; if(OFF_POS.has(pos)) score+=250; else score-=150; const adp=Number(p.adp_half_ppr??p.adp_ppr??p.adp??p.adp_full_ppr??p.adp_std); if(isFinite(adp)) score+=(10000-adp*100); if(score>bestScore){bestScore=score; bestId=id;} } return bestId;}
-function parsePick(pickStr, teams){ if(!pickStr) return null; const s=String(pickStr).trim(); if(s.startsWith('#')){const ov=parseInt(s.slice(1),10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};} const sep=s.includes('.')?'.':(s.includes('-')?'-':null); if(sep){const [r,p]=s.split(sep); const rr=parseInt(r,10); const pp=parseInt(p,10); if(!isFinite(rr)||!isFinite(pp)) return null; const ov=(rr-1)* (teams||12)+pp; return {overall:ov,round:rr};} const ov=parseInt(s,10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};}
+
+// Team alias normalization for inputs like "pitt", "wash", "jax", etc.
+const TEAM_ALIAS_IN = {
+  was: 'wsh', wash: 'wsh',
+  pitt: 'pit',
+  jac: 'jax', jax: 'jax',
+  oak: 'lv', stl: 'lar', sd: 'lac', sdc: 'lac',
+  buffalo: 'buf', bills: 'buf',
+  steelers: 'pit', pittsburgh: 'pit',
+  washington: 'wsh', commanders: 'wsh'
+};
+const aliasTeam = (t) => TEAM_ALIAS_IN[t] || t;
+
+// STRICT-FIRST resolver: exact name + (team/pos) → exact name → fallback scoring.
+function resolveIdByName(playersById, input) {
+  if (!input) return null;
+  const raw = String(input).trim();
+  if (playersById[raw]) return raw; // already an ID
+
+  const toks = normTxt(raw).split(' ');
+  const hints = { team: null, pos: null };
+  // peel team/pos from end; honor aliases
+  while (toks.length > 0) {
+    let last = toks[toks.length - 1];
+    const maybeTeam = aliasTeam(last);
+    if (TEAM_RE.test(maybeTeam)) { hints.team = maybeTeam.toUpperCase(); toks.pop(); continue; }
+    if (POS_RE.test(last))       { hints.pos  = last.toUpperCase();     toks.pop(); continue; }
+    break;
+  }
+  const baseName = toks.join(' ');
+  if (!baseName) return null;
+
+  const getFull = (p) => (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toLowerCase();
+  const getPos  = (p) => (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
+  const getTeam = (p) => (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
+
+  // Phase 1: exact name + optional hints (team/pos)
+  const exactMatches = [];
+  for (const [id, p] of Object.entries(playersById || {})) {
+    const full = getFull(p);
+    if (!full || full !== baseName) continue;
+    if (hints.team && getTeam(p) !== hints.team) continue;
+    if (hints.pos  && getPos(p)  !== hints.pos)  continue;
+    exactMatches.push(id);
+  }
+  if (exactMatches.length === 1) return exactMatches[0];
+  if (exactMatches.length > 1) {
+    const pick = exactMatches.find(id => OFF_POS.has(getPos(playersById[id]))) || exactMatches[0];
+    return pick;
+  }
+
+  // Phase 2: same exact name; refine with hints; prefer offense
+  const sameName = Object.entries(playersById || {})
+    .filter(([_, p]) => getFull(p) === baseName);
+  if (sameName.length) {
+    if (hints.team) {
+      const withTeam = sameName.find(([_, p]) => getTeam(p) === hints.team);
+      if (withTeam) return withTeam[0];
+    }
+    if (hints.pos) {
+      const withPos = sameName.find(([_, p]) => getPos(p) === hints.pos);
+      if (withPos) return withPos[0];
+    }
+    const offense = sameName.find(([_, p]) => OFF_POS.has(getPos(p)));
+    if (offense) return offense[0];
+    return sameName[0][0];
+  }
+
+  // Phase 3: fallback — prior scoring, but with alias'ed team hint
+  let bestId = null, bestScore = -1e9;
+  for (const [id, p] of Object.entries(playersById || {})) {
+    const full = getFull(p);
+    if (!full) continue;
+    let score = 0;
+    if (full === baseName) score += 2000;
+    else if (full.startsWith(baseName)) score += 1200;
+    else if (full.includes(baseName)) score += 800;
+    const pos = getPos(p);
+    const team = getTeam(p);
+    if (hints.pos && pos === hints.pos) score += 900;
+    if (hints.team && team === hints.team) score += 900;
+    if (OFF_POS.has(pos)) score += 250; else score -= 150;
+    const adp = Number(p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std);
+    if (isFinite(adp)) score += (10000 - adp * 100);
+    if (score > bestScore) { bestScore = score; bestId = id; }
+  }
+  return bestId;
+}
+
+// Keep strings for display, but compute IDs alongside so renderers can key on IDs.
+function sanitizeOverridesForBoard(o, playersById){
+  if(!o||typeof o!=='object') return o;
+  const next=JSON.parse(JSON.stringify(o));
+
+  const fix=(x)=>{
+    if(!x||typeof x!=='object') return;
+    if(typeof x.primary==='string') {
+      x.primaryId = resolveIdByName(playersById, x.primary);
+    }
+    if(Array.isArray(x.recs)) {
+      x.recs = x.recs.filter(v=>v!==undefined && v!=='');
+      x.recsIds = x.recs.map(v => typeof v === 'string' ? resolveIdByName(playersById, v) : undefined);
+    }
+  };
+
+  if(next.moves&&typeof next.moves==='object'){
+    fix(next.moves.trade);
+    fix(next.moves.uptier);
+    fix(next.moves.pivot);
+  }
+  return next;
+}
+
+function parsePick(pickStr, teams){
+  if(!pickStr) return null; const s=String(pickStr).trim();
+  if(s.startsWith('#')){const ov=parseInt(s.slice(1),10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};}
+  const sep=s.includes('.')?'.':(s.includes('-')?'-':null); if(sep){const [r,p]=s.split(sep); const rr=parseInt(r,10); const pp=parseInt(p,10); if(!isFinite(rr)||!isFinite(pp)) return null; const ov=(rr-1)* (teams||12)+pp; return {overall:ov,round:rr};}
+  const ov=parseInt(s,10); if(!isFinite(ov)) return null; const round=Math.max(1,Math.ceil(ov/Math.max(1,teams||12))); return {overall:ov,round};
+}
 
 // NEW: pick user by team name OR username (display_name)
 const normSimple = (s) => String(s || '').trim().toLowerCase();
@@ -106,8 +222,8 @@ export default function WhiteboardSite() {
   }, [settings, rosterIds, playersById, lineup, leagueId]);
 
   const overridesForBoard = useMemo(
-    () => sanitizeOverridesForBoard(overrides),
-    [overrides]
+    () => sanitizeOverridesForBoard(overrides, playersById),
+    [overrides, playersById]
   );
 
   // PNG export
