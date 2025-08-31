@@ -7,6 +7,10 @@ import './team-name.css';
  * - Finds largest font size (<= maxFont) that fits maxWidth via binary search.
  * - If still a hair wide, applies a final scale so it ALWAYS fits.
  * - Optional baselineAlign keeps the text sitting on a consistent baseline.
+ *
+ * NOTE: This version keeps your existing font from team-name.css.
+ *       Baseline locking is applied on a wrapper so the font/scale won’t
+ *       change the baseline position.
  */
 export default function TeamName({
   text = 'TEAM NAME GOES HERE',
@@ -17,16 +21,18 @@ export default function TeamName({
 
   // baseline anchoring
   baselineAlign = false,
-  baselineRatio = 0.78, // approx baseline from top for Veneer (tweak 0.74–0.82)
+  baselineRatio = 0.78, // approx baseline from top for your font (tweak 0.74–0.82)
   baselineNudge = 0,    // extra px up(+)/down(-)
 }) {
-  const boxRef = useRef(null);
+  const boxRef  = useRef(null);
   const textRef = useRef(null);
-  const [fontPx, setFontPx] = useState(maxFont);
-  const [scale, setScale] = useState(1);
 
+  const [fontPx, setFontPx] = useState(maxFont);
+  const [scale,  setScale]  = useState(1);
+
+  // Fit routine (largest font that fits maxWidth; final micro-scale if needed)
   const fit = () => {
-    const el = textRef.current;
+    const el  = textRef.current;
     const box = boxRef.current;
     if (!el || !box) return;
 
@@ -35,15 +41,16 @@ export default function TeamName({
 
     // reset for measurement
     el.style.fontSize = `${maxFont}px`;
-    el.style.transform = 'scale(1) translateY(0)';
+    el.style.transform = 'scale(1)';
 
+    // quick early out
     if (el.scrollWidth <= boxW) {
       setFontPx(maxFont);
       setScale(1);
       return;
     }
 
-    // binary search for largest font that fits
+    // binary search
     let lo = minFont, hi = maxFont, best = minFont;
     while (lo <= hi) {
       const mid = Math.floor((lo + hi) / 2);
@@ -54,7 +61,7 @@ export default function TeamName({
     }
     setFontPx(best);
 
-    // final exact scale if best is still a tad wide
+    // final exact scale if still a tad wide
     el.style.fontSize = `${best}px`;
     const finalW = el.scrollWidth || 1;
     setScale(finalW > boxW ? boxW / finalW : 1);
@@ -69,10 +76,13 @@ export default function TeamName({
       ro.disconnect();
       window.removeEventListener('resize', fit);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, maxWidth, maxFont, minFont]);
 
+  // Baseline shift (applied on an outer wrapper that is NOT scaled)
+  // This pins the visual baseline of the text to the wrapper's top edge.
   const baselineShift = baselineAlign
-    ? -(fontPx * baselineRatio * scale) + baselineNudge
+    ? -(fontPx * baselineRatio) + baselineNudge
     : 0;
 
   return (
@@ -82,19 +92,23 @@ export default function TeamName({
       style={{ width: `${maxWidth}px`, overflow: 'visible' }}
       title={text}
     >
-      <h1
-        ref={textRef}
-        className="team-name"
-        style={{
-          fontWeight: 400,                           // match @font-face
-          color,
-          fontSize: `${fontPx}px`,
-          transform: `translateY(${baselineShift}px) scale(${scale})`,
-          transformOrigin: 'left top',
-        }}
-      >
-        {(text || '').toUpperCase()}
-      </h1>
+      {/* Baseline wrapper (translate only) */}
+      <div style={{ transform: `translateY(${baselineShift}px)` }}>
+        {/* Scaled text element (font + scale only; no translate here) */}
+        <h1
+          ref={textRef}
+          className="team-name"
+          style={{
+            fontWeight: 400,             // keep your existing weight
+            color,
+            fontSize: `${fontPx}px`,
+            transform: `scale(${scale})`,
+            transformOrigin: 'left top',
+          }}
+        >
+          {(text || '').toUpperCase()}
+        </h1>
+      </div>
     </div>
   );
 }

@@ -81,10 +81,10 @@
 }
 
 /* Fill colors */
-.qb-fill { background-color: #D84343; }
-.rb-fill { background-color: #5CD2DB; }
-.wr-fill { background-color: #60C08B; }
-.te-fill { background-color: #F2B94B; }
+.qb-fill { background-color: #c15252; }
+.rb-fill { background-color: #81c6c9; }
+.wr-fill { background-color: #7ab274; }
+.te-fill { background-color: #f0c05f; }
 
 /* --- hard resets so every fill renders identical --- */
 .positional-grades .grade-row,

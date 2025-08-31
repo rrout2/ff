@@ -1,33 +1,28 @@
 // /src/redraft/positional-grade/PositionalGrades.jsx
 import React, { useMemo } from 'react';
 import './positional-grade.css';
-import gradeData from '../players/players-by-id.json'; // merged fields
+import gradeData from '../players/players-by-id.json';
 
 const gradeMatrix = {
-  SF: {
-    QB: [4, 10, 20, 30, 40, 50, 60, 66, 74, 80],
-    RB: [10, 25, 50, 75, 100, 125, 140, 165, 180, 200],
-    WR: [20, 50, 70, 90, 110, 130, 160, 200, 250, 300],
-    TE: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  },
-  '1QB': {
-    QB: [2, 5, 10, 15, 20, 25, 30, 33, 37, 40],
-    RB: [10, 25, 50, 75, 100, 125, 140, 165, 180, 200],
-    WR: [20, 50, 70, 90, 110, 130, 160, 200, 250, 300],
-    TE: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  },
+  SF:   { QB:[1,2,3,4,5,6,7,8,9,10], RB:[10,25,50,75,100,125,140,165,180,200], WR:[20,50,70,90,110,130,160,200,250,300], TE:[1,2,3,4,5,6,7,8,9,10] },
+  '1QB':{ QB:[1,2,3,4,5,6,7,8,9,10], RB:[10,25,50,75,100,125,140,165,180,200], WR:[20,50,70,90,110,130,160,200,250,300], TE:[1,2,3,4,5,6,7,8,9,10] },
 };
 
+const num = (v) => {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+};
+const firstNum = (...vals) => {
+  for (const v of vals) { const n = num(v); if (n !== null) return n; }
+  return null;
+};
+const normName = (s) => String(s || '').trim().toUpperCase().replace(/\s+/g,' ');
+
 function getGrade(thresholds, value) {
-  for (let i = thresholds.length - 1; i >= 0; i--) {
-    if (value >= thresholds[i]) return i + 1;
-  }
+  for (let i = thresholds.length - 1; i >= 0; i--) if (value >= thresholds[i]) return i + 1;
   return 1;
 }
-
-function clamp10(n) {
-  return Math.max(0, Math.min(10, n));
-}
+const clamp10 = (n) => Math.max(0, Math.min(10, n));
 
 function GradeRow({ label, grade, posClass }) {
   const percent = Math.max(0, Math.min(100, (grade / 10) * 100));
@@ -58,20 +53,51 @@ export default function PositionalGrades({
   forcedGrades,
 }) {
   const auto = useMemo(() => {
-    // Normalize + merge grade data by id
+    // Build grade indexes: by id and by normalized name
+    const byId = gradeData || {};
+    const byName = (() => {
+      const map = new Map();
+      for (const [gid, row] of Object.entries(byId)) {
+        const k = normName(row?.name);
+        if (k && !map.has(k)) map.set(k, row);
+      }
+      return map;
+    })();
+
+    // Collect roster players with merged grade fields
     const allPlayers = (rosterIds || [])
       .map((id) => playersById[id])
       .filter(Boolean)
       .map((p) => {
-        const id = String(p.player_id || p.id);
-        const g = gradeData[id] || {};
+        const pid = String(p.player_id || p.id);
+        const name = p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim();
+        const pos = Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position;
+
+        const g = byId[pid] || byName.get(normName(name)) || {};
+
+        // RB/WR: legacy 'value', but accept rb_value/wr_value/score
+        const rbwrValue =
+          pos === 'RB' || pos === 'WR'
+            ? firstNum(g.value, g[`${String(pos).toLowerCase()}_value`], g.score, g.points)
+            : null;
+
+        // TE: te_value/teValue/te/value/score
+        const teScore = pos === 'TE'
+          ? firstNum(g.te_value, g.teValue, g.te, g.value, g.score)
+          : null;
+
+        // QB: qb-score/qb_score/qbScore/qb_value/qb/value (last is a fallback)
+        const qbScore = pos === 'QB'
+          ? firstNum(g['qb-score'], g.qb_score, g.qbScore, g.qb_value, g.qb, g.value)
+          : null;
+
         return {
-          id,
-          name: p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim(),
-          position: Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position,
-          value: typeof g.value === 'number' ? g.value : 0,         // RB/WR still use 'value'
-          te_value: typeof g.te_value === 'number' ? g.te_value : null,
-          qbScore: typeof g['qb-score'] === 'number' ? g['qb-score'] : null,
+          id: pid,
+          name,
+          position: pos,
+          rbwrValue: rbwrValue ?? 0,
+          teScore: teScore ?? null,
+          qbScore: qbScore ?? null,
         };
       });
 
@@ -81,49 +107,34 @@ export default function PositionalGrades({
         : (settings && (settings.flex_qb === 1 || settings.positions?.sf > 0)) || false;
     const mode = detectSF ? 'SF' : '1QB';
 
-    // Helper: top + 0.5 * second (ignore rest)
     const topPlusHalfSecond = (arr) => {
       if (!arr.length) return 0;
       const sorted = arr.slice().sort((a, b) => b - a);
-      const first = sorted[0] ?? 0;
-      const second = sorted[1] ?? 0;
-      return first + 0.5 * second;
+      return (sorted[0] ?? 0) + 0.5 * (sorted[1] ?? 0);
     };
 
-    // --- QB grade from qb-score(s) ---
-    const qbScores = allPlayers
-      .filter((p) => p.position === 'QB' && typeof p.qbScore === 'number')
-      .map((p) => p.qbScore);
-    const qbComposite = topPlusHalfSecond(qbScores);
-    const qbGrade = Math.round(clamp10(qbComposite)); // clamp to 0–10
+    // QB
+    const qbScores = allPlayers.filter(p => p.position === 'QB' && p.qbScore !== null).map(p => p.qbScore);
+    const qbGrade = Math.round(clamp10(topPlusHalfSecond(qbScores)));
 
-    // --- TE grade from te_value(s) ---
-    const teScores = allPlayers
-      .filter((p) => p.position === 'TE' && typeof p.te_value === 'number')
-      .map((p) => p.te_value);
-    const teComposite = topPlusHalfSecond(teScores);
-    const teGrade = Math.round(clamp10(teComposite)); // clamp to 0–10
+    // TE
+    const teScores = allPlayers.filter(p => p.position === 'TE' && p.teScore !== null).map(p => p.teScore);
+    const teGrade = Math.round(clamp10(topPlusHalfSecond(teScores)));
 
-    // --- RB / WR keep existing sum + threshold method ---
-    const sumPos = (pos) =>
-      allPlayers
-        .filter((p) => p.position === pos)
-        .reduce((s, p) => s + (p.value || 0), 0);
+    // RB / WR thresholds (sum)
+    const rbTotal = allPlayers.filter(p => p.position === 'RB').reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
+    const wrTotal = allPlayers.filter(p => p.position === 'WR').reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
 
-    const rbTotal = sumPos('RB');
-    const wrTotal = sumPos('WR');
-
-    const grades = {
-      QB: qbGrade,
-      RB: getGrade(gradeMatrix[mode].RB, rbTotal),
-      WR: getGrade(gradeMatrix[mode].WR, wrTotal),
-      TE: teGrade,
+    return {
+      grades: {
+        QB: qbGrade,
+        RB: getGrade(gradeMatrix[mode].RB, rbTotal),
+        WR: getGrade(gradeMatrix[mode].WR, wrTotal),
+        TE: teGrade,
+      },
     };
-
-    return { grades };
   }, [settings, rosterIds, playersById, isSF]);
 
-  // Final grades (allow per-pos override)
   const grades = useMemo(
     () => ({
       QB: Number.isFinite(forcedGrades?.QB) ? Math.round(clamp10(forcedGrades.QB)) : auto.grades.QB,

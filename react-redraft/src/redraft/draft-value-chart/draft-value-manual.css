@@ -1,0 +1,38 @@
+.dvm { color: #2D2D2C; }
+.dvm-abs { pointer-events: none; } /* overlay won't block clicks */
+
+.dvm-title {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: .8px;
+  margin: 0 0 8px 0;
+  text-align: left;
+}
+
+/* artwork container */
+.dvm-card { position: relative; width: 100%; }
+.dvm-img  { width: 100%; height: auto; display: block; object-fit: contain; }
+
+/* centered, bold grade text that scales with width */
+.dvm-grade {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--dvm-scale, 1));
+  font-family: "Prohibition", Impact, "Anton", "League Gothic", Oswald, "Arial Black", sans-serif;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.9;
+  letter-spacing: 2px;
+  font-size: calc(var(--dvm-w) * 0.28); /* dial this to match your mock */
+  text-shadow:
+    0 2px 0 rgba(0,0,0,.06),
+    0 4px 0 rgba(0,0,0,.04);
+}
+
+/* white cover block(s) placed over the legend/values */
+.dvm-whitebox {
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}

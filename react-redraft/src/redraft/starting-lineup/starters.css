@@ -115,9 +115,9 @@
 }
 
 /* ===== Position color bars ===== */
-.pos-qb    { border-color: #D84343; } /* Red */
-.pos-rb    { border-color: #5CD2DB; } /* Teal */
-.pos-wr    { border-color: #60C08B; } /* Green */
-.pos-te    { border-color: #F2B94B; } /* Gold */
-.pos-flex  { border-color: #F1996C; } /* Orange */
-.pos-bench { border-color: #A6A6BD; } /* Gray */
+.pos-qb    { border-color: #c15252; } /* Red */
+.pos-rb    { border-color: #81c6c9; } /* Teal */
+.pos-wr    { border-color: #7ab274; } /* Green */
+.pos-te    { border-color: #f0c05f; } /* Gold */
+.pos-flex  { border-color: #e8a080; } /* Orange */
+.pos-bench { border-color: #b3b3c4; } /* Gray */

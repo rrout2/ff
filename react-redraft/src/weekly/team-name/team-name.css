@@ -1,0 +1,18 @@
+/* If you have the file, put Prohibition.woff2 in /public/fonts/ */
+@font-face {
+  font-family: "Prohibition";
+  src: url("/fonts/Prohibition.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: oblique;
+  font-display: swap;
+}
+
+.weekly-prohibition {
+  font-family: "Prohibition", Impact, "Anton", "League Gothic", Oswald, "Arial Black", sans-serif;
+  font-style: oblique;
+  font-weight: 900;
+  line-height: 0.9;      /* same compact look */
+  letter-spacing: 0.5px; /* subtle spacing like your mock */
+  color: #fff;           /* white text for weekly board */
+  text-transform: uppercase; /* remove if you don't want all caps */
+}

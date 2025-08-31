@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:redraft": "vite --open /",
+    "dev:weekly": "vite --open /weekly.html",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

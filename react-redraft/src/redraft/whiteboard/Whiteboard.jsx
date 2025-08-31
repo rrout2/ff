@@ -14,6 +14,8 @@ import PowerRanking from '../power-ranking/PowerRanking';
 import RosterTag from '../roster-tag/RosterTag';
 import TeamName from '../team-name/TeamName';
 import FinalVerdict from '../final-verdict/FinalVerdict';
+import DraftValueManual from '../draft-value-chart/DraftValueManual.jsx';
+import WhiteBox from '../whitebox/WhiteBox.jsx';
 
 import {
   getLeagueSettings,
@@ -28,6 +30,7 @@ import {
 
 import gradeData from '../players/players-by-id.json';
 import whiteboardBg from './WB-Base.png';
+import whiteboardBg2 from './WB2-base.png';
 
 // ---------- URL overrides helpers ----------
 function readOverridesFromUrl() {
@@ -59,7 +62,7 @@ const POS_RE  = /^(qb|rb|wr|te)$/;
 function resolveIdByName(playersById, name) {
   if (!name) return null;
   const raw = String(name);
-  if (playersById[raw]) return raw; // already an ID
+  if (playersById[raw]) return raw;
   const q = normTxt(raw);
   if (!q) return null;
 
@@ -256,14 +259,13 @@ export default function Whiteboard() {
               const fromLocal = gradeData[pid]?.sleeperAdp
                 ?? gradeData[pid]?.domainAdpN
                 ?? gradeData[pid]?.domainAdp;
-              const adp = Number.isFinite(fromSleeper) ? Number(fromSleeper)
-                        : Number.isFinite(fromLocal)   ? Number(fromLocal)
-                        : null;
-              if (!Number.isFinite(adp)) continue;
-
-              const key = `${pid}-${overall}`;
-              if (seen.has(key)) continue;
-              seen.add(key);
+              const adpSleeper = Number(fromSleeper);
+              const adpLocal   = Number(fromLocal);
+              const adp = Number.isFinite(adpSleeper)
+                ? adpSleeper
+                : Number.isFinite(adpLocal)
+                  ? adpLocal
+                  : Number(overall); // fallback so point still renders
 
               pts.push({ id: pid, first, last: rest.join(' '), overall, round, adp });
             }
@@ -273,7 +275,7 @@ export default function Whiteboard() {
           // ignore; chart will just show "No data"
         }
 
-        // ADP map for starters text
+        // ADP map for starters text (coerce first, fallback to local)
         const adpMap = {};
         for (const pid of ids) {
           const p = playersById[pid] || playersMap[pid] || {};
@@ -282,14 +284,16 @@ export default function Whiteboard() {
           const fromLocal = gradeData[String(pid)]?.sleeperAdp
             ?? gradeData[String(pid)]?.domainAdpN
             ?? gradeData[String(pid)]?.domainAdp;
-          const adp = Number.isFinite(fromSleeper) ? Number(fromSleeper)
-                    : Number.isFinite(fromLocal)   ? Number(fromLocal)
-                    : null;
-          if (Number.isFinite(adp)) adpMap[String(pid)] = adp;
+          const adpSleeper = Number(fromSleeper);
+          const adpLocal   = Number(fromLocal);
+          const adp = Number.isFinite(adpSleeper) ? adpSleeper
+                    : Number.isFinite(adpLocal)   ? adpLocal
+                    : undefined;
+          if (adp !== undefined) adpMap[String(pid)] = adp;
         }
         if (!cancelled) setAdpByPlayerId(adpMap);
 
-        // ---------- MANUAL ROSTER & PICKS (override Sleeper when present) ----------
+        // ---------- MANUAL ROSTER (prefer stored id; picks optional) ----------
         const manualRows = Array.isArray(overrides?.manual?.roster) ? overrides.manual.roster : [];
         if (!cancelled && manualRows.length) {
           const manualIds = [];
@@ -298,45 +302,44 @@ export default function Whiteboard() {
           const teamsCount = Number(s.teams || 12);
 
           for (const row of manualRows) {
-            const nm = row?.name?.trim();
-            if (!nm) continue;
-            const id = resolveIdByName(playersMap, nm);
+            const idFromOverride = String(row?.id || row?.playerId || '').trim();
+            let id = idFromOverride && playersMap[idFromOverride] ? idFromOverride : null;
+
+            if (!id) {
+              const nm = row?.name?.trim();
+              if (!nm) continue;
+              id = resolveIdByName(playersMap, nm);
+            }
             if (!id) continue;
+
             if (!manualIds.includes(id)) manualIds.push(id);
 
             const pick = parsePick(row?.pick, teamsCount);
-            if (!pick) continue;
+            if (pick) {
+              const p = playersMap[id] || {};
+              const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toUpperCase();
+              const [first, ...rest] = full.split(/\s+/);
 
-            const p = playersMap[id] || {};
-            const full = (p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim()).toUpperCase();
-            const [first, ...rest] = full.split(/\s+/);
+              const v = p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std;
+              const adpSleeper = Number(v);
+              const adpLocal   = Number(gradeData[id]?.sleeperAdp ?? gradeData[id]?.domainAdpN ?? gradeData[id]?.domainAdp);
+              const adp = Number.isFinite(adpSleeper) ? adpSleeper
+                        : Number.isFinite(adpLocal)   ? adpLocal
+                        : Number(pick.overall);
 
-            const v = p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std;
-            const adp = Number(v);
-            if (!isFinite(adp)) continue;
-
-            const key = `${id}-${pick.overall}`;
-            if (seenManual.has(key)) continue;
-            seenManual.add(key);
-
-            manualPts.push({
-              id,
-              first,
-              last: rest.join(' '),
-              overall: pick.overall,
-              round: pick.round,
-              adp,
-            });
+              const key = `${id}-${pick.overall}`;
+              if (!seenManual.has(key)) {
+                seenManual.add(key);
+                manualPts.push({ id, first, last: rest.join(' '), overall: pick.overall, round: pick.round, adp });
+              }
+            }
           }
 
-          // Override roster + lineup + chart with manual input
           setRosterIds(manualIds);
           setRosterCount(manualIds.length);
           setStarters(buildStartingLineup(s.positions, manualIds, playersMap));
           setDraftPoints(manualPts);
         }
-        // --------------------------------------------------------------------------
-
       } catch (e) {
         setError(e.message || 'Failed to load league data');
       } finally {
@@ -346,28 +349,46 @@ export default function Whiteboard() {
 
     return () => { cancelled = true; };
   }, [leagueId, teamName]);
-  // ---------------------------------------------------------------------------
 
   // ---------- EFFECTIVE values (overrides layered on top) ----------
   const effTeamName   = overrides.teamName ?? teamName;
+
+  // merge league settings overrides (from Tweaks) into fetched settings
+  const effSettings = useMemo(() => {
+    const o = overrides?.leagueSettings || {};
+    const posO = o?.positions || {};
+    return {
+      ...settings,
+      ...(o.teams     != null ? { teams: Number(o.teams) } : null),
+      ...(o.ppr       != null ? { ppr: !!o.ppr } : null),
+      ...(o.tepValue  != null ? { tepValue: Number(o.tepValue) || 0 } : null),
+      positions: {
+        ...settings.positions,
+        ...Object.fromEntries(
+          Object.entries(posO).map(([k, v]) => [k, Number(v)])
+        ),
+      },
+    };
+  }, [settings, overrides]);
+
   const effFour = {
-    upside: overrides?.fourFactors?.upside ?? factorScores.upside,
-    reliability: overrides?.fourFactors?.reliability ?? factorScores.reliability,
-    depth: overrides?.fourFactors?.depth ?? factorScores.depth,
-    risk: overrides?.fourFactors?.risk ?? factorScores.risk,
+    upside: oget(overrides, 'fourFactors.upside',     undefined) ?? oget(factorScores, 'upside', 5),
+    reliability: oget(overrides, 'fourFactors.reliability', undefined) ?? oget(factorScores, 'reliability', 5),
+    depth: oget(overrides, 'fourFactors.depth',       undefined) ?? oget(factorScores, 'depth', 5),
+    risk: oget(overrides, 'fourFactors.risk',         undefined) ?? oget(factorScores, 'risk', 5),
   };
+
   const effGrades = {
     QB: oget(overrides, 'positionalGrades.QB', undefined),
     RB: oget(overrides, 'positionalGrades.RB', undefined),
     WR: oget(overrides, 'positionalGrades.WR', undefined),
     TE: oget(overrides, 'positionalGrades.TE', undefined),
   };
-  const effTag        = overrides?.rosterTag ?? undefined;
+
   const effStars      = overrides?.finalVerdict?.stars ?? undefined;
   const effVerdictTxt = overrides?.finalVerdict?.note ?? '';
   const effPowerRank  = overrides?.powerRanking?.rank ?? undefined;
 
-  // Roster Strengths overrides (accept array or object, always 3 slots)
   const effRSItems = useMemo(() => {
     const raw = overrides?.rosterStrengths?.items;
     if (Array.isArray(raw)) return [raw[0] ?? null, raw[1] ?? null, raw[2] ?? null];
@@ -377,7 +398,6 @@ export default function Whiteboard() {
     return [null, null, null];
   }, [overrides]);
 
-  // Moves overrides merge (array or object)
   const effMoves = overrides?.moves ?? undefined;
   const mergedMoves = useMemo(() => {
     const base = moves;
@@ -398,10 +418,14 @@ export default function Whiteboard() {
     return base;
   }, [moves, effMoves]);
 
+  // Background choice
+  const bgVariant = overrides?.background?.variant === 'wb2' ? 'wb2' : 'wb1';
+  const selectedBg = bgVariant === 'wb2' ? whiteboardBg2 : whiteboardBg;
+
   return (
     <div
       style={{
-        backgroundImage: `url(${whiteboardBg})`,
+        backgroundImage: `url(${selectedBg})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top left',
@@ -413,7 +437,7 @@ export default function Whiteboard() {
       }}
     >
       {/* TEAM NAME */}
-      <div style={{ position: 'absolute', top: 3, left: 40, zIndex: 3 }}>
+      <div style={{ position: 'absolute', top: 90, left: 40, zIndex: 3 }}>
         <TeamName
           text={effTeamName}
           maxWidth={900}
@@ -422,6 +446,7 @@ export default function Whiteboard() {
           color="#2D2D2C"
           baselineAlign
           baselineRatio={0.78}
+          baselineNudge={6}
         />
       </div>
 
@@ -440,7 +465,7 @@ export default function Whiteboard() {
           <PowerRanking
             leagueId={leagueId}
             ownerId={ownerId}
-            settings={settings}
+            settings={effSettings}
             playersById={playersById}
             forcedRank={effPowerRank}
           />
@@ -487,7 +512,7 @@ export default function Whiteboard() {
             {error}
           </div>
         ) : (
-          <LeagueSettings settings={settings} />
+          <LeagueSettings settings={effSettings} />
         )}
       </div>
 
@@ -503,7 +528,7 @@ export default function Whiteboard() {
       >
         {!loading && !error && (
           <FourFactors
-            settings={settings}
+            settings={effSettings}
             rosterIds={rosterIds}
             playersById={playersById}
             lineup={starters}
@@ -513,7 +538,7 @@ export default function Whiteboard() {
         )}
       </div>
       
-      {/* DRAFT VALUE CHART */}
+      {/* DRAFT VALUE: chart + optional manual overlay */}
       <div
         style={{
           position: 'absolute',
@@ -524,14 +549,31 @@ export default function Whiteboard() {
         }}
       >
         {!loading && !error && (
-          <DraftValueChart
-            points={draftPoints}
-            teamsCount={settings.teams || 12}
-            width={640}
-            height={600}
-          />
+          overrides?.manualDraft?.enabled ? (
+            <DraftValueManual grade={overrides?.manualDraft?.grade ?? 0} width={640} board={overrides?.manualDraft?.board || "green"} />
+          ) : (
+            <DraftValueChart
+              points={draftPoints}
+              teamsCount={effSettings.teams || 12}
+              width={640}
+              height={600}
+            />
+          )
         )}
       </div>
+
+      {/* WHITE BOX OVERLAY */}
+      {overrides?.whiteBox?.enabled && (
+        <WhiteBox
+          x={overrides?.whiteBox?.x ?? 650}
+          y={overrides?.whiteBox?.y ?? 558}
+          width={overrides?.whiteBox?.width ?? 640}
+          height={overrides?.whiteBox?.height ?? 68}
+          opacity={overrides?.whiteBox?.opacity ?? 1}
+          rotate={overrides?.whiteBox?.rotate ?? 0}
+          z={overrides?.whiteBox?.z ?? 6}
+        />
+      )}
 
       {/* STARTERS */}
       <div
@@ -566,7 +608,7 @@ export default function Whiteboard() {
       >
         {!loading && !error && (
           <PositionalGrades
-            settings={settings}
+            settings={effSettings}
             rosterIds={rosterIds}
             playersById={playersById}
             forcedGrades={oget(overrides,'positionalGrades',undefined)}
@@ -588,7 +630,7 @@ export default function Whiteboard() {
           <RosterStrengths
             leagueId={leagueId}
             ownerId={ownerId}
-            starCount={effStars ?? finalStars ?? 3}
+            starCount={overrides?.finalVerdict?.stars ?? finalStars ?? 3}
             overrideItems={effRSItems}
           />
         )}
@@ -607,11 +649,11 @@ export default function Whiteboard() {
       >
         {!loading && !error && (
           <Stars
-            settings={settings}
+            settings={effSettings}
             rosterIds={rosterIds}
             playersById={playersById}
             onStarsChange={(n) => setFinalStars(n)}
-            forcedStars={effStars}
+            forcedStars={overrides?.finalVerdict?.stars ?? undefined}
           />
         )}
       </div>

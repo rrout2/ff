@@ -205,10 +205,10 @@
 
 /* colored bar per position for recs */
 .rec-bar { width: 4px; height: 100%; border-radius: 2px; background: #ddd; }
-.rec-row.pos-qb   .rec-bar { background: #D84343; }
-.rec-row.pos-rb   .rec-bar { background: #5CD2DB; }
-.rec-row.pos-wr   .rec-bar { background: #60C08B; }
-.rec-row.pos-te   .rec-bar { background: #F2B94B; }
+.rec-row.pos-qb   .rec-bar { background: #c15252; }
+.rec-row.pos-rb   .rec-bar { background: #81c6c9; }
+.rec-row.pos-wr   .rec-bar { background: #7ab274; }
+.rec-row.pos-te   .rec-bar { background: #f0c05f; }
 .rec-row.pos-flex .rec-bar { background: #F1996C; }
 .rec-row.pos-bench .rec-bar{ background: #A6A6BD; }
 

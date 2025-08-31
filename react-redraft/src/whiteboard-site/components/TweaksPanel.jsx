@@ -7,8 +7,8 @@ export default function TweaksPanel({
   onExport,
   hud,
   exportLabel = 'Download PNG',
-  playersById = {},       // map of all players
-  rosterIds = [],         // ids for the current roster (starters + bench)
+  playersById = {},
+  rosterIds = [],
 }) {
   const o = overrides || {};
 
@@ -71,7 +71,7 @@ export default function TweaksPanel({
     const key = (t || '').toUpperCase();
     return TEAM_ALIASES[key] || key;
   };
-  // For strings like "Player Name WR WAS" that may already be saved
+  // For commit strings like "Player Name WR WAS"
   const normalizeCommitStringTeam = (s) => {
     if (!s) return s;
     const parts = String(s).trim().split(/\s+/);
@@ -146,7 +146,6 @@ export default function TweaksPanel({
   );
 
   /* ============================= Player Autocomplete ============================== */
-  // Filter to fantasy-relevant offense positions; keep Travis Hunter explicitly
   const INCLUDE_POS = new Set(['QB', 'RB', 'WR', 'TE']);
   const ALWAYS_KEEP = new Set(['TRAVIS HUNTER']); // plays both ways
 
@@ -166,10 +165,7 @@ export default function TweaksPanel({
       const search = `${name} ${pos} ${team}`.toLowerCase();
       const adp = Number(p.adp_half_ppr ?? p.adp_ppr ?? p.adp ?? p.adp_full_ppr ?? p.adp_std);
 
-      arr.push({
-        id, name, label, search, pos, team,
-        adp: isFinite(adp) ? adp : 9999,
-      });
+      arr.push({ id, name, label, search, pos, team, adp: isFinite(adp) ? adp : 9999 });
     }
     arr.sort((a, b) => a.adp - b.adp || a.name.localeCompare(b.name));
     return arr;
@@ -328,11 +324,7 @@ export default function TweaksPanel({
                 }}
                 onMouseEnter={() => setHover(idx)}
                 onMouseLeave={() => setHover(-1)}
-                style={{
-                  padding: '8px 10px', cursor: 'pointer',
-                  background: hover === idx ? '#f3f4f6' : 'transparent',
-                  display: 'flex', alignItems: 'center', gap: 8, fontSize: 14
-                }}
+                style={{ padding: '8px 10px', cursor: 'pointer', background: hover === idx ? '#f3f4f6' : 'transparent', display: 'flex', alignItems: 'center', gap: 8, fontSize: 14 }}
               >
                 <span style={{ opacity: .55, minWidth: 42, fontSize: 12 }}>
                   {opt.pos}{opt.team ? ` • ${opt.team}` : ''}
@@ -352,19 +344,15 @@ export default function TweaksPanel({
     const parts = String(commitStr).trim().split(/\s+/);
     if (!parts.length) return undefined;
 
-    // Try to parse "... NAME POS TEAM"
     const maybeTeam = parts[parts.length - 1]?.toUpperCase();
     const maybePos  = parts[parts.length - 2]?.toUpperCase();
     const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
     const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
 
-    // First pass: exact name (case-insensitive)
     let cands = allPlayerOptions.filter(o => o.name.toLowerCase() === name.toLowerCase());
     if (!cands.length) return undefined;
 
-    // Refine by pos if present
     if (posIsKnown) cands = cands.filter(o => o.pos === maybePos);
-    // Refine by team if present (and we still have >1)
     if (maybeTeam && cands.length > 1) cands = cands.filter(o => o.team === maybeTeam);
 
     return cands[0]?.id;
@@ -424,7 +412,6 @@ export default function TweaksPanel({
 
     const primaryField = () => {
       if (rosterOptions.length > 0) {
-        // Normalize saved value (e.g., "... WAS" -> "... WSH") so the select shows correctly
         const normalizedPrimary = normalizeCommitStringTeam(primary || '');
         const valueIsOption = rosterOptions.some(o => o.value === normalizedPrimary);
         const selected = valueIsOption ? normalizedPrimary : '';
@@ -471,7 +458,7 @@ export default function TweaksPanel({
       <div className="wb-card" style={{ padding: 12, overflow: 'visible' }}>
         <div className="wb-card__title" style={{ marginBottom: 8 }}>{title}</div>
 
-        {/* Column Label = dropdown (TRADE / UPTIER / PIVOT) */}
+        {/* Column Label */}
         <div className="wb-row" style={{ marginBottom: 8 }}>
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Column Label</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
@@ -531,7 +518,6 @@ export default function TweaksPanel({
     const color = get(`${base}.color`, '');
     const label = get(`${base}.label`, '');
 
-    // Suggest based on color selection; Auto shows both lists.
     const listId = `sw-opts-${index}`;
     const options = color === 'green'
       ? STRENGTH_OPTIONS
@@ -543,14 +529,12 @@ export default function TweaksPanel({
       <div className="wb-row sw-row" style={{ display:'grid', gridTemplateColumns:'auto 1fr 2fr auto', gap:8, alignItems:'center' }}>
         <div style={{ fontWeight:700, opacity:.8 }}>Badge {index + 1}</div>
 
-        {/* color chooser */}
         <select value={color} onChange={(e) => set(`${base}.color`, e.target.value || undefined)}>
           <option value="">Auto</option>
           <option value="green">Strength (Green)</option>
           <option value="red">Weakness (Red)</option>
         </select>
 
-        {/* label combobox with datalist (typed text allowed) */}
         <LabelCombo
           value={label}
           onCommit={(v) => set(`${base}.label`, v)}
@@ -565,60 +549,61 @@ export default function TweaksPanel({
     );
   };
 
-  /* ======================== Manual Roster & Picks (UNCONTROLLED) ======================== */
+  /* ======================== Manual Roster (12 rows, players only, saves id) ======================== */
   const ManualRosterSection = () => {
-    const initialManual = Array.isArray(o?.manual?.roster) ? o.manual.roster : [];
-    const [rowIds, setRowIds] = useState(initialManual.length ? initialManual.map((_, i) => i) : [0]);
-    const nextIdRef = useRef(rowIds.length);
+    const initial = Array.isArray(o?.manual?.roster) ? o.manual.roster : [];
+    const normalizeRow = (r) => {
+      if (!r) return { name: '', id: undefined };
+      if (typeof r === 'string') return { name: r, id: undefined };
+      return { name: r.name || '', id: r.id || r.playerId || undefined };
+    };
+    const initialRows = initial.map(normalizeRow);
+    const initialCount = Math.max(12, initialRows.length);
 
-    const nameRefs = useRef({}); // id -> input
-    const pickRefs = useRef({}); // id -> input
+    const [rows, setRows] = useState(
+      Array.from({ length: initialCount }, (_, i) => initialRows[i] || { name: '', id: undefined })
+    );
     const [savedFlag, setSavedFlag] = useState(false);
 
-    const addRow = () => { const id = nextIdRef.current++; setRowIds((prev) => [...prev, id]); };
-    const removeRow = (id) => { setRowIds((prev) => prev.filter((x) => x !== id)); delete nameRefs.current[id]; delete pickRefs.current[id]; };
+    const setRow = (idx, nameVal) => {
+      const name = normalizeCommitStringTeam(nameVal || '');
+      const id = resolveIdFromCommitString(name) || undefined;
+      setRows((prev) => {
+        const next = prev.slice();
+        next[idx] = { name, id };
+        return next;
+      });
+    };
+
+    const addRow = () => setRows((prev) => [...prev, { name: '', id: undefined }]);
 
     const submit = () => {
-      const rows = rowIds.map((id, idx) => {
-        const name = (nameRefs.current[id]?.value || '').trim();
-        const pick = (pickRefs.current[id]?.value || '').trim();
-        return { name, pick };
-      }).filter((r) => r.name.length > 0);
-
-      set('manual.roster', rows.length ? rows : undefined);
+      const payload = rows
+        .map((r) => ({ name: (r.name || '').trim(), id: r.id }))
+        .filter((r) => r.name.length > 0);
+      set('manual.roster', payload.length ? payload : undefined);
       setSavedFlag(true);
       setTimeout(() => setSavedFlag(false), 1600);
     };
 
-    const Row = ({ id, defaultName = '', defaultPick = '' }) => (
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr auto', gap: 8, alignItems: 'center' }}>
-        <input
-          defaultValue={defaultName}
-          placeholder="Player name (e.g., Bijan Robinson)"
-          ref={(el) => { if (el) nameRefs.current[id] = el; }}
+    const Row = ({ index }) => (
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'center' }}>
+        <PlayerAutocomplete
+          value={rows[index]?.name || ''}
+          placeholder="start typing a player…"
+          onCommit={(v) => setRow(index, v)}
+          maxResults={14}
         />
-        <input
-          defaultValue={defaultPick}
-          placeholder="Pick (1.07, #5, or 5)"
-          ref={(el) => { if (el) pickRefs.current[id] = el; }}
-        />
-        <ClearBtn onClick={() => removeRow(id)} />
+        <ClearBtn onClick={() => setRow(index, '')} />
       </div>
     );
 
     return (
       <div style={{ display: 'grid', gap: 8, gridColumn: '1 / -1' }}>
-        {rowIds.map((id, idx) => (
-          <Row
-            key={id}
-            id={id}
-            defaultName={(o?.manual?.roster && o.manual.roster[idx]?.name) || ''}
-            defaultPick={(o?.manual?.roster && o.manual.roster[idx]?.pick) || ''}
-          />
-        ))}
+        {rows.map((_, idx) => (<Row key={idx} index={idx} />))}
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <button type="button" onClick={addRow}>Add Row</button>
-          <button type="button" onClick={submit}>Submit Manual Roster</button>
+          <button type="button" onClick={addRow}>Add Player</button>
+          <button type="button" onClick={submit}>Save Manual Roster</button>
           {savedFlag && <span style={{ fontSize: 12, color: '#2c7' }}>Saved!</span>}
         </div>
 
@@ -630,7 +615,18 @@ export default function TweaksPanel({
     );
   };
 
+  /* ----------------------------- Background picker ----------------------------- */
+  const bgVariant = get('background.variant', 'wb1'); // 'wb1' (default) | 'wb2'
+  const setBgExclusive = (variant, checked) => {
+    set('background.variant', checked ? variant : undefined); // undefined => fallback to wb1
+  };
+
   /* ---------------------------------- render ---------------------------------- */
+  const board = get('manualDraft.board', 'green');
+  const setBoardExclusive = (color, checked) => {
+    set('manualDraft.board', checked ? color : undefined);
+  };
+
   return (
     <div className="wb-tweaks">
       <div className="wb-grid">
@@ -638,7 +634,6 @@ export default function TweaksPanel({
         <label>Team Name</label>
         <TextInput value={get('teamName', '')} placeholder="override team name…" onCommit={(v) => set('teamName', v)} />
 
-        {/* Roster Tag: dropdown + free-typing (like S/W badges) */}
         <label>Roster Tag</label>
         <LabelCombo
           value={get('rosterTag', '')}
@@ -648,6 +643,57 @@ export default function TweaksPanel({
           placeholder="Select or type a roster tag…"
           maxLength={40}
         />
+
+        {/* Board Background */}
+        <div className="wb-sep">Board Background</div>
+        <div style={{ display:'flex', gap:16, alignItems:'center' }}>
+          <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
+            <input
+              type="checkbox"
+              checked={bgVariant === 'wb1'}
+              onChange={(e)=> setBgExclusive('wb1', e.target.checked)}
+            />
+            <span>Classic (WB-Base.png)</span>
+          </label>
+          <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
+            <input
+              type="checkbox"
+              checked={bgVariant === 'wb2'}
+              onChange={(e)=> setBgExclusive('wb2', e.target.checked)}
+            />
+            <span>Alternate (WB2-base.png)</span>
+          </label>
+        </div>
+
+        {/* League Settings (override) */}
+        <div className="wb-sep">League Settings (override)</div>
+        <label>Teams</label>{numInput(get('leagueSettings.teams', null), 'leagueSettings.teams', { min:2, max:20 })}
+        <label>PPR Scoring</label>
+        <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', alignItems:'center', gap:8 }}>
+          <input
+            type="checkbox"
+            checked={!!get('leagueSettings.ppr', false)}
+            onChange={(e)=> set('leagueSettings.ppr', e.target.checked || undefined)}
+          />
+          <span style={{ fontSize:12, opacity:.7 }}>If unchecked, treated as Standard</span>
+        </div>
+        <label>TE Premium (points)</label>{numInput(get('leagueSettings.tepValue', null), 'leagueSettings.tepValue', { min:0, max:5, step:0.1 })}
+
+        <div style={{ gridColumn:'1 / -1', display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gap:8, alignItems:'center' }}>
+          <div style={{ gridColumn:'1 / -1', fontSize:12, opacity:.8, margin:'4px 0 2px' }}>Positions</div>
+          <span>QB</span>{numInput(get('leagueSettings.positions.qb', null), 'leagueSettings.positions.qb', { min:0, max:3 })}
+          <span>RB</span>{numInput(get('leagueSettings.positions.rb', null), 'leagueSettings.positions.rb', { min:0, max:6 })}
+          <span>WR</span>{numInput(get('leagueSettings.positions.wr', null), 'leagueSettings.positions.wr', { min:0, max:6 })}
+          <span>TE</span>{numInput(get('leagueSettings.positions.te', null), 'leagueSettings.positions.te', { min:0, max:3 })}
+          <span>FLEX</span>{numInput(get('leagueSettings.positions.flex', null), 'leagueSettings.positions.flex', { min:0, max:6 })}
+          <span>DEF</span>{numInput(get('leagueSettings.positions.def', null), 'leagueSettings.positions.def', { min:0, max:3 })}
+          <span>K</span>{numInput(get('leagueSettings.positions.k', null), 'leagueSettings.positions.k', { min:0, max:3 })}
+          <span>Bench</span>{numInput(get('leagueSettings.positions.bench', null), 'leagueSettings.positions.bench', { min:0, max:20 })}
+        </div>
+
+        {/* League Power Rank */}
+        <div className="wb-sep">League Power Rank</div>
+        <label>Rank (1 = best)</label>{numInput(get('powerRanking.rank', null), 'powerRanking.rank', { min:1, max:99 })}
 
         {/* Four Factors */}
         <div className="wb-sep">Four Factors (0–10)</div>
@@ -663,7 +709,52 @@ export default function TweaksPanel({
         <label>WR</label>{numInput(get('positionalGrades.WR', null), 'positionalGrades.WR')}
         <label>TE</label>{numInput(get('positionalGrades.TE', null), 'positionalGrades.TE')}
 
-        {/* Final Verdict (stars + text) */}
+        {/* Draft Value Grade (manual) */}
+        <div className="wb-sep">Draft Value Grade (manual)</div>
+
+        <label>Show manual grade overlay</label>
+        <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8, alignItems:'center' }}>
+          <input
+            type="checkbox"
+            checked={!!get('manualDraft.enabled', false)}
+            onChange={(e)=> set('manualDraft.enabled', e.target.checked || undefined)}
+          />
+          <span style={{ fontSize:12, opacity:.7 }}>When ON, replaces the Draft Value Chart with a manual overlay.</span>
+        </div>
+
+        <label>Grade (0–10)</label>
+        {numInput(get('manualDraft.grade', null), 'manualDraft.grade', { min:0, max:10, step:0.1 })}
+
+        {/* Manual board color (exclusive) */}
+        <label>Manual board color</label>
+        <div style={{ display:'flex', gap:16, alignItems:'center' }}>
+          <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
+            <input type="checkbox" checked={board === 'red'} onChange={(e)=> setBoardExclusive('red', e.target.checked)} />
+            <span>Red</span>
+          </label>
+          <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
+            <input type="checkbox" checked={board === 'yellow'} onChange={(e)=> setBoardExclusive('yellow', e.target.checked)} />
+            <span>Yellow</span>
+          </label>
+          <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
+            <input type="checkbox" checked={board === 'green'} onChange={(e)=> setBoardExclusive('green', e.target.checked)} />
+            <span>Green</span>
+          </label>
+        </div>
+
+        {/* White Box Overlay */}
+        <div className="wb-sep">White Box Overlay</div>
+        <label>Show white box overlay</label>
+        <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8, alignItems:'center' }}>
+          <input
+            type="checkbox"
+            checked={!!get('whiteBox.enabled', false)}
+            onChange={(e)=> set('whiteBox.enabled', e.target.checked || undefined)}
+          />
+          <span style={{ fontSize:12, opacity:.7 }}>Toggle the white cover PNG (place/size in Whiteboard.jsx).</span>
+        </div>
+
+        {/* Final Verdict */}
         <div className="wb-sep">Final Verdict</div>
         <label>Stars (1–5)</label>{numInput(get('finalVerdict.stars', null), 'finalVerdict.stars', { min: 1, max: 5 })}
         <label>Verdict Text</label>
@@ -681,17 +772,9 @@ export default function TweaksPanel({
         <MoveCardEditor moveId="uptier" title="#2 Column" />
         <MoveCardEditor moveId="pivot"  title="#3 Column" />
 
-        {/* Manual Roster & Picks */}
-        <div className="wb-sep">Manual Roster & Picks (type names + pick)</div>
+        {/* Manual Roster */}
+        <div className="wb-sep">Manual Roster (type players; 12 rows)</div>
         <ManualRosterSection />
-
-        {/* Roster Strengths & Weaknesses */}
-        <div className="wb-sep">Roster Strengths & Weaknesses (3 badges)</div>
-        <div style={{ gridColumn:'1 / -1', display:'grid', gap:8 }}>
-          <SWRow index={0} />
-          <SWRow index={1} />
-          <SWRow index={2} />
-        </div>
 
         {/* Actions */}
         <div className="wb-actions-row" style={{ gridColumn:'1 / -1' }}>
