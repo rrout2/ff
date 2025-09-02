@@ -345,7 +345,7 @@ export default function TweaksPanel({
     if (!parts.length) return undefined;
 
     const maybeTeam = parts[parts.length - 1]?.toUpperCase();
-    const pos  = parts[parts.length - 2]?.toUpperCase();
+    const maybePos  = parts[parts.length - 2]?.toUpperCase();   // ✅ define maybePos
     const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
     const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
 
