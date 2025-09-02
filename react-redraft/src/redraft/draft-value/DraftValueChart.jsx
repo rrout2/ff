@@ -2,6 +2,9 @@
 import React, { useMemo } from 'react';
 import './draft-value.css';
 
+// Superflex ranks source (keyed by Sleeper player_id)
+import sfPlayersById from '../players/players-by-id.backup.1756692065071.json';
+
 const COLORS = {
   steal: '#60C08B', // diff > 3
   even:  '#F2B94B',
@@ -12,8 +15,8 @@ const COLORS = {
 export default function DraftValueChart({
   points = [],                   // [{ id, first, last, overall, round, adp }]
   lineup = [],
-  pickByPlayerId = {},
-  adpByPlayerId = {},
+  pickByPlayerId = {},           // used if points are empty
+  adpByPlayerId = {},            // used if points are empty
   teamsCount = 12,
   width = 640,
   height = 340,
@@ -31,30 +34,71 @@ export default function DraftValueChart({
   axisColor = '#2D2D2C',
   axisTickSize = 18,
   axisTitleSize = 18,
+
+  /* Prefer Superflex ranks for ADP if the league has SF slots */
+  useSuperflexADP = false,
 }) {
   const ROUNDS_TO_SHOW = 10;
 
-  // Build / normalize points (fallback from starters if not provided)
+  // Decide if we should use SF ADPs:
+  // - explicit prop, OR
+  // - detectable SFLEX in lineup (nice auto fallback if you pass lineup)
+  const preferSF = useSuperflexADP || (Array.isArray(lineup) && lineup.some(
+    it => String(it?.slot || '').toUpperCase() === 'SFLEX'
+  ));
+
+  const getSfRank = (id) => {
+    const raw = sfPlayersById?.[String(id)]?.['superflex-rank'];
+    const n = Number(raw);
+    return Number.isFinite(n) ? n : undefined;
+  };
+
+  // Build / normalize points (fallback from lineup if not provided)
   const pts = useMemo(() => {
     let src = points;
+
+    // Helper: pick ADP if we need to construct from lineup
+    const pickAdpForBuild = (id, fallbackOverall) => {
+      if (preferSF) {
+        const sf = getSfRank(id);
+        if (sf !== undefined) return sf;
+      }
+      const fromMap = Number(adpByPlayerId[String(id)]);
+      if (Number.isFinite(fromMap)) return fromMap;
+      return Number.isFinite(fallbackOverall) ? fallbackOverall : undefined;
+    };
+
     if (!src || !src.length) {
       src = [];
-      for (const it of lineup) {
+      for (const it of lineup || []) {
         const p = it?.player || {};
         const id = String(p?.player_id || p?.id || '');
         if (!id) continue;
+
         const pickObj = pickByPlayerId[id];
-        const adp = adpByPlayerId[id];
-        if (!pickObj || !Number.isFinite(pickObj.overall) || !Number.isFinite(adp)) continue;
-        const full = p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || '—';
-        const [first, ...rest] = full.trim().toUpperCase().split(/\s+/);
+        if (!pickObj || !Number.isFinite(pickObj.overall)) continue;
+
         const overall = Number(pickObj.overall);
         const round = Math.max(1, Math.ceil(overall / Math.max(1, teamsCount)));
+
+        const full = p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || '—';
+        const [first, ...rest] = full.trim().toUpperCase().split(/\s+/);
+
+        const adp = pickAdpForBuild(id, overall);
+        if (!Number.isFinite(adp)) continue;
+
         src.push({ id, first, last: rest.join(' '), overall, round, adp: Number(adp) });
       }
     }
 
-    return src
+    // If we already have points, optionally override each point's ADP with SF rank.
+    const withCorrectADP = (src || []).map(d => {
+      if (!preferSF) return d;
+      const sf = getSfRank(d.id);
+      return (sf !== undefined) ? { ...d, adp: sf } : d;
+    });
+
+    return withCorrectADP
       .filter(d => Number.isFinite(d.overall) && Number.isFinite(d.adp))
       .map(d => {
         const diff = d.overall - d.adp;
@@ -65,12 +109,12 @@ export default function DraftValueChart({
       })
       .filter(d => d.round <= ROUNDS_TO_SHOW)
       .sort((a, b) => a.round - b.round || a.overall - b.overall);
-  }, [points, lineup, pickByPlayerId, adpByPlayerId, teamsCount]);
+  }, [points, lineup, pickByPlayerId, adpByPlayerId, teamsCount, preferSF]);
 
   const svg = useMemo(() => {
     if (!pts.length) return null;
 
-    // Bottom pad includes space for ticks + the "ROUND" title so it never clips
+    // Bottom pad includes space for ticks + the "ROUND" title
     const pad = {
       l: 54,
       b: Math.max(38, axisTickSize + axisTitleSize + 22),
@@ -87,7 +131,7 @@ export default function DraftValueChart({
       pad.l + firstRoundOffsetPx + ((round - 1) / denom) * usableW;
     const xTicks = Array.from({ length: roundsShown }, (_, i) => i + 1);
 
-    // Y-axis: use the MAX ADP among players taken in rounds 1–10 (+ headroom)
+    // Y-axis: max ADP among plotted points + headroom
     const maxAdpFirstTen = Math.max(...pts.map(p => Number(p.adp)));
     const yMax = Math.max(1, maxAdpFirstTen + yHeadroomADP);
 
@@ -121,7 +165,7 @@ export default function DraftValueChart({
     let fs = labelFontSize;
     const lastSize = fs;
     const firstSize = Math.max(minLabelFontSize, Math.round(fs * 0.78));
-    let lineH = Math.max( firstSize + 2, Math.round(fs * 0.85) );
+    let lineH = Math.max(firstSize + 2, Math.round(fs * 0.85));
 
     const lines = [p.first, p.last].filter(Boolean);
     // width estimate based on the largest line (for collision)
@@ -180,6 +224,8 @@ export default function DraftValueChart({
     '--dv-title-size': `${axisTitleSize}px`,
   };
 
+  const yAxisTitleText = preferSF ? 'SUPERFLEX RANK' : 'CONSENSUS ADP';
+
   return (
     <div className="draft-value">
       <svg className="dv-chart" width={W} height={H} style={{ ...axisVars, overflow: 'visible' }}>
@@ -217,7 +263,7 @@ export default function DraftValueChart({
             transform={`translate(16, ${(H - pad.b + pad.t) / 2}) rotate(-90)`}
             textAnchor="middle"
           >
-            CONSENSUS ADP
+            {yAxisTitleText}
           </text>
         </g>
 

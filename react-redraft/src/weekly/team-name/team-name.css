@@ -10,7 +10,7 @@
 .weekly-prohibition {
   font-family: "Prohibition", Impact, "Anton", "League Gothic", Oswald, "Arial Black", sans-serif;
   font-style: oblique;
-  font-weight: 900;
+  font-weight: 300;
   line-height: 0.9;      /* same compact look */
   letter-spacing: 0.5px; /* subtle spacing like your mock */
   color: #fff;           /* white text for weekly board */

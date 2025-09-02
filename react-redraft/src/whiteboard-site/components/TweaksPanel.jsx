@@ -345,7 +345,7 @@ export default function TweaksPanel({
     if (!parts.length) return undefined;
 
     const maybeTeam = parts[parts.length - 1]?.toUpperCase();
-    const maybePos  = parts[parts.length - 2]?.toUpperCase();
+    const pos  = parts[parts.length - 2]?.toUpperCase();
     const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
     const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
 
@@ -686,6 +686,7 @@ export default function TweaksPanel({
           <span>WR</span>{numInput(get('leagueSettings.positions.wr', null), 'leagueSettings.positions.wr', { min:0, max:6 })}
           <span>TE</span>{numInput(get('leagueSettings.positions.te', null), 'leagueSettings.positions.te', { min:0, max:3 })}
           <span>FLEX</span>{numInput(get('leagueSettings.positions.flex', null), 'leagueSettings.positions.flex', { min:0, max:6 })}
+          <span>SF</span>{numInput(get('leagueSettings.positions.sf', null), 'leagueSettings.positions.sf', { min:0, max:3 })}
           <span>DEF</span>{numInput(get('leagueSettings.positions.def', null), 'leagueSettings.positions.def', { min:0, max:3 })}
           <span>K</span>{numInput(get('leagueSettings.positions.k', null), 'leagueSettings.positions.k', { min:0, max:3 })}
           <span>Bench</span>{numInput(get('leagueSettings.positions.bench', null), 'leagueSettings.positions.bench', { min:0, max:20 })}
@@ -708,6 +709,24 @@ export default function TweaksPanel({
         <label>RB</label>{numInput(get('positionalGrades.RB', null), 'positionalGrades.RB')}
         <label>WR</label>{numInput(get('positionalGrades.WR', null), 'positionalGrades.WR')}
         <label>TE</label>{numInput(get('positionalGrades.TE', null), 'positionalGrades.TE')}
+
+        {/* Roster Strengths & Weaknesses (manual overrides) */}
+        <div className="wb-sep">Roster Strengths &amp; Weaknesses</div>
+        <div className="wb-row" style={{ gridColumn:'1 / -1', fontSize:12, opacity:.75, margin:'2px 0 8px' }}>
+          Leave any badge blank to auto-pick. Fill 2 greens + 1 red (or vice-versa) to force labels.
+        </div>
+        <SWRow index={0} />
+        <SWRow index={1} />
+        <SWRow index={2} />
+        <div className="wb-row" style={{ gridColumn:'1 / -1', display:'flex', justifyContent:'flex-end', marginTop:4 }}>
+          <button
+            type="button"
+            className="wb-danger"
+            onClick={() => set('rosterStrengths.items', undefined)}
+          >
+            Clear All (Auto)
+          </button>
+        </div>
 
         {/* Draft Value Grade (manual) */}
         <div className="wb-sep">Draft Value Grade (manual)</div>

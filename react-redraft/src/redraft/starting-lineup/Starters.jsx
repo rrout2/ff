@@ -1,10 +1,9 @@
-// /src/redraft/starting-lineup/Starters.jsx
 import React, { useMemo } from 'react';
 import './starters.css';
 
 /**
  * Props:
- * - lineup: [{ slot: 'QB'|'RB'|'WR'|'TE'|'FLEX'|'DEF'|'K', player }]
+ * - lineup: [{ slot: 'QB'|'RB'|'WR'|'TE'|'FLEX'|'SFLEX'|'DEF'|'K', player }]
  * - rosterIds: string[]
  * - playersById: Record<string, any>
  */
@@ -13,7 +12,6 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
     const score = (p) =>
       (p?.adp_half_ppr || p?.adp || 9999) + (p?.search_rank ? p.search_rank / 10000 : 0);
 
-    // Players already used as starters (to exclude from bench pool)
     const usedIds = new Set(
       (lineup || [])
         .map((it) => it?.player?.player_id || it?.player?.id)
@@ -21,7 +19,6 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
         .map(String)
     );
 
-    // All roster players sorted by rough value
     const allPlayers = (rosterIds || [])
       .map((id) => playersById[id])
       .filter(Boolean)
@@ -35,10 +32,11 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       }))
       .sort((a, b) => score(a) - score(b));
 
-    // Normalize starters we received
     const startersNormalized = (lineup || []).map((it) => {
       const p = it.player || {};
       const id = p.player_id || p.id;
+      const raw = (it.slot || '').toLowerCase();
+      const slot = raw === 'superflex' ? 'sflex' : raw; // normalize
       return {
         id,
         name: p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || '—',
@@ -47,26 +45,21 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
           p.position ||
           '',
         team: p.team || p.pro_team || p.team_abbr || '',
-        slot: (it.slot || '').toLowerCase(),
+        slot,
       };
     });
 
-    // --- Only count core starters (QB/RB/WR/TE/FLEX) ---
-    const CORE = new Set(['qb', 'rb', 'wr', 'te', 'flex']);
+    // core = include SFLEX
+    const CORE = new Set(['qb', 'rb', 'wr', 'te', 'sflex', 'flex']);
     const startersCore = startersNormalized.filter((p) => CORE.has(p.slot));
     const startersCount = startersCore.length;
 
-    // --- Target rows ---
-    // 1) At least 10 total rows
-    // 2) At least +2 bench beyond *core* starters
-    // 3) Make it EVEN so columns are equal
     const MIN_TOTAL = 10;
     const MIN_BENCH = 2;
 
     let totalNeeded = Math.max(MIN_TOTAL, startersCount + MIN_BENCH);
-    if (totalNeeded % 2 !== 0) totalNeeded += 1; // force even total for 50/50 split
+    if (totalNeeded % 2 !== 0) totalNeeded += 1;
 
-    // Build bench list to reach target
     const benchNeeded = Math.max(0, totalNeeded - startersCount);
     const benchPool = allPlayers
       .filter((p) => !usedIds.has(String(p.id)))
@@ -80,7 +73,6 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       slot: 'bench',
     }));
 
-    // If not enough real bench, pad with placeholders to keep columns even
     const placeholders = [];
     for (let i = startersCount + bench.length; i < totalNeeded; i++) {
       placeholders.push({
@@ -92,18 +84,16 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
       });
     }
 
-    // Order rows: QB → RB → WR → TE → FLEX → BENCH (DEF/K are never shown)
-    const order = ['qb', 'rb', 'wr', 'te', 'flex', 'bench'];
+    // Order rows: QB → RB → WR → TE → SFLEX → FLEX → BENCH
+    const order = ['qb', 'rb', 'wr', 'te', 'sflex', 'flex', 'bench'];
     const ordered = order
       .flatMap((slot) => startersCore.filter((p) => p.slot === slot))
       .concat(bench, placeholders);
 
-    // Split exactly in half (we guaranteed even length)
     const mid = ordered.length / 2;
     return { leftCol: ordered.slice(0, mid), rightCol: ordered.slice(mid) };
   }, [lineup, rosterIds, playersById]);
 
-  // Resolve team logo from /src/assets/standard/<team>.png (e.g., 'ari.png')
   const logoForTeam = (team) => {
     const code = String(team || '').toLowerCase();
     if (!code) return '';
@@ -116,11 +106,12 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
 
   const PlayerRow = ({ p }) => {
     const slotClass =
-      p.slot === 'qb' ? 'pos-qb' :
-      p.slot === 'rb' ? 'pos-rb' :
-      p.slot === 'wr' ? 'pos-wr' :
-      p.slot === 'te' ? 'pos-te' :
-      p.slot === 'flex' ? 'pos-flex' : 'pos-bench';
+      p.slot === 'qb'    ? 'pos-qb'   :
+      p.slot === 'rb'    ? 'pos-rb'   :
+      p.slot === 'wr'    ? 'pos-wr'   :
+      p.slot === 'te'    ? 'pos-te'   :
+      p.slot === 'sflex' ? 'pos-sflex pos-flex' :
+      p.slot === 'flex'  ? 'pos-flex' : 'pos-bench';
 
     const headshot =
       p.id && !String(p.id).startsWith('placeholder-')
@@ -131,7 +122,7 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
     const slotLabel = (p.slot || '').toUpperCase();
     const team = (p.team || '').toUpperCase();
 
-    const details = ['flex', 'bench'].includes(p.slot)
+    const details = ['sflex', 'flex', 'bench'].includes(p.slot)
       ? `${slotLabel} – ${p.position || ''} – ${team}`
       : `${p.position || ''} – ${team}`;
 
@@ -175,13 +166,11 @@ export default function Starters({ lineup = [], rosterIds = [], playersById = {}
     );
   };
 
-  /* ========= AUTO-SCALE to fit above Positional Grades ========= */
-  const ROW_H = 68;   // estimated from CSS
-  const GAP   = 16;   // .roster-column gap
+  const ROW_H = 68;
+  const GAP   = 16;
   const longest = Math.max(leftCol.length, rightCol.length);
   const naturalHeight = longest > 0 ? (longest * ROW_H) + ((longest - 1) * GAP) : 0;
 
-  // Keep your chosen printed height
   const MAX_H = 450;
   const scale = naturalHeight > MAX_H ? (MAX_H / naturalHeight) : 1;
 

@@ -3,8 +3,8 @@
 // ---------------------------------------------------------------------------
 // Base config
 // ---------------------------------------------------------------------------
-const BASE = 'https://api.sleeper.app/v1';
-const SPORT = 'nfl';
+export const BASE = 'https://api.sleeper.app/v1';
+export const SPORT = 'nfl';
 
 // ---------------------------------------------------------------------------
 // League settings
@@ -24,7 +24,10 @@ export async function fetchLeagueRaw(leagueId) {
  *   teams: number,
  *   ppr: boolean,
  *   tepValue: number,
- *   positions: { qb, rb, wr, te, flex, def, k, bench }
+ *   positions: { qb, rb, wr, te, flex, superflex, def, k, bench },
+ *   isSuperflex: boolean,
+ *   isTwoQB: boolean,
+ *   flex_qb: 0|1   // kept for backward compat
  * }
  */
 export async function getLeagueSettings(leagueId) {
@@ -37,28 +40,61 @@ export async function getLeagueSettings(leagueId) {
     scoring.te_rec ?? scoring.bonus_rec_te ?? scoring.rec_te ?? 0
   );
 
-  // Roster positions array like: ["QB","RB","RB","WR","WR","TE","FLEX","BN","BN",...]
+  // Roster positions array like:
+  // ["QB","RB","RB","WR","WR","TE","FLEX","SUPER_FLEX","BN","BN",...]
   const rp = Array.isArray(league?.roster_positions) ? league.roster_positions : [];
   const count = (key) => rp.filter((p) => p === key).length;
+
+  // Robust detection for Superflex vs normal FLEX based on label content.
+  // Sleeper typically uses "SUPER_FLEX" for Q/W/R/T, but handle UI-style text too.
+  const isSuperFlexKey = (key) => {
+    const raw = String(key || '').toUpperCase();
+    if (raw === 'SUPER_FLEX') return true;
+    // e.g., "FLEX (Q/W/R/T)" or variants
+    const clean = raw.replace(/[^A-Z]/g, ''); // drop non-letters
+    // must contain Q, W, R, T (i.e., QB/WR/RB/TE)
+    return clean.includes('Q') && clean.includes('W') && clean.includes('R') && clean.includes('T');
+  };
+
+  const isWrtFlexKey = (key) => {
+    const raw = String(key || '').toUpperCase();
+    if (raw === 'FLEX') return true; // Sleeper's base W/R/T
+    // e.g., "FLEX (W/R/T)" or "WRRBTE" style
+    const clean = raw.replace(/[^A-Z]/g, '');
+    const hasW = clean.includes('W');
+    const hasR = clean.includes('R');
+    const hasT = clean.includes('T');
+    const hasQ = clean.includes('Q');
+    return hasW && hasR && hasT && !hasQ;
+  };
+
+  const superflex = rp.filter(isSuperFlexKey).length;
+  const flex = rp.filter(isWrtFlexKey).length;
 
   const positions = {
     qb: count('QB'),
     rb: count('RB'),
     wr: count('WR'),
     te: count('TE'),
-    flex: count('FLEX'),
+    flex,                 // W/R/T only
+    superflex,            // Q/W/R/T (Superflex)
     def: count('DEF') + count('DST'),
     k: count('K'),
     bench: count('BN'),
   };
+
+  // Some leagues set settings.qb_count > 1 for true 2QB formats
+  const isTwoQB = Number(league?.settings?.qb_count ?? 0) > 1;
 
   return {
     teams: Number(league?.total_rosters ?? league?.teams ?? 0),
     ppr: pprNum > 0,
     tepValue: tePremiumNum,
     positions,
-    // also expose flags Sleeper sometimes uses for SF (optional)
-    flex_qb: Number(league?.settings?.qb_count ?? 0) > 1 ? 1 : 0,
+    isSuperflex: superflex > 0,
+    isTwoQB,
+    // keep old field for any legacy references
+    flex_qb: isTwoQB ? 1 : 0,
   };
 }
 
@@ -137,10 +173,10 @@ export function findOwnerUserId(users, teamOrHandle) {
 
 /**
  * Build a starting lineup array from roster + league positions.
- * Fills: QB, RB, RB, WR, WR, TE, FLEX..., DEF, K.
- * FLEX prefers the best of RB/WR/TE remaining.
+ * Fills: QB, RB, RB, WR, WR, TE, SFLEX..., FLEX..., DEF, K.
+ * SUPERFLEX considers the best of QB/RB/WR/TE; FLEX is W/R/T only.
  *
- * @param {{qb:number,rb:number,wr:number,te:number,flex:number,def:number,k:number}} positions
+ * @param {{qb:number,rb:number,wr:number,te:number,flex:number,superflex?:number,sflex?:number,def:number,k:number}} positions
  * @param {string[]} rosterIds - Sleeper player_ids from the roster
  * @param {Record<string, any>} playersById - player_id -> player object
  * @returns {{slot:string, player:any|null}[]}
@@ -155,7 +191,7 @@ export function buildStartingLineup(positions, rosterIds, playersById) {
     if (pool[pos]) pool[pos].push(p);
   }
 
-  // naive quality score: lower is better
+  // Naive quality score: lower is better
   const score = (p) =>
     (p?.adp_half_ppr || p?.adp || 9999) + (p?.search_rank ? p.search_rank / 10000 : 0);
 
@@ -171,7 +207,20 @@ export function buildStartingLineup(positions, rosterIds, playersById) {
   for (let i = 0; i < (positions?.wr || 0); i++) push('WR', take('WR'));
   for (let i = 0; i < (positions?.te || 0); i++) push('TE', take('TE'));
 
-  // FLEX pulls best of RB/WR/TE
+  // SUPERFLEX (Q/W/R/T) – do this BEFORE normal FLEX to give QBs a chance
+  const sflexCount = Number(positions?.sflex ?? positions?.superflex ?? 0);
+  for (let i = 0; i < sflexCount; i++) {
+    const candidates = [pool.QB[0], pool.RB[0], pool.WR[0], pool.TE[0]].filter(Boolean);
+    candidates.sort((a, b) => score(a) - score(b));
+    const pick = candidates[0] || null;
+    if (pick) {
+      const pos = (pick.fantasy_positions?.[0]) || pick.position;
+      pool[pos]?.shift();
+    }
+    push('SFLEX', pick);
+  }
+
+  // FLEX (W/R/T) – no QBs here
   for (let i = 0; i < (positions?.flex || 0); i++) {
     const candidates = [pool.RB[0], pool.WR[0], pool.TE[0]].filter(Boolean);
     candidates.sort((a, b) => score(a) - score(b));

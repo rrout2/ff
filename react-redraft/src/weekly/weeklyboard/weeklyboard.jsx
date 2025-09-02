@@ -4,6 +4,8 @@ import weeklyBase from "./weekly-base.png";
 import TeamName from "../team-name/TeamName.jsx";
 import LeagueSettings from "../league-settings/LeagueSettings.jsx";
 import StartersWeekly from "../starting-lineup/StartersWeekly.jsx";
+import FlexAnalysis from "../starting-lineup/FlexAnalysis.jsx";
+import WeekLabel from "../week-label/WeekLabel.jsx"; // ← re-added
 
 // Reuse redraft Sleeper API helpers
 import {
@@ -21,12 +23,14 @@ function useQuery() {
     return {
       leagueId: (sp.get("leagueId") || "").trim(),
       teamName: (sp.get("teamName") || "TEAM NAME").trim(),
+      // allow either ?week=... or ?weekLabel=...
+      weekLabel: (sp.get("weekLabel") || sp.get("week") || "WEEK 1").trim(),
     };
   }, []);
 }
 
 export default function WeeklyBoard() {
-  const { leagueId, teamName } = useQuery();
+  const { leagueId, teamName, weekLabel } = useQuery();
 
   // scaffold (same pattern as whiteboard)
   const [settings, setSettings] = useState({
@@ -115,16 +119,29 @@ export default function WeeklyBoard() {
         }}
       >
         {/* === Team Name (your current settings) === */}
-        <div style={{ position: "absolute", top: 80, left: 40, zIndex: 5 }}>
+        <div style={{ position: "absolute", top: 60, left: 40, zIndex: 5 }}>
           <TeamName
             text={teamName}
-            maxWidth={900}
+            maxWidth={760}
             maxFont={80}
             minFont={20}
             color="#fff"
             baselineAlign
             baselineRatio={0.78}
           />
+        </div>
+
+        {/* === Week Label (text only; pill is in the PNG) === */}
+        <div
+          style={{
+            position: "absolute",
+            top: 64,     // ← tweak these three to sit inside your green pill
+            left: 698,
+            width: 300,
+            zIndex: 5,
+          }}
+        >
+          <WeekLabel text={weekLabel} fontSize={40} color="#000" align="center" width={300} />
         </div>
 
         {/* === League Settings === */}
@@ -151,9 +168,9 @@ export default function WeeklyBoard() {
         <div
           style={{
             position: "absolute",
-            top: 280,        // place within your "Recommended Lineup" area
+            top: 280,
             left: -60,
-            width: 600,      // single column width; matches 300px card + gutter if you scale
+            width: 600,
             transform: "scale(1.2)",
             transformOrigin: "top left",
             zIndex: 4,
@@ -167,6 +184,28 @@ export default function WeeklyBoard() {
               targetHeight={600}
               rowHeight={68}
               minGap={10}
+            />
+          )}
+        </div>
+
+        {/* === Flex Analysis (3 best WR/RB/TE from bench) === */}
+        <div
+          style={{
+            position: "absolute",
+            top: 340,   // place inside your "FLEX ANALYSIS" box
+            left: 480,  // tweak to land it perfectly
+            width: 520,
+            transform: "scale(1.0)",
+            transformOrigin: "top left",
+            zIndex: 4,
+          }}
+        >
+          {!loading && !error && (
+            <FlexAnalysis
+              lineup={lineup}
+              rosterIds={rosterIds}
+              playersById={playersById}
+              count={3}
             />
           )}
         </div>

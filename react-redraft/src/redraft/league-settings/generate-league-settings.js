@@ -1,50 +1,87 @@
-const path = require('path');
-const fs = require('fs');
-const { fetchLeagueData } = require('../sleeper-league/league-data');
+// ---------------------------------------------------------------------------
+// League settings
+// ---------------------------------------------------------------------------
 
-(async () => {
-  const data = await fetchLeagueData();
+/** Fetch raw league object from Sleeper. */
+export async function fetchLeagueRaw(leagueId) {
+  const res = await fetch(`${BASE}/league/${leagueId}`);
+  if (!res.ok) throw new Error(`League ${leagueId} not found`);
+  return res.json();
+}
 
-  console.log('📡 Fetching league settings for:', data?.leagueId, data?.displayName);
+/**
+ * Map Sleeper league -> UI shape
+ * Returns:
+ * {
+ *   teams: number,
+ *   ppr: boolean,
+ *   tepValue: number,
+ *   positions: { qb, rb, wr, te, flex, superflex, def, k, bench }
+ *   isSuperflex: boolean,
+ *   isTwoQB: boolean
+ * }
+ */
+export async function getLeagueSettings(leagueId) {
+  const league = await fetchLeagueRaw(leagueId);
 
-  if (!data || !data.leagueSettings) {
-    console.error('❌ Missing league settings data.');
-    return;
-  }
+  // PPR & TE premium
+  const scoring = league?.scoring_settings || {};
+  const pprNum = Number(scoring.rec ?? 0);
+  const tePremiumNum = Number(
+    scoring.te_rec ?? scoring.bonus_rec_te ?? scoring.rec_te ?? 0
+  );
 
-  const {
-    teams,
-    ppr,
-    tep,
-    qb,
-    rb,
-    wr,
-    te,
-    flex,
-    def,
-    k,
-    bn
-  } = data.leagueSettings;
+  // Roster positions array like: ["QB","RB","RB","WR","WR","TE","FLEX","SUPER_FLEX","BN","BN",...]
+  const rp = Array.isArray(league?.roster_positions) ? league.roster_positions : [];
+  const count = (key) => rp.filter((p) => p === key).length;
 
-  const scoringLabel = ppr === 1 ? 'PPR' : ppr === 0.5 ? 'HALF' : ppr === 0 ? 'NONE' : ppr;
+  // Helpers to robustly identify FLEX types by their label
+  const isSuperFlexKey = (key) => {
+    const raw = String(key || "").toUpperCase();
+    if (raw === "SUPER_FLEX") return true;
+    // handle odd strings like "FLEX (Q/W/R/T)" variants
+    const clean = raw.replace(/[^A-Z]/g, ""); // drop slashes/spaces/parens
+    // must contain Q, W, R, T (i.e., QB/WR/RB/TE)
+    return clean.includes("Q") && clean.includes("W") && clean.includes("R") && clean.includes("T");
+  };
 
-  const html = `
-<div class="league-settings">
-  <div class="setting"><div class="setting-label">TEAMS</div><div class="setting-box teams">${teams}</div></div>
-  <div class="setting"><div class="setting-label">SCORING</div><div class="setting-box scoring">${scoringLabel}</div></div>
-  <div class="setting"><div class="setting-label">TEP</div><div class="setting-box tep">${tep}</div></div>
-  <div class="setting"><div class="setting-label">QB</div><div class="setting-box qb">${qb}</div></div>
-  <div class="setting"><div class="setting-label">RB</div><div class="setting-box rb">${rb}</div></div>
-  <div class="setting"><div class="setting-label">WR</div><div class="setting-box wr">${wr}</div></div>
-  <div class="setting"><div class="setting-label">TE</div><div class="setting-box te">${te}</div></div>
-  <div class="setting"><div class="setting-label">FLEX</div><div class="setting-box flex">${flex}</div></div>
-  <div class="setting"><div class="setting-label">DEF</div><div class="setting-box def">${def}</div></div>
-  <div class="setting"><div class="setting-label">K</div><div class="setting-box k">${k}</div></div>
-  <div class="setting"><div class="setting-label">BENCH</div><div class="setting-box bench">${bn}</div></div>
-</div>
-  `.trim();
+  const isWrtFlexKey = (key) => {
+    const raw = String(key || "").toUpperCase();
+    if (raw === "FLEX") return true; // Sleeper's base FLEX is W/R/T
+    const clean = raw.replace(/[^A-Z]/g, "");
+    // W/R/T but NOT Q
+    const hasW = clean.includes("W");
+    const hasR = clean.includes("R");
+    const hasT = clean.includes("T");
+    const hasQ = clean.includes("Q");
+    return hasW && hasR && hasT && !hasQ;
+  };
 
-  const outPath = path.join(__dirname, 'league-settings-output.html');
-  fs.writeFileSync(outPath, html);
-  console.log('✅ League settings HTML generated at:', outPath);
-})();
+  const superflex = rp.filter(isSuperFlexKey).length;
+  const flex = rp.filter(isWrtFlexKey).length;
+
+  const positions = {
+    qb: count("QB"),
+    rb: count("RB"),
+    wr: count("WR"),
+    te: count("TE"),
+    flex,                 // W/R/T only
+    superflex,            // Q/W/R/T (aka Superflex)
+    def: count("DEF") + count("DST"),
+    k: count("K"),
+    bench: count("BN"),
+  };
+
+  const isTwoQB = Number(league?.settings?.qb_count ?? 0) > 1;
+
+  return {
+    teams: Number(league?.total_rosters ?? league?.teams ?? 0),
+    ppr: pprNum > 0,
+    tepValue: tePremiumNum,
+    positions,
+    isSuperflex: superflex > 0,
+    isTwoQB,
+    // keep the old field if anything else references it
+    flex_qb: isTwoQB ? 1 : 0,
+  };
+}

@@ -1,0 +1,37 @@
+/* /src/weekly/team-name/prohibition.css
+   Paths are RELATIVE to this file:
+   ../.. takes us from /src/weekly/team-name/ → /src/
+*/
+
+/* Prohibition Oblique (what the weekly header uses) */
+@font-face {
+  font-family: "Prohibition";
+  src:
+    url("../../assets/prohibition/Prohibition-Oblique.woff2") format("woff2"),
+    url("../../assets/prohibition/Prohibition-Oblique.woff") format("woff");
+  font-weight: 900;           /* strong weekly look */
+  font-style: oblique;
+  font-display: swap;
+}
+
+/* Optional fallback: Prohibition Regular (if you ever switch off oblique) */
+@font-face {
+  font-family: "Prohibition";
+  src:
+    url("../../assets/prohibition/Prohibition-Regular.woff2") format("woff2"),
+    url("../../assets/prohibition/Prohibition-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apply to the weekly team name text */
+.weekly-prohibition {
+  font-family: "Prohibition", Impact, "Anton", "League Gothic", Oswald, "Arial Black", sans-serif;
+  font-style: oblique;      /* weekly style */
+  font-weight: 900;         /* weekly style */
+  line-height: 0.9;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-transform: uppercase;
+}

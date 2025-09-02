@@ -1,8 +1,7 @@
-// /src/weekly/starting-lineup/StartersWeekly.jsx
+// /src/weekly/starting-lineup/FlexAnalysis.jsx
 import React, { useMemo } from "react";
 import "./weekly-starters.css";
 
-// fixed-order tag icons
 import TAG_M from "./lights/M.png";
 import TAG_V from "./lights/V.png";
 import TAG_O from "./lights/O.png";
@@ -13,41 +12,55 @@ const LIGHT_ORDER = [
   { key: "O", src: TAG_O },
 ];
 
-export default function StartersWeekly({
+export default function FlexAnalysis({
   lineup = [],
   rosterIds = [],
   playersById = {},
-  targetHeight = 450,
-  rowHeight = 68,
-  minGap = 10,
+  count = 3,
+  allowed = ["WR", "RB", "TE"],
 }) {
-  // Build a vertical, core-only list: QB → RB → WR → TE → FLEX
-  const rows = useMemo(() => {
-    const starters = (lineup || []).map((it) => {
-      const p = it?.player || {};
-      const id = p.player_id || p.id;
-      return {
-        id: String(id || ""),
-        slot: String(it?.slot || "").toLowerCase(),
-        name:
-          p.full_name ||
-          `${p.first_name || ""} ${p.last_name || ""}`.trim() ||
-          "—",
-        position:
-          (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) ||
-          p.position ||
-          "",
-        team: p.team || p.pro_team || p.team_abbr || "",
-      };
-    });
-
-    const CORE = new Set(["qb", "rb", "wr", "te", "flex"]);
-    const core = starters.filter((r) => CORE.has(r.slot));
-    const ORDER = ["qb", "rb", "wr", "te", "flex"];
-    return ORDER.flatMap((s) => core.filter((r) => r.slot === s));
+  const usedIds = useMemo(() => {
+    const s = new Set();
+    for (const it of lineup || []) {
+      const p = it?.player;
+      const id = p?.player_id || p?.id;
+      if (id) s.add(String(id));
+    }
+    return s;
   }, [lineup]);
 
-  // Resolve team logo path
+  const score = (p) =>
+    (Number(p?.adp_half_ppr ?? p?.adp_ppr ?? p?.adp ?? p?.adp_full_ppr ?? p?.adp_std ?? 9999)) +
+    (p?.search_rank ? p.search_rank / 10000 : 0);
+
+  const rows = useMemo(() => {
+    const allowedSet = new Set(allowed.map((x) => String(x).toUpperCase()));
+    const all = (rosterIds || [])
+      .map((id) => playersById[id])
+      .filter(Boolean)
+      .map((p) => {
+        const pos =
+          (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) ||
+          p.position ||
+          "";
+        return {
+          raw: p,
+          id: String(p.player_id || p.id),
+          name:
+            p.full_name ||
+            `${p.first_name || ""} ${p.last_name || ""}`.trim() ||
+            "—",
+          position: String(pos).toUpperCase(),
+          team: p.team || p.pro_team || p.team_abbr || "",
+        };
+      })
+      .filter((p) => allowedSet.has(p.position))
+      .filter((p) => !usedIds.has(p.id))
+      .sort((a, b) => score(a.raw) - score(b.raw));
+
+    return all.slice(0, Math.max(0, count));
+  }, [allowed, rosterIds, playersById, usedIds, count]);
+
   const logoForTeam = (team) => {
     const code = String(team || "").toLowerCase();
     if (!code) return "";
@@ -60,11 +73,11 @@ export default function StartersWeekly({
 
   const PlayerRow = ({ p }) => {
     const slotClass =
-      p.slot === "qb" ? "pos-qb" :
-      p.slot === "rb" ? "pos-rb" :
-      p.slot === "wr" ? "pos-wr" :
-      p.slot === "te" ? "pos-te" :
-      p.slot === "flex" ? "pos-flex" : "pos-bench";
+      p.position === "QB" ? "pos-qb" :
+      p.position === "RB" ? "pos-rb" :
+      p.position === "WR" ? "pos-wr" :
+      p.position === "TE" ? "pos-te" :
+      "pos-bench";
 
     const headshot =
       p.id && !String(p.id).startsWith("placeholder-")
@@ -73,10 +86,7 @@ export default function StartersWeekly({
 
     const teamLogo = logoForTeam(p.team);
     const team = (p.team || "").toUpperCase();
-    const details =
-      p.slot === "flex"
-        ? `FLEX – ${p.position || ""} – ${team}`
-        : `${p.position || ""} – ${team}`;
+    const details = `${p.position || ""} – ${team}`;
 
     const display = (p.name || "—").toUpperCase();
     let nameSize = 18;
@@ -109,7 +119,6 @@ export default function StartersWeekly({
         </div>
 
         <div className="player-info">
-          {/* name + lights (always M → V → O) */}
           <div className="player-name-row">
             <div className="player-name" style={{ fontSize: nameSize }} title={display}>
               {display}
@@ -120,48 +129,17 @@ export default function StartersWeekly({
               ))}
             </div>
           </div>
-
           <div className="player-details">{details}</div>
         </div>
       </div>
     );
   };
 
-  // ----- Fit-to-range logic -----
-  const n = Math.max(1, rows.length);
-  const contentH = n * rowHeight;
-  const gaps = Math.max(0, n - 1);
-
-  let gap = minGap;
-  let scale = 1;
-
-  if (gaps === 0) {
-    scale = Math.min(1, targetHeight / contentH);
-  } else {
-    const exactGap = (targetHeight - contentH) / gaps;
-    if (exactGap >= minGap) {
-      gap = exactGap;
-      scale = 1;
-    } else {
-      gap = minGap;
-      const needed = contentH + gaps * gap;
-      scale = Math.min(1, targetHeight / needed);
-    }
-  }
-
   return (
-    <div
-      className="starting-roster"
-      style={{
-        "--row-gap": `${gap}px`,
-        transform: `scale(${scale})`,
-        transformOrigin: "top left",
-        height: `${targetHeight}px`,
-      }}
-    >
+    <div className="starting-roster" style={{ "--row-gap": "16px" }}>
       <div className="roster-column">
         {rows.map((p, i) => (
-          <PlayerRow key={`${i}-${p.id}-${p.slot}`} p={p} />
+          <PlayerRow key={`${i}-${p.id}-${p.position}`} p={p} />
         ))}
       </div>
     </div>

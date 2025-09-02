@@ -1,5 +1,5 @@
 // /src/redraft/whiteboard/Whiteboard.jsx
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useLayoutEffect, useRef } from 'react';
 import LZString from 'lz-string';
 
 import LeagueSettings from '../league-settings/LeagueSettings';
@@ -121,6 +121,46 @@ function parsePick(pickStr, teams) {
   const round = Math.max(1, Math.ceil(ov / Math.max(1, teams || 12)));
   return { overall: ov, round };
 }
+
+// -----------------------------------------------------------------
+// Fit-to-right-limit hook (shrinks content to fit a width budget)
+// -----------------------------------------------------------------
+function useScaleToRightLimit(ref, {
+  baseScale = 0.70,
+  minScale  = 0.50,
+  maxScale  = 0.70,
+  widthBudgetPx = 1120,
+  deps = [],
+} = {}) {
+  const [scale, setScale] = React.useState(baseScale);
+
+  React.useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const compute = () => {
+      const w = el.scrollWidth || el.getBoundingClientRect().width || 1;
+      const extra = Math.min(1, Math.max(0.0001, widthBudgetPx / w));
+      const next = Math.min(maxScale, Math.max(minScale, baseScale * extra));
+      setScale(next);
+    };
+
+    compute();
+
+    const ro = new ResizeObserver(() => compute());
+    ro.observe(el);
+    window.addEventListener('resize', compute);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', compute);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref, baseScale, minScale, maxScale, widthBudgetPx, ...deps]);
+
+  return scale;
+}
+
 // -----------------------------------------------------------------
 
 export default function Whiteboard() {
@@ -128,7 +168,7 @@ export default function Whiteboard() {
   const leagueId = params.get('leagueId');
   const teamName = params.get('teamName')?.trim() || '';
 
-  // read overrides once per mount (SitePage remounts this when overrides change)
+  // read overrides once per mount
   const overrides = useMemo(() => readOverridesFromUrl(), []);
 
   const [settings, setSettings] = useState({
@@ -153,7 +193,7 @@ export default function Whiteboard() {
   const [adpByPlayerId, setAdpByPlayerId] = useState({});
   const [draftPoints, setDraftPoints] = useState([]);
 
-  // Final stars (for strengths default)
+  // Final stars
   const [finalStars, setFinalStars] = useState(null);
 
   // Moves baseline (overrideable)
@@ -265,7 +305,7 @@ export default function Whiteboard() {
                 ? adpSleeper
                 : Number.isFinite(adpLocal)
                   ? adpLocal
-                  : Number(overall); // fallback so point still renders
+                  : Number(overall);
 
               pts.push({ id: pid, first, last: rest.join(' '), overall, round, adp });
             }
@@ -293,7 +333,7 @@ export default function Whiteboard() {
         }
         if (!cancelled) setAdpByPlayerId(adpMap);
 
-        // ---------- MANUAL ROSTER (prefer stored id; picks optional) ----------
+        // ---------- MANUAL ROSTER ----------
         const manualRows = Array.isArray(overrides?.manual?.roster) ? overrides.manual.roster : [];
         if (!cancelled && manualRows.length) {
           const manualIds = [];
@@ -353,23 +393,65 @@ export default function Whiteboard() {
   // ---------- EFFECTIVE values (overrides layered on top) ----------
   const effTeamName   = overrides.teamName ?? teamName;
 
-  // merge league settings overrides (from Tweaks) into fetched settings
+  // SPLIT overrides so FLEX (W/R/T) and SF (Q/W/R/T) are explicit
   const effSettings = useMemo(() => {
-    const o = overrides?.leagueSettings || {};
+    const o    = overrides?.leagueSettings || {};
     const posO = o?.positions || {};
-    return {
-      ...settings,
-      ...(o.teams     != null ? { teams: Number(o.teams) } : null),
-      ...(o.ppr       != null ? { ppr: !!o.ppr } : null),
-      ...(o.tepValue  != null ? { tepValue: Number(o.tepValue) || 0 } : null),
-      positions: {
-        ...settings.positions,
-        ...Object.fromEntries(
-          Object.entries(posO).map(([k, v]) => [k, Number(v)])
-        ),
-      },
+    const base = settings || {};
+    const basePos = base.positions || {};
+
+    // base counts
+    const baseSF   = Number(basePos.sf ?? basePos.superflex ?? 0);
+    const baseFlex = Number(basePos.flex ?? 0);
+
+    // explicit overrides
+    const oSF        = posO.sf ?? posO.superflex;
+    const oFlexValue = posO.flex; // treat this as W/R/T (not combined)
+
+    // start merged from base
+    const merged = {
+      ...base,
+      ...(o.teams    != null ? { teams: Number(o.teams) } : null),
+      ...(o.ppr      != null ? { ppr: !!o.ppr } : null),
+      ...(o.tepValue != null ? { tepValue: Number(o.tepValue) || 0 } : null),
+      positions: { ...basePos },
     };
+
+    // final counts
+    let sfFinal   = Number(oSF        ?? baseSF);
+    let flexFinal = Number(oFlexValue ?? baseFlex);
+    if (!Number.isFinite(sfFinal))   sfFinal = 0;
+    if (!Number.isFinite(flexFinal)) flexFinal = 0;
+
+    merged.positions = {
+      ...merged.positions,
+      ...Object.fromEntries(Object.entries(posO).map(([k, v]) => [k, Number(v)])),
+      // ensure explicit keys exist for consumers (LeagueSettings & builder)
+      flex: flexFinal,              // W/R/T
+      sf: sfFinal,                  // Q/W/R/T alias
+      superflex: sfFinal,           // canonical
+    };
+    return merged;
   }, [settings, overrides]);
+
+  // Recompute starters whenever effective counts or roster change — keeps roster in sync with pills
+  useEffect(() => {
+    if (!rosterIds?.length) return;
+    if (!playersById || Object.keys(playersById).length === 0) return;
+    setStarters(buildStartingLineup(effSettings.positions, rosterIds, playersById));
+  }, [
+    rosterIds,
+    playersById,
+    effSettings.positions.qb,
+    effSettings.positions.rb,
+    effSettings.positions.wr,
+    effSettings.positions.te,
+    effSettings.positions.flex,
+    effSettings.positions.sf,
+    effSettings.positions.superflex,
+    effSettings.positions.def,
+    effSettings.positions.k,
+  ]);
 
   const effFour = {
     upside: oget(overrides, 'fourFactors.upside',     undefined) ?? oget(factorScores, 'upside', 5),
@@ -422,6 +504,36 @@ export default function Whiteboard() {
   const bgVariant = overrides?.background?.variant === 'wb2' ? 'wb2' : 'wb1';
   const selectedBg = bgVariant === 'wb2' ? whiteboardBg2 : whiteboardBg;
 
+  // ---- League Settings fit-to-bar geometry ----
+  const LS_LEFT_PX = 80;
+  const LS_RIGHT_LIMIT_PX = 920;
+  const LS_GUTTER_PX = 12;
+  const LS_BASE_SCALE = 0.70;
+  const LS_MIN_SCALE = 0.30;
+
+  // Auto-fit LeagueSettings row (right boundary)
+  const lsInnerRef = useRef(null);
+  const lsScale = useScaleToRightLimit(lsInnerRef, {
+    baseScale: LS_BASE_SCALE,
+    minScale:  LS_MIN_SCALE,
+    maxScale:  LS_BASE_SCALE,
+    widthBudgetPx: Math.max(1, LS_RIGHT_LIMIT_PX - LS_LEFT_PX - LS_GUTTER_PX),
+    deps: [
+      effSettings.teams,
+      effSettings.ppr,
+      effSettings.tepValue,
+      effSettings.positions?.qb,
+      effSettings.positions?.rb,
+      effSettings.positions?.wr,
+      effSettings.positions?.te,
+      effSettings.positions?.flex,
+      effSettings.positions?.superflex ?? effSettings.positions?.sf,
+      effSettings.positions?.def,
+      effSettings.positions?.k,
+      effSettings.positions?.bench,
+    ],
+  });
+
   return (
     <div
       style={{
@@ -440,7 +552,7 @@ export default function Whiteboard() {
       <div style={{ position: 'absolute', top: 90, left: 40, zIndex: 3 }}>
         <TeamName
           text={effTeamName}
-          maxWidth={900}
+          maxWidth={890}
           maxFont={120}
           minFont={60}
           color="#2D2D2C"
@@ -495,13 +607,13 @@ export default function Whiteboard() {
         />
       </div>
 
-      {/* LEAGUE SETTINGS */}
+      {/* LEAGUE SETTINGS (auto-fit to right boundary) */}
       <div
         style={{
           position: 'absolute',
           top: '220px',
-          left: '80px',
-          transform: 'scale(0.70)',
+          left: `${LS_LEFT_PX}px`,
+          transform: `scale(${lsScale})`,
           transformOrigin: 'top left'
         }}
       >
@@ -512,7 +624,9 @@ export default function Whiteboard() {
             {error}
           </div>
         ) : (
-          <LeagueSettings settings={effSettings} />
+          <div ref={lsInnerRef} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+            <LeagueSettings settings={effSettings} />
+          </div>
         )}
       </div>
 
@@ -557,6 +671,7 @@ export default function Whiteboard() {
               teamsCount={effSettings.teams || 12}
               width={640}
               height={600}
+              useSuperflexADP={Number(effSettings?.positions?.superflex ?? effSettings?.positions?.sf ?? 0) > 0}
             />
           )
         )}
