@@ -7,7 +7,7 @@ import SleeperForm from "./components/SleeperForm.jsx";
 import TweaksPanel from "./components/TweaksPanel.jsx";
 
 // NOTE: use a RELATIVE import so CI (Linux) resolves it correctly
-import WeeklyBoard from "../weekly/weeklyboard/WeeklyBoard.jsx";
+import WeeklyBoard from "../weekly/weeklyboard/weeklyboard.jsx";
 
 /** tiny helper so we only write ?o= when we truly have overrides */
 const isEmptyObj = (obj) => !obj || (Object.keys(obj).length === 0 && obj.constructor === Object);
