@@ -2,7 +2,7 @@ name: Deploy Vite site to GitHub Pages (redraft + weekly)
 
 on:
   push:
-    branches: [ main ]        # change if your default branch is different
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: react-redraft   # project is ff/react-redraft relative to repo root (ff)
+        working-directory: react-redraft
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
           cache: npm
           cache-dependency-path: react-redraft/package-lock.json
 
-      - name: Install deps
+      - name: Install deps (ci with fallback)
         run: |
           if [ -f package-lock.json ]; then
             npm ci || npm install
@@ -42,17 +42,19 @@ jobs:
       - name: Build (Vite)
         run: npm run build
 
-      - name: Verify dist
+      - name: Verify dist contents
         run: |
           ls -la dist
           test -f dist/index.html  || (echo "index.html missing" && exit 1)
           test -f dist/weekly.html || (echo "weekly.html missing" && exit 1)
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # path is relative to the REPO ROOT, not the working-directory
-          path: react-redraft/dist
+          path: ./react-redraft/dist   # path relative to repo root
 
   deploy:
     needs: build
