@@ -3,12 +3,19 @@ name: Deploy Vite site (react-redraft) to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'react-redraft/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -18,41 +25,39 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18          # keep what you've been using
           cache: npm
-          # If you don't have react-redraft/package-lock.json,
-          # remove this and use npm install below.
           cache-dependency-path: react-redraft/package-lock.json
 
-      # Use ONE of these install steps:
-      - name: Install (with lockfile)
-        run: npm ci --legacy-peer-deps
-        working-directory: react-redraft
+      # Install with fallback (handles missing/old lockfiles)
+      - name: Install deps
+        run: |
+          cd react-redraft
+          if [ -f package-lock.json ]; then
+            npm ci || npm install
+          else
+            npm install
+          fi
 
-      # - name: Install (no lockfile)
-      #   run: npm install
-      #   working-directory: react-redraft
+      - name: Build (Vite)
+        run: |
+          cd react-redraft
+          npm run build
 
-      - name: Build
-        run: npm run build
-        working-directory: react-redraft
-
-      # Put the bundle under out/react-redraft so Pages serves it at /ff/react-redraft/
+      # Serve dist under /react-redraft/
       - name: Prepare artifact
         run: |
           rm -rf out
           mkdir -p out/react-redraft
           cp -r react-redraft/dist/. out/react-redraft/
 
-      - name: Show artifact tree (debug)
-        run: |
-          echo "== top level ==" && ls -lah out
-          echo "== react-redraft ==" && ls -lah out/react-redraft
-          echo "== index head ==" && sed -n '1,40p' out/react-redraft/index.html
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out   # contains /react-redraft/index.html
+          path: ./out
 
   deploy:
     needs: build

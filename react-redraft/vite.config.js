@@ -4,10 +4,8 @@ import { resolve } from 'node:path'
 
 export default defineConfig({
   plugins: [react()],
-  // If your GitHub repo name is "ff", keep this as '/ff/'.
-  // If the repo name is different, change to '/<REPO>/'.
-  // If it's a user/org page repo named <username>.github.io, use '/'.
-  base: '/ff/',
+  // Keep site under /ff/react-redraft/
+  base: '/ff/react-redraft/',
   build: {
     outDir: 'dist',
     rollupOptions: {
