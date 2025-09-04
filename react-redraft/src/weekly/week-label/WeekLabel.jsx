@@ -3,33 +3,42 @@ import React from "react";
 import "./week-label.css";
 
 /**
- * WeekLabel
- * - Text only (green pill is in the PNG)
- * - Font: 'Arial Black', sans-serif
+ * Text-only label. No background (your PNG has the green pill).
+ * Pass either:
+ *   - week={number}  -> renders "WEEK {n}"
+ *   - text="WEEK 4"  -> renders exactly the string
+ * If both are given, `text` wins.
  */
-function WeekLabel({
-  text = "WEEK 1",
-  fontSize = 30,
-  color = "#000",
+export default function WeekLabel({
+  week,
+  text,
+  fontSize = 38,
+  color = "#2D2D2C",
+  weight = 700,
   align = "center",
-  width,
+  width,               // px, optional
   letterGap = 1,
+  style = {},
 }) {
+  const computed = text ?? (Number.isFinite(+week) ? `WEEK ${+week}` : "WEEK 1");
+  const label = String(computed).toUpperCase();
+
   return (
     <div
       className="week-label"
       style={{
         fontSize,
         color,
+        fontWeight: weight,
         textAlign: align,
-        width: width ? `${width}px` : undefined,
         letterSpacing: `${letterGap}px`,
+        width: width ? `${width}px` : undefined,
+        ...style,
       }}
-      title={text}
+      aria-label={label}
+      title={label}
     >
-      {(text || "").toUpperCase()}
+      {label}
     </div>
   );
 }
-
-export default WeekLabel;  // <-- important

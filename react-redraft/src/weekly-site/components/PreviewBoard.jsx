@@ -1,8 +1,8 @@
 // /src/weekly-site/components/PreviewBoard.jsx
 import React, { useMemo } from 'react';
 
-// Render your weekly canvas (adjust path if your file is elsewhere)
-import WeeklyBoard from '../../weekly/WeeklyBoard.jsx';
+// Render your weekly canvas
+import WeeklyBoard from "/src/weekly/weeklyboard/WeeklyBoard.jsx";
 
 export default function PreviewBoard({
   leagueId,
@@ -26,7 +26,7 @@ export default function PreviewBoard({
     return Number.isFinite(n) && n > 0 ? n : 1;
   }, [overrides?.week]);
 
-  // Forward week in overrides (so WeeklyBoard can show WEEK N label, etc.)
+  // Forward week in overrides (so WeeklyBoard can also read from overrides if it wants)
   const passOverrides = useMemo(() => ({ ...overrides, week }), [overrides, week]);
 
   return (
@@ -34,6 +34,7 @@ export default function PreviewBoard({
       leagueId={leagueId}
       teamName={teamName}
       overrides={passOverrides}
+      week={week}                 
 
       /* pass-throughs; WeeklyBoard can use or ignore these */
       settings={settings}

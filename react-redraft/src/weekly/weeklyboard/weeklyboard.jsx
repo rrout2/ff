@@ -1,13 +1,18 @@
-// /src/weekly/weeklyboard/weeklyboard.jsx
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef, useLayoutEffect } from "react";
 import weeklyBase from "./weekly-base.png";
 import TeamName from "../team-name/TeamName.jsx";
 import LeagueSettings from "../league-settings/LeagueSettings.jsx";
 import StartersWeekly from "../starting-lineup/StartersWeekly.jsx";
 import FlexAnalysis from "../starting-lineup/FlexAnalysis.jsx";
-import WeekLabel from "../week-label/WeekLabel.jsx"; // ← re-added
+import WeekLabel from "../week-label/WeekLabel.jsx";
 
-// Reuse redraft Sleeper API helpers
+// Chosen weekly ranking datasets (enriched so rows always have `lights`)
+import RANK_1QB from "../players/weekly-1qb.enriched.json";
+import RANK_SF  from "../players/weekly-sf.enriched.json";
+
+// Global lights by id (optional fallback)
+import LIGHTS_ALL from "../players/lights.json";
+
 import {
   getLeagueSettings,
   fetchLeagueUsers,
@@ -17,31 +22,72 @@ import {
   buildStartingLineup,
 } from "../../redraft/sleeper-league/sleeperAPI.js";
 
-function useQuery() {
+/* Fallbacks from URL so the board still works when opened directly */
+function useQueryFallback() {
   return useMemo(() => {
     const sp = new URLSearchParams(window.location.search);
     return {
       leagueId: (sp.get("leagueId") || "").trim(),
       teamName: (sp.get("teamName") || "TEAM NAME").trim(),
-      // allow either ?week=... or ?weekLabel=...
-      weekLabel: (sp.get("weekLabel") || sp.get("week") || "WEEK 1").trim(),
+      weekFromUrl: Number(sp.get("week")),
     };
   }, []);
 }
 
-export default function WeeklyBoard() {
-  const { leagueId, teamName, weekLabel } = useQuery();
+/* Auto-fit TeamName to a width budget */
+function useAutoScaleToWidth(ref, widthBudgetPx, deps = []) {
+  const [scale, setScale] = useState(1);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const measure = () => {
+      const w = el.scrollWidth || el.getBoundingClientRect().width || 1;
+      setScale(Math.min(1, widthBudgetPx / w));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener("resize", measure);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref, widthBudgetPx, ...deps]);
+  return scale;
+}
 
-  // scaffold (same pattern as whiteboard)
+/* Name normalizer so id-less rows still match later by name */
+const HYPHENS = /[\u2010\u2011\u2012\u2013\u2014\u2015\u2212\u2043\uFE58\uFE63\uFF0D-]/g;
+const SUFFIX_RE = /\b(jr|sr|ii|iii|iv|v)\b$/i;
+const normName = (s) =>
+  String(s || "")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // diacritics
+    .replace(/[’']/g, "")                             // quotes
+    .replace(HYPHENS, " ")                            // dash family → space
+    .replace(/[.,]/g, " ")
+    .replace(/\s+/g, " ").trim()
+    .replace(SUFFIX_RE, "").trim()
+    .toLowerCase();
+
+export default function WeeklyBoard(props) {
+  const { leagueId: pLeagueId, teamName: pTeamName, week: weekProp } = props;
+  const { leagueId: qLeagueId, teamName: qTeamName, weekFromUrl } = useQueryFallback();
+
+  const leagueId = pLeagueId || qLeagueId || "";
+  const teamName = pTeamName || qTeamName || "TEAM NAME";
+
+  const weekToShow =
+    Number.isFinite(weekProp) ? Number(weekProp)
+    : Number.isFinite(weekFromUrl) ? Number(weekFromUrl)
+    : 1;
+
   const [settings, setSettings] = useState({
     teams: 12,
     ppr: true,
     tepValue: 0,
-    positions: { qb: 1, rb: 2, wr: 2, te: 1, flex: 2, def: 1, k: 1, bench: 6 },
+    positions: { qb: 1, rb: 2, wr: 2, te: 1, flex: 2, def: 1, k: 1, bench: 6, superflex: 0 },
   });
   const [playersById, setPlayersById] = useState({});
   const [rosterIds, setRosterIds] = useState([]);
-  const [lineup, setLineup] = useState([]); // built starters only
+  const [lineup, setLineup] = useState([]);
   const [ownerId, setOwnerId] = useState(null);
   const [loading, setLoading] = useState(!!leagueId);
   const [error, setError] = useState(null);
@@ -56,12 +102,10 @@ export default function WeeklyBoard() {
         setLoading(true);
         setError(null);
 
-        // league settings
         const s = await getLeagueSettings(leagueId);
         if (cancelled) return;
         setSettings(s);
 
-        // users / rosters / players
         const [users, rosters, playersMap] = await Promise.all([
           fetchLeagueUsers(leagueId),
           fetchLeagueRosters(leagueId),
@@ -77,13 +121,8 @@ export default function WeeklyBoard() {
         setRosterIds(ids);
         setPlayersById(playersMap);
 
-        // build starting lineup (QB→RB→WR→TE→FLEX; no DEF/K)
-        if (ids.length) {
-          const built = buildStartingLineup(s.positions, ids, playersMap);
-          setLineup(built);
-        } else {
-          setLineup([]);
-        }
+        // ADP-based fallback lineup while weekly ranks are loading
+        setLineup(ids.length ? buildStartingLineup(s.positions, ids, playersMap) : []);
       } catch (e) {
         if (!cancelled) setError(e?.message || "Failed to load weekly data");
       } finally {
@@ -91,91 +130,172 @@ export default function WeeklyBoard() {
       }
     })();
 
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [leagueId, teamName]);
 
+  // ---- Choose dataset (SF>1 → SF file, else 1QB) and build maps ----
+  const { rankMap, rankNameMap, lightsById, lightsByName } = useMemo(() => {
+    const sfCount = Number(settings?.positions?.superflex ?? settings?.positions?.sf ?? 0);
+    const list = sfCount > 1 ? RANK_SF : RANK_1QB;
+
+    // id → rank
+    const rMap = new Map();
+    // name → rank (normalized), for rows that didn't resolve id
+    const rNameMap = new Map();
+
+    // id → lights (merge global → row.lights)
+    const lById = { ...(LIGHTS_ALL || {}) };
+    // name → lights (normalized name), for id-less rows
+    const lByName = {};
+
+    list.forEach((row, i) => {
+      const id = String(row?.id ?? row?.playerId ?? row?.player_id ?? "").trim();
+      const nameKey = normName(row?.name);
+      const rank = Number(row?.rank ?? (i + 1));
+
+      if (nameKey) rNameMap.set(nameKey, rank);
+      if (id) rMap.set(id, rank);
+
+      const lights = row?.lights && typeof row.lights === "object" ? row.lights : null;
+      if (lights) {
+        if (id) lById[id] = { ...lById[id], ...lights };
+        if (nameKey) lByName[nameKey] = { ...lights };
+      }
+    });
+
+    return { rankMap: rMap, rankNameMap: rNameMap, lightsById: lById, lightsByName: lByName };
+  }, [settings]);
+
+  // Rebuild lineup using weekly ranks (includes name fallback)
+  useEffect(() => {
+    if (!rosterIds?.length || !playersById || (!rankMap?.size && !rankNameMap?.size)) return;
+
+    // pools by position with a rank accessor (id → rank, else name → rank)
+    const getRank = (p) => {
+      const id = String(p.player_id || p.id || "");
+      const byId = rankMap?.get(id);
+      if (Number.isFinite(byId)) return byId;
+      const nm = normName(p.full_name || `${p.first_name || ""} ${p.last_name || ""}`.trim());
+      const byName = rankNameMap?.get(nm);
+      return Number.isFinite(byName) ? byName : Infinity;
+    };
+
+    const buildByRanks = () => {
+      const pool = { QB: [], RB: [], WR: [], TE: [] };
+      for (const rid of rosterIds) {
+        const p = playersById[rid];
+        if (!p) continue;
+        const pos =
+          (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) ||
+          p.position || "";
+      const POS = String(pos).toUpperCase();
+        if (pool[POS]) pool[POS].push(p);
+      }
+      for (const k of Object.keys(pool)) {
+        pool[k].sort((a, b) => getRank(a) - getRank(b));
+      }
+
+      const take = (pos) => (pool[pos] && pool[pos].shift()) || null;
+      const out = [];
+      const push = (slot, player) => out.push({ slot, player });
+
+      const qbN   = Number(settings?.positions?.qb   || 0);
+      const rbN   = Number(settings?.positions?.rb   || 0);
+      const wrN   = Number(settings?.positions?.wr   || 0);
+      const teN   = Number(settings?.positions?.te   || 0);
+      const flexN = Number(settings?.positions?.flex || 0);
+      const sfN   = Number(settings?.positions?.superflex ?? settings?.positions?.sf ?? 0);
+
+      for (let i = 0; i < qbN; i++) push("QB",  take("QB"));
+      for (let i = 0; i < rbN; i++) push("RB",  take("RB"));
+      for (let i = 0; i < wrN; i++) push("WR",  take("WR"));
+      for (let i = 0; i < teN; i++) push("TE",  take("TE"));
+
+      // SFLEX: best of QB/RB/WR/TE remaining
+      for (let i = 0; i < sfN; i++) {
+        const c = [pool.QB[0], pool.RB[0], pool.WR[0], pool.TE[0]].filter(Boolean);
+        c.sort((a, b) => getRank(a) - getRank(b));
+        const pick = c[0] || null;
+        if (pick) {
+          const POS = (Array.isArray(pick.fantasy_positions) && pick.fantasy_positions[0]) || pick.position || "";
+          pool[String(POS).toUpperCase()]?.shift();
+        }
+        push("SFLEX", pick || null);
+      }
+
+      // FLEX: best of RB/WR/TE remaining
+      for (let i = 0; i < flexN; i++) {
+        const c = [pool.RB[0], pool.WR[0], pool.TE[0]].filter(Boolean);
+        c.sort((a, b) => getRank(a) - getRank(b));
+        const pick = c[0] || null;
+        if (pick) {
+          const POS = (Array.isArray(pick.fantasy_positions) && pick.fantasy_positions[0]) || pick.position || "";
+          pool[String(POS).toUpperCase()]?.shift();
+        }
+        push("FLEX", pick || null);
+      }
+
+      return out;
+    };
+
+    const ranked = buildByRanks();
+    if (ranked.some(it => it?.player)) setLineup(ranked);
+  }, [rankMap, rankNameMap, rosterIds, playersById, settings?.positions]);
+
+  // === TeamName auto-fit to a 660px area (no clipping) ===
+  const TEAMNAME_WIDTH = 660;
+  const tnRef = useRef(null);
+  const tnScale = useAutoScaleToWidth(tnRef, TEAMNAME_WIDTH, [teamName]);
+
   return (
-    <div
-      style={{
-        background: "#f6f6f6",
-        minHeight: "100vh",
-        display: "grid",
-        placeItems: "start center",
-        padding: 20,
-      }}
-    >
+    <div style={{ background:"#f6f6f6", minHeight:"100vh", display:"grid", placeItems:"start center", padding:20 }}>
       <div
         style={{
-          position: "relative",
-          width: "1920px",
-          height: "1080px",
-          backgroundImage: `url(${weeklyBase})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top left",
-          overflow: "hidden",
+          position:"relative",
+          width:"1920px",
+          height:"1080px",
+          backgroundImage:`url(${weeklyBase})`,
+          backgroundSize:"contain",
+          backgroundRepeat:"no-repeat",
+          backgroundPosition:"top left",
+          overflow:"hidden",
         }}
       >
-        {/* === Team Name (your current settings) === */}
-        <div style={{ position: "absolute", top: 60, left: 40, zIndex: 5 }}>
-          <TeamName
-            text={teamName}
-            maxWidth={760}
-            maxFont={80}
-            minFont={20}
-            color="#fff"
-            baselineAlign
-            baselineRatio={0.78}
-          />
+        {/* Team Name (auto-fit to 660px; shrinks when needed) */}
+        <div style={{ position:"absolute", top:50, left:40, zIndex:5, width:TEAMNAME_WIDTH }}>
+          <div
+            ref={tnRef}
+            style={{ display:"inline-block", whiteSpace:"nowrap", transform:`scale(${tnScale})`, transformOrigin:"top left" }}
+          >
+            <TeamName
+              text={teamName}
+              maxFont={80}
+              minFont={20}
+              color="#fff"
+              baselineAlign
+              baselineRatio={0.78}
+            />
+          </div>
         </div>
 
-        {/* === Week Label (text only; pill is in the PNG) === */}
-        <div
-          style={{
-            position: "absolute",
-            top: 64,     // ← tweak these three to sit inside your green pill
-            left: 698,
-            width: 300,
-            zIndex: 5,
-          }}
-        >
-          <WeekLabel text={weekLabel} fontSize={40} color="#000" align="center" width={300} />
+        {/* Week Label */}
+        <div style={{ position:"absolute", top:64, left:698, width:300, zIndex:5 }}>
+          <WeekLabel week={weekToShow} fontSize={40} color="#000" align="center" width={300} />
         </div>
 
-        {/* === League Settings === */}
-        <div
-          style={{
-            position: "absolute",
-            top: 155,                 // tweak for your PNG
-            left: 40,
-            transform: "scale(0.8)",
-            transformOrigin: "top left",
-            zIndex: 4,
-          }}
-        >
+        {/* League Settings */}
+        <div style={{ position:"absolute", top:155, left:40, transform:"scale(0.8)", transformOrigin:"top left", zIndex:4 }}>
           {loading ? (
-            <div style={{ fontFamily: "Arial, sans-serif", color: "#fff" }}>Loading league…</div>
+            <div style={{ fontFamily:"Arial, sans-serif", color:"#fff" }}>Loading league…</div>
           ) : error ? (
-            <div style={{ fontFamily: "Arial, sans-serif", color: "crimson" }}>{error}</div>
+            <div style={{ fontFamily:"Arial, sans-serif", color:"crimson" }}>{error}</div>
           ) : (
             <LeagueSettings settings={settings} />
           )}
         </div>
 
-        {/* === Starters (VERTICAL, NO BENCH) === */}
-        <div
-          style={{
-            position: "absolute",
-            top: 280,
-            left: -60,
-            width: 600,
-            transform: "scale(1.2)",
-            transformOrigin: "top left",
-            zIndex: 4,
-          }}
-        >
+        {/* Starters (uses lights & ranks; rows will use name fallback) */}
+        <div style={{ position:"absolute", top:280, left:-60, width:600, transform:"scale(1.2)", transformOrigin:"top left", zIndex:4 }}>
           {!loading && !error && (
             <StartersWeekly
               lineup={lineup}
@@ -184,52 +304,28 @@ export default function WeeklyBoard() {
               targetHeight={600}
               rowHeight={68}
               minGap={10}
+              rankMap={rankMap}
+              rankNameMap={rankNameMap}        
+              lightsOverride={lightsById}
+              lightsByName={lightsByName}     
             />
           )}
         </div>
 
-        {/* === Flex Analysis (3 best WR/RB/TE from bench) === */}
-        <div
-          style={{
-            position: "absolute",
-            top: 340,   // place inside your "FLEX ANALYSIS" box
-            left: 480,  // tweak to land it perfectly
-            width: 520,
-            transform: "scale(1.0)",
-            transformOrigin: "top left",
-            zIndex: 4,
-          }}
-        >
+        {/* Flex Analysis (same fallbacks for rank & lights) */}
+        <div style={{ position:"absolute", top:340, left:480, width:520, transform:"scale(1.0)", transformOrigin:"top left", zIndex:4 }}>
           {!loading && !error && (
             <FlexAnalysis
               lineup={lineup}
               rosterIds={rosterIds}
               playersById={playersById}
               count={3}
+              rankMap={rankMap}
+              rankNameMap={rankNameMap}         
+              lightsOverride={lightsById}
+              lightsByName={lightsByName}       
             />
           )}
-        </div>
-
-        {/* HUD (optional) */}
-        <div
-          style={{
-            position: "absolute",
-            right: 12,
-            top: 12,
-            background: "rgba(255,255,255,.9)",
-            border: "1px solid #ddd",
-            borderRadius: 8,
-            padding: "6px 8px",
-            fontSize: 12,
-            zIndex: 9,
-          }}
-        >
-          <div><strong>leagueId:</strong> {leagueId || "—"}</div>
-          <div><strong>teamName:</strong> {teamName || "—"}</div>
-          <div><strong>ownerId:</strong> {ownerId || "—"}</div>
-          <div><strong>roster:</strong> {rosterIds?.length ?? 0}</div>
-          <div><strong>loading:</strong> {String(loading)}</div>
-          {error && <div style={{ color: "crimson" }}><strong>err:</strong> {error}</div>}
         </div>
       </div>
     </div>

@@ -8,8 +8,11 @@
     "dev:redraft": "vite --open /",
     "dev:weekly": "vite --open /weekly.html",
     "build": "vite build",
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist -b gh-pages",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
   "dependencies": {
     "@tanstack/react-query": "^5.85.5",

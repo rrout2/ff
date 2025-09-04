@@ -1,21 +1,20 @@
 /* /src/weekly/week-label/week-label.css */
 
-/* Load Prohibition Regular from your repo.
-   If your files are at:  src/assets/prohibition/Prohibition-Regular.woff2
-   this relative path is correct from week-label.css (which lives at src/weekly/week-label/). */
 @font-face {
   font-family: "Prohibition";
   src:
     url("../../assets/prohibition/Prohibition-Regular.woff2") format("woff2"),
     url("../../assets/prohibition/Prohibition-Regular.woff") format("woff");
-  font-weight: 400;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 
 .week-label {
-  font-family: "Prohibition Regular", "Prohibition", system-ui, sans-serif !important; 
-  font-weight: 700;     /* Regular */
+  /* Text only — no background; your PNG provides the green pill */
+  background: transparent;
+  font-family: "Prohibition Regular", "Prohibition", system-ui, sans-serif !important;
+  font-weight: 300;
   font-style: normal;
   line-height: 1;
   text-transform: uppercase;

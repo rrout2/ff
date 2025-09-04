@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LZString from 'lz-string';
 import './site.css';
-import './print.css';
+
 
 import {
   getLeagueSettings, fetchLeagueUsers, fetchLeagueRosters,
@@ -14,8 +14,7 @@ import PreviewBoard from './components/PreviewBoard.jsx';
 import SleeperForm from './components/SleeperForm.jsx';
 import ManualBuilder from './components/ManualBuilder.jsx';
 import TweaksPanel from './components/TweaksPanel.jsx';
-import { exportNodeAsPng } from './utils/exportPng.js';
-import { printBoard } from './utils/printBoard.js';
+
 import Whiteboard from '../redraft/whiteboard/Whiteboard.jsx';
 
 // ------------------------------------------------------------------
