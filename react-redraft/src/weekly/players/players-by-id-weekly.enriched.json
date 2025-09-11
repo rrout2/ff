@@ -14,12 +14,12 @@
     "sleeperAdp": 76,
     "superflex-rank": 96,
     "weekly": {
-      "rank1QB": 92,
-      "rankSF": 112,
+      "rank1QB": 108,
+      "rankSF": 128,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -37,12 +37,12 @@
     "sleeperAdp": 165,
     "superflex-rank": 170,
     "weekly": {
-      "rank1QB": 112,
-      "rankSF": 132,
+      "rank1QB": 114,
+      "rankSF": 134,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -60,12 +60,12 @@
     "sleeperAdp": 42,
     "superflex-rank": 51,
     "weekly": {
-      "rank1QB": 33,
-      "rankSF": 62,
+      "rank1QB": 49,
+      "rankSF": 76,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -83,12 +83,12 @@
     "sleeperAdp": 37,
     "superflex-rank": 50,
     "weekly": {
-      "rank1QB": 39,
-      "rankSF": 67,
+      "rank1QB": 41,
+      "rankSF": 68,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -106,12 +106,12 @@
     "sleeperAdp": 94,
     "superflex-rank": 94,
     "weekly": {
-      "rank1QB": 73,
-      "rankSF": 98,
+      "rank1QB": 95,
+      "rankSF": 117,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -130,12 +130,12 @@
     "qb-score": 3,
     "superflex-rank": 29,
     "weekly": {
-      "rank1QB": 117,
-      "rankSF": 15,
+      "rank1QB": 174,
+      "rankSF": 21,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -153,12 +153,12 @@
     "sleeperAdp": 10,
     "superflex-rank": 39,
     "weekly": {
-      "rank1QB": 8,
-      "rankSF": 40,
+      "rank1QB": 6,
+      "rankSF": 38,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -177,12 +177,12 @@
     "qb-score": 2,
     "superflex-rank": 16,
     "weekly": {
-      "rank1QB": 121,
-      "rankSF": 19,
+      "rank1QB": 81,
+      "rankSF": 8,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -200,12 +200,12 @@
     "sleeperAdp": 29,
     "superflex-rank": 47,
     "weekly": {
-      "rank1QB": 40,
-      "rankSF": 68,
+      "rank1QB": 54,
+      "rankSF": 81,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -223,10 +223,12 @@
     "sleeperAdp": 46,
     "superflex-rank": 149,
     "weekly": {
+      "rank1QB": 258,
+      "rankSF": 253,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -245,12 +247,12 @@
     "sleeperAdp": 99,
     "superflex-rank": 102,
     "weekly": {
-      "rank1QB": 95,
-      "rankSF": 115,
+      "rank1QB": 128,
+      "rankSF": 140,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -268,12 +270,12 @@
     "sleeperAdp": 14,
     "superflex-rank": 23,
     "weekly": {
-      "rank1QB": 5,
-      "rankSF": 37,
+      "rank1QB": 2,
+      "rankSF": 34,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -291,12 +293,12 @@
     "sleeperAdp": 44,
     "superflex-rank": 56,
     "weekly": {
-      "rank1QB": 26,
-      "rankSF": 56,
+      "rank1QB": 31,
+      "rankSF": 61,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -314,10 +316,12 @@
     "sleeperAdp": 72,
     "superflex-rank": 120,
     "weekly": {
+      "rank1QB": 224,
+      "rankSF": 222,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -335,12 +339,12 @@
     "sleeperAdp": 92,
     "superflex-rank": 121,
     "weekly": {
-      "rank1QB": 83,
-      "rankSF": 107,
+      "rank1QB": 132,
+      "rankSF": 144,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -353,10 +357,12 @@
     "team": "KC",
     "superflex-rank": 352,
     "weekly": {
+      "rank1QB": 113,
+      "rankSF": 133,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -375,12 +381,12 @@
     "qb-score": 6,
     "superflex-rank": 7,
     "weekly": {
-      "rank1QB": 71,
-      "rankSF": 6,
+      "rank1QB": 94,
+      "rankSF": 10,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -399,12 +405,12 @@
     "sleeperAdp": 91,
     "superflex-rank": 104,
     "weekly": {
-      "rank1QB": 93,
-      "rankSF": 113,
+      "rank1QB": 144,
+      "rankSF": 156,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -418,10 +424,12 @@
     "sleeperAdp": 306,
     "superflex-rank": 316,
     "weekly": {
+      "rank1QB": 276,
+      "rankSF": 271,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -440,11 +448,11 @@
     "superflex-rank": 76,
     "weekly": {
       "rank1QB": 38,
-      "rankSF": 66,
+      "rankSF": 65,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -459,12 +467,12 @@
     "sleeperAdp": 86,
     "superflex-rank": 171,
     "weekly": {
-      "rank1QB": 122,
-      "rankSF": 135,
+      "rank1QB": 145,
+      "rankSF": 157,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -482,12 +490,12 @@
     "sleeperAdp": 67,
     "superflex-rank": 90,
     "weekly": {
-      "rank1QB": 62,
-      "rankSF": 89,
+      "rank1QB": 60,
+      "rankSF": 87,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -506,12 +514,12 @@
     "sleeperAdp": 38,
     "superflex-rank": 48,
     "weekly": {
-      "rank1QB": 43,
-      "rankSF": 71,
+      "rank1QB": 243,
+      "rankSF": 238,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -529,12 +537,12 @@
     "sleeperAdp": 142,
     "superflex-rank": 126,
     "weekly": {
-      "rank1QB": 99,
-      "rankSF": 119,
+      "rank1QB": 106,
+      "rankSF": 126,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -552,12 +560,12 @@
     "sleeperAdp": 2,
     "superflex-rank": 18,
     "weekly": {
-      "rank1QB": 3,
-      "rankSF": 35,
+      "rank1QB": 10,
+      "rankSF": 42,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -576,12 +584,12 @@
     "qb-score": 6,
     "superflex-rank": 9,
     "weekly": {
-      "rank1QB": 72,
-      "rankSF": 7,
+      "rank1QB": 93,
+      "rankSF": 9,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -599,12 +607,12 @@
     "sleeperAdp": 77,
     "superflex-rank": 72,
     "weekly": {
-      "rank1QB": 56,
-      "rankSF": 84,
+      "rank1QB": 69,
+      "rankSF": 96,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -622,12 +630,12 @@
     "sleeperAdp": 48,
     "superflex-rank": 55,
     "weekly": {
-      "rank1QB": 53,
-      "rankSF": 81,
+      "rank1QB": 52,
+      "rankSF": 79,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -649,9 +657,9 @@
       "rank1QB": 22,
       "rankSF": 1,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -670,12 +678,12 @@
     "sleeperAdp": 82,
     "superflex-rank": 105,
     "weekly": {
-      "rank1QB": 113,
-      "rankSF": 133,
+      "rank1QB": 130,
+      "rankSF": 142,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -694,12 +702,12 @@
     "sleeperAdp": 125,
     "superflex-rank": 136,
     "weekly": {
-      "rank1QB": 142,
-      "rankSF": 155,
+      "rank1QB": 129,
+      "rankSF": 141,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -717,12 +725,12 @@
     "sleeperAdp": 50,
     "superflex-rank": 58,
     "weekly": {
-      "rank1QB": 41,
-      "rankSF": 69,
+      "rank1QB": 28,
+      "rankSF": 58,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -741,12 +749,12 @@
     "sleeperAdp": 59,
     "superflex-rank": 84,
     "weekly": {
-      "rank1QB": 94,
-      "rankSF": 114,
+      "rank1QB": 109,
+      "rankSF": 129,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -764,12 +772,12 @@
     "sleeperAdp": 49,
     "superflex-rank": 64,
     "weekly": {
-      "rank1QB": 54,
-      "rankSF": 82,
+      "rank1QB": 43,
+      "rankSF": 70,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "RED"
+        "matchup": "YELLOW",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -787,12 +795,12 @@
     "sleeperAdp": 150,
     "superflex-rank": 169,
     "weekly": {
-      "rank1QB": 138,
-      "rankSF": 151,
+      "rank1QB": 57,
+      "rankSF": 84,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -811,12 +819,12 @@
     "qb-score": 5,
     "superflex-rank": 15,
     "weekly": {
-      "rank1QB": 82,
-      "rankSF": 8,
+      "rank1QB": 77,
+      "rankSF": 6,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -834,12 +842,12 @@
     "sleeperAdp": 20,
     "superflex-rank": 46,
     "weekly": {
-      "rank1QB": 18,
-      "rankSF": 50,
+      "rank1QB": 20,
+      "rankSF": 52,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -849,7 +857,16 @@
     "rank": 272,
     "positionRank": 28,
     "value": null,
-    "team": "SEA"
+    "team": "SEA",
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "5859": {
     "name": "A.J. Brown",
@@ -865,12 +882,12 @@
     "sleeperAdp": 19,
     "superflex-rank": 31,
     "weekly": {
-      "rank1QB": 20,
-      "rankSF": 52,
+      "rank1QB": 21,
+      "rankSF": 53,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -888,12 +905,12 @@
     "sleeperAdp": 88,
     "superflex-rank": 109,
     "weekly": {
-      "rank1QB": 87,
-      "rankSF": 109,
+      "rank1QB": 65,
+      "rankSF": 92,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -911,12 +928,12 @@
     "sleeperAdp": 55,
     "superflex-rank": 89,
     "weekly": {
-      "rank1QB": 61,
-      "rankSF": 88,
+      "rank1QB": 75,
+      "rankSF": 102,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -934,12 +951,12 @@
     "sleeperAdp": 34,
     "superflex-rank": 53,
     "weekly": {
-      "rank1QB": 42,
-      "rankSF": 70,
+      "rank1QB": 47,
+      "rankSF": 74,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -957,12 +974,12 @@
     "sleeperAdp": 84,
     "superflex-rank": 99,
     "weekly": {
-      "rank1QB": 84,
-      "rankSF": 108,
+      "rank1QB": 55,
+      "rankSF": 82,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -980,12 +997,12 @@
     "sleeperAdp": 73,
     "superflex-rank": 81,
     "weekly": {
-      "rank1QB": 63,
-      "rankSF": 90,
+      "rank1QB": 45,
+      "rankSF": 72,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -995,7 +1012,16 @@
     "rank": 274,
     "positionRank": 28,
     "value": null,
-    "team": "CIN"
+    "team": "CIN",
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "6770": {
     "name": "Joe Burrow",
@@ -1012,12 +1038,12 @@
     "qb-score": 7,
     "superflex-rank": 5,
     "weekly": {
-      "rank1QB": 60,
-      "rankSF": 5,
+      "rank1QB": 35,
+      "rankSF": 4,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1035,12 +1061,12 @@
     "sleeperAdp": 71,
     "superflex-rank": 91,
     "weekly": {
-      "rank1QB": 75,
-      "rankSF": 100,
+      "rank1QB": 79,
+      "rankSF": 104,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -1058,12 +1084,12 @@
     "sleeperAdp": 6,
     "superflex-rank": 8,
     "weekly": {
-      "rank1QB": 7,
-      "rankSF": 39,
+      "rank1QB": 5,
+      "rankSF": 37,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1081,12 +1107,12 @@
     "sleeperAdp": 75,
     "superflex-rank": 83,
     "weekly": {
-      "rank1QB": 69,
-      "rankSF": 96,
+      "rank1QB": 59,
+      "rankSF": 86,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1104,12 +1130,12 @@
     "sleeperAdp": 4,
     "superflex-rank": 10,
     "weekly": {
-      "rank1QB": 6,
-      "rankSF": 38,
+      "rank1QB": 4,
+      "rankSF": 36,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1128,12 +1154,12 @@
     "qb-score": 1,
     "superflex-rank": 27,
     "weekly": {
-      "rank1QB": 119,
-      "rankSF": 17,
+      "rank1QB": 102,
+      "rankSF": 11,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1151,12 +1177,12 @@
     "sleeperAdp": 31,
     "superflex-rank": 40,
     "weekly": {
-      "rank1QB": 24,
-      "rankSF": 55,
+      "rank1QB": 32,
+      "rankSF": 62,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1174,10 +1200,12 @@
     "sleeperAdp": 93,
     "superflex-rank": 141,
     "weekly": {
+      "rank1QB": 227,
+      "rankSF": 225,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1196,12 +1224,12 @@
     "qb-score": 2,
     "superflex-rank": 36,
     "weekly": {
-      "rank1QB": 115,
-      "rankSF": 13,
+      "rank1QB": 122,
+      "rankSF": 16,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1219,12 +1247,12 @@
     "sleeperAdp": 132,
     "superflex-rank": 123,
     "weekly": {
-      "rank1QB": 101,
-      "rankSF": 121,
+      "rank1QB": 62,
+      "rankSF": 89,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1242,12 +1270,12 @@
     "sleeperAdp": 23,
     "superflex-rank": 49,
     "weekly": {
-      "rank1QB": 19,
-      "rankSF": 51,
+      "rank1QB": 15,
+      "rankSF": 47,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1265,12 +1293,12 @@
     "sleeperAdp": 110,
     "superflex-rank": 113,
     "weekly": {
-      "rank1QB": 88,
-      "rankSF": 110,
+      "rank1QB": 72,
+      "rankSF": 99,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1289,12 +1317,12 @@
     "qb-score": 8,
     "superflex-rank": 4,
     "weekly": {
-      "rank1QB": 29,
+      "rank1QB": 33,
       "rankSF": 3,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1309,12 +1337,12 @@
     "qb-score": 10,
     "superflex-rank": 2,
     "weekly": {
-      "rank1QB": 25,
+      "rank1QB": 26,
       "rankSF": 2,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1332,12 +1360,12 @@
     "sleeperAdp": 102,
     "superflex-rank": 114,
     "weekly": {
-      "rank1QB": 80,
-      "rankSF": 105,
+      "rank1QB": 100,
+      "rankSF": 122,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1355,12 +1383,12 @@
     "sleeperAdp": 107,
     "superflex-rank": 129,
     "weekly": {
-      "rank1QB": 79,
-      "rankSF": 104,
+      "rank1QB": 98,
+      "rankSF": 120,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1371,7 +1399,16 @@
     "positionRank": 27,
     "value": null,
     "team": "MIA",
-    "superflex-rank": 249
+    "superflex-rank": 249,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "7523": {
     "name": "Trevor Lawrence",
@@ -1388,12 +1425,12 @@
     "qb-score": 1,
     "superflex-rank": 38,
     "weekly": {
-      "rank1QB": 116,
+      "rank1QB": 120,
       "rankSF": 14,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1411,12 +1448,12 @@
     "sleeperAdp": 54,
     "superflex-rank": 65,
     "weekly": {
-      "rank1QB": 49,
-      "rankSF": 77,
+      "rank1QB": 58,
+      "rankSF": 85,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1434,12 +1471,12 @@
     "sleeperAdp": 68,
     "superflex-rank": 70,
     "weekly": {
-      "rank1QB": 67,
-      "rankSF": 94,
+      "rank1QB": 90,
+      "rankSF": 114,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1449,7 +1486,16 @@
     "rank": 266,
     "positionRank": 26,
     "value": null,
-    "team": "SF"
+    "team": "SF",
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "7528": {
     "name": "Najee Harris",
@@ -1465,12 +1511,12 @@
     "sleeperAdp": 89,
     "superflex-rank": 142,
     "weekly": {
-      "rank1QB": 159,
-      "rankSF": 171,
+      "rank1QB": 161,
+      "rankSF": 173,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1488,12 +1534,12 @@
     "sleeperAdp": 90,
     "superflex-rank": 106,
     "weekly": {
-      "rank1QB": 96,
-      "rankSF": 116,
+      "rank1QB": 44,
+      "rankSF": 71,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1511,12 +1557,12 @@
     "sleeperAdp": 8,
     "superflex-rank": 17,
     "weekly": {
-      "rank1QB": 15,
-      "rankSF": 47,
+      "rank1QB": 17,
+      "rankSF": 49,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1535,12 +1581,12 @@
     "sleeperAdp": 136,
     "superflex-rank": 152,
     "weekly": {
-      "rank1QB": 148,
-      "rankSF": 160,
+      "rank1QB": 142,
+      "rankSF": 154,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1554,10 +1600,12 @@
     "sleeperAdp": 295,
     "superflex-rank": 252,
     "weekly": {
+      "rank1QB": 296,
+      "rankSF": 288,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1579,8 +1627,8 @@
       "rankSF": 33,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1598,12 +1646,12 @@
     "sleeperAdp": 12,
     "superflex-rank": 19,
     "weekly": {
-      "rank1QB": 16,
-      "rankSF": 48,
+      "rank1QB": 18,
+      "rankSF": 50,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1621,12 +1669,12 @@
     "sleeperAdp": 104,
     "superflex-rank": 118,
     "weekly": {
-      "rank1QB": 103,
-      "rankSF": 123,
+      "rank1QB": 46,
+      "rankSF": 73,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1645,12 +1693,12 @@
     "qb-score": 3,
     "superflex-rank": 22,
     "weekly": {
-      "rank1QB": 120,
-      "rankSF": 18,
+      "rank1QB": 78,
+      "rankSF": 7,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -1668,12 +1716,12 @@
     "sleeperAdp": 47,
     "superflex-rank": 73,
     "weekly": {
-      "rank1QB": 37,
-      "rankSF": 65,
+      "rank1QB": 36,
+      "rankSF": 64,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -1692,12 +1740,12 @@
     "sleeperAdp": 159,
     "superflex-rank": 188,
     "weekly": {
-      "rank1QB": 177,
-      "rankSF": 184,
+      "rank1QB": 204,
+      "rankSF": 203,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1708,7 +1756,16 @@
     "positionRank": 26,
     "value": null,
     "team": "PHI",
-    "superflex-rank": 458
+    "superflex-rank": 458,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "7611": {
     "name": "Rhamondre Stevenson",
@@ -1724,12 +1781,12 @@
     "sleeperAdp": 105,
     "superflex-rank": 128,
     "weekly": {
-      "rank1QB": 98,
-      "rankSF": 118,
+      "rank1QB": 67,
+      "rankSF": 94,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1751,8 +1808,8 @@
       "rankSF": 44,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1763,7 +1820,16 @@
     "positionRank": 25,
     "value": null,
     "team": "BAL",
-    "superflex-rank": 481
+    "superflex-rank": 481,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "8130": {
     "name": "Trey McBride",
@@ -1780,12 +1846,12 @@
     "sleeperAdp": 24,
     "superflex-rank": 37,
     "weekly": {
-      "rank1QB": 30,
-      "rankSF": 59,
+      "rank1QB": 34,
+      "rankSF": 63,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1803,12 +1869,12 @@
     "sleeperAdp": 153,
     "superflex-rank": 167,
     "weekly": {
-      "rank1QB": 129,
-      "rankSF": 142,
+      "rank1QB": 136,
+      "rankSF": 148,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -1826,12 +1892,12 @@
     "sleeperAdp": 83,
     "superflex-rank": 108,
     "weekly": {
-      "rank1QB": 81,
-      "rankSF": 106,
+      "rank1QB": 84,
+      "rankSF": 108,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1849,12 +1915,12 @@
     "sleeperAdp": 126,
     "superflex-rank": 138,
     "weekly": {
-      "rank1QB": 104,
-      "rankSF": 124,
+      "rank1QB": 135,
+      "rankSF": 147,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -1872,12 +1938,12 @@
     "sleeperAdp": 61,
     "superflex-rank": 74,
     "weekly": {
-      "rank1QB": 57,
-      "rankSF": 85,
+      "rank1QB": 71,
+      "rankSF": 98,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1895,12 +1961,12 @@
     "sleeperAdp": 35,
     "superflex-rank": 60,
     "weekly": {
-      "rank1QB": 45,
-      "rankSF": 73,
+      "rank1QB": 48,
+      "rankSF": 75,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1918,12 +1984,12 @@
     "sleeperAdp": 69,
     "superflex-rank": 82,
     "weekly": {
-      "rank1QB": 52,
-      "rankSF": 80,
+      "rank1QB": 64,
+      "rankSF": 91,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "matchup": "RED",
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -1941,12 +2007,12 @@
     "sleeperAdp": 32,
     "superflex-rank": 42,
     "weekly": {
-      "rank1QB": 35,
-      "rankSF": 63,
+      "rank1QB": 27,
+      "rankSF": 57,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -1964,12 +2030,12 @@
     "sleeperAdp": 57,
     "superflex-rank": 78,
     "weekly": {
-      "rank1QB": 55,
-      "rankSF": 83,
+      "rank1QB": 68,
+      "rankSF": 95,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -1987,12 +2053,12 @@
     "sleeperAdp": 27,
     "superflex-rank": 54,
     "weekly": {
-      "rank1QB": 156,
-      "rankSF": 168,
+      "rank1QB": 29,
+      "rankSF": 59,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2010,12 +2076,12 @@
     "sleeperAdp": 45,
     "superflex-rank": 63,
     "weekly": {
-      "rank1QB": 36,
-      "rankSF": 64,
+      "rank1QB": 76,
+      "rankSF": 103,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2033,12 +2099,12 @@
     "sleeperAdp": 81,
     "superflex-rank": 148,
     "weekly": {
-      "rank1QB": 164,
-      "rankSF": 176,
+      "rank1QB": 133,
+      "rankSF": 145,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2056,12 +2122,12 @@
     "sleeperAdp": 33,
     "superflex-rank": 66,
     "weekly": {
-      "rank1QB": 47,
-      "rankSF": 75,
+      "rank1QB": 40,
+      "rankSF": 67,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2072,7 +2138,16 @@
     "positionRank": 26,
     "value": null,
     "team": "CLE",
-    "superflex-rank": 372
+    "superflex-rank": 372,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "8161": {
     "name": "Malik Willis",
@@ -2081,7 +2156,16 @@
     "positionRank": 25,
     "value": null,
     "team": "GB",
-    "superflex-rank": 414
+    "superflex-rank": 414,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "8183": {
     "name": "Brock Purdy",
@@ -2098,12 +2182,12 @@
     "qb-score": 4,
     "superflex-rank": 21,
     "weekly": {
-      "rank1QB": 86,
-      "rankSF": 10,
+      "rank1QB": 126,
+      "rankSF": 20,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2113,7 +2197,16 @@
     "rank": 285,
     "positionRank": 25,
     "value": null,
-    "team": "GB"
+    "team": "GB",
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "8205": {
     "name": "Isiah Pacheco",
@@ -2129,12 +2222,12 @@
     "sleeperAdp": 62,
     "superflex-rank": 88,
     "weekly": {
-      "rank1QB": 65,
-      "rankSF": 92,
+      "rank1QB": 91,
+      "rankSF": 115,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2152,12 +2245,12 @@
     "sleeperAdp": 87,
     "superflex-rank": 101,
     "weekly": {
-      "rank1QB": 105,
-      "rankSF": 125,
+      "rank1QB": 89,
+      "rankSF": 113,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2175,12 +2268,12 @@
     "sleeperAdp": 116,
     "superflex-rank": 115,
     "weekly": {
-      "rank1QB": 123,
-      "rankSF": 136,
+      "rank1QB": 88,
+      "rankSF": 112,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2198,12 +2291,12 @@
     "sleeperAdp": 129,
     "superflex-rank": 137,
     "weekly": {
-      "rank1QB": 108,
-      "rankSF": 128,
+      "rank1QB": 101,
+      "rankSF": 123,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -2221,12 +2314,12 @@
     "sleeperAdp": 5,
     "superflex-rank": 13,
     "weekly": {
-      "rank1QB": 4,
-      "rankSF": 36,
+      "rank1QB": 8,
+      "rankSF": 40,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2244,12 +2337,12 @@
     "sleeperAdp": 28,
     "superflex-rank": 41,
     "weekly": {
-      "rank1QB": 27,
-      "rankSF": 57,
+      "rank1QB": 19,
+      "rankSF": 51,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2267,12 +2360,12 @@
     "sleeperAdp": 131,
     "superflex-rank": 132,
     "weekly": {
-      "rank1QB": 125,
-      "rankSF": 138,
+      "rank1QB": 163,
+      "rankSF": 175,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "RED"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2290,12 +2383,12 @@
     "sleeperAdp": 16,
     "superflex-rank": 34,
     "weekly": {
-      "rank1QB": 13,
-      "rankSF": 45,
+      "rank1QB": 11,
+      "rankSF": 43,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2306,7 +2399,16 @@
     "positionRank": 24,
     "value": null,
     "team": "PHI",
-    "sleeperAdp": null
+    "sleeperAdp": null,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "9482": {
     "name": "Michael Mayer",
@@ -2315,7 +2417,16 @@
     "positionRank": 23,
     "value": null,
     "team": "LV",
-    "superflex-rank": 303
+    "superflex-rank": 303,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "9484": {
     "name": "Tucker Kraft",
@@ -2332,12 +2443,12 @@
     "sleeperAdp": 114,
     "superflex-rank": 119,
     "weekly": {
-      "rank1QB": 114,
-      "rankSF": 134,
+      "rank1QB": 110,
+      "rankSF": 130,
       "lights": {
-        "matchup": "RED",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2355,12 +2466,12 @@
     "sleeperAdp": 26,
     "superflex-rank": 35,
     "weekly": {
-      "rank1QB": 31,
-      "rankSF": 60,
+      "rank1QB": 13,
+      "rankSF": 45,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2378,12 +2489,12 @@
     "sleeperAdp": 7,
     "superflex-rank": 20,
     "weekly": {
-      "rank1QB": 10,
-      "rankSF": 42,
+      "rank1QB": 9,
+      "rankSF": 41,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2401,10 +2512,12 @@
     "sleeperAdp": 112,
     "superflex-rank": 161,
     "weekly": {
+      "rank1QB": 294,
+      "rankSF": 286,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2422,12 +2535,12 @@
     "sleeperAdp": 3,
     "superflex-rank": 12,
     "weekly": {
-      "rank1QB": 2,
-      "rankSF": 34,
+      "rank1QB": 3,
+      "rankSF": 35,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2445,12 +2558,12 @@
     "sleeperAdp": 108,
     "superflex-rank": 112,
     "weekly": {
-      "rank1QB": 127,
-      "rankSF": 140,
+      "rank1QB": 74,
+      "rankSF": 101,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2468,10 +2581,12 @@
     "sleeperAdp": 70,
     "superflex-rank": 110,
     "weekly": {
+      "rank1QB": 223,
+      "rankSF": 221,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2490,12 +2605,12 @@
     "qb-score": 1,
     "superflex-rank": 43,
     "weekly": {
-      "rank1QB": 118,
-      "rankSF": 16,
+      "rank1QB": 123,
+      "rankSF": 17,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2516,9 +2631,9 @@
       "rank1QB": 66,
       "rankSF": 93,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2536,12 +2651,12 @@
     "sleeperAdp": 95,
     "superflex-rank": 124,
     "weekly": {
-      "rank1QB": 78,
-      "rankSF": 103,
+      "rank1QB": 99,
+      "rankSF": 121,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2552,7 +2667,16 @@
     "positionRank": 24,
     "value": null,
     "team": "TB",
-    "superflex-rank": 389
+    "superflex-rank": 389,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "10229": {
     "name": "Rashee Rice",
@@ -2568,10 +2692,12 @@
     "sleeperAdp": 41,
     "superflex-rank": 93,
     "weekly": {
+      "rank1QB": 221,
+      "rankSF": 219,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2582,7 +2708,16 @@
     "positionRank": 0,
     "value": null,
     "team": "ARI",
-    "superflex-rank": 403
+    "superflex-rank": 403,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "10236": {
     "name": "Dalton Kincaid",
@@ -2599,12 +2734,12 @@
     "sleeperAdp": 113,
     "superflex-rank": 131,
     "weekly": {
-      "rank1QB": 145,
-      "rankSF": 158,
+      "rank1QB": 165,
+      "rankSF": 177,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2623,12 +2758,12 @@
     "sleeperAdp": 52,
     "superflex-rank": 87,
     "weekly": {
-      "rank1QB": 59,
-      "rankSF": 87,
+      "rank1QB": 73,
+      "rankSF": 100,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2647,12 +2782,12 @@
     "qb-score": 3,
     "superflex-rank": 28,
     "weekly": {
-      "rank1QB": 90,
-      "rankSF": 12,
+      "rank1QB": 121,
+      "rankSF": 15,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2666,8 +2801,13 @@
     "sleeperAdp": null,
     "superflex-rank": 154,
     "weekly": {
-      "rank1QB": 190,
-      "rankSF": 32
+      "rank1QB": 191,
+      "rankSF": 31,
+      "lights": {
+        "matchup": "GREEN",
+        "offense": "GREEN",
+        "vegas": "RED"
+      }
     }
   },
   "11563": {
@@ -2685,12 +2825,12 @@
     "qb-score": 5,
     "superflex-rank": 11,
     "weekly": {
-      "rank1QB": 85,
-      "rankSF": 9,
+      "rank1QB": 119,
+      "rankSF": 13,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2709,12 +2849,12 @@
     "qb-score": 4,
     "superflex-rank": 26,
     "weekly": {
-      "rank1QB": 89,
-      "rankSF": 11,
+      "rank1QB": 103,
+      "rankSF": 12,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2733,12 +2873,12 @@
     "qb-score": 1,
     "superflex-rank": 45,
     "weekly": {
-      "rank1QB": 169,
-      "rankSF": 24,
+      "rank1QB": 125,
+      "rankSF": 19,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2757,12 +2897,12 @@
     "qb-score": 9,
     "superflex-rank": 3,
     "weekly": {
-      "rank1QB": 34,
-      "rankSF": 4,
+      "rank1QB": 37,
+      "rankSF": 5,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2780,12 +2920,12 @@
     "sleeperAdp": 17,
     "superflex-rank": 44,
     "weekly": {
-      "rank1QB": 17,
-      "rankSF": 49,
+      "rank1QB": 30,
+      "rankSF": 60,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -2803,12 +2943,12 @@
     "sleeperAdp": 149,
     "superflex-rank": 146,
     "weekly": {
-      "rank1QB": 130,
-      "rankSF": 143,
+      "rank1QB": 92,
+      "rankSF": 116,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "GREEN"
+        "offense": "GREEN",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2830,9 +2970,9 @@
       "rank1QB": 23,
       "rankSF": 54,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "GREEN"
+        "matchup": "RED",
+        "offense": "GREEN",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2843,7 +2983,16 @@
     "positionRank": 23,
     "value": null,
     "team": "PHI",
-    "superflex-rank": 452
+    "superflex-rank": 452,
+    "weekly": {
+      "rank1QB": null,
+      "rankSF": null,
+      "lights": {
+        "matchup": "YELLOW",
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
+      }
+    }
   },
   "11617": {
     "name": "Malachi Corley",
@@ -2854,10 +3003,12 @@
     "team": "NYJ",
     "superflex-rank": 407,
     "weekly": {
+      "rank1QB": 301,
+      "rankSF": 293,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2875,12 +3026,12 @@
     "sleeperAdp": 78,
     "superflex-rank": 92,
     "weekly": {
-      "rank1QB": 50,
-      "rankSF": 78,
+      "rank1QB": 53,
+      "rankSF": 80,
       "lights": {
         "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2898,12 +3049,12 @@
     "sleeperAdp": 56,
     "superflex-rank": 71,
     "weekly": {
-      "rank1QB": 51,
-      "rankSF": 79,
+      "rank1QB": 261,
+      "rankSF": 256,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -2921,12 +3072,12 @@
     "sleeperAdp": 182,
     "superflex-rank": 175,
     "weekly": {
-      "rank1QB": 136,
-      "rankSF": 149,
+      "rank1QB": 148,
+      "rankSF": 160,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -2944,12 +3095,12 @@
     "sleeperAdp": 36,
     "superflex-rank": 52,
     "weekly": {
-      "rank1QB": 32,
-      "rankSF": 61,
+      "rank1QB": 25,
+      "rankSF": 56,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "RED"
+        "matchup": "YELLOW",
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2962,10 +3113,12 @@
     "team": "BAL",
     "superflex-rank": 365,
     "weekly": {
+      "rank1QB": 295,
+      "rankSF": 287,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -2983,12 +3136,12 @@
     "sleeperAdp": 13,
     "superflex-rank": 24,
     "weekly": {
-      "rank1QB": 11,
-      "rankSF": 43,
+      "rank1QB": 14,
+      "rankSF": 46,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3006,12 +3159,12 @@
     "sleeperAdp": 9,
     "superflex-rank": 14,
     "weekly": {
-      "rank1QB": 9,
-      "rankSF": 41,
+      "rank1QB": 7,
+      "rankSF": 39,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -3029,12 +3182,12 @@
     "sleeperAdp": 21,
     "superflex-rank": 32,
     "weekly": {
-      "rank1QB": 21,
-      "rankSF": 53,
+      "rank1QB": 24,
+      "rankSF": 55,
       "lights": {
         "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3052,12 +3205,12 @@
     "sleeperAdp": 118,
     "superflex-rank": 130,
     "weekly": {
-      "rank1QB": 106,
-      "rankSF": 126,
+      "rank1QB": 80,
+      "rankSF": 105,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -3075,12 +3228,12 @@
     "sleeperAdp": 97,
     "superflex-rank": 97,
     "weekly": {
-      "rank1QB": 77,
-      "rankSF": 102,
+      "rank1QB": 56,
+      "rankSF": 83,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3098,10 +3251,12 @@
     "sleeperAdp": 144,
     "superflex-rank": 190,
     "weekly": {
+      "rank1QB": 238,
+      "rankSF": 233,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3119,12 +3274,12 @@
     "sleeperAdp": 80,
     "superflex-rank": 100,
     "weekly": {
-      "rank1QB": 64,
-      "rankSF": 91,
+      "rank1QB": 61,
+      "rankSF": 88,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -3142,12 +3297,12 @@
     "sleeperAdp": 139,
     "superflex-rank": 159,
     "weekly": {
-      "rank1QB": 173,
-      "rankSF": 181,
+      "rank1QB": 207,
+      "rankSF": 206,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "RED"
+        "matchup": "GREEN",
+        "offense": "RED",
+        "vegas": "GREEN"
       }
     }
   },
@@ -3165,12 +3320,12 @@
     "sleeperAdp": 106,
     "superflex-rank": 133,
     "weekly": {
-      "rank1QB": 124,
-      "rankSF": 137,
+      "rank1QB": 172,
+      "rankSF": 184,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -3188,12 +3343,12 @@
     "sleeperAdp": 147,
     "superflex-rank": 202,
     "weekly": {
-      "rank1QB": 158,
-      "rankSF": 170,
+      "rank1QB": null,
+      "rankSF": null,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "RED"
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
       }
     }
   },
@@ -3211,12 +3366,12 @@
     "sleeperAdp": 119,
     "superflex-rank": 158,
     "weekly": {
-      "rank1QB": 135,
-      "rankSF": 148,
+      "rank1QB": 137,
+      "rankSF": 149,
       "lights": {
-        "matchup": "RED",
-        "vegas": "RED",
-        "offense": "GREEN"
+        "matchup": "GREEN",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3234,12 +3389,12 @@
     "sleeperAdp": 58,
     "superflex-rank": 86,
     "weekly": {
-      "rank1QB": 70,
-      "rankSF": 97,
+      "rank1QB": 104,
+      "rankSF": 124,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3257,12 +3412,12 @@
     "sleeperAdp": 137,
     "superflex-rank": 157,
     "weekly": {
-      "rank1QB": 154,
-      "rankSF": 166,
+      "rank1QB": 170,
+      "rankSF": 182,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3280,12 +3435,12 @@
     "sleeperAdp": 100,
     "superflex-rank": 117,
     "weekly": {
-      "rank1QB": 74,
-      "rankSF": 99,
+      "rank1QB": 111,
+      "rankSF": 131,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "GREEN"
       }
     }
   },
@@ -3303,12 +3458,12 @@
     "sleeperAdp": 79,
     "superflex-rank": 107,
     "weekly": {
-      "rank1QB": 102,
-      "rankSF": 122,
+      "rank1QB": 236,
+      "rankSF": 231,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3326,12 +3481,12 @@
     "sleeperAdp": 39,
     "superflex-rank": 62,
     "weekly": {
-      "rank1QB": 44,
-      "rankSF": 72,
+      "rank1QB": 39,
+      "rankSF": 66,
       "lights": {
-        "matchup": "RED",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3349,10 +3504,12 @@
     "sleeperAdp": 66,
     "superflex-rank": 153,
     "weekly": {
+      "rank1QB": 171,
+      "rankSF": 183,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "RED",
+        "offense": "RED",
+        "vegas": "RED"
       }
     }
   },
@@ -3370,12 +3527,12 @@
     "sleeperAdp": 117,
     "superflex-rank": 95,
     "weekly": {
-      "rank1QB": 68,
-      "rankSF": 95,
+      "rank1QB": 51,
+      "rankSF": 78,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "GREEN"
+        "matchup": "YELLOW",
+        "offense": "GREEN",
+        "vegas": "RED"
       }
     }
   },
@@ -3394,12 +3551,12 @@
     "sleeperAdp": 120,
     "superflex-rank": 135,
     "weekly": {
-      "rank1QB": 149,
-      "rankSF": 161,
+      "rank1QB": 151,
+      "rankSF": 163,
       "lights": {
-        "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "matchup": "RED",
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3418,12 +3575,12 @@
     "sleeperAdp": 101,
     "superflex-rank": 116,
     "weekly": {
-      "rank1QB": 91,
-      "rankSF": 111,
+      "rank1QB": 63,
+      "rankSF": 90,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3441,12 +3598,12 @@
     "sleeperAdp": 60,
     "superflex-rank": 61,
     "weekly": {
-      "rank1QB": 48,
-      "rankSF": 76,
+      "rank1QB": 42,
+      "rankSF": 69,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "YELLOW",
-        "offense": "YELLOW"
+        "matchup": "YELLOW",
+        "offense": "YELLOW",
+        "vegas": "RED"
       }
     }
   },
@@ -3464,12 +3621,12 @@
     "sleeperAdp": 11,
     "superflex-rank": 30,
     "weekly": {
-      "rank1QB": 14,
-      "rankSF": 46,
+      "rank1QB": 16,
+      "rankSF": 48,
       "lights": {
-        "matchup": "GREEN",
-        "vegas": "RED",
-        "offense": "YELLOW"
+        "matchup": "RED",
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3487,12 +3644,12 @@
     "sleeperAdp": 63,
     "superflex-rank": 75,
     "weekly": {
-      "rank1QB": 46,
-      "rankSF": 74,
+      "rank1QB": 70,
+      "rankSF": 97,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "YELLOW",
-        "offense": "RED"
+        "offense": "RED",
+        "vegas": "YELLOW"
       }
     }
   },
@@ -3510,12 +3667,12 @@
     "sleeperAdp": 65,
     "superflex-rank": 85,
     "weekly": {
-      "rank1QB": 58,
-      "rankSF": 86,
+      "rank1QB": 50,
+      "rankSF": 77,
       "lights": {
         "matchup": "YELLOW",
-        "vegas": "GREEN",
-        "offense": "YELLOW"
+        "offense": "YELLOW",
+        "vegas": "YELLOW"
       }
     }
   }
