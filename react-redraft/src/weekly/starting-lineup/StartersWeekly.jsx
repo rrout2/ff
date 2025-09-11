@@ -1,4 +1,3 @@
-// /src/weekly/starting-lineup/StartersWeekly.jsx
 import React, { useMemo } from "react";
 import "./weekly-starters.css";
 

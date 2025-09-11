@@ -20,7 +20,7 @@ export default function WeekLabel({
   letterGap = 1,
   style = {},
 }) {
-  const computed = text ?? (Number.isFinite(+week) ? `WEEK ${+week}` : "WEEK 1");
+  const computed = text ?? (Number.isFinite(+week) ? `WEEK ${+week}` : "WEEK 2");
   const label = String(computed).toUpperCase();
 
   return (

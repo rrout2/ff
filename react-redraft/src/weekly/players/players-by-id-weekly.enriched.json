@@ -15,7 +15,7 @@
     "superflex-rank": 96,
     "weekly": {
       "rank1QB": 108,
-      "rankSF": 128,
+      "rankSF": 127,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -38,7 +38,7 @@
     "superflex-rank": 170,
     "weekly": {
       "rank1QB": 114,
-      "rankSF": 134,
+      "rankSF": 133,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -61,7 +61,7 @@
     "superflex-rank": 51,
     "weekly": {
       "rank1QB": 49,
-      "rankSF": 76,
+      "rankSF": 75,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -84,7 +84,7 @@
     "superflex-rank": 50,
     "weekly": {
       "rank1QB": 41,
-      "rankSF": 68,
+      "rankSF": 67,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -107,7 +107,7 @@
     "superflex-rank": 94,
     "weekly": {
       "rank1QB": 95,
-      "rankSF": 117,
+      "rankSF": 116,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -130,8 +130,8 @@
     "qb-score": 3,
     "superflex-rank": 29,
     "weekly": {
-      "rank1QB": 174,
-      "rankSF": 21,
+      "rank1QB": 173,
+      "rankSF": 20,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -154,7 +154,7 @@
     "superflex-rank": 39,
     "weekly": {
       "rank1QB": 6,
-      "rankSF": 38,
+      "rankSF": 37,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -201,7 +201,7 @@
     "superflex-rank": 47,
     "weekly": {
       "rank1QB": 54,
-      "rankSF": 81,
+      "rankSF": 80,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -223,8 +223,8 @@
     "sleeperAdp": 46,
     "superflex-rank": 149,
     "weekly": {
-      "rank1QB": 258,
-      "rankSF": 253,
+      "rank1QB": 257,
+      "rankSF": 252,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -247,8 +247,8 @@
     "sleeperAdp": 99,
     "superflex-rank": 102,
     "weekly": {
-      "rank1QB": 128,
-      "rankSF": 140,
+      "rank1QB": 127,
+      "rankSF": 139,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -271,7 +271,7 @@
     "superflex-rank": 23,
     "weekly": {
       "rank1QB": 2,
-      "rankSF": 34,
+      "rankSF": 33,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -294,7 +294,7 @@
     "superflex-rank": 56,
     "weekly": {
       "rank1QB": 31,
-      "rankSF": 61,
+      "rankSF": 60,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -316,8 +316,8 @@
     "sleeperAdp": 72,
     "superflex-rank": 120,
     "weekly": {
-      "rank1QB": 224,
-      "rankSF": 222,
+      "rank1QB": 223,
+      "rankSF": 221,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -339,8 +339,8 @@
     "sleeperAdp": 92,
     "superflex-rank": 121,
     "weekly": {
-      "rank1QB": 132,
-      "rankSF": 144,
+      "rank1QB": 131,
+      "rankSF": 143,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -358,7 +358,7 @@
     "superflex-rank": 352,
     "weekly": {
       "rank1QB": 113,
-      "rankSF": 133,
+      "rankSF": 132,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -405,8 +405,8 @@
     "sleeperAdp": 91,
     "superflex-rank": 104,
     "weekly": {
-      "rank1QB": 144,
-      "rankSF": 156,
+      "rank1QB": 143,
+      "rankSF": 155,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -424,8 +424,8 @@
     "sleeperAdp": 306,
     "superflex-rank": 316,
     "weekly": {
-      "rank1QB": 276,
-      "rankSF": 271,
+      "rank1QB": 275,
+      "rankSF": 270,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -448,7 +448,7 @@
     "superflex-rank": 76,
     "weekly": {
       "rank1QB": 38,
-      "rankSF": 65,
+      "rankSF": 64,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -467,8 +467,8 @@
     "sleeperAdp": 86,
     "superflex-rank": 171,
     "weekly": {
-      "rank1QB": 145,
-      "rankSF": 157,
+      "rank1QB": 144,
+      "rankSF": 156,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -491,7 +491,7 @@
     "superflex-rank": 90,
     "weekly": {
       "rank1QB": 60,
-      "rankSF": 87,
+      "rankSF": 86,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -514,8 +514,8 @@
     "sleeperAdp": 38,
     "superflex-rank": 48,
     "weekly": {
-      "rank1QB": 243,
-      "rankSF": 238,
+      "rank1QB": 242,
+      "rankSF": 237,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -538,7 +538,7 @@
     "superflex-rank": 126,
     "weekly": {
       "rank1QB": 106,
-      "rankSF": 126,
+      "rankSF": 125,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -561,7 +561,7 @@
     "superflex-rank": 18,
     "weekly": {
       "rank1QB": 10,
-      "rankSF": 42,
+      "rankSF": 41,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -608,7 +608,7 @@
     "superflex-rank": 72,
     "weekly": {
       "rank1QB": 69,
-      "rankSF": 96,
+      "rankSF": 95,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -631,7 +631,7 @@
     "superflex-rank": 55,
     "weekly": {
       "rank1QB": 52,
-      "rankSF": 79,
+      "rankSF": 78,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -678,8 +678,8 @@
     "sleeperAdp": 82,
     "superflex-rank": 105,
     "weekly": {
-      "rank1QB": 130,
-      "rankSF": 142,
+      "rank1QB": 129,
+      "rankSF": 141,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -702,8 +702,8 @@
     "sleeperAdp": 125,
     "superflex-rank": 136,
     "weekly": {
-      "rank1QB": 129,
-      "rankSF": 141,
+      "rank1QB": 128,
+      "rankSF": 140,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -726,7 +726,7 @@
     "superflex-rank": 58,
     "weekly": {
       "rank1QB": 28,
-      "rankSF": 58,
+      "rankSF": 57,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -750,7 +750,7 @@
     "superflex-rank": 84,
     "weekly": {
       "rank1QB": 109,
-      "rankSF": 129,
+      "rankSF": 128,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -773,7 +773,7 @@
     "superflex-rank": 64,
     "weekly": {
       "rank1QB": 43,
-      "rankSF": 70,
+      "rankSF": 69,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -796,7 +796,7 @@
     "superflex-rank": 169,
     "weekly": {
       "rank1QB": 57,
-      "rankSF": 84,
+      "rankSF": 83,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -843,7 +843,7 @@
     "superflex-rank": 46,
     "weekly": {
       "rank1QB": 20,
-      "rankSF": 52,
+      "rankSF": 51,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -883,7 +883,7 @@
     "superflex-rank": 31,
     "weekly": {
       "rank1QB": 21,
-      "rankSF": 53,
+      "rankSF": 52,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -906,7 +906,7 @@
     "superflex-rank": 109,
     "weekly": {
       "rank1QB": 65,
-      "rankSF": 92,
+      "rankSF": 91,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -929,7 +929,7 @@
     "superflex-rank": 89,
     "weekly": {
       "rank1QB": 75,
-      "rankSF": 102,
+      "rankSF": 101,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -952,7 +952,7 @@
     "superflex-rank": 53,
     "weekly": {
       "rank1QB": 47,
-      "rankSF": 74,
+      "rankSF": 73,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -975,7 +975,7 @@
     "superflex-rank": 99,
     "weekly": {
       "rank1QB": 55,
-      "rankSF": 82,
+      "rankSF": 81,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -998,7 +998,7 @@
     "superflex-rank": 81,
     "weekly": {
       "rank1QB": 45,
-      "rankSF": 72,
+      "rankSF": 71,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1062,7 +1062,7 @@
     "superflex-rank": 91,
     "weekly": {
       "rank1QB": 79,
-      "rankSF": 104,
+      "rankSF": 103,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -1085,7 +1085,7 @@
     "superflex-rank": 8,
     "weekly": {
       "rank1QB": 5,
-      "rankSF": 37,
+      "rankSF": 36,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -1108,7 +1108,7 @@
     "superflex-rank": 83,
     "weekly": {
       "rank1QB": 59,
-      "rankSF": 86,
+      "rankSF": 85,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -1131,7 +1131,7 @@
     "superflex-rank": 10,
     "weekly": {
       "rank1QB": 4,
-      "rankSF": 36,
+      "rankSF": 35,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1178,7 +1178,7 @@
     "superflex-rank": 40,
     "weekly": {
       "rank1QB": 32,
-      "rankSF": 62,
+      "rankSF": 61,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1200,8 +1200,8 @@
     "sleeperAdp": 93,
     "superflex-rank": 141,
     "weekly": {
-      "rank1QB": 227,
-      "rankSF": 225,
+      "rank1QB": 226,
+      "rankSF": 224,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -1248,7 +1248,7 @@
     "superflex-rank": 123,
     "weekly": {
       "rank1QB": 62,
-      "rankSF": 89,
+      "rankSF": 88,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1271,7 +1271,7 @@
     "superflex-rank": 49,
     "weekly": {
       "rank1QB": 15,
-      "rankSF": 47,
+      "rankSF": 46,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1294,7 +1294,7 @@
     "superflex-rank": 113,
     "weekly": {
       "rank1QB": 72,
-      "rankSF": 99,
+      "rankSF": 98,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1361,7 +1361,7 @@
     "superflex-rank": 114,
     "weekly": {
       "rank1QB": 100,
-      "rankSF": 122,
+      "rankSF": 121,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -1384,7 +1384,7 @@
     "superflex-rank": 129,
     "weekly": {
       "rank1QB": 98,
-      "rankSF": 120,
+      "rankSF": 119,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1449,7 +1449,7 @@
     "superflex-rank": 65,
     "weekly": {
       "rank1QB": 58,
-      "rankSF": 85,
+      "rankSF": 84,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -1472,7 +1472,7 @@
     "superflex-rank": 70,
     "weekly": {
       "rank1QB": 90,
-      "rankSF": 114,
+      "rankSF": 113,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -1511,8 +1511,8 @@
     "sleeperAdp": 89,
     "superflex-rank": 142,
     "weekly": {
-      "rank1QB": 161,
-      "rankSF": 173,
+      "rank1QB": 160,
+      "rankSF": 172,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1535,7 +1535,7 @@
     "superflex-rank": 106,
     "weekly": {
       "rank1QB": 44,
-      "rankSF": 71,
+      "rankSF": 70,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -1558,7 +1558,7 @@
     "superflex-rank": 17,
     "weekly": {
       "rank1QB": 17,
-      "rankSF": 49,
+      "rankSF": 48,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -1581,8 +1581,8 @@
     "sleeperAdp": 136,
     "superflex-rank": 152,
     "weekly": {
-      "rank1QB": 142,
-      "rankSF": 154,
+      "rank1QB": 141,
+      "rankSF": 153,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -1600,8 +1600,8 @@
     "sleeperAdp": 295,
     "superflex-rank": 252,
     "weekly": {
-      "rank1QB": 296,
-      "rankSF": 288,
+      "rank1QB": 295,
+      "rankSF": 287,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -1624,7 +1624,7 @@
     "superflex-rank": 6,
     "weekly": {
       "rank1QB": 1,
-      "rankSF": 33,
+      "rankSF": 32,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1647,7 +1647,7 @@
     "superflex-rank": 19,
     "weekly": {
       "rank1QB": 18,
-      "rankSF": 50,
+      "rankSF": 49,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -1670,7 +1670,7 @@
     "superflex-rank": 118,
     "weekly": {
       "rank1QB": 46,
-      "rankSF": 73,
+      "rankSF": 72,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -1717,7 +1717,7 @@
     "superflex-rank": 73,
     "weekly": {
       "rank1QB": 36,
-      "rankSF": 64,
+      "rankSF": 63,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1740,8 +1740,8 @@
     "sleeperAdp": 159,
     "superflex-rank": 188,
     "weekly": {
-      "rank1QB": 204,
-      "rankSF": 203,
+      "rank1QB": 203,
+      "rankSF": 202,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -1782,7 +1782,7 @@
     "superflex-rank": 128,
     "weekly": {
       "rank1QB": 67,
-      "rankSF": 94,
+      "rankSF": 93,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -1805,7 +1805,7 @@
     "superflex-rank": 25,
     "weekly": {
       "rank1QB": 12,
-      "rankSF": 44,
+      "rankSF": 43,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1847,7 +1847,7 @@
     "superflex-rank": 37,
     "weekly": {
       "rank1QB": 34,
-      "rankSF": 63,
+      "rankSF": 62,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -1869,8 +1869,8 @@
     "sleeperAdp": 153,
     "superflex-rank": 167,
     "weekly": {
-      "rank1QB": 136,
-      "rankSF": 148,
+      "rank1QB": 135,
+      "rankSF": 147,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -1893,7 +1893,7 @@
     "superflex-rank": 108,
     "weekly": {
       "rank1QB": 84,
-      "rankSF": 108,
+      "rankSF": 107,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -1915,8 +1915,8 @@
     "sleeperAdp": 126,
     "superflex-rank": 138,
     "weekly": {
-      "rank1QB": 135,
-      "rankSF": 147,
+      "rank1QB": 134,
+      "rankSF": 146,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -1939,7 +1939,7 @@
     "superflex-rank": 74,
     "weekly": {
       "rank1QB": 71,
-      "rankSF": 98,
+      "rankSF": 97,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -1962,7 +1962,7 @@
     "superflex-rank": 60,
     "weekly": {
       "rank1QB": 48,
-      "rankSF": 75,
+      "rankSF": 74,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -1985,7 +1985,7 @@
     "superflex-rank": 82,
     "weekly": {
       "rank1QB": 64,
-      "rankSF": 91,
+      "rankSF": 90,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -2008,7 +2008,7 @@
     "superflex-rank": 42,
     "weekly": {
       "rank1QB": 27,
-      "rankSF": 57,
+      "rankSF": 56,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2031,7 +2031,7 @@
     "superflex-rank": 78,
     "weekly": {
       "rank1QB": 68,
-      "rankSF": 95,
+      "rankSF": 94,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2054,7 +2054,7 @@
     "superflex-rank": 54,
     "weekly": {
       "rank1QB": 29,
-      "rankSF": 59,
+      "rankSF": 58,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2077,7 +2077,7 @@
     "superflex-rank": 63,
     "weekly": {
       "rank1QB": 76,
-      "rankSF": 103,
+      "rankSF": 102,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2099,8 +2099,8 @@
     "sleeperAdp": 81,
     "superflex-rank": 148,
     "weekly": {
-      "rank1QB": 133,
-      "rankSF": 145,
+      "rank1QB": 132,
+      "rankSF": 144,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -2123,7 +2123,7 @@
     "superflex-rank": 66,
     "weekly": {
       "rank1QB": 40,
-      "rankSF": 67,
+      "rankSF": 66,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -2182,12 +2182,12 @@
     "qb-score": 4,
     "superflex-rank": 21,
     "weekly": {
-      "rank1QB": 126,
-      "rankSF": 20,
+      "rank1QB": null,
+      "rankSF": null,
       "lights": {
         "matchup": "YELLOW",
-        "offense": "YELLOW",
-        "vegas": "YELLOW"
+        "vegas": "YELLOW",
+        "offense": "YELLOW"
       }
     }
   },
@@ -2223,7 +2223,7 @@
     "superflex-rank": 88,
     "weekly": {
       "rank1QB": 91,
-      "rankSF": 115,
+      "rankSF": 114,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -2246,7 +2246,7 @@
     "superflex-rank": 101,
     "weekly": {
       "rank1QB": 89,
-      "rankSF": 113,
+      "rankSF": 112,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2269,7 +2269,7 @@
     "superflex-rank": 115,
     "weekly": {
       "rank1QB": 88,
-      "rankSF": 112,
+      "rankSF": 111,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2292,7 +2292,7 @@
     "superflex-rank": 137,
     "weekly": {
       "rank1QB": 101,
-      "rankSF": 123,
+      "rankSF": 122,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -2315,7 +2315,7 @@
     "superflex-rank": 13,
     "weekly": {
       "rank1QB": 8,
-      "rankSF": 40,
+      "rankSF": 39,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -2338,7 +2338,7 @@
     "superflex-rank": 41,
     "weekly": {
       "rank1QB": 19,
-      "rankSF": 51,
+      "rankSF": 50,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -2360,8 +2360,8 @@
     "sleeperAdp": 131,
     "superflex-rank": 132,
     "weekly": {
-      "rank1QB": 163,
-      "rankSF": 175,
+      "rank1QB": 162,
+      "rankSF": 174,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2384,7 +2384,7 @@
     "superflex-rank": 34,
     "weekly": {
       "rank1QB": 11,
-      "rankSF": 43,
+      "rankSF": 42,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -2444,7 +2444,7 @@
     "superflex-rank": 119,
     "weekly": {
       "rank1QB": 110,
-      "rankSF": 130,
+      "rankSF": 129,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2467,7 +2467,7 @@
     "superflex-rank": 35,
     "weekly": {
       "rank1QB": 13,
-      "rankSF": 45,
+      "rankSF": 44,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2490,7 +2490,7 @@
     "superflex-rank": 20,
     "weekly": {
       "rank1QB": 9,
-      "rankSF": 41,
+      "rankSF": 40,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2512,8 +2512,8 @@
     "sleeperAdp": 112,
     "superflex-rank": 161,
     "weekly": {
-      "rank1QB": 294,
-      "rankSF": 286,
+      "rank1QB": 293,
+      "rankSF": 285,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2536,7 +2536,7 @@
     "superflex-rank": 12,
     "weekly": {
       "rank1QB": 3,
-      "rankSF": 35,
+      "rankSF": 34,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2559,7 +2559,7 @@
     "superflex-rank": 112,
     "weekly": {
       "rank1QB": 74,
-      "rankSF": 101,
+      "rankSF": 100,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2581,8 +2581,8 @@
     "sleeperAdp": 70,
     "superflex-rank": 110,
     "weekly": {
-      "rank1QB": 223,
-      "rankSF": 221,
+      "rank1QB": 222,
+      "rankSF": 220,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -2629,7 +2629,7 @@
     "superflex-rank": 77,
     "weekly": {
       "rank1QB": 66,
-      "rankSF": 93,
+      "rankSF": 92,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -2652,7 +2652,7 @@
     "superflex-rank": 124,
     "weekly": {
       "rank1QB": 99,
-      "rankSF": 121,
+      "rankSF": 120,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2692,8 +2692,8 @@
     "sleeperAdp": 41,
     "superflex-rank": 93,
     "weekly": {
-      "rank1QB": 221,
-      "rankSF": 219,
+      "rank1QB": 220,
+      "rankSF": 218,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -2734,8 +2734,8 @@
     "sleeperAdp": 113,
     "superflex-rank": 131,
     "weekly": {
-      "rank1QB": 165,
-      "rankSF": 177,
+      "rank1QB": 164,
+      "rankSF": 176,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -2759,7 +2759,7 @@
     "superflex-rank": 87,
     "weekly": {
       "rank1QB": 73,
-      "rankSF": 100,
+      "rankSF": 99,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -2801,8 +2801,8 @@
     "sleeperAdp": null,
     "superflex-rank": 154,
     "weekly": {
-      "rank1QB": 191,
-      "rankSF": 31,
+      "rank1QB": 190,
+      "rankSF": 30,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -2921,7 +2921,7 @@
     "superflex-rank": 44,
     "weekly": {
       "rank1QB": 30,
-      "rankSF": 60,
+      "rankSF": 59,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -2944,7 +2944,7 @@
     "superflex-rank": 146,
     "weekly": {
       "rank1QB": 92,
-      "rankSF": 116,
+      "rankSF": 115,
       "lights": {
         "matchup": "GREEN",
         "offense": "GREEN",
@@ -2968,7 +2968,7 @@
     "superflex-rank": 33,
     "weekly": {
       "rank1QB": 23,
-      "rankSF": 54,
+      "rankSF": 53,
       "lights": {
         "matchup": "RED",
         "offense": "GREEN",
@@ -3003,8 +3003,8 @@
     "team": "NYJ",
     "superflex-rank": 407,
     "weekly": {
-      "rank1QB": 301,
-      "rankSF": 293,
+      "rank1QB": 300,
+      "rankSF": 292,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3027,7 +3027,7 @@
     "superflex-rank": 92,
     "weekly": {
       "rank1QB": 53,
-      "rankSF": 80,
+      "rankSF": 79,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -3049,8 +3049,8 @@
     "sleeperAdp": 56,
     "superflex-rank": 71,
     "weekly": {
-      "rank1QB": 261,
-      "rankSF": 256,
+      "rank1QB": 260,
+      "rankSF": 255,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -3072,8 +3072,8 @@
     "sleeperAdp": 182,
     "superflex-rank": 175,
     "weekly": {
-      "rank1QB": 148,
-      "rankSF": 160,
+      "rank1QB": 147,
+      "rankSF": 159,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3096,7 +3096,7 @@
     "superflex-rank": 52,
     "weekly": {
       "rank1QB": 25,
-      "rankSF": 56,
+      "rankSF": 55,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3113,8 +3113,8 @@
     "team": "BAL",
     "superflex-rank": 365,
     "weekly": {
-      "rank1QB": 295,
-      "rankSF": 287,
+      "rank1QB": 294,
+      "rankSF": 286,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -3137,7 +3137,7 @@
     "superflex-rank": 24,
     "weekly": {
       "rank1QB": 14,
-      "rankSF": 46,
+      "rankSF": 45,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3160,7 +3160,7 @@
     "superflex-rank": 14,
     "weekly": {
       "rank1QB": 7,
-      "rankSF": 39,
+      "rankSF": 38,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -3183,7 +3183,7 @@
     "superflex-rank": 32,
     "weekly": {
       "rank1QB": 24,
-      "rankSF": 55,
+      "rankSF": 54,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -3206,7 +3206,7 @@
     "superflex-rank": 130,
     "weekly": {
       "rank1QB": 80,
-      "rankSF": 105,
+      "rankSF": 104,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -3229,7 +3229,7 @@
     "superflex-rank": 97,
     "weekly": {
       "rank1QB": 56,
-      "rankSF": 83,
+      "rankSF": 82,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -3251,8 +3251,8 @@
     "sleeperAdp": 144,
     "superflex-rank": 190,
     "weekly": {
-      "rank1QB": 238,
-      "rankSF": 233,
+      "rank1QB": 237,
+      "rankSF": 232,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -3275,7 +3275,7 @@
     "superflex-rank": 100,
     "weekly": {
       "rank1QB": 61,
-      "rankSF": 88,
+      "rankSF": 87,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3297,8 +3297,8 @@
     "sleeperAdp": 139,
     "superflex-rank": 159,
     "weekly": {
-      "rank1QB": 207,
-      "rankSF": 206,
+      "rank1QB": 206,
+      "rankSF": 205,
       "lights": {
         "matchup": "GREEN",
         "offense": "RED",
@@ -3320,8 +3320,8 @@
     "sleeperAdp": 106,
     "superflex-rank": 133,
     "weekly": {
-      "rank1QB": 172,
-      "rankSF": 184,
+      "rank1QB": 171,
+      "rankSF": 183,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3366,8 +3366,8 @@
     "sleeperAdp": 119,
     "superflex-rank": 158,
     "weekly": {
-      "rank1QB": 137,
-      "rankSF": 149,
+      "rank1QB": 136,
+      "rankSF": 148,
       "lights": {
         "matchup": "GREEN",
         "offense": "YELLOW",
@@ -3390,7 +3390,7 @@
     "superflex-rank": 86,
     "weekly": {
       "rank1QB": 104,
-      "rankSF": 124,
+      "rankSF": 123,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3412,8 +3412,8 @@
     "sleeperAdp": 137,
     "superflex-rank": 157,
     "weekly": {
-      "rank1QB": 170,
-      "rankSF": 182,
+      "rank1QB": 169,
+      "rankSF": 181,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3436,7 +3436,7 @@
     "superflex-rank": 117,
     "weekly": {
       "rank1QB": 111,
-      "rankSF": 131,
+      "rankSF": 130,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3458,8 +3458,8 @@
     "sleeperAdp": 79,
     "superflex-rank": 107,
     "weekly": {
-      "rank1QB": 236,
-      "rankSF": 231,
+      "rank1QB": 235,
+      "rankSF": 230,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3482,7 +3482,7 @@
     "superflex-rank": 62,
     "weekly": {
       "rank1QB": 39,
-      "rankSF": 66,
+      "rankSF": 65,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3504,8 +3504,8 @@
     "sleeperAdp": 66,
     "superflex-rank": 153,
     "weekly": {
-      "rank1QB": 171,
-      "rankSF": 183,
+      "rank1QB": 170,
+      "rankSF": 182,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -3528,7 +3528,7 @@
     "superflex-rank": 95,
     "weekly": {
       "rank1QB": 51,
-      "rankSF": 78,
+      "rankSF": 77,
       "lights": {
         "matchup": "YELLOW",
         "offense": "GREEN",
@@ -3551,8 +3551,8 @@
     "sleeperAdp": 120,
     "superflex-rank": 135,
     "weekly": {
-      "rank1QB": 151,
-      "rankSF": 163,
+      "rank1QB": 150,
+      "rankSF": 162,
       "lights": {
         "matchup": "RED",
         "offense": "RED",
@@ -3576,7 +3576,7 @@
     "superflex-rank": 116,
     "weekly": {
       "rank1QB": 63,
-      "rankSF": 90,
+      "rankSF": 89,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3599,7 +3599,7 @@
     "superflex-rank": 61,
     "weekly": {
       "rank1QB": 42,
-      "rankSF": 69,
+      "rankSF": 68,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",
@@ -3622,7 +3622,7 @@
     "superflex-rank": 30,
     "weekly": {
       "rank1QB": 16,
-      "rankSF": 48,
+      "rankSF": 47,
       "lights": {
         "matchup": "RED",
         "offense": "YELLOW",
@@ -3645,7 +3645,7 @@
     "superflex-rank": 75,
     "weekly": {
       "rank1QB": 70,
-      "rankSF": 97,
+      "rankSF": 96,
       "lights": {
         "matchup": "YELLOW",
         "offense": "RED",
@@ -3668,7 +3668,7 @@
     "superflex-rank": 85,
     "weekly": {
       "rank1QB": 50,
-      "rankSF": 77,
+      "rankSF": 76,
       "lights": {
         "matchup": "YELLOW",
         "offense": "YELLOW",

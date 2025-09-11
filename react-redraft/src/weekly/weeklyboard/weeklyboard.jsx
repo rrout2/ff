@@ -133,10 +133,18 @@ export default function WeeklyBoard(props) {
     return () => { cancelled = true; };
   }, [leagueId, teamName]);
 
-  // ---- Choose dataset (SF>1 → SF file, else 1QB) and build maps ----
+  // ---- Choose dataset (SF >= 1 → SF file, else 1QB) and build maps ----
   const { rankMap, rankNameMap, lightsById, lightsByName } = useMemo(() => {
-    const sfCount = Number(settings?.positions?.superflex ?? settings?.positions?.sf ?? 0);
-    const list = sfCount > 1 ? RANK_SF : RANK_1QB;
+    // Accept several aliases just in case the source uses a different key
+    const sfCount = Number(
+      (settings?.positions?.superflex ??
+       settings?.positions?.sf ??
+       settings?.positions?.sflex ??
+       settings?.positions?.op ??
+       0)
+    );
+
+    const list = sfCount >= 1 ? RANK_SF : RANK_1QB;
 
     // id → rank
     const rMap = new Map();
@@ -247,6 +255,15 @@ export default function WeeklyBoard(props) {
   const tnRef = useRef(null);
   const tnScale = useAutoScaleToWidth(tnRef, TEAMNAME_WIDTH, [teamName]);
 
+  // === League Settings: right-side limit auto-shrink (preserves base 0.8 scale) ===
+  const LS_LEFT = 40;                 // current left used below
+  const LS_RIGHT_LIMIT = 700;         // <-- adjust this stop point as needed
+  const LS_WIDTH_BUDGET = LS_RIGHT_LIMIT - LS_LEFT;
+
+  const lsRef = useRef(null);
+  const lsScaleRaw = useAutoScaleToWidth(lsRef, LS_WIDTH_BUDGET, [settings]);
+  const lsScale = Math.min(0.8, lsScaleRaw); // keep your 0.8 baseline, shrink further only if needed
+
   return (
     <div style={{ background:"#f6f6f6", minHeight:"100vh", display:"grid", placeItems:"start center", padding:20 }}>
       <div
@@ -283,15 +300,33 @@ export default function WeeklyBoard(props) {
           <WeekLabel week={weekToShow} fontSize={40} color="#000" align="center" width={300} />
         </div>
 
-        {/* League Settings */}
-        <div style={{ position:"absolute", top:155, left:40, transform:"scale(0.8)", transformOrigin:"top left", zIndex:4 }}>
-          {loading ? (
-            <div style={{ fontFamily:"Arial, sans-serif", color:"#fff" }}>Loading league…</div>
-          ) : error ? (
-            <div style={{ fontFamily:"Arial, sans-serif", color:"crimson" }}>{error}</div>
-          ) : (
-            <LeagueSettings settings={settings} />
-          )}
+        {/* League Settings (auto-shrinks to respect LS_RIGHT_LIMIT) */}
+        <div
+          style={{
+            position:"absolute",
+            top:155,
+            left:LS_LEFT,
+            width:LS_WIDTH_BUDGET,
+            zIndex:4,
+            overflow:"hidden", // clip any sub-pixel overflow
+          }}
+        >
+          <div
+            ref={lsRef}
+            style={{
+              display:"inline-block",
+              transform:`scale(${lsScale})`,
+              transformOrigin:"top left",
+            }}
+          >
+            {loading ? (
+              <div style={{ fontFamily:"Arial, sans-serif", color:"#fff" }}>Loading league…</div>
+            ) : error ? (
+              <div style={{ fontFamily:"Arial, sans-serif", color:"crimson" }}>{error}</div>
+            ) : (
+              <LeagueSettings settings={settings} />
+            )}
+          </div>
         </div>
 
         {/* Starters (uses lights & ranks; rows will use name fallback) */}
@@ -305,9 +340,9 @@ export default function WeeklyBoard(props) {
               rowHeight={68}
               minGap={10}
               rankMap={rankMap}
-              rankNameMap={rankNameMap}        
+              rankNameMap={rankNameMap}
               lightsOverride={lightsById}
-              lightsByName={lightsByName}     
+              lightsByName={lightsByName}
             />
           )}
         </div>
@@ -321,9 +356,9 @@ export default function WeeklyBoard(props) {
               playersById={playersById}
               count={3}
               rankMap={rankMap}
-              rankNameMap={rankNameMap}         
+              rankNameMap={rankNameMap}
               lightsOverride={lightsById}
-              lightsByName={lightsByName}       
+              lightsByName={lightsByName}
             />
           )}
         </div>
