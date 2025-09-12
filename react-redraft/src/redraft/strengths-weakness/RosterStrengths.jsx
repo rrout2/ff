@@ -1,6 +1,7 @@
+// /src/redraft/strengths-weakness/RosterStrengths.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 import './strength-weakness.css';
-import gradeData from '../players/players-by-id.json';
+import gradeData from '../players/players-by-id.json.backup.1757645792240.json';
 import { fetchLeagueRosters } from '../sleeper-league/sleeperAPI.js';
 
 import TagGreen from './strengths-weakness-images/S&W-green.png';
@@ -12,13 +13,12 @@ import TagRed   from './strengths-weakness-images/S&W-red.png';
  * - ownerId: string
  * - starCount?: number
  * - overrideItems?: Array<{ color?: 'green'|'red', type?: 'strength'|'weakness', label: string } | null>
- *   Index 0/1/2 map to Badge 1/2/3. If an index is empty/null, we use AUTO at that slot.
  */
 export default function RosterStrengths({ leagueId, ownerId, starCount = 3, overrideItems }) {
   const [rosters, setRosters] = useState([]);
   const [err, setErr] = useState(null);
 
-  // Fetch league rosters once
+  // ---- fetch once ----
   useEffect(() => {
     if (!leagueId) return;
     let cancel = false;
@@ -28,90 +28,156 @@ export default function RosterStrengths({ leagueId, ownerId, starCount = 3, over
         const rs = await fetchLeagueRosters(leagueId);
         if (!cancel) setRosters(Array.isArray(rs) ? rs : []);
       } catch (e) {
-        if (!cancel) setErr(e.message || 'Failed to load rosters');
+        if (!cancel) setErr(e?.message || 'Failed to load rosters');
       }
     })();
     return () => { cancel = true; };
   }, [leagueId]);
 
-  // --- AUTO computation (always run hooks in same order) ---------------------
+  // ---- helpers ----
+  const toNum = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+  const clamp10 = (n) => Math.max(0, Math.min(10, n));
+  const topHalfSecond = (arr) => {
+    const s = arr.filter(Number.isFinite).sort((a, b) => b - a);
+    return (s[0] ?? 0) + 0.5 * (s[1] ?? 0);
+  };
+  const normName = (s) => String(s || '').trim().toUpperCase();
+
+  // Treat these names as WR even if their DB/other positions sneak in
+  const NAME_AS_WR = new Set(['TRAVIS HUNTER']);
+
+  // normalize position from gradeData row (e.g., "WR104" -> "WR")
+  const posKey = (row) => {
+    const nm = normName(row?.name || row?.full_name);
+    if (NAME_AS_WR.has(nm)) return 'WR';
+    const raw = String(row?.position || '').toUpperCase().replace(/[^A-Z]/g, '');
+    if (raw.startsWith('QB')) return 'QB';
+    if (raw.startsWith('RB')) return 'RB';
+    if (raw.startsWith('WR')) return 'WR';
+    if (raw.startsWith('TE')) return 'TE';
+    return '';
+  };
+
+  // same thresholds as PositionalGrades for RB/WR sums
+  const THRESH = {
+    RB: [10,25,50,75,100,125,140,165,180,200],
+    WR: [20,50,70,90,110,130,160,200,250,300],
+  };
+  const gradeFromThresholds = (arr, value) => {
+    if (!Number.isFinite(value) || value <= 0) return 0;
+    let g = 1;
+    for (let i = 0; i < arr.length; i++) if (value >= arr[i]) g = i + 1;
+    return g; // 1..10
+  };
+
+  // ---- compute grades for each team ----
   const auto = useMemo(() => {
-    if (!ownerId || !rosters.length) {
-      return { ready: false, autoItems: [null, null, null] };
-    }
+    if (!ownerId || !rosters.length) return { ready: false, items: [null, null, null] };
 
-    const sumTeamPos = (playerIds, pos) =>
-      (playerIds || [])
-        .map(id => gradeData[String(id)])
-        .filter(p => p && p.position === pos)
-        .reduce((s, p) => s + (Number(p.value) || 0), 0);
+    const allTeams = rosters.map((r) => {
+      const ids = (r.players || []).map(String);
+      const qbVals = [];
+      const teVals = [];
+      let rbSum = 0;
+      let wrSum = 0;
 
-    const allTeams = rosters.map(r => ({
-      id: String(r.owner_id),
-      qb: sumTeamPos(r.players, 'QB'),
-      rb: sumTeamPos(r.players, 'RB'),
-      wr: sumTeamPos(r.players, 'WR'),
-      te: sumTeamPos(r.players, 'TE'),
-    }));
+      for (const id of ids) {
+        const row = gradeData[id];
+        if (!row) continue;
+        const P = posKey(row);
+        if (P === 'QB') {
+          const v = toNum(row['qb-score'] ?? row.qb_score ?? row.qbScore ?? row.qb_value ?? row.qb ?? row.value);
+          if (v !== null) qbVals.push(v);
+        } else if (P === 'TE') {
+          const v = toNum(row.te_value ?? row.teValue ?? row.te ?? row.value ?? row.score);
+          if (v !== null) teVals.push(v);
+        } else if (P === 'RB') {
+          const v = toNum(row.value ?? row.rb_value ?? row.score ?? row.points);
+          rbSum += v || 0;
+        } else if (P === 'WR') {
+          const v = toNum(row.value ?? row.wr_value ?? row.score ?? row.points);
+          wrSum += v || 0;
+        }
+      }
 
-    const me = allTeams.find(t => t.id === String(ownerId));
-    if (!me) return { ready: false, autoItems: [null, null, null] };
+      const qbGrade = Math.round(clamp10(topHalfSecond(qbVals)));
+      const teGrade = Math.round(clamp10(topHalfSecond(teVals)));
+      const rbGrade = gradeFromThresholds(THRESH.RB, rbSum);
+      const wrGrade = gradeFromThresholds(THRESH.WR, wrSum);
 
-    const isBest = (pos) => allTeams.every(t => t.id === me.id || me[pos] > t[pos]);
+      return { id: String(r.owner_id), qbGrade, rbGrade, wrGrade, teGrade };
+    });
 
-    const thresholds = {
-      wr: { strong: 5.9, weak: 6 },
-      rb: { strong: 5.9, weak: 6 },
-      te: { strong: 5.9, weak: 6 },
-      qb: { strong: 5.9, weak: 6 },
-    };
+    const me = allTeams.find((t) => t.id === String(ownerId));
+    if (!me) return { ready: false, items: [null, null, null] };
+
+    // Best in league (strictly higher)
+    const bestAt = (key) => allTeams.every((t) => t.id === me.id || me[key] > t[key]);
+
+    // thresholds from your sheet (grades)
+    const STRONG = 5.9;   // > 5.9  => strong
+    const WEAK   = 6.0;   // < 6    => weak
 
     const strengths = [];
     const weaknesses = [];
 
-    if (isBest('wr')) strengths.push('Best WR Room In The League');
-    else if (me.wr > thresholds.wr.strong) strengths.push('Strong WR Room');
-    else if (me.wr < thresholds.wr.weak) weaknesses.push('Weak WR Room');
+    // WR
+    if (bestAt('wrGrade')) strengths.push({ key: 'WR', label: 'Best WR Room In The League' });
+    else if (me.wrGrade > STRONG) strengths.push({ key: 'WR', label: 'Strong WR Room' });
+    else if (me.wrGrade < WEAK) weaknesses.push({ key: 'WR', label: 'Weak WR Room' });
 
-    if (isBest('rb')) strengths.push('Best RB Room In The League');
-    else if (me.rb > thresholds.rb.strong) strengths.push('Strong RB Room');
-    else if (me.rb < thresholds.rb.weak) weaknesses.push('Weak RB Room');
+    // RB
+    if (bestAt('rbGrade')) strengths.push({ key: 'RB', label: 'Best RB Room In The League' });
+    else if (me.rbGrade > STRONG) strengths.push({ key: 'RB', label: 'Strong RB Room' });
+    else if (me.rbGrade < WEAK) weaknesses.push({ key: 'RB', label: 'Weak RB Room' });
 
-    if (isBest('te')) strengths.push('Best TE Room In The League');
-    else if (me.te > thresholds.te.strong) strengths.push('Strong TE Room');
-    else if (me.te < thresholds.te.weak) weaknesses.push('Weak TE Room');
+    // TE
+    if (bestAt('teGrade')) strengths.push({ key: 'TE', label: 'Best TE Room In The League' });
+    else if (me.teGrade > STRONG) strengths.push({ key: 'TE', label: 'Strong TE Room' });
+    else if (me.teGrade < WEAK) weaknesses.push({ key: 'TE', label: 'Weak TE Room' });
 
-    if (isBest('qb')) strengths.push('Best QB Room In The League');
-    else if (me.qb > thresholds.qb.strong) strengths.push('Strong QB Room');
-    else if (me.qb < thresholds.qb.weak) weaknesses.push('Weak QB Room');
+    // QB
+    if (bestAt('qbGrade')) strengths.push({ key: 'QB', label: 'Best QB Room In The League' });
+    else if (me.qbGrade > STRONG) strengths.push({ key: 'QB', label: 'Strong QB Room' });
+    else if (me.qbGrade < WEAK) weaknesses.push({ key: 'QB', label: 'Weak QB Room' });
 
-    // exactly 3 slots:
+    // Don’t show both “Best” and “Strong” for same position
+    const bestKeys = new Set(strengths.filter(s => s.label.startsWith('Best')).map(s => s.key));
+    const dedupStrengths = strengths.filter(s => !(s.label.startsWith('Strong') && bestKeys.has(s.key)));
+
+    // How many tags
     const wantStrengths = starCount >= 3 ? 2 : 1;
     const wantWeaknesses = starCount >= 3 ? 1 : 2;
 
+    // Fallbacks
     const sFallback = ['Has Playmakers', 'Upside Depth'];
     const wFallback = ['Needs Depth', 'Injury Risk'];
 
-    while (strengths.length < wantStrengths && sFallback.length) strengths.push(sFallback.shift());
-    while (weaknesses.length < wantWeaknesses && wFallback.length) weaknesses.push(wFallback.shift());
+    const S = dedupStrengths.map(s => s.label).slice(0, wantStrengths);
+    const W = weaknesses.map(w => w.label).slice(0, wantWeaknesses);
 
-    const autoItems =
-      starCount >= 3
-        ? [
-            { type: 'strength', color: 'green', label: strengths[0] },
-            { type: 'strength', color: 'green', label: strengths[1] },
-            { type: 'weakness', color: 'red',   label: weaknesses[0] },
-          ]
-        : [
-            { type: 'strength', color: 'green', label: strengths[0] },
-            { type: 'weakness', color: 'red',   label: weaknesses[0] },
-            { type: 'weakness', color: 'red',   label: weaknesses[1] },
-          ];
+    while (S.length < wantStrengths && sFallback.length) S.push(sFallback.shift());
+    while (W.length < wantWeaknesses && wFallback.length) W.push(wFallback.shift());
 
-    return { ready: true, autoItems };
+    const items = (starCount >= 3)
+      ? [
+          { type: 'strength', color: 'green', label: S[0] },
+          { type: 'strength', color: 'green', label: S[1] },
+          { type: 'weakness', color: 'red',   label: W[0] },
+        ]
+      : [
+          { type: 'strength', color: 'green', label: S[0] },
+          { type: 'weakness', color: 'red',   label: W[0] },
+          { type: 'weakness', color: 'red',   label: W[1] },
+        ];
+
+    return { ready: true, items };
   }, [rosters, ownerId, starCount]);
 
-  // --- Normalize overrides to fixed 3 slots ---------------------------------
+  // ---- overrides (slot-based) ----
   const normOverride = useMemo(() => {
     const out = [null, null, null];
     if (!Array.isArray(overrideItems)) return out;
@@ -127,9 +193,8 @@ export default function RosterStrengths({ leagueId, ownerId, starCount = 3, over
     return out;
   }, [overrideItems]);
 
-  // --- Final items: override by slot -> else auto at that slot ---------------
   const items = useMemo(() => {
-    const base = auto.autoItems || [null, null, null];
+    const base = auto.items || [null, null, null];
     return [0, 1, 2].map(i => normOverride[i] || base[i]).filter(Boolean);
   }, [normOverride, auto]);
 

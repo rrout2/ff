@@ -84,7 +84,7 @@ export default function StartersWeekly({
 
     const CORE = new Set(["qb", "rb", "wr", "te", "sflex", "flex"]);
     const core = starters.filter((r) => CORE.has(r.slot));
-    const ORDER = ["qb", "rb", "wr", "te", "sflex", "flex"];
+    const ORDER = ["qb", "rb", "wr", "te", "flex", "sflex"];
     return ORDER.flatMap((s) => core.filter((r) => r.slot === s));
   }, [lineup]);
 

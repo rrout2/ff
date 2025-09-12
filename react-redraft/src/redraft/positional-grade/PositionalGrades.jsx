@@ -1,7 +1,7 @@
 // /src/redraft/positional-grade/PositionalGrades.jsx
 import React, { useMemo } from 'react';
 import './positional-grade.css';
-import gradeData from '../players/players-by-id.json';
+import gradeData from '../players/players-by-id.json.backup.1757645792240.json';
 
 const gradeMatrix = {
   SF:   { QB:[1,2,3,4,5,6,7,8,9,10], RB:[10,25,50,75,100,125,140,165,180,200], WR:[20,50,70,90,110,130,160,200,250,300], TE:[1,2,3,4,5,6,7,8,9,10] },
@@ -16,7 +16,16 @@ const firstNum = (...vals) => {
   for (const v of vals) { const n = num(v); if (n !== null) return n; }
   return null;
 };
-const normName = (s) => String(s || '').trim().toUpperCase().replace(/\s+/g,' ');
+
+// Robust name normalizer (handles curly quotes & accents)
+const normKey = (s) =>
+  String(s || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’‘]/g, "'")
+    .replace(/[^a-z0-9']/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 function getGrade(thresholds, value) {
   for (let i = thresholds.length - 1; i >= 0; i--) if (value >= thresholds[i]) return i + 1;
@@ -58,7 +67,7 @@ export default function PositionalGrades({
     const byName = (() => {
       const map = new Map();
       for (const [gid, row] of Object.entries(byId)) {
-        const k = normName(row?.name);
+        const k = normKey(row?.name);
         if (k && !map.has(k)) map.set(k, row);
       }
       return map;
@@ -71,33 +80,42 @@ export default function PositionalGrades({
       .map((p) => {
         const pid = String(p.player_id || p.id);
         const name = p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim();
-        const pos = Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position;
+        const pos = (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) || p.position || '';
+        const POS = String(pos).toUpperCase();
 
-        const g = byId[pid] || byName.get(normName(name)) || {};
+        const g = byId[pid] || byName.get(normKey(name)) || {};
+        const isTravisHunter = normKey(name) === normKey('Travis Hunter');
 
-        // RB/WR: legacy 'value', but accept rb_value/wr_value/score
+        // Value from the unified JSON (domain values). Also accept legacy fields as fallback.
+        const baseValue = firstNum(
+          g.value,
+          g[`${String(POS).toLowerCase()}_value`], // rb_value / wr_value if present
+          g.score,
+          g.points
+        );
+
+        // RB/WR value: include if position RB/WR OR if Travis Hunter (special case -> count with WR)
         const rbwrValue =
-          pos === 'RB' || pos === 'WR'
-            ? firstNum(g.value, g[`${String(pos).toLowerCase()}_value`], g.score, g.points)
-            : null;
+          (POS === 'RB' || POS === 'WR' || isTravisHunter) ? (baseValue ?? 0) : null;
 
-        // TE: te_value/teValue/te/value/score
-        const teScore = pos === 'TE'
+        // TE value from te_value (or fallbacks)
+        const teScore = POS === 'TE'
           ? firstNum(g.te_value, g.teValue, g.te, g.value, g.score)
           : null;
 
-        // QB: qb-score/qb_score/qbScore/qb_value/qb/value (last is a fallback)
-        const qbScore = pos === 'QB'
+        // QB score from qb-score (or fallbacks)
+        const qbScore = POS === 'QB'
           ? firstNum(g['qb-score'], g.qb_score, g.qbScore, g.qb_value, g.qb, g.value)
           : null;
 
         return {
           id: pid,
           name,
-          position: pos,
+          position: POS,
           rbwrValue: rbwrValue ?? 0,
           teScore: teScore ?? null,
           qbScore: qbScore ?? null,
+          countAsWR: POS === 'WR' || isTravisHunter, // ensure Hunter contributes to WR
         };
       });
 
@@ -121,9 +139,14 @@ export default function PositionalGrades({
     const teScores = allPlayers.filter(p => p.position === 'TE' && p.teScore !== null).map(p => p.teScore);
     const teGrade = Math.round(clamp10(topPlusHalfSecond(teScores)));
 
-    // RB / WR thresholds (sum)
-    const rbTotal = allPlayers.filter(p => p.position === 'RB').reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
-    const wrTotal = allPlayers.filter(p => p.position === 'WR').reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
+    // RB / WR totals (sum of 'value')
+    const rbTotal = allPlayers
+      .filter(p => p.position === 'RB')
+      .reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
+
+    const wrTotal = allPlayers
+      .filter(p => p.countAsWR)    // WRs + Travis Hunter override
+      .reduce((s, p) => s + (num(p.rbwrValue) || 0), 0);
 
     return {
       grades: {

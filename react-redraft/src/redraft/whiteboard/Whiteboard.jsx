@@ -17,6 +17,9 @@ import FinalVerdict from '../final-verdict/FinalVerdict';
 import DraftValueManual from '../draft-value-chart/DraftValueManual.jsx';
 import WhiteBox from '../whitebox/WhiteBox.jsx';
 
+// ⬇️ NEW: Waiver block
+import TopWaiverPriorities from '../top-waiver-priorities/TopWaiverPriorities.jsx';
+
 import {
   getLeagueSettings,
   fetchLeagueUsers,
@@ -475,7 +478,7 @@ export default function Whiteboard() {
     const raw = overrides?.rosterStrengths?.items;
     if (Array.isArray(raw)) return [raw[0] ?? null, raw[1] ?? null, raw[2] ?? null];
     if (raw && typeof raw === 'object') {
-      return [raw[0] ?? raw['0'] ?? null, raw[1] ?? raw['1'] ?? null, raw[2] ?? raw['2'] ?? null];
+    return [raw[0] ?? raw['0'] ?? null, raw[1] ?? raw['1'] ?? null, raw[2] ?? raw['2'] ?? null];
     }
     return [null, null, null];
   }, [overrides]);
@@ -652,31 +655,6 @@ export default function Whiteboard() {
         )}
       </div>
       
-      {/* DRAFT VALUE: chart + optional manual overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '590px',
-          left: '650px',
-          transform: 'scale(0.7)',
-          transformOrigin: 'top left'
-        }}
-      >
-        {!loading && !error && (
-          overrides?.manualDraft?.enabled ? (
-            <DraftValueManual grade={overrides?.manualDraft?.grade ?? 0} width={640} board={overrides?.manualDraft?.board || "green"} />
-          ) : (
-            <DraftValueChart
-              points={draftPoints}
-              teamsCount={effSettings.teams || 12}
-              width={640}
-              height={600}
-              useSuperflexADP={Number(effSettings?.positions?.superflex ?? effSettings?.positions?.sf ?? 0) > 0}
-            />
-          )
-        )}
-      </div>
-
       {/* WHITE BOX OVERLAY */}
       {overrides?.whiteBox?.enabled && (
         <WhiteBox
@@ -727,6 +705,26 @@ export default function Whiteboard() {
             rosterIds={rosterIds}
             playersById={playersById}
             forcedGrades={oget(overrides,'positionalGrades',undefined)}
+          />
+        )}
+      </div>
+
+      {/* ⬇️ NEW: TOP WAIVER PRIORITIES */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '575px',
+          left: '665px',
+          transform: 'scale(0.75)',
+          transformOrigin: 'top left'
+        }}
+      >
+        {!loading && !error && (
+          <TopWaiverPriorities
+            leagueId={leagueId}
+            settings={effSettings}
+            playersById={playersById}
+            rosterIds={rosterIds}
           />
         )}
       </div>

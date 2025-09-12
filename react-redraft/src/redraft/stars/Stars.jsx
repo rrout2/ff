@@ -2,8 +2,7 @@ import React, { useMemo, useEffect } from 'react';
 import './stars.css';
 import starFilled from './stars-images/star_filled.png';
 import starUnfilled from './stars-images/star_unfilled.png';
-import gradeData from '../players/players-by-id.json';
-
+import gradeData from '../players/players-by-id.json.backup.1757645792240.json';
 const gradeMatrix = {
   SF: {
     QB: [4, 10, 20, 30, 40, 50, 60, 66, 74, 80],
