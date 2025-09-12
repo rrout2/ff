@@ -1,4 +1,3 @@
-// /src/redraft/top-waiver-priorities/TopWaiverPriorities.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import "./top-waiver-priorities.css";
 import gradeData from "../players/players-by-id.json";
@@ -13,18 +12,20 @@ import { fetchLeagueRosters } from "../sleeper-league/sleeperAPI.js";
  *  - settings: { positions?: { superflex?: number, sf?: number } }
  *  - playersById: Record<string, SleeperPlayer>
  *  - rosterIds: string[] (needed to compute current QB/TE grades so we can block them)
+ *  - overrideIds?: string[]   // EXACT players to show (order = 1/2/3)
  */
 export default function TopWaiverPriorities({
   leagueId,
   settings,
   playersById = {},
   rosterIds = [],
+  overrideIds = [],
 }) {
   const [rosteredIds, setRosteredIds] = useState(new Set());
   const [loading, setLoading] = useState(Boolean(leagueId));
   const [error, setError] = useState(null);
 
-  // Collect all rostered IDs in the league (to find true FAs)
+  // league-wide rostered ids (to define true free agents)
   useEffect(() => {
     if (!leagueId) return;
     let cancelled = false;
@@ -48,7 +49,7 @@ export default function TopWaiverPriorities({
 
   const isSF = Number(settings?.positions?.superflex ?? settings?.positions?.sf ?? 0) > 0;
 
-  // Current team QB/TE grades (block those positions when >= 8)
+  // compute team QB/TE grades (for auto-mode filtering)
   const { qbGrade, teGrade } = useMemo(() => {
     const clamp10 = (n) => Math.max(0, Math.min(10, n));
     const topHalfSecond = (arr) => {
@@ -76,8 +77,8 @@ export default function TopWaiverPriorities({
     };
   }, [rosterIds, playersById]);
 
-  // Top 3 free agents by your Domain/SF ranks
-  const top3 = useMemo(() => {
+  // ---------- AUTO top 3 from free agents ----------
+  const autoTop3 = useMemo(() => {
     if (!playersById || !Object.keys(playersById).length) return [];
     const ALLOWED = new Set(["QB", "RB", "WR", "TE"]);
     const scoreOf = (id) => {
@@ -91,8 +92,7 @@ export default function TopWaiverPriorities({
     const cands = [];
     for (const [id, p] of Object.entries(playersById)) {
       const pid = String(id);
-      if (rosteredIds.has(pid)) continue;
-
+      if (rosteredIds.has(pid)) continue; // FREE AGENT (not rostered anywhere)
       const POS = String(
         (Array.isArray(p.fantasy_positions) && p.fantasy_positions[0]) || p.position || ""
       ).toUpperCase();
@@ -107,24 +107,40 @@ export default function TopWaiverPriorities({
 
       cands.push({ id: pid, pos: POS, team, score: sc, name: fullNameOf(p) });
     }
-
     cands.sort((a, b) => a.score - b.score);
     return cands.slice(0, 3);
   }, [playersById, rosteredIds, isSF, qbGrade, teGrade]);
 
-  if (error || loading || !top3.length) return null;
+  // ---------- Overrides: show exact players (in given order) ----------
+  const overrideTop = useMemo(() => {
+    const ids = (overrideIds || []).map(String).filter(Boolean).slice(0, 3);
+    if (!ids.length) return null;
+    const rows = [];
+    for (const id of ids) {
+      const p = playersById[id];
+      if (!p) continue;
+      const pos = (Array.isArray(p.fantasy_positions) ? p.fantasy_positions[0] : p.position || '').toUpperCase();
+      if (!['QB','RB','WR','TE'].includes(pos)) continue;
+      const team = (p.team || p.pro_team || p.team_abbr || '').toUpperCase();
+      const name = fullNameOf(p);
+      rows.push({ id, pos, team, name });
+    }
+    return rows.length ? rows : null;
+  }, [overrideIds, playersById]);
+
+  const list = overrideTop || autoTop3;
+
+  if (error || loading || !list.length) return null;
 
   return (
     <div className="waiver-priorities">
       <div className="waiver-stack">
-        {top3.map((p, i) => (
-          <div key={p.id} className={`waiver-card ${posClass(p.pos)}`}>
-            {/* Left white rank area */}
+        {list.map((p, i) => (
+          <div key={`${p.id}-${i}`} className={`waiver-card ${posClass(p.pos)}`}>
             <div className="waiver-left">
               <div className="waiver-rank">#{i + 1}</div>
             </div>
 
-            {/* Right position-tinted panel */}
             <div className={`waiver-right ${posClass(p.pos)}`}>
               <div className="waiver-media">
                 {teamLogo(p.team) && (

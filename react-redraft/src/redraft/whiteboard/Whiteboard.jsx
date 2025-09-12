@@ -17,8 +17,10 @@ import FinalVerdict from '../final-verdict/FinalVerdict';
 import DraftValueManual from '../draft-value-chart/DraftValueManual.jsx';
 import WhiteBox from '../whitebox/WhiteBox.jsx';
 
-// ⬇️ NEW: Waiver block
+// ⬇️ Auto Waiver block (existing)
 import TopWaiverPriorities from '../top-waiver-priorities/TopWaiverPriorities.jsx';
+// ⬇️ NEW: Manual Top Waivers single-tile overlay
+import ManualTopWaivers from '../top-waiver-priorities/ManualTopWaivers.jsx';
 
 import {
   getLeagueSettings,
@@ -478,7 +480,7 @@ export default function Whiteboard() {
     const raw = overrides?.rosterStrengths?.items;
     if (Array.isArray(raw)) return [raw[0] ?? null, raw[1] ?? null, raw[2] ?? null];
     if (raw && typeof raw === 'object') {
-    return [raw[0] ?? raw['0'] ?? null, raw[1] ?? raw['1'] ?? null, raw[2] ?? raw['2'] ?? null];
+      return [raw[0] ?? raw['0'] ?? null, raw[1] ?? raw['1'] ?? null, raw[2] ?? raw['2'] ?? null];
     }
     return [null, null, null];
   }, [overrides]);
@@ -709,7 +711,7 @@ export default function Whiteboard() {
         )}
       </div>
 
-      {/* ⬇️ NEW: TOP WAIVER PRIORITIES */}
+      {/* ⬇️ TOP WAIVER PRIORITIES or MANUAL OVERLAY (single tile) */}
       <div
         style={{
           position: 'absolute',
@@ -720,12 +722,29 @@ export default function Whiteboard() {
         }}
       >
         {!loading && !error && (
-          <TopWaiverPriorities
-            leagueId={leagueId}
-            settings={effSettings}
-            playersById={playersById}
-            rosterIds={rosterIds}
-          />
+          overrides?.manualWaivers?.enabled ? (
+            <ManualTopWaivers
+              enabled
+              items={[{
+                // pass preset id and optional label; ManualTopWaivers resolves color/label
+                preset: String(overrides?.manualWaivers?.preset || '').toUpperCase(),
+                label: overrides?.manualWaivers?.label || undefined
+              }]}
+              width={560}
+              tileHeight={150}
+              gap={18}
+              fontSize={40}
+              textScale={1.8}
+            />
+          ) : (
+            <TopWaiverPriorities
+              leagueId={leagueId}
+              settings={effSettings}
+              playersById={playersById}
+              rosterIds={rosterIds}
+              overrideIds={(overrides?.topWaivers?.overrideIds || []).filter(Boolean)}
+            />
+          )
         )}
       </div>
 

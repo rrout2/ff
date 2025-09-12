@@ -1,4 +1,3 @@
-// /src/whiteboard-site/components/TweaksPanel.jsx
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 export default function TweaksPanel({
@@ -65,13 +64,12 @@ export default function TweaksPanel({
     catch { return fallback; }
   };
 
-  /* -------------------- TEAM CODE CANONICALIZATION (WAS/WASH -> WSH) -------------------- */
+  /* -------------------- TEAM CODE CANONICALIZATION -------------------- */
   const TEAM_ALIASES = { WAS: 'WSH', WASH: 'WSH' };
   const canonicalTeam = (t) => {
     const key = (t || '').toUpperCase();
     return TEAM_ALIASES[key] || key;
   };
-  // For commit strings like "Player Name WR WAS"
   const normalizeCommitStringTeam = (s) => {
     if (!s) return s;
     const parts = String(s).trim().split(/\s+/);
@@ -84,7 +82,7 @@ export default function TweaksPanel({
   };
 
   /* --------------------------------- small inputs --------------------------------- */
-  function TextInput({ value, placeholder, onCommit, maxLength, counterFrom }) {
+  function TextInput({ value, placeholder, onCommit, maxLength, counterFrom, disabled }) {
     const [local, setLocal] = useState(value ?? '');
     useEffect(() => { setLocal(value ?? ''); }, [value]);
     const commit = () => onCommit(local.trim() === '' ? undefined : local.trim());
@@ -103,6 +101,7 @@ export default function TweaksPanel({
           onChange={(e) => setLocal(e.target.value)}
           onBlur={commit}
           onKeyDown={onKeyDown}
+          disabled={disabled}
         />
         {left !== null && <span style={{ fontSize: 12, opacity: .7, whiteSpace: 'nowrap' }}>{left} left</span>}
       </div>
@@ -171,7 +170,6 @@ export default function TweaksPanel({
     return arr;
   }, [playersById]);
 
-  /* ---------- Build roster dropdown options from the current rosterIds ---------- */
   const rosterOptions = useMemo(() => {
     const opts = [];
     for (const id of rosterIds || []) {
@@ -194,48 +192,6 @@ export default function TweaksPanel({
     return opts;
   }, [rosterIds, playersById]);
 
-  /* ============================= Strength/Weakness options ============================= */
-  const STRENGTH_OPTIONS = [
-    'Best WR Room In The League',
-    'Best RB Room In The League',
-    'Best TE Room In The League',
-    'Best QB Room In The League',
-    'Strong WR Room',
-    'Strong RB Room',
-    'High Upside',
-    'Low Risk',
-    'Strong TE Room',
-    'Strong QB Room',
-    'Strong Reliability',
-    'Strong Depth',
-    'Value Necessary To Pivot',
-    'Has Tools to Make a Playoff Push',
-  ];
-
-  const WEAKNESS_OPTIONS = [
-    'Weak WR Room',
-    'Weak RB Room',
-    'Low Upside',
-    'High Risk',
-    'Weak TE Room',
-    'Weak QB Room',
-    'Weak Reliability',
-    'Weak Depth',
-    'Changes are Necessary to Compete',
-  ];
-
-  /* ============================= Roster Tag options (deduped) ============================= */
-  const ROSTER_TAG_OPTIONS = [
-    'The Juggernaut',
-    'Riskit For Biskit',
-    'Safe And Sound',
-    'Balanced Approach',
-    'Wi Tu Lo',
-    'Mariana Trench',
-    'Star Studded',
-  ];
-
-  /* ============================= Player Autocomplete (for recs) ============================== */
   function PlayerAutocomplete({ value, placeholder, onCommit, maxResults = 14 }) {
     const [input, setInput] = useState(value ?? '');
     const [open, setOpen] = useState(false);
@@ -338,14 +294,13 @@ export default function TweaksPanel({
     );
   }
 
-  /* ===== helper: map a commit string "Name POS TEAM" to an ID from allPlayerOptions ===== */
   function resolveIdFromCommitString(commitStr) {
     if (!commitStr) return undefined;
     const parts = String(commitStr).trim().split(/\s+/);
     if (!parts.length) return undefined;
 
     const maybeTeam = parts[parts.length - 1]?.toUpperCase();
-    const maybePos  = parts[parts.length - 2]?.toUpperCase();   // ✅ define maybePos
+    const maybePos  = parts[parts.length - 2]?.toUpperCase();
     const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
     const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
 
@@ -358,7 +313,6 @@ export default function TweaksPanel({
     return cands[0]?.id;
   }
 
-  /* ========================= Label combo (datalist; also free-typing) ========================= */
   function LabelCombo({ value, onCommit, options, listId, placeholder = 'Select or type…', maxLength = 40 }) {
     const [local, setLocal] = useState(value ?? '');
     useEffect(() => { setLocal(value ?? ''); }, [value]);
@@ -384,9 +338,24 @@ export default function TweaksPanel({
     );
   }
 
-  /* ====================== Moves editor (Primary = roster dropdown) ====================== */
-  const LABEL_OPTIONS = ['TRADE', 'UPTIER', 'PIVOT'];
+  /* ============================ SW options ============================ */
+  const STRENGTH_OPTIONS = [
+    'Best WR Room In The League','Best RB Room In The League','Best TE Room In The League','Best QB Room In The League',
+    'Strong WR Room','Strong RB Room','High Upside','Low Risk','Strong TE Room','Strong QB Room','Strong Reliability','Strong Depth',
+    'Value Necessary To Pivot','Has Tools to Make a Playoff Push',
+  ];
+  const WEAKNESS_OPTIONS = [
+    'Weak WR Room','Weak RB Room','Low Upside','High Risk','Weak TE Room','Weak QB Room','Weak Reliability','Weak Depth',
+    'Changes are Necessary to Compete',
+  ];
 
+  /* ============================ Roster Tag options ============================ */
+  const ROSTER_TAG_OPTIONS = [
+    'The Juggernaut','Riskit For Biskit','Safe And Sound','Balanced Approach','Wi Tu Lo','Mariana Trench','Star Studded',
+  ];
+
+  /* ============================ Moves editor (unchanged) ============================ */
+  const LABEL_OPTIONS = ['TRADE', 'UPTIER', 'PIVOT'];
   const MoveCardEditor = ({ moveId, title }) => {
     const base = `moves.${moveId}`;
     const label   = get(`${base}.label`, '');
@@ -401,7 +370,6 @@ export default function TweaksPanel({
       const clean = a.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
       set(`${base}.recs`, clean.length ? clean : undefined);
 
-      // also store recsIds[] so renderers can use a stable key
       const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
       ids[idx] = resolveIdFromCommitString(val);
       const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
@@ -458,7 +426,6 @@ export default function TweaksPanel({
       <div className="wb-card" style={{ padding: 12, overflow: 'visible' }}>
         <div className="wb-card__title" style={{ marginBottom: 8 }}>{title}</div>
 
-        {/* Column Label */}
         <div className="wb-row" style={{ marginBottom: 8 }}>
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Column Label</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
@@ -501,7 +468,7 @@ export default function TweaksPanel({
         <div className="wb-row" style={{ marginTop: 10 }}>
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Option / Note</div>
           <TextArea
-            value={note}
+            value={get(`${base}.note`, '')}
             placeholder="e.g., Package WR2 + RB4 for elite TE; or flip TE for WR upgrade"
             onCommit={(v) => set(`${base}.note`, v)}
             rows={3}
@@ -549,7 +516,7 @@ export default function TweaksPanel({
     );
   };
 
-  /* ======================== Manual Roster (12 rows, players only, saves id) ======================== */
+  /* ======================== Manual Roster (unchanged) ======================== */
   const ManualRosterSection = () => {
     const initial = Array.isArray(o?.manual?.roster) ? o.manual.roster : [];
     const normalizeRow = (r) => {
@@ -576,7 +543,6 @@ export default function TweaksPanel({
     };
 
     const addRow = () => setRows((prev) => [...prev, { name: '', id: undefined }]);
-
     const submit = () => {
       const payload = rows
         .map((r) => ({ name: (r.name || '').trim(), id: r.id }))
@@ -616,16 +582,23 @@ export default function TweaksPanel({
   };
 
   /* ----------------------------- Background picker ----------------------------- */
-  const bgVariant = get('background.variant', 'wb1'); // 'wb1' (default) | 'wb2'
+  const bgVariant = get('background.variant', 'wb1');
   const setBgExclusive = (variant, checked) => {
-    set('background.variant', checked ? variant : undefined); // undefined => fallback to wb1
+    set('background.variant', checked ? variant : undefined);
   };
 
-  /* ---------------------------------- render ---------------------------------- */
   const board = get('manualDraft.board', 'green');
   const setBoardExclusive = (color, checked) => {
     set('manualDraft.board', checked ? color : undefined);
   };
+
+  /* --------- PRESETS for Manual Waivers (single tile) --------- */
+  const WAIVER_PRESETS = [
+    { id: 'WR_UPSIDE', label: 'WR UPSIDE' }, // #7ab274
+    { id: 'RB_UPSIDE', label: 'RB UPSIDE' }, // #81c6c9
+    { id: 'QB_UPSIDE', label: 'QB UPSIDE' }, // #c15252
+    { id: 'TE_UPSIDE', label: 'TE UPSIDE' }, // #f0c05f
+  ];
 
   return (
     <div className="wb-tweaks">
@@ -648,19 +621,11 @@ export default function TweaksPanel({
         <div className="wb-sep">Board Background</div>
         <div style={{ display:'flex', gap:16, alignItems:'center' }}>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input
-              type="checkbox"
-              checked={bgVariant === 'wb1'}
-              onChange={(e)=> setBgExclusive('wb1', e.target.checked)}
-            />
+            <input type="checkbox" checked={bgVariant === 'wb1'} onChange={(e)=> setBgExclusive('wb1', e.target.checked)} />
             <span>Classic (WB-Base.png)</span>
           </label>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input
-              type="checkbox"
-              checked={bgVariant === 'wb2'}
-              onChange={(e)=> setBgExclusive('wb2', e.target.checked)}
-            />
+            <input type="checkbox" checked={bgVariant === 'wb2'} onChange={(e)=> setBgExclusive('wb2', e.target.checked)} />
             <span>Alternate (WB2-base.png)</span>
           </label>
         </div>
@@ -719,47 +684,64 @@ export default function TweaksPanel({
         <SWRow index={1} />
         <SWRow index={2} />
         <div className="wb-row" style={{ gridColumn:'1 / -1', display:'flex', justifyContent:'flex-end', marginTop:4 }}>
-          <button
-            type="button"
-            className="wb-danger"
-            onClick={() => set('rosterStrengths.items', undefined)}
-          >
-            Clear All (Auto)
-          </button>
+          <button type="button" className="wb-danger" onClick={() => set('rosterStrengths.items', undefined)}>Clear All (Auto)</button>
         </div>
 
         {/* Draft Value Grade (manual) */}
         <div className="wb-sep">Draft Value Grade (manual)</div>
-
         <label>Show manual grade overlay</label>
         <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8, alignItems:'center' }}>
-          <input
-            type="checkbox"
-            checked={!!get('manualDraft.enabled', false)}
-            onChange={(e)=> set('manualDraft.enabled', e.target.checked || undefined)}
-          />
+          <input type="checkbox" checked={!!get('manualDraft.enabled', false)} onChange={(e)=> set('manualDraft.enabled', e.target.checked || undefined)} />
           <span style={{ fontSize:12, opacity:.7 }}>When ON, replaces the Draft Value Chart with a manual overlay.</span>
         </div>
-
         <label>Grade (0–10)</label>
         {numInput(get('manualDraft.grade', null), 'manualDraft.grade', { min:0, max:10, step:0.1 })}
 
-        {/* Manual board color (exclusive) */}
+        {/* Manual board color */}
         <label>Manual board color</label>
         <div style={{ display:'flex', gap:16, alignItems:'center' }}>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'red'} onChange={(e)=> setBoardExclusive('red', e.target.checked)} />
-            <span>Red</span>
+            <input type="checkbox" checked={board === 'red'} onChange={(e)=> setBoardExclusive('red', e.target.checked)} /><span>Red</span>
           </label>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'yellow'} onChange={(e)=> setBoardExclusive('yellow', e.target.checked)} />
-            <span>Yellow</span>
+            <input type="checkbox" checked={board === 'yellow'} onChange={(e)=> setBoardExclusive('yellow', e.target.checked)} /><span>Yellow</span>
           </label>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'green'} onChange={(e)=> setBoardExclusive('green', e.target.checked)} />
-            <span>Green</span>
+            <input type="checkbox" checked={board === 'green'} onChange={(e)=> setBoardExclusive('green', e.target.checked)} /><span>Green</span>
           </label>
         </div>
+
+        {/* Top Waivers (manual overlay) — SINGLE TILE */}
+        <div className="wb-sep">Top Waivers (manual overlay)</div>
+
+        <label>Show manual Top Waivers</label>
+        <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8, alignItems:'center' }}>
+          <input
+            type="checkbox"
+            checked={!!get('manualWaivers.enabled', false)}
+            onChange={(e)=> set('manualWaivers.enabled', e.target.checked || undefined)}
+          />
+          <span style={{ fontSize:12, opacity:.7 }}>When ON, replaces the auto waivers with a single full-width tile.</span>
+        </div>
+
+        <label>Tile preset</label>
+        <select
+          value={get('manualWaivers.preset', '')}
+          onChange={(e)=> set('manualWaivers.preset', e.target.value || undefined)}
+        >
+          <option value="">— Select a preset —</option>
+          {WAIVER_PRESETS.map(p => (
+            <option key={p.id} value={p.id}>{p.label}</option>
+          ))}
+        </select>
+
+        <label>Custom label (optional)</label>
+        <TextInput
+          value={get('manualWaivers.label', '')}
+          placeholder="leave blank to use preset label…"
+          onCommit={(v)=> set('manualWaivers.label', v)}
+          maxLength={40}
+        />
 
         {/* White Box Overlay */}
         <div className="wb-sep">White Box Overlay</div>
