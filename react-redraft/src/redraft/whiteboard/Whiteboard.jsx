@@ -160,7 +160,7 @@ function useScaleToRightLimit(ref, {
       ro.disconnect();
       window.removeEventListener('resize', compute);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref, baseScale, minScale, maxScale, widthBudgetPx, ...deps]);
 
   return scale;
@@ -405,36 +405,32 @@ export default function Whiteboard() {
     const base = settings || {};
     const basePos = base.positions || {};
 
-    // base counts
-    const baseSF   = Number(basePos.sf ?? basePos.superflex ?? 0);
-    const baseFlex = Number(basePos.flex ?? 0);
-
-    // explicit overrides
-    const oSF        = posO.sf ?? posO.superflex;
-    const oFlexValue = posO.flex; // treat this as W/R/T (not combined)
-
     // start merged from base
     const merged = {
       ...base,
       ...(o.teams    != null ? { teams: Number(o.teams) } : null),
       ...(o.ppr      != null ? { ppr: !!o.ppr } : null),
+      // ⬇️ NEW: custom scoring label/value support
+      ...(o.scoring  != null && String(o.scoring).trim() !== '' ? { scoring: String(o.scoring) } : null),
       ...(o.tepValue != null ? { tepValue: Number(o.tepValue) || 0 } : null),
       positions: { ...basePos },
     };
 
     // final counts
-    let sfFinal   = Number(oSF        ?? baseSF);
-    let flexFinal = Number(oFlexValue ?? baseFlex);
+    const oSF        = posO.sf ?? posO.superflex;
+    const oFlexValue = posO.flex;
+
+    let sfFinal   = Number(oSF        ?? basePos.sf ?? basePos.superflex ?? 0);
+    let flexFinal = Number(oFlexValue ?? basePos.flex ?? 0);
     if (!Number.isFinite(sfFinal))   sfFinal = 0;
     if (!Number.isFinite(flexFinal)) flexFinal = 0;
 
     merged.positions = {
       ...merged.positions,
       ...Object.fromEntries(Object.entries(posO).map(([k, v]) => [k, Number(v)])),
-      // ensure explicit keys exist for consumers (LeagueSettings & builder)
-      flex: flexFinal,              // W/R/T
-      sf: sfFinal,                  // Q/W/R/T alias
-      superflex: sfFinal,           // canonical
+      flex: flexFinal,
+      sf: sfFinal,
+      superflex: sfFinal,
     };
     return merged;
   }, [settings, overrides]);
@@ -526,6 +522,7 @@ export default function Whiteboard() {
     deps: [
       effSettings.teams,
       effSettings.ppr,
+      effSettings.scoring, // include scoring so pill updates on edit
       effSettings.tepValue,
       effSettings.positions?.qb,
       effSettings.positions?.rb,
@@ -722,21 +719,8 @@ export default function Whiteboard() {
         }}
       >
         {!loading && !error && (
-          overrides?.manualWaivers?.enabled ? (
-            <ManualTopWaivers
-              enabled
-              items={[{
-                // pass preset id and optional label; ManualTopWaivers resolves color/label
-                preset: String(overrides?.manualWaivers?.preset || '').toUpperCase(),
-                label: overrides?.manualWaivers?.label || undefined
-              }]}
-              width={560}
-              tileHeight={150}
-              gap={18}
-              fontSize={40}
-              textScale={1.8}
-            />
-          ) : (
+          // Overrides take precedence
+          ((overrides?.topWaivers?.overrideIds || []).filter(Boolean).length > 0) ? (
             <TopWaiverPriorities
               leagueId={leagueId}
               settings={effSettings}
@@ -744,6 +728,29 @@ export default function Whiteboard() {
               rosterIds={rosterIds}
               overrideIds={(overrides?.topWaivers?.overrideIds || []).filter(Boolean)}
             />
+          ) : (
+            overrides?.manualWaivers?.enabled ? (
+              <ManualTopWaivers
+                enabled
+                items={[{
+                  preset: String(overrides?.manualWaivers?.preset || '').toUpperCase(),
+                  label: overrides?.manualWaivers?.label || undefined
+                }]}
+                width={560}
+                tileHeight={150}
+                gap={18}
+                fontSize={40}
+                textScale={1.8}
+              />
+            ) : (
+              <TopWaiverPriorities
+                leagueId={leagueId}
+                settings={effSettings}
+                playersById={playersById}
+                rosterIds={rosterIds}
+                overrideIds={[]}
+              />
+            )
           )
         )}
       </div>

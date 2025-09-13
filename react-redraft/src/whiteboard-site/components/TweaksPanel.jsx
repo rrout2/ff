@@ -300,6 +300,8 @@ export default function TweaksPanel({
     if (!parts.length) return undefined;
 
     const maybeTeam = parts[parts.length - 1]?.toUpperCase();
+    the_return: {
+    }
     const maybePos  = parts[parts.length - 2]?.toUpperCase();
     const posIsKnown = ['QB','RB','WR','TE'].includes(maybePos);
     const name = parts.slice(0, parts.length - (posIsKnown ? 2 : 1)).join(' ').trim();
@@ -380,7 +382,7 @@ export default function TweaksPanel({
 
     const primaryField = () => {
       if (rosterOptions.length > 0) {
-        const normalizedPrimary = normalizeCommitStringTeam(primary || '');
+        const normalizedPrimary = get(`${base}.primary`, '');
         const valueIsOption = rosterOptions.some(o => o.value === normalizedPrimary);
         const selected = valueIsOption ? normalizedPrimary : '';
         return (
@@ -402,7 +404,7 @@ export default function TweaksPanel({
       }
       return (
         <PlayerAutocomplete
-          value={primary}
+          value={get(`${base}.primary`, '')}
           placeholder="start typing a player…"
           onCommit={(v) => {
             set(`${base}.primary`, v);
@@ -452,26 +454,66 @@ export default function TweaksPanel({
         <div className="wb-row" style={{ marginBottom: 8 }}>
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Recommendation A (choose player)</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
-            {playerField(rec0, (v) => setRec(0, v))}
-            <ClearBtn onClick={() => setRec(0, undefined)} />
+            {playerField(get(`${base}.recs.0`, ''), (v) => {
+              // normalize recs array
+              const cur = [get(`${base}.recs.0`, undefined), get(`${base}.recs.1`, undefined)];
+              cur[0] = v;
+              const clean = cur.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recs`, clean.length ? clean : undefined);
+
+              const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
+              ids[0] = resolveIdFromCommitString(v);
+              const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recsIds`, idClean.length ? idClean : undefined);
+            })}
+            <ClearBtn onClick={() => {
+              const cur = [get(`${base}.recs.0`, undefined), get(`${base}.recs.1`, undefined)];
+              cur[0] = undefined;
+              const clean = cur.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recs`, clean.length ? clean : undefined);
+
+              const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
+              ids[0] = undefined;
+              const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recsIds`, idClean.length ? idClean : undefined);
+            }} />
           </div>
         </div>
 
         <div className="wb-row">
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Recommendation B (choose player)</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8 }}>
-            {playerField(rec1, (v) => setRec(1, v))}
-            <ClearBtn onClick={() => setRec(1, undefined)} />
+            {playerField(get(`${base}.recs.1`, ''), (v) => {
+              const cur = [get(`${base}.recs.0`, undefined), get(`${base}.recs.1`, undefined)];
+              cur[1] = v;
+              const clean = cur.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recs`, clean.length ? clean : undefined);
+
+              const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
+              ids[1] = resolveIdFromCommitString(v);
+              const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recsIds`, idClean.length ? idClean : undefined);
+            })}
+            <ClearBtn onClick={() => {
+              const cur = [get(`${base}.recs.0`, undefined), get(`${base}.recs.1`, undefined)];
+              cur[1] = undefined;
+              const clean = cur.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recs`, clean.length ? clean : undefined);
+
+              const ids = [get(`${base}.recsIds.0`, undefined), get(`${base}.recsIds.1`, undefined)];
+              ids[1] = undefined;
+              const idClean = ids.filter((x, i, ar) => x !== undefined || i < ar.length - 1);
+              set(`${base}.recsIds`, idClean.length ? idClean : undefined);
+            }} />
           </div>
         </div>
 
         <div className="wb-row" style={{ marginTop: 10 }}>
           <div style={{ fontWeight: 700, marginBottom: 6 }}>Option / Note</div>
-          <TextArea
+          <TextInput
             value={get(`${base}.note`, '')}
             placeholder="e.g., Package WR2 + RB4 for elite TE; or flip TE for WR upgrade"
             onCommit={(v) => set(`${base}.note`, v)}
-            rows={3}
             maxLength={200}
           />
         </div>
@@ -642,6 +684,16 @@ export default function TweaksPanel({
           />
           <span style={{ fontSize:12, opacity:.7 }}>If unchecked, treated as Standard</span>
         </div>
+
+        {/* NEW: Scoring (label/value) */}
+        <label>Scoring (label/value)</label>
+        <TextInput
+          value={get('leagueSettings.scoring', '')}
+          placeholder="e.g., PPR, STD, 0.5"
+          onCommit={(v)=> set('leagueSettings.scoring', v)}
+          maxLength={12}
+        />
+
         <label>TE Premium (points)</label>{numInput(get('leagueSettings.tepValue', null), 'leagueSettings.tepValue', { min:0, max:5, step:0.1 })}
 
         <div style={{ gridColumn:'1 / -1', display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gap:8, alignItems:'center' }}>
@@ -701,13 +753,16 @@ export default function TweaksPanel({
         <label>Manual board color</label>
         <div style={{ display:'flex', gap:16, alignItems:'center' }}>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'red'} onChange={(e)=> setBoardExclusive('red', e.target.checked)} /><span>Red</span>
+            <input type="checkbox" checked={get('manualDraft.board', 'green') === 'red'} onChange={(e)=> set('manualDraft.board', e.target.checked ? 'red' : undefined)} />
+            <span>Red</span>
           </label>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'yellow'} onChange={(e)=> setBoardExclusive('yellow', e.target.checked)} /><span>Yellow</span>
+            <input type="checkbox" checked={get('manualDraft.board', 'green') === 'yellow'} onChange={(e)=> set('manualDraft.board', e.target.checked ? 'yellow' : undefined)} />
+            <span>Yellow</span>
           </label>
           <label style={{ display:'inline-flex', gap:6, alignItems:'center' }}>
-            <input type="checkbox" checked={board === 'green'} onChange={(e)=> setBoardExclusive('green', e.target.checked)} /><span>Green</span>
+            <input type="checkbox" checked={get('manualDraft.board', 'green') === 'green'} onChange={(e)=> set('manualDraft.board', e.target.checked ? 'green' : undefined)} />
+            <span>Green</span>
           </label>
         </div>
 

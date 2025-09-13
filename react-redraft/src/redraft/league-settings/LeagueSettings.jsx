@@ -4,12 +4,16 @@ import './league-settings.css';
 export default function LeagueSettings({ settings }) {
   const teams = Number(settings?.teams ?? 12);
 
-  // scoring label
-  const pprNum = Number(settings?.ppr ?? 0);
-  const is = (x) => Math.abs(pprNum - x) < 1e-6;
-  let scoringLabel = 'STRD';
-  if (is(1)) scoringLabel = 'PPR';
-  else if (is(0.5)) scoringLabel = 'Half';
+  // scoring label: use custom if provided, else derive from PPR
+  const customScore = String(settings?.scoring ?? '').trim();
+  let scoringLabel;
+  if (customScore) {
+    scoringLabel = customScore.toUpperCase(); // e.g., "STD", "0.5", "PPR"
+  } else {
+    const pprNum = Number(settings?.ppr ?? 0);
+    const is = (x) => Math.abs(pprNum - x) < 1e-6;
+    scoringLabel = is(1) ? 'PPR' : is(0.5) ? 'HALF' : 'STD';
+  }
 
   const tepValue = Number(settings?.tepValue ?? 0);
 
